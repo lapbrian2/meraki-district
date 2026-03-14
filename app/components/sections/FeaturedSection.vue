@@ -3,6 +3,9 @@
     <div class="section-default">
       <p class="overline reveal">From The Road</p>
       <h2 class="reveal">Featured thinking</h2>
+      <p class="featured-intro reveal">
+        Essays, dispatches, and frameworks from inside the ecosystem.
+      </p>
 
       <div class="featured-grid">
         <article v-for="post in posts" :key="post.title" class="featured-card reveal">
@@ -30,20 +33,20 @@ const posts = [
   {
     title: 'The Craft Premium',
     tag: 'Essay',
-    excerpt: 'Why human-led creative work commands more value in an AI-saturated market.',
+    excerpt: 'Why human-led creative work commands more value in an AI-saturated market. And what it takes to prove the difference.',
     image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&h=400&fit=crop',
   },
   {
     title: 'Building in Public, Thinking in Private',
     tag: 'Practice',
-    excerpt: 'The case for protecting your creative process from the content machine.',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop',
+    excerpt: 'The case for protecting your creative process from the content machine. Not everything needs an audience.',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop',
   },
   {
     title: 'Ten Institutions, One District',
     tag: 'Announcement',
-    excerpt: 'Introducing Meraki District: a cultural ecosystem for the AI-native era.',
-    image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=400&fit=crop',
+    excerpt: 'Introducing Meraki District: why we built a cultural ecosystem for AI-native creators, and what comes next.',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop',
   },
 ]
 </script>
@@ -51,6 +54,11 @@ const posts = [
 <style scoped>
 .featured h2 {
   margin-top: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.featured-intro {
+  color: var(--color-text-muted);
   margin-bottom: var(--space-12);
 }
 
@@ -112,6 +120,7 @@ const posts = [
   font-size: var(--text-small);
   color: var(--color-text-muted);
   line-height: var(--leading-normal);
+  margin-top: var(--space-3);
 }
 
 @media (max-width: 768px) {

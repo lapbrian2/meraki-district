@@ -1,13 +1,17 @@
 <template>
   <section ref="hero" class="hero">
     <div class="hero-content">
-      <p class="overline reveal">Est. 2025</p>
+      <p class="hero-overline reveal">Est. 2025</p>
       <h1 class="hero-title reveal">
         Where craft<br />meets culture
       </h1>
       <p class="hero-sub reveal">
-        A cultural ecosystem for AI-native creators who refuse to choose
-        between ambition and integrity.
+        A cultural ecosystem for AI-native creators who refuse to
+        choose between ambition and integrity.
+      </p>
+      <div class="hero-rule reveal" aria-hidden="true" />
+      <p class="hero-anchor reveal">
+        Ten institutions. One district. A new standard for creative practice.
       </p>
     </div>
     <div class="hero-scroll" aria-hidden="true">
@@ -26,13 +30,14 @@ onMounted(() => {
   if (!hero.value) return
 
   ctx = gsap.context(() => {
-    // Selectors scoped to hero.value by gsap.context
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
-    tl.from('.overline', { opacity: 0, y: 20, duration: 0.6 }, 0.2)
-      .from('.hero-title', { opacity: 0, y: 40, duration: 1 }, 0.4)
-      .from('.hero-sub', { opacity: 0, y: 30, duration: 0.8 }, 0.7)
-      .from('.hero-scroll', { opacity: 0, duration: 0.6 }, 1.2)
+    tl.from('.hero-overline', { opacity: 0, y: 20, duration: 0.6 }, 0.3)
+      .from('.hero-title', { opacity: 0, y: 50, duration: 1.2, ease: 'power4.out' }, 0.5)
+      .from('.hero-sub', { opacity: 0, y: 30, duration: 0.9 }, 0.9)
+      .from('.hero-rule', { scaleX: 0, duration: 0.8, ease: 'power2.inOut' }, 1.2)
+      .from('.hero-anchor', { opacity: 0, y: 15, duration: 0.7 }, 1.5)
+      .from('.hero-scroll', { opacity: 0, duration: 0.8 }, 1.8)
   }, hero.value)
 })
 
@@ -57,6 +62,15 @@ onUnmounted(() => {
   max-width: 800px;
 }
 
+.hero-overline {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
 .hero-title {
   font-size: var(--text-display);
   font-weight: 300;
@@ -71,6 +85,21 @@ onUnmounted(() => {
   margin: 0 auto;
   font-weight: 400;
   line-height: var(--leading-relaxed);
+}
+
+.hero-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--color-gold);
+  margin: var(--space-8) auto;
+  transform-origin: center;
+}
+
+.hero-anchor {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  letter-spacing: var(--tracking-wide);
+  max-width: none;
 }
 
 .hero-scroll {

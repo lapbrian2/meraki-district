@@ -4,6 +4,18 @@
       <div class="footer-brand">
         <p class="footer-logo">Meraki District</p>
         <p class="footer-tagline">A cultural ecosystem for AI-native creators.</p>
+        <div class="footer-newsletter">
+          <p class="footer-newsletter-label">Dispatches from the District</p>
+          <form class="footer-newsletter-form" @submit.prevent>
+            <input
+              type="email"
+              placeholder="your@email.com"
+              class="footer-newsletter-input"
+              aria-label="Email address for newsletter"
+            />
+            <button type="submit" class="footer-newsletter-btn">Subscribe</button>
+          </form>
+        </div>
       </div>
 
       <div class="footer-col">
@@ -21,7 +33,6 @@
         <ul>
           <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="#" target="_blank" rel="noopener">Newsletter</a></li>
         </ul>
       </div>
 
@@ -41,7 +52,6 @@
 </template>
 
 <script setup lang="ts">
-// SSR-safe: computed prevents hydration mismatch from new Date() in template
 const year = computed(() => new Date().getFullYear())
 </script>
 
@@ -73,6 +83,61 @@ const year = computed(() => new Date().getFullYear())
   color: var(--color-dark-muted);
   font-size: var(--text-small);
   max-width: 30ch;
+}
+
+.footer-newsletter {
+  margin-top: var(--space-8);
+}
+
+.footer-newsletter-label {
+  font-size: var(--text-small);
+  color: var(--color-dark-muted);
+  margin-bottom: var(--space-3);
+  max-width: none;
+}
+
+.footer-newsletter-form {
+  display: flex;
+  gap: 0;
+  max-width: 320px;
+}
+
+.footer-newsletter-input {
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: none;
+  color: var(--color-dark-text);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  outline: none;
+  transition: border-color var(--duration-fast) ease;
+}
+
+.footer-newsletter-input::placeholder {
+  color: var(--color-dark-muted);
+}
+
+.footer-newsletter-input:focus {
+  border-color: var(--color-gold);
+}
+
+.footer-newsletter-btn {
+  padding: var(--space-3) var(--space-6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-dark-text);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  transition: border-color var(--duration-fast) ease,
+              color var(--duration-fast) ease;
+}
+
+.footer-newsletter-btn:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
 }
 
 .footer-col .overline {
@@ -119,6 +184,10 @@ const year = computed(() => new Date().getFullYear())
 
   .footer-brand {
     grid-column: 1 / -1;
+  }
+
+  .footer-newsletter-form {
+    max-width: none;
   }
 }
 </style>

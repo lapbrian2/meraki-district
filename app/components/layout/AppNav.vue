@@ -19,8 +19,8 @@
         aria-label="Toggle menu"
         @click="mobileOpen = !mobileOpen"
       >
-        <span />
-        <span />
+        <span :class="{ rotated: mobileOpen }" />
+        <span :class="{ rotated: mobileOpen }" />
       </button>
     </div>
   </header>
@@ -45,6 +45,10 @@ function onKeydown(e: KeyboardEvent) {
   }
 }
 
+watch(mobileOpen, (open) => {
+  document.body.style.overflow = open ? 'hidden' : ''
+})
+
 onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
   window.addEventListener('keydown', onKeydown)
@@ -53,6 +57,7 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
   window.removeEventListener('keydown', onKeydown)
+  document.body.style.overflow = ''
 })
 </script>
 
@@ -109,6 +114,7 @@ onUnmounted(() => {
   text-transform: uppercase;
   color: var(--color-text-muted);
   transition: color var(--duration-fast) ease;
+  background-image: none;
 }
 
 .nav-links a:hover {
@@ -124,7 +130,7 @@ onUnmounted(() => {
   padding: var(--space-2) var(--space-6);
   border: 1px solid var(--color-ink);
   background-image: none;
-  transition: background-color var(--duration-fast) ease,
+  transition: border-color var(--duration-fast) ease,
               color var(--duration-fast) ease;
 }
 
@@ -145,12 +151,20 @@ onUnmounted(() => {
   width: 24px;
   height: 1.5px;
   background-color: var(--color-ink);
-  transition: transform var(--duration-fast) ease;
+  transition: transform var(--duration-normal) ease,
+              opacity var(--duration-fast) ease;
+}
+
+.nav-toggle span.rotated:first-child {
+  transform: translateY(3.75px) rotate(45deg);
+}
+
+.nav-toggle span.rotated:last-child {
+  transform: translateY(-3.75px) rotate(-45deg);
 }
 
 @media (max-width: 768px) {
   .nav-links {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -161,17 +175,37 @@ onUnmounted(() => {
     align-items: center;
     justify-content: center;
     gap: var(--space-8);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-normal) ease,
+                visibility var(--duration-normal) ease;
   }
 
   .nav-links.open {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
   }
 
   .nav-links a {
     font-size: var(--text-h3);
     text-transform: none;
     letter-spacing: var(--tracking-normal);
+    background-image: none;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: opacity var(--duration-normal) ease,
+                transform var(--duration-normal) var(--ease-out),
+                color var(--duration-fast) ease;
   }
+
+  .nav-links.open a {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav-links.open a:nth-child(1) { transition-delay: 100ms; }
+  .nav-links.open a:nth-child(2) { transition-delay: 200ms; }
+  .nav-links.open a:nth-child(3) { transition-delay: 300ms; }
 
   .nav-actions {
     display: none;
@@ -179,6 +213,7 @@ onUnmounted(() => {
 
   .nav-toggle {
     display: flex;
+    z-index: 101;
   }
 }
 </style>

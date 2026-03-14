@@ -3,15 +3,20 @@
     <div class="section-narrow">
       <p class="overline reveal">Philosophy</p>
       <blockquote class="philosophy-quote reveal">
-        <p>
-          We believe AI reveals who was actually creative all along.
-        </p>
+        <p>We believe AI reveals who was actually creative all along.</p>
       </blockquote>
-      <p class="philosophy-body reveal">
-        Every institution in Meraki District operates on a single principle:
-        the work matters more than the tools. We build for creators who
-        understand that mastery is a practice, not a destination.
-      </p>
+      <div class="philosophy-exposition">
+        <p class="reveal">
+          When the tools become accessible to everyone, the only differentiator
+          is taste, judgment, and the willingness to go deeper than the first
+          good output.
+        </p>
+        <p class="reveal">
+          Every institution in Meraki District operates on a single principle:
+          the work matters more than the tools. We build for creators who
+          understand that mastery is a practice, not a destination.
+        </p>
+      </div>
     </div>
   </section>
 </template>
@@ -20,7 +25,7 @@
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
 
 const section = ref<HTMLElement | null>(null)
-useGsapScrollReveal(section, '.reveal')
+useGsapScrollReveal(section, '.reveal', { stagger: 0.12 })
 </script>
 
 <style scoped>
@@ -37,7 +42,7 @@ useGsapScrollReveal(section, '.reveal')
 
 .philosophy-quote p {
   font-family: var(--font-display);
-  font-size: var(--text-h2);
+  font-size: var(--text-h1);
   font-weight: 300;
   font-style: italic;
   line-height: var(--leading-snug);
@@ -45,7 +50,13 @@ useGsapScrollReveal(section, '.reveal')
   max-width: none;
 }
 
-.philosophy-body {
+.philosophy-exposition {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.philosophy-exposition p {
   color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
 }

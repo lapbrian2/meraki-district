@@ -6,3 +6,5 @@ dist
 .nitro
 .cache
 .claude/
+
+.vercel

@@ -2,7 +2,9 @@
   <div>
     <HeroSection />
     <ManifestoSection />
+    <SectionDivider />
     <InstitutionsGrid />
+    <MarqueeStrip />
     <PhilosophySection />
     <FeaturedSection />
     <SealSection />
