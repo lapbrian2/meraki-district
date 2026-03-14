@@ -144,7 +144,7 @@ onUnmounted(() => {
 .institutions-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: var(--space-6);
+  gap: var(--space-4);
 }
 
 /* ─── Card base ─── */
@@ -169,7 +169,7 @@ onUnmounted(() => {
 /* ─── Image container ─── */
 .inst-image-wrap {
   overflow: hidden;
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
 }
 
 .inst-image {
@@ -229,7 +229,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-1);
 }
 
 .inst-number {
@@ -257,7 +257,7 @@ onUnmounted(() => {
 
 .inst-name {
   font-size: var(--text-h3);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-1);
   position: relative;
   display: inline-block;
 }
@@ -282,7 +282,7 @@ onUnmounted(() => {
 .inst-desc {
   font-size: var(--text-small);
   color: var(--color-text-muted);
-  line-height: var(--leading-relaxed);
+  line-height: var(--leading-normal);
 }
 
 .inst-hero .inst-desc {
@@ -301,7 +301,7 @@ onUnmounted(() => {
 
   .institutions-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-12);
+    gap: var(--space-8);
   }
 
   .inst-hero,
