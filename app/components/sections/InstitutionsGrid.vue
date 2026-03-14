@@ -1,15 +1,6 @@
 <template>
   <section ref="section" class="institutions">
     <div class="institutions-hero section-dark">
-      <div class="institutions-hero-bg">
-        <img
-          src="/images/institutions-bg.jpg"
-          alt=""
-          class="institutions-hero-image"
-          loading="lazy"
-        />
-        <div class="institutions-hero-overlay" />
-      </div>
       <div class="section-wide institutions-hero-content">
         <p class="overline reveal">The Ecosystem</p>
         <h2 class="institutions-title reveal">
@@ -107,34 +98,7 @@ onUnmounted(() => {
   padding: var(--space-32) var(--content-padding) var(--space-16);
 }
 
-.institutions-hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
 
-.institutions-hero-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.3;
-}
-
-.institutions-hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(9, 9, 11, 0.5) 0%,
-    rgba(9, 9, 11, 0.25) 50%,
-    rgba(9, 9, 11, 0.6) 100%
-  );
-}
-
-.institutions-hero-content {
-  position: relative;
-  z-index: 1;
-}
 
 .institutions-body {
   background-color: var(--color-background);
