@@ -29,7 +29,7 @@ const principles = [
   {
     number: '01',
     title: 'Craft over convenience',
-    body: 'We treat AI as a medium that demands mastery, not a shortcut that replaces it. The tool is available to everyone. The craft is not.',
+    body: 'We treat AI as a medium that demands mastery. The tool is available to everyone. The craft takes dedicated practice.',
   },
   {
     number: '02',
@@ -39,7 +39,7 @@ const principles = [
   {
     number: '03',
     title: 'Earned, not purchased',
-    body: 'Our credentials, our community, our standards\u2014they mean something because they cost something to achieve. No shortcuts. No bought seats.',
+    body: 'Our credentials, our community, our standards\u2014they carry weight because they require demonstrated practice and real contribution.',
   },
 ]
 </script>

@@ -8,7 +8,7 @@
         </h1>
         <p class="page-hero-sub reveal">
           Long-form storytelling and cultural criticism for the AI-native era.
-          Where craft meets critical thinking.
+          Long-form essays and cultural criticism shaped by creative practice.
         </p>
       </div>
     </section>

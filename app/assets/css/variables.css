@@ -9,7 +9,8 @@
   --color-gold-accessible: #96783C;
   --color-background: #FAFAF9;
   --color-surface: #F5F5F0;
-  --color-text: #1C1C1E;
+  --color-text: #27272A;
+  --color-text-secondary: #3F3F46;
   --color-text-muted: #71717A;
   --color-border: #E4E4E7;
   --color-error: #DC2626;
@@ -18,6 +19,7 @@
   /* Dark section overrides */
   --color-dark-bg: #18181B;
   --color-dark-text: #FAFAF9;
+  --color-dark-secondary: #D4D4D8;
   --color-dark-muted: #A1A1AA;
 
   /* Typography */
@@ -25,31 +27,33 @@
   --font-body: 'Geist', system-ui, -apple-system, sans-serif;
   --font-mono: 'Geist Mono', 'Courier New', monospace;
 
-  --text-display: clamp(3rem, 6vw, 5.5rem);
-  --text-h1: clamp(2.25rem, 4vw, 3.5rem);
-  --text-h2: clamp(1.75rem, 3vw, 2.5rem);
-  --text-h3: clamp(1.25rem, 2vw, 1.75rem);
+  --text-display: clamp(2.75rem, 5.5vw, 4.5rem);
+  --text-h1: clamp(2rem, 3.5vw, 3rem);
+  --text-h2: clamp(1.625rem, 2.5vw, 2.25rem);
+  --text-h3: clamp(1.25rem, 1.75vw, 1.5rem);
   --text-h4: clamp(1.1rem, 1.5vw, 1.25rem);
   --text-body: clamp(1rem, 1.15vw, 1.125rem);
   --text-small: clamp(0.8rem, 0.9vw, 0.875rem);
-  --text-caption: 0.75rem;
+  --text-caption: 0.8125rem;
   --text-overline: 0.75rem;
 
-  --leading-tight: 1.1;
-  --leading-snug: 1.3;
-  --leading-normal: 1.6;
+  --leading-display: 0.95;
+  --leading-tight: 1.05;
+  --leading-snug: 1.25;
+  --leading-normal: 1.65;
   --leading-relaxed: 1.8;
 
   --tracking-tight: -0.03em;
   --tracking-normal: 0;
-  --tracking-wide: 0.08em;
-  --tracking-widest: 0.15em;
+  --tracking-snug: -0.01em;
+  --tracking-wide: 0.1em;
+  --tracking-widest: 0.14em;
 
   /* Layout */
   --grid-columns: 12;
   --grid-gutter: clamp(1rem, 2vw, 2rem);
   --grid-margin: clamp(1.5rem, 4vw, 4rem);
-  --width-narrow: 680px;
+  --width-narrow: 720px;
   --width-default: 1000px;
   --width-wide: 1200px;
 
@@ -69,9 +73,9 @@
 
   /* Surface */
   --surface-radius: 0px;
-  --section-gap: clamp(6rem, 10vw, 12rem);
+  --section-gap: clamp(6rem, 10vw, 10rem);
   --content-max-width: 1200px;
-  --content-padding: clamp(1.5rem, 4vw, 4rem);
+  --content-padding: clamp(1.5rem, 5vw, 6rem);
   --rule-color: rgba(9, 9, 11, 0.12);
 
   /* Motion */

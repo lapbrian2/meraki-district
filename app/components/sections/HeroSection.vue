@@ -1,5 +1,15 @@
 <template>
   <section ref="hero" class="hero">
+    <div class="hero-bg-wrap">
+      <img
+        src="/images/hero-bg.png"
+        alt=""
+        class="hero-bg-image"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hero-bg-overlay" />
+    </div>
     <ClientOnly>
       <HeroCanvas />
     </ClientOnly>
@@ -9,12 +19,12 @@
         Where craft<br />meets culture
       </h1>
       <p class="hero-sub reveal">
-        A cultural ecosystem for AI-native creators who refuse to
-        choose between ambition and integrity.
+        A cultural ecosystem built for creators who hold ambition
+        and integrity as a single standard.
       </p>
       <div class="hero-rule reveal" aria-hidden="true" />
       <p class="hero-anchor reveal">
-        Ten institutions. One district. A new standard for creative practice.
+        Ten institutions within one district, building a new standard for creative practice.
       </p>
     </div>
     <div class="hero-scroll" aria-hidden="true">
@@ -39,7 +49,8 @@ onMounted(async () => {
   ctx = gsap.context(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
-    tl.from('.hero-overline', { opacity: 0, y: 20, duration: 0.6 }, 0.3)
+    tl.from('.hero-bg-image', { scale: 1.1, duration: 2.4, ease: 'power2.out' }, 0)
+      .from('.hero-overline', { opacity: 0, y: 20, duration: 0.6 }, 0.3)
       .from('.hero-title', { opacity: 0, y: 50, duration: 1.2, ease: 'power4.out' }, 0.5)
       .from('.hero-sub', { opacity: 0, y: 30, duration: 0.9 }, 0.9)
       .from('.hero-rule', { scaleX: 0, duration: 0.8, ease: 'power2.inOut' }, 1.2)
@@ -64,6 +75,32 @@ onUnmounted(() => {
   padding: var(--space-24) var(--content-padding);
   position: relative;
   overflow: hidden;
+  background: var(--color-ink);
+}
+
+.hero-bg-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.hero-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+}
+
+.hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(9, 9, 11, 0.4) 0%,
+    rgba(9, 9, 11, 0.15) 40%,
+    rgba(9, 9, 11, 0.3) 70%,
+    rgba(9, 9, 11, 0.7) 100%
+  );
 }
 
 .hero-content {
@@ -78,7 +115,7 @@ onUnmounted(() => {
   font-weight: 500;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-gold);
 }
 
 .hero-title {
@@ -86,11 +123,12 @@ onUnmounted(() => {
   font-weight: 300;
   margin-top: var(--space-6);
   margin-bottom: var(--space-8);
+  color: var(--color-dark-text);
 }
 
 .hero-sub {
   font-size: var(--text-h4);
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   max-width: 50ch;
   margin: 0 auto;
   font-weight: 400;
@@ -107,7 +145,7 @@ onUnmounted(() => {
 
 .hero-anchor {
   font-size: var(--text-small);
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   letter-spacing: var(--tracking-wide);
   max-width: none;
 }
@@ -125,7 +163,7 @@ onUnmounted(() => {
 .hero-scroll-line {
   width: 1px;
   height: 48px;
-  background: linear-gradient(to bottom, var(--color-ink), transparent);
+  background: linear-gradient(to bottom, var(--color-dark-muted), transparent);
   animation: scrollPulse 2s ease-in-out infinite;
 }
 

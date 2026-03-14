@@ -4,7 +4,7 @@
       <div class="institutions-header">
         <p class="overline reveal">The Ecosystem</p>
         <h2 class="institutions-title reveal">
-          Ten institutions. One district.
+          Ten institutions within one district.
         </h2>
       </div>
 

@@ -39,7 +39,7 @@ const posts = [
   {
     title: 'Building in Public, Thinking in Private',
     tag: 'Practice',
-    excerpt: 'The case for protecting your creative process from the content machine. Not everything needs an audience.',
+    excerpt: 'The case for protecting your creative process from the content machine. Some work gains power by staying private.',
     image: '/images/featured/building-in-public.webp',
   },
   {

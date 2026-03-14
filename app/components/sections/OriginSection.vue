@@ -21,7 +21,7 @@
         work is a legitimate discipline that deserves legitimate support.
       </p>
       <p class="origin-body reveal">
-        So we built it.
+        We built it.
       </p>
     </div>
   </section>

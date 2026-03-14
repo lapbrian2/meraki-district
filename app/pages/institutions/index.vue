@@ -8,7 +8,7 @@
         </h1>
         <p class="page-hero-sub reveal">
           Each institution is a world unto itself, united by a shared belief:
-          that the most meaningful work happens when ambition meets integrity.
+          the most meaningful work grows from ambition held alongside integrity.
         </p>
       </div>
     </section>
@@ -26,7 +26,7 @@ useGsapScrollReveal(section, '.reveal')
 useHead({
   title: 'Institutions — Meraki District',
   meta: [
-    { name: 'description', content: 'Ten institutions. One district. A cultural ecosystem for AI-native creators.' },
+    { name: 'description', content: 'Ten institutions within one district. A cultural ecosystem for AI-native creators.' },
   ],
 })
 </script>

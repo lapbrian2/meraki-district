@@ -20,13 +20,13 @@ export const institutions: Institution[] = [
     number: '02', name: 'The Road', slug: 'the-road',
     image: '/images/institutions/the-road.webp', type: 'Publishing & Editorial', layout: 'wide',
     description: 'Long-form storytelling and cultural criticism for the AI-native era.',
-    longDescription: 'The Road is the editorial arm of Meraki District. Long-form essays, dispatches, interviews, and cultural criticism written for creators who think deeply about their practice. No hot takes. No engagement bait. Just substantive writing about what it means to make things in an era where the tools are changing faster than the conversations about them.',
+    longDescription: 'The Road is the editorial arm of Meraki District. Long-form essays, dispatches, interviews, and cultural criticism written for creators who think deeply about their practice. Substantive writing about what it means to make things in an era where the tools are changing faster than the conversations about them.',
   },
   {
     number: '03', name: 'Meridian', slug: 'meridian',
     image: '/images/institutions/meridian.webp', type: 'Research & Strategy', layout: 'narrow',
     description: 'Frontier research translated into actionable creative intelligence.',
-    longDescription: 'Meridian sits at the intersection of research and practice. It tracks emerging tools, techniques, and cultural shifts\u2014then translates them into frameworks that working creators can actually use. Not academic papers. Not trend reports. Actionable intelligence for people building at the frontier.',
+    longDescription: 'Meridian sits at the intersection of research and practice. It tracks emerging tools, techniques, and cultural shifts\u2014then translates them into frameworks that working creators can actually use. Actionable intelligence for people building at the frontier.',
   },
   {
     number: '04', name: 'Fieldwork', slug: 'fieldwork',
@@ -44,13 +44,13 @@ export const institutions: Institution[] = [
     number: '06', name: 'Basecamp', slug: 'basecamp',
     image: '/images/institutions/basecamp.webp', type: 'Community', layout: 'half',
     description: 'Where ambitious creators find their people and sharpen their practice.',
-    longDescription: 'Basecamp is the community layer of Meraki District. Not another Discord server with infinite channels and no signal. A curated space where ambitious creators find peers who match their commitment, challenge their assumptions, and push them toward work they couldn\u2019t do alone.',
+    longDescription: 'Basecamp is the community layer of Meraki District. A curated space where ambitious creators find peers who match their commitment, challenge their assumptions, and push them toward work they couldn\u2019t do alone.',
   },
   {
     number: '07', name: 'Common Ground', slug: 'common-ground',
     image: '/images/institutions/common-ground.webp', type: 'Events & Gatherings', layout: 'half',
     description: 'Intimate gatherings where ideas collide and collaborations ignite.',
-    longDescription: 'Common Ground organises the gatherings that matter. Intimate salons, working sessions, studio visits, and collaborative sprints\u2014designed to create the conditions for unexpected connections and genuine creative exchange. No keynotes. No panels. Just people in a room, doing the work.',
+    longDescription: 'Common Ground organises the gatherings that matter. Intimate salons, working sessions, studio visits, and collaborative sprints\u2014designed to create the conditions for unexpected connections and genuine creative exchange. People in a room, doing the work. The gatherings that lead to genuine creative exchange and unexpected collaboration.',
   },
   {
     number: '08', name: 'The Mint', slug: 'the-mint',
@@ -62,7 +62,7 @@ export const institutions: Institution[] = [
     number: '09', name: 'The Seal', slug: 'the-seal',
     image: '/images/institutions/the-seal.webp', type: 'Credentials & Standards', layout: 'narrow',
     description: 'A credentialing system that means something. Earned, not purchased.',
-    longDescription: 'The Seal is a credentialing system designed to actually mean something. Four tiers\u2014Associate, Verified, Master, Fellow\u2014each requiring demonstrated practice, peer review, and real contribution to the ecosystem. No certificates for watching videos. No badges for showing up. Every credential is earned through the work itself.',
+    longDescription: 'The Seal is a credentialing system designed to actually mean something. Four tiers\u2014Associate, Verified, Master, Fellow\u2014each requiring demonstrated practice, peer review, and real contribution to the ecosystem. Every credential is earned through the work itself — demonstrated practice, peer review, and real contribution to the ecosystem.',
   },
   {
     number: '10', name: 'The Collective', slug: 'the-collective',

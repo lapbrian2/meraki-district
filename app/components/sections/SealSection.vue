@@ -2,7 +2,7 @@
   <section ref="section" class="seal section">
     <div class="section-narrow">
       <p class="overline reveal">The Seal</p>
-      <h2 class="reveal">Earned, not purchased</h2>
+      <h2 class="reveal">Earned through practice</h2>
       <p class="seal-intro reveal">
         A four-tier credentialing system that recognises genuine creative mastery.
         Each level requires demonstrated practice, peer review, and real contribution.
