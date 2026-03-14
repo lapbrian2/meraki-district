@@ -25,7 +25,7 @@ import { useMagnetic } from '~/composables/useInteractions'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal')
-useWordReveal(section, '.word-reveal', { stagger: 0.05 })
+useWordReveal(section, '.word-reveal', { stagger: 0.08 })
 useMagnetic(section, '.cta-button', { strength: 0.25 })
 </script>
 

@@ -36,7 +36,7 @@ import { useParallax } from '~/composables/useParallax'
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.12 })
 useParallax(section, '.philosophy-bg-image', { speed: 0.08 })
-useWordReveal(section, '.word-reveal', { stagger: 0.04 })
+useWordReveal(section, '.word-reveal', { stagger: 0.08 })
 </script>
 
 <style scoped>

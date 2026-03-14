@@ -25,9 +25,9 @@ export function useWordReveal(
   options: WordRevealOptions = {}
 ) {
   const {
-    stagger = 0.035,
-    duration = 0.7,
-    y = 110,
+    stagger = 0.07,
+    duration = 1.1,
+    y = 70,
     start = 'top 85%',
   } = options
 
@@ -68,7 +68,7 @@ export function useWordReveal(
             yPercent: 0,
             duration,
             stagger,
-            ease: 'power3.out',
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: el,
               start,
