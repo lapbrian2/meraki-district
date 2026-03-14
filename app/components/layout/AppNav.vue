@@ -129,8 +129,8 @@ onUnmounted(() => {
 }
 
 .nav-cta:hover {
-  background-color: var(--color-ink);
-  color: var(--color-background);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
 }
 
 .nav-toggle {

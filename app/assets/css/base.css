@@ -126,7 +126,28 @@ img, video {
   color: var(--color-dark-text);
 }
 .section-dark .overline {
-  color: var(--color-dark-muted);
+  color: var(--color-gold-accessible);
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(184, 150, 78, 0.15);
+  color: var(--color-ink);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
 }
 
 /* Reduced motion */

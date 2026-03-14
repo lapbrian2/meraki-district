@@ -63,6 +63,7 @@ const posts = [
 .featured-card {
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .featured-image {
@@ -95,6 +96,16 @@ const posts = [
 .featured-content h3 {
   font-size: var(--text-h4);
   margin-bottom: var(--space-3);
+  display: inline;
+  background-image: linear-gradient(var(--color-gold), var(--color-gold));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--duration-normal) ease;
+}
+
+.featured-card:hover .featured-content h3 {
+  background-size: 100% 1px;
 }
 
 .featured-content p {

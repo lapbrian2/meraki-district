@@ -59,11 +59,15 @@ const institutions = [
 .inst-card {
   padding: var(--space-8);
   background: var(--color-background);
-  transition: transform var(--duration-normal) var(--ease-out);
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color var(--duration-normal) var(--ease-out),
+              transform var(--duration-normal) var(--ease-out);
 }
 
 .inst-card:hover {
-  transform: translateY(-2px);
+  border-left-color: var(--color-gold);
+  transform: translateX(4px);
 }
 
 .inst-number {
