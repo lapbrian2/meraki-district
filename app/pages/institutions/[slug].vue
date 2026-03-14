@@ -1,5 +1,5 @@
 <template>
-  <div v-if="institution">
+  <div v-if="institution" ref="root">
     <section class="inst-hero">
       <div class="inst-hero-image-wrap">
         <img
@@ -99,11 +99,12 @@ useHead(computed(() => ({
   ] : [],
 })))
 
+const root = ref<HTMLElement | null>(null)
 const section = ref<HTMLElement | null>(null)
 let ctx: gsap.Context | null = null
 
 function initAnimations() {
-  if (!section.value) return
+  if (!root.value || !section.value) return
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
   gsap.registerPlugin(ScrollTrigger)
@@ -145,18 +146,19 @@ function initAnimations() {
       duration: 1.6,
       ease: 'power3.out',
     })
-  }, section.value)
+  }, root.value)
 }
 
 onMounted(async () => {
-  if (!section.value) return
-  await waitForAncestorAnimations(section.value)
-  if (!section.value) return
+  if (!root.value) return
+  await waitForAncestorAnimations(root.value)
+  if (!root.value) return
   initAnimations()
 })
 
 // Re-init animations when navigating between institutions
 watch(slug, async () => {
+  ctx?.revert()
   await nextTick()
   window.scrollTo(0, 0)
   initAnimations()

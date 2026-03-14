@@ -9,41 +9,41 @@ Requirements for production polish. Each maps to roadmap phases.
 
 ### Cleanup
 
-- [ ] **CLEAN-01**: Dead Three.js config removed from nuxt.config.ts (transpile + vite exclude references)
-- [ ] **CLEAN-02**: Stale CSS cleaned from InstitutionsGrid.vue (empty rules from removed image)
+- [x] **-01**: Dead Three.js config removed from nuxt.config.ts (transpile + vite exclude references)
+- [x] **-02**: Stale CSS cleaned from InstitutionsGrid.vue (empty rules from removed image)
 
 ### Forms
 
-- [ ] **FORM-01**: Apply page has email input field with submit button
-- [ ] **FORM-02**: Apply page form stores submissions (localStorage until backend exists)
-- [ ] **FORM-03**: Footer newsletter form collects and stores email submissions
-- [ ] **FORM-04**: Both forms show success/error feedback states to user
+- [x] **-01**: Apply page has email input field with submit button
+- [x] **-02**: Apply page form stores submissions (localStorage until backend exists)
+- [x] **-03**: Footer newsletter form collects and stores email submissions
+- [x] **-04**: Both forms show success/error feedback states to user
 
 ### Links & Navigation
 
-- [ ] **LINK-01**: Footer social links (Instagram, LinkedIn) removed until accounts exist
-- [ ] **LINK-02**: (Removed — merged into LINK-01)
-- [ ] **LINK-03**: All internal navigation links resolve correctly (no dead hrefs)
+- [x] **-01**: Footer social links (Instagram, LinkedIn) removed until accounts exist
+- [x] **-02**: (Removed — merged into LINK-01)
+- [x] **-03**: All internal navigation links resolve correctly (no dead hrefs)
 
 ### Legal
 
-- [ ] **LEGAL-01**: Privacy policy page has substantive content covering data collection, cookies, third-party services
-- [ ] **LEGAL-02**: Terms of service page has substantive content covering usage, intellectual property, liability
+- [x] **-01**: Privacy policy page has substantive content covering data collection, cookies, third-party services
+- [x] **-02**: Terms of service page has substantive content covering usage, intellectual property, liability
 
 ### Accessibility
 
-- [ ] **A11Y-01**: All decorative images use alt="" and content images have meaningful alt text
-- [ ] **A11Y-02**: Focus states visible on all interactive elements (links, buttons, form inputs)
-- [ ] **A11Y-03**: Keyboard navigation works through all pages (logical tab order, Enter to activate links)
-- [ ] **A11Y-04**: Skip-to-content link on every page
-- [ ] **A11Y-05**: Color contrast meets WCAG AA on all text elements
+- [x] **-01**: All decorative images use alt="" and content images have meaningful alt text
+- [x] **-02**: Focus states visible on all interactive elements (links, buttons, form inputs)
+- [x] **-03**: Keyboard navigation works through all pages (logical tab order, Enter to activate links)
+- [x] **-04**: Skip-to-content link on every page
+- [x] **-05**: Color contrast meets WCAG AA on all text elements
 
 ### SEO & Performance
 
-- [ ] **PERF-01**: Each page has unique meta description and og:title
-- [ ] **PERF-02**: Sitemap.xml generated via Nuxt module
-- [ ] **PERF-03**: Hero image (hero-bg.png) converted to WebP for smaller payload
-- [ ] **PERF-04**: robots.txt properly configured
+- [x] **-01**: Each page has unique meta description and og:title
+- [x] **-02**: Sitemap.xml generated via Nuxt module
+- [x] **-03**: Hero image (hero-bg.png) converted to WebP for smaller payload
+- [x] **-04**: robots.txt properly configured
 
 ## v2.0 Requirements (Future)
 
@@ -76,26 +76,26 @@ Requirements for production polish. Each maps to roadmap phases.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CLEAN-01 | Phase 1: Quick Wins | Pending |
-| CLEAN-02 | Phase 1: Quick Wins | Pending |
-| LINK-01 | Phase 1: Quick Wins | Pending |
-| LINK-02 | Phase 1: Quick Wins | Pending |
-| LINK-03 | Phase 1: Quick Wins | Pending |
-| FORM-01 | Phase 2: Forms | Pending |
-| FORM-02 | Phase 2: Forms | Pending |
-| FORM-03 | Phase 2: Forms | Pending |
-| FORM-04 | Phase 2: Forms | Pending |
-| LEGAL-01 | Phase 3: Legal Pages | Pending |
-| LEGAL-02 | Phase 3: Legal Pages | Pending |
-| A11Y-01 | Phase 4: Accessibility | Pending |
-| A11Y-02 | Phase 4: Accessibility | Pending |
-| A11Y-03 | Phase 4: Accessibility | Pending |
-| A11Y-04 | Phase 4: Accessibility | Pending |
-| A11Y-05 | Phase 4: Accessibility | Pending |
-| PERF-01 | Phase 5: SEO & Performance | Pending |
-| PERF-02 | Phase 5: SEO & Performance | Pending |
-| PERF-03 | Phase 5: SEO & Performance | Pending |
-| PERF-04 | Phase 5: SEO & Performance | Pending |
+| CLEAN-01 | Phase 1: Quick Wins | Complete |
+| CLEAN-02 | Phase 1: Quick Wins | Complete |
+| LINK-01 | Phase 1: Quick Wins | Complete |
+| LINK-02 | Phase 1: Quick Wins | Complete |
+| LINK-03 | Phase 1: Quick Wins | Complete |
+| FORM-01 | Phase 2: Forms | Complete |
+| FORM-02 | Phase 2: Forms | Complete |
+| FORM-03 | Phase 2: Forms | Complete |
+| FORM-04 | Phase 2: Forms | Complete |
+| LEGAL-01 | Phase 3: Legal Pages | Complete |
+| LEGAL-02 | Phase 3: Legal Pages | Complete |
+| A11Y-01 | Phase 4: Accessibility | Complete |
+| A11Y-02 | Phase 4: Accessibility | Complete |
+| A11Y-03 | Phase 4: Accessibility | Complete |
+| A11Y-04 | Phase 4: Accessibility | Complete |
+| A11Y-05 | Phase 4: Accessibility | Complete |
+| PERF-01 | Phase 5: SEO & Performance | Complete |
+| PERF-02 | Phase 5: SEO & Performance | Complete |
+| PERF-03 | Phase 5: SEO & Performance | Complete |
+| PERF-04 | Phase 5: SEO & Performance | Complete |
 
 **Coverage:**
 - v1.0 requirements: 17 total
@@ -104,4 +104,4 @@ Requirements for production polish. Each maps to roadmap phases.
 
 ---
 *Requirements defined: 2026-03-14*
-*Last updated: 2026-03-14 after roadmap creation*
+*Last updated: 2026-03-14 all v1.0 requirements complete*

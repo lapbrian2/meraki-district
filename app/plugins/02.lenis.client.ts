@@ -14,10 +14,20 @@ export default defineNuxtPlugin(() => {
 
   lenis.on('scroll', ScrollTrigger.update)
 
-  gsap.ticker.add((time: number) => {
+  const rafCallback = (time: number) => {
     lenis.raf(time * 1000)
-  })
+  }
+
+  gsap.ticker.add(rafCallback)
   gsap.ticker.lagSmoothing(0)
+
+  // Clean up on HMR to prevent leaked ticker callbacks
+  if (import.meta.hot) {
+    import.meta.hot.dispose(() => {
+      gsap.ticker.remove(rafCallback)
+      lenis.destroy()
+    })
+  }
 
   return {
     provide: {

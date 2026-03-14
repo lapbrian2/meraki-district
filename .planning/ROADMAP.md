@@ -12,11 +12,11 @@ Five phases take Meraki District from a working front door to a production-ready
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Quick Wins** - Remove dead code and fix broken links across the site
-- [ ] **Phase 2: Forms** - Build functional email collection on Apply page and footer newsletter
-- [ ] **Phase 3: Legal Pages** - Create substantive Privacy Policy and Terms of Service content
-- [ ] **Phase 4: Accessibility** - Systematic audit and fixes for WCAG AA compliance
-- [ ] **Phase 5: SEO & Performance** - Per-page meta, sitemap, image optimization, robots.txt
+- [x] **Phase 1: Quick Wins** - Remove dead code and fix broken links across the site
+- [x] **Phase 2: Forms** - Build functional email collection on Apply page and footer newsletter
+- [x] **Phase 3: Legal Pages** - Create substantive Privacy Policy and Terms of Service content
+- [x] **Phase 4: Accessibility** - Systematic audit and fixes for WCAG AA compliance
+- [x] **Phase 5: SEO & Performance** - Per-page meta, sitemap, image optimization, robots.txt
 
 ## Phase Details
 
@@ -97,8 +97,8 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Quick Wins | 0/? | Not started | - |
-| 2. Forms | 0/? | Not started | - |
-| 3. Legal Pages | 0/? | Not started | - |
-| 4. Accessibility | 0/? | Not started | - |
-| 5. SEO & Performance | 0/? | Not started | - |
+| 1. Quick Wins | 1/1 | Complete | 2026-03-14 |
+| 2. Forms | 1/1 | Complete | 2026-03-14 |
+| 3. Legal Pages | 1/1 | Complete | 2026-03-14 |
+| 4. Accessibility | 1/1 | Complete | 2026-03-14 |
+| 5. SEO & Performance | 1/1 | Complete | 2026-03-14 |

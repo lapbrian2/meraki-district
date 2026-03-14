@@ -78,6 +78,7 @@ onUnmounted(() => {
 
 .nav.scrolled {
   background-color: rgba(250, 250, 249, 0.95);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   box-shadow: 0 1px 0 var(--rule-color);
 }
