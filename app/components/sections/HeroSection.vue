@@ -25,11 +25,15 @@
 
 <script setup lang="ts">
 import { gsap } from 'gsap'
+import { waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 
 const hero = ref<HTMLElement | null>(null)
 let ctx: gsap.Context | null = null
 
-onMounted(() => {
+onMounted(async () => {
+  if (!hero.value) return
+
+  await waitForAncestorAnimations(hero.value)
   if (!hero.value) return
 
   ctx = gsap.context(() => {

@@ -24,14 +24,14 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
+import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.12 })
 
 let ctx: gsap.Context | null = null
 
-onMounted(() => {
+onMounted(async () => {
   if (!section.value) return
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     section.value.querySelectorAll('.reveal-image').forEach((el) => {
@@ -39,6 +39,9 @@ onMounted(() => {
     })
     return
   }
+
+  await waitForAncestorAnimations(section.value)
+  if (!section.value) return
 
   gsap.registerPlugin(ScrollTrigger)
 

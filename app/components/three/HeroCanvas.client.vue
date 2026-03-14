@@ -5,6 +5,7 @@
 <script setup lang="ts">
 import * as THREE from 'three'
 import { gsap } from 'gsap'
+import { waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
@@ -86,8 +87,11 @@ let material: THREE.ShaderMaterial | null = null
 let rafId: number | null = null
 let scrollTriggerInstance: globalThis.ScrollTrigger | null = null
 
-onMounted(() => {
+onMounted(async () => {
   try {
+    if (canvasRef.value) {
+      await waitForAncestorAnimations(canvasRef.value)
+    }
     const tier = init()
     if (!tier) return
 
