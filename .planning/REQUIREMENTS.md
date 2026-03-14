@@ -21,8 +21,8 @@ Requirements for production polish. Each maps to roadmap phases.
 
 ### Links & Navigation
 
-- [ ] **LINK-01**: Footer Instagram link points to real Meraki District URL (or placeholder page)
-- [ ] **LINK-02**: Footer LinkedIn link points to real Meraki District URL (or placeholder page)
+- [ ] **LINK-01**: Footer social links (Instagram, LinkedIn) removed until accounts exist
+- [ ] **LINK-02**: (Removed — merged into LINK-01)
 - [ ] **LINK-03**: All internal navigation links resolve correctly (no dead hrefs)
 
 ### Legal
@@ -74,17 +74,34 @@ Requirements for production polish. Each maps to roadmap phases.
 
 ## Traceability
 
-Which phases cover which requirements. Updated during roadmap creation.
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (populated by roadmapper) | | |
+| CLEAN-01 | Phase 1: Quick Wins | Pending |
+| CLEAN-02 | Phase 1: Quick Wins | Pending |
+| LINK-01 | Phase 1: Quick Wins | Pending |
+| LINK-02 | Phase 1: Quick Wins | Pending |
+| LINK-03 | Phase 1: Quick Wins | Pending |
+| FORM-01 | Phase 2: Forms | Pending |
+| FORM-02 | Phase 2: Forms | Pending |
+| FORM-03 | Phase 2: Forms | Pending |
+| FORM-04 | Phase 2: Forms | Pending |
+| LEGAL-01 | Phase 3: Legal Pages | Pending |
+| LEGAL-02 | Phase 3: Legal Pages | Pending |
+| A11Y-01 | Phase 4: Accessibility | Pending |
+| A11Y-02 | Phase 4: Accessibility | Pending |
+| A11Y-03 | Phase 4: Accessibility | Pending |
+| A11Y-04 | Phase 4: Accessibility | Pending |
+| A11Y-05 | Phase 4: Accessibility | Pending |
+| PERF-01 | Phase 5: SEO & Performance | Pending |
+| PERF-02 | Phase 5: SEO & Performance | Pending |
+| PERF-03 | Phase 5: SEO & Performance | Pending |
+| PERF-04 | Phase 5: SEO & Performance | Pending |
 
 **Coverage:**
-- v1.0 requirements: 18 total
-- Mapped to phases: 0
-- Unmapped: 18
+- v1.0 requirements: 17 total
+- Mapped to phases: 18
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-14*
-*Last updated: 2026-03-14 after initial definition*
+*Last updated: 2026-03-14 after roadmap creation*
