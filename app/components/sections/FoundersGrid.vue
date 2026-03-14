@@ -8,7 +8,12 @@
           class="founder-card"
         >
           <div class="founder-image-wrap reveal-image">
-            <div class="founder-image" />
+            <img
+              class="founder-image"
+              :src="founder.image"
+              :alt="founder.name"
+              loading="lazy"
+            />
           </div>
           <div class="founder-content reveal">
             <h2 class="founder-name">{{ founder.name }}</h2>
@@ -74,11 +79,13 @@ const founders = [
     name: 'Brian Lapinski',
     role: 'Co-founder',
     bio: "Brian builds systems. A developer who treats AI as a creative partner, he sees infrastructure where others see tools. Meraki District grew from his conviction that the creators defining this era need more than access to technology\u2014they need institutions that match their ambition.",
+    image: '/images/founders/brian.jpg',
   },
   {
     name: 'Rachel Gaia',
     role: 'Co-founder',
     bio: "Rachel builds worlds. A classically trained musician turned design entrepreneur turned AI-native artist, she\u2019s spent decades learning what it means to make something worth experiencing. At Meraki District, she shapes the creative vision and editorial voice that gives the ecosystem its soul.",
+    image: '/images/founders/rachel.webp',
   },
 ]
 </script>
@@ -102,7 +109,7 @@ const founders = [
 .founder-image {
   width: 100%;
   aspect-ratio: 3 / 4;
-  background: linear-gradient(145deg, #E8E7E3 0%, #DDDBD5 50%, #D5D4CE 100%);
+  object-fit: cover;
   transition: transform 0.6s var(--ease-out);
 }
 

@@ -34,19 +34,19 @@ const posts = [
     title: 'The Craft Premium',
     tag: 'Essay',
     excerpt: 'Why human-led creative work commands more value in an AI-saturated market. And what it takes to prove the difference.',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&h=400&fit=crop',
+    image: '/images/featured/craft-premium.webp',
   },
   {
     title: 'Building in Public, Thinking in Private',
     tag: 'Practice',
     excerpt: 'The case for protecting your creative process from the content machine. Not everything needs an audience.',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop',
+    image: '/images/featured/building-in-public.webp',
   },
   {
     title: 'Ten Institutions, One District',
     tag: 'Announcement',
     excerpt: 'Introducing Meraki District: why we built a cultural ecosystem for AI-native creators, and what comes next.',
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop',
+    image: '/images/featured/ten-institutions.webp',
   },
 ]
 </script>

@@ -16,7 +16,12 @@
           :class="[`inst-${inst.layout}`]"
         >
           <div class="inst-image-wrap reveal-image">
-            <div class="inst-image" />
+            <img
+              class="inst-image"
+              :src="inst.image"
+              :alt="inst.name"
+              loading="lazy"
+            />
           </div>
           <div class="inst-content reveal">
             <div class="inst-meta">
@@ -82,43 +87,53 @@ onUnmounted(() => {
 
 const institutions = [
   {
-    number: '01', name: 'Voight Studio', type: 'Design Practice', layout: 'hero',
+    number: '01', name: 'Voight Studio',
+    image: '/images/institutions/voight-studio.webp', type: 'Design Practice', layout: 'hero',
     description: 'Design and brand strategy for ventures building at the edge of what is possible. The flagship institution where client work meets creative ambition.',
   },
   {
-    number: '02', name: 'The Road', type: 'Publishing & Editorial', layout: 'wide',
+    number: '02', name: 'The Road',
+    image: '/images/institutions/the-road.webp', type: 'Publishing & Editorial', layout: 'wide',
     description: 'Long-form storytelling and cultural criticism for the AI-native era.',
   },
   {
-    number: '03', name: 'Meridian', type: 'Research & Strategy', layout: 'narrow',
+    number: '03', name: 'Meridian',
+    image: '/images/institutions/meridian.webp', type: 'Research & Strategy', layout: 'narrow',
     description: 'Frontier research translated into actionable creative intelligence.',
   },
   {
-    number: '04', name: 'Fieldwork', type: 'Education', layout: 'narrow',
+    number: '04', name: 'Fieldwork',
+    image: '/images/institutions/fieldwork.webp', type: 'Education', layout: 'narrow',
     description: 'Structured learning paths for creators who want depth, not shortcuts.',
   },
   {
-    number: '05', name: 'The Provenance', type: 'Archive & Curation', layout: 'wide',
+    number: '05', name: 'The Provenance',
+    image: '/images/institutions/the-provenance.webp', type: 'Archive & Curation', layout: 'wide',
     description: 'A living archive of creative practice, process, and precedent.',
   },
   {
-    number: '06', name: 'Basecamp', type: 'Community', layout: 'half',
+    number: '06', name: 'Basecamp',
+    image: '/images/institutions/basecamp.webp', type: 'Community', layout: 'half',
     description: 'Where ambitious creators find their people and sharpen their practice.',
   },
   {
-    number: '07', name: 'Common Ground', type: 'Events & Gatherings', layout: 'half',
+    number: '07', name: 'Common Ground',
+    image: '/images/institutions/common-ground.webp', type: 'Events & Gatherings', layout: 'half',
     description: 'Intimate gatherings where ideas collide and collaborations ignite.',
   },
   {
-    number: '08', name: 'The Mint', type: 'Creative Commerce', layout: 'wide',
+    number: '08', name: 'The Mint',
+    image: '/images/institutions/the-mint.webp', type: 'Creative Commerce', layout: 'wide',
     description: 'Ethical monetization infrastructure for independent creators.',
   },
   {
-    number: '09', name: 'The Seal', type: 'Credentials & Standards', layout: 'narrow',
+    number: '09', name: 'The Seal',
+    image: '/images/institutions/the-seal.webp', type: 'Credentials & Standards', layout: 'narrow',
     description: 'A credentialing system that means something. Earned, not purchased.',
   },
   {
-    number: '10', name: 'The Collective', type: 'Ventures & Partnerships', layout: 'closer',
+    number: '10', name: 'The Collective',
+    image: '/images/institutions/the-collective.webp', type: 'Ventures & Partnerships', layout: 'closer',
     description: 'Strategic partnerships and ventures that extend the ecosystem beyond its walls.',
   },
 ]
@@ -168,7 +183,7 @@ const institutions = [
 
 .inst-image {
   width: 100%;
-  background: linear-gradient(145deg, #E8E7E3 0%, #DDDBD5 50%, #D5D4CE 100%);
+  object-fit: cover;
   transition: transform 0.6s var(--ease-out);
 }
 
