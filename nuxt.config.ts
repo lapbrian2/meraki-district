@@ -11,12 +11,7 @@ export default defineNuxtConfig({
     '~/assets/css/transitions.css',
   ],
   build: {
-    transpile: ['three', 'gsap'],
-  },
-  vite: {
-    optimizeDeps: {
-      exclude: ['three'],
-    },
+    transpile: ['gsap'],
   },
 
   routeRules: {

@@ -29,14 +29,6 @@
       </div>
 
       <div class="footer-col">
-        <h4 class="overline">Connect</h4>
-        <ul>
-          <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-          <li><a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
         <h4 class="overline">Legal</h4>
         <ul>
           <li><NuxtLink to="/privacy">Privacy</NuxtLink></li>
@@ -65,7 +57,7 @@ const year = computed(() => new Date().getFullYear())
   max-width: var(--width-wide);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr;
   gap: var(--space-12);
   padding-bottom: var(--space-16);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);

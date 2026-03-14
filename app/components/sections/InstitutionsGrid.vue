@@ -98,8 +98,6 @@ onUnmounted(() => {
   padding: var(--space-32) var(--content-padding) var(--space-16);
 }
 
-
-
 .institutions-body {
   background-color: var(--color-background);
   padding: var(--space-16) var(--content-padding) var(--space-24);
