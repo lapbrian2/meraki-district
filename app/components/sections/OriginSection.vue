@@ -92,7 +92,7 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.2;
+  opacity: 0.5;
 }
 
 .origin-bg-overlay {
@@ -100,9 +100,9 @@ onUnmounted(() => {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(24, 24, 27, 0.5) 0%,
-    rgba(24, 24, 27, 0.2) 40%,
-    rgba(24, 24, 27, 0.6) 100%
+    rgba(24, 24, 27, 0.4) 0%,
+    rgba(24, 24, 27, 0.1) 40%,
+    rgba(24, 24, 27, 0.5) 100%
   );
 }
 
