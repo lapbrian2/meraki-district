@@ -78,44 +78,57 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
+import { waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { institutions, useInstitution } from '~/composables/useInstitutions'
 
 const route = useRoute()
-const slug = route.params.slug as string
-const institution = useInstitution(slug)
 
-const currentIndex = institutions.findIndex(i => i.slug === slug)
-const prev = currentIndex > 0 ? institutions[currentIndex - 1] : null
-const next = currentIndex < institutions.length - 1 ? institutions[currentIndex + 1] : null
+// Reactive — updates when navigating between institution pages
+const slug = computed(() => route.params.slug as string)
+const institution = computed(() => useInstitution(slug.value))
+const currentIndex = computed(() => institutions.findIndex(i => i.slug === slug.value))
+const prev = computed(() => currentIndex.value > 0 ? institutions[currentIndex.value - 1] : null)
+const next = computed(() => currentIndex.value < institutions.length - 1 ? institutions[currentIndex.value + 1] : null)
+const prevUrl = computed(() => prev.value ? '/institutions/' + prev.value.slug : '')
+const nextUrl = computed(() => next.value ? '/institutions/' + next.value.slug : '')
 
-const prevUrl = prev ? '/institutions/' + prev.slug : ''
-const nextUrl = next ? '/institutions/' + next.slug : ''
-
-if (institution) {
-  useHead({
-    title: institution.name + ' — Meraki District',
-    meta: [
-      { name: 'description', content: institution.description },
-    ],
-  })
-}
+useHead(computed(() => ({
+  title: institution.value ? institution.value.name + ' — Meraki District' : 'Meraki District',
+  meta: institution.value ? [
+    { name: 'description', content: institution.value.description },
+  ] : [],
+})))
 
 const section = ref<HTMLElement | null>(null)
-useGsapScrollReveal(section, '.reveal', { stagger: 0.1 })
-
 let ctx: gsap.Context | null = null
 
-onMounted(async () => {
+function initAnimations() {
   if (!section.value) return
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-  await waitForAncestorAnimations(section.value)
-  if (!section.value) return
-
   gsap.registerPlugin(ScrollTrigger)
 
+  // Clean up previous animations
+  ctx?.revert()
+
   ctx = gsap.context(() => {
+    // Scroll reveal for .reveal elements
+    gsap.fromTo('.reveal',
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: section.value,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      }
+    )
+
     gsap.from('.inst-rule', {
       scaleX: 0,
       duration: 0.8,
@@ -132,7 +145,21 @@ onMounted(async () => {
       duration: 1.6,
       ease: 'power3.out',
     })
-  }, section.value?.parentElement || undefined)
+  }, section.value)
+}
+
+onMounted(async () => {
+  if (!section.value) return
+  await waitForAncestorAnimations(section.value)
+  if (!section.value) return
+  initAnimations()
+})
+
+// Re-init animations when navigating between institutions
+watch(slug, async () => {
+  await nextTick()
+  window.scrollTo(0, 0)
+  initAnimations()
 })
 
 onUnmounted(() => {

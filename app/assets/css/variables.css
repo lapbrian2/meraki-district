@@ -30,17 +30,17 @@
   --text-h2: clamp(1.75rem, 3vw, 2.5rem);
   --text-h3: clamp(1.25rem, 2vw, 1.75rem);
   --text-h4: clamp(1.1rem, 1.5vw, 1.25rem);
-  --text-body: clamp(1rem, 1.1vw, 1.125rem);
+  --text-body: clamp(1rem, 1.15vw, 1.125rem);
   --text-small: clamp(0.8rem, 0.9vw, 0.875rem);
   --text-caption: 0.75rem;
-  --text-overline: 0.6875rem;
+  --text-overline: 0.75rem;
 
   --leading-tight: 1.1;
   --leading-snug: 1.3;
   --leading-normal: 1.6;
   --leading-relaxed: 1.8;
 
-  --tracking-tight: -0.02em;
+  --tracking-tight: -0.03em;
   --tracking-normal: 0;
   --tracking-wide: 0.08em;
   --tracking-widest: 0.15em;

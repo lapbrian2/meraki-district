@@ -129,6 +129,24 @@ img, video {
   color: var(--color-gold-accessible);
 }
 
+
+/* Typography refinements */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+blockquote {
+  hanging-punctuation: first;
+}
+
+/* Kerning and ligatures for display font */
+h1, h2, h3, h4,
+.hero-title,
+.inst-hero-title {
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  -webkit-font-smoothing: antialiased;
+}
+
 /* Selection */
 ::selection {
   background-color: rgba(184, 150, 78, 0.15);

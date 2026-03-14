@@ -119,7 +119,11 @@ onUnmounted(() => {
 }
 
 .inst-card:hover .inst-image {
-  transform: scale(1.03);
+  transform: scale(1.04);
+}
+
+.inst-card:hover .inst-type {
+  color: var(--color-gold);
 }
 
 .inst-card:hover .inst-name::after {
@@ -208,6 +212,7 @@ onUnmounted(() => {
 
 .inst-type {
   font-size: var(--text-overline);
+  transition: color var(--duration-fast) ease;
   font-weight: 500;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;

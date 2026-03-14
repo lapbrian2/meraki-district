@@ -31,7 +31,7 @@ onUnmounted(() => {
   background: var(--color-gold);
   transform-origin: left;
   transform: scaleX(0);
-  z-index: 200;
+  z-index: 99;
   pointer-events: none;
   will-change: transform;
 }

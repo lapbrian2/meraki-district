@@ -45,8 +45,12 @@ export default defineNuxtConfig({
         { name: 'twitter:title', content: 'Meraki District \u2014 Where craft meets culture' },
         { name: 'twitter:description', content: 'A cultural ecosystem for AI-native creators. Ten institutions. One district.' },
         { name: 'theme-color', content: '#09090B' },
+        { property: 'og:site_name', content: 'Meraki District' },
+        { property: 'og:locale', content: 'en_US' },
       ],
       link: [
+        { rel: 'canonical', href: 'https://meraki-district.vercel.app' },
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500&display=swap' },
