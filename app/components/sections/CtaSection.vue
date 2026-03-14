@@ -15,9 +15,11 @@
 
 <script setup lang="ts">
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
+import { useMagnetic } from '~/composables/useInteractions'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal')
+useMagnetic(section, '.cta-button', { strength: 0.25 })
 </script>
 
 <style scoped>

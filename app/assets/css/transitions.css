@@ -1,18 +1,22 @@
 /* Page transitions
    Enter: no CSS animation — GSAP scroll reveals handle all enter effects.
-   Leave: simple fade-out so navigating away feels smooth.
+   Leave: clip-path wipe upward for a clean, editorial exit.
    Vue 3.5 uses Web Animations API for <Transition>, which conflicts with
    GSAP's ScrollTrigger if both run during onMounted. Removing the enter
    animation eliminates that conflict entirely. */
 .page-leave-active {
-  transition: opacity 0.3s ease;
+  transition: clip-path 0.45s cubic-bezier(0.65, 0, 0.35, 1);
 }
 .page-leave-to {
-  opacity: 0;
+  clip-path: inset(0 0 100% 0);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .page-leave-active {
     transition: opacity 0.01ms;
+  }
+  .page-leave-to {
+    clip-path: none;
+    opacity: 0;
   }
 }

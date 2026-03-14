@@ -25,9 +25,11 @@
 
 <script setup lang="ts">
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
+import { useTilt } from '~/composables/useInteractions'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.12 })
+useTilt(section, '.featured-card', { maxRotation: 3 })
 
 const posts = [
   {

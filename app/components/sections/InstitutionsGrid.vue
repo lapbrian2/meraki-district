@@ -45,10 +45,12 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
+import { useTilt } from '~/composables/useInteractions'
 import { institutions } from '~/composables/useInstitutions'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.08 })
+useTilt(section, '.inst-card', { maxRotation: 2.5 })
 
 let ctx: gsap.Context | null = null
 
