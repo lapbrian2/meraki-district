@@ -1,5 +1,14 @@
 <template>
   <section ref="section" class="philosophy section section-dark">
+    <div class="philosophy-bg-wrap">
+      <img
+        src="/images/philosophy-bg.jpg"
+        alt=""
+        class="philosophy-bg-image"
+        loading="lazy"
+      />
+      <div class="philosophy-bg-overlay" />
+    </div>
     <div class="section-narrow">
       <p class="overline reveal">Philosophy</p>
       <blockquote class="philosophy-quote reveal">
@@ -30,6 +39,37 @@ useGsapScrollReveal(section, '.reveal', { stagger: 0.12 })
 .philosophy {
   padding-top: var(--space-32);
   padding-bottom: var(--space-32);
+  position: relative;
+  overflow: hidden;
+}
+
+.philosophy-bg-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.philosophy-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.12;
+}
+
+.philosophy-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(24, 24, 27, 0.6) 0%,
+    rgba(24, 24, 27, 0.3) 50%,
+    rgba(24, 24, 27, 0.7) 100%
+  );
+}
+
+.section-narrow {
+  position: relative;
+  z-index: 1;
 }
 
 .philosophy-quote {

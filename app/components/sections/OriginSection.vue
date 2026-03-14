@@ -1,6 +1,15 @@
 <template>
   <section ref="section" class="origin section section-dark">
-    <div class="section-narrow">
+    <div class="origin-bg-wrap">
+      <img
+        src="/images/origin-bg.jpg"
+        alt=""
+        class="origin-bg-image"
+        loading="lazy"
+      />
+      <div class="origin-bg-overlay" />
+    </div>
+    <div class="section-narrow origin-content">
       <p class="overline reveal">The Origin</p>
       <h2 class="origin-title reveal">
         We couldn&rsquo;t find what we were looking for.
@@ -69,6 +78,37 @@ onUnmounted(() => {
 .origin {
   padding-top: var(--space-32);
   padding-bottom: var(--space-32);
+  position: relative;
+  overflow: hidden;
+}
+
+.origin-bg-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.origin-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+}
+
+.origin-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(24, 24, 27, 0.5) 0%,
+    rgba(24, 24, 27, 0.2) 40%,
+    rgba(24, 24, 27, 0.6) 100%
+  );
+}
+
+.origin-content {
+  position: relative;
+  z-index: 1;
 }
 
 .origin-title {
