@@ -31,11 +31,15 @@ import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal')
 
+let ctx: gsap.Context | null = null
+
 onMounted(() => {
   if (!section.value) return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
   gsap.registerPlugin(ScrollTrigger)
 
-  gsap.context(() => {
+  ctx = gsap.context(() => {
     gsap.from('.manifesto-rule', {
       scaleX: 0,
       duration: 0.8,
@@ -47,6 +51,10 @@ onMounted(() => {
       },
     })
   }, section.value)
+})
+
+onUnmounted(() => {
+  ctx?.revert()
 })
 </script>
 

@@ -84,6 +84,7 @@ void main(){
 
 let material: THREE.ShaderMaterial | null = null
 let rafId: number | null = null
+let scrollTriggerInstance: globalThis.ScrollTrigger | null = null
 
 onMounted(() => {
   try {
@@ -113,7 +114,7 @@ onMounted(() => {
 
     // Scroll proxy
     gsap.registerPlugin(ScrollTrigger)
-    ScrollTrigger.create({
+    scrollTriggerInstance = ScrollTrigger.create({
       trigger: 'body',
       start: 'top top',
       end: '30% top',
@@ -163,7 +164,7 @@ onUnmounted(() => {
   if (rafId !== null) cancelAnimationFrame(rafId)
   window.removeEventListener('mousemove', onMouseMove)
   window.removeEventListener('resize', resize)
-  ScrollTrigger.getAll().forEach((t) => t.kill())
+  if (scrollTriggerInstance) { scrollTriggerInstance.kill(); scrollTriggerInstance = null }
   dispose()
 })
 </script>

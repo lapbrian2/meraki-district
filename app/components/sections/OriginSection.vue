@@ -3,18 +3,18 @@
     <div class="section-narrow">
       <p class="overline reveal">The Origin</p>
       <h2 class="origin-title reveal">
-        We couldn't find what we were looking for.
+        We couldn&rsquo;t find what we were looking for.
       </h2>
       <div class="origin-rule" aria-hidden="true" />
       <p class="origin-body reveal">
         Not another platform. Not another community with a Discord server and
         a course catalog. Something with weight. Something built like the
         institutions that shaped every creative discipline before this
-        one&mdash;but designed for creators working at the frontier of what's
+        one&mdash;but designed for creators working at the frontier of what&rsquo;s
         possible.
       </p>
       <p class="origin-body reveal">
-        The gap isn't talent. The gap isn't tools. The gap is infrastructure.
+        The gap isn&rsquo;t talent. The gap isn&rsquo;t tools. The gap is infrastructure.
         Places that take this work seriously. Standards that mean something. A
         publishing house, a credential, a research practice, a gathering
         place&mdash;all built around the conviction that AI-native creative
@@ -35,13 +35,15 @@ import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal')
 
+let ctx: gsap.Context | null = null
+
 onMounted(() => {
   if (!section.value) return
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
   gsap.registerPlugin(ScrollTrigger)
 
-  gsap.context(() => {
+  ctx = gsap.context(() => {
     gsap.from('.origin-rule', {
       scaleX: 0,
       duration: 0.8,
@@ -53,6 +55,10 @@ onMounted(() => {
       },
     })
   }, section.value)
+})
+
+onUnmounted(() => {
+  ctx?.revert()
 })
 </script>
 

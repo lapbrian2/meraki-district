@@ -46,7 +46,9 @@ function onKeydown(e: KeyboardEvent) {
 }
 
 watch(mobileOpen, (open) => {
-  document.body.style.overflow = open ? 'hidden' : ''
+  if (import.meta.client) {
+    document.body.style.overflow = open ? 'hidden' : ''
+  }
 })
 
 onMounted(() => {

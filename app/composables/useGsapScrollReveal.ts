@@ -1,6 +1,6 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { onMounted, onUnmounted, type Ref } from 'vue'
+import { nextTick, onMounted, onUnmounted, type Ref } from 'vue'
 
 interface ScrollRevealOptions {
   y?: number
@@ -39,19 +39,28 @@ export function useGsapScrollReveal(
     gsap.registerPlugin(ScrollTrigger)
 
     ctx = gsap.context(() => {
-      gsap.from(selector, {
-        opacity: 0,
-        y,
-        duration,
-        stagger,
-        ease,
-        scrollTrigger: {
-          trigger: container.value,
-          start,
-          toggleActions: 'play none none none',
-        },
-      })
+      gsap.fromTo(selector,
+        { opacity: 0, y },
+        {
+          opacity: 1,
+          y: 0,
+          duration,
+          stagger,
+          ease,
+          scrollTrigger: {
+            trigger: container.value,
+            start,
+            toggleActions: 'play none none none',
+            invalidateOnRefresh: true,
+          },
+        }
+      )
     }, container.value)
+
+    // Recalculate after page transition completes (Nuxt out-in mode)
+    nextTick(() => {
+      ScrollTrigger.refresh()
+    })
   })
 
   onUnmounted(() => {

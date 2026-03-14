@@ -29,6 +29,8 @@ import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.12 })
 
+let ctx: gsap.Context | null = null
+
 onMounted(() => {
   if (!section.value) return
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -40,7 +42,7 @@ onMounted(() => {
 
   gsap.registerPlugin(ScrollTrigger)
 
-  gsap.context(() => {
+  ctx = gsap.context(() => {
     gsap.utils.toArray<HTMLElement>('.reveal-image').forEach((el, i) => {
       gsap.fromTo(el,
         { clipPath: 'inset(100% 0 0 0)' },
@@ -60,16 +62,20 @@ onMounted(() => {
   }, section.value)
 })
 
+onUnmounted(() => {
+  ctx?.revert()
+})
+
 const founders = [
   {
     name: 'Brian Lapinski',
     role: 'Co-founder',
-    bio: 'Brian builds systems. A developer who treats AI as a creative partner, he sees infrastructure where others see tools. Meraki District grew from his conviction that the creators defining this era need more than access to technology\u2014they need institutions that match their ambition.',
+    bio: "Brian builds systems. A developer who treats AI as a creative partner, he sees infrastructure where others see tools. Meraki District grew from his conviction that the creators defining this era need more than access to technology\u2014they need institutions that match their ambition.",
   },
   {
     name: 'Rachel Gaia',
     role: 'Co-founder',
-    bio: 'Rachel builds worlds. A classically trained musician turned design entrepreneur turned AI-native artist, she\u2019s spent decades learning what it means to make something worth experiencing. At Meraki District, she shapes the creative vision and editorial voice that gives the ecosystem its soul.',
+    bio: "Rachel builds worlds. A classically trained musician turned design entrepreneur turned AI-native artist, she\u2019s spent decades learning what it means to make something worth experiencing. At Meraki District, she shapes the creative vision and editorial voice that gives the ecosystem its soul.",
   },
 ]
 </script>
@@ -85,7 +91,6 @@ const founders = [
   gap: var(--space-12);
 }
 
-/* ─── Image ─── */
 .founder-image-wrap {
   overflow: hidden;
   margin-bottom: var(--space-6);
@@ -102,7 +107,6 @@ const founders = [
   transform: scale(1.02);
 }
 
-/* ─── Content ─── */
 .founder-name {
   font-size: var(--text-h2);
   margin-bottom: var(--space-1);
@@ -124,7 +128,6 @@ const founders = [
   max-width: 45ch;
 }
 
-/* ─── Responsive ─── */
 @media (max-width: 768px) {
   .founders-grid {
     grid-template-columns: 1fr;

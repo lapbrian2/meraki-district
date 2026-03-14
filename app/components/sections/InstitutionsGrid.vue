@@ -41,6 +41,8 @@ import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.08 })
 
+let ctx: gsap.Context | null = null
+
 onMounted(() => {
   if (!section.value) return
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -52,7 +54,7 @@ onMounted(() => {
 
   gsap.registerPlugin(ScrollTrigger)
 
-  gsap.context(() => {
+  ctx = gsap.context(() => {
     gsap.utils.toArray<HTMLElement>('.reveal-image').forEach((el) => {
       gsap.fromTo(el,
         { clipPath: 'inset(100% 0 0 0)' },
@@ -69,6 +71,10 @@ onMounted(() => {
       )
     })
   }, section.value)
+})
+
+onUnmounted(() => {
+  ctx?.revert()
 })
 
 const institutions = [

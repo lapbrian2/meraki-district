@@ -31,8 +31,8 @@
       <div class="footer-col">
         <h4 class="overline">Connect</h4>
         <ul>
-          <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
         </ul>
       </div>
 

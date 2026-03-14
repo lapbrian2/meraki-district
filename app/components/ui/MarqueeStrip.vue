@@ -39,11 +39,10 @@ const words = ['The work matters more than the tools', 'Mastery is a practice', 
   font-family: var(--font-display);
   font-size: var(--text-h3);
   font-weight: 300;
-  letter-spacing: var(--tracking-tight);
+  letter-spacing: var(--tracking-wide);
   color: var(--color-text-muted);
   white-space: nowrap;
   text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
 }
 
 .marquee-dot {
