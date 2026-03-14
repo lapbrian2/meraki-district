@@ -72,8 +72,8 @@ onUnmounted(() => {
 
 <style scoped>
 .origin {
-  padding-top: var(--space-32);
-  padding-bottom: var(--space-32);
+  padding-top: var(--space-24);
+  padding-bottom: var(--space-24);
   position: relative;
   overflow: hidden;
 }

@@ -144,8 +144,8 @@ useSeoMeta({
 
 <style scoped>
 .page-hero {
-  padding-top: calc(var(--space-48) + 4rem);
-  padding-bottom: var(--space-24);
+  padding-top: calc(var(--space-32) + 3rem);
+  padding-bottom: var(--space-16);
 }
 
 .page-hero-title {
@@ -313,7 +313,7 @@ useSeoMeta({
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .page-hero {
-    padding-top: calc(var(--space-24) + 3rem);
+    padding-top: calc(var(--space-16) + 3rem);
     padding-bottom: var(--space-12);
   }
 

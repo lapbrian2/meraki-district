@@ -125,12 +125,12 @@ onUnmounted(() => {
 .institutions-hero {
   position: relative;
   overflow: hidden;
-  padding: var(--space-32) var(--content-padding) var(--space-16);
+  padding: var(--space-24) var(--content-padding) var(--space-12);
 }
 
 .institutions-body {
   background-color: var(--color-background);
-  padding: var(--space-16) var(--content-padding) var(--space-24);
+  padding: var(--space-12) var(--content-padding) var(--space-16);
 }
 
 .institutions-title {

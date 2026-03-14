@@ -250,7 +250,7 @@ useSeoMeta({
 <style scoped>
 /* Hero */
 .legal-hero {
-  padding-top: calc(var(--space-48) + 4rem);
+  padding-top: calc(var(--space-32) + 3rem);
   padding-bottom: var(--space-24);
 }
 
@@ -366,7 +366,7 @@ useSeoMeta({
 /* Responsive */
 @media (max-width: 600px) {
   .legal-hero {
-    padding-top: calc(var(--space-32) + 2rem);
+    padding-top: calc(var(--space-24) + 2rem);
     padding-bottom: var(--space-16);
   }
 

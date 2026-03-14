@@ -60,8 +60,8 @@ onUnmounted(() => {
 
 <style scoped>
 .manifesto {
-  padding-top: var(--space-32);
-  padding-bottom: var(--space-32);
+  padding-top: var(--space-24);
+  padding-bottom: var(--space-24);
 }
 
 .manifesto-text {

@@ -82,7 +82,7 @@ function formatDate(dateStr: string) {
 .article-hero-content {
   position: relative;
   z-index: 1;
-  padding-top: calc(var(--space-48) + 4rem);
+  padding-top: calc(var(--space-32) + 3rem);
   padding-bottom: var(--space-16);
 }
 
@@ -121,7 +121,7 @@ function formatDate(dateStr: string) {
   }
 
   .article-hero-content {
-    padding-top: calc(var(--space-24) + 3rem);
+    padding-top: calc(var(--space-16) + 3rem);
     padding-bottom: var(--space-12);
   }
 

@@ -71,7 +71,7 @@ useGsapScrollReveal(footerRef, '.reveal', { stagger: 0.12 })
 
 <style scoped>
 .footer {
-  padding: var(--space-24) var(--content-padding) var(--space-8);
+  padding: var(--space-16) var(--content-padding) var(--space-8);
   border-top: none;
   position: relative;
 }

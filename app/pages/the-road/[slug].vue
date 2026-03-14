@@ -332,7 +332,7 @@ onUnmounted(() => {
 
 /* Not found */
 .not-found {
-  padding-top: calc(var(--space-48) + 4rem);
+  padding-top: calc(var(--space-32) + 3rem);
   min-height: 60vh;
 }
 

@@ -31,8 +31,8 @@ useMagnetic(section, '.cta-button', { strength: 0.25 })
 
 <style scoped>
 .cta {
-  padding-top: var(--space-32);
-  padding-bottom: var(--space-32);
+  padding-top: var(--space-24);
+  padding-bottom: var(--space-24);
   position: relative;
   overflow: hidden;
 }
