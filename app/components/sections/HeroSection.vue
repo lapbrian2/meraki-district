@@ -1,5 +1,8 @@
 <template>
   <section ref="hero" class="hero">
+    <ClientOnly>
+      <HeroCanvas />
+    </ClientOnly>
     <div class="hero-content">
       <p class="hero-overline reveal">Est. 2025</p>
       <h1 class="hero-title reveal">
@@ -56,10 +59,13 @@ onUnmounted(() => {
   text-align: center;
   padding: var(--space-24) var(--content-padding);
   position: relative;
+  overflow: hidden;
 }
 
 .hero-content {
   max-width: 800px;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-overline {
@@ -109,6 +115,7 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   gap: var(--space-2);
+  z-index: 1;
 }
 
 .hero-scroll-line {

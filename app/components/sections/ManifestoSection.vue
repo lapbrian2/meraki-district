@@ -14,9 +14,10 @@
         to pursue mastery without compromise.
       </p>
       <p class="manifesto-body reveal">
-        We exist because nobody built this yet. No credentialing system that
-        means anything. No publishing house for AI-native thinking. No community
-        that filters for depth over volume. So we are building it.
+        We believe the creators who will define this era are the ones who treat
+        AI as a craft, not a shortcut. Who measure their work by depth, not
+        output. Who understand that when everyone has access to the same tools,
+        the only thing left is taste, judgment, and the willingness to go further.
       </p>
     </div>
   </section>

@@ -10,6 +10,14 @@ export default defineNuxtConfig({
     '~/assets/css/base.css',
     '~/assets/css/transitions.css',
   ],
+  build: {
+    transpile: ['three', 'gsap'],
+  },
+  vite: {
+    optimizeDeps: {
+      exclude: ['three'],
+    },
+  },
   app: {
     head: {
       htmlAttrs: { lang: 'en' },
@@ -17,12 +25,12 @@ export default defineNuxtConfig({
       meta: [
         { name: 'description', content: 'A cultural ecosystem for AI-native creators who refuse to choose between ambition and integrity. Ten institutions. One district. A new standard for creative practice.' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { property: 'og:title', content: 'Meraki District — Where craft meets culture' },
+        { property: 'og:title', content: 'Meraki District \u2014 Where craft meets culture' },
         { property: 'og:description', content: 'A cultural ecosystem for AI-native creators. Ten institutions. One district. A new standard for creative practice.' },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: 'https://meraki-district.vercel.app' },
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'Meraki District — Where craft meets culture' },
+        { name: 'twitter:title', content: 'Meraki District \u2014 Where craft meets culture' },
         { name: 'twitter:description', content: 'A cultural ecosystem for AI-native creators. Ten institutions. One district.' },
         { name: 'theme-color', content: '#09090B' },
       ],

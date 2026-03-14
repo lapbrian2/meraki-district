@@ -28,12 +28,17 @@ export function useGsapScrollReveal(
   onMounted(() => {
     if (!container.value) return
 
-    // Defensive: ensure ScrollTrigger is registered
+    // Respect prefers-reduced-motion: make elements visible without animation
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      container.value.querySelectorAll(selector).forEach((el) => {
+        ;(el as HTMLElement).style.opacity = '1'
+      })
+      return
+    }
+
     gsap.registerPlugin(ScrollTrigger)
 
     ctx = gsap.context(() => {
-      // gsap.context scopes string selectors to container.value
-      // so '.reveal' only matches elements within this section
       gsap.from(selector, {
         opacity: 0,
         y,
