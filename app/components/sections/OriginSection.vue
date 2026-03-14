@@ -16,18 +16,10 @@
       </h2>
       <div class="origin-rule" aria-hidden="true" />
       <p class="origin-body reveal">
-        Not another platform. Not another community with a Discord server and
-        a course catalog. Something with weight. Something built like the
-        institutions that shaped every creative discipline before this
-        one&mdash;but designed for creators working at the frontier of what&rsquo;s
-        possible.
+        We looked for something with weight. Something built like the institutions that shaped every creative discipline before this one&mdash;designed for creators working at the frontier of what&rsquo;s possible.
       </p>
       <p class="origin-body reveal">
-        The gap isn&rsquo;t talent. The gap isn&rsquo;t tools. The gap is infrastructure.
-        Places that take this work seriously. Standards that mean something. A
-        publishing house, a credential, a research practice, a gathering
-        place&mdash;all built around the conviction that AI-native creative
-        work is a legitimate discipline that deserves legitimate support.
+        The gap is infrastructure. Places that take this work seriously. Standards that mean something. A publishing house, a credential, a research practice, a gathering place&mdash;all built around the conviction that AI-native creative work is a legitimate discipline that deserves legitimate support.
       </p>
       <p class="origin-body reveal">
         We built it.

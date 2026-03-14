@@ -3,7 +3,7 @@
     <div class="institutions-hero section-dark">
       <div class="institutions-hero-bg">
         <img
-          src="/images/manifesto-bg.jpg"
+          src="/images/institutions-bg.jpg"
           alt=""
           class="institutions-hero-image"
           loading="lazy"

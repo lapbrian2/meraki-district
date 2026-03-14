@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-const words = ['The work matters more than the tools', 'Mastery is a practice', 'Earned not purchased', 'Ambition meets integrity']
+const words = ['The work comes first', 'Mastery is a daily practice', 'Credentials are earned', 'Craft meets culture']
 </script>
 
 <style scoped>
