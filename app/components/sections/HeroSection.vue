@@ -2,7 +2,7 @@
   <section ref="hero" class="hero">
     <div class="hero-bg-wrap">
       <img
-        src="/images/hero-bg.png"
+        src="/images/hero-bg.webp"
         alt=""
         class="hero-bg-image"
         loading="eager"

@@ -2,6 +2,10 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  modules: ['@nuxtjs/sitemap'],
+  site: {
+    url: 'https://meraki-district.vercel.app',
+  },
   components: [
     { path: '~/components', pathPrefix: false },
   ],
