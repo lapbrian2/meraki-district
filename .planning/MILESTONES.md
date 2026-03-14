@@ -1,5 +1,22 @@
 # Milestones
 
+## v1.1 — Launch Prep (Complete)
+
+**Shipped:** 2026-03-14
+**Phases:** 6-7 (2 plans, 8 requirements)
+**Files Changed:** 19
+
+**Key accomplishments:**
+1. Per-page OG meta tags (og:title, og:description) on all 8 pages + 10 dynamic institution pages
+2. Dynamic canonical URLs via app.vue computed useHead
+3. Default OG image (1200x630) for social sharing previews
+4. Vercel Analytics + Speed Insights (Web Vitals) installed
+5. Remaining 3 background images converted from JPG to WebP (37-71% reduction)
+
+**Last phase number:** 7
+
+---
+
 ## v1.0 — Production Polish (Complete)
 
 **Shipped:** 2026-03-14

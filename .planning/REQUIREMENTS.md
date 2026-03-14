@@ -9,20 +9,20 @@ Requirements for v1.1 Launch Prep. Everything needed to share the URL publicly.
 
 ### SEO
 
-- [ ] **SEO-01**: Every page has page-specific og:title and og:description meta tags (not just global fallback)
-- [ ] **SEO-02**: Every page has canonical URL meta tag
-- [ ] **SEO-03**: Default OG image (1200x630) created and referenced site-wide via og:image and twitter:image
-- [ ] **SEO-04**: Institution detail pages generate dynamic og:title and og:description from institution data
+- [x] **SEO-01**: Every page has page-specific og:title and og:description meta tags (not just global fallback)
+- [x] **SEO-02**: Every page has canonical URL meta tag
+- [x] **SEO-03**: Default OG image (1200x630) created and referenced site-wide via og:image and twitter:image
+- [x] **SEO-04**: Institution detail pages generate dynamic og:title and og:description from institution data
 
 ### Analytics
 
-- [ ] **ANLX-01**: Vercel Analytics installed and tracking page views on all routes
-- [ ] **ANLX-02**: Vercel Web Vitals collection enabled
+- [x] **ANLX-01**: Vercel Analytics installed and tracking page views on all routes
+- [x] **ANLX-02**: Vercel Web Vitals collection enabled
 
 ### Performance
 
-- [ ] **PERF-01**: Remaining background images (origin-bg.jpg, philosophy-bg.jpg, the-road-hero.jpg) converted from JPG to WebP
-- [ ] **PERF-02**: All component references updated to use WebP versions
+- [x] **PERF-01**: Remaining background images (origin-bg.jpg, philosophy-bg.jpg, the-road-hero.jpg) converted from JPG to WebP
+- [x] **PERF-02**: All component references updated to use WebP versions
 
 ## Future Requirements
 
@@ -55,20 +55,20 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SEO-01 | Phase 6 | Pending |
-| SEO-02 | Phase 6 | Pending |
-| SEO-03 | Phase 6 | Pending |
-| SEO-04 | Phase 6 | Pending |
-| ANLX-01 | Phase 7 | Pending |
-| ANLX-02 | Phase 7 | Pending |
-| PERF-01 | Phase 7 | Pending |
-| PERF-02 | Phase 7 | Pending |
+| SEO-01 | Phase 6 | Complete |
+| SEO-02 | Phase 6 | Complete |
+| SEO-03 | Phase 6 | Complete |
+| SEO-04 | Phase 6 | Complete |
+| ANLX-01 | Phase 7 | Complete |
+| ANLX-02 | Phase 7 | Complete |
+| PERF-01 | Phase 7 | Complete |
+| PERF-02 | Phase 7 | Complete |
 
 **Coverage:**
 - v1.1 requirements: 8 total
 - Mapped to phases: 8
-- Unmapped: 0
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-14*
-*Last updated: 2026-03-14 after roadmap creation*
+*Last updated: 2026-03-14 after v1.1 completion*
