@@ -32,9 +32,11 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
+import { useParallax } from '~/composables/useParallax'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal')
+useParallax(section, '.origin-bg-image', { speed: 0.08 })
 
 let ctx: gsap.Context | null = null
 
@@ -82,9 +84,12 @@ onUnmounted(() => {
 
 .origin-bg-image {
   width: 100%;
-  height: 100%;
+  height: 130%;
+  top: -15%;
+  position: relative;
   object-fit: cover;
   opacity: 0.5;
+  will-change: transform;
 }
 
 .origin-bg-overlay {

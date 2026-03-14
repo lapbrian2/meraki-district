@@ -1,5 +1,5 @@
 <template>
-  <div class="marquee" aria-hidden="true">
+  <div ref="marqueeEl" class="marquee" aria-hidden="true">
     <div class="marquee-track">
       <span v-for="i in 2" :key="i" class="marquee-content">
         <span v-for="word in words" :key="`${i}-${word}`" class="marquee-word">
@@ -11,7 +11,46 @@
 </template>
 
 <script setup lang="ts">
+import { gsap } from 'gsap'
+
 const words = ['The work comes first', 'Mastery is a daily practice', 'Credentials are earned', 'Craft meets culture']
+
+const marqueeEl = ref<HTMLElement | null>(null)
+let tickerFn: (() => void) | null = null
+
+onMounted(() => {
+  if (!marqueeEl.value) return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  const track = marqueeEl.value.querySelector('.marquee-track') as HTMLElement
+  if (!track) return
+
+  const { $lenis } = useNuxtApp()
+
+  const content = track.querySelector('.marquee-content') as HTMLElement
+  const contentWidth = content.offsetWidth
+
+  let xPos = 0
+  const baseSpeed = 0.5
+
+  tickerFn = () => {
+    const velocity = ($lenis as any)?.velocity ?? 0
+    const speedBoost = 1 + Math.min(Math.abs(velocity) * 0.04, 3)
+    xPos -= baseSpeed * speedBoost
+
+    if (Math.abs(xPos) >= contentWidth) {
+      xPos += contentWidth
+    }
+
+    gsap.set(track, { x: xPos })
+  }
+
+  gsap.ticker.add(tickerFn)
+})
+
+onUnmounted(() => {
+  if (tickerFn) gsap.ticker.remove(tickerFn)
+})
 </script>
 
 <style scoped>
@@ -26,7 +65,6 @@ const words = ['The work comes first', 'Mastery is a daily practice', 'Credentia
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marqueeScroll 30s linear infinite;
 }
 
 .marquee-content {
@@ -50,17 +88,6 @@ const words = ['The work comes first', 'Mastery is a daily practice', 'Credentia
   margin: 0 var(--space-8);
   color: var(--color-gold);
   font-size: var(--text-h2);
-}
-
-@keyframes marqueeScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-  }
 }
 
 @media (max-width: 768px) {

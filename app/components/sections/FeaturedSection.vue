@@ -10,7 +10,7 @@
       <div class="featured-grid">
         <article v-for="post in posts" :key="post.title" class="featured-card reveal">
           <div class="featured-image">
-            <img :src="post.image" :alt="`${post.tag}: ${post.title}`" loading="lazy" />
+            <img :src="post.image" :alt="`${post.tag}: ${post.title}`" loading="lazy" @load="onImageLoad" />
           </div>
           <div class="featured-content">
             <span class="featured-tag">{{ post.tag }}</span>
@@ -49,6 +49,9 @@ const posts = [
     image: '/images/featured/ten-institutions.webp',
   },
 ]
+function onImageLoad(e: Event) {
+  (e.target as HTMLElement).classList.add("loaded")
+}
 </script>
 
 <style scoped>
@@ -84,10 +87,17 @@ const posts = [
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--duration-slow) var(--ease-out);
+  opacity: 0;
+  transform: scale(0.97);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.featured-card:hover .featured-image img {
+.featured-image img.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.featured-card:hover .featured-image img.loaded {
   transform: scale(1.03);
 }
 

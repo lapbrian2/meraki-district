@@ -32,6 +32,7 @@
 
 <script setup lang="ts">
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 
 const hero = ref<HTMLElement | null>(null)
@@ -43,16 +44,34 @@ onMounted(async () => {
   await waitForAncestorAnimations(hero.value)
   if (!hero.value) return
 
+  gsap.registerPlugin(ScrollTrigger)
+
   ctx = gsap.context(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
-    tl.from('.hero-bg-image', { scale: 1.1, duration: 2.4, ease: 'power2.out' }, 0)
+    tl.from('.hero-bg-image', { scale: 1.15, duration: 2.4, ease: 'power2.out' }, 0)
       .from('.hero-overline', { opacity: 0, y: 20, duration: 0.6 }, 0.3)
       .from('.hero-title', { opacity: 0, y: 50, duration: 1.2, ease: 'power4.out' }, 0.5)
       .from('.hero-sub', { opacity: 0, y: 30, duration: 0.9 }, 0.9)
       .from('.hero-rule', { scaleX: 0, duration: 0.8, ease: 'power2.inOut' }, 1.2)
       .from('.hero-anchor', { opacity: 0, y: 15, duration: 0.7 }, 1.5)
       .from('.hero-scroll', { opacity: 0, duration: 0.8 }, 1.8)
+
+    // Parallax: hero bg drifts slower than content
+    gsap.fromTo('.hero-bg-image',
+      { yPercent: -5 },
+      {
+        yPercent: 10,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: hero.value,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      }
+    )
   }, hero.value)
 })
 
@@ -83,9 +102,12 @@ onUnmounted(() => {
 
 .hero-bg-image {
   width: 100%;
-  height: 100%;
+  height: 130%;
+  top: -15%;
+  position: relative;
   object-fit: cover;
   opacity: 0.35;
+  will-change: transform;
 }
 
 .hero-bg-overlay {

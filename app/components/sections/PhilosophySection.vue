@@ -30,9 +30,11 @@
 
 <script setup lang="ts">
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
+import { useParallax } from '~/composables/useParallax'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.12 })
+useParallax(section, '.philosophy-bg-image', { speed: 0.08 })
 </script>
 
 <style scoped>
@@ -51,9 +53,12 @@ useGsapScrollReveal(section, '.reveal', { stagger: 0.12 })
 
 .philosophy-bg-image {
   width: 100%;
-  height: 100%;
+  height: 130%;
+  top: -15%;
+  position: relative;
   object-fit: cover;
   opacity: 0.12;
+  will-change: transform;
 }
 
 .philosophy-bg-overlay {

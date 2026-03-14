@@ -28,9 +28,11 @@
 
 <script setup lang="ts">
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
+import { useParallax } from '~/composables/useParallax'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal')
+useParallax(section, '.page-hero-bg-image', { speed: 0.1 })
 
 useHead({
   title: 'The Road — Meraki District',
@@ -66,9 +68,12 @@ useSeoMeta({
 
 .page-hero-bg-image {
   width: 100%;
-  height: 100%;
+  height: 130%;
+  top: -15%;
+  position: relative;
   object-fit: cover;
   opacity: 0.4;
+  will-change: transform;
 }
 
 .page-hero-bg-overlay {
