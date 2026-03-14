@@ -1,12 +1,23 @@
 <template>
-  <section ref="section" class="institutions section">
-    <div class="section-wide">
-      <div class="institutions-header">
+  <section ref="section" class="institutions">
+    <div class="institutions-hero section-dark">
+      <div class="institutions-hero-bg">
+        <img
+          src="/images/manifesto-bg.jpg"
+          alt=""
+          class="institutions-hero-image"
+          loading="lazy"
+        />
+        <div class="institutions-hero-overlay" />
+      </div>
+      <div class="section-wide institutions-hero-content">
         <p class="overline reveal">The Ecosystem</p>
         <h2 class="institutions-title reveal">
           Ten institutions within one district.
         </h2>
       </div>
+    </div>
+    <div class="section-wide institutions-body">
 
       <div class="institutions-grid">
         <NuxtLink
@@ -90,18 +101,51 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.institutions {
-  background-color: var(--color-background);
+.institutions-hero {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-32) var(--content-padding) var(--space-16);
 }
 
-.institutions-header {
-  margin-bottom: var(--space-16);
+.institutions-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.institutions-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.institutions-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(9, 9, 11, 0.5) 0%,
+    rgba(9, 9, 11, 0.25) 50%,
+    rgba(9, 9, 11, 0.6) 100%
+  );
+}
+
+.institutions-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.institutions-body {
+  background-color: var(--color-background);
+  padding: var(--space-16) var(--content-padding) var(--space-24);
 }
 
 .institutions-title {
   margin-top: var(--space-4);
   font-size: var(--text-h1);
   line-height: var(--leading-snug);
+  color: var(--color-dark-text);
 }
 
 /* ─── Grid ─── */
@@ -255,6 +299,14 @@ onUnmounted(() => {
 
 /* ─── Responsive ─── */
 @media (max-width: 768px) {
+  .institutions-hero {
+    padding: var(--space-16) var(--content-padding) var(--space-8);
+  }
+
+  .institutions-body {
+    padding: var(--space-8) var(--content-padding) var(--space-16);
+  }
+
   .institutions-grid {
     grid-template-columns: 1fr;
     gap: var(--space-12);

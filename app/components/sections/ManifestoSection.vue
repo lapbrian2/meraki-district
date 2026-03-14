@@ -1,15 +1,6 @@
 <template>
-  <section ref="section" class="manifesto section section-dark">
-    <div class="manifesto-bg-wrap">
-      <img
-        src="/images/manifesto-bg.jpg"
-        alt=""
-        class="manifesto-bg-image"
-        loading="lazy"
-      />
-      <div class="manifesto-bg-overlay" />
-    </div>
-    <div class="section-narrow manifesto-content">
+  <section ref="section" class="manifesto section">
+    <div class="section-narrow">
       <p class="overline reveal">Our Conviction</p>
       <h2 class="manifesto-text reveal">
         The future of creative practice demands institutions worthy of both human craft and machine capability.
@@ -69,37 +60,6 @@ onUnmounted(() => {
 .manifesto {
   padding-top: var(--space-32);
   padding-bottom: var(--space-32);
-  position: relative;
-  overflow: hidden;
-}
-
-.manifesto-bg-wrap {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.manifesto-bg-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.35;
-}
-
-.manifesto-bg-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(9, 9, 11, 0.5) 0%,
-    rgba(9, 9, 11, 0.3) 50%,
-    rgba(9, 9, 11, 0.6) 100%
-  );
-}
-
-.manifesto-content {
-  position: relative;
-  z-index: 1;
 }
 
 .manifesto-text {
@@ -109,7 +69,6 @@ onUnmounted(() => {
   margin-top: var(--space-8);
   margin-bottom: var(--space-8);
   max-width: none;
-  color: var(--color-dark-text);
 }
 
 .manifesto-rule {
@@ -122,7 +81,7 @@ onUnmounted(() => {
 
 .manifesto-body {
   font-size: var(--text-body);
-  color: var(--color-dark-muted);
+  color: var(--color-text-muted);
   line-height: var(--leading-relaxed);
   margin-bottom: var(--space-6);
 }
