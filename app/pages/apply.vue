@@ -60,6 +60,13 @@ useHead({
     { name: 'description', content: 'Apply to join Meraki District. For creators, thinkers, and builders.' },
   ],
 })
+
+useSeoMeta({
+  ogTitle: 'Apply — Meraki District',
+  ogDescription: 'Apply to join Meraki District. For creators, thinkers, and builders who refuse to choose between ambition and integrity.',
+  twitterTitle: 'Apply — Meraki District',
+  twitterDescription: 'Apply to join Meraki District. For creators, thinkers, and builders who refuse to choose between ambition and integrity.',
+})
 </script>
 
 <style scoped>

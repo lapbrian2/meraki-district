@@ -46,9 +46,12 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#09090B' },
         { property: 'og:site_name', content: 'Meraki District' },
         { property: 'og:locale', content: 'en_US' },
+        { property: 'og:image', content: 'https://meraki-district.vercel.app/images/og-default.png' },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { name: 'twitter:image', content: 'https://meraki-district.vercel.app/images/og-default.png' },
       ],
       link: [
-        { rel: 'canonical', href: 'https://meraki-district.vercel.app' },
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },

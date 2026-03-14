@@ -20,4 +20,11 @@ useHead({
     { property: 'og:title', content: 'Meraki District — Where craft meets culture' },
   ],
 })
+
+useSeoMeta({
+  ogTitle: 'Meraki District — Where craft meets culture',
+  ogDescription: 'A cultural ecosystem for AI-native creators. Ten institutions, one district, a new standard for creative practice.',
+  twitterTitle: 'Meraki District — Where craft meets culture',
+  twitterDescription: 'A cultural ecosystem for AI-native creators. Ten institutions, one district, a new standard for creative practice.',
+})
 </script>

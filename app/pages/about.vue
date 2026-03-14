@@ -17,4 +17,11 @@ useHead({
     { name: 'description', content: 'The people behind Meraki District. Two paths, one conviction: that AI-native creative work deserves real institutions.' },
   ],
 })
+
+useSeoMeta({
+  ogTitle: 'About — Meraki District',
+  ogDescription: 'The people behind Meraki District. Two paths, one conviction: that AI-native creative work deserves real institutions.',
+  twitterTitle: 'About — Meraki District',
+  twitterDescription: 'The people behind Meraki District. Two paths, one conviction: that AI-native creative work deserves real institutions.',
+})
 </script>

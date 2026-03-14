@@ -29,6 +29,13 @@ useHead({
     { name: 'description', content: 'Ten institutions within one district. A cultural ecosystem for AI-native creators.' },
   ],
 })
+
+useSeoMeta({
+  ogTitle: 'Institutions — Meraki District',
+  ogDescription: 'Ten institutions within one district. A cultural ecosystem for AI-native creators.',
+  twitterTitle: 'Institutions — Meraki District',
+  twitterDescription: 'Ten institutions within one district. A cultural ecosystem for AI-native creators.',
+})
 </script>
 
 <style scoped>

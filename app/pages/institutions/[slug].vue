@@ -96,6 +96,10 @@ useHead(computed(() => ({
   title: institution.value ? institution.value.name + ' — Meraki District' : 'Meraki District',
   meta: institution.value ? [
     { name: 'description', content: institution.value.description },
+    { property: 'og:title', content: institution.value.name + ' — Meraki District' },
+    { property: 'og:description', content: institution.value.description },
+    { name: 'twitter:title', content: institution.value.name + ' — Meraki District' },
+    { name: 'twitter:description', content: institution.value.description },
   ] : [],
 })))
 

@@ -3,7 +3,7 @@
     <section ref="section" class="page-hero section section-dark">
       <div class="page-hero-bg-wrap">
         <img
-          src="/images/the-road-hero.jpg"
+          src="/images/the-road-hero.webp"
           alt=""
           class="page-hero-bg-image"
           loading="eager"
@@ -37,6 +37,13 @@ useHead({
   meta: [
     { name: 'description', content: 'Long-form storytelling and cultural criticism for the AI-native era.' },
   ],
+})
+
+useSeoMeta({
+  ogTitle: 'The Road — Meraki District',
+  ogDescription: 'Long-form storytelling and cultural criticism for the AI-native era.',
+  twitterTitle: 'The Road — Meraki District',
+  twitterDescription: 'Long-form storytelling and cultural criticism for the AI-native era.',
 })
 </script>
 

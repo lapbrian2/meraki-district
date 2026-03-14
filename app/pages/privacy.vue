@@ -238,6 +238,13 @@ useHead({
     { name: 'description', content: 'How Meraki District collects, uses, and protects your information. Our commitment to transparency and your data rights.' },
   ],
 })
+
+useSeoMeta({
+  ogTitle: 'Privacy Policy — Meraki District',
+  ogDescription: 'How Meraki District collects, uses, and protects your information. Our commitment to transparency and your data rights.',
+  twitterTitle: 'Privacy Policy — Meraki District',
+  twitterDescription: 'How Meraki District collects, uses, and protects your information. Our commitment to transparency and your data rights.',
+})
 </script>
 
 <style scoped>

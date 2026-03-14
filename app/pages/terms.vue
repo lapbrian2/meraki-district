@@ -207,6 +207,13 @@ useHead({
     { name: 'description', content: 'Terms of Service for Meraki District. The agreement governing your use of merakidistrict.ai and related services.' },
   ],
 })
+
+useSeoMeta({
+  ogTitle: 'Terms of Service — Meraki District',
+  ogDescription: 'Terms of Service for Meraki District. The agreement governing your use of merakidistrict.ai and related services.',
+  twitterTitle: 'Terms of Service — Meraki District',
+  twitterDescription: 'Terms of Service for Meraki District. The agreement governing your use of merakidistrict.ai and related services.',
+})
 </script>
 
 <style scoped>
