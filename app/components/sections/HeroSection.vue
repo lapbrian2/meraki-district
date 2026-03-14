@@ -26,9 +26,10 @@ onMounted(() => {
   if (!hero.value) return
 
   ctx = gsap.context(() => {
+    // Selectors scoped to hero.value by gsap.context
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
-    tl.from('.hero .overline', { opacity: 0, y: 20, duration: 0.6 }, 0.2)
+    tl.from('.overline', { opacity: 0, y: 20, duration: 0.6 }, 0.2)
       .from('.hero-title', { opacity: 0, y: 40, duration: 1 }, 0.4)
       .from('.hero-sub', { opacity: 0, y: 30, duration: 0.8 }, 0.7)
       .from('.hero-scroll', { opacity: 0, duration: 0.6 }, 1.2)

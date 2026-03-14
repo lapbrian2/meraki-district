@@ -1,5 +1,5 @@
 <template>
-  <header ref="nav" class="nav" :class="{ scrolled: isScrolled, hidden: isHidden }">
+  <header class="nav" :class="{ scrolled: isScrolled, hidden: isHidden }">
     <div class="nav-inner">
       <NuxtLink to="/" class="nav-logo">Meraki District</NuxtLink>
 
@@ -39,12 +39,20 @@ function onScroll() {
   lastScroll = y
 }
 
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape' && mobileOpen.value) {
+    mobileOpen.value = false
+  }
+}
+
 onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('keydown', onKeydown)
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('keydown', onKeydown)
 })
 </script>
 

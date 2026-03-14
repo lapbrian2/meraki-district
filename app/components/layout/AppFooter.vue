@@ -7,7 +7,7 @@
       </div>
 
       <div class="footer-col">
-        <p class="overline">Navigate</p>
+        <h4 class="overline">Navigate</h4>
         <ul>
           <li><NuxtLink to="/institutions">Institutions</NuxtLink></li>
           <li><NuxtLink to="/the-road">The Road</NuxtLink></li>
@@ -17,7 +17,7 @@
       </div>
 
       <div class="footer-col">
-        <p class="overline">Connect</p>
+        <h4 class="overline">Connect</h4>
         <ul>
           <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -26,7 +26,7 @@
       </div>
 
       <div class="footer-col">
-        <p class="overline">Legal</p>
+        <h4 class="overline">Legal</h4>
         <ul>
           <li><NuxtLink to="/privacy">Privacy</NuxtLink></li>
           <li><NuxtLink to="/terms">Terms</NuxtLink></li>
@@ -35,10 +35,15 @@
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; {{ new Date().getFullYear() }} Meraki Productions Ltd. All rights reserved.</p>
+      <p>&copy; {{ year }} Meraki Productions Ltd. All rights reserved.</p>
     </div>
   </footer>
 </template>
+
+<script setup lang="ts">
+// SSR-safe: computed prevents hydration mismatch from new Date() in template
+const year = computed(() => new Date().getFullYear())
+</script>
 
 <style scoped>
 .footer {
@@ -68,6 +73,10 @@
   color: var(--color-dark-muted);
   font-size: var(--text-small);
   max-width: 30ch;
+}
+
+.footer-col .overline {
+  font-weight: 500;
 }
 
 .footer-col ul {
