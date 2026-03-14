@@ -3,11 +3,10 @@
     <div class="section-narrow cta-inner">
       <p class="overline reveal">Join the District</p>
       <h2 class="cta-title reveal">
-        Ready to build something<br />that matters?
+        The district is open.
       </h2>
       <p class="cta-body reveal">
-        Applications are open for creators, thinkers, and builders who believe
-        the best work is still ahead of us.
+        We are accepting applications from creators, researchers, and builders with a demonstrated body of work.
       </p>
       <NuxtLink to="/apply" class="cta-button reveal">Apply Now</NuxtLink>
     </div>

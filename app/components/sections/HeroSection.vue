@@ -81,7 +81,7 @@ onUnmounted(() => {
 .hero-bg-wrap {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
 }
 
 .hero-bg-image {
@@ -106,7 +106,7 @@ onUnmounted(() => {
 .hero-content {
   max-width: 800px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .hero-overline {
@@ -157,7 +157,7 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   gap: var(--space-2);
-  z-index: 1;
+  z-index: 2;
 }
 
 .hero-scroll-line {

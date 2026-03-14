@@ -3,21 +3,16 @@
     <div class="section-narrow">
       <p class="overline reveal">Our Conviction</p>
       <h2 class="manifesto-text reveal">
-        The future of creative practice is not about choosing between human craft
-        and machine capability. It is about building institutions worthy of both.
+        The future of creative practice demands institutions worthy of both human craft and machine capability.
       </h2>
       <div class="manifesto-rule" aria-hidden="true" />
       <p class="manifesto-body reveal">
         Meraki District is a cultural ecosystem. Ten institutions, each a world
         unto itself, united by a shared belief: that the most meaningful work
-        happens when ambition meets integrity, and when creators have the space
-        to pursue mastery without compromise.
+        comes from creators who have the infrastructure, the standards, and the space to pursue mastery.
       </p>
       <p class="manifesto-body reveal">
-        We believe the creators who will define this era are the ones who treat
-        AI as a craft, not a shortcut. Who measure their work by depth, not
-        output. Who understand that when everyone has access to the same tools,
-        the only thing left is taste, judgment, and the willingness to go further.
+        The creators who will define this era treat AI as a craft. They measure their work by depth. They understand that when everyone has access to the same tools, the differentiator is taste, judgment, and the willingness to go further.
       </p>
     </div>
   </section>

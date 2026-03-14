@@ -7,8 +7,7 @@
           Apply
         </h1>
         <p class="page-hero-sub reveal">
-          Applications are open for creators, thinkers, and builders who believe
-          the best work is still ahead of us.
+          We are accepting applications from creators, researchers, and builders with a demonstrated body of work.
         </p>
         <p class="page-hero-note reveal">
           Application process coming soon. Leave your email below and

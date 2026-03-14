@@ -12,9 +12,7 @@
           good output.
         </p>
         <p class="reveal">
-          Every institution in Meraki District operates on a single principle:
-          the work matters more than the tools. We build for creators who
-          understand that mastery is a practice, not a destination.
+          Every institution in Meraki District operates on a single principle: the work comes first. We build for creators who treat mastery as a daily practice.
         </p>
       </div>
     </div>
