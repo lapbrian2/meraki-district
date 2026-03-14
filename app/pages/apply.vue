@@ -14,7 +14,7 @@
           we’ll notify you when applications open.
         </p>
 
-        <form class="apply-form reveal" @submit.prevent="submit">
+        <form class="apply-form reveal" @submit.prevent="submit" aria-label="Application notification signup">
           <div class="apply-form-row">
             <input
               v-model="email"
@@ -114,7 +114,6 @@ useHead({
   color: var(--color-dark-text);
   font-family: var(--font-body);
   font-size: var(--text-body);
-  outline: none;
   transition: border-color var(--duration-fast) ease;
 }
 
@@ -124,6 +123,12 @@ useHead({
 
 .apply-input:focus {
   border-color: var(--color-gold);
+  outline: none;
+}
+
+.apply-input:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: -1px;
 }
 
 .apply-input:disabled {
@@ -145,6 +150,11 @@ useHead({
 .apply-btn:hover:not(:disabled) {
   border-color: var(--color-gold);
   color: var(--color-gold);
+}
+
+.apply-btn:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
 }
 
 .apply-btn:disabled {

@@ -1,8 +1,9 @@
 <template>
   <div class="layout">
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
     <ScrollProgress />
     <AppNav />
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     <AppFooter />

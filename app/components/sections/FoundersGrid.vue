@@ -11,7 +11,7 @@
             <img
               class="founder-image"
               :src="founder.image"
-              :alt="founder.name"
+              :alt="`Portrait of ${founder.name}, ${founder.role}`"
               loading="lazy"
             />
           </div>

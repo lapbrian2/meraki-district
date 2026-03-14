@@ -10,7 +10,7 @@
       <div class="featured-grid">
         <article v-for="post in posts" :key="post.title" class="featured-card reveal">
           <div class="featured-image">
-            <img :src="post.image" :alt="post.title" loading="lazy" />
+            <img :src="post.image" :alt="`${post.tag}: ${post.title}`" loading="lazy" />
           </div>
           <div class="featured-content">
             <span class="featured-tag">{{ post.tag }}</span>

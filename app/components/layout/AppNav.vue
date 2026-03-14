@@ -3,7 +3,7 @@
     <div class="nav-inner">
       <NuxtLink to="/" class="nav-logo">Meraki District</NuxtLink>
 
-      <nav class="nav-links" :class="{ open: mobileOpen }">
+      <nav class="nav-links" :class="{ open: mobileOpen }" aria-label="Main navigation">
         <NuxtLink to="/institutions" @click="mobileOpen = false">Institutions</NuxtLink>
         <NuxtLink to="/the-road" @click="mobileOpen = false">The Road</NuxtLink>
         <NuxtLink to="/about" @click="mobileOpen = false">About</NuxtLink>
@@ -16,7 +16,7 @@
       <button
         class="nav-toggle"
         :aria-expanded="mobileOpen"
-        aria-label="Toggle menu"
+        :aria-label="mobileOpen ? 'Close menu' : 'Open menu'"
         @click="mobileOpen = !mobileOpen"
       >
         <span :class="{ rotated: mobileOpen }" />
@@ -139,6 +139,11 @@ onUnmounted(() => {
 .nav-cta:hover {
   border-color: var(--color-gold);
   color: var(--color-gold);
+}
+
+.nav-cta:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
 }
 
 .nav-toggle {

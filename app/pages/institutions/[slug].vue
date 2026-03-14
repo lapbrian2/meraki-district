@@ -4,7 +4,7 @@
       <div class="inst-hero-image-wrap">
         <img
           :src="institution.image"
-          :alt="institution.name"
+          :alt="`${institution.name} — ${institution.type}`"
           class="inst-hero-image"
         />
         <div class="inst-hero-overlay" />
@@ -322,6 +322,11 @@ onUnmounted(() => {
 .inst-cta-button:hover {
   border-color: var(--color-gold);
   color: var(--color-gold);
+}
+
+.inst-cta-button:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
 }
 
 /* Nav between institutions */

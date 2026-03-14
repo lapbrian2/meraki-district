@@ -22,7 +22,7 @@
             <img
               class="inst-image"
               :src="inst.image"
-              :alt="inst.name"
+              :alt="`${inst.name} — ${inst.type}`"
               loading="lazy"
             />
           </div>

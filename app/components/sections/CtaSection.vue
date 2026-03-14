@@ -66,6 +66,11 @@ useGsapScrollReveal(section, '.reveal')
   color: var(--color-ink);
 }
 
+.cta-button:focus-visible {
+  outline: 2px solid var(--color-dark-text);
+  outline-offset: 4px;
+}
+
 @media (max-width: 768px) {
   .cta {
     padding-top: var(--space-16);

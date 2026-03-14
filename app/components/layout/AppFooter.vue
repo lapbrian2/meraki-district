@@ -6,7 +6,7 @@
         <p class="footer-tagline">A cultural ecosystem for AI-native creators.</p>
         <div class="footer-newsletter">
           <p class="footer-newsletter-label">Dispatches from the District</p>
-          <form class="footer-newsletter-form" @submit.prevent="submit">
+          <form class="footer-newsletter-form" @submit.prevent="submit" aria-label="Newsletter signup">
             <input
               v-model="email"
               type="email"
@@ -121,7 +121,6 @@ const { email, status, errorMessage, submit, reset } = useEmailCollection('newsl
   color: var(--color-dark-text);
   font-family: var(--font-body);
   font-size: var(--text-small);
-  outline: none;
   transition: border-color var(--duration-fast) ease;
 }
 
@@ -131,6 +130,12 @@ const { email, status, errorMessage, submit, reset } = useEmailCollection('newsl
 
 .footer-newsletter-input:focus {
   border-color: var(--color-gold);
+  outline: none;
+}
+
+.footer-newsletter-input:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: -1px;
 }
 
 .footer-newsletter-btn {
@@ -148,6 +153,11 @@ const { email, status, errorMessage, submit, reset } = useEmailCollection('newsl
 .footer-newsletter-btn:hover {
   border-color: var(--color-gold);
   color: var(--color-gold);
+}
+
+.footer-newsletter-btn:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
 }
 
 .footer-col .overline {

@@ -69,6 +69,15 @@ a:hover {
   outline-offset: 2px;
 }
 
+
+/* Ensure form inputs show focus indicators */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 0;
+}
+
 /* Interactive */
 button, [role="button"] {
   cursor: pointer;
@@ -128,7 +137,7 @@ img, video {
   color: var(--color-dark-text);
 }
 .section-dark .overline {
-  color: var(--color-gold-accessible);
+  color: #C4A05A;
 }
 
 
@@ -165,6 +174,32 @@ h1, h2, h3, h4,
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-text-muted);
+}
+
+
+/* Skip to content link */
+.skip-to-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  padding: var(--space-3) var(--space-6);
+  background-color: var(--color-gold);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-decoration: none;
+  background-image: none;
+  transform: translateY(-100%);
+  transition: transform var(--duration-fast) ease;
+}
+
+.skip-to-content:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
 }
 
 /* Reduced motion */

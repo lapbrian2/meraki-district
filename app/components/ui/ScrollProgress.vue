@@ -1,5 +1,5 @@
 <template>
-  <div class="scroll-progress" :style="{ transform: `scaleX(${progress})` }" />
+  <div class="scroll-progress" aria-hidden="true" :style="{ transform: `scaleX(${progress})` }" />
 </template>
 
 <script setup lang="ts">
