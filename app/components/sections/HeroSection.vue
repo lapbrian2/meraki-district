@@ -40,6 +40,7 @@ let ctx: gsap.Context | null = null
 
 onMounted(async () => {
   if (!hero.value) return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
   await waitForAncestorAnimations(hero.value)
   if (!hero.value) return
@@ -115,10 +116,10 @@ onUnmounted(() => {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(9, 9, 11, 0.4) 0%,
-    rgba(9, 9, 11, 0.15) 40%,
-    rgba(9, 9, 11, 0.3) 70%,
-    rgba(9, 9, 11, 0.7) 100%
+    color-mix(in srgb, var(--color-ink) 40%, transparent) 0%,
+    color-mix(in srgb, var(--color-ink) 15%, transparent) 40%,
+    color-mix(in srgb, var(--color-ink) 30%, transparent) 70%,
+    color-mix(in srgb, var(--color-ink) 70%, transparent) 100%
   );
 }
 
@@ -189,6 +190,13 @@ onUnmounted(() => {
 @keyframes scrollPulse {
   0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
   50% { opacity: 1; transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll-line {
+    animation: none;
+    opacity: 0.5;
+  }
 }
 
 @supports (min-height: 100svh) {

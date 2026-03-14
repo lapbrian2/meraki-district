@@ -146,7 +146,7 @@ onUnmounted(() => {
   display: grid;
   grid-template-columns: 100px 1fr;
   gap: var(--space-8);
-  padding: 2.5rem 0;
+  padding: var(--space-8) 0;
   align-items: baseline;
 }
 

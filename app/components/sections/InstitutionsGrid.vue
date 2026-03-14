@@ -84,7 +84,6 @@ onMounted(async () => {
     })
 
     // Sort each row left-to-right, then animate with position-based delay
-    let rowIndex = 0
     const sortedRows = [...rows.entries()].sort((a, b) => a[0] - b[0])
 
     sortedRows.forEach(([, rowCards]) => {
@@ -112,7 +111,6 @@ onMounted(async () => {
           }
         )
       })
-      rowIndex++
     })
   }, section.value)
 })
@@ -243,7 +241,7 @@ onUnmounted(() => {
 .inst-dot {
   width: 3px;
   height: 3px;
-  border-radius: 50%;
+  border-radius: 0;
   background: var(--color-text-muted);
   opacity: 0.5;
 }

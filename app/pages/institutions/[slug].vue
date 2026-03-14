@@ -268,7 +268,7 @@ onUnmounted(() => {
 .inst-status-marker {
   width: 8px;
   height: 8px;
-  border-radius: 50%;
+  border-radius: 0;
   background: var(--color-gold);
   flex-shrink: 0;
   margin-top: var(--space-1);

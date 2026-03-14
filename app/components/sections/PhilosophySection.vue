@@ -68,9 +68,9 @@ useWordReveal(section, '.word-reveal', { stagger: 0.08 })
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(24, 24, 27, 0.6) 0%,
-    rgba(24, 24, 27, 0.3) 50%,
-    rgba(24, 24, 27, 0.7) 100%
+    color-mix(in srgb, var(--color-graphite) 60%, transparent) 0%,
+    color-mix(in srgb, var(--color-graphite) 30%, transparent) 50%,
+    color-mix(in srgb, var(--color-graphite) 70%, transparent) 100%
   );
 }
 

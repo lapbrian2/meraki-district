@@ -159,16 +159,25 @@ function onImageLoad(e: Event) {
 .featured-content h3 {
   font-size: var(--text-h4);
   margin-bottom: var(--space-3);
-  display: inline;
-  background-image: linear-gradient(var(--color-gold), var(--color-gold));
-  background-size: 0% 1px;
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  transition: background-size var(--duration-normal) ease;
+  display: inline-block;
+  position: relative;
 }
 
-.featured-card:hover .featured-content h3 {
-  background-size: 100% 1px;
+.featured-content h3::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.featured-card:hover .featured-content h3::after {
+  transform: scaleX(1);
 }
 
 .featured-content p {

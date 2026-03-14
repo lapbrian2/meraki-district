@@ -262,7 +262,7 @@ useSeoMeta({
 .inst-dot {
   width: 3px;
   height: 3px;
-  border-radius: 50%;
+  border-radius: 0;
   background: var(--color-text-muted);
   opacity: 0.5;
 }

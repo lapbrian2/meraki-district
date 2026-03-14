@@ -27,25 +27,30 @@ onMounted(() => {
 
   const { $lenis } = useNuxtApp()
 
-  const content = track.querySelector('.marquee-content') as HTMLElement
-  const contentWidth = content.offsetWidth
+  // Defer measurement until layout is settled (offsetWidth can be 0 before paint)
+  requestAnimationFrame(() => {
+    if (!marqueeEl.value) return
+    const content = track.querySelector('.marquee-content') as HTMLElement
+    const contentWidth = content.offsetWidth
+    if (contentWidth === 0) return
 
-  let xPos = 0
-  const baseSpeed = 0.5
+    let xPos = 0
+    const baseSpeed = 0.5
 
-  tickerFn = () => {
-    const velocity = ($lenis as any)?.velocity ?? 0
-    const speedBoost = 1 + Math.min(Math.abs(velocity) * 0.04, 3)
-    xPos -= baseSpeed * speedBoost
+    tickerFn = () => {
+      const velocity = ($lenis as any)?.velocity ?? 0
+      const speedBoost = 1 + Math.min(Math.abs(velocity) * 0.04, 3)
+      xPos -= baseSpeed * speedBoost
 
-    if (Math.abs(xPos) >= contentWidth) {
-      xPos += contentWidth
+      if (Math.abs(xPos) >= contentWidth) {
+        xPos += contentWidth
+      }
+
+      gsap.set(track, { x: xPos })
     }
 
-    gsap.set(track, { x: xPos })
-  }
-
-  gsap.ticker.add(tickerFn)
+    gsap.ticker.add(tickerFn)
+  })
 })
 
 onUnmounted(() => {
