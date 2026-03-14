@@ -91,7 +91,11 @@ useNavAnimation({ navRef, overlayRef, mobileOpen })
 function onScroll() {
   const y = window.scrollY
   isScrolled.value = y > 100
-  isHidden.value = y > 300 && y > lastScroll
+  if (y > lastScroll) {
+    if (y > 300) isHidden.value = true
+  } else if (lastScroll - y > 10) {
+    isHidden.value = false
+  }
   lastScroll = y
 }
 
@@ -112,6 +116,10 @@ function onKeydown(e: KeyboardEvent) {
 watch(mobileOpen, (open) => {
   if (import.meta.client) {
     document.body.style.overflow = open ? 'hidden' : ''
+    // Focus trap: make background content inert when overlay is open
+    document.querySelectorAll('main, footer').forEach((el) => {
+      ;(el as HTMLElement).inert = open
+    })
   }
 })
 
@@ -195,6 +203,7 @@ onUnmounted(() => {
 }
 
 .nav-compact-inner {
+  position: relative;
   max-width: var(--width-wide);
   margin: 0 auto;
   display: flex;
