@@ -2,7 +2,7 @@
   <section ref="section" class="principles section">
     <div class="section-default">
       <p class="overline reveal">How We Work</p>
-      <h2 class="principles-title reveal">Guiding principles</h2>
+      <h2 class="principles-title word-reveal">Guiding principles</h2>
 
       <div class="principles-grid">
         <article
@@ -24,10 +24,12 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { useTilt } from '~/composables/useInteractions'
+import { useWordReveal } from '~/composables/useWordReveal'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.1 })
 useTilt(section, '.principle-card', { maxRotation: 2 })
+useWordReveal(section, '.word-reveal')
 
 let ctx: gsap.Context | null = null
 

@@ -2,7 +2,7 @@
   <section ref="section" class="featured section">
     <div class="section-default">
       <p class="overline reveal">From The Road</p>
-      <h2 class="reveal">Featured thinking</h2>
+      <h2 class="word-reveal">Featured thinking</h2>
       <p class="featured-intro reveal">
         Essays, dispatches, and frameworks from inside the ecosystem.
       </p>
@@ -28,10 +28,12 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { useTilt } from '~/composables/useInteractions'
+import { useWordReveal } from '~/composables/useWordReveal'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.12 })
 useTilt(section, '.featured-card', { maxRotation: 3 })
+useWordReveal(section, '.word-reveal')
 
 let ctx: gsap.Context | null = null
 

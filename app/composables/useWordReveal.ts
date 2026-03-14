@@ -51,7 +51,7 @@ export function useWordReveal(
     // Split text into word spans before animating
     container.value.querySelectorAll(selector).forEach((el) => {
       const text = el.textContent || ''
-      const words = text.trim().split(/s+/)
+      const words = text.trim().split(/\s+/)
       el.innerHTML = words.map(word =>
         '<span class="wr-mask" style="display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:0.1em">' +
         '<span class="wr-word" style="display:inline-block;will-change:transform">' + word + '</span>' +

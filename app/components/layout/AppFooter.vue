@@ -68,7 +68,25 @@ const { email, status, errorMessage, submit, reset } = useEmailCollection('newsl
 <style scoped>
 .footer {
   padding: var(--space-24) var(--content-padding) var(--space-8);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: none;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--content-padding);
+  right: var(--content-padding);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-gold) 20%,
+    var(--color-gold) 80%,
+    transparent
+  );
+  opacity: 0.3;
 }
 
 .footer-inner {

@@ -120,8 +120,38 @@ onUnmounted(() => {
   background-image: none;
 }
 
+.nav-links a {
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
 .nav-links a:hover {
   color: var(--color-ink);
+}
+
+.nav-links a:hover::after {
+  transform: scaleX(1);
+}
+
+.nav-links a.router-link-active {
+  color: var(--color-ink);
+}
+
+.nav-links a.router-link-active::after {
+  transform: scaleX(1);
+  background: var(--color-ink);
 }
 
 .nav-cta {

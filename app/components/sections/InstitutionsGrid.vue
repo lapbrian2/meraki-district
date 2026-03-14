@@ -3,7 +3,7 @@
     <div class="institutions-hero section-dark">
       <div class="section-wide institutions-hero-content">
         <p class="overline reveal">The Ecosystem</p>
-        <h2 class="institutions-title reveal">
+        <h2 class="institutions-title word-reveal">
           Ten institutions within one district.
         </h2>
       </div>
@@ -46,11 +46,13 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { useTilt } from '~/composables/useInteractions'
+import { useWordReveal } from '~/composables/useWordReveal'
 import { institutions } from '~/composables/useInstitutions'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.08 })
 useTilt(section, '.inst-card', { maxRotation: 2.5 })
+useWordReveal(section, '.word-reveal')
 
 let ctx: gsap.Context | null = null
 

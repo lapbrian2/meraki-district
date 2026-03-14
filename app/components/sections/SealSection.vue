@@ -2,7 +2,7 @@
   <section ref="section" class="seal section">
     <div class="section-default">
       <p class="overline reveal">The Seal</p>
-      <h2 class="reveal">Earned through practice</h2>
+      <h2 class="word-reveal">Earned through practice</h2>
       <p class="seal-intro reveal">
         A four-tier credentialing system that recognises genuine creative mastery.
         Each level requires demonstrated practice, peer review, and real contribution.
@@ -29,9 +29,13 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
+import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
+import { useWordReveal } from '~/composables/useWordReveal'
 
 const section = ref<HTMLElement | null>(null)
+useGsapScrollReveal(section, '.reveal', { stagger: 0.1 })
+useWordReveal(section, '.word-reveal')
+
 let ctx: gsap.Context | null = null
 
 const tiers = [
@@ -72,20 +76,6 @@ onMounted(async () => {
   ctx = gsap.context(() => {
     const tierEls = section.value!.querySelectorAll('.seal-tier')
     const ruleEls = section.value!.querySelectorAll('.seal-rule')
-
-    // Intro elements
-    gsap.from('.seal .overline', {
-      opacity: 0, y: 20, duration: 0.6,
-      scrollTrigger: { trigger: section.value, start: 'top 80%', toggleActions: 'play none none none' },
-    })
-    gsap.from('.seal h2', {
-      opacity: 0, y: 30, duration: 0.8, delay: 0.1,
-      scrollTrigger: { trigger: section.value, start: 'top 80%', toggleActions: 'play none none none' },
-    })
-    gsap.from('.seal-intro', {
-      opacity: 0, y: 20, duration: 0.7, delay: 0.2,
-      scrollTrigger: { trigger: section.value, start: 'top 80%', toggleActions: 'play none none none' },
-    })
 
     // Each tier animates individually
     tierEls.forEach((tier, i) => {
