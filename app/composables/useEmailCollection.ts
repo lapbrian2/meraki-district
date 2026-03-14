@@ -13,7 +13,7 @@ export function useEmailCollection(source: EmailSource) {
 
   function validate(value: string): string | null {
     if (!value.trim()) return 'Please enter your email address.'
-    if (!/^[^s@]+@[^s@]+.[^s@]+$/.test(value.trim())) return 'Please enter a valid email address.'
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) return 'Please enter a valid email address.'
     return null
   }
 
@@ -24,6 +24,8 @@ export function useEmailCollection(source: EmailSource) {
       errorMessage.value = error
       return
     }
+
+    if (!import.meta.client) return
 
     try {
       const key = 'meraki_emails'

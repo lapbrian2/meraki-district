@@ -128,5 +128,12 @@ export function useNavAnimation(options: UseNavAnimationOptions) {
       openTl.kill()
       openTl = null
     }
+    // Clear GSAP inline styles from overlay elements (not tracked by ctx)
+    if (overlayRef.value) {
+      gsap.set(overlayRef.value, { clearProps: 'all' })
+      overlayRef.value.querySelectorAll('.mobile-link-mask, .mobile-rule, .mobile-apply').forEach((el) => {
+        gsap.set(el, { clearProps: 'all' })
+      })
+    }
   })
 }

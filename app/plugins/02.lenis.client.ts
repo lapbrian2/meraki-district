@@ -15,7 +15,7 @@ export default defineNuxtPlugin(() => {
   lenis.on('scroll', ScrollTrigger.update)
 
   const rafCallback = (time: number) => {
-    lenis.raf(time * 1000)
+    lenis.raf(time)
   }
 
   gsap.ticker.add(rafCallback)

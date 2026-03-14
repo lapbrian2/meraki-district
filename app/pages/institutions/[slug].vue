@@ -164,6 +164,7 @@ onMounted(async () => {
 watch(slug, async () => {
   ctx?.revert()
   await nextTick()
+  await nextTick()
   window.scrollTo(0, 0)
   initAnimations()
 })

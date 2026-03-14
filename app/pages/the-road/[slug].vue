@@ -6,7 +6,7 @@
 
     <section ref="bodySection" class="article-body section">
       <div class="section-narrow">
-        <div class="article-rule reveal" aria-hidden="true" />
+        <div class="article-rule" aria-hidden="true" />
         <div class="article-prose reveal">
           <ContentRenderer :value="article" />
         </div>
@@ -65,8 +65,12 @@ const route = useRoute()
 const slug = computed(() => route.params.slug as string)
 
 const { data: article } = await useAsyncData(
-  'the-road-' + slug.value,
-  () => queryCollection('theRoad').path('/the-road/' + slug.value).first()
+  () => 'the-road-' + slug.value,
+  () => queryCollection('theRoad')
+    .where('published', '=', true)
+    .path('/the-road/' + slug.value)
+    .first(),
+  { watch: [slug] }
 )
 
 // Get all articles for prev/next navigation
@@ -93,11 +97,18 @@ const nextArticle = computed(() => {
   return allArticles.value[currentIndex.value + 1]
 })
 
-// Estimate reading time from body content
+// Walk AST to extract prose text (not JSON structure tokens)
+function extractText(node: any): string {
+  if (!node) return ''
+  if (node.type === 'text') return node.value || ''
+  if (Array.isArray(node.children)) return node.children.map(extractText).join(' ')
+  return ''
+}
+
 const readingTime = computed(() => {
   if (!article.value?.body) return 0
-  const text = JSON.stringify(article.value.body)
-  const words = text.split(/\s+/).length
+  const text = extractText(article.value.body)
+  const words = text.split(/\s+/).filter(Boolean).length
   return Math.max(1, Math.round(words / 250))
 })
 
