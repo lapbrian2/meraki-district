@@ -7,8 +7,13 @@
         Essays, dispatches, and frameworks from inside the ecosystem.
       </p>
 
-      <div class="featured-grid">
-        <article v-for="post in posts" :key="post.title" class="featured-card reveal">
+      <div v-if="posts && posts.length" class="featured-grid">
+        <NuxtLink
+          v-for="post in posts"
+          :key="post.path"
+          :to="post.path"
+          class="featured-card reveal"
+        >
           <div class="featured-image">
             <img :src="post.image" :alt="`${post.tag}: ${post.title}`" loading="lazy" @load="onImageLoad" />
           </div>
@@ -17,7 +22,7 @@
             <h3>{{ post.title }}</h3>
             <p>{{ post.excerpt }}</p>
           </div>
-        </article>
+        </NuxtLink>
       </div>
     </div>
   </section>
@@ -34,6 +39,15 @@ const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.12 })
 useTilt(section, '.featured-card', { maxRotation: 3 })
 useWordReveal(section, '.word-reveal')
+
+const { data: posts } = await useAsyncData('featured-posts', () =>
+  queryCollection('theRoad')
+    .where('featured', '=', true)
+    .where('published', '=', true)
+    .order('date', 'DESC')
+    .limit(3)
+    .all()
+)
 
 let ctx: gsap.Context | null = null
 
@@ -79,26 +93,6 @@ onUnmounted(() => {
   ctx?.revert()
 })
 
-const posts = [
-  {
-    title: 'The Craft Premium',
-    tag: 'Essay',
-    excerpt: 'Why human-led creative work commands more value in an AI-saturated market. And what it takes to prove the difference.',
-    image: '/images/featured/craft-premium.webp',
-  },
-  {
-    title: 'Building in Public, Thinking in Private',
-    tag: 'Practice',
-    excerpt: 'The case for protecting your creative process from the content machine. Some work gains power by staying private.',
-    image: '/images/featured/building-in-public.webp',
-  },
-  {
-    title: 'Ten Institutions, One District',
-    tag: 'Announcement',
-    excerpt: 'Introducing Meraki District: why we built a cultural ecosystem for AI-native creators, and what comes next.',
-    image: '/images/featured/ten-institutions.webp',
-  },
-]
 function onImageLoad(e: Event) {
   (e.target as HTMLElement).classList.add("loaded")
 }
@@ -125,6 +119,7 @@ function onImageLoad(e: Event) {
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  background-image: none;
 }
 
 .featured-image {

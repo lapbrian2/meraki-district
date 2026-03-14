@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section ref="section" class="page-hero section section-dark">
+    <section ref="heroSection" class="page-hero section section-dark">
       <div class="page-hero-bg-wrap">
         <img
           src="/images/the-road-hero.webp"
@@ -13,7 +13,7 @@
       </div>
       <div class="section-default page-hero-content">
         <p class="overline reveal">Publishing &amp; Editorial</p>
-        <h1 class="page-hero-title reveal">
+        <h1 class="page-hero-title word-reveal">
           The Road
         </h1>
         <p class="page-hero-sub reveal">
@@ -21,6 +21,26 @@
         </p>
       </div>
     </section>
+
+    <SectionDivider />
+
+    <section ref="gridSection" class="articles section">
+      <div class="section-default">
+        <div v-if="articles && articles.length" class="articles-grid">
+          <ArticleCard
+            v-for="article in articles"
+            :key="article.path"
+            :article="article"
+            :show-date="true"
+            class="reveal"
+          />
+        </div>
+        <div v-else class="articles-empty reveal">
+          <p>New essays are on the way. Check back soon.</p>
+        </div>
+      </div>
+    </section>
+
     <SectionDivider />
     <CtaSection />
   </div>
@@ -29,10 +49,24 @@
 <script setup lang="ts">
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
 import { useParallax } from '~/composables/useParallax'
+import { useWordReveal } from '~/composables/useWordReveal'
+import { useTilt } from '~/composables/useInteractions'
 
-const section = ref<HTMLElement | null>(null)
-useGsapScrollReveal(section, '.reveal')
-useParallax(section, '.page-hero-bg-image', { speed: 0.1 })
+const heroSection = ref<HTMLElement | null>(null)
+const gridSection = ref<HTMLElement | null>(null)
+
+useGsapScrollReveal(heroSection, '.reveal')
+useParallax(heroSection, '.page-hero-bg-image', { speed: 0.1 })
+useWordReveal(heroSection, '.word-reveal')
+useGsapScrollReveal(gridSection, '.reveal', { stagger: 0.12 })
+useTilt(gridSection, '.article-card', { maxRotation: 3 })
+
+const { data: articles } = await useAsyncData('the-road-listing', () =>
+  queryCollection('theRoad')
+    .where('published', '=', true)
+    .order('date', 'DESC')
+    .all()
+)
 
 useHead({
   title: 'The Road — Meraki District',
@@ -109,11 +143,35 @@ useSeoMeta({
   max-width: 50ch;
 }
 
-@media (max-width: 768px) {
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+}
+
+.articles-empty {
+  text-align: center;
+  padding: var(--space-24) 0;
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .articles-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+@media (max-width: 600px) {
   .page-hero {
     padding-top: calc(var(--space-24) + 3rem);
     padding-bottom: var(--space-12);
     min-height: 50vh;
+  }
+
+  .articles-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
   }
 }
 </style>
