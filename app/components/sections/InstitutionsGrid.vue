@@ -67,20 +67,48 @@ onMounted(async () => {
   gsap.registerPlugin(ScrollTrigger)
 
   ctx = gsap.context(() => {
-    gsap.utils.toArray<HTMLElement>('.reveal-image').forEach((el) => {
-      gsap.fromTo(el,
-        { clipPath: 'inset(100% 0 0 0)' },
-        {
-          clipPath: 'inset(0% 0 0 0)',
-          duration: 1,
-          ease: 'power3.inOut',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        }
-      )
+    const cards = gsap.utils.toArray<HTMLElement>('.reveal-image')
+
+    // Group cards by visual row for grid-aware stagger
+    const rows: Map<number, { el: HTMLElement; left: number }[]> = new Map()
+    cards.forEach((el) => {
+      const rect = el.getBoundingClientRect()
+      // Round to nearest 50px to group cards on the same visual row
+      const rowKey = Math.round(rect.top / 50) * 50
+      if (!rows.has(rowKey)) rows.set(rowKey, [])
+      rows.get(rowKey)!.push({ el, left: rect.left })
+    })
+
+    // Sort each row left-to-right, then animate with position-based delay
+    let rowIndex = 0
+    const sortedRows = [...rows.entries()].sort((a, b) => a[0] - b[0])
+
+    sortedRows.forEach(([, rowCards]) => {
+      rowCards.sort((a, b) => a.left - b.left)
+
+      rowCards.forEach((card, colIndex) => {
+        // Alternate wipe direction: left cards wipe from left, right cards from right
+        const isLeftCard = colIndex === 0
+        const fromClip = isLeftCard
+          ? 'inset(0 100% 0 0)'   // wipe from left
+          : 'inset(0 0 0 100%)'   // wipe from right
+
+        gsap.fromTo(card.el,
+          { clipPath: fromClip },
+          {
+            clipPath: 'inset(0% 0% 0% 0%)',
+            duration: 1.1,
+            delay: colIndex * 0.12,
+            ease: 'power3.inOut',
+            scrollTrigger: {
+              trigger: card.el,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        )
+      })
+      rowIndex++
     })
   }, section.value)
 })

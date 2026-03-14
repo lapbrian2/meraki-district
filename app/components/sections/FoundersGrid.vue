@@ -52,13 +52,18 @@ onMounted(async () => {
 
   ctx = gsap.context(() => {
     gsap.utils.toArray<HTMLElement>('.reveal-image').forEach((el, i) => {
+      // Alternate wipe direction: first from left, second from right
+      const fromClip = i === 0
+        ? 'inset(0 100% 0 0)'   // wipe from left
+        : 'inset(0 0 0 100%)'   // wipe from right
+
       gsap.fromTo(el,
-        { clipPath: 'inset(100% 0 0 0)' },
+        { clipPath: fromClip },
         {
-          clipPath: 'inset(0% 0 0 0)',
+          clipPath: 'inset(0% 0% 0% 0%)',
           duration: 1.2,
           ease: 'power3.inOut',
-          delay: i * 0.15,
+          delay: i * 0.2,
           scrollTrigger: {
             trigger: el,
             start: 'top 85%',

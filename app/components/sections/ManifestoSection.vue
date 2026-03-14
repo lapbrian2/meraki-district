@@ -2,7 +2,7 @@
   <section ref="section" class="manifesto section">
     <div class="section-narrow">
       <p class="overline reveal">Our Conviction</p>
-      <h2 class="manifesto-text reveal">
+      <h2 class="manifesto-text word-reveal">
         The future of creative practice demands institutions worthy of both human craft and machine capability.
       </h2>
       <div class="manifesto-rule" aria-hidden="true" />
@@ -22,9 +22,11 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
+import { useWordReveal } from '~/composables/useWordReveal'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal')
+useWordReveal(section, '.word-reveal')
 
 let ctx: gsap.Context | null = null
 

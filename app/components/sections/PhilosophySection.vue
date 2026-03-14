@@ -11,7 +11,7 @@
     </div>
     <div class="section-narrow">
       <p class="overline reveal">Philosophy</p>
-      <blockquote class="philosophy-quote reveal">
+      <blockquote class="philosophy-quote word-reveal">
         <p>We believe AI reveals who was actually creative all along.</p>
       </blockquote>
       <div class="philosophy-exposition">
@@ -30,11 +30,13 @@
 
 <script setup lang="ts">
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
+import { useWordReveal } from '~/composables/useWordReveal'
 import { useParallax } from '~/composables/useParallax'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.12 })
 useParallax(section, '.philosophy-bg-image', { speed: 0.08 })
+useWordReveal(section, '.word-reveal', { stagger: 0.04 })
 </script>
 
 <style scoped>
