@@ -54,9 +54,17 @@ The site must communicate the gravity, taste, and institutional quality of Merak
 
 ### Active
 
-<!-- Next milestone scope. -->
+<!-- v1.1 Launch Prep scope. -->
 
-(None yet — define with /gsd:new-milestone)
+## Current Milestone: v1.1 Launch Prep
+
+**Goal:** Everything needed to share the URL publicly — OG images, per-page SEO, analytics, remaining image optimization.
+
+**Target features:**
+- Per-page OG meta tags and canonical URLs for social sharing
+- Default OG image (1200x630) for link previews
+- Vercel Analytics + Web Vitals tracking
+- Remaining background images converted to WebP
 
 ### Out of Scope
 
@@ -72,7 +80,7 @@ The site must communicate the gravity, taste, and institutional quality of Merak
 
 ## Context
 
-**Current state:** v1.0 shipped. Production-ready front door with functional forms, legal pages, accessibility compliance, and SEO optimization.
+**Current state:** v1.1 in progress. Adding launch prep: OG images, per-page SEO meta, analytics, and remaining image optimization.
 
 - **Stack:** Nuxt 4 + Vue 3, GSAP + ScrollTrigger, Lenis, custom CSS variables
 - **Deploy:** Vercel (auto-deploy from GitHub main branch)
@@ -106,4 +114,4 @@ The site must communicate the gravity, taste, and institutional quality of Merak
 | Phases 3+4 as parallel agents | Independent concerns, 2x faster execution | ✓ Good |
 
 ---
-*Last updated: 2026-03-14 after v1.0 milestone*
+*Last updated: 2026-03-14 after v1.1 milestone started*
