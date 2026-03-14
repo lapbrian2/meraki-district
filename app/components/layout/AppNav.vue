@@ -1,47 +1,111 @@
 <template>
-  <header class="nav" :class="{ scrolled: isScrolled, hidden: isHidden }">
-    <div class="nav-inner">
-      <NuxtLink to="/" class="nav-logo">Meraki District</NuxtLink>
-
-      <nav class="nav-links" :class="{ open: mobileOpen }" aria-label="Main navigation">
-        <NuxtLink to="/institutions" @click="mobileOpen = false">Institutions</NuxtLink>
-        <NuxtLink to="/the-road" @click="mobileOpen = false">The Road</NuxtLink>
-        <NuxtLink to="/about" @click="mobileOpen = false">About</NuxtLink>
-      </nav>
-
-      <div class="nav-actions">
-        <NuxtLink to="/apply" class="nav-cta">Apply</NuxtLink>
+  <header ref="navRef" class="nav" :class="{ scrolled: isScrolled, hidden: isHidden }">
+    <!-- Expanded state: magazine masthead (desktop only, scrollY < 100) -->
+    <div class="nav-expanded" :class="{ collapsed: isScrolled }">
+      <div class="nav-expanded-inner">
+        <NuxtLink to="/" class="nav-logo">Meraki District</NuxtLink>
+        <div class="nav-expanded-row">
+          <nav class="nav-links" aria-label="Main navigation">
+            <NuxtLink to="/institutions" class="nav-link">Institutions</NuxtLink>
+            <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
+            <NuxtLink to="/about" class="nav-link">About</NuxtLink>
+            <span class="nav-dot" aria-hidden="true">&middot;</span>
+            <NuxtLink to="/apply" class="nav-apply">Apply</NuxtLink>
+          </nav>
+        </div>
       </div>
-
-      <button
-        class="nav-toggle"
-        :aria-expanded="mobileOpen"
-        :aria-label="mobileOpen ? 'Close menu' : 'Open menu'"
-        @click="mobileOpen = !mobileOpen"
-      >
-        <span :class="{ rotated: mobileOpen }" />
-        <span :class="{ rotated: mobileOpen }" />
-      </button>
     </div>
+
+    <!-- Compact state: single-row utility bar (scrollY >= 100) -->
+    <div class="nav-compact" :class="{ active: isScrolled }">
+      <div class="nav-compact-inner">
+        <NuxtLink to="/" class="nav-logo">Meraki District</NuxtLink>
+        <nav class="nav-links" aria-label="Main navigation">
+          <NuxtLink to="/institutions" class="nav-link">Institutions</NuxtLink>
+          <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
+          <NuxtLink to="/about" class="nav-link">About</NuxtLink>
+        </nav>
+        <NuxtLink to="/apply" class="nav-apply">Apply</NuxtLink>
+      </div>
+    </div>
+
+    <!-- Mobile toggle -->
+    <button
+      class="nav-toggle"
+      :aria-expanded="mobileOpen"
+      :aria-label="mobileOpen ? 'Close menu' : 'Open menu'"
+      @click="toggleMobile"
+    >
+      <span class="nav-toggle-label" :class="{ inverted: mobileOpen }">{{ mobileOpen ? 'Close' : 'Menu' }}</span>
+    </button>
+
+    <!-- Mobile logo (always visible on mobile) -->
+    <NuxtLink to="/" class="nav-mobile-logo" :class="{ inverted: mobileOpen }">Meraki District</NuxtLink>
+
+    <!-- Scroll progress bar -->
+    <ScrollProgress />
   </header>
+
+  <!-- Mobile overlay -->
+  <div ref="overlayRef" class="mobile-overlay">
+    <div class="mobile-overlay-inner">
+      <nav class="mobile-nav" aria-label="Mobile navigation">
+        <div v-for="link in mobileLinks" :key="link.to" class="mobile-link-wrap">
+          <div class="mobile-link-mask">
+            <NuxtLink
+              :to="link.to"
+              class="mobile-link"
+              @click="closeMobile"
+            >
+              {{ link.label }}
+            </NuxtLink>
+          </div>
+        </div>
+      </nav>
+      <div class="mobile-rule" aria-hidden="true" />
+      <NuxtLink to="/apply" class="mobile-apply" @click="closeMobile">
+        Apply
+      </NuxtLink>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
+import { useNavAnimation } from '~/composables/useNavAnimation'
+
+const navRef = ref<HTMLElement | null>(null)
+const overlayRef = ref<HTMLElement | null>(null)
 const mobileOpen = ref(false)
 const isScrolled = ref(false)
 const isHidden = ref(false)
 let lastScroll = 0
 
+const mobileLinks = [
+  { to: '/institutions', label: 'Institutions' },
+  { to: '/the-road', label: 'The Road' },
+  { to: '/about', label: 'About' },
+]
+
+useNavAnimation({ navRef, overlayRef, mobileOpen })
+
 function onScroll() {
   const y = window.scrollY
-  isScrolled.value = y > 60
+  isScrolled.value = y > 100
   isHidden.value = y > 300 && y > lastScroll
   lastScroll = y
 }
 
+function toggleMobile() {
+  mobileOpen.value = !mobileOpen.value
+}
+
+function closeMobile() {
+  mobileOpen.value = false
+}
+
 function onKeydown(e: KeyboardEvent) {
   if (e.key === 'Escape' && mobileOpen.value) {
-    mobileOpen.value = false
+    closeMobile()
   }
 }
 
@@ -64,30 +128,73 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+/* BASE HEADER */
 .nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  padding: var(--space-4) var(--content-padding);
-  transition: background-color var(--duration-normal) ease,
-              transform var(--duration-normal) ease,
-              box-shadow var(--duration-normal) ease;
-}
-
-.nav.scrolled {
-  background-color: rgba(250, 250, 249, 0.95);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 1px 0 var(--rule-color);
+  transition: transform 0.4s var(--ease-in-out);
 }
 
 .nav.hidden {
   transform: translateY(-100%);
 }
 
-.nav-inner {
+/* EXPANDED STATE (magazine masthead) */
+.nav-expanded {
+  padding: var(--space-6) var(--content-padding) var(--space-4);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s var(--ease-out), visibility 0.5s;
+}
+
+.nav-expanded.collapsed {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.nav-expanded-inner {
+  max-width: var(--width-wide);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.nav-expanded-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+/* COMPACT STATE (utility bar) */
+.nav-compact {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-3) var(--content-padding);
+  background-color: rgba(250, 250, 249, 0.97);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 1px 0 var(--rule-color);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease-out), visibility 0.5s;
+}
+
+.nav-compact.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.nav-compact-inner {
   max-width: var(--width-wide);
   margin: 0 auto;
   display: flex;
@@ -96,166 +203,300 @@ onUnmounted(() => {
   gap: var(--space-8);
 }
 
+.nav-compact .nav-links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-compact .nav-logo {
+  font-size: var(--text-h4);
+}
+
+/* SHARED ELEMENTS */
 .nav-logo {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 300;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+  background-image: none;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.nav-link {
+  position: relative;
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background-image: none;
+  transition: color 0.2s ease, letter-spacing 0.3s var(--ease-out);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-gold);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.4s var(--ease-out);
+}
+
+.nav-link:hover {
+  color: var(--color-ink);
+  letter-spacing: 0.18em;
+}
+
+.nav-link:hover::after {
+  clip-path: inset(0 0 0 0);
+}
+
+.nav-link.router-link-active {
+  color: var(--color-ink);
+}
+
+.nav-link.router-link-active::after {
+  clip-path: inset(0 0 0 0);
+  background: var(--color-ink);
+}
+
+.nav-link:focus-visible,
+.nav-apply:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+/* Gold middot separator */
+.nav-dot {
+  color: var(--color-gold);
+  font-size: var(--text-body);
+  line-height: 1;
+  opacity: 0.5;
+  user-select: none;
+}
+
+/* APPLY CTA - editorial text-and-line */
+.nav-apply {
+  position: relative;
+  padding-top: var(--space-2);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background-image: none;
+  transition: color 0.3s var(--ease-out);
+}
+
+.nav-apply::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-gold);
+  transition: left 0.4s var(--ease-out), right 0.4s var(--ease-out);
+}
+
+.nav-apply:hover {
+  color: var(--color-gold);
+}
+
+.nav-apply:hover::before {
+  left: -8px;
+  right: -8px;
+}
+
+/* MOBILE TOGGLE (text-based) */
+.nav-toggle {
+  display: none;
+  position: fixed;
+  top: var(--space-4);
+  right: var(--content-padding);
+  z-index: 101;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2) var(--space-3);
+}
+
+.nav-toggle-label {
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-ink);
+  transition: color 0.3s ease;
+}
+
+.nav-toggle-label.inverted {
+  color: var(--color-dark-text);
+}
+
+/* Mobile logo */
+.nav-mobile-logo {
+  display: none;
+  position: fixed;
+  top: var(--space-4);
+  left: var(--content-padding);
+  z-index: 101;
   font-family: var(--font-display);
   font-size: var(--text-h4);
   font-weight: 300;
   letter-spacing: var(--tracking-tight);
   color: var(--color-ink);
   background-image: none;
+  transition: color 0.3s ease;
 }
 
-.nav-links {
-  display: flex;
-  gap: var(--space-8);
+.nav-mobile-logo.inverted {
+  color: var(--color-dark-text);
 }
 
-.nav-links a {
-  font-size: var(--text-small);
-  font-weight: 500;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  transition: color var(--duration-fast) ease;
-  background-image: none;
-}
-
-.nav-links a {
-  position: relative;
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
+/* MOBILE OVERLAY */
+.mobile-overlay {
+  position: fixed;
+  top: 0;
   left: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--color-gold);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--duration-normal) var(--ease-out);
-}
-
-.nav-links a:hover {
-  color: var(--color-ink);
-}
-
-.nav-links a:hover::after {
-  transform: scaleX(1);
-}
-
-.nav-links a.router-link-active {
-  color: var(--color-ink);
-}
-
-.nav-links a.router-link-active::after {
-  transform: scaleX(1);
+  right: 0;
+  bottom: 0;
+  z-index: 100;
   background: var(--color-ink);
-}
-
-.nav-cta {
-  font-size: var(--text-small);
-  font-weight: 500;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--color-ink);
-  padding: var(--space-2) var(--space-6);
-  border: 1px solid var(--color-ink);
-  background-image: none;
-  transition: border-color var(--duration-fast) ease,
-              color var(--duration-fast) ease;
-}
-
-.nav-cta:hover {
-  border-color: var(--color-gold);
-  color: var(--color-gold);
-}
-
-.nav-cta:focus-visible {
-  outline: 2px solid var(--color-gold);
-  outline-offset: 4px;
-}
-
-.nav-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 6px;
-  padding: var(--space-3);
-  min-width: 44px;
-  min-height: 44px;
+  clip-path: circle(0% at calc(100% - 2rem) 1.5rem);
+  visibility: hidden;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.nav-toggle span {
+.mobile-overlay-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.mobile-link-wrap {
+  overflow: hidden;
+}
+
+.mobile-link-mask {
+  will-change: transform;
+}
+
+.mobile-link {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 300;
+  color: var(--color-dark-muted);
+  background-image: none;
+  transition: color 0.2s ease;
+  line-height: var(--leading-tight);
   display: block;
-  width: 24px;
-  height: 1.5px;
-  background-color: var(--color-ink);
-  transition: transform var(--duration-normal) ease,
-              opacity var(--duration-fast) ease;
 }
 
-.nav-toggle span.rotated:first-child {
-  transform: translateY(3.75px) rotate(45deg);
+.mobile-link:hover {
+  color: var(--color-dark-text);
 }
 
-.nav-toggle span.rotated:last-child {
-  transform: translateY(-3.75px) rotate(-45deg);
+.mobile-link.router-link-active {
+  color: var(--color-dark-text);
 }
 
+.mobile-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--color-gold);
+  opacity: 0.3;
+  margin: var(--space-6) 0;
+  transform-origin: center;
+}
+
+.mobile-apply {
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+  background-image: none;
+  position: relative;
+  padding-bottom: var(--space-1);
+  transition: color 0.2s ease;
+}
+
+.mobile-apply::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-gold);
+}
+
+.mobile-apply:hover {
+  color: var(--color-gold);
+}
+
+/* SCROLL PROGRESS - positioned at nav bottom */
+.nav :deep(.scroll-progress) {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
-  .nav-links {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--color-background);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-8);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--duration-normal) ease,
-                visibility var(--duration-normal) ease;
-  }
-
-  .nav-links.open {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .nav-links a {
-    font-size: var(--text-h3);
-    text-transform: none;
-    letter-spacing: var(--tracking-normal);
-    background-image: none;
-    transform: translateY(20px);
-    opacity: 0;
-    transition: opacity var(--duration-normal) ease,
-                transform var(--duration-normal) var(--ease-out),
-                color var(--duration-fast) ease;
-  }
-
-  .nav-links.open a {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .nav-links.open a:nth-child(1) { transition-delay: 100ms; }
-  .nav-links.open a:nth-child(2) { transition-delay: 200ms; }
-  .nav-links.open a:nth-child(3) { transition-delay: 300ms; }
-
-  .nav-actions {
+  .nav-expanded,
+  .nav-compact {
     display: none;
   }
 
   .nav-toggle {
     display: flex;
-    z-index: 101;
   }
+
+  .nav-mobile-logo {
+    display: block;
+  }
+
+  .nav {
+    pointer-events: none;
+  }
+
+  .nav-toggle,
+  .nav-mobile-logo {
+    pointer-events: auto;
+  }
+}
+
+/* Focus styles */
+.mobile-link:focus-visible,
+.mobile-apply:focus-visible,
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
 }
 </style>

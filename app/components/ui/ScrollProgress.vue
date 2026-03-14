@@ -1,5 +1,5 @@
 <template>
-  <div class="scroll-progress" aria-hidden="true" :style="{ transform: `scaleX(${progress})` }" />
+  <div class="scroll-progress" aria-hidden="true" :style="{ transform: 'scaleX(' + progress + ')' }" />
 </template>
 
 <script setup lang="ts">
@@ -23,15 +23,10 @@ onUnmounted(() => {
 
 <style scoped>
 .scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   height: 2px;
   background: var(--color-gold);
   transform-origin: left;
   transform: scaleX(0);
-  z-index: 99;
   pointer-events: none;
   will-change: transform;
 }

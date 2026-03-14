@@ -1,7 +1,7 @@
 <template>
-  <footer class="footer section-dark">
+  <footer ref="footerRef" class="footer section-dark">
     <div class="footer-inner">
-      <div class="footer-brand">
+      <div class="footer-brand reveal">
         <p class="footer-logo">Meraki District</p>
         <p class="footer-tagline">A cultural ecosystem for AI-native creators.</p>
         <div class="footer-newsletter">
@@ -25,7 +25,7 @@
             </button>
           </form>
           <p v-if="status === 'success'" class="footer-newsletter-feedback footer-newsletter-success">
-            You’re on the list.
+            You're on the list.
           </p>
           <p v-if="status === 'error'" class="footer-newsletter-feedback footer-newsletter-error">
             {{ errorMessage }}
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="footer-col">
+      <div class="footer-col reveal">
         <h4 class="overline">Navigate</h4>
         <ul>
           <li><NuxtLink to="/institutions">Institutions</NuxtLink></li>
@@ -43,7 +43,7 @@
         </ul>
       </div>
 
-      <div class="footer-col">
+      <div class="footer-col reveal">
         <h4 class="overline">Legal</h4>
         <ul>
           <li><NuxtLink to="/privacy">Privacy</NuxtLink></li>
@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <div class="footer-bottom">
+    <div class="footer-bottom reveal">
       <p>&copy; {{ year }} Meraki Productions Ltd. All rights reserved.</p>
     </div>
   </footer>
@@ -60,9 +60,13 @@
 
 <script setup lang="ts">
 import { useEmailCollection } from '~/composables/useEmailCollection'
+import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
 
 const year = computed(() => new Date().getFullYear())
 const { email, status, errorMessage, submit, reset } = useEmailCollection('newsletter')
+
+const footerRef = ref<HTMLElement | null>(null)
+useGsapScrollReveal(footerRef, '.reveal', { stagger: 0.12 })
 </script>
 
 <style scoped>
@@ -86,7 +90,7 @@ const { email, status, errorMessage, submit, reset } = useEmailCollection('newsl
     var(--color-gold) 80%,
     transparent
   );
-  opacity: 0.3;
+  opacity: 0.4;
 }
 
 .footer-inner {
