@@ -6,15 +6,30 @@
         <p class="footer-tagline">A cultural ecosystem for AI-native creators.</p>
         <div class="footer-newsletter">
           <p class="footer-newsletter-label">Dispatches from the District</p>
-          <form class="footer-newsletter-form" @submit.prevent>
+          <form class="footer-newsletter-form" @submit.prevent="submit">
             <input
+              v-model="email"
               type="email"
               placeholder="your@email.com"
               class="footer-newsletter-input"
               aria-label="Email address for newsletter"
+              :disabled="status === 'success'"
+              @focus="reset"
             />
-            <button type="submit" class="footer-newsletter-btn">Subscribe</button>
+            <button
+              type="submit"
+              class="footer-newsletter-btn"
+              :disabled="status === 'success'"
+            >
+              {{ status === 'success' ? 'Subscribed' : 'Subscribe' }}
+            </button>
           </form>
+          <p v-if="status === 'success'" class="footer-newsletter-feedback footer-newsletter-success">
+            You’re on the list.
+          </p>
+          <p v-if="status === 'error'" class="footer-newsletter-feedback footer-newsletter-error">
+            {{ errorMessage }}
+          </p>
         </div>
       </div>
 
@@ -44,7 +59,10 @@
 </template>
 
 <script setup lang="ts">
+import { useEmailCollection } from '~/composables/useEmailCollection'
+
 const year = computed(() => new Date().getFullYear())
+const { email, status, errorMessage, submit, reset } = useEmailCollection('newsletter')
 </script>
 
 <style scoped>
@@ -166,6 +184,25 @@ const year = computed(() => new Date().getFullYear())
   font-size: var(--text-caption);
   color: var(--color-dark-muted);
   max-width: none;
+}
+
+.footer-newsletter-input:disabled,
+.footer-newsletter-btn:disabled {
+  opacity: 0.5;
+}
+
+.footer-newsletter-feedback {
+  margin-top: var(--space-2);
+  font-size: var(--text-caption);
+  max-width: none;
+}
+
+.footer-newsletter-success {
+  color: var(--color-gold);
+}
+
+.footer-newsletter-error {
+  color: #e55;
 }
 
 @media (max-width: 768px) {

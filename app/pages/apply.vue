@@ -11,8 +11,35 @@
         </p>
         <p class="page-hero-note reveal">
           Application process coming soon. Leave your email below and
-          we&rsquo;ll notify you when applications open.
+          we’ll notify you when applications open.
         </p>
+
+        <form class="apply-form reveal" @submit.prevent="submit">
+          <div class="apply-form-row">
+            <input
+              v-model="email"
+              type="email"
+              placeholder="your@email.com"
+              class="apply-input"
+              aria-label="Email address"
+              :disabled="status === 'success'"
+              @focus="reset"
+            />
+            <button
+              type="submit"
+              class="apply-btn"
+              :disabled="status === 'success'"
+            >
+              Notify Me
+            </button>
+          </div>
+          <p v-if="status === 'success'" class="apply-feedback apply-success">
+            Thank you. We’ll be in touch when applications open.
+          </p>
+          <p v-if="status === 'error'" class="apply-feedback apply-error">
+            {{ errorMessage }}
+          </p>
+        </form>
       </div>
     </section>
   </div>
@@ -20,9 +47,12 @@
 
 <script setup lang="ts">
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
+import { useEmailCollection } from '~/composables/useEmailCollection'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal')
+
+const { email, status, errorMessage, submit, reset } = useEmailCollection('apply')
 
 useHead({
   title: 'Apply — Meraki District',
@@ -63,6 +93,76 @@ useHead({
   color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
   max-width: 45ch;
+  margin-bottom: var(--space-8);
+}
+
+.apply-form {
+  max-width: 420px;
+}
+
+.apply-form-row {
+  display: flex;
+  gap: 0;
+}
+
+.apply-input {
+  flex: 1;
+  padding: var(--space-4) var(--space-5);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: none;
+  color: var(--color-dark-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  outline: none;
+  transition: border-color var(--duration-fast) ease;
+}
+
+.apply-input::placeholder {
+  color: var(--color-dark-muted);
+}
+
+.apply-input:focus {
+  border-color: var(--color-gold);
+}
+
+.apply-input:disabled {
+  opacity: 0.5;
+}
+
+.apply-btn {
+  padding: var(--space-4) var(--space-8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-dark-text);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  transition: border-color var(--duration-fast) ease,
+              color var(--duration-fast) ease;
+}
+
+.apply-btn:hover:not(:disabled) {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.apply-btn:disabled {
+  opacity: 0.5;
+}
+
+.apply-feedback {
+  margin-top: var(--space-3);
+  font-size: var(--text-small);
+  max-width: none;
+}
+
+.apply-success {
+  color: var(--color-gold);
+}
+
+.apply-error {
+  color: #e55;
 }
 
 @media (max-width: 768px) {
@@ -70,6 +170,10 @@ useHead({
     padding-top: calc(var(--space-24) + 3rem);
     padding-bottom: var(--space-16);
     min-height: auto;
+  }
+
+  .apply-form {
+    max-width: none;
   }
 }
 </style>
