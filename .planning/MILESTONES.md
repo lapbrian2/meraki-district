@@ -1,10 +1,18 @@
 # Milestones
 
-## v1.2 — Visual & Interaction Polish (In Progress)
+## v1.2 — Visual & Interaction Polish (Complete)
 
-**Started:** 2026-03-14
-**Phases:** 8-10 (9 requirements)
-**Goal:** Awwwards-quality editorial experience with parallax, splitText, staggered grids, enhanced transitions, micro-interactions.
+**Shipped:** 2026-03-14
+**Phases:** 8-10 (3 plans, 9 requirements)
+
+**Key accomplishments:**
+1. Parallax scroll-driven backgrounds on hero, philosophy, origin, and the-road sections
+2. GSAP velocity-modulated marquee (scroll speed affects marquee speed)
+3. Word-by-word text reveal on manifesto heading and philosophy quote
+4. Grid-aware directional clip-path wipes on institution and founder cards
+5. 3D perspective tilt on cards (featured, institutions) with touch device detection
+6. Magnetic CTA button with elastic snap-back
+7. Page transition upgraded from opacity fade to clip-path wipe
 
 **Last phase number:** 10
 

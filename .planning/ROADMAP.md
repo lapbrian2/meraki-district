@@ -5,7 +5,7 @@
 - [x] **v1.0 Production Polish** — Phases 1-5 (shipped 2026-03-14) [archive](milestones/v1.0-ROADMAP.md)
 - [x] **v1.1 Launch Prep** — Phases 6-7 (shipped 2026-03-14) [archive](milestones/v1.1-ROADMAP.md)
 
-- [ ] **v1.2 Visual & Interaction Polish** — Phases 8-10
+- [x] **v1.2 Visual & Interaction Polish** — Phases 8-10
 
 ## Phases
 
@@ -30,9 +30,9 @@
 
 ### v1.2 Visual & Interaction Polish
 
-- [ ] **Phase 8: Scroll-Driven Depth & Parallax** - Parallax backgrounds, scrubbed marquee, image fade-in transitions
-- [ ] **Phase 9: Text Animation & Grid Reveals** - SplitText heading reveals, grid-aware staggered card entrances
-- [ ] **Phase 10: Page Transitions & Micro-Interactions** - Enhanced route transitions, hover parallax tilt, magnetic buttons, mobile optimization
+- [x] **Phase 8: Scroll-Driven Depth & Parallax** - Parallax backgrounds, scrubbed marquee, image fade-in transitions
+- [x] **Phase 9: Text Animation & Grid Reveals** - SplitText heading reveals, grid-aware staggered card entrances
+- [x] **Phase 10: Page Transitions & Micro-Interactions** - Enhanced route transitions, hover parallax tilt, magnetic buttons, mobile optimization
 
 ## Phase Details
 
@@ -47,7 +47,7 @@
   1. Hero background and dark section backgrounds shift vertically on scroll (parallax offset)
   2. Marquee strip speed modulates with scroll velocity (not fixed CSS animation)
   3. All below-fold images fade in with a subtle scale transition on intersection
-**Plans**: 0/1
+**Plans**: 1/1 ✓
 
 ### Phase 9: Text Animation & Grid Reveals
 **Goal**: Elevate typography and grid layouts with sophisticated entrance animations
@@ -56,7 +56,7 @@
 **Success Criteria** (what must be TRUE):
   1. Section h1/h2 headings animate per-word on scroll reveal (not simple opacity fade)
   2. InstitutionsGrid and FoundersGrid cards enter with per-row stagger and directional reveals
-**Plans**: 0/1
+**Plans**: 1/1 ✓
 
 ### Phase 10: Page Transitions & Micro-Interactions
 **Goal**: Polish navigation feel and add interactive delight through hover effects
@@ -67,7 +67,7 @@
   2. Featured and institution cards tilt subtly toward cursor on hover
   3. CTA buttons show magnetic pull toward cursor within hover proximity
   4. Parallax and tilt effects are disabled on touch devices / reduced-motion preference
-**Plans**: 0/1
+**Plans**: 1/1 ✓
 
 ## Progress
 
@@ -81,6 +81,6 @@ Phases 8-10 execute sequentially within v1.2 Visual & Interaction Polish milesto
 | 3. Legal Pages | v1.0 | 1/1 | Complete | 2026-03-14 |
 | 4. Accessibility | v1.0 | 1/1 | Complete | 2026-03-14 |
 | 5. SEO & Performance | v1.0 | 1/1 | Complete | 2026-03-14 |
-| 8. Scroll-Driven Depth | v1.2 | 0/1 | Pending | — |
-| 9. Text Animation & Grid | v1.2 | 0/1 | Pending | — |
-| 10. Page Transitions & Micro | v1.2 | 0/1 | Pending | — |
+| 8. Scroll-Driven Depth | v1.2 | 1/1 | Complete | 2026-03-14 |
+| 9. Text Animation & Grid | v1.2 | 1/1 | Complete | 2026-03-14 |
+| 10. Page Transitions & Micro | v1.2 | 1/1 | Complete | 2026-03-14 |

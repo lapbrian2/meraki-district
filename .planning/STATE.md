@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-03-14)
 
 **Core value:** The site must communicate the gravity, taste, and institutional quality of Meraki District.
-**Current focus:** v1.2 Visual & Interaction Polish — Awwwards-quality animations and micro-interactions.
+**Current focus:** v1.2 complete. Ready for next milestone.
 
 ## Current Position
 
-Phase: 8 (Scroll-Driven Depth & Parallax)
-Plan: Pending
-Status: Defining requirements and roadmap
-Last activity: 2026-03-14 — v1.2 milestone started
+Phase: None active (between milestones)
+Plan: None
+Status: v1.2 shipped, awaiting next milestone
+Last activity: 2026-03-14 — v1.2 milestone complete
 
-Progress: Requirements defined (9), roadmap pending
+Progress: Milestone complete
 
 ## Performance Metrics
 
@@ -28,6 +28,11 @@ Progress: Requirements defined (9), roadmap pending
 - Files changed: 19
 - Timeline: Single session (2026-03-14)
 
+**v1.2 Velocity:**
+- Total plans completed: 3 phases (9 requirements)
+- New composables: 3 (useParallax, useWordReveal, useInteractions)
+- Timeline: Single session (2026-03-14)
+
 ## Accumulated Context
 
 ### Decisions
@@ -37,10 +42,9 @@ All decisions logged in PROJECT.md Key Decisions table.
 ### Blockers/Concerns
 
 - EEXIST bug: Edit/Write tools fail on paths with spaces — use node -e with fs
-- GSAP SplitText is a Club GreenSock plugin — need to check if free alternative available or use manual splitting
 
 ## Session Continuity
 
 Last session: 2026-03-14
-Stopped at: v1.2 requirements defined, roadmap pending
+Stopped at: v1.2 milestone complete
 Resume file: None

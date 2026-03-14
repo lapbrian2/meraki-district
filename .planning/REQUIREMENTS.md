@@ -9,24 +9,24 @@ Requirements for v1.2 Visual & Interaction Polish. Awwwards-quality editorial ex
 
 ### Scroll-Driven Depth
 
-- [ ] **DEPTH-01**: Parallax effect on hero background image and dark section backgrounds (scroll-driven Y offset creates depth perception)
-- [ ] **DEPTH-02**: Scroll-scrubbed marquee strip (speed modulates with scroll velocity instead of fixed CSS animation)
-- [ ] **DEPTH-03**: Image fade-in transitions on lazy-loaded images (opacity + subtle scale on intersection)
+- [x] **DEPTH-01**: Parallax effect on hero background image and dark section backgrounds (scroll-driven Y offset creates depth perception)
+- [x] **DEPTH-02**: Scroll-scrubbed marquee strip (speed modulates with scroll velocity instead of fixed CSS animation)
+- [x] **DEPTH-03**: Image fade-in transitions on lazy-loaded images (opacity + subtle scale on intersection)
 
 ### Text & Grid Animation
 
-- [ ] **TEXT-01**: SplitText character/word reveals on section headings (h1/h2 elements animate per-word or per-character on scroll)
-- [ ] **TEXT-02**: Grid-aware staggered card entrances on InstitutionsGrid and FoundersGrid (per-row stagger with directional reveals)
+- [x] **TEXT-01**: SplitText character/word reveals on section headings (h1/h2 elements animate per-word or per-character on scroll)
+- [x] **TEXT-02**: Grid-aware staggered card entrances on InstitutionsGrid and FoundersGrid (per-row stagger with directional reveals)
 
 ### Page Transitions & Micro-Interactions
 
-- [ ] **TRANS-01**: Enhanced page transitions beyond fade-out (clip-path wipe or slide-up reveal on route change)
-- [ ] **MICRO-01**: Hover parallax tilt on featured cards and institution cards (mouse-position-driven subtle 3D tilt)
-- [ ] **MICRO-02**: Magnetic hover effect on CTA buttons (button subtly follows cursor within proximity)
+- [x] **TRANS-01**: Enhanced page transitions beyond fade-out (clip-path wipe or slide-up reveal on route change)
+- [x] **MICRO-01**: Hover parallax tilt on featured cards and institution cards (mouse-position-driven subtle 3D tilt)
+- [x] **MICRO-02**: Magnetic hover effect on CTA buttons (button subtly follows cursor within proximity)
 
 ### Mobile Polish
 
-- [ ] **MOB-01**: Mobile-optimized animation performance (disable parallax, reduce particle counts, simplify tilt effects on touch devices)
+- [x] **MOB-01**: Mobile-optimized animation performance (disable parallax, reduce particle counts, simplify tilt effects on touch devices)
 
 ## Future Requirements
 
@@ -56,15 +56,15 @@ Deferred to v2.0 or later.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DEPTH-01 | Phase 8 | Pending |
-| DEPTH-02 | Phase 8 | Pending |
-| DEPTH-03 | Phase 8 | Pending |
-| TEXT-01 | Phase 9 | Pending |
-| TEXT-02 | Phase 9 | Pending |
-| TRANS-01 | Phase 10 | Pending |
-| MICRO-01 | Phase 10 | Pending |
-| MICRO-02 | Phase 10 | Pending |
-| MOB-01 | Phase 10 | Pending |
+| DEPTH-01 | Phase 8 | Complete |
+| DEPTH-02 | Phase 8 | Complete |
+| DEPTH-03 | Phase 8 | Complete |
+| TEXT-01 | Phase 9 | Complete |
+| TEXT-02 | Phase 9 | Complete |
+| TRANS-01 | Phase 10 | Complete |
+| MICRO-01 | Phase 10 | Complete |
+| MICRO-02 | Phase 10 | Complete |
+| MOB-01 | Phase 10 | Complete |
 
 **Coverage:**
 - v1.2 requirements: 9 total
