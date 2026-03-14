@@ -183,7 +183,18 @@ function onImageLoad(e: Event) {
   margin-top: var(--space-3);
 }
 
-@media (max-width: 768px) {
+@media (min-width: 601px) and (max-width: 1024px) {
+  .featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+  }
+
+  .featured-card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
   .featured-grid {
     grid-template-columns: 1fr;
     gap: var(--space-12);

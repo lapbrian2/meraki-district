@@ -181,7 +181,11 @@ onUnmounted(() => {
   display: none;
   flex-direction: column;
   gap: 6px;
-  padding: var(--space-2);
+  padding: var(--space-3);
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-toggle span {

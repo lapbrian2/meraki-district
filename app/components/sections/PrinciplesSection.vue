@@ -160,7 +160,14 @@ const principles = [
   line-height: var(--leading-relaxed);
 }
 
-@media (max-width: 768px) {
+@media (min-width: 601px) and (max-width: 1024px) {
+  .principles-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+@media (max-width: 600px) {
   .principles-grid {
     grid-template-columns: 1fr;
     gap: var(--space-8);

@@ -25,6 +25,7 @@ export function useParallax(
   onMounted(async () => {
     if (!container.value) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (!window.matchMedia('(hover: hover)').matches || window.innerWidth < 768) return
 
     await waitForAncestorAnimations(container.value)
     if (!container.value) return

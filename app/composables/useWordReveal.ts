@@ -52,11 +52,14 @@ export function useWordReveal(
     container.value.querySelectorAll(selector).forEach((el) => {
       const text = el.textContent || ''
       const words = text.trim().split(/\s+/)
+      ;(el as HTMLElement).style.display = 'flex'
+      ;(el as HTMLElement).style.flexWrap = 'wrap'
+      ;(el as HTMLElement).style.columnGap = '0.27em'
       el.innerHTML = words.map(word =>
-        '<span class="wr-mask" style="display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:0.1em">' +
+        '<span class="wr-mask" style="display:inline-flex;overflow:hidden;vertical-align:bottom;padding-bottom:0.1em">' +
         '<span class="wr-word" style="display:inline-block;will-change:transform">' + word + '</span>' +
         '</span>'
-      ).join(' ')
+      ).join('')
     })
 
     ctx = gsap.context(() => {
