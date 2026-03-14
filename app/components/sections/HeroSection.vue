@@ -11,7 +11,7 @@
       <div class="hero-bg-overlay" />
     </div>
     <div class="hero-content">
-      <p class="hero-overline reveal">Est. 2025</p>
+      <p class="hero-overline reveal">Est. 2026</p>
       <h1 class="hero-title reveal">
         Where craft<br />meets culture
       </h1>
