@@ -1,0 +1,81 @@
+export interface Institution {
+  number: string
+  name: string
+  slug: string
+  type: string
+  layout: string
+  description: string
+  image: string
+  longDescription: string
+}
+
+export const institutions: Institution[] = [
+  {
+    number: '01', name: 'Voight Studio', slug: 'voight-studio',
+    image: '/images/institutions/voight-studio.webp', type: 'Design Practice', layout: 'hero',
+    description: 'Design and brand strategy for ventures building at the edge of what is possible. The flagship institution where client work meets creative ambition.',
+    longDescription: 'Voight Studio is the creative engine of Meraki District. A full-service design practice that pairs strategic thinking with obsessive craft, working with ventures and cultural institutions that refuse to settle for conventional output. Every engagement is a collaboration\u2014built on the belief that the best work happens when ambition meets restraint, and when both sides are willing to go further than comfortable.',
+  },
+  {
+    number: '02', name: 'The Road', slug: 'the-road',
+    image: '/images/institutions/the-road.webp', type: 'Publishing & Editorial', layout: 'wide',
+    description: 'Long-form storytelling and cultural criticism for the AI-native era.',
+    longDescription: 'The Road is the editorial arm of Meraki District. Long-form essays, dispatches, interviews, and cultural criticism written for creators who think deeply about their practice. No hot takes. No engagement bait. Just substantive writing about what it means to make things in an era where the tools are changing faster than the conversations about them.',
+  },
+  {
+    number: '03', name: 'Meridian', slug: 'meridian',
+    image: '/images/institutions/meridian.webp', type: 'Research & Strategy', layout: 'narrow',
+    description: 'Frontier research translated into actionable creative intelligence.',
+    longDescription: 'Meridian sits at the intersection of research and practice. It tracks emerging tools, techniques, and cultural shifts\u2014then translates them into frameworks that working creators can actually use. Not academic papers. Not trend reports. Actionable intelligence for people building at the frontier.',
+  },
+  {
+    number: '04', name: 'Fieldwork', slug: 'fieldwork',
+    image: '/images/institutions/fieldwork.webp', type: 'Education', layout: 'narrow',
+    description: 'Structured learning paths for creators who want depth, not shortcuts.',
+    longDescription: 'Fieldwork is education designed for practitioners. Structured learning paths, cohort-based intensives, and mentorship programs built around the conviction that mastery requires deliberate practice, honest feedback, and sustained commitment. Every program is taught by people who are actively building\u2014not just teaching.',
+  },
+  {
+    number: '05', name: 'The Provenance', slug: 'the-provenance',
+    image: '/images/institutions/the-provenance.webp', type: 'Archive & Curation', layout: 'wide',
+    description: 'A living archive of creative practice, process, and precedent.',
+    longDescription: 'The Provenance is a living archive. It documents creative process, catalogues precedent, and preserves the thinking behind the work\u2014not just the polished output. In an era of ephemeral content, it builds a permanent record of what it looks like to practice AI-native creativity with intention.',
+  },
+  {
+    number: '06', name: 'Basecamp', slug: 'basecamp',
+    image: '/images/institutions/basecamp.webp', type: 'Community', layout: 'half',
+    description: 'Where ambitious creators find their people and sharpen their practice.',
+    longDescription: 'Basecamp is the community layer of Meraki District. Not another Discord server with infinite channels and no signal. A curated space where ambitious creators find peers who match their commitment, challenge their assumptions, and push them toward work they couldn\u2019t do alone.',
+  },
+  {
+    number: '07', name: 'Common Ground', slug: 'common-ground',
+    image: '/images/institutions/common-ground.webp', type: 'Events & Gatherings', layout: 'half',
+    description: 'Intimate gatherings where ideas collide and collaborations ignite.',
+    longDescription: 'Common Ground organises the gatherings that matter. Intimate salons, working sessions, studio visits, and collaborative sprints\u2014designed to create the conditions for unexpected connections and genuine creative exchange. No keynotes. No panels. Just people in a room, doing the work.',
+  },
+  {
+    number: '08', name: 'The Mint', slug: 'the-mint',
+    image: '/images/institutions/the-mint.webp', type: 'Creative Commerce', layout: 'wide',
+    description: 'Ethical monetization infrastructure for independent creators.',
+    longDescription: 'The Mint is commerce infrastructure built for creators who take their independence seriously. Fair revenue splits, transparent pricing, ethical monetization tools\u2014everything a creator needs to build a sustainable practice without compromising their values or ceding control to platforms that don\u2019t share their interests.',
+  },
+  {
+    number: '09', name: 'The Seal', slug: 'the-seal',
+    image: '/images/institutions/the-seal.webp', type: 'Credentials & Standards', layout: 'narrow',
+    description: 'A credentialing system that means something. Earned, not purchased.',
+    longDescription: 'The Seal is a credentialing system designed to actually mean something. Four tiers\u2014Associate, Verified, Master, Fellow\u2014each requiring demonstrated practice, peer review, and real contribution to the ecosystem. No certificates for watching videos. No badges for showing up. Every credential is earned through the work itself.',
+  },
+  {
+    number: '10', name: 'The Collective', slug: 'the-collective',
+    image: '/images/institutions/the-collective.webp', type: 'Ventures & Partnerships', layout: 'closer',
+    description: 'Strategic partnerships and ventures that extend the ecosystem beyond its walls.',
+    longDescription: 'The Collective is the outward-facing arm of Meraki District. Strategic partnerships, joint ventures, and collaborative projects that extend the ecosystem\u2019s reach and create opportunities for its members. Every partnership is evaluated on a single criterion: does it make the work better?',
+  },
+]
+
+export function useInstitutions() {
+  return { institutions }
+}
+
+export function useInstitution(slug: string) {
+  return institutions.find(i => i.slug === slug) || null
+}

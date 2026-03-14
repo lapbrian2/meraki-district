@@ -65,4 +65,12 @@ useHead({
   line-height: var(--leading-relaxed);
   max-width: 45ch;
 }
+
+@media (max-width: 768px) {
+  .page-hero {
+    padding-top: calc(var(--space-24) + 3rem);
+    padding-bottom: var(--space-16);
+    min-height: auto;
+  }
+}
 </style>

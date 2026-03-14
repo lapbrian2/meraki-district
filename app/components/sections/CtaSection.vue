@@ -66,4 +66,17 @@ useGsapScrollReveal(section, '.reveal')
   background-color: var(--color-gold);
   color: var(--color-ink);
 }
+
+@media (max-width: 768px) {
+  .cta {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
+  .cta-button {
+    width: 100%;
+    text-align: center;
+    padding: var(--space-4) var(--space-6);
+  }
+}
 </style>

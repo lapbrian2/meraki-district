@@ -62,4 +62,19 @@ const words = ['The work matters more than the tools', 'Mastery is a practice', 
     animation: none;
   }
 }
+
+@media (max-width: 768px) {
+  .marquee {
+    padding: var(--space-4) 0;
+  }
+
+  .marquee-word {
+    font-size: var(--text-h4);
+  }
+
+  .marquee-dot {
+    font-size: var(--text-h3);
+    margin: 0 var(--space-4);
+  }
+}
 </style>

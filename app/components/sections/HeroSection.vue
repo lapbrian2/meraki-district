@@ -133,4 +133,22 @@ onUnmounted(() => {
   0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
   50% { opacity: 1; transform: scaleY(1); }
 }
+
+@supports (min-height: 100svh) {
+  .hero { min-height: 100svh; }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-16) var(--content-padding);
+  }
+
+  .hero-sub {
+    font-size: var(--text-body);
+  }
+
+  .hero-scroll {
+    bottom: var(--space-6);
+  }
+}
 </style>

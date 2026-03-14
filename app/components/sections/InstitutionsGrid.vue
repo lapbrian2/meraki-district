@@ -9,9 +9,10 @@
       </div>
 
       <div class="institutions-grid">
-        <article
+        <NuxtLink
           v-for="inst in institutions"
           :key="inst.name"
+          :to="`/institutions/${inst.slug}`"
           class="inst-card"
           :class="[`inst-${inst.layout}`]"
         >
@@ -32,7 +33,7 @@
             <h3 class="inst-name">{{ inst.name }}</h3>
             <p class="inst-desc">{{ inst.description }}</p>
           </div>
-        </article>
+        </NuxtLink>
       </div>
     </div>
   </section>
@@ -42,6 +43,7 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
+import { institutions } from '~/composables/useInstitutions'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.08 })
@@ -85,58 +87,6 @@ onUnmounted(() => {
   ctx?.revert()
 })
 
-const institutions = [
-  {
-    number: '01', name: 'Voight Studio',
-    image: '/images/institutions/voight-studio.webp', type: 'Design Practice', layout: 'hero',
-    description: 'Design and brand strategy for ventures building at the edge of what is possible. The flagship institution where client work meets creative ambition.',
-  },
-  {
-    number: '02', name: 'The Road',
-    image: '/images/institutions/the-road.webp', type: 'Publishing & Editorial', layout: 'wide',
-    description: 'Long-form storytelling and cultural criticism for the AI-native era.',
-  },
-  {
-    number: '03', name: 'Meridian',
-    image: '/images/institutions/meridian.webp', type: 'Research & Strategy', layout: 'narrow',
-    description: 'Frontier research translated into actionable creative intelligence.',
-  },
-  {
-    number: '04', name: 'Fieldwork',
-    image: '/images/institutions/fieldwork.webp', type: 'Education', layout: 'narrow',
-    description: 'Structured learning paths for creators who want depth, not shortcuts.',
-  },
-  {
-    number: '05', name: 'The Provenance',
-    image: '/images/institutions/the-provenance.webp', type: 'Archive & Curation', layout: 'wide',
-    description: 'A living archive of creative practice, process, and precedent.',
-  },
-  {
-    number: '06', name: 'Basecamp',
-    image: '/images/institutions/basecamp.webp', type: 'Community', layout: 'half',
-    description: 'Where ambitious creators find their people and sharpen their practice.',
-  },
-  {
-    number: '07', name: 'Common Ground',
-    image: '/images/institutions/common-ground.webp', type: 'Events & Gatherings', layout: 'half',
-    description: 'Intimate gatherings where ideas collide and collaborations ignite.',
-  },
-  {
-    number: '08', name: 'The Mint',
-    image: '/images/institutions/the-mint.webp', type: 'Creative Commerce', layout: 'wide',
-    description: 'Ethical monetization infrastructure for independent creators.',
-  },
-  {
-    number: '09', name: 'The Seal',
-    image: '/images/institutions/the-seal.webp', type: 'Credentials & Standards', layout: 'narrow',
-    description: 'A credentialing system that means something. Earned, not purchased.',
-  },
-  {
-    number: '10', name: 'The Collective',
-    image: '/images/institutions/the-collective.webp', type: 'Ventures & Partnerships', layout: 'closer',
-    description: 'Strategic partnerships and ventures that extend the ecosystem beyond its walls.',
-  },
-]
 </script>
 
 <style scoped>
@@ -165,6 +115,7 @@ const institutions = [
 .inst-card {
   cursor: pointer;
   position: relative;
+  background-image: none;
 }
 
 .inst-card:hover .inst-image {

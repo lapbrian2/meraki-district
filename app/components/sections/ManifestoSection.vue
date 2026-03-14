@@ -94,4 +94,16 @@ onUnmounted(() => {
 .manifesto-body:last-child {
   margin-bottom: 0;
 }
+
+@media (max-width: 768px) {
+  .manifesto {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
+  .manifesto-text {
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+}
 </style>

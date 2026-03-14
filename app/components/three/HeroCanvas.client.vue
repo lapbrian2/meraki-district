@@ -72,15 +72,33 @@ void main(){
   vec3 ink=vec3(0.035,0.035,0.043);
   vec3 gold=vec3(0.722,0.588,0.306);
   vec3 warm=vec3(0.95,0.92,0.88);
-  vec3 lightDir=normalize(vec3(0.5,1.0,0.3));
+
+  // Directional light with softer fill
+  vec3 lightDir=normalize(vec3(0.4,1.0,0.3));
   float diff=max(dot(vNormal,lightDir),0.0);
-  float ridge=smoothstep(0.3,1.2,vElevation);
-  vec3 col=mix(ink,gold,ridge*0.2);
-  col+=warm*diff*0.06;
+
+  // Rim light for edge definition
+  vec3 viewDir=normalize(vec3(0.0,1.0,0.5));
+  float rim=1.0-max(dot(vNormal,viewDir),0.0);
+  rim=pow(rim,3.0)*0.4;
+
+  // Ridge highlighting with more gold presence
+  float ridge=smoothstep(0.2,1.0,vElevation);
+  vec3 col=mix(ink,gold,ridge*0.35);
+  col+=warm*diff*0.08;
+  col+=gold*rim;
+
+  // Subtle color shift based on position
+  float shift=sin(vUv.x*3.14159)*0.03;
+  col+=warm*shift;
+
+  // Vignette
   float dist=length(vUv-vec2(0.5));
-  float vig=smoothstep(0.65,0.25,dist);
-  float scrollFade=1.0-smoothstep(0.0,0.6,uScroll);
-  gl_FragColor=vec4(col,vig*scrollFade*0.45);
+  float vig=smoothstep(0.7,0.2,dist);
+
+  // Scroll fade
+  float scrollFade=1.0-smoothstep(0.0,0.5,uScroll);
+  gl_FragColor=vec4(col,vig*scrollFade*0.6);
 }`
 
 let material: THREE.ShaderMaterial | null = null
@@ -97,7 +115,7 @@ onMounted(async () => {
 
     // Triangle budget: 64x64=8192, 48x48=4608, 32x32=2048 (all under 10k)
     const segments = tier === 'high' ? 64 : tier === 'medium' ? 48 : 32
-    const geometry = new THREE.PlaneGeometry(12, 12, segments, segments)
+    const geometry = new THREE.PlaneGeometry(16, 16, segments, segments)
     geometry.rotateX(-Math.PI * 0.5)
 
     material = new THREE.ShaderMaterial({
@@ -113,7 +131,7 @@ onMounted(async () => {
     mesh.position.y = -1.5
     scene.add(mesh)
 
-    camera.position.set(0, 4, 6)
+    camera.position.set(0, 4.5, 7)
     camera.lookAt(0, 0, 0)
 
     // Scroll proxy
@@ -145,9 +163,11 @@ onMounted(async () => {
       if (material) {
         material.uniforms.uTime.value = clock.getElapsedTime()
         material.uniforms.uScroll.value = proxy.scroll
+        // Subtle breathing
+        camera.position.y = 4.5 + Math.sin(clock.getElapsedTime() * 0.3) * 0.15
       }
-      camera.position.x = proxy.mouseX * 0.3
-      camera.position.z = 6 + proxy.mouseY * 0.2
+      camera.position.x = proxy.mouseX * 0.4
+      camera.position.z = 7 + proxy.mouseY * 0.25
       camera.lookAt(0, 0, 0)
       render()
     }

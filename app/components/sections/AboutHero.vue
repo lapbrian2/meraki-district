@@ -41,4 +41,11 @@ useGsapScrollReveal(section, '.reveal')
   line-height: var(--leading-relaxed);
   max-width: 50ch;
 }
+
+@media (max-width: 768px) {
+  .about-hero {
+    padding-top: calc(var(--space-24) + 3rem);
+    padding-bottom: var(--space-12);
+  }
+}
 </style>

@@ -106,4 +106,11 @@ onUnmounted(() => {
   letter-spacing: var(--tracking-tight);
   margin-top: var(--space-8);
 }
+
+@media (max-width: 768px) {
+  .origin {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+}
 </style>

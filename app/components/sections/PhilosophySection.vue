@@ -60,4 +60,20 @@ useGsapScrollReveal(section, '.reveal', { stagger: 0.12 })
   color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
 }
+
+@media (max-width: 768px) {
+  .philosophy {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
+  .philosophy-quote {
+    padding-left: var(--space-4);
+    margin: var(--space-8) 0;
+  }
+
+  .philosophy-quote p {
+    font-size: var(--text-h2);
+  }
+}
 </style>
