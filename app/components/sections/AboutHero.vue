@@ -2,8 +2,8 @@
   <section ref="section" class="about-hero section">
     <div class="section-default">
       <p class="overline reveal">About</p>
-      <h1 class="about-hero-title reveal">
-        The people behind<br>the district.
+      <h1 class="about-hero-title word-reveal">
+        The people behind the district.
       </h1>
       <p class="about-hero-sub reveal">
         Meraki District was founded by two people who arrived at the same
@@ -16,9 +16,11 @@
 
 <script setup lang="ts">
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
+import { useWordReveal } from '~/composables/useWordReveal'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal')
+useWordReveal(section, '.word-reveal')
 </script>
 
 <style scoped>

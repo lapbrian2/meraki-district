@@ -11,7 +11,7 @@
     </div>
     <div class="section-narrow origin-content">
       <p class="overline reveal">The Origin</p>
-      <h2 class="origin-title reveal">
+      <h2 class="origin-title word-reveal">
         We couldn&rsquo;t find what we were looking for.
       </h2>
       <div class="origin-rule" aria-hidden="true" />
@@ -33,10 +33,12 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { useParallax } from '~/composables/useParallax'
+import { useWordReveal } from '~/composables/useWordReveal'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal')
 useParallax(section, '.origin-bg-image', { speed: 0.08 })
+useWordReveal(section, '.word-reveal')
 
 let ctx: gsap.Context | null = null
 

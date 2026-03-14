@@ -24,12 +24,58 @@
 </template>
 
 <script setup lang="ts">
-import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { useTilt } from '~/composables/useInteractions'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.12 })
 useTilt(section, '.featured-card', { maxRotation: 3 })
+
+let ctx: gsap.Context | null = null
+
+onMounted(async () => {
+  if (!section.value) return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  await waitForAncestorAnimations(section.value)
+  if (!section.value) return
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  ctx = gsap.context(() => {
+    const images = section.value!.querySelectorAll('.featured-image')
+
+    images.forEach((img, i) => {
+      // Alternate wipe directions across the 3 cards
+      const directions = [
+        'inset(0 100% 0 0)',  // from left
+        'inset(100% 0 0 0)',  // from top
+        'inset(0 0 0 100%)',  // from right
+      ]
+
+      gsap.fromTo(img,
+        { clipPath: directions[i % 3] },
+        {
+          clipPath: 'inset(0% 0% 0% 0%)',
+          duration: 1.1,
+          delay: i * 0.15,
+          ease: 'power3.inOut',
+          scrollTrigger: {
+            trigger: img,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      )
+    })
+  }, section.value)
+})
+
+onUnmounted(() => {
+  ctx?.revert()
+})
 
 const posts = [
   {
