@@ -2,7 +2,7 @@
   <section ref="section" class="origin section section-dark">
     <div class="origin-bg-wrap">
       <img
-        src="/images/origin-bg.jpg"
+        src="/images/origin-bg.webp"
         alt=""
         class="origin-bg-image"
         loading="lazy"

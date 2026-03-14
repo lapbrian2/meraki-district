@@ -2,7 +2,7 @@
   <section ref="section" class="philosophy section section-dark">
     <div class="philosophy-bg-wrap">
       <img
-        src="/images/philosophy-bg.jpg"
+        src="/images/philosophy-bg.webp"
         alt=""
         class="philosophy-bg-image"
         loading="lazy"
