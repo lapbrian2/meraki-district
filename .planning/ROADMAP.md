@@ -3,7 +3,9 @@
 ## Milestones
 
 - [x] **v1.0 Production Polish** — Phases 1-5 (shipped 2026-03-14) [archive](milestones/v1.0-ROADMAP.md)
-- [x] **v1.1 Launch Prep** — Phases 6-7 (shipped 2026-03-14)
+- [x] **v1.1 Launch Prep** — Phases 6-7 (shipped 2026-03-14) [archive](milestones/v1.1-ROADMAP.md)
+
+- [ ] **v1.2 Visual & Interaction Polish** — Phases 8-10
 
 ## Phases
 
@@ -18,37 +20,59 @@
 
 </details>
 
-### v1.1 Launch Prep
+<details>
+<summary>v1.1 Launch Prep (Phases 6-7) — SHIPPED 2026-03-14</summary>
 
-- [x] **Phase 6: Social Sharing & SEO** - Per-page OG meta, canonical URLs, and default OG image
-- [x] **Phase 7: Analytics & Image Optimization** - Vercel Analytics/Web Vitals and remaining WebP conversions
+- [x] Phase 6: Social Sharing & SEO (1/1 plans) — completed 2026-03-14
+- [x] Phase 7: Analytics & Image Optimization (1/1 plans) — completed 2026-03-14
+
+</details>
+
+### v1.2 Visual & Interaction Polish
+
+- [ ] **Phase 8: Scroll-Driven Depth & Parallax** - Parallax backgrounds, scrubbed marquee, image fade-in transitions
+- [ ] **Phase 9: Text Animation & Grid Reveals** - SplitText heading reveals, grid-aware staggered card entrances
+- [ ] **Phase 10: Page Transitions & Micro-Interactions** - Enhanced route transitions, hover parallax tilt, magnetic buttons, mobile optimization
 
 ## Phase Details
 
-### Phase 6: Social Sharing & SEO
-**Goal**: Every page produces a rich, accurate social sharing preview when its URL is pasted on any platform
-**Depends on**: Phase 5 (v1.0 SEO foundation — sitemap, robots.txt, homepage og:title already exist)
-**Requirements**: SEO-01, SEO-02, SEO-03, SEO-04
-**Success Criteria** (what must be TRUE):
-  1. Pasting any page URL into Twitter/LinkedIn/iMessage shows a branded preview card with page-specific title and description (not generic fallback)
-  2. Pasting an institution detail page URL shows that institution's name and description in the preview card
-  3. Every page preview card displays the Meraki District OG image (1200x630)
-**Plans**: 1/1 ✓
 
-### Phase 7: Analytics & Image Optimization
-**Goal**: The site tracks visitor behavior and serves all images at optimal file sizes
-**Depends on**: Phase 6 (analytics should track the final page state)
-**Requirements**: ANLX-01, ANLX-02, PERF-01, PERF-02
+
+
+### Phase 8: Scroll-Driven Depth & Parallax
+**Goal**: Add depth perception through scroll-driven parallax and polished image loading
+**Depends on**: v1.1 (stable site with analytics)
+**Requirements**: DEPTH-01, DEPTH-02, DEPTH-03
 **Success Criteria** (what must be TRUE):
-  1. Vercel Analytics dashboard shows page view data for all routes
-  2. Web Vitals scores (LCP, FID, CLS) are visible in the Vercel dashboard
-  3. No JPG background images remain in the public/ directory — all converted to WebP and referenced correctly
-**Plans**: 1/1 ✓
+  1. Hero background and dark section backgrounds shift vertically on scroll (parallax offset)
+  2. Marquee strip speed modulates with scroll velocity (not fixed CSS animation)
+  3. All below-fold images fade in with a subtle scale transition on intersection
+**Plans**: 0/1
+
+### Phase 9: Text Animation & Grid Reveals
+**Goal**: Elevate typography and grid layouts with sophisticated entrance animations
+**Depends on**: Phase 8 (scroll infrastructure established)
+**Requirements**: TEXT-01, TEXT-02
+**Success Criteria** (what must be TRUE):
+  1. Section h1/h2 headings animate per-word on scroll reveal (not simple opacity fade)
+  2. InstitutionsGrid and FoundersGrid cards enter with per-row stagger and directional reveals
+**Plans**: 0/1
+
+### Phase 10: Page Transitions & Micro-Interactions
+**Goal**: Polish navigation feel and add interactive delight through hover effects
+**Depends on**: Phase 9 (all scroll animations stable)
+**Requirements**: TRANS-01, MICRO-01, MICRO-02, MOB-01
+**Success Criteria** (what must be TRUE):
+  1. Route changes use a visible transition effect beyond simple fade (clip-path wipe or slide)
+  2. Featured and institution cards tilt subtly toward cursor on hover
+  3. CTA buttons show magnetic pull toward cursor within hover proximity
+  4. Parallax and tilt effects are disabled on touch devices / reduced-motion preference
+**Plans**: 0/1
 
 ## Progress
 
 **Execution Order:**
-Phases 6-7 execute sequentially within v1.1 Launch Prep milestone.
+Phases 8-10 execute sequentially within v1.2 Visual & Interaction Polish milestone.
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
@@ -57,5 +81,6 @@ Phases 6-7 execute sequentially within v1.1 Launch Prep milestone.
 | 3. Legal Pages | v1.0 | 1/1 | Complete | 2026-03-14 |
 | 4. Accessibility | v1.0 | 1/1 | Complete | 2026-03-14 |
 | 5. SEO & Performance | v1.0 | 1/1 | Complete | 2026-03-14 |
-| 6. Social Sharing & SEO | v1.1 | 1/1 | Complete | 2026-03-14 |
-| 7. Analytics & Image Optimization | v1.1 | 1/1 | Complete | 2026-03-14 |
+| 8. Scroll-Driven Depth | v1.2 | 0/1 | Pending | — |
+| 9. Text Animation & Grid | v1.2 | 0/1 | Pending | — |
+| 10. Page Transitions & Micro | v1.2 | 0/1 | Pending | — |

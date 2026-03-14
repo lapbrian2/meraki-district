@@ -1,5 +1,15 @@
 # Milestones
 
+## v1.2 — Visual & Interaction Polish (In Progress)
+
+**Started:** 2026-03-14
+**Phases:** 8-10 (9 requirements)
+**Goal:** Awwwards-quality editorial experience with parallax, splitText, staggered grids, enhanced transitions, micro-interactions.
+
+**Last phase number:** 10
+
+---
+
 ## v1.1 — Launch Prep (Complete)
 
 **Shipped:** 2026-03-14

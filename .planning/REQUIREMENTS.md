@@ -3,26 +3,30 @@
 **Defined:** 2026-03-14
 **Core Value:** The site must communicate the gravity, taste, and institutional quality of Meraki District.
 
-## v1.1 Requirements
+## v1.2 Requirements
 
-Requirements for v1.1 Launch Prep. Everything needed to share the URL publicly.
+Requirements for v1.2 Visual & Interaction Polish. Awwwards-quality editorial experience.
 
-### SEO
+### Scroll-Driven Depth
 
-- [x] **SEO-01**: Every page has page-specific og:title and og:description meta tags (not just global fallback)
-- [x] **SEO-02**: Every page has canonical URL meta tag
-- [x] **SEO-03**: Default OG image (1200x630) created and referenced site-wide via og:image and twitter:image
-- [x] **SEO-04**: Institution detail pages generate dynamic og:title and og:description from institution data
+- [ ] **DEPTH-01**: Parallax effect on hero background image and dark section backgrounds (scroll-driven Y offset creates depth perception)
+- [ ] **DEPTH-02**: Scroll-scrubbed marquee strip (speed modulates with scroll velocity instead of fixed CSS animation)
+- [ ] **DEPTH-03**: Image fade-in transitions on lazy-loaded images (opacity + subtle scale on intersection)
 
-### Analytics
+### Text & Grid Animation
 
-- [x] **ANLX-01**: Vercel Analytics installed and tracking page views on all routes
-- [x] **ANLX-02**: Vercel Web Vitals collection enabled
+- [ ] **TEXT-01**: SplitText character/word reveals on section headings (h1/h2 elements animate per-word or per-character on scroll)
+- [ ] **TEXT-02**: Grid-aware staggered card entrances on InstitutionsGrid and FoundersGrid (per-row stagger with directional reveals)
 
-### Performance
+### Page Transitions & Micro-Interactions
 
-- [x] **PERF-01**: Remaining background images (origin-bg.jpg, philosophy-bg.jpg, the-road-hero.jpg) converted from JPG to WebP
-- [x] **PERF-02**: All component references updated to use WebP versions
+- [ ] **TRANS-01**: Enhanced page transitions beyond fade-out (clip-path wipe or slide-up reveal on route change)
+- [ ] **MICRO-01**: Hover parallax tilt on featured cards and institution cards (mouse-position-driven subtle 3D tilt)
+- [ ] **MICRO-02**: Magnetic hover effect on CTA buttons (button subtly follows cursor within proximity)
+
+### Mobile Polish
+
+- [ ] **MOB-01**: Mobile-optimized animation performance (disable parallax, reduce particle counts, simplify tilt effects on touch devices)
 
 ## Future Requirements
 
@@ -43,32 +47,29 @@ Deferred to v2.0 or later.
 
 | Feature | Reason |
 |---------|--------|
-| Domain purchase (merakidistrict.ai) | Operational decision, not code |
-| Real content for institution detail pages | Requires editorial from Brian/Rachel |
-| Dynamic per-page OG image generation | Static default sufficient for launch |
-| Google Analytics / GA4 | Vercel Analytics is simpler and privacy-respecting |
-| Visual/UX polish | Deferred to later milestone per Brian |
+| Custom cursor | Off-brand for editorial aesthetic — editorial sites use default cursor |
+| Three.js background | Removed in v0.1, photos replaced 3D |
+| Audio/sound design | Not appropriate for editorial site |
+| Scroll-to-top button | Lenis handles smooth scroll, keyboard nav sufficient |
 
 ## Traceability
 
-Which phases cover which requirements. Updated during roadmap creation.
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SEO-01 | Phase 6 | Complete |
-| SEO-02 | Phase 6 | Complete |
-| SEO-03 | Phase 6 | Complete |
-| SEO-04 | Phase 6 | Complete |
-| ANLX-01 | Phase 7 | Complete |
-| ANLX-02 | Phase 7 | Complete |
-| PERF-01 | Phase 7 | Complete |
-| PERF-02 | Phase 7 | Complete |
+| DEPTH-01 | Phase 8 | Pending |
+| DEPTH-02 | Phase 8 | Pending |
+| DEPTH-03 | Phase 8 | Pending |
+| TEXT-01 | Phase 9 | Pending |
+| TEXT-02 | Phase 9 | Pending |
+| TRANS-01 | Phase 10 | Pending |
+| MICRO-01 | Phase 10 | Pending |
+| MICRO-02 | Phase 10 | Pending |
+| MOB-01 | Phase 10 | Pending |
 
 **Coverage:**
-- v1.1 requirements: 8 total
-- Mapped to phases: 8
+- v1.2 requirements: 9 total
+- Mapped to phases: 9
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-14*
-*Last updated: 2026-03-14 after v1.1 completion*

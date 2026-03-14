@@ -54,17 +54,20 @@ The site must communicate the gravity, taste, and institutional quality of Merak
 
 ### Active
 
-<!-- v1.1 Launch Prep scope. -->
+<!-- v1.2 Visual & Interaction Polish scope. -->
 
-## Current Milestone: v1.1 Launch Prep
+## Current Milestone: v1.2 Visual & Interaction Polish
 
-**Goal:** Everything needed to share the URL publicly — OG images, per-page SEO, analytics, remaining image optimization.
+**Goal:** Awwwards-quality editorial experience — richer GSAP animations, scroll-driven depth, typography animation, micro-interactions.
 
 **Target features:**
-- Per-page OG meta tags and canonical URLs for social sharing
-- Default OG image (1200x630) for link previews
-- Vercel Analytics + Web Vitals tracking
-- Remaining background images converted to WebP
+- Parallax on hero and dark section backgrounds
+- SplitText character/word reveals on section headings
+- Grid-aware staggered card entrances
+- Enhanced page transitions (clip-path wipe)
+- Hover parallax tilt and magnetic CTA buttons
+- Scroll-scrubbed marquee strip
+- Mobile-optimized animation performance
 
 ### Out of Scope
 
@@ -80,7 +83,7 @@ The site must communicate the gravity, taste, and institutional quality of Merak
 
 ## Context
 
-**Current state:** v1.1 in progress. Adding launch prep: OG images, per-page SEO meta, analytics, and remaining image optimization.
+**Current state:** v1.2 in progress. Adding Awwwards-quality visual polish: parallax, splitText, staggered grids, enhanced page transitions, micro-interactions.
 
 - **Stack:** Nuxt 4 + Vue 3, GSAP + ScrollTrigger, Lenis, custom CSS variables
 - **Deploy:** Vercel (auto-deploy from GitHub main branch)
@@ -114,4 +117,4 @@ The site must communicate the gravity, taste, and institutional quality of Merak
 | Phases 3+4 as parallel agents | Independent concerns, 2x faster execution | ✓ Good |
 
 ---
-*Last updated: 2026-03-14 after v1.1 milestone started*
+*Last updated: 2026-03-14 after v1.2 milestone started*
