@@ -10,9 +10,6 @@
       />
       <div class="hero-bg-overlay" />
     </div>
-    <ClientOnly>
-      <HeroCanvas />
-    </ClientOnly>
     <div class="hero-content">
       <p class="hero-overline reveal">Est. 2025</p>
       <h1 class="hero-title reveal">
@@ -106,7 +103,7 @@ onUnmounted(() => {
 .hero-content {
   max-width: 800px;
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
 
 .hero-overline {
@@ -157,7 +154,7 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   gap: var(--space-2);
-  z-index: 2;
+  z-index: 1;
 }
 
 .hero-scroll-line {
