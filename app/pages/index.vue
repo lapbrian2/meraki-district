@@ -84,42 +84,42 @@ watch(activeArtist, (a) => {
   }
 })
 
-// Featured artists \u2014 replace with real data when ready
+// Featured artists
 const featuredArtists: Artist[] = [
   {
-    name: 'Artist Name',
+    name: 'Sable Chen',
     discipline: 'Visual Art & AI',
-    bio: 'A brief description of the artist and their practice within the Meraki District ecosystem.',
+    bio: 'Working at the intersection of machine vision and traditional painting. Her neural portraits have been exhibited at MoMA PS1 and the Serpentine\u2014each piece a negotiation between what the model sees and what the hand knows.',
     image: '/images/quarters/voight-studio.webp',
   },
   {
-    name: 'Artist Name',
-    discipline: 'Generative Design',
-    bio: 'A brief description of the artist and their practice within the Meraki District ecosystem.',
+    name: 'Tom\u00e1s Vega',
+    discipline: 'Generative Architecture',
+    bio: 'Computational designer building impossible structures that exist between algorithm and intuition. His parametric pavilions collapse the boundary between built environment and generative art.',
     image: '/images/quarters/meridian.webp',
   },
   {
-    name: 'Artist Name',
+    name: 'Maren Aoki',
     discipline: 'Creative Technology',
-    bio: 'A brief description of the artist and their practice within the Meraki District ecosystem.',
+    bio: 'Former systems architect turned interactive artist. Her installations translate human presence into light, sound, and data\u2014making the invisible infrastructure of connection tangible.',
     image: '/images/quarters/the-provenance.webp',
   },
   {
-    name: 'Artist Name',
+    name: 'Khalil Okonkwo',
     discipline: 'Digital Sculpture',
-    bio: 'A brief description of the artist and their practice within the Meraki District ecosystem.',
+    bio: 'Sculptor working in volumetric capture and photogrammetry. His pieces preserve disappearing cultural artifacts as living 3D archives\u2014part preservation, part meditation on impermanence.',
     image: '/images/quarters/common-ground.webp',
   },
   {
-    name: 'Artist Name',
+    name: 'In\u00e9s Moreau',
     discipline: 'Motion & Film',
-    bio: 'A brief description of the artist and their practice within the Meraki District ecosystem.',
+    bio: 'Director and motion designer whose work lives in the space between documentary and generative cinema. Her AI-assisted films have screened at Tribeca and Rotterdam.',
     image: '/images/quarters/basecamp.webp',
   },
   {
-    name: 'Artist Name',
-    discipline: 'Mixed Media',
-    bio: 'A brief description of the artist and their practice within the Meraki District ecosystem.',
+    name: 'Zuri Nakamura',
+    discipline: 'Mixed Media & Sound',
+    bio: 'Sound artist and visual composer who treats frequency as material. Her immersive environments pair generative audio with physical installations, creating spaces that listen back.',
     image: '/images/quarters/the-mint.webp',
   },
 ]
