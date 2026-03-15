@@ -1,359 +1,342 @@
 <template>
-  <div>
-    <section ref="heroRef" class="page-hero section">
-      <div class="section-default">
-        <p class="overline reveal">The Ecosystem</p>
-        <h1 class="page-hero-title word-reveal">
-          Ten quarters.<br>One district.
-        </h1>
-        <p class="page-hero-sub reveal">
-          Each quarter is a world unto itself, united by a shared belief:
-          the most meaningful work grows from ambition held alongside integrity.
-        </p>
+  <div class="district-nav">
+
+    <div class="nav-hero">
+      <p class="overline">Explore</p>
+      <h1>The <span>District</span></h1>
+      <p class="nav-subtitle">Ten quarters, one ecosystem. Find your way in.</p>
+    </div>
+
+    <!-- Quarters Grid -->
+    <section class="nav-section">
+      <div class="nav-section-header">
+        <h2>Quarters</h2>
+        <p>The ten pillars of Meraki District</p>
+      </div>
+      <div class="inst-grid">
+        <NuxtLink
+          v-for="inst in quarters"
+          :key="inst.slug"
+          :to="'/quarters/' + inst.slug"
+          class="inst-card"
+        >
+          <div class="inst-img">
+            <img :src="inst.image" :alt="inst.name" loading="lazy">
+            <span class="inst-number">{{ inst.number }}</span>
+          </div>
+          <div class="inst-info">
+            <span class="inst-type">{{ inst.type }}</span>
+            <h3>{{ inst.name }}</h3>
+            <p>{{ inst.description }}</p>
+          </div>
+          <span class="inst-arrow">&rarr;</span>
+        </NuxtLink>
       </div>
     </section>
 
-    <section ref="gridRef" class="inst-listing">
-      <div class="section-wide">
-        <div class="inst-grid">
-          <NuxtLink
-            v-for="inst in quarters"
-            :key="inst.slug"
-            :to="`/quarters/${inst.slug}`"
-            class="inst-card"
-            :class="[`inst-${inst.layout}`]"
-          >
-            <div class="inst-image-wrap reveal-image">
-              <img
-                class="inst-image"
-                :src="inst.image"
-                :alt="`${inst.name} — ${inst.type}`"
-                loading="lazy"
-              />
-            </div>
-            <div class="inst-content reveal">
-              <div class="inst-meta">
-                <span class="inst-number">{{ inst.number }}</span>
-                <span class="inst-dot" aria-hidden="true" />
-                <span class="inst-type">{{ inst.type }}</span>
-              </div>
-              <h2 class="inst-name">{{ inst.name }}</h2>
-              <p class="inst-desc">{{ inst.description }}</p>
-            </div>
-          </NuxtLink>
+    <!-- Editorial -->
+    <section class="nav-section">
+      <div class="nav-section-header">
+        <h2>The Road</h2>
+        <p>Long-form storytelling and cultural criticism</p>
+      </div>
+      <NuxtLink to="/the-road" class="editorial-card">
+        <div class="editorial-content">
+          <span class="card-type">Publishing & Editorial</span>
+          <h3>Explore The Road</h3>
+          <p>Essays, dispatches, interviews, and cultural criticism for creators who think deeply about their practice.</p>
+          <span class="card-link">Read &rarr;</span>
         </div>
+      </NuxtLink>
+    </section>
+
+    <!-- Pages -->
+    <section class="nav-section">
+      <div class="nav-section-header">
+        <h2>Quick Links</h2>
+      </div>
+      <div class="links-grid">
+        <NuxtLink to="/about" class="link-card">
+          <h3>About</h3>
+          <p>Our origin story, founders, and principles.</p>
+          <span class="card-link">Learn more &rarr;</span>
+        </NuxtLink>
+        <NuxtLink to="/apply" class="link-card link-card--accent">
+          <h3>Apply</h3>
+          <p>Join the district. For creators ready to go further.</p>
+          <span class="card-link">Apply now &rarr;</span>
+        </NuxtLink>
       </div>
     </section>
 
-    <SectionDivider />
-    <CtaSection />
   </div>
 </template>
 
 <script setup lang="ts">
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
-import { useTilt } from '~/composables/useInteractions'
-import { useWordReveal } from '~/composables/useWordReveal'
-import { quarters } from '~/composables/useQuarters'
-
-const heroRef = ref<HTMLElement | null>(null)
-const gridRef = ref<HTMLElement | null>(null)
-
-useGsapScrollReveal(heroRef, '.reveal')
-useGsapScrollReveal(gridRef, '.reveal', { stagger: 0.08 })
-useTilt(gridRef, '.inst-card', { maxRotation: 2.5 })
-useWordReveal(heroRef, '.word-reveal')
-
-let ctx: gsap.Context | null = null
-
-onMounted(async () => {
-  if (!gridRef.value) return
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    gridRef.value.querySelectorAll('.reveal-image').forEach((el) => {
-      ;(el as HTMLElement).style.clipPath = 'inset(0)'
-    })
-    return
-  }
-
-  await waitForAncestorAnimations(gridRef.value)
-  if (!gridRef.value) return
-
-  gsap.registerPlugin(ScrollTrigger)
-
-  ctx = gsap.context(() => {
-    const cards = gsap.utils.toArray<HTMLElement>('.reveal-image')
-
-    const rows: Map<number, { el: HTMLElement; left: number }[]> = new Map()
-    cards.forEach((el) => {
-      const rect = el.getBoundingClientRect()
-      const rowKey = Math.round(rect.top / 50) * 50
-      if (!rows.has(rowKey)) rows.set(rowKey, [])
-      rows.get(rowKey)!.push({ el, left: rect.left })
-    })
-
-    const sortedRows = [...rows.entries()].sort((a, b) => a[0] - b[0])
-
-    sortedRows.forEach(([, rowCards]) => {
-      rowCards.sort((a, b) => a.left - b.left)
-
-      rowCards.forEach((card, colIndex) => {
-        const isLeftCard = colIndex === 0
-        const fromClip = isLeftCard
-          ? 'inset(0 100% 0 0)'
-          : 'inset(0 0 0 100%)'
-
-        gsap.fromTo(card.el,
-          { clipPath: fromClip },
-          {
-            clipPath: 'inset(0% 0% 0% 0%)',
-            duration: 1.1,
-            delay: colIndex * 0.12,
-            ease: 'power3.inOut',
-            scrollTrigger: {
-              trigger: card.el,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
-            },
-          }
-        )
-      })
-    })
-  }, gridRef.value)
-})
-
-onUnmounted(() => {
-  ctx?.revert()
-})
+const { quarters } = useQuarters()
 
 useHead({
   title: 'Quarters \u2014 Meraki District',
   meta: [
-    { name: 'description', content: 'Ten quarters within one district. A cultural ecosystem for AI-native creators.' },
+    { name: 'description', content: 'Navigate the ten quarters of Meraki District. Find your way into a cultural ecosystem built for AI-native creators.' },
   ],
-})
-
-useSeoMeta({
-  ogTitle: 'Quarters \u2014 Meraki District',
-  ogDescription: 'Ten quarters within one district. A cultural ecosystem for AI-native creators.',
-  twitterTitle: 'Quarters \u2014 Meraki District',
-  twitterDescription: 'Ten quarters within one district. A cultural ecosystem for AI-native creators.',
 })
 </script>
 
 <style scoped>
-.page-hero {
-  padding-top: calc(var(--space-32) + 3rem);
-  padding-bottom: var(--space-16);
+.district-nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--content-padding) var(--space-24);
 }
 
-.page-hero-title {
-  font-size: var(--text-display);
-  line-height: var(--leading-tight);
-  margin-top: var(--space-4);
+/* Hero */
+.nav-hero {
+  text-align: center;
+  padding: calc(var(--space-32) + 3rem) 0 var(--space-16);
+}
+
+.overline {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-gold);
+  margin-bottom: 0.75rem;
+}
+
+.nav-hero h1 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.nav-hero h1 span { color: var(--color-gold); }
+
+.nav-subtitle {
+  font-size: 1rem;
+  color: var(--color-text-secondary, #71717A);
+  max-width: 440px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Sections */
+.nav-section {
+  margin-bottom: var(--space-24);
+}
+
+.nav-section-header {
   margin-bottom: var(--space-8);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-rule, rgba(184,150,78,0.15));
 }
 
-.page-hero-sub {
-  font-size: var(--text-h4);
-  font-weight: 400;
-  color: var(--color-text-muted);
-  line-height: var(--leading-relaxed);
-  max-width: 50ch;
+.nav-section-header h2 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 1.75rem;
+  margin-bottom: 0.25rem;
 }
 
-/* ── Grid ── */
-.inst-listing {
-  padding: var(--space-4) var(--content-padding) var(--space-24);
+.nav-section-header p {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary, #71717A);
 }
 
+/* Quarter Grid */
 .inst-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: var(--space-4);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--color-rule, rgba(184,150,78,0.15));
+  border: 1px solid var(--color-rule, rgba(184,150,78,0.15));
 }
 
-/* ── Card base ── */
 .inst-card {
-  cursor: pointer;
-  position: relative;
-  background-image: none;
-}
-
-.inst-card:hover .inst-image {
-  transform: scale(1.04);
-}
-
-.inst-card:hover .inst-type {
-  color: var(--color-gold);
-}
-
-.inst-card:hover .inst-name::after {
-  transform: scaleX(1);
-}
-
-/* ── Image container ── */
-.inst-image-wrap {
-  overflow: hidden;
-  margin-bottom: var(--space-3);
-}
-
-.inst-image {
-  width: 100%;
-  object-fit: cover;
-  transition: transform 0.6s var(--ease-out);
-}
-
-/* ── Layout variants ── */
-.inst-hero {
-  grid-column: 1 / -1;
-}
-.inst-hero .inst-image {
-  aspect-ratio: 21 / 9;
-}
-
-.inst-closer {
-  grid-column: 1 / -1;
-}
-.inst-closer .inst-image {
-  aspect-ratio: 3 / 1;
-}
-
-.inst-wide {
-  grid-column: span 7;
-}
-.inst-wide .inst-image {
-  aspect-ratio: 3 / 2;
-}
-
-.inst-narrow {
-  grid-column: span 5;
-}
-.inst-narrow .inst-image {
-  aspect-ratio: 4 / 5;
-}
-
-.inst-half {
-  grid-column: span 6;
-}
-.inst-half .inst-image {
-  aspect-ratio: 4 / 3;
-}
-
-/* ── Content ── */
-.inst-content {
-  padding-right: var(--space-4);
-}
-
-.inst-meta {
   display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin-bottom: var(--space-1);
+  flex-direction: column;
+  background: var(--color-background, #FAFAF9);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s ease;
+}
+
+.inst-card:hover {
+  background: var(--color-surface, #F4F4F5);
+}
+
+.inst-card:hover .inst-img img {
+  transform: scale(1.03);
+}
+
+.inst-card:hover .inst-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.inst-img {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  position: relative;
+}
+
+.inst-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .inst-number {
-  font-family: var(--font-mono);
-  font-size: var(--text-caption);
-  color: var(--color-text-muted);
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  color: rgba(250, 250, 249, 0.85);
+  background: rgba(9, 9, 11, 0.55);
+  backdrop-filter: blur(8px);
+  padding: 0.2rem 0.5rem;
+  text-transform: uppercase;
 }
 
-.inst-dot {
-  width: 3px;
-  height: 3px;
-  border-radius: 0;
-  background: var(--color-text-muted);
-  opacity: 0.5;
+.inst-info {
+  padding: 1rem 1.25rem 1.25rem;
 }
 
 .inst-type {
-  font-size: var(--text-overline);
-  transition: color var(--duration-fast) ease;
-  font-weight: 500;
-  letter-spacing: var(--tracking-widest);
+  font-size: 0.5625rem;
   text-transform: uppercase;
-  color: var(--color-gold-accessible);
+  letter-spacing: 0.12em;
+  color: var(--color-gold);
+  margin-bottom: 0.3rem;
+  display: block;
 }
 
-.inst-name {
-  font-size: var(--text-h3);
-  margin-bottom: var(--space-1);
-  position: relative;
-  display: inline-block;
+.inst-info h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.25rem;
+  margin-bottom: 0.3rem;
+  line-height: 1.15;
 }
 
-.inst-name::after {
-  content: '';
+.inst-info p {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #71717A);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.inst-arrow {
   position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--color-gold);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s var(--ease-out);
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 1rem;
+  color: var(--color-gold);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.3s ease;
 }
 
-.inst-hero .inst-name {
-  font-size: var(--text-h2);
+/* Editorial Card */
+.editorial-card {
+  display: block;
+  background: var(--color-ink, #09090B);
+  color: var(--color-background, #FAFAF9);
+  text-decoration: none;
+  padding: var(--space-16);
+  transition: background 0.3s ease;
 }
 
-.inst-desc {
-  font-size: var(--text-small);
-  color: var(--color-text-muted);
-  line-height: var(--leading-normal);
+.editorial-card:hover {
+  background: var(--color-graphite, #18181B);
 }
 
-.inst-hero .inst-desc {
-  max-width: 55ch;
+.card-type {
+  font-size: 0.5625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-gold);
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
-/* ── Responsive ── */
+.editorial-content h3 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.editorial-content p {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary, #A1A1AA);
+  line-height: 1.6;
+  max-width: 600px;
+  margin-bottom: 1rem;
+}
+
+.card-link {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-gold);
+}
+
+/* Links Grid */
+.links-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.link-card {
+  display: block;
+  border: 1px solid var(--color-rule, rgba(184,150,78,0.15));
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+.link-card:hover {
+  border-color: var(--color-gold);
+  background: rgba(184, 150, 78, 0.04);
+}
+
+.link-card h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.25rem;
+  margin-bottom: 0.4rem;
+}
+
+.link-card p {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary, #71717A);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.link-card--accent {
+  border-color: rgba(184, 150, 78, 0.3);
+  background: rgba(184, 150, 78, 0.04);
+}
+
+.link-card--accent h3 { color: var(--color-gold); }
+
+/* Responsive */
 @media (max-width: 768px) {
-  .page-hero {
-    padding-top: calc(var(--space-16) + 3rem);
-    padding-bottom: var(--space-12);
-  }
-
-  .inst-listing {
-    padding: var(--space-4) var(--content-padding) var(--space-16);
-  }
-
-  .inst-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-  }
-
-  .inst-hero,
-  .inst-closer,
-  .inst-wide,
-  .inst-narrow,
-  .inst-half {
-    grid-column: 1 / -1;
-  }
-
-  .inst-image {
-    aspect-ratio: 3 / 2 !important;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .inst-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-8);
-  }
-
-  .inst-hero,
-  .inst-closer {
-    grid-column: 1 / -1;
-  }
-
-  .inst-wide,
-  .inst-narrow,
-  .inst-half {
-    grid-column: span 1;
-  }
+  .inst-grid { grid-template-columns: 1fr; }
+  .links-grid { grid-template-columns: 1fr; }
 }
 </style>
