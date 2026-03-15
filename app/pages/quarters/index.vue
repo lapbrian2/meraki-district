@@ -11,26 +11,28 @@
     <section class="nav-section">
       <div class="nav-section-header">
         <h2>Quarters</h2>
-        <p>The ten pillars of Meraki District</p>
+        <p>The ten quarters of Meraki District</p>
       </div>
-      <div class="inst-grid">
-        <NuxtLink
-          v-for="inst in quarters"
-          :key="inst.slug"
-          :to="'/quarters/' + inst.slug"
-          class="inst-card"
+      <div class="q-grid">
+        <div
+          v-for="q in quarters"
+          :key="q.slug"
+          class="q-card"
+          @click="openQuarter(q)"
         >
-          <div class="inst-img">
-            <img :src="inst.image" :alt="inst.name" loading="lazy">
-            <span class="inst-number">{{ inst.number }}</span>
+          <div class="q-img">
+            <img :src="q.image" :alt="q.name" loading="lazy">
+            <span class="q-number">{{ q.number }}</span>
+            <div class="q-overlay">
+              <span class="q-peek">View details</span>
+            </div>
           </div>
-          <div class="inst-info">
-            <span class="inst-type">{{ inst.type }}</span>
-            <h3>{{ inst.name }}</h3>
-            <p>{{ inst.description }}</p>
+          <div class="q-info">
+            <span class="q-type">{{ q.type }}</span>
+            <h3>{{ q.name }}</h3>
+            <p>{{ q.description }}</p>
           </div>
-          <span class="inst-arrow">&rarr;</span>
-        </NuxtLink>
+        </div>
       </div>
     </section>
 
@@ -50,7 +52,7 @@
       </NuxtLink>
     </section>
 
-    <!-- Pages -->
+    <!-- Quick Links -->
     <section class="nav-section">
       <div class="nav-section-header">
         <h2>Quick Links</h2>
@@ -69,17 +71,44 @@
       </div>
     </section>
 
+    <!-- Lightbox -->
+    <LightboxOverlay
+      :open="!!activeQuarter"
+      :image="activeQuarter?.image"
+      :overline="activeQuarter?.type"
+      :title="activeQuarter?.name || ''"
+      :subtitle="'Quarter ' + (activeQuarter?.number || '')"
+      :body="activeQuarter?.longDescription || ''"
+      :link="activeQuarter ? '/quarters/' + activeQuarter.slug : ''"
+      link-label="Visit quarter"
+      @close="activeQuarter = null"
+    />
+
   </div>
 </template>
 
 <script setup lang="ts">
+import type { Quarter } from '~/composables/useQuarters'
+
 const { quarters } = useQuarters()
+const activeQuarter = ref<Quarter | null>(null)
+
+function openQuarter(q: Quarter) {
+  activeQuarter.value = q
+}
 
 useHead({
   title: 'Quarters \u2014 Meraki District',
   meta: [
     { name: 'description', content: 'Navigate the ten quarters of Meraki District. Find your way into a cultural ecosystem built for AI-native creators.' },
   ],
+})
+
+// Lock scroll when lightbox is open
+watch(activeQuarter, (q) => {
+  if (import.meta.client) {
+    document.body.style.overflow = q ? 'hidden' : ''
+  }
 })
 </script>
 
@@ -123,9 +152,7 @@ useHead({
 }
 
 /* Sections */
-.nav-section {
-  margin-bottom: var(--space-24);
-}
+.nav-section { margin-bottom: var(--space-24); }
 
 .nav-section-header {
   margin-bottom: var(--space-8);
@@ -146,7 +173,7 @@ useHead({
 }
 
 /* Quarter Grid */
-.inst-grid {
+.q-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1px;
@@ -154,37 +181,25 @@ useHead({
   border: 1px solid var(--color-rule, rgba(184,150,78,0.15));
 }
 
-.inst-card {
-  display: flex;
-  flex-direction: column;
+.q-card {
   background: var(--color-background, #FAFAF9);
-  text-decoration: none;
-  color: inherit;
+  cursor: pointer;
   position: relative;
   overflow: hidden;
   transition: background 0.3s ease;
 }
 
-.inst-card:hover {
-  background: var(--color-surface, #F4F4F5);
-}
+.q-card:hover { background: var(--color-surface, #F4F4F5); }
+.q-card:hover .q-img img { transform: scale(1.03); }
+.q-card:hover .q-overlay { opacity: 1; }
 
-.inst-card:hover .inst-img img {
-  transform: scale(1.03);
-}
-
-.inst-card:hover .inst-arrow {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.inst-img {
+.q-img {
   aspect-ratio: 16/10;
   overflow: hidden;
   position: relative;
 }
 
-.inst-img img {
+.q-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -192,7 +207,7 @@ useHead({
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.inst-number {
+.q-number {
   position: absolute;
   top: 0.6rem;
   left: 0.6rem;
@@ -203,13 +218,33 @@ useHead({
   backdrop-filter: blur(8px);
   padding: 0.2rem 0.5rem;
   text-transform: uppercase;
+  z-index: 2;
 }
 
-.inst-info {
-  padding: 1rem 1.25rem 1.25rem;
+.q-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 9, 11, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.inst-type {
+.q-peek {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(250, 250, 249, 0.9);
+  border: 1px solid rgba(250, 250, 249, 0.4);
+  padding: 0.4rem 1rem;
+  backdrop-filter: blur(4px);
+}
+
+.q-info { padding: 1rem 1.25rem 1.25rem; }
+
+.q-type {
   font-size: 0.5625rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -218,7 +253,7 @@ useHead({
   display: block;
 }
 
-.inst-info h3 {
+.q-info h3 {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: 1.25rem;
@@ -226,7 +261,7 @@ useHead({
   line-height: 1.15;
 }
 
-.inst-info p {
+.q-info p {
   font-size: 0.75rem;
   color: var(--color-text-secondary, #71717A);
   line-height: 1.5;
@@ -234,17 +269,6 @@ useHead({
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-.inst-arrow {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  font-size: 1rem;
-  color: var(--color-gold);
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: all 0.3s ease;
 }
 
 /* Editorial Card */
@@ -257,9 +281,7 @@ useHead({
   transition: background 0.3s ease;
 }
 
-.editorial-card:hover {
-  background: var(--color-graphite, #18181B);
-}
+.editorial-card:hover { background: var(--color-graphite, #18181B); }
 
 .card-type {
   font-size: 0.5625rem;
@@ -336,7 +358,7 @@ useHead({
 
 /* Responsive */
 @media (max-width: 768px) {
-  .inst-grid { grid-template-columns: 1fr; }
+  .q-grid { grid-template-columns: 1fr; }
   .links-grid { grid-template-columns: 1fr; }
 }
 </style>

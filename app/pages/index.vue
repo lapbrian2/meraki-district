@@ -4,7 +4,7 @@
     <ManifestoSection />
     <SectionDivider />
 
-    <!-- Featured Artists (replaces QuartersGrid) -->
+    <!-- Featured Artists -->
     <section class="featured-artists">
       <div class="fa-header">
         <p class="fa-overline">Featured</p>
@@ -12,9 +12,17 @@
         <p class="fa-subtitle">Artists and builders shaping the future of AI-native practice.</p>
       </div>
       <div class="fa-grid">
-        <div v-for="artist in featuredArtists" :key="artist.name" class="fa-card">
+        <div
+          v-for="(artist, i) in featuredArtists"
+          :key="i"
+          class="fa-card"
+          @click="activeArtist = artist"
+        >
           <div class="fa-image">
             <img :src="artist.image" :alt="artist.name" loading="lazy">
+            <div class="fa-overlay">
+              <span class="fa-peek">View artist</span>
+            </div>
           </div>
           <div class="fa-info">
             <span class="fa-discipline">{{ artist.discipline }}</span>
@@ -30,6 +38,17 @@
     <FeaturedSection />
     <SealSection />
     <CtaSection />
+
+    <!-- Lightbox -->
+    <LightboxOverlay
+      :open="!!activeArtist"
+      :image="activeArtist?.image"
+      :overline="activeArtist?.discipline"
+      :title="activeArtist?.name || ''"
+      :body="activeArtist?.bio || ''"
+      @close="activeArtist = null"
+    />
+
   </div>
 </template>
 
@@ -49,8 +68,24 @@ useSeoMeta({
   twitterDescription: 'A cultural ecosystem for AI-native creators. Ten quarters, one district, a new standard for creative practice.',
 })
 
-// Featured artists — replace with real data when ready
-const featuredArtists = [
+interface Artist {
+  name: string
+  discipline: string
+  bio: string
+  image: string
+}
+
+const activeArtist = ref<Artist | null>(null)
+
+// Lock scroll when lightbox is open
+watch(activeArtist, (a) => {
+  if (import.meta.client) {
+    document.body.style.overflow = a ? 'hidden' : ''
+  }
+})
+
+// Featured artists \u2014 replace with real data when ready
+const featuredArtists: Artist[] = [
   {
     name: 'Artist Name',
     discipline: 'Visual Art & AI',
@@ -91,17 +126,13 @@ const featuredArtists = [
 </script>
 
 <style scoped>
-/* Featured Artists Section */
 .featured-artists {
   padding: var(--space-16) var(--content-padding);
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.fa-header {
-  text-align: center;
-  margin-bottom: var(--space-16);
-}
+.fa-header { text-align: center; margin-bottom: var(--space-16); }
 
 .fa-overline {
   font-size: 0.6875rem;
@@ -139,19 +170,17 @@ const featuredArtists = [
   background: var(--color-background, #FAFAF9);
   overflow: hidden;
   transition: background 0.3s ease;
+  cursor: pointer;
 }
 
-.fa-card:hover {
-  background: var(--color-surface, #F4F4F5);
-}
-
-.fa-card:hover .fa-image img {
-  transform: scale(1.03);
-}
+.fa-card:hover { background: var(--color-surface, #F4F4F5); }
+.fa-card:hover .fa-image img { transform: scale(1.03); }
+.fa-card:hover .fa-overlay { opacity: 1; }
 
 .fa-image {
   aspect-ratio: 3/4;
   overflow: hidden;
+  position: relative;
 }
 
 .fa-image img {
@@ -162,9 +191,28 @@ const featuredArtists = [
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.fa-info {
-  padding: 1rem 1.25rem 1.5rem;
+.fa-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 9, 11, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
+
+.fa-peek {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(250, 250, 249, 0.9);
+  border: 1px solid rgba(250, 250, 249, 0.4);
+  padding: 0.4rem 1rem;
+  backdrop-filter: blur(4px);
+}
+
+.fa-info { padding: 1rem 1.25rem 1.5rem; }
 
 .fa-discipline {
   font-size: 0.5625rem;
