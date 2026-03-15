@@ -4,7 +4,7 @@
     <ManifestoSection />
     <SectionDivider />
 
-    <!-- Featured Artists (replaces InstitutionsGrid) -->
+    <!-- Featured Artists (replaces QuartersGrid) -->
     <section class="featured-artists">
       <div class="fa-header">
         <p class="fa-overline">Featured</p>
@@ -37,16 +37,16 @@
 useHead({
   title: 'Meraki District \u2014 Where craft meets culture',
   meta: [
-    { name: 'description', content: 'A cultural ecosystem for AI-native creators. Ten institutions, one district, a new standard for creative practice.' },
+    { name: 'description', content: 'A cultural ecosystem for AI-native creators. Ten quarters, one district, a new standard for creative practice.' },
     { property: 'og:title', content: 'Meraki District \u2014 Where craft meets culture' },
   ],
 })
 
 useSeoMeta({
   ogTitle: 'Meraki District \u2014 Where craft meets culture',
-  ogDescription: 'A cultural ecosystem for AI-native creators. Ten institutions, one district, a new standard for creative practice.',
+  ogDescription: 'A cultural ecosystem for AI-native creators. Ten quarters, one district, a new standard for creative practice.',
   twitterTitle: 'Meraki District \u2014 Where craft meets culture',
-  twitterDescription: 'A cultural ecosystem for AI-native creators. Ten institutions, one district, a new standard for creative practice.',
+  twitterDescription: 'A cultural ecosystem for AI-native creators. Ten quarters, one district, a new standard for creative practice.',
 })
 
 // Featured artists — replace with real data when ready
@@ -55,37 +55,37 @@ const featuredArtists = [
     name: 'Artist Name',
     discipline: 'Visual Art & AI',
     bio: 'A brief description of the artist and their practice within the Meraki District ecosystem.',
-    image: '/images/institutions/voight-studio.webp',
+    image: '/images/quarters/voight-studio.webp',
   },
   {
     name: 'Artist Name',
     discipline: 'Generative Design',
     bio: 'A brief description of the artist and their practice within the Meraki District ecosystem.',
-    image: '/images/institutions/meridian.webp',
+    image: '/images/quarters/meridian.webp',
   },
   {
     name: 'Artist Name',
     discipline: 'Creative Technology',
     bio: 'A brief description of the artist and their practice within the Meraki District ecosystem.',
-    image: '/images/institutions/the-provenance.webp',
+    image: '/images/quarters/the-provenance.webp',
   },
   {
     name: 'Artist Name',
     discipline: 'Digital Sculpture',
     bio: 'A brief description of the artist and their practice within the Meraki District ecosystem.',
-    image: '/images/institutions/common-ground.webp',
+    image: '/images/quarters/common-ground.webp',
   },
   {
     name: 'Artist Name',
     discipline: 'Motion & Film',
     bio: 'A brief description of the artist and their practice within the Meraki District ecosystem.',
-    image: '/images/institutions/basecamp.webp',
+    image: '/images/quarters/basecamp.webp',
   },
   {
     name: 'Artist Name',
     discipline: 'Mixed Media',
     bio: 'A brief description of the artist and their practice within the Meraki District ecosystem.',
-    image: '/images/institutions/the-mint.webp',
+    image: '/images/quarters/the-mint.webp',
   },
 ]
 </script>

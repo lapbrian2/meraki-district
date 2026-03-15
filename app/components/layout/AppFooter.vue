@@ -36,7 +36,7 @@
       <div class="footer-col reveal">
         <h4 class="overline">Navigate</h4>
         <ul>
-          <li><NuxtLink to="/institutions">Institutions</NuxtLink></li>
+          <li><NuxtLink to="/quarters">Quarters</NuxtLink></li>
           <li><NuxtLink to="/the-road">The Road</NuxtLink></li>
           <li><NuxtLink to="/about">About</NuxtLink></li>
           <li><NuxtLink to="/apply">Apply</NuxtLink></li>

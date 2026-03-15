@@ -1,32 +1,32 @@
 <template>
-  <div v-if="institution" ref="root">
+  <div v-if="quarter" ref="root">
     <section class="inst-hero">
       <div class="inst-hero-image-wrap">
         <img
-          :src="institution.image"
-          :alt="`${institution.name} — ${institution.type}`"
+          :src="quarter.image"
+          :alt="`${quarter.name} — ${quarter.type}`"
           class="inst-hero-image"
         />
         <div class="inst-hero-overlay" />
       </div>
       <div class="inst-hero-content section-default">
-        <p class="overline">{{ institution.type }}</p>
-        <h1 class="inst-hero-title">{{ institution.name }}</h1>
-        <span class="inst-hero-number">{{ institution.number }}</span>
+        <p class="overline">{{ quarter.type }}</p>
+        <h1 class="inst-hero-title">{{ quarter.name }}</h1>
+        <span class="inst-hero-number">{{ quarter.number }}</span>
       </div>
     </section>
 
     <section ref="section" class="inst-detail section">
       <div class="section-narrow">
         <div class="inst-rule" aria-hidden="true" />
-        <p class="inst-long reveal">{{ institution.longDescription }}</p>
+        <p class="inst-long reveal">{{ quarter.longDescription }}</p>
 
         <div class="inst-status reveal">
           <div class="inst-status-marker" />
           <div>
             <p class="inst-status-label">Status</p>
             <p class="inst-status-text">
-              This institution is currently in development. We’re building
+              This quarter is currently in development. We’re building
               something worth waiting for.
             </p>
           </div>
@@ -34,7 +34,7 @@
 
         <div class="inst-cta reveal">
           <p class="inst-cta-text">
-            Want to be notified when {{ institution.name }} opens?
+            Want to be notified when {{ quarter.name }} opens?
           </p>
           <NuxtLink to="/apply" class="inst-cta-button">Join the waitlist</NuxtLink>
         </div>
@@ -67,9 +67,9 @@
   </div>
   <div v-else class="not-found section">
     <div class="section-narrow">
-      <h1>Institution not found</h1>
+      <h1>Quarter not found</h1>
       <p>
-        <NuxtLink to="/institutions">Back to all institutions</NuxtLink>
+        <NuxtLink to="/quarters">Back to all quarters</NuxtLink>
       </p>
     </div>
   </div>
@@ -79,27 +79,27 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
-import { institutions, useInstitution } from '~/composables/useInstitutions'
+import { quarters, useQuarter } from '~/composables/useQuarters'
 
 const route = useRoute()
 
-// Reactive — updates when navigating between institution pages
+// Reactive — updates when navigating between quarter pages
 const slug = computed(() => route.params.slug as string)
-const institution = computed(() => useInstitution(slug.value))
-const currentIndex = computed(() => institutions.findIndex(i => i.slug === slug.value))
-const prev = computed(() => currentIndex.value > 0 ? institutions[currentIndex.value - 1] : null)
-const next = computed(() => currentIndex.value < institutions.length - 1 ? institutions[currentIndex.value + 1] : null)
-const prevUrl = computed(() => prev.value ? '/institutions/' + prev.value.slug : '')
-const nextUrl = computed(() => next.value ? '/institutions/' + next.value.slug : '')
+const quarter = computed(() => useQuarter(slug.value))
+const currentIndex = computed(() => quarters.findIndex(i => i.slug === slug.value))
+const prev = computed(() => currentIndex.value > 0 ? quarters[currentIndex.value - 1] : null)
+const next = computed(() => currentIndex.value < quarters.length - 1 ? quarters[currentIndex.value + 1] : null)
+const prevUrl = computed(() => prev.value ? '/quarters/' + prev.value.slug : '')
+const nextUrl = computed(() => next.value ? '/quarters/' + next.value.slug : '')
 
 useHead(computed(() => ({
-  title: institution.value ? institution.value.name + ' — Meraki District' : 'Meraki District',
-  meta: institution.value ? [
-    { name: 'description', content: institution.value.description },
-    { property: 'og:title', content: institution.value.name + ' — Meraki District' },
-    { property: 'og:description', content: institution.value.description },
-    { name: 'twitter:title', content: institution.value.name + ' — Meraki District' },
-    { name: 'twitter:description', content: institution.value.description },
+  title: quarter.value ? quarter.value.name + ' — Meraki District' : 'Meraki District',
+  meta: quarter.value ? [
+    { name: 'description', content: quarter.value.description },
+    { property: 'og:title', content: quarter.value.name + ' — Meraki District' },
+    { property: 'og:description', content: quarter.value.description },
+    { name: 'twitter:title', content: quarter.value.name + ' — Meraki District' },
+    { name: 'twitter:description', content: quarter.value.description },
   ] : [],
 })))
 
@@ -160,7 +160,7 @@ onMounted(async () => {
   initAnimations()
 })
 
-// Re-init animations when navigating between institutions
+// Re-init animations when navigating between quarters
 watch(slug, async () => {
   ctx?.revert()
   await nextTick()
@@ -336,7 +336,7 @@ onUnmounted(() => {
   outline-offset: 4px;
 }
 
-/* Nav between institutions */
+/* Nav between quarters */
 .inst-nav {
   padding-top: var(--space-12);
   padding-bottom: var(--space-12);

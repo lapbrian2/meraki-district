@@ -3,11 +3,11 @@
     <div class="section-narrow">
       <p class="overline reveal">Our Conviction</p>
       <h2 class="manifesto-text word-reveal">
-        The future of creative practice demands institutions worthy of both human craft and machine capability.
+        The future of creative practice demands quarters worthy of both human craft and machine capability.
       </h2>
       <div class="manifesto-rule" aria-hidden="true" />
       <p class="manifesto-body reveal">
-        Meraki District is a cultural ecosystem. Ten institutions, each a world
+        Meraki District is a cultural ecosystem. Ten quarters, each a world
         unto itself, united by a shared belief: that the most meaningful work
         comes from creators who have the infrastructure, the standards, and the space to pursue mastery.
       </p>

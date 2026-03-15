@@ -1,20 +1,20 @@
 <template>
-  <section ref="section" class="institutions">
-    <div class="institutions-hero section-dark">
-      <div class="section-wide institutions-hero-content">
+  <section ref="section" class="quarters">
+    <div class="quarters-hero section-dark">
+      <div class="section-wide quarters-hero-content">
         <p class="overline reveal">The Ecosystem</p>
-        <h2 class="institutions-title word-reveal">
-          Ten institutions within one district.
+        <h2 class="quarters-title word-reveal">
+          Ten quarters within one district.
         </h2>
       </div>
     </div>
-    <div class="section-wide institutions-body">
+    <div class="section-wide quarters-body">
 
-      <div class="institutions-grid">
+      <div class="quarters-grid">
         <NuxtLink
-          v-for="inst in institutions"
+          v-for="inst in quarters"
           :key="inst.name"
-          :to="`/institutions/${inst.slug}`"
+          :to="`/quarters/${inst.slug}`"
           class="inst-card"
           :class="[`inst-${inst.layout}`]"
         >
@@ -47,7 +47,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { useTilt } from '~/composables/useInteractions'
 import { useWordReveal } from '~/composables/useWordReveal'
-import { institutions } from '~/composables/useInstitutions'
+import { quarters } from '~/composables/useQuarters'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.08 })
@@ -122,18 +122,18 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.institutions-hero {
+.quarters-hero {
   position: relative;
   overflow: hidden;
   padding: var(--space-24) var(--content-padding) var(--space-12);
 }
 
-.institutions-body {
+.quarters-body {
   background-color: var(--color-background);
   padding: var(--space-12) var(--content-padding) var(--space-16);
 }
 
-.institutions-title {
+.quarters-title {
   margin-top: var(--space-4);
   font-size: var(--text-h1);
   line-height: var(--leading-snug);
@@ -141,7 +141,7 @@ onUnmounted(() => {
 }
 
 /* ─── Grid ─── */
-.institutions-grid {
+.quarters-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: var(--space-4);
@@ -291,15 +291,15 @@ onUnmounted(() => {
 
 /* ─── Responsive ─── */
 @media (max-width: 768px) {
-  .institutions-hero {
+  .quarters-hero {
     padding: var(--space-16) var(--content-padding) var(--space-8);
   }
 
-  .institutions-body {
+  .quarters-body {
     padding: var(--space-8) var(--content-padding) var(--space-16);
   }
 
-  .institutions-grid {
+  .quarters-grid {
     grid-template-columns: 1fr;
     gap: var(--space-8);
   }
@@ -318,7 +318,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .institutions-grid {
+  .quarters-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-8);
   }

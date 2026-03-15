@@ -21,7 +21,7 @@
           good output.
         </p>
         <p class="reveal">
-          Every institution in Meraki District operates on a single principle: the work comes first. We build for creators who treat mastery as a daily practice.
+          Every quarter in Meraki District operates on a single principle: the work comes first. We build for creators who treat mastery as a daily practice.
         </p>
       </div>
     </div>

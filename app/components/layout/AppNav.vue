@@ -6,7 +6,7 @@
         <NuxtLink to="/" class="nav-logo">Meraki District</NuxtLink>
         <div class="nav-expanded-row">
           <nav class="nav-links" aria-label="Main navigation">
-            <NuxtLink to="/institutions" class="nav-link">Institutions</NuxtLink>
+            <NuxtLink to="/quarters" class="nav-link">Quarters</NuxtLink>
             <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
             <NuxtLink to="/about" class="nav-link">About</NuxtLink>
             <span class="nav-dot" aria-hidden="true">&middot;</span>
@@ -21,7 +21,7 @@
       <div class="nav-compact-inner">
         <NuxtLink to="/" class="nav-logo">Meraki District</NuxtLink>
         <nav class="nav-links" aria-label="Main navigation">
-          <NuxtLink to="/institutions" class="nav-link">Institutions</NuxtLink>
+          <NuxtLink to="/quarters" class="nav-link">Quarters</NuxtLink>
           <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
           <NuxtLink to="/about" class="nav-link">About</NuxtLink>
         </nav>
@@ -81,7 +81,7 @@ const isHidden = ref(false)
 let lastScroll = 0
 
 const mobileLinks = [
-  { to: '/institutions', label: 'Institutions' },
+  { to: '/quarters', label: 'Quarters' },
   { to: '/the-road', label: 'The Road' },
   { to: '/about', label: 'About' },
 ]

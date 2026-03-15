@@ -21,7 +21,7 @@
       </p>
       <div class="hero-rule reveal" aria-hidden="true" />
       <p class="hero-anchor reveal">
-        Ten institutions within one district, building a new standard for creative practice.
+        Ten quarters within one district, building a new standard for creative practice.
       </p>
     </div>
     <div class="hero-scroll" aria-hidden="true">

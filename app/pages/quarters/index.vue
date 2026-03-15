@@ -4,10 +4,10 @@
       <div class="section-default">
         <p class="overline reveal">The Ecosystem</p>
         <h1 class="page-hero-title word-reveal">
-          Ten institutions.<br>One district.
+          Ten quarters.<br>One district.
         </h1>
         <p class="page-hero-sub reveal">
-          Each institution is a world unto itself, united by a shared belief:
+          Each quarter is a world unto itself, united by a shared belief:
           the most meaningful work grows from ambition held alongside integrity.
         </p>
       </div>
@@ -17,9 +17,9 @@
       <div class="section-wide">
         <div class="inst-grid">
           <NuxtLink
-            v-for="inst in institutions"
+            v-for="inst in quarters"
             :key="inst.slug"
-            :to="`/institutions/${inst.slug}`"
+            :to="`/quarters/${inst.slug}`"
             class="inst-card"
             :class="[`inst-${inst.layout}`]"
           >
@@ -56,7 +56,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { useTilt } from '~/composables/useInteractions'
 import { useWordReveal } from '~/composables/useWordReveal'
-import { institutions } from '~/composables/useInstitutions'
+import { quarters } from '~/composables/useQuarters'
 
 const heroRef = ref<HTMLElement | null>(null)
 const gridRef = ref<HTMLElement | null>(null)
@@ -128,17 +128,17 @@ onUnmounted(() => {
 })
 
 useHead({
-  title: 'Institutions \u2014 Meraki District',
+  title: 'Quarters \u2014 Meraki District',
   meta: [
-    { name: 'description', content: 'Ten institutions within one district. A cultural ecosystem for AI-native creators.' },
+    { name: 'description', content: 'Ten quarters within one district. A cultural ecosystem for AI-native creators.' },
   ],
 })
 
 useSeoMeta({
-  ogTitle: 'Institutions \u2014 Meraki District',
-  ogDescription: 'Ten institutions within one district. A cultural ecosystem for AI-native creators.',
-  twitterTitle: 'Institutions \u2014 Meraki District',
-  twitterDescription: 'Ten institutions within one district. A cultural ecosystem for AI-native creators.',
+  ogTitle: 'Quarters \u2014 Meraki District',
+  ogDescription: 'Ten quarters within one district. A cultural ecosystem for AI-native creators.',
+  twitterTitle: 'Quarters \u2014 Meraki District',
+  twitterDescription: 'Ten quarters within one district. A cultural ecosystem for AI-native creators.',
 })
 </script>
 

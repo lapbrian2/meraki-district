@@ -4,20 +4,20 @@
     <div class="nav-hero">
       <p class="overline">Explore</p>
       <h1>The <span>District</span></h1>
-      <p class="nav-subtitle">Ten institutions, one ecosystem. Find your way in.</p>
+      <p class="nav-subtitle">Ten quarters, one ecosystem. Find your way in.</p>
     </div>
 
-    <!-- Institutions Grid -->
+    <!-- Quarters Grid -->
     <section class="nav-section">
       <div class="nav-section-header">
-        <h2>Institutions</h2>
+        <h2>Quarters</h2>
         <p>The ten pillars of Meraki District</p>
       </div>
       <div class="inst-grid">
         <NuxtLink
-          v-for="inst in institutions"
+          v-for="inst in quarters"
           :key="inst.slug"
-          :to="'/institutions/' + inst.slug"
+          :to="'/quarters/' + inst.slug"
           class="inst-card"
         >
           <div class="inst-img">
@@ -73,12 +73,12 @@
 </template>
 
 <script setup lang="ts">
-const { institutions } = useInstitutions()
+const { quarters } = useQuarters()
 
 useHead({
   title: 'Explore the District \u2014 Meraki District',
   meta: [
-    { name: 'description', content: 'Navigate the ten institutions of Meraki District. Find your way into a cultural ecosystem built for AI-native creators.' },
+    { name: 'description', content: 'Navigate the ten quarters of Meraki District. Find your way into a cultural ecosystem built for AI-native creators.' },
   ],
 })
 </script>
@@ -145,7 +145,7 @@ useHead({
   color: var(--color-text-secondary, #71717A);
 }
 
-/* Institution Grid */
+/* Quarter Grid */
 .inst-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
