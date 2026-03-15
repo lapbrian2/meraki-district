@@ -138,7 +138,7 @@ if (import.meta.client) {
 }
 
 .lightbox-title {
-  font-family: var(--font-display, 'Cormorant Garamond', serif);
+  font-family: var(--font-display, 'Fraunces', serif);
   font-weight: 300;
   font-size: 2rem;
   line-height: 1.1;

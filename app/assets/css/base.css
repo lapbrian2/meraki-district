@@ -152,6 +152,7 @@ h1, h2, h3, h4,
 .hero-title,
 .inst-hero-title {
   font-feature-settings: 'kern' 1, 'liga' 1, 'onum' 1;
+  font-variation-settings: 'WONK' 1, 'SOFT' 50;
   -webkit-font-smoothing: antialiased;
 }
 

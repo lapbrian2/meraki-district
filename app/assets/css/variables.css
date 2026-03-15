@@ -23,9 +23,9 @@
   --color-dark-muted: #A1A1AA;
 
   /* Typography */
-  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --font-body: 'Geist', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Geist Mono', 'Courier New', monospace;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
 
   --text-display: clamp(2.75rem, 5.5vw, 4.5rem);
   --text-h1: clamp(2rem, 3.5vw, 3rem);
