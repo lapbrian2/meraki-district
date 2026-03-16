@@ -85,7 +85,7 @@ const founders = [
   {
     name: 'Brian Lapinski',
     role: 'Co-founder',
-    bio: "Brian builds systems. A developer who treats AI as a creative partner, he recognises the infrastructure that creative practice requires. Meraki District grew from his conviction that the creators defining this era need quarters that match their ambition\u2014they need quarters that match their ambition.",
+    bio: "Brian builds systems. A developer who treats AI as a creative partner, he recognises the infrastructure that creative practice requires. Meraki District grew from his conviction that the creators defining this era need quarters that match their ambition.",
     image: '/images/founders/brian.jpg',
   },
   {
