@@ -35,8 +35,32 @@
             class="reveal"
           />
         </div>
-        <div v-else class="articles-empty reveal">
-          <p>New essays are on the way. Check back soon.</p>
+
+        <!-- Editorial empty state -->
+        <div v-else class="road-manifesto">
+          <div class="road-manifesto-inner reveal">
+            <div class="road-manifesto-rule" aria-hidden="true" />
+            <blockquote class="road-manifesto-quote">
+              <p>The tools are changing faster than the conversations about them.</p>
+            </blockquote>
+            <p class="road-manifesto-body">
+              The Road is where Meraki District thinks in public. Long-form essays,
+              field dispatches, creator interviews, and cultural criticism for people
+              who believe that making things well still matters\u2014even when
+              (especially when) the tools make it easy to make things fast.
+            </p>
+            <p class="road-manifesto-body">
+              We\u2019re writing the first essays now. Expect dispatches on AI-native
+              creative practice, profiles of builders who refuse to choose between
+              ambition and integrity, and honest criticism of the work\u2014ours included.
+            </p>
+            <div class="road-manifesto-cta">
+              <p class="road-manifesto-label">Get notified when we publish</p>
+              <NuxtLink to="/apply" class="road-manifesto-button">
+                Join the district \u2192
+              </NuxtLink>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -69,16 +93,16 @@ const { data: articles } = await useAsyncData('the-road-listing', () =>
 )
 
 useHead({
-  title: 'The Road — Meraki District',
+  title: 'The Road \u2014 Meraki District',
   meta: [
     { name: 'description', content: 'Long-form storytelling and cultural criticism for the AI-native era.' },
   ],
 })
 
 useSeoMeta({
-  ogTitle: 'The Road — Meraki District',
+  ogTitle: 'The Road \u2014 Meraki District',
   ogDescription: 'Long-form storytelling and cultural criticism for the AI-native era.',
-  twitterTitle: 'The Road — Meraki District',
+  twitterTitle: 'The Road \u2014 Meraki District',
   twitterDescription: 'Long-form storytelling and cultural criticism for the AI-native era.',
 })
 </script>
@@ -149,10 +173,72 @@ useSeoMeta({
   gap: var(--space-8);
 }
 
-.articles-empty {
-  text-align: center;
-  padding: var(--space-24) 0;
+/* ── Editorial manifesto empty state ── */
+.road-manifesto {
+  max-width: var(--width-narrow);
+  margin: 0 auto;
+  padding: var(--space-16) 0 var(--space-24);
+}
+
+.road-manifesto-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--color-gold);
+  margin-bottom: var(--space-12);
+}
+
+.road-manifesto-quote {
+  margin-bottom: var(--space-12);
+}
+
+.road-manifesto-quote p {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 300;
+  font-style: italic;
+  line-height: var(--leading-snug);
+  color: var(--color-ink);
+  max-width: none;
+  font-variation-settings: 'WONK' 1, 'SOFT' 80;
+}
+
+.road-manifesto-body {
+  font-size: var(--text-body);
   color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-8);
+}
+
+.road-manifesto-cta {
+  margin-top: var(--space-16);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.road-manifesto-label {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+}
+
+.road-manifesto-button {
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-ink);
+  padding: var(--space-3) var(--space-8);
+  border: 1px solid var(--color-ink);
+  background-image: none;
+  transition: border-color var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+
+.road-manifesto-button:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
 }
 
 @media (min-width: 601px) and (max-width: 1024px) {
@@ -172,6 +258,21 @@ useSeoMeta({
   .articles-grid {
     grid-template-columns: 1fr;
     gap: var(--space-12);
+  }
+
+  .road-manifesto-quote p {
+    font-size: var(--text-h3);
+  }
+
+  .road-manifesto-cta {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .road-manifesto-button {
+    width: 100%;
+    text-align: center;
   }
 }
 </style>

@@ -1,27 +1,37 @@
 <template>
-  <section ref="section" class="seal section">
-    <div class="section-default">
-      <p class="overline reveal">The Seal</p>
-      <h2 class="word-reveal">Earned through practice</h2>
-      <p class="seal-intro reveal">
-        A four-tier credentialing system that recognises genuine creative mastery.
-        Each level requires demonstrated practice, peer review, and real contribution.
-      </p>
+  <section ref="section" class="seal section-dark">
+    <div class="seal-inner section-default">
+
+      <div class="seal-header">
+        <p class="seal-overline reveal">The Seal</p>
+        <h2 class="seal-title word-reveal">Earned through practice</h2>
+        <p class="seal-intro reveal">
+          A four-tier credentialing system that recognises genuine creative mastery.
+          Each level requires demonstrated practice, peer review, and real contribution.
+        </p>
+      </div>
 
       <div class="seal-tiers">
-        <template v-for="(tier, index) in tiers" :key="tier.name">
-          <div class="seal-tier">
-            <div class="seal-ordinal" :style="{ color: tier.color }">
-              {{ tier.ordinal }}
-            </div>
-            <div class="seal-tier-body">
-              <h4 class="seal-tier-name">{{ tier.name }}</h4>
-              <p class="seal-tier-desc">{{ tier.description }}</p>
-            </div>
+        <div class="seal-progress-track" aria-hidden="true">
+          <div class="seal-progress-fill" ref="progressFill" />
+        </div>
+
+        <div
+          v-for="(tier, index) in tiers"
+          :key="tier.name"
+          class="seal-tier"
+          :class="{ 'seal-tier--gold': tier.accent }"
+        >
+          <div class="seal-tier-marker" aria-hidden="true" />
+          <div class="seal-tier-ordinal">{{ tier.ordinal }}</div>
+          <div class="seal-tier-content">
+            <span class="seal-tier-level">Tier {{ tier.ordinal }}</span>
+            <h3 class="seal-tier-name">{{ tier.name }}</h3>
+            <p class="seal-tier-desc">{{ tier.description }}</p>
           </div>
-          <div v-if="index < tiers.length - 1" class="seal-rule" aria-hidden="true" />
-        </template>
+        </div>
       </div>
+
     </div>
   </section>
 </template>
@@ -33,7 +43,9 @@ import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/us
 import { useWordReveal } from '~/composables/useWordReveal'
 
 const section = ref<HTMLElement | null>(null)
-useGsapScrollReveal(section, '.reveal', { stagger: 0.1 })
+const progressFill = ref<HTMLElement | null>(null)
+
+useGsapScrollReveal(section, '.reveal', { stagger: 0.12 })
 useWordReveal(section, '.word-reveal')
 
 let ctx: gsap.Context | null = null
@@ -42,31 +54,32 @@ const tiers = [
   {
     name: 'Associate',
     ordinal: 'I',
-    color: 'var(--color-text-muted)',
-    description: 'Entry to the ecosystem. Complete foundational coursework and demonstrate active practice.',
+    accent: false,
+    description: 'Entry to the ecosystem. Complete foundational coursework and demonstrate active practice. The first step toward recognition.',
   },
   {
     name: 'Verified',
     ordinal: 'II',
-    color: 'var(--color-text-secondary)',
-    description: 'Peer-reviewed portfolio. Consistent output quality and contribution to the community.',
+    accent: false,
+    description: 'Peer-reviewed portfolio. Consistent output quality, meaningful contribution to the community, and a body of work that speaks for itself.',
   },
   {
     name: 'Master',
     ordinal: 'III',
-    color: 'var(--color-gold)',
-    description: 'Recognised expertise. Published work, mentorship track record, and institutional impact.',
+    accent: true,
+    description: 'Recognised expertise. Published work, a mentorship track record, and demonstrated institutional impact. The standard bearers.',
   },
   {
     name: 'Fellow',
     ordinal: 'IV',
-    color: 'var(--color-gold)',
-    description: 'Highest distinction. Sustained excellence and significant contribution to the field.',
+    accent: true,
+    description: 'Highest distinction. Sustained excellence and significant contribution to the field. Reserved for those whose practice has shaped the practice of others.',
   },
 ]
 
 onMounted(async () => {
   if (!section.value) return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
   await waitForAncestorAnimations(section.value)
   if (!section.value) return
@@ -74,48 +87,55 @@ onMounted(async () => {
   gsap.registerPlugin(ScrollTrigger)
 
   ctx = gsap.context(() => {
-    const tierEls = section.value!.querySelectorAll('.seal-tier')
-    const ruleEls = section.value!.querySelectorAll('.seal-rule')
+    // Progress line fills as you scroll through tiers
+    if (progressFill.value) {
+      gsap.fromTo(progressFill.value,
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.seal-tiers',
+            start: 'top 80%',
+            end: 'bottom 40%',
+            scrub: 0.6,
+          },
+        }
+      )
+    }
 
-    // Each tier animates individually
+    // Each tier entrance
+    const tierEls = section.value!.querySelectorAll('.seal-tier')
     tierEls.forEach((tier, i) => {
-      const ordinal = tier.querySelector('.seal-ordinal')
-      const body = tier.querySelector('.seal-tier-body')
+      const ordinal = tier.querySelector('.seal-tier-ordinal')
+      const content = tier.querySelector('.seal-tier-content')
+      const marker = tier.querySelector('.seal-tier-marker')
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: tier,
-          start: 'top 85%',
+          start: 'top 82%',
           toggleActions: 'play none none none',
         },
       })
 
-      tl.from(ordinal, {
-        opacity: 0,
-        scale: 0.8,
-        duration: 0.7,
-        ease: 'power3.out',
+      tl.from(marker, {
+        scale: 0,
+        duration: 0.4,
+        ease: 'back.out(2)',
       }, 0)
-      .from(body, {
+      .from(ordinal, {
         opacity: 0,
-        x: 30,
-        duration: 0.7,
+        y: 30,
+        duration: 0.8,
         ease: 'power3.out',
       }, 0.1)
-    })
-
-    // Gold rules draw in
-    ruleEls.forEach((rule) => {
-      gsap.from(rule, {
-        scaleX: 0,
-        duration: 0.9,
-        ease: 'power2.inOut',
-        scrollTrigger: {
-          trigger: rule,
-          start: 'top 90%',
-          toggleActions: 'play none none none',
-        },
-      })
+      .from(content, {
+        opacity: 0,
+        x: 40,
+        duration: 0.8,
+        ease: 'power3.out',
+      }, 0.2)
     })
   }, section.value)
 })
@@ -126,76 +146,179 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.seal h2 {
-  margin-top: var(--space-4);
-  margin-bottom: var(--space-4);
+.seal {
+  padding: var(--space-32) 0;
+}
+
+.seal-inner {
+  position: relative;
+}
+
+/* Header */
+.seal-header {
+  margin-bottom: var(--space-24);
+}
+
+.seal-overline {
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: #C4A05A;
+  margin-bottom: var(--space-3);
+}
+
+.seal-title {
+  color: var(--color-dark-text);
+  margin-bottom: var(--space-6);
 }
 
 .seal-intro {
-  color: var(--color-text-muted);
-  margin-bottom: var(--space-16);
+  font-size: var(--text-body);
+  color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
+  max-width: 55ch;
 }
 
+/* Tiers container */
 .seal-tiers {
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  padding-left: 3rem;
 }
 
+/* Vertical progress track */
+.seal-progress-track {
+  position: absolute;
+  left: 5px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(250, 250, 249, 0.08);
+}
+
+.seal-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--color-gold), rgba(184, 150, 78, 0.4));
+  transform-origin: top center;
+}
+
+/* Individual tier */
 .seal-tier {
+  position: relative;
   display: grid;
-  grid-template-columns: 100px 1fr;
+  grid-template-columns: auto 1fr;
   gap: var(--space-8);
-  padding: var(--space-8) 0;
-  align-items: baseline;
+  padding: var(--space-12) 0;
+  border-bottom: 1px solid rgba(250, 250, 249, 0.06);
 }
 
-.seal-ordinal {
+.seal-tier:last-child {
+  border-bottom: none;
+}
+
+/* Node marker on the progress line */
+.seal-tier-marker {
+  position: absolute;
+  left: -3rem;
+  top: var(--space-12);
+  width: 12px;
+  height: 12px;
+  background: rgba(250, 250, 249, 0.15);
+  transform: translateX(-3px);
+  transition: background 0.6s ease;
+}
+
+.seal-tier--gold .seal-tier-marker {
+  background: var(--color-gold);
+}
+
+/* Ordinal (massive display) */
+.seal-tier-ordinal {
   font-family: var(--font-display);
-  font-size: var(--text-h1);
+  font-size: clamp(3.5rem, 7vw, 5.5rem);
   font-weight: 300;
-  line-height: 1;
-  letter-spacing: var(--tracking-tight);
-  transition: color var(--duration-normal) ease;
+  line-height: 0.85;
+  color: rgba(250, 250, 249, 0.08);
+  letter-spacing: -0.02em;
+  min-width: 100px;
+  transition: color 0.6s ease;
+  font-variation-settings: 'WONK' 1, 'SOFT' 70;
 }
 
-.seal-tier:hover .seal-ordinal {
-  color: var(--color-gold) !important;
+.seal-tier:hover .seal-tier-ordinal {
+  color: rgba(250, 250, 249, 0.18);
+}
+
+.seal-tier--gold .seal-tier-ordinal {
+  color: rgba(184, 150, 78, 0.2);
+}
+
+.seal-tier--gold:hover .seal-tier-ordinal {
+  color: rgba(184, 150, 78, 0.4);
+}
+
+/* Content */
+.seal-tier-content {
+  padding-top: 0.5rem;
+}
+
+.seal-tier-level {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.seal-tier--gold .seal-tier-level {
+  color: #C4A05A;
 }
 
 .seal-tier-name {
-  font-size: var(--text-h3);
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 300;
+  color: var(--color-dark-text);
   margin-bottom: var(--space-3);
-  font-weight: 400;
-  letter-spacing: var(--tracking-snug);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
 }
 
 .seal-tier-desc {
   font-size: var(--text-body);
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
   max-width: 50ch;
 }
 
-.seal-rule {
-  height: 1px;
-  background: linear-gradient(to right, var(--color-gold), var(--color-border));
-  transform-origin: left center;
-}
-
+/* Responsive */
 @media (max-width: 768px) {
-  .seal-tier {
-    grid-template-columns: 56px 1fr;
-    gap: var(--space-4);
-    padding: var(--space-6) 0;
+  .seal-tiers {
+    padding-left: 2rem;
   }
 
-  .seal-ordinal {
-    font-size: var(--text-h2);
+  .seal-tier-marker {
+    left: -2rem;
+  }
+
+  .seal-tier {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .seal-tier-ordinal {
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
+    min-width: auto;
   }
 
   .seal-tier-name {
-    font-size: var(--text-h4);
+    font-size: var(--text-h3);
   }
 
   .seal-tier-desc {
