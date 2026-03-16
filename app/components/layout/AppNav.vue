@@ -117,13 +117,14 @@ watch(mobileOpen, (open) => {
   if (import.meta.client) {
     document.body.style.overflow = open ? 'hidden' : ''
     // Focus trap: make background content inert when overlay is open
-    document.querySelectorAll('main, footer').forEach((el) => {
+    document.querySelectorAll('main, footer, header').forEach((el) => {
       ;(el as HTMLElement).inert = open
     })
   }
 })
 
 onMounted(() => {
+  lastScroll = window.scrollY
   window.addEventListener('scroll', onScroll, { passive: true })
   window.addEventListener('keydown', onKeydown)
 })

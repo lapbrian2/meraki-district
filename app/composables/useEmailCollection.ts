@@ -29,13 +29,17 @@ export function useEmailCollection(source: EmailSource) {
 
     try {
       const key = 'meraki_emails'
+      const trimmed = email.value.trim()
       const existing: StoredEmail[] = JSON.parse(localStorage.getItem(key) || '[]')
-      existing.push({
-        email: email.value.trim(),
-        source,
-        timestamp: new Date().toISOString(),
-      })
-      localStorage.setItem(key, JSON.stringify(existing))
+      // Prevent duplicate submissions
+      if (!existing.some(e => e.email === trimmed)) {
+        existing.push({
+          email: trimmed,
+          source,
+          timestamp: new Date().toISOString(),
+        })
+        localStorage.setItem(key, JSON.stringify(existing))
+      }
       status.value = 'success'
       email.value = ''
     } catch {

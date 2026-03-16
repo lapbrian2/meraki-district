@@ -38,7 +38,8 @@ onMounted(() => {
     const baseSpeed = 0.5
 
     tickerFn = () => {
-      const velocity = ($lenis as any)?.velocity ?? 0
+      const rawVelocity = ($lenis as any)?.velocity
+      const velocity = typeof rawVelocity === 'number' && isFinite(rawVelocity) ? rawVelocity : 0
       const speedBoost = 1 + Math.min(Math.abs(velocity) * 0.04, 3)
       xPos -= baseSpeed * speedBoost
 

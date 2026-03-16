@@ -6,7 +6,8 @@
 
 <script setup lang="ts">
 const route = useRoute()
-const siteUrl = 'https://meraki-district.vercel.app'
+const config = useSiteConfig()
+const siteUrl = config?.url || 'https://meraki-district.vercel.app'
 
 useHead(computed(() => ({
   link: [

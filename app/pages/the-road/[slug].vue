@@ -65,7 +65,7 @@ const route = useRoute()
 const slug = computed(() => route.params.slug as string)
 
 const { data: article } = await useAsyncData(
-  () => 'the-road-' + slug.value,
+  'the-road-' + slug.value,
   () => queryCollection('theRoad')
     .where('published', '=', true)
     .path('/the-road/' + slug.value)

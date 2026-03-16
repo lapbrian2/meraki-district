@@ -75,6 +75,12 @@ export function useTilt(
 
   onUnmounted(() => {
     cleanups.forEach(fn => fn())
+    // Clear GSAP inline transforms that may persist during page transitions
+    if (container.value) {
+      container.value.querySelectorAll<HTMLElement>(selector).forEach((el) => {
+        gsap.set(el, { clearProps: 'transform' })
+      })
+    }
   })
 }
 
@@ -137,5 +143,11 @@ export function useMagnetic(
 
   onUnmounted(() => {
     cleanups.forEach(fn => fn())
+    // Clear GSAP inline transforms that may persist during page transitions
+    if (container.value) {
+      container.value.querySelectorAll<HTMLElement>(selector).forEach((el) => {
+        gsap.set(el, { clearProps: 'transform' })
+      })
+    }
   })
 }

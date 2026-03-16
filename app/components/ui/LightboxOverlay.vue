@@ -42,21 +42,30 @@ defineProps<{
   linkLabel?: string
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   close: []
 }>()
 
-// ESC to close
+const panel = ref<HTMLElement | null>(null)
+
+// ESC to close + focus trap
 if (import.meta.client) {
   const handler = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      const emit = getCurrentInstance()?.emit
-      if (emit) emit('close')
-    }
+    if (e.key === 'Escape') emit('close')
   }
   onMounted(() => window.addEventListener('keydown', handler))
   onUnmounted(() => window.removeEventListener('keydown', handler))
 }
+
+// Move focus into lightbox when it opens
+watch(() => panel.value, (el) => {
+  if (el) {
+    nextTick(() => {
+      const btn = el.querySelector('button')
+      if (btn) btn.focus()
+    })
+  }
+})
 </script>
 
 <style scoped>
