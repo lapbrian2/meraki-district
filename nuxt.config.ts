@@ -31,6 +31,11 @@ export default defineNuxtConfig({
       },
     },
   },
+  runtimeConfig: {
+    public: {
+      sentryDsn: process.env.SENTRY_DSN || '',
+    },
+  },
   app: {
     head: {
       htmlAttrs: { lang: 'en' },

@@ -28,9 +28,9 @@
             <button
               type="submit"
               class="apply-btn"
-              :disabled="status === 'success'"
+              :disabled="status === 'success' || status === 'submitting'"
             >
-              Notify Me
+              {{ status === 'submitting' ? 'Sending…' : status === 'success' ? 'Sent' : 'Notify Me' }}
             </button>
           </div>
           <p v-if="status === 'success'" class="apply-feedback apply-success">

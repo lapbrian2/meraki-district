@@ -1,14 +1,8 @@
 export type EmailSource = 'apply' | 'newsletter'
 
-interface StoredEmail {
-  email: string
-  source: EmailSource
-  timestamp: string
-}
-
 export function useEmailCollection(source: EmailSource) {
   const email = ref('')
-  const status = ref<'idle' | 'success' | 'error'>('idle')
+  const status = ref<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const errorMessage = ref('')
 
   function validate(value: string): string | null {
@@ -17,7 +11,7 @@ export function useEmailCollection(source: EmailSource) {
     return null
   }
 
-  function submit() {
+  async function submit() {
     const error = validate(email.value)
     if (error) {
       status.value = 'error'
@@ -25,26 +19,21 @@ export function useEmailCollection(source: EmailSource) {
       return
     }
 
-    if (!import.meta.client) return
+    status.value = 'submitting'
 
     try {
-      const key = 'meraki_emails'
-      const trimmed = email.value.trim()
-      const existing: StoredEmail[] = JSON.parse(localStorage.getItem(key) || '[]')
-      // Prevent duplicate submissions
-      if (!existing.some(e => e.email === trimmed)) {
-        existing.push({
-          email: trimmed,
+      const res = await $fetch('/api/subscribe', {
+        method: 'POST',
+        body: {
+          email: email.value.trim(),
           source,
-          timestamp: new Date().toISOString(),
-        })
-        localStorage.setItem(key, JSON.stringify(existing))
-      }
+        },
+      })
       status.value = 'success'
       email.value = ''
-    } catch {
+    } catch (err: any) {
       status.value = 'error'
-      errorMessage.value = 'Something went wrong. Please try again.'
+      errorMessage.value = err?.data?.message || 'Something went wrong. Please try again.'
     }
   }
 

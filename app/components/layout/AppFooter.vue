@@ -19,9 +19,9 @@
             <button
               type="submit"
               class="footer-newsletter-btn"
-              :disabled="status === 'success'"
+              :disabled="status === 'success' || status === 'submitting'"
             >
-              {{ status === 'success' ? 'Subscribed' : 'Subscribe' }}
+              {{ status === 'submitting' ? 'Sending…' : status === 'success' ? 'Subscribed' : 'Subscribe' }}
             </button>
           </form>
           <p v-if="status === 'success'" class="footer-newsletter-feedback footer-newsletter-success">
