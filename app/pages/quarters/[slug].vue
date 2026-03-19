@@ -55,13 +55,20 @@
     <!-- Status -->
     <section ref="statusSection" class="q-status-section section">
       <div class="section-narrow">
-        <div class="q-status reveal">
+        <div class="q-status reveal" :class="'q-status--' + quarter.status">
           <div class="q-status-marker" />
           <div>
             <p class="q-status-label">Status</p>
             <p class="q-status-text">
-              This quarter is currently in development. We\u2019re building
-              something worth waiting for.
+              <template v-if="quarter.status === 'active'">
+                This quarter is live. {{ quarter.statusNote || '' }}
+              </template>
+              <template v-else-if="quarter.status === 'coming-soon'">
+                {{ quarter.statusNote || 'Coming soon.' }}
+              </template>
+              <template v-else>
+                This quarter is in development. We\u2019re building something worth waiting for.
+              </template>
             </p>
           </div>
         </div>
@@ -463,6 +470,15 @@ onUnmounted(() => {
   flex-shrink: 0;
   margin-top: var(--space-1);
   animation: statusPulse 2s ease-in-out infinite;
+}
+
+.q-status--active .q-status-marker {
+  background: var(--color-success);
+  animation: none;
+}
+
+.q-status--coming-soon .q-status-marker {
+  background: var(--color-gold);
 }
 
 @keyframes statusPulse {

@@ -177,6 +177,16 @@ h1, h2, h3, h4,
   background: var(--color-text-muted);
 }
 
+/* Dark mode scrollbar */
+[data-theme="dark"] ::-webkit-scrollbar-track,
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) ::-webkit-scrollbar-track {
+  background: var(--color-background);
+}}
+[data-theme="dark"] ::-webkit-scrollbar-thumb,
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) ::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+}}
+
 
 /* Skip to content link */
 .skip-to-content {
@@ -201,6 +211,31 @@ h1, h2, h3, h4,
   transform: translateY(0);
   outline: 2px solid var(--color-ink);
   outline-offset: 2px;
+}
+
+/* Flash prevention — hide reveal elements until GSAP initializes.
+   GSAP sets opacity: 0 immediately on mount, then animates to 1.
+   This CSS prevents the brief visible flash before GSAP runs. */
+.reveal {
+  opacity: 0;
+}
+
+/* Word-reveal elements also need to be visible for initial render
+   measurement, then GSAP takes over */
+.word-reveal {
+  opacity: 1;
+}
+
+/* Page enter state — prevent flash of positioned content */
+.page-enter-from {
+  opacity: 0;
+}
+
+/* Reduced motion — make everything visible immediately */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+  }
 }
 
 /* Reduced motion */

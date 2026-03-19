@@ -42,6 +42,21 @@
     <!-- Mobile logo (always visible on mobile) -->
     <NuxtLink to="/" class="nav-mobile-logo" :class="{ inverted: mobileOpen }">Meraki District</NuxtLink>
 
+    <!-- Theme toggle -->
+    <button
+      class="nav-theme-toggle"
+      :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+      @click="toggle"
+    >
+      <svg v-if="isDark" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      <svg v-else width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M14 9.5A6.5 6.5 0 016.5 2 5.5 5.5 0 1014 9.5z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
     <!-- Scroll progress bar -->
     <ScrollProgress />
   </header>
@@ -72,6 +87,7 @@
 
 <script setup lang="ts">
 import { useNavAnimation } from '~/composables/useNavAnimation'
+import { useDarkMode } from '~/composables/useDarkMode'
 
 const navRef = ref<HTMLElement | null>(null)
 const overlayRef = ref<HTMLElement | null>(null)
@@ -79,6 +95,8 @@ const mobileOpen = ref(false)
 const isScrolled = ref(false)
 const isHidden = ref(false)
 let lastScroll = 0
+
+const { isDark, toggle } = useDarkMode()
 
 const mobileLinks = [
   { to: '/quarters', label: 'Quarters' },
@@ -466,6 +484,28 @@ onUnmounted(() => {
 
 .mobile-apply:hover {
   color: var(--color-gold);
+}
+
+/* THEME TOGGLE */
+.nav-theme-toggle {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  z-index: 99;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease;
+}
+
+.nav-theme-toggle:hover {
+  color: var(--color-gold);
+  border-color: var(--color-gold);
 }
 
 /* SCROLL PROGRESS - positioned at nav bottom */
