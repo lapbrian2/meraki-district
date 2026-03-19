@@ -9,7 +9,7 @@
       <div class="fa-header">
         <p class="fa-overline">Featured</p>
         <h2>The Creators</h2>
-        <p class="fa-subtitle">Artists and builders shaping the future of AI-native practice.</p>
+        <p class="fa-subtitle">Six practitioners building at the intersection of craft and computation.</p>
       </div>
       <div class="fa-grid">
         <div
@@ -25,6 +25,7 @@
             </div>
           </div>
           <div class="fa-info">
+            <span class="fa-index">{{ String(i + 1).padStart(2, '0') }}</span>
             <span class="fa-discipline">{{ artist.discipline }}</span>
             <h3>{{ artist.name }}</h3>
             <p>{{ artist.bio }}</p>
@@ -127,12 +128,12 @@ const featuredArtists: Artist[] = [
 
 <style scoped>
 .featured-artists {
-  padding: var(--space-16) var(--content-padding);
+  padding: var(--space-12) var(--content-padding);
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.fa-header { text-align: center; margin-bottom: var(--space-16); }
+.fa-header { text-align: center; margin-bottom: var(--space-8); }
 
 .fa-overline {
   font-size: 0.6875rem;
@@ -212,7 +213,24 @@ const featuredArtists: Artist[] = [
   backdrop-filter: blur(4px);
 }
 
-.fa-info { padding: 1rem 1.25rem 1.5rem; }
+.fa-info {
+  padding: 1rem 1.25rem 1.5rem;
+  position: relative;
+}
+
+.fa-index {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  color: var(--color-gold);
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.fa-card:hover .fa-index { opacity: 1; }
 
 .fa-discipline {
   font-size: 0.5625rem;
@@ -229,12 +247,27 @@ const featuredArtists: Artist[] = [
   font-size: 1.25rem;
   margin-bottom: 0.3rem;
   line-height: 1.15;
+  display: inline;
+  background-image: linear-gradient(var(--color-gold), var(--color-gold));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s var(--ease-out);
+}
+
+.fa-card:hover .fa-info h3 {
+  background-size: 100% 1px;
 }
 
 .fa-info p {
   font-size: 0.75rem;
   color: var(--color-text-secondary, #71717A);
   line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 0.4rem;
 }
 
 @media (max-width: 900px) {

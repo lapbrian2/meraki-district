@@ -4,7 +4,7 @@
       <p class="overline reveal">From The Road</p>
       <h2 class="word-reveal">Featured thinking</h2>
       <p class="featured-intro reveal">
-        Essays, dispatches, and frameworks from inside the ecosystem.
+        Essays, dispatches, and frameworks from practitioners inside the ecosystem.
       </p>
 
       <div v-if="posts && posts.length" class="featured-grid">
@@ -106,7 +106,7 @@ function onImageLoad(e: Event) {
 
 .featured-intro {
   color: var(--color-text-muted);
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-8);
 }
 
 .featured-grid {

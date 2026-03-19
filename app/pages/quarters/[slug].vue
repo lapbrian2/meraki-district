@@ -67,7 +67,7 @@
                 {{ quarter.statusNote || 'Coming soon.' }}
               </template>
               <template v-else>
-                This quarter is in development. We\u2019re building something worth waiting for.
+                This quarter is in development. Every detail is being built with the same standard we apply to the work itself.
               </template>
             </p>
           </div>

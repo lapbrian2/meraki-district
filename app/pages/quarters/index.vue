@@ -4,14 +4,14 @@
     <div class="nav-hero">
       <p class="overline">Explore</p>
       <h1>The <span>District</span></h1>
-      <p class="nav-subtitle">Ten quarters, one ecosystem. Find your way in.</p>
+      <p class="nav-subtitle">Ten quarters, each with its own mandate. One shared infrastructure.</p>
     </div>
 
     <!-- Quarters Grid -->
     <section class="nav-section">
       <div class="nav-section-header">
         <h2>Quarters</h2>
-        <p>The ten quarters of Meraki District</p>
+        <p>Each quarter operates independently within a shared creative infrastructure.</p>
       </div>
       <div class="q-grid">
         <div
@@ -122,7 +122,7 @@ watch(activeQuarter, (q) => {
 /* Hero */
 .nav-hero {
   text-align: center;
-  padding: calc(var(--space-32) + 3rem) 0 var(--space-16);
+  padding: calc(var(--space-32) + 3rem) 0 var(--space-8);
 }
 
 .overline {
@@ -152,7 +152,7 @@ watch(activeQuarter, (q) => {
 }
 
 /* Sections */
-.nav-section { margin-bottom: var(--space-24); }
+.nav-section { margin-bottom: var(--space-12); }
 
 .nav-section-header {
   margin-bottom: var(--space-8);
@@ -242,7 +242,7 @@ watch(activeQuarter, (q) => {
   backdrop-filter: blur(4px);
 }
 
-.q-info { padding: 1rem 1.25rem 1.25rem; }
+.q-info { padding: 0.75rem 1rem 1rem; }
 
 .q-type {
   font-size: 0.5625rem;
@@ -259,6 +259,16 @@ watch(activeQuarter, (q) => {
   font-size: 1.25rem;
   margin-bottom: 0.3rem;
   line-height: 1.15;
+  display: inline;
+  background-image: linear-gradient(var(--color-gold), var(--color-gold));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s var(--ease-out);
+}
+
+.q-card:hover .q-info h3 {
+  background-size: 100% 1px;
 }
 
 .q-info p {
@@ -277,7 +287,7 @@ watch(activeQuarter, (q) => {
   background: var(--color-ink, #09090B);
   color: var(--color-background, #FAFAF9);
   text-decoration: none;
-  padding: var(--space-16);
+  padding: var(--space-8) var(--space-12);
   transition: background 0.3s ease;
 }
 

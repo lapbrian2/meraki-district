@@ -177,15 +177,7 @@ h1, h2, h3, h4,
   background: var(--color-text-muted);
 }
 
-/* Dark mode scrollbar */
-[data-theme="dark"] ::-webkit-scrollbar-track,
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) ::-webkit-scrollbar-track {
-  background: var(--color-background);
-}}
-[data-theme="dark"] ::-webkit-scrollbar-thumb,
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) ::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-}}
+/* Dark mode scrollbar — uses design token vars which auto-swap in dark mode */
 
 
 /* Skip to content link */
