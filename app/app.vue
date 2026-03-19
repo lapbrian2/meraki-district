@@ -6,8 +6,8 @@
 
 <script setup lang="ts">
 const route = useRoute()
-const config = useSiteConfig()
-const siteUrl = config?.url || 'https://meraki-district.vercel.app'
+const { site } = useRuntimeConfig().public as { site?: { url?: string } }
+const siteUrl = site?.url || 'https://meraki-district.vercel.app'
 
 useHead(computed(() => ({
   link: [
