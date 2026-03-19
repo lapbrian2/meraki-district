@@ -1,7 +1,7 @@
 <template>
   <div v-if="quarter" ref="root">
     <!-- Hero -->
-    <section class="q-hero">
+    <section ref="heroSection" class="q-hero">
       <div class="q-hero-image-wrap">
         <img
           :src="quarter.image"
@@ -13,7 +13,7 @@
       </div>
       <div class="q-hero-content section-default">
         <p class="overline">{{ quarter.type }}</p>
-        <h1 class="q-hero-title">{{ quarter.name }}</h1>
+        <h1 ref="heroTitle" class="q-hero-title">{{ quarter.name }}</h1>
         <span class="q-hero-number">{{ quarter.number }}</span>
       </div>
     </section>
@@ -27,10 +27,10 @@
     </section>
 
     <!-- Pull Quote -->
-    <section class="q-quote section-dark">
+    <section ref="quoteSection" class="q-quote section-dark">
       <div class="section-default q-quote-inner">
-        <blockquote class="q-quote-text reveal">
-          <p>\u201c{{ quarter.pullQuote }}\u201d</p>
+        <blockquote class="q-quote-text">
+          <p class="word-reveal">\u201c{{ quarter.pullQuote }}\u201d</p>
         </blockquote>
       </div>
     </section>
@@ -126,6 +126,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
 import { useParallax } from '~/composables/useParallax'
+import { useTilt } from '~/composables/useInteractions'
 import { quarters, useQuarter } from '~/composables/useQuarters'
 
 const route = useRoute()
@@ -146,17 +147,77 @@ useHead(computed(() => ({
 })))
 
 const root = ref<HTMLElement | null>(null)
+const heroSection = ref<HTMLElement | null>(null)
+const heroTitle = ref<HTMLElement | null>(null)
 const bodySection = ref<HTMLElement | null>(null)
+const quoteSection = ref<HTMLElement | null>(null)
 const offeringsSection = ref<HTMLElement | null>(null)
 const statusSection = ref<HTMLElement | null>(null)
 const navSection = ref<HTMLElement | null>(null)
 
+// Composable-driven animations (run once on mount)
 useGsapScrollReveal(bodySection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(offeringsSection, '.reveal', { stagger: 0.08 })
 useGsapScrollReveal(statusSection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(navSection, '.reveal', { stagger: 0.12 })
+useParallax(heroSection, '.q-hero-image', { speed: 0.08 })
+useTilt(navSection, '.q-explore-card', { maxRotation: 2 })
 
 let ctx: gsap.Context | null = null
+
+/**
+ * Split text into word-reveal spans and animate.
+ * Reproduces useWordReveal logic inline so it can re-run on slug changes.
+ */
+function wordReveal(el: HTMLElement, opts: { stagger?: number; duration?: number; y?: number } = {}) {
+  const { stagger = 0.07, duration = 1.1, y = 70 } = opts
+  const text = el.textContent || ''
+  const words = text.trim().split(/\s+/)
+  el.style.display = 'flex'
+  el.style.flexWrap = 'wrap'
+  el.style.columnGap = '0.27em'
+  el.innerHTML = words.map(word =>
+    '<span class="wr-mask" style="display:inline-flex;overflow:hidden;vertical-align:bottom;padding-bottom:0.1em">' +
+    '<span class="wr-word" style="display:inline-block;will-change:transform">' + word + '</span>' +
+    '</span>'
+  ).join('')
+
+  gsap.from(el.querySelectorAll('.wr-word'), {
+    yPercent: y,
+    duration,
+    stagger,
+    ease: 'power2.out',
+  })
+}
+
+/**
+ * Split quote text and animate with ScrollTrigger.
+ */
+function quoteWordReveal(el: HTMLElement) {
+  const text = el.textContent || ''
+  const words = text.trim().split(/\s+/)
+  el.style.display = 'flex'
+  el.style.flexWrap = 'wrap'
+  el.style.columnGap = '0.27em'
+  el.style.justifyContent = 'center'
+  el.innerHTML = words.map(word =>
+    '<span class="wr-mask" style="display:inline-flex;overflow:hidden;vertical-align:bottom;padding-bottom:0.1em">' +
+    '<span class="wr-word" style="display:inline-block;will-change:transform">' + word + '</span>' +
+    '</span>'
+  ).join('')
+
+  gsap.from(el.querySelectorAll('.wr-word'), {
+    yPercent: 70,
+    duration: 1.2,
+    stagger: 0.04,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: el.closest('.q-quote') || el,
+      start: 'top 75%',
+      toggleActions: 'play none none none',
+    },
+  })
+}
 
 function initAnimations() {
   if (!root.value) return
@@ -166,29 +227,36 @@ function initAnimations() {
   ctx?.revert()
 
   ctx = gsap.context(() => {
-    // Hero image zoom
+    // Hero image zoom entrance
     gsap.from('.q-hero-image', {
       scale: 1.1,
       duration: 1.8,
       ease: 'power3.out',
     })
 
-    // Hero parallax
-    gsap.fromTo('.q-hero-image',
-      { yPercent: -3 },
-      {
-        yPercent: 8,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.q-hero',
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      }
-    )
+    // Hero content staggered entrance
+    gsap.from('.q-hero-content .overline', {
+      opacity: 0,
+      y: 15,
+      duration: 0.6,
+      ease: 'power3.out',
+      delay: 0.3,
+    })
 
-    // Rule draw
+    gsap.from('.q-hero-number', {
+      opacity: 0,
+      y: 10,
+      duration: 0.5,
+      ease: 'power3.out',
+      delay: 0.8,
+    })
+
+    // Hero title word-reveal
+    if (heroTitle.value) {
+      wordReveal(heroTitle.value, { stagger: 0.06, duration: 1.0, y: 80 })
+    }
+
+    // Gold rule draw
     gsap.from('.q-rule', {
       scaleX: 0,
       duration: 0.8,
@@ -200,18 +268,11 @@ function initAnimations() {
       },
     })
 
-    // Quote entrance
-    gsap.from('.q-quote-text', {
-      opacity: 0,
-      y: 40,
-      duration: 1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.q-quote',
-        start: 'top 75%',
-        toggleActions: 'play none none none',
-      },
-    })
+    // Pull quote word-reveal on scroll
+    const quoteP = root.value?.querySelector('.q-quote-text .word-reveal')
+    if (quoteP) {
+      quoteWordReveal(quoteP as HTMLElement)
+    }
   }, root.value)
 }
 

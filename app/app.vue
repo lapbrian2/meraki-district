@@ -6,12 +6,11 @@
 
 <script setup lang="ts">
 const route = useRoute()
-const { site } = useRuntimeConfig().public as { site?: { url?: string } }
-const siteUrl = site?.url || 'https://meraki-district.vercel.app'
+const requestUrl = useRequestURL()
 
 useHead(computed(() => ({
   link: [
-    { rel: 'canonical', href: siteUrl + route.path },
+    { rel: 'canonical', href: requestUrl.origin + route.path },
   ],
 })))
 </script>
