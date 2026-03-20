@@ -8,6 +8,8 @@
           :alt="`${district.name} \u2014 ${district.type}`"
           class="q-hero-image"
           loading="eager"
+          fetchpriority="high"
+          decoding="async"
         />
         <div class="q-hero-overlay" />
       </div>

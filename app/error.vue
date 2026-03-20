@@ -10,7 +10,7 @@
         <NuxtLink to="/" class="error-cta" @click="clearError">
           Back to Meraki Road
         </NuxtLink>
-        <NuxtLink v-if="error?.statusCode === 404" to="/districts" class="error-link" @click="clearError">
+        <NuxtLink v-if="error?.statusCode === 404" to="/districts" class="error-link" @click="clearError('/districts')">
           Browse districts
         </NuxtLink>
       </div>
@@ -45,7 +45,7 @@ useHead({
   title: `${code} \u2014 Meraki Road`,
 })
 
-const clearError = () => clearNuxtError({ redirect: '/' })
+const clearError = (path = '/') => clearNuxtError({ redirect: path })
 </script>
 
 <style scoped>

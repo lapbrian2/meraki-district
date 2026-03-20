@@ -40,10 +40,12 @@ export function useDarkMode() {
 
   // Initialize from localStorage on client
   if (import.meta.client) {
-    const saved = localStorage.getItem('meraki_theme') as 'light' | 'dark' | 'system' | null
-    if (saved && ['light', 'dark', 'system'].includes(saved)) {
-      theme.value = saved
-    }
+    try {
+      const saved = localStorage.getItem('meraki_theme') as 'light' | 'dark' | 'system' | null
+      if (saved && ['light', 'dark', 'system'].includes(saved)) {
+        theme.value = saved
+      }
+    } catch {}
     applyTheme(theme.value)
   }
 

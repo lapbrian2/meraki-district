@@ -55,11 +55,12 @@ export function useWordReveal(
       ;(el as HTMLElement).style.display = 'flex'
       ;(el as HTMLElement).style.flexWrap = 'wrap'
       ;(el as HTMLElement).style.columnGap = '0.27em'
-      el.innerHTML = words.map(word =>
-        '<span class="wr-mask" style="display:inline-flex;overflow:hidden;vertical-align:bottom;padding-bottom:0.1em">' +
-        '<span class="wr-word" style="display:inline-block;will-change:transform">' + word + '</span>' +
-        '</span>'
-      ).join('')
+      el.innerHTML = words.map(word => {
+        const safe = word.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+        return '<span class="wr-mask" style="display:inline-flex;overflow:hidden;vertical-align:bottom;padding-bottom:0.1em">' +
+          '<span class="wr-word" style="display:inline-block;will-change:transform">' + safe + '</span>' +
+          '</span>'
+      }).join('')
     })
 
     ctx = gsap.context(() => {
