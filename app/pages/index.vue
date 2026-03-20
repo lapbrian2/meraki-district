@@ -19,7 +19,7 @@
           @click="activeArtist = artist"
         >
           <div class="fa-image">
-            <img :src="artist.image" :alt="artist.name" loading="lazy">
+            <NuxtImg :src="artist.image" :alt="artist.name" loading="lazy" decoding="async" width="400" height="533" />
             <div class="fa-overlay">
               <span class="fa-peek">View artist</span>
             </div>

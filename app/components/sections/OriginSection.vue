@@ -1,11 +1,14 @@
 <template>
   <section ref="section" class="origin section section-dark">
     <div class="origin-bg-wrap">
-      <img
+      <NuxtImg
         src="/images/origin-bg.webp"
         alt=""
         class="origin-bg-image"
         loading="lazy"
+        decoding="async"
+        width="1920"
+        height="1080"
       />
       <div class="origin-bg-overlay" />
     </div>

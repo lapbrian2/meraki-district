@@ -1,12 +1,15 @@
 <template>
   <section class="article-hero">
     <div class="article-hero-image-wrap">
-      <img
+      <NuxtImg
         :src="article.image"
         :alt="article.tag + ': ' + article.title"
         class="article-hero-image"
         loading="eager"
         fetchpriority="high"
+        decoding="async"
+        width="1400"
+        height="700"
       />
       <div class="article-hero-overlay" />
     </div>

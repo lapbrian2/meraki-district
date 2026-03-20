@@ -8,11 +8,14 @@
           class="founder-card"
         >
           <div class="founder-image-wrap reveal-image">
-            <img
+            <NuxtImg
               class="founder-image"
               :src="founder.image"
               :alt="`Portrait of ${founder.name}, ${founder.role}`"
               loading="lazy"
+              decoding="async"
+              width="400"
+              height="500"
             />
           </div>
           <div class="founder-content reveal">

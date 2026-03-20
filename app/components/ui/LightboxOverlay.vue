@@ -4,14 +4,24 @@
       <div v-if="open" class="lightbox-backdrop" @click.self="$emit('close')">
         <div class="lightbox-panel" ref="panel">
 
-          <button class="lightbox-close" @click="$emit('close')" aria-label="Close">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M4 4L16 16M16 4L4 16" stroke="currentColor" stroke-width="1.5"/>
-            </svg>
-          </button>
+          <div class="lightbox-actions">
+            <button v-if="canFullscreen" class="lightbox-action" @click="toggleFullscreen" :aria-label="isFullscreen ? 'Exit fullscreen' : 'Fullscreen'">
+              <svg v-if="!isFullscreen" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M2 6V2h4M12 2h4v4M16 12v4h-4M6 16H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <svg v-else width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M6 2v4H2M12 6h4V2M12 16v-4h4M6 12H2v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="lightbox-action" @click="$emit('close')" aria-label="Close">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M4 4L16 16M16 4L4 16" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </button>
+          </div>
 
           <div class="lightbox-image" v-if="image">
-            <img :src="image" :alt="title" />
+            <NuxtImg :src="image" :alt="title" width="450" height="600" />
           </div>
 
           <div class="lightbox-content">
@@ -31,6 +41,8 @@
 </template>
 
 <script setup lang="ts">
+import screenfull from 'screenfull'
+
 defineProps<{
   open: boolean
   image?: string
@@ -47,14 +59,40 @@ const emit = defineEmits<{
 }>()
 
 const panel = ref<HTMLElement | null>(null)
+const isFullscreen = ref(false)
+const canFullscreen = ref(false)
+
+// Fullscreen support
+if (import.meta.client) {
+  canFullscreen.value = screenfull.isEnabled
+  if (screenfull.isEnabled) {
+    screenfull.on('change', () => {
+      isFullscreen.value = screenfull.isFullscreen
+    })
+  }
+}
+
+function toggleFullscreen() {
+  if (!panel.value || !screenfull.isEnabled) return
+  screenfull.toggle(panel.value)
+}
 
 // ESC to close + focus trap
 if (import.meta.client) {
   const handler = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') emit('close')
+    if (e.key === 'Escape') {
+      if (isFullscreen.value && screenfull.isEnabled) {
+        screenfull.exit()
+      } else {
+        emit('close')
+      }
+    }
   }
   onMounted(() => window.addEventListener('keydown', handler))
-  onUnmounted(() => window.removeEventListener('keydown', handler))
+  onUnmounted(() => {
+    window.removeEventListener('keydown', handler)
+    if (screenfull.isEnabled) screenfull.off('change')
+  })
 }
 
 // Move focus into lightbox when it opens
@@ -94,11 +132,16 @@ watch(() => panel.value, (el) => {
   border: 1px solid rgba(184, 150, 78, 0.2);
 }
 
-.lightbox-close {
+.lightbox-actions {
   position: absolute;
   top: 1rem;
   right: 1rem;
   z-index: 10;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.lightbox-action {
   background: rgba(9, 9, 11, 0.5);
   backdrop-filter: blur(8px);
   border: none;
@@ -112,7 +155,7 @@ watch(() => panel.value, (el) => {
   transition: all 0.2s ease;
 }
 
-.lightbox-close:hover {
+.lightbox-action:hover {
   background: rgba(9, 9, 11, 0.8);
   color: var(--color-gold, #B8964E);
 }

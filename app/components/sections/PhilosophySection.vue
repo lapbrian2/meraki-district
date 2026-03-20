@@ -1,11 +1,14 @@
 <template>
   <section ref="section" class="philosophy section section-dark">
     <div class="philosophy-bg-wrap">
-      <img
+      <NuxtImg
         src="/images/philosophy-bg.webp"
         alt=""
         class="philosophy-bg-image"
         loading="lazy"
+        decoding="async"
+        width="1920"
+        height="1080"
       />
       <div class="philosophy-bg-overlay" />
     </div>

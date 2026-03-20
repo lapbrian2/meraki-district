@@ -15,7 +15,7 @@
           class="featured-card reveal"
         >
           <div class="featured-image">
-            <img :src="post.image" :alt="`${post.tag}: ${post.title}`" loading="lazy" @load="onImageLoad" />
+            <NuxtImg :src="post.image" :alt="`${post.tag}: ${post.title}`" loading="lazy" decoding="async" width="400" height="267" @load="onImageLoad" />
           </div>
           <div class="featured-content">
             <span class="featured-tag">{{ post.tag }}</span>

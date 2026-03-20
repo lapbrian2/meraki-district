@@ -2,12 +2,14 @@
   <div>
     <section ref="heroSection" class="page-hero section section-dark">
       <div class="page-hero-bg-wrap">
-        <img
+        <NuxtImg
           src="/images/the-road-hero.webp"
           alt=""
           class="page-hero-bg-image"
           loading="eager"
           fetchpriority="high"
+          width="1920"
+          height="1080"
         />
         <div class="page-hero-bg-overlay" />
       </div>

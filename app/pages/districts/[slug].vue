@@ -3,13 +3,15 @@
     <!-- Hero -->
     <section ref="heroSection" class="q-hero">
       <div class="q-hero-image-wrap">
-        <img
+        <NuxtImg
           :src="district.image"
           :alt="`${district.name} \u2014 ${district.type}`"
           class="q-hero-image"
           loading="eager"
           fetchpriority="high"
           decoding="async"
+          width="1400"
+          height="750"
         />
         <div class="q-hero-overlay" />
       </div>
@@ -97,7 +99,7 @@
             class="q-explore-card reveal"
           >
             <div class="q-explore-image">
-              <img :src="prev.image" :alt="prev.name" loading="lazy" />
+              <NuxtImg :src="prev.image" :alt="prev.name" loading="lazy" decoding="async" width="600" height="338" />
             </div>
             <div class="q-explore-info">
               <span class="q-explore-type">{{ prev.type }}</span>
@@ -110,7 +112,7 @@
             class="q-explore-card reveal"
           >
             <div class="q-explore-image">
-              <img :src="next.image" :alt="next.name" loading="lazy" />
+              <NuxtImg :src="next.image" :alt="next.name" loading="lazy" decoding="async" width="600" height="338" />
             </div>
             <div class="q-explore-info">
               <span class="q-explore-type">{{ next.type }}</span>

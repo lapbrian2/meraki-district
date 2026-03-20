@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
   sourcemap: false,
-  modules: ['@nuxtjs/sitemap', '@nuxt/content'],
+  modules: ['@nuxtjs/sitemap', '@nuxt/content', '@nuxt/image'],
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL || 'https://meraki-district.vercel.app',
   },
@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     { path: '~/components', pathPrefix: false },
   ],
   css: [
+    'modern-normalize/modern-normalize.css',
     '~/assets/css/variables.css',
     '~/assets/css/base.css',
     '~/assets/css/transitions.css',

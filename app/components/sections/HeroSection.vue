@@ -1,12 +1,14 @@
 <template>
   <section ref="hero" class="hero">
     <div class="hero-bg-wrap">
-      <img
+      <NuxtImg
         src="/images/hero-bg.webp"
         alt=""
         class="hero-bg-image"
         loading="eager"
         fetchpriority="high"
+        width="1920"
+        height="1080"
       />
       <div class="hero-bg-overlay" />
     </div>

@@ -19,11 +19,14 @@
           :class="[`inst-${inst.layout}`]"
         >
           <div class="inst-image-wrap reveal-image">
-            <img
+            <NuxtImg
               class="inst-image"
               :src="inst.image"
               :alt="`${inst.name} — ${inst.type}`"
               loading="lazy"
+              decoding="async"
+              width="600"
+              height="400"
             />
           </div>
           <div class="inst-content reveal">

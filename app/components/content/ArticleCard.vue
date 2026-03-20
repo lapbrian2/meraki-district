@@ -2,11 +2,14 @@
   <article class="article-card">
     <NuxtLink :to="articlePath" class="article-card-link">
       <div class="article-card-image">
-        <img
+        <NuxtImg
           ref="imgRef"
           :src="article.image"
           :alt="article.tag + ': ' + article.title"
           loading="lazy"
+          decoding="async"
+          width="400"
+          height="267"
           @load="onImageLoad"
           @error="onImageLoad"
         />

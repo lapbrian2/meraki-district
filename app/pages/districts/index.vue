@@ -21,7 +21,7 @@
           @click="openDistrict(d)"
         >
           <div class="q-img">
-            <img :src="d.image" :alt="d.name" loading="lazy">
+            <NuxtImg :src="d.image" :alt="d.name" loading="lazy" decoding="async" width="600" height="375" />
             <span class="q-number">{{ d.number }}</span>
             <div class="q-overlay">
               <span class="q-peek">View details</span>
