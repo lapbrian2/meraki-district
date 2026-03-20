@@ -57,16 +57,16 @@
 useHead({
   title: 'Meraki Road \u2014 Where craft meets culture',
   meta: [
-    { name: 'description', content: 'A cultural ecosystem for AI-native creators. Ten districts, one road, a new standard for creative practice.' },
+    { name: 'description', content: 'A cultural ecosystem for AI-native creators. Eleven districts, one road, a new standard for creative practice.' },
     { property: 'og:title', content: 'Meraki Road \u2014 Where craft meets culture' },
   ],
 })
 
 useSeoMeta({
   ogTitle: 'Meraki Road \u2014 Where craft meets culture',
-  ogDescription: 'A cultural ecosystem for AI-native creators. Ten districts, one road, a new standard for creative practice.',
+  ogDescription: 'A cultural ecosystem for AI-native creators. Eleven districts, one road, a new standard for creative practice.',
   twitterTitle: 'Meraki Road \u2014 Where craft meets culture',
-  twitterDescription: 'A cultural ecosystem for AI-native creators. Ten districts, one road, a new standard for creative practice.',
+  twitterDescription: 'A cultural ecosystem for AI-native creators. Eleven districts, one road, a new standard for creative practice.',
 })
 
 interface Artist {
@@ -91,37 +91,37 @@ const featuredArtists: Artist[] = [
     name: 'Sable Chen',
     discipline: 'Visual Art & AI',
     bio: 'Working at the intersection of machine vision and traditional painting. Her neural portraits have been exhibited at MoMA PS1 and the Serpentine\u2014each piece a negotiation between what the model sees and what the hand knows.',
-    image: '/images/quarters/voight-studio.webp',
+    image: '/images/districts/voight-studio.webp',
   },
   {
     name: 'Tom\u00e1s Vega',
     discipline: 'Generative Architecture',
     bio: 'Computational designer building impossible structures that exist between algorithm and intuition. His parametric pavilions collapse the boundary between built environment and generative art.',
-    image: '/images/quarters/meridian.webp',
+    image: '/images/districts/meridian.webp',
   },
   {
     name: 'Maren Aoki',
     discipline: 'Creative Technology',
     bio: 'Former systems architect turned interactive artist. Her installations translate human presence into light, sound, and data\u2014making the invisible infrastructure of connection tangible.',
-    image: '/images/quarters/the-provenance.webp',
+    image: '/images/districts/the-provenance.webp',
   },
   {
     name: 'Khalil Okonkwo',
     discipline: 'Digital Sculpture',
     bio: 'Sculptor working in volumetric capture and photogrammetry. His pieces preserve disappearing cultural artifacts as living 3D archives\u2014part preservation, part meditation on impermanence.',
-    image: '/images/quarters/common-ground.webp',
+    image: '/images/districts/common-ground.webp',
   },
   {
     name: 'In\u00e9s Moreau',
     discipline: 'Motion & Film',
     bio: 'Director and motion designer whose work lives in the space between documentary and generative cinema. Her AI-assisted films have screened at Tribeca and Rotterdam.',
-    image: '/images/quarters/basecamp.webp',
+    image: '/images/districts/basecamp.webp',
   },
   {
     name: 'Zuri Nakamura',
     discipline: 'Mixed Media & Sound',
     bio: 'Sound artist and visual composer who treats frequency as material. Her immersive environments pair generative audio with physical installations, creating spaces that listen back.',
-    image: '/images/quarters/the-mint.webp',
+    image: '/images/districts/the-mint.webp',
   },
 ]
 </script>

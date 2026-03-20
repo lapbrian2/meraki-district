@@ -164,7 +164,7 @@ onUnmounted(() => {
   font-weight: 500;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: #C4A05A;
+  color: var(--color-gold);
   margin-bottom: var(--space-3);
 }
 
@@ -277,7 +277,7 @@ onUnmounted(() => {
 }
 
 .seal-tier--gold .seal-tier-level {
-  color: #C4A05A;
+  color: var(--color-gold);
 }
 
 .seal-tier-name {

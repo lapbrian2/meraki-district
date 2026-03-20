@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest'
 import { districts, useDistrict } from '~/composables/useDistricts'
 
 describe('District data', () => {
-  it('has exactly 10 districts', () => {
-    expect(districts).toHaveLength(10)
+  it('has exactly 11 districts', () => {
+    expect(districts).toHaveLength(11)
   })
 
   it('all districts have required fields', () => {
@@ -27,10 +27,35 @@ describe('District data', () => {
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 
-  it('all numbers are sequential from 01 to 10', () => {
+  it('all numbers are sequential from 01 to 11', () => {
     districts.forEach((d, i) => {
       expect(d.number).toBe(String(i + 1).padStart(2, '0'))
     })
+  })
+
+  it('all image paths end in .webp', () => {
+    for (const d of districts) {
+      expect(d.image).toMatch(/\.webp$/)
+    }
+  })
+
+  it('all slugs are URL-safe', () => {
+    for (const d of districts) {
+      expect(d.slug).toMatch(/^[a-z0-9-]+$/)
+    }
+  })
+
+  it('all layouts are valid', () => {
+    const validLayouts = ['hero', 'wide', 'narrow', 'half', 'closer']
+    for (const d of districts) {
+      expect(validLayouts).toContain(d.layout)
+    }
+  })
+
+  it('all districts have exactly 4 offerings', () => {
+    for (const d of districts) {
+      expect(d.offerings).toHaveLength(4)
+    }
   })
 
   it('useDistrict returns correct district by slug', () => {

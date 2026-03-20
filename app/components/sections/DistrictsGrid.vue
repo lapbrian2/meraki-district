@@ -1,16 +1,16 @@
 <template>
-  <section ref="section" class="quarters">
-    <div class="quarters-hero section-dark">
-      <div class="section-wide quarters-hero-content">
+  <section ref="section" class="districts">
+    <div class="districts-hero section-dark">
+      <div class="section-wide districts-hero-content">
         <p class="overline reveal">The Ecosystem</p>
-        <h2 class="quarters-title word-reveal">
-          Ten districts along one road.
+        <h2 class="districts-title word-reveal">
+          Eleven districts along one road.
         </h2>
       </div>
     </div>
-    <div class="section-wide quarters-body">
+    <div class="section-wide districts-body">
 
-      <div class="quarters-grid">
+      <div class="districts-grid">
         <NuxtLink
           v-for="inst in districts"
           :key="inst.name"
@@ -122,18 +122,18 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.quarters-hero {
+.districts-hero {
   position: relative;
   overflow: hidden;
   padding: var(--space-24) var(--content-padding) var(--space-12);
 }
 
-.quarters-body {
+.districts-body {
   background-color: var(--color-background);
   padding: var(--space-12) var(--content-padding) var(--space-16);
 }
 
-.quarters-title {
+.districts-title {
   margin-top: var(--space-4);
   font-size: var(--text-h1);
   line-height: var(--leading-snug);
@@ -141,7 +141,7 @@ onUnmounted(() => {
 }
 
 /* ─── Grid ─── */
-.quarters-grid {
+.districts-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: var(--space-4);
@@ -291,15 +291,15 @@ onUnmounted(() => {
 
 /* ─── Responsive ─── */
 @media (max-width: 768px) {
-  .quarters-hero {
+  .districts-hero {
     padding: var(--space-16) var(--content-padding) var(--space-8);
   }
 
-  .quarters-body {
+  .districts-body {
     padding: var(--space-8) var(--content-padding) var(--space-16);
   }
 
-  .quarters-grid {
+  .districts-grid {
     grid-template-columns: 1fr;
     gap: var(--space-8);
   }
@@ -318,7 +318,7 @@ onUnmounted(() => {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .quarters-grid {
+  .districts-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-8);
   }

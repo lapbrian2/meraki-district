@@ -4,7 +4,7 @@
     <div class="nav-hero">
       <p class="overline">Explore</p>
       <h1>The <span>Districts</span></h1>
-      <p class="nav-subtitle">Ten districts, each with its own mandate. One shared infrastructure.</p>
+      <p class="nav-subtitle">Eleven districts, each with its own mandate. One shared infrastructure.</p>
     </div>
 
     <!-- Districts Grid -->
