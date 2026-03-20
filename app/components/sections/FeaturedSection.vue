@@ -94,7 +94,8 @@ onUnmounted(() => {
 })
 
 function onImageLoad(e: Event) {
-  (e.target as HTMLElement).classList.add("loaded")
+  const el = e.target as HTMLElement | null
+  el?.classList.add('loaded')
 }
 </script>
 

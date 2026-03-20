@@ -51,15 +51,17 @@ function formatDate(dateStr: string) {
   return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
 }
 
-const imgRef = ref<HTMLImageElement | null>(null)
+const imgRef = ref<any>(null)
 
 function onImageLoad(e: Event) {
-  (e.target as HTMLElement).classList.add('loaded')
+  const el = e.target as HTMLElement | null
+  el?.classList.add('loaded')
 }
 
 onMounted(() => {
-  if (imgRef.value?.complete) {
-    imgRef.value.classList.add('loaded')
+  const el = imgRef.value?.$el as HTMLImageElement | undefined
+  if (el?.complete) {
+    el.classList.add('loaded')
   }
 })
 </script>
