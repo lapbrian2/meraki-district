@@ -6,6 +6,7 @@
       <slot />
     </main>
     <AppFooter />
+    <SocialSidebar />
   </div>
 </template>
 
