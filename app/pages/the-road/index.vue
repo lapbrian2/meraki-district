@@ -241,6 +241,15 @@ useSeoMeta({
   color: var(--color-gold);
 }
 
+/* Last card in a 3-col grid: span 2 cols if alone, or full width if single remainder */
+.articles-grid > .article-card:last-child:nth-child(3n + 1) {
+  grid-column: 1 / -1;
+}
+
+.articles-grid > .article-card:last-child:nth-child(3n + 1) :deep(.article-card-image) {
+  aspect-ratio: 21 / 9;
+}
+
 @media (min-width: 601px) and (max-width: 1024px) {
   .articles-grid {
     grid-template-columns: repeat(2, 1fr);

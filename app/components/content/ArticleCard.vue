@@ -3,10 +3,12 @@
     <NuxtLink :to="articlePath" class="article-card-link">
       <div class="article-card-image">
         <img
+          ref="imgRef"
           :src="article.image"
           :alt="article.tag + ': ' + article.title"
           loading="lazy"
           @load="onImageLoad"
+          @error="onImageLoad"
         />
       </div>
       <div class="article-card-content">
@@ -46,9 +48,17 @@ function formatDate(dateStr: string) {
   return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
 }
 
+const imgRef = ref<HTMLImageElement | null>(null)
+
 function onImageLoad(e: Event) {
   (e.target as HTMLElement).classList.add('loaded')
 }
+
+onMounted(() => {
+  if (imgRef.value?.complete) {
+    imgRef.value.classList.add('loaded')
+  }
+})
 </script>
 
 <style scoped>
