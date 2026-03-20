@@ -98,6 +98,7 @@
   --color-text-muted: #71717A;
   --color-border: #27272A;
   --rule-color: rgba(250, 250, 249, 0.12);
+  --color-gold-accessible: #B8964E;
 
   /* Dark sections in dark mode get slightly lighter to maintain contrast */
   --color-dark-bg: #111113;
@@ -115,6 +116,7 @@
     --color-text-muted: #71717A;
     --color-border: #27272A;
     --rule-color: rgba(250, 250, 249, 0.12);
+    --color-gold-accessible: #B8964E;
     --color-dark-bg: #111113;
   }
 }

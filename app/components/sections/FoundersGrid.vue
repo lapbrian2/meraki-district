@@ -66,9 +66,9 @@ onMounted(async () => {
         { clipPath: fromClip },
         {
           clipPath: 'inset(0% 0% 0% 0%)',
-          duration: 1.2,
+          duration: 1.1,
           ease: 'power3.inOut',
-          delay: i * 0.2,
+          delay: i * 0.15,
           scrollTrigger: {
             trigger: el,
             start: 'top 85%',

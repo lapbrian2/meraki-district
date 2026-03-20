@@ -104,7 +104,7 @@ onMounted(async () => {
           {
             clipPath: 'inset(0% 0% 0% 0%)',
             duration: 1.1,
-            delay: colIndex * 0.12,
+            delay: colIndex * 0.15,
             ease: 'power3.inOut',
             scrollTrigger: {
               trigger: card.el,

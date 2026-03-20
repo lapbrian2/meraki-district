@@ -129,7 +129,7 @@ watch(activeDistrict, (d) => {
   font-size: 0.6875rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--color-gold);
+  color: var(--color-gold-accessible);
   margin-bottom: 0.75rem;
 }
 
@@ -141,7 +141,7 @@ watch(activeDistrict, (d) => {
   margin-bottom: 0.75rem;
 }
 
-.nav-hero h1 span { color: var(--color-gold); }
+.nav-hero h1 span { color: var(--color-gold-accessible); }
 
 .nav-subtitle {
   font-size: 1rem;
@@ -247,7 +247,7 @@ watch(activeDistrict, (d) => {
   font-size: 0.5625rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--color-gold);
+  color: var(--color-gold-accessible);
   margin-bottom: 0.3rem;
   display: block;
 }

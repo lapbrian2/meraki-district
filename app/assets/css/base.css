@@ -130,7 +130,7 @@ img, video {
   color: var(--color-dark-text);
 }
 .section-dark .overline {
-  color: #C4A05A;
+  color: var(--color-gold);
 }
 
 

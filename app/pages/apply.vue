@@ -259,7 +259,7 @@ useSeoMeta({
 .criteria-number {
   font-family: var(--font-mono);
   font-size: var(--text-caption);
-  color: var(--color-gold);
+  color: var(--color-gold-accessible);
   display: block;
   margin-bottom: var(--space-3);
 }
