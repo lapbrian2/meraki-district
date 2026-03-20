@@ -42,20 +42,24 @@
     <!-- Mobile logo (always visible on mobile) -->
     <NuxtLink to="/" class="nav-mobile-logo" :class="{ inverted: mobileOpen }">Meraki Road</NuxtLink>
 
-    <!-- Theme toggle -->
-    <button
-      class="nav-theme-toggle"
-      :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
-      @click="toggle"
-    >
-      <svg v-if="isDark" width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.2"/>
-        <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-      </svg>
-      <svg v-else width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path d="M14 9.5A6.5 6.5 0 016.5 2 5.5 5.5 0 1014 9.5z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
+    <!-- Theme toggle (ClientOnly prevents SSR hydration mismatch on icon swap) -->
+    <ClientOnly>
+      <button
+        class="nav-theme-toggle"
+        :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+        :title="isDark ? 'Light mode' : 'Dark mode'"
+        @click="toggle"
+      >
+        <svg v-if="isDark" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <svg v-else width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M14 9.5A6.5 6.5 0 016.5 2 5.5 5.5 0 1014 9.5z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="nav-theme-label">{{ isDark ? 'Light' : 'Dark' }}</span>
+      </button>
+    </ClientOnly>
 
     <!-- Scroll progress bar -->
     <ScrollProgress />
@@ -492,11 +496,10 @@ onUnmounted(() => {
   bottom: var(--space-6);
   right: var(--space-6);
   z-index: 99;
-  width: 36px;
-  height: 36px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
   background: var(--color-background);
   border: 1px solid var(--color-border);
   color: var(--color-text-muted);
@@ -506,6 +509,13 @@ onUnmounted(() => {
 .nav-theme-toggle:hover {
   color: var(--color-gold);
   border-color: var(--color-gold);
+}
+
+.nav-theme-label {
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* SCROLL PROGRESS - positioned at nav bottom */
