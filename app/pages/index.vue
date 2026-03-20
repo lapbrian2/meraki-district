@@ -162,19 +162,18 @@ const featuredArtists: Artist[] = [
 .fa-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--color-rule, rgba(184,150,78,0.15));
-  border: 1px solid var(--color-rule, rgba(184,150,78,0.15));
+  gap: clamp(1rem, 2vw, 1.5rem);
 }
 
 .fa-card {
   background: var(--color-background, #FAFAF9);
+  border: 1px solid var(--color-rule, rgba(184,150,78,0.15));
   overflow: hidden;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
 }
 
-.fa-card:hover { background: var(--color-surface, #F4F4F5); }
+.fa-card:hover { background: var(--color-surface, #F4F4F5); border-color: var(--color-gold); }
 .fa-card:hover .fa-image img { transform: scale(1.03); }
 .fa-card:hover .fa-overlay { opacity: 1; }
 

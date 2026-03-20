@@ -100,7 +100,7 @@ function openDistrict(d: District) {
 useHead({
   title: 'Districts \u2014 Meraki Road',
   meta: [
-    { name: 'description', content: 'Navigate the ten districts of Meraki Road. Find your way into a cultural ecosystem built for AI-native creators.' },
+    { name: 'description', content: 'Navigate the eleven districts of Meraki Road. Find your way into a cultural ecosystem built for AI-native creators.' },
   ],
 })
 
@@ -176,20 +176,19 @@ watch(activeDistrict, (d) => {
 .q-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: var(--color-rule, rgba(184,150,78,0.15));
-  border: 1px solid var(--color-rule, rgba(184,150,78,0.15));
+  gap: clamp(1rem, 2vw, 1.5rem);
 }
 
 .q-card {
   background: var(--color-background, #FAFAF9);
+  border: 1px solid var(--color-rule, rgba(184,150,78,0.15));
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-.q-card:hover { background: var(--color-surface, #F4F4F5); }
+.q-card:hover { background: var(--color-surface, #F4F4F5); border-color: var(--color-gold); }
 .q-card:hover .q-img img { transform: scale(1.03); }
 .q-card:hover .q-overlay { opacity: 1; }
 
@@ -366,9 +365,21 @@ watch(activeDistrict, (d) => {
 
 .link-card--accent h3 { color: var(--color-gold); }
 
+/* Last card spans full width when odd count */
+.q-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.q-card:last-child:nth-child(odd) .q-img {
+  aspect-ratio: 21 / 10;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .q-grid { grid-template-columns: 1fr; }
   .links-grid { grid-template-columns: 1fr; }
+  .q-card:last-child:nth-child(odd) .q-img {
+    aspect-ratio: 16 / 10;
+  }
 }
 </style>

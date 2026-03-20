@@ -144,7 +144,7 @@ onUnmounted(() => {
 .districts-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: var(--space-4);
+  gap: clamp(1.5rem, 2.5vw, 2.5rem);
 }
 
 /* ─── Card base ─── */
@@ -222,7 +222,7 @@ onUnmounted(() => {
 
 /* ─── Content ─── */
 .inst-content {
-  padding-right: var(--space-4);
+  padding: var(--space-2) var(--space-4) var(--space-4) 0;
 }
 
 .inst-meta {
