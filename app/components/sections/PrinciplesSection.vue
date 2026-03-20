@@ -1,19 +1,27 @@
 <template>
   <section ref="section" class="principles section">
     <div class="section-default">
-      <p class="overline reveal">How We Work</p>
-      <h2 class="principles-title word-reveal">Guiding principles</h2>
+      <div class="principles-layout">
+        <div class="principles-sticky">
+          <p class="overline reveal">How We Work</p>
+          <h2 class="principles-title word-reveal">Guiding principles</h2>
+          <p class="principles-intro reveal">
+            Three convictions that shape every decision at Meraki Road &mdash; from
+            what we publish to who we invite.
+          </p>
+        </div>
 
-      <div class="principles-grid">
-        <article
-          v-for="principle in principles"
-          :key="principle.title"
-          class="principle-card"
-        >
-          <span class="principle-number">{{ principle.number }}</span>
-          <h3 class="principle-title">{{ principle.title }}</h3>
-          <p class="principle-body">{{ principle.body }}</p>
-        </article>
+        <div class="principles-scroll">
+          <article
+            v-for="principle in principles"
+            :key="principle.title"
+            class="principle-card"
+          >
+            <span class="principle-number">{{ principle.number }}</span>
+            <h3 class="principle-title">{{ principle.title }}</h3>
+            <p class="principle-body">{{ principle.body }}</p>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -45,11 +53,10 @@ onMounted(async () => {
   ctx = gsap.context(() => {
     const cards = section.value!.querySelectorAll('.principle-card')
 
-    cards.forEach((card, i) => {
+    cards.forEach((card) => {
       const number = card.querySelector('.principle-number')
       const title = card.querySelector('.principle-title')
       const body = card.querySelector('.principle-body')
-      const borderTop = card
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -108,14 +115,33 @@ const principles = [
   background-color: var(--color-surface);
 }
 
-.principles-title {
-  margin-top: var(--space-4);
-  margin-bottom: var(--space-16);
+.principles-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: start;
 }
 
-.principles-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.principles-sticky {
+  position: sticky;
+  top: calc(var(--space-16) + 3rem);
+}
+
+.principles-title {
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.principles-intro {
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 36ch;
+}
+
+.principles-scroll {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-12);
 }
 
@@ -160,16 +186,17 @@ const principles = [
   line-height: var(--leading-relaxed);
 }
 
-@media (min-width: 601px) and (max-width: 1024px) {
-  .principles-grid {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 768px) {
+  .principles-layout {
+    grid-template-columns: 1fr;
     gap: var(--space-8);
   }
-}
 
-@media (max-width: 600px) {
-  .principles-grid {
-    grid-template-columns: 1fr;
+  .principles-sticky {
+    position: static;
+  }
+
+  .principles-scroll {
     gap: var(--space-8);
   }
 }

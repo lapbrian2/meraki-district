@@ -188,7 +188,7 @@ watch(activeDistrict, (d) => {
   transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-.q-card:hover { background: var(--color-surface, #F4F4F5); border-color: var(--color-gold); }
+.q-card:hover { background: var(--color-surface, #F4F4F5); border-color: var(--color-gold); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06); }
 .q-card:hover .q-img img { transform: scale(1.03); }
 .q-card:hover .q-overlay { opacity: 1; }
 

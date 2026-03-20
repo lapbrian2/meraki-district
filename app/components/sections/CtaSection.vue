@@ -1,19 +1,26 @@
 <template>
-  <section ref="section" class="cta section section-dark">
-    <div class="cta-bg-pattern" aria-hidden="true">
-      <div class="cta-line" v-for="n in 5" :key="n" />
+  <section ref="section" class="cta">
+    <div class="cta-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,70 1440,60 L1440,0 L0,0 Z" />
+      </svg>
     </div>
     <div class="section-narrow cta-inner">
-      <p class="overline reveal">Join the District</p>
+      <p class="cta-overline reveal">Join Meraki Road</p>
       <h2 class="cta-title word-reveal">
-        The district is open.
+        The road is open.
       </h2>
       <p class="cta-body reveal">
         We are accepting applications from creators, researchers, and builders
         with a demonstrated body of work. No follower counts. No application fees.
         Just evidence of practice.
       </p>
-      <NuxtLink to="/apply" class="cta-button reveal">Apply Now</NuxtLink>
+      <NuxtLink to="/apply" class="cta-button reveal">Apply Now &rarr;</NuxtLink>
+    </div>
+    <div class="cta-wave cta-wave--bottom" aria-hidden="true">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path d="M0,60 C360,0 720,120 1080,60 C1260,30 1380,50 1440,60 L1440,120 L0,120 Z" />
+      </svg>
     </div>
   </section>
 </template>
@@ -31,31 +38,34 @@ useMagnetic(section, '.cta-button', { strength: 0.25 })
 
 <style scoped>
 .cta {
-  padding-top: var(--space-24);
-  padding-bottom: var(--space-24);
+  background: var(--color-gold);
+  padding: var(--space-24) var(--content-padding);
   position: relative;
   overflow: hidden;
 }
 
-.cta-bg-pattern {
+.cta-wave {
   position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 var(--content-padding);
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 80px;
   pointer-events: none;
 }
 
-.cta-line {
-  width: 1px;
+.cta-wave svg {
+  display: block;
+  width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(184, 150, 78, 0.06) 30%,
-    rgba(184, 150, 78, 0.06) 70%,
-    transparent 100%
-  );
+}
+
+.cta-wave path {
+  fill: var(--color-dark-bg, #18181B);
+}
+
+.cta-wave--bottom {
+  top: auto;
+  bottom: -1px;
 }
 
 .cta-inner {
@@ -67,18 +77,29 @@ useMagnetic(section, '.cta-button', { strength: 0.25 })
   z-index: 1;
 }
 
+.cta-overline {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: rgba(9, 9, 11, 0.6);
+  margin-bottom: var(--space-4);
+}
+
 .cta-title {
   font-size: var(--text-h1);
-  margin-top: var(--space-6);
+  font-weight: 300;
+  color: var(--color-ink);
   margin-bottom: var(--space-6);
-  color: var(--color-dark-text);
 }
 
 .cta-body {
-  color: var(--color-dark-muted);
+  color: rgba(9, 9, 11, 0.75);
   margin-bottom: var(--space-12);
   line-height: var(--leading-relaxed);
   max-width: 45ch;
+  font-size: var(--text-body);
 }
 
 .cta-button {
@@ -87,28 +108,28 @@ useMagnetic(section, '.cta-button', { strength: 0.25 })
   font-weight: 500;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--color-gold);
+  color: var(--color-ink);
   padding: var(--space-4) var(--space-12);
-  border: 1px solid var(--color-gold);
+  border: 1.5px solid var(--color-ink);
   background-image: none;
+  background-color: transparent;
   transition: background-color var(--duration-normal) ease,
               color var(--duration-normal) ease;
 }
 
 .cta-button:hover {
-  background-color: var(--color-gold);
-  color: var(--color-ink);
+  background-color: var(--color-ink);
+  color: var(--color-gold);
 }
 
 .cta-button:focus-visible {
-  outline: 2px solid var(--color-dark-text);
+  outline: 2px solid var(--color-ink);
   outline-offset: 4px;
 }
 
 @media (max-width: 768px) {
   .cta {
-    padding-top: var(--space-16);
-    padding-bottom: var(--space-16);
+    padding: var(--space-16) var(--content-padding);
   }
 
   .cta-button {
@@ -117,8 +138,8 @@ useMagnetic(section, '.cta-button', { strength: 0.25 })
     padding: var(--space-4) var(--space-6);
   }
 
-  .cta-bg-pattern {
-    display: none;
+  .cta-wave {
+    height: 48px;
   }
 }
 </style>

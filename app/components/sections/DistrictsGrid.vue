@@ -152,6 +152,14 @@ onUnmounted(() => {
   cursor: pointer;
   position: relative;
   background-image: none;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inst-card:hover {
+  border-color: var(--color-gold);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
 }
 
 .inst-card:hover .inst-image {
@@ -169,7 +177,6 @@ onUnmounted(() => {
 /* ─── Image container ─── */
 .inst-image-wrap {
   overflow: hidden;
-  margin-bottom: var(--space-3);
 }
 
 .inst-image {
@@ -222,7 +229,7 @@ onUnmounted(() => {
 
 /* ─── Content ─── */
 .inst-content {
-  padding: var(--space-2) var(--space-4) var(--space-4) 0;
+  padding: var(--space-3) var(--space-4) var(--space-4);
 }
 
 .inst-meta {
