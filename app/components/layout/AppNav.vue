@@ -402,7 +402,7 @@ onUnmounted(() => {
   right: 0;
   bottom: 0;
   z-index: 100;
-  background: var(--color-ink);
+  background: var(--color-dark-bg, #09090B);
   clip-path: circle(0% at calc(100% - 2rem) 1.5rem);
   visibility: hidden;
   display: flex;

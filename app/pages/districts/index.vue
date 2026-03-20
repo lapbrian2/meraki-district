@@ -283,8 +283,8 @@ watch(activeDistrict, (d) => {
 /* Editorial Card */
 .editorial-card {
   display: block;
-  background: var(--color-ink, #09090B);
-  color: var(--color-background, #FAFAF9);
+  background: var(--color-dark-bg, #09090B);
+  color: var(--color-dark-text, #FAFAF9);
   text-decoration: none;
   padding: var(--space-8) var(--space-12);
   transition: background 0.3s ease;
@@ -310,7 +310,7 @@ watch(activeDistrict, (d) => {
 
 .editorial-content p {
   font-size: 0.875rem;
-  color: var(--color-text-secondary, #A1A1AA);
+  color: var(--color-dark-muted, #A1A1AA);
   line-height: 1.6;
   max-width: 600px;
   margin-bottom: 1rem;

@@ -92,7 +92,7 @@ onUnmounted(() => {
   padding: var(--space-24) var(--content-padding);
   position: relative;
   overflow: hidden;
-  background: var(--color-ink);
+  background: #09090B;
 }
 
 .hero-bg-wrap {
@@ -116,10 +116,10 @@ onUnmounted(() => {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    color-mix(in srgb, var(--color-ink) 40%, transparent) 0%,
-    color-mix(in srgb, var(--color-ink) 15%, transparent) 40%,
-    color-mix(in srgb, var(--color-ink) 30%, transparent) 70%,
-    color-mix(in srgb, var(--color-ink) 70%, transparent) 100%
+    rgba(9, 9, 11, 0.4) 0%,
+    rgba(9, 9, 11, 0.15) 40%,
+    rgba(9, 9, 11, 0.3) 70%,
+    rgba(9, 9, 11, 0.7) 100%
   );
 }
 
