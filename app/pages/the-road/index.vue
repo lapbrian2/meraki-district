@@ -44,7 +44,7 @@
               <p>The tools are changing faster than the conversations about them.</p>
             </blockquote>
             <p class="road-manifesto-body">
-              The Road is where Meraki District thinks in public. Long-form essays,
+              The Road is where Meraki Road thinks in public. Long-form essays,
               field dispatches, creator interviews, and cultural criticism for people
               who believe that making things well still matters\u2014even when
               (especially when) the tools make it easy to make things fast.
@@ -57,7 +57,7 @@
             <div class="road-manifesto-cta">
               <p class="road-manifesto-label">Get notified when we publish</p>
               <NuxtLink to="/apply" class="road-manifesto-button">
-                Join the district \u2192
+                Join Meraki Road \u2192
               </NuxtLink>
             </div>
           </div>
@@ -93,16 +93,16 @@ const { data: articles } = await useAsyncData('the-road-listing', () =>
 )
 
 useHead({
-  title: 'The Road \u2014 Meraki District',
+  title: 'The Road \u2014 Meraki Road',
   meta: [
     { name: 'description', content: 'Long-form storytelling and cultural criticism for the AI-native era.' },
   ],
 })
 
 useSeoMeta({
-  ogTitle: 'The Road \u2014 Meraki District',
+  ogTitle: 'The Road \u2014 Meraki Road',
   ogDescription: 'Long-form storytelling and cultural criticism for the AI-native era.',
-  twitterTitle: 'The Road \u2014 Meraki District',
+  twitterTitle: 'The Road \u2014 Meraki Road',
   twitterDescription: 'Long-form storytelling and cultural criticism for the AI-native era.',
 })
 </script>

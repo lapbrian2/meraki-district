@@ -4,7 +4,7 @@
       <div class="section-wide quarters-hero-content">
         <p class="overline reveal">The Ecosystem</p>
         <h2 class="quarters-title word-reveal">
-          Ten quarters within one district.
+          Ten districts along one road.
         </h2>
       </div>
     </div>
@@ -12,9 +12,9 @@
 
       <div class="quarters-grid">
         <NuxtLink
-          v-for="inst in quarters"
+          v-for="inst in districts"
           :key="inst.name"
-          :to="`/quarters/${inst.slug}`"
+          :to="`/districts/${inst.slug}`"
           class="inst-card"
           :class="[`inst-${inst.layout}`]"
         >
@@ -47,7 +47,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { useTilt } from '~/composables/useInteractions'
 import { useWordReveal } from '~/composables/useWordReveal'
-import { quarters } from '~/composables/useQuarters'
+import { districts } from '~/composables/useDistricts'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.08 })

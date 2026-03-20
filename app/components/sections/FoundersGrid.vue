@@ -85,13 +85,13 @@ const founders = [
   {
     name: 'Brian Lapinski',
     role: 'Co-founder',
-    bio: "Brian builds systems. A developer who treats AI as a creative partner, he recognises the infrastructure that creative practice requires. Meraki District grew from his conviction that the creators defining this era need quarters that match their ambition.",
+    bio: "Brian builds systems. A developer who treats AI as a creative partner, he recognises the infrastructure that creative practice requires. Meraki Road grew from his conviction that the creators defining this era need districts that match their ambition.",
     image: '/images/founders/brian.jpg',
   },
   {
     name: 'Rachel Gaia',
     role: 'Co-founder',
-    bio: "Rachel builds worlds. A classically trained musician turned design entrepreneur turned AI-native artist, she\u2019s spent decades learning what it means to make something worth experiencing. At Meraki District, she shapes the creative vision and editorial voice that gives the ecosystem its identity.",
+    bio: "Rachel builds worlds. A classically trained musician turned design entrepreneur turned AI-native artist, she\u2019s spent decades learning what it means to make something worth experiencing. At Meraki Road, she shapes the creative vision and editorial voice that gives the ecosystem its identity.",
     image: '/images/founders/rachel.webp',
   },
 ]

@@ -114,7 +114,7 @@ const readingTime = computed(() => {
 
 // SEO
 useHead(computed(() => ({
-  title: article.value ? article.value.title + ' \u2014 The Road \u2014 Meraki District' : 'The Road \u2014 Meraki District',
+  title: article.value ? article.value.title + ' \u2014 The Road \u2014 Meraki Road' : 'The Road \u2014 Meraki Road',
   meta: article.value ? [
     { name: 'description', content: article.value.excerpt },
   ] : [],

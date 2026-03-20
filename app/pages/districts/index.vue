@@ -3,34 +3,34 @@
 
     <div class="nav-hero">
       <p class="overline">Explore</p>
-      <h1>The <span>District</span></h1>
-      <p class="nav-subtitle">Ten quarters, each with its own mandate. One shared infrastructure.</p>
+      <h1>The <span>Districts</span></h1>
+      <p class="nav-subtitle">Ten districts, each with its own mandate. One shared infrastructure.</p>
     </div>
 
-    <!-- Quarters Grid -->
+    <!-- Districts Grid -->
     <section class="nav-section">
       <div class="nav-section-header">
-        <h2>Quarters</h2>
-        <p>Each quarter operates independently within a shared creative infrastructure.</p>
+        <h2>Districts</h2>
+        <p>Each district operates independently within a shared creative infrastructure.</p>
       </div>
       <div class="q-grid">
         <div
-          v-for="q in quarters"
-          :key="q.slug"
+          v-for="d in districts"
+          :key="d.slug"
           class="q-card"
-          @click="openQuarter(q)"
+          @click="openDistrict(d)"
         >
           <div class="q-img">
-            <img :src="q.image" :alt="q.name" loading="lazy">
-            <span class="q-number">{{ q.number }}</span>
+            <img :src="d.image" :alt="d.name" loading="lazy">
+            <span class="q-number">{{ d.number }}</span>
             <div class="q-overlay">
               <span class="q-peek">View details</span>
             </div>
           </div>
           <div class="q-info">
-            <span class="q-type">{{ q.type }}</span>
-            <h3>{{ q.name }}</h3>
-            <p>{{ q.description }}</p>
+            <span class="q-type">{{ d.type }}</span>
+            <h3>{{ d.name }}</h3>
+            <p>{{ d.description }}</p>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
         </NuxtLink>
         <NuxtLink to="/apply" class="link-card link-card--accent">
           <h3>Apply</h3>
-          <p>Join the district. For creators ready to go further.</p>
+          <p>Join Meraki Road. For creators ready to go further.</p>
           <span class="card-link">Apply now &rarr;</span>
         </NuxtLink>
       </div>
@@ -73,41 +73,41 @@
 
     <!-- Lightbox -->
     <LightboxOverlay
-      :open="!!activeQuarter"
-      :image="activeQuarter?.image"
-      :overline="activeQuarter?.type"
-      :title="activeQuarter?.name || ''"
-      :subtitle="'Quarter ' + (activeQuarter?.number || '')"
-      :body="activeQuarter?.longDescription || ''"
-      :link="activeQuarter ? '/quarters/' + activeQuarter.slug : ''"
-      link-label="Visit quarter"
-      @close="activeQuarter = null"
+      :open="!!activeDistrict"
+      :image="activeDistrict?.image"
+      :overline="activeDistrict?.type"
+      :title="activeDistrict?.name || ''"
+      :subtitle="'District ' + (activeDistrict?.number || '')"
+      :body="activeDistrict?.longDescription || ''"
+      :link="activeDistrict ? '/districts/' + activeDistrict.slug : ''"
+      link-label="Visit district"
+      @close="activeDistrict = null"
     />
 
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Quarter } from '~/composables/useQuarters'
+import type { District } from '~/composables/useDistricts'
 
-const { quarters } = useQuarters()
-const activeQuarter = ref<Quarter | null>(null)
+const { districts } = useDistricts()
+const activeDistrict = ref<District | null>(null)
 
-function openQuarter(q: Quarter) {
-  activeQuarter.value = q
+function openDistrict(d: District) {
+  activeDistrict.value = d
 }
 
 useHead({
-  title: 'Quarters \u2014 Meraki District',
+  title: 'Districts \u2014 Meraki Road',
   meta: [
-    { name: 'description', content: 'Navigate the ten quarters of Meraki District. Find your way into a cultural ecosystem built for AI-native creators.' },
+    { name: 'description', content: 'Navigate the ten districts of Meraki Road. Find your way into a cultural ecosystem built for AI-native creators.' },
   ],
 })
 
 // Lock scroll when lightbox is open
-watch(activeQuarter, (q) => {
+watch(activeDistrict, (d) => {
   if (import.meta.client) {
-    document.body.style.overflow = q ? 'hidden' : ''
+    document.body.style.overflow = d ? 'hidden' : ''
   }
 })
 </script>

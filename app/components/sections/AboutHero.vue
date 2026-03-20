@@ -3,10 +3,10 @@
     <div class="section-default">
       <p class="overline reveal">About</p>
       <h1 class="about-hero-title word-reveal">
-        The people behind the district.
+        The people behind the road.
       </h1>
       <p class="about-hero-sub reveal">
-        Meraki District was founded by two people who arrived at the same
+        Meraki Road was founded by two people who arrived at the same
         conclusion from opposite directions: the creators shaping this era
         deserve better infrastructure than what exists.
       </p>

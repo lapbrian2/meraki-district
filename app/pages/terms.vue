@@ -24,7 +24,7 @@
             </p>
             <p>
               These Terms constitute a legally binding agreement between you and Meraki Productions Ltd.
-              ("Meraki District," "we," "us," or "our"). We may update these Terms from time to time.
+              ("Meraki Road," "we," "us," or "our"). We may update these Terms from time to time.
               Continued use of the Site after changes constitutes acceptance of the revised Terms.
             </p>
           </div>
@@ -32,7 +32,7 @@
           <div class="legal-section">
             <h2>What This Site Is</h2>
             <p>
-              Meraki District is a cultural ecosystem for AI-native creators. The Site currently serves
+              Meraki Road is a cultural ecosystem for AI-native creators. The Site currently serves
               as an informational platform and waitlist for upcoming services. We do not currently offer
               user accounts, paid services, or transactional functionality through the Site.
             </p>
@@ -51,7 +51,7 @@
               <li>Use the Site in any way that violates applicable laws or regulations.</li>
               <li>Attempt to gain unauthorized access to any part of the Site, its servers, or any connected systems.</li>
               <li>Interfere with or disrupt the Site’s infrastructure, including through automated scraping, denial-of-service attacks, or injection of malicious code.</li>
-              <li>Impersonate Meraki District, its team members, or any other person or entity.</li>
+              <li>Impersonate Meraki Road, its team members, or any other person or entity.</li>
               <li>Use the Site to transmit spam, unsolicited messages, or misleading content.</li>
               <li>Reproduce, distribute, or commercially exploit any part of the Site without prior written permission.</li>
             </ul>
@@ -64,7 +64,7 @@
             <h2>Waitlist and Communications</h2>
             <p>
               When you submit your email address to join our waitlist, you consent to receive
-              communications from Meraki District related to our launch, updates, and opportunities.
+              communications from Meraki Road related to our launch, updates, and opportunities.
               You may unsubscribe at any time using the link provided in each email or by contacting
               us directly.
             </p>
@@ -86,7 +86,7 @@
             </p>
             <p>
               You may not copy, modify, distribute, sell, or create derivative works from any part of
-              the Site without our prior written consent. "Meraki District" and the Meraki District logo
+              the Site without our prior written consent. "Meraki Road" and the Meraki Road logo
               are trademarks of Meraki Productions Ltd.
             </p>
 
@@ -202,17 +202,17 @@
 
 <script setup lang="ts">
 useHead({
-  title: 'Terms of Service — Meraki District',
+  title: 'Terms of Service — Meraki Road',
   meta: [
-    { name: 'description', content: 'Terms of Service for Meraki District. The agreement governing your use of merakidistrict.ai and related services.' },
+    { name: 'description', content: 'Terms of Service for Meraki Road. The agreement governing your use of merakidistrict.ai and related services.' },
   ],
 })
 
 useSeoMeta({
-  ogTitle: 'Terms of Service — Meraki District',
-  ogDescription: 'Terms of Service for Meraki District. The agreement governing your use of merakidistrict.ai and related services.',
-  twitterTitle: 'Terms of Service — Meraki District',
-  twitterDescription: 'Terms of Service for Meraki District. The agreement governing your use of merakidistrict.ai and related services.',
+  ogTitle: 'Terms of Service — Meraki Road',
+  ogDescription: 'Terms of Service for Meraki Road. The agreement governing your use of merakidistrict.ai and related services.',
+  twitterTitle: 'Terms of Service — Meraki Road',
+  twitterDescription: 'Terms of Service for Meraki Road. The agreement governing your use of merakidistrict.ai and related services.',
 })
 </script>
 

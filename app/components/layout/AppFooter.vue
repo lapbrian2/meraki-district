@@ -2,10 +2,10 @@
   <footer ref="footerRef" class="footer section-dark">
     <div class="footer-inner">
       <div class="footer-brand reveal">
-        <p class="footer-logo">Meraki District</p>
+        <p class="footer-logo">Meraki Road</p>
         <p class="footer-tagline">A cultural ecosystem for AI-native creators.</p>
         <div class="footer-newsletter">
-          <p class="footer-newsletter-label">Dispatches from the District</p>
+          <p class="footer-newsletter-label">Dispatches from the Road</p>
           <form class="footer-newsletter-form" @submit.prevent="submit" aria-label="Newsletter signup">
             <input
               v-model="email"
@@ -36,7 +36,7 @@
       <div class="footer-col reveal">
         <h4 class="overline">Navigate</h4>
         <ul>
-          <li><NuxtLink to="/quarters">Quarters</NuxtLink></li>
+          <li><NuxtLink to="/districts">Districts</NuxtLink></li>
           <li><NuxtLink to="/the-road">The Road</NuxtLink></li>
           <li><NuxtLink to="/about">About</NuxtLink></li>
           <li><NuxtLink to="/apply">Apply</NuxtLink></li>

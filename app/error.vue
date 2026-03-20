@@ -12,7 +12,7 @@
         }}
       </p>
       <NuxtLink to="/" class="error-cta" @click="clearError">
-        Back to the District
+        Back to Meraki Road
       </NuxtLink>
     </div>
   </div>
@@ -22,7 +22,7 @@
 const props = defineProps<{ error: { statusCode: number; message: string } }>()
 
 useHead({
-  title: props.error?.statusCode === 404 ? '404 — Meraki District' : 'Error — Meraki District',
+  title: props.error?.statusCode === 404 ? '404 — Meraki Road' : 'Error — Meraki Road',
 })
 
 const clearError = () => clearNuxtError({ redirect: '/' })

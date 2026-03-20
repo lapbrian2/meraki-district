@@ -12,16 +12,16 @@
 
 <script setup lang="ts">
 useHead({
-  title: 'About — Meraki District',
+  title: 'About — Meraki Road',
   meta: [
-    { name: 'description', content: 'The people behind Meraki District. Two paths, one conviction: that AI-native creative work deserves real quarters.' },
+    { name: 'description', content: 'The people behind Meraki Road. Two paths, one conviction: that AI-native creative work deserves real districts.' },
   ],
 })
 
 useSeoMeta({
-  ogTitle: 'About — Meraki District',
-  ogDescription: 'The people behind Meraki District. Two paths, one conviction: that AI-native creative work deserves real quarters.',
-  twitterTitle: 'About — Meraki District',
-  twitterDescription: 'The people behind Meraki District. Two paths, one conviction: that AI-native creative work deserves real quarters.',
+  ogTitle: 'About — Meraki Road',
+  ogDescription: 'The people behind Meraki Road. Two paths, one conviction: that AI-native creative work deserves real districts.',
+  twitterTitle: 'About — Meraki Road',
+  twitterDescription: 'The people behind Meraki Road. Two paths, one conviction: that AI-native creative work deserves real districts.',
 })
 </script>

@@ -3,10 +3,10 @@
     <!-- Expanded state: magazine masthead (desktop only, scrollY < 100) -->
     <div class="nav-expanded" :class="{ collapsed: isScrolled }">
       <div class="nav-expanded-inner">
-        <NuxtLink to="/" class="nav-logo">Meraki District</NuxtLink>
+        <NuxtLink to="/" class="nav-logo">Meraki Road</NuxtLink>
         <div class="nav-expanded-row">
           <nav class="nav-links" aria-label="Main navigation">
-            <NuxtLink to="/quarters" class="nav-link">Quarters</NuxtLink>
+            <NuxtLink to="/districts" class="nav-link">Districts</NuxtLink>
             <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
             <NuxtLink to="/about" class="nav-link">About</NuxtLink>
             <span class="nav-dot" aria-hidden="true">&middot;</span>
@@ -19,9 +19,9 @@
     <!-- Compact state: single-row utility bar (scrollY >= 100) -->
     <div class="nav-compact" :class="{ active: isScrolled }">
       <div class="nav-compact-inner">
-        <NuxtLink to="/" class="nav-logo">Meraki District</NuxtLink>
+        <NuxtLink to="/" class="nav-logo">Meraki Road</NuxtLink>
         <nav class="nav-links" aria-label="Main navigation">
-          <NuxtLink to="/quarters" class="nav-link">Quarters</NuxtLink>
+          <NuxtLink to="/districts" class="nav-link">Districts</NuxtLink>
           <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
           <NuxtLink to="/about" class="nav-link">About</NuxtLink>
         </nav>
@@ -40,7 +40,7 @@
     </button>
 
     <!-- Mobile logo (always visible on mobile) -->
-    <NuxtLink to="/" class="nav-mobile-logo" :class="{ inverted: mobileOpen }">Meraki District</NuxtLink>
+    <NuxtLink to="/" class="nav-mobile-logo" :class="{ inverted: mobileOpen }">Meraki Road</NuxtLink>
 
     <!-- Theme toggle -->
     <button
@@ -99,7 +99,7 @@ let lastScroll = 0
 const { isDark, toggle } = useDarkMode()
 
 const mobileLinks = [
-  { to: '/quarters', label: 'Quarters' },
+  { to: '/districts', label: 'Districts' },
   { to: '/the-road', label: 'The Road' },
   { to: '/about', label: 'About' },
 ]

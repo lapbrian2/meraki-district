@@ -2,7 +2,7 @@
   <div>
     <section ref="section" class="page-hero section section-dark">
       <div class="section-narrow">
-        <p class="overline reveal">Join the District</p>
+        <p class="overline reveal">Join Meraki Road</p>
         <h1 class="page-hero-title reveal">
           Apply
         </h1>
@@ -55,17 +55,17 @@ useGsapScrollReveal(section, '.reveal')
 const { email, status, errorMessage, submit, reset } = useEmailCollection('apply')
 
 useHead({
-  title: 'Apply — Meraki District',
+  title: 'Apply — Meraki Road',
   meta: [
-    { name: 'description', content: 'Apply to join Meraki District. For creators, thinkers, and builders.' },
+    { name: 'description', content: 'Apply to join Meraki Road. For creators, thinkers, and builders.' },
   ],
 })
 
 useSeoMeta({
-  ogTitle: 'Apply — Meraki District',
-  ogDescription: 'Apply to join Meraki District. For creators, thinkers, and builders who refuse to choose between ambition and integrity.',
-  twitterTitle: 'Apply — Meraki District',
-  twitterDescription: 'Apply to join Meraki District. For creators, thinkers, and builders who refuse to choose between ambition and integrity.',
+  ogTitle: 'Apply — Meraki Road',
+  ogDescription: 'Apply to join Meraki Road. For creators, thinkers, and builders who refuse to choose between ambition and integrity.',
+  twitterTitle: 'Apply — Meraki Road',
+  twitterDescription: 'Apply to join Meraki Road. For creators, thinkers, and builders who refuse to choose between ambition and integrity.',
 })
 </script>
 

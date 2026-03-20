@@ -1,4 +1,4 @@
-export interface Quarter {
+export interface District {
   number: string
   name: string
   slug: string
@@ -13,12 +13,12 @@ export interface Quarter {
   statusNote?: string
 }
 
-export const quarters: Quarter[] = [
+export const districts: District[] = [
   {
     number: '01', name: 'Voight Studio', slug: 'voight-studio',
     image: '/images/quarters/voight-studio.webp', type: 'Design Practice', layout: 'hero',
-    description: 'Design and brand strategy for ventures building at the edge of what is possible. The flagship quarter where client work meets creative ambition.',
-    longDescription: 'Voight Studio is the creative engine of Meraki District. A full-service design practice that pairs strategic thinking with obsessive craft, working with ventures and cultural institutions that refuse to settle for conventional output. Every engagement is a collaboration\u2014built on the belief that the best work happens when ambition meets restraint, and when both sides are willing to go further than comfortable.',
+    description: 'Design and brand strategy for ventures building at the edge of what is possible. The flagship district where client work meets creative ambition.',
+    longDescription: 'Voight Studio is the creative engine of Meraki Road. A full-service design practice that pairs strategic thinking with obsessive craft, working with ventures and cultural institutions that refuse to settle for conventional output. Every engagement is a collaboration\u2014built on the belief that the best work happens when ambition meets restraint, and when both sides are willing to go further than comfortable.',
     pullQuote: 'The best work happens when ambition meets restraint.',
     offerings: ['Design strategy', 'Brand identity', 'Creative direction', 'Visual systems'],
     status: 'active', statusNote: 'Now accepting select engagements.',
@@ -27,7 +27,7 @@ export const quarters: Quarter[] = [
     number: '02', name: 'The Road', slug: 'the-road',
     image: '/images/quarters/the-road.webp', type: 'Publishing & Editorial', layout: 'wide',
     description: 'Long-form storytelling and cultural criticism for the AI-native era.',
-    longDescription: 'The Road is the editorial arm of Meraki District. Long-form essays, dispatches, interviews, and cultural criticism written for creators who think deeply about their practice. Substantive writing about what it means to make things in an era where the tools are changing faster than the conversations about them.',
+    longDescription: 'The Road is the editorial arm of Meraki Road. Long-form essays, dispatches, interviews, and cultural criticism written for creators who think deeply about their practice. Substantive writing about what it means to make things in an era where the tools are changing faster than the conversations about them.',
     pullQuote: 'Substantive writing for creators who think deeply about their practice.',
     offerings: ['Long-form essays', 'Cultural criticism', 'Creator interviews', 'Field dispatches'],
     status: 'active', statusNote: 'Publishing weekly.',
@@ -63,7 +63,7 @@ export const quarters: Quarter[] = [
     number: '06', name: 'Basecamp', slug: 'basecamp',
     image: '/images/quarters/basecamp.webp', type: 'Community', layout: 'half',
     description: 'Where ambitious creators find their people and sharpen their practice.',
-    longDescription: 'Basecamp is the community layer of Meraki District. A curated space where ambitious creators find peers who match their commitment, challenge their assumptions, and push them toward work they couldn\u2019t do alone.',
+    longDescription: 'Basecamp is the community layer of Meraki Road. A curated space where ambitious creators find peers who match their commitment, challenge their assumptions, and push them toward work they couldn\u2019t do alone.',
     pullQuote: 'Find peers who match your commitment and challenge your assumptions.',
     offerings: ['Curated community', 'Peer matching', 'Working groups', 'Accountability circles'],
     status: 'coming-soon', statusNote: 'Applications opening soon.',
@@ -99,17 +99,17 @@ export const quarters: Quarter[] = [
     number: '10', name: 'The Collective', slug: 'the-collective',
     image: '/images/quarters/the-collective.webp', type: 'Ventures & Partnerships', layout: 'closer',
     description: 'Strategic partnerships and ventures that extend the ecosystem beyond its walls.',
-    longDescription: 'The Collective is the outward-facing arm of Meraki District. Strategic partnerships, joint ventures, and collaborative projects that extend the ecosystem\u2019s reach and create opportunities for its members. Every partnership is evaluated on a single criterion: does it make the work better?',
+    longDescription: 'The Collective is the outward-facing arm of Meraki Road. Strategic partnerships, joint ventures, and collaborative projects that extend the ecosystem\u2019s reach and create opportunities for its members. Every partnership is evaluated on a single criterion: does it make the work better?',
     pullQuote: 'Does it make the work better?',
     offerings: ['Strategic partnerships', 'Joint ventures', 'Cross-ecosystem projects', 'Creator opportunities'],
     status: 'development',
   },
 ]
 
-export function useQuarters() {
-  return { quarters }
+export function useDistricts() {
+  return { districts }
 }
 
-export function useQuarter(slug: string) {
-  return quarters.find(i => i.slug === slug) || null
+export function useDistrict(slug: string) {
+  return districts.find(i => i.slug === slug) || null
 }

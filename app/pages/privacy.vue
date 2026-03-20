@@ -6,7 +6,7 @@
         <p class="overline">Legal</p>
         <h1 class="legal-title">Privacy Policy</h1>
         <p class="legal-subtitle">
-          How Meraki District collects, uses, and protects your information.
+          How Meraki Road collects, uses, and protects your information.
         </p>
       </div>
     </section>
@@ -19,7 +19,7 @@
           <div class="legal-section">
             <h2>Who We Are</h2>
             <p>
-              This site is operated by Meraki Productions Ltd. ("Meraki District," "we," "us," or "our").
+              This site is operated by Meraki Productions Ltd. ("Meraki Road," "we," "us," or "our").
               We are a cultural ecosystem for AI-native creators. This privacy policy explains how we handle
               information collected through merakidistrict.ai and any related services.
             </p>
@@ -32,7 +32,7 @@
             <h2>What We Collect</h2>
             <p>
               We collect only what is necessary to operate this site and communicate with people who
-              have expressed interest in Meraki District.
+              have expressed interest in Meraki Road.
             </p>
 
             <h3>Information You Provide</h3>
@@ -63,7 +63,7 @@
           <div class="legal-section">
             <h2>How We Use Your Information</h2>
             <ul>
-              <li>To send updates about Meraki District, including launch announcements, newsletters, and relevant opportunities.</li>
+              <li>To send updates about Meraki Road, including launch announcements, newsletters, and relevant opportunities.</li>
               <li>To respond to inquiries you send us directly.</li>
               <li>To monitor and improve site performance and security.</li>
             </ul>
@@ -188,7 +188,7 @@
           <div class="legal-section">
             <h2>Children</h2>
             <p>
-              Meraki District is not directed at children under the age of 16. We do not knowingly
+              Meraki Road is not directed at children under the age of 16. We do not knowingly
               collect personal data from children. If you believe a child has provided us with personal
               information, please contact us and we will delete it.
             </p>
@@ -233,17 +233,17 @@
 
 <script setup lang="ts">
 useHead({
-  title: 'Privacy Policy — Meraki District',
+  title: 'Privacy Policy — Meraki Road',
   meta: [
-    { name: 'description', content: 'How Meraki District collects, uses, and protects your information. Our commitment to transparency and your data rights.' },
+    { name: 'description', content: 'How Meraki Road collects, uses, and protects your information. Our commitment to transparency and your data rights.' },
   ],
 })
 
 useSeoMeta({
-  ogTitle: 'Privacy Policy — Meraki District',
-  ogDescription: 'How Meraki District collects, uses, and protects your information. Our commitment to transparency and your data rights.',
-  twitterTitle: 'Privacy Policy — Meraki District',
-  twitterDescription: 'How Meraki District collects, uses, and protects your information. Our commitment to transparency and your data rights.',
+  ogTitle: 'Privacy Policy — Meraki Road',
+  ogDescription: 'How Meraki Road collects, uses, and protects your information. Our commitment to transparency and your data rights.',
+  twitterTitle: 'Privacy Policy — Meraki Road',
+  twitterDescription: 'How Meraki Road collects, uses, and protects your information. Our commitment to transparency and your data rights.',
 })
 </script>
 

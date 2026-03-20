@@ -21,7 +21,7 @@
       </p>
       <div class="hero-rule reveal" aria-hidden="true" />
       <p class="hero-anchor reveal">
-        Ten quarters within one district, building a new standard for creative practice.
+        Ten districts along one road, building a new standard for creative practice.
       </p>
     </div>
     <div class="hero-scroll" aria-hidden="true">

@@ -1,20 +1,20 @@
 <template>
-  <div v-if="quarter" ref="root">
+  <div v-if="district" ref="root">
     <!-- Hero -->
     <section ref="heroSection" class="q-hero">
       <div class="q-hero-image-wrap">
         <img
-          :src="quarter.image"
-          :alt="`${quarter.name} \u2014 ${quarter.type}`"
+          :src="district.image"
+          :alt="`${district.name} \u2014 ${district.type}`"
           class="q-hero-image"
           loading="eager"
         />
         <div class="q-hero-overlay" />
       </div>
       <div class="q-hero-content section-default">
-        <p class="overline">{{ quarter.type }}</p>
-        <h1 ref="heroTitle" class="q-hero-title">{{ quarter.name }}</h1>
-        <span class="q-hero-number">{{ quarter.number }}</span>
+        <p class="overline">{{ district.type }}</p>
+        <h1 ref="heroTitle" class="q-hero-title">{{ district.name }}</h1>
+        <span class="q-hero-number">{{ district.number }}</span>
       </div>
     </section>
 
@@ -22,7 +22,7 @@
     <section ref="bodySection" class="q-body section">
       <div class="section-narrow">
         <div class="q-rule" aria-hidden="true" />
-        <p class="q-long reveal">{{ quarter.longDescription }}</p>
+        <p class="q-long reveal">{{ district.longDescription }}</p>
       </div>
     </section>
 
@@ -30,7 +30,7 @@
     <section ref="quoteSection" class="q-quote section-dark">
       <div class="section-default q-quote-inner">
         <blockquote class="q-quote-text">
-          <p class="word-reveal">\u201c{{ quarter.pullQuote }}\u201d</p>
+          <p class="word-reveal">\u201c{{ district.pullQuote }}\u201d</p>
         </blockquote>
       </div>
     </section>
@@ -41,7 +41,7 @@
         <p class="overline reveal">What you\u2019ll find</p>
         <div class="q-offerings-grid">
           <div
-            v-for="(item, i) in quarter.offerings"
+            v-for="(item, i) in district.offerings"
             :key="i"
             class="q-offering reveal"
           >
@@ -55,19 +55,19 @@
     <!-- Status -->
     <section ref="statusSection" class="q-status-section section">
       <div class="section-narrow">
-        <div class="q-status reveal" :class="'q-status--' + quarter.status">
+        <div class="q-status reveal" :class="'q-status--' + district.status">
           <div class="q-status-marker" />
           <div>
             <p class="q-status-label">Status</p>
             <p class="q-status-text">
-              <template v-if="quarter.status === 'active'">
-                This quarter is live. {{ quarter.statusNote || '' }}
+              <template v-if="district.status === 'active'">
+                This district is live. {{ district.statusNote || '' }}
               </template>
-              <template v-else-if="quarter.status === 'coming-soon'">
-                {{ quarter.statusNote || 'Coming soon.' }}
+              <template v-else-if="district.status === 'coming-soon'">
+                {{ district.statusNote || 'Coming soon.' }}
               </template>
               <template v-else>
-                This quarter is in development. Every detail is being built with the same standard we apply to the work itself.
+                This district is in development. Every detail is being built with the same standard we apply to the work itself.
               </template>
             </p>
           </div>
@@ -75,7 +75,7 @@
 
         <div class="q-cta reveal">
           <p class="q-cta-text">
-            Want to be notified when {{ quarter.name }} opens?
+            Want to be notified when {{ district.name }} opens?
           </p>
           <NuxtLink to="/apply" class="q-cta-button">Join the waitlist</NuxtLink>
         </div>
@@ -91,7 +91,7 @@
         <div class="q-explore-grid">
           <NuxtLink
             v-if="prev"
-            :to="'/quarters/' + prev.slug"
+            :to="'/districts/' + prev.slug"
             class="q-explore-card reveal"
           >
             <div class="q-explore-image">
@@ -104,7 +104,7 @@
           </NuxtLink>
           <NuxtLink
             v-if="next"
-            :to="'/quarters/' + next.slug"
+            :to="'/districts/' + next.slug"
             class="q-explore-card reveal"
           >
             <div class="q-explore-image">
@@ -121,8 +121,8 @@
   </div>
   <div v-else class="not-found section">
     <div class="section-narrow">
-      <h1>Quarter not found</h1>
-      <p><NuxtLink to="/quarters">Back to all quarters</NuxtLink></p>
+      <h1>District not found</h1>
+      <p><NuxtLink to="/districts">Back to all districts</NuxtLink></p>
     </div>
   </div>
 </template>
@@ -134,22 +134,22 @@ import { waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
 import { useParallax } from '~/composables/useParallax'
 import { useTilt } from '~/composables/useInteractions'
-import { quarters, useQuarter } from '~/composables/useQuarters'
+import { districts, useDistrict } from '~/composables/useDistricts'
 
 const route = useRoute()
 
 const slug = computed(() => route.params.slug as string)
-const quarter = computed(() => useQuarter(slug.value))
-const currentIndex = computed(() => quarters.findIndex(i => i.slug === slug.value))
-const prev = computed(() => currentIndex.value > 0 ? quarters[currentIndex.value - 1] : null)
-const next = computed(() => currentIndex.value < quarters.length - 1 ? quarters[currentIndex.value + 1] : null)
+const district = computed(() => useDistrict(slug.value))
+const currentIndex = computed(() => districts.findIndex(i => i.slug === slug.value))
+const prev = computed(() => currentIndex.value > 0 ? districts[currentIndex.value - 1] : null)
+const next = computed(() => currentIndex.value < districts.length - 1 ? districts[currentIndex.value + 1] : null)
 
 useHead(computed(() => ({
-  title: quarter.value ? quarter.value.name + ' \u2014 Meraki District' : 'Meraki District',
-  meta: quarter.value ? [
-    { name: 'description', content: quarter.value.description },
-    { property: 'og:title', content: quarter.value.name + ' \u2014 Meraki District' },
-    { property: 'og:description', content: quarter.value.description },
+  title: district.value ? district.value.name + ' \u2014 Meraki Road' : 'Meraki Road',
+  meta: district.value ? [
+    { name: 'description', content: district.value.description },
+    { property: 'og:title', content: district.value.name + ' \u2014 Meraki Road' },
+    { property: 'og:description', content: district.value.description },
   ] : [],
 })))
 
