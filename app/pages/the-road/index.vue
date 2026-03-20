@@ -46,18 +46,18 @@
             <p class="road-manifesto-body">
               The Road is where Meraki Road thinks in public. Long-form essays,
               field dispatches, creator interviews, and cultural criticism for people
-              who believe that making things well still matters\u2014even when
+              who believe that making things well still matters&mdash;even when
               (especially when) the tools make it easy to make things fast.
             </p>
             <p class="road-manifesto-body">
-              We\u2019re writing the first essays now. Expect dispatches on AI-native
+              We&rsquo;re writing the first essays now. Expect dispatches on AI-native
               creative practice, profiles of builders who refuse to choose between
-              ambition and integrity, and honest criticism of the work\u2014ours included.
+              ambition and integrity, and honest criticism of the work&mdash;ours included.
             </p>
             <div class="road-manifesto-cta">
               <p class="road-manifesto-label">Get notified when we publish</p>
               <NuxtLink to="/apply" class="road-manifesto-button">
-                Join Meraki Road \u2192
+                Join Meraki Road &rarr;
               </NuxtLink>
             </div>
           </div>

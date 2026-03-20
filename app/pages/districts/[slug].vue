@@ -32,7 +32,7 @@
     <section ref="quoteSection" class="q-quote section-dark">
       <div class="section-default q-quote-inner">
         <blockquote class="q-quote-text">
-          <p class="word-reveal">\u201c{{ district.pullQuote }}\u201d</p>
+          <p class="word-reveal">&ldquo;{{ district.pullQuote }}&rdquo;</p>
         </blockquote>
       </div>
     </section>
@@ -40,7 +40,7 @@
     <!-- Offerings -->
     <section ref="offeringsSection" class="q-offerings section">
       <div class="section-default">
-        <p class="overline reveal">What you\u2019ll find</p>
+        <p class="overline reveal">What you&rsquo;ll find</p>
         <div class="q-offerings-grid">
           <div
             v-for="(item, i) in district.offerings"
