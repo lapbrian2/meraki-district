@@ -94,9 +94,17 @@ onUnmounted(() => {
 })
 
 function onImageLoad(e: Event) {
+  // NuxtImg SSR fast-path emits new Event('load') with no target
   const el = e.target as HTMLElement | null
   el?.classList.add('loaded')
 }
+
+// Catch SSR-cached images that fired load before hydration
+onMounted(() => {
+  section.value?.querySelectorAll('.featured-image img').forEach(img => {
+    if ((img as HTMLImageElement).complete) img.classList.add('loaded')
+  })
+})
 </script>
 
 <style scoped>

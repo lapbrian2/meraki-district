@@ -1,9 +1,8 @@
 <template>
   <article class="article-card">
     <NuxtLink :to="articlePath" class="article-card-link">
-      <div class="article-card-image">
+      <div ref="imageWrap" class="article-card-image">
         <NuxtImg
-          ref="imgRef"
           :src="article.image"
           :alt="article.tag + ': ' + article.title"
           loading="lazy"
@@ -51,18 +50,17 @@ function formatDate(dateStr: string) {
   return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
 }
 
-const imgRef = ref<any>(null)
+const imageWrap = ref<HTMLElement | null>(null)
 
 function onImageLoad(e: Event) {
-  const el = e.target as HTMLElement | null
+  // NuxtImg SSR fast-path emits new Event('load') with no target — fall back to querySelector
+  const el = (e.target as HTMLElement | null) ?? imageWrap.value?.querySelector('img')
   el?.classList.add('loaded')
 }
 
 onMounted(() => {
-  const el = imgRef.value?.$el as HTMLImageElement | undefined
-  if (el?.complete) {
-    el.classList.add('loaded')
-  }
+  const img = imageWrap.value?.querySelector('img') as HTMLImageElement | null
+  if (img?.complete) img.classList.add('loaded')
 })
 </script>
 

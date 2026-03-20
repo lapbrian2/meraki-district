@@ -62,14 +62,8 @@ const panel = ref<HTMLElement | null>(null)
 const isFullscreen = ref(false)
 const canFullscreen = ref(false)
 
-// Fullscreen support
-if (import.meta.client) {
-  canFullscreen.value = screenfull.isEnabled
-  if (screenfull.isEnabled) {
-    screenfull.on('change', () => {
-      isFullscreen.value = screenfull.isFullscreen
-    })
-  }
+function onFullscreenChange() {
+  isFullscreen.value = screenfull.isFullscreen
 }
 
 function toggleFullscreen() {
@@ -77,23 +71,31 @@ function toggleFullscreen() {
   screenfull.toggle(panel.value)
 }
 
-// ESC to close + focus trap
-if (import.meta.client) {
-  const handler = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      if (isFullscreen.value && screenfull.isEnabled) {
-        screenfull.exit()
-      } else {
-        emit('close')
-      }
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape') {
+    if (isFullscreen.value && screenfull.isEnabled) {
+      screenfull.exit()
+    } else {
+      emit('close')
     }
   }
-  onMounted(() => window.addEventListener('keydown', handler))
-  onUnmounted(() => {
-    window.removeEventListener('keydown', handler)
-    if (screenfull.isEnabled) screenfull.off('change')
-  })
 }
+
+if (import.meta.client) {
+  canFullscreen.value = screenfull.isEnabled
+}
+
+onMounted(() => {
+  if (!import.meta.client) return
+  window.addEventListener('keydown', onKeydown)
+  if (screenfull.isEnabled) screenfull.on('change', onFullscreenChange)
+})
+
+onUnmounted(() => {
+  if (!import.meta.client) return
+  window.removeEventListener('keydown', onKeydown)
+  if (screenfull.isEnabled) screenfull.off('change', onFullscreenChange)
+})
 
 // Move focus into lightbox when it opens
 watch(() => panel.value, (el) => {
