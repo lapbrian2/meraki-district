@@ -1,18 +1,5 @@
 <template>
   <section ref="hero" class="hero">
-    <div class="hero-bg-wrap">
-      <NuxtImg
-        src="/images/hero-bg.webp"
-        alt=""
-        class="hero-bg-image"
-        loading="eager"
-        fetchpriority="high"
-        width="1920"
-        height="1080"
-      />
-      <div class="hero-bg-overlay" />
-    </div>
-
     <div class="hero-layout">
       <!-- Left: editorial text stack -->
       <div class="hero-text">
@@ -71,8 +58,7 @@ onMounted(async () => {
   ctx = gsap.context(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
-    tl.from('.hero-bg-image', { scale: 1.15, duration: 2.4, ease: 'power2.out' }, 0)
-      .fromTo('.hero-overline', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, 0.3)
+    tl.fromTo('.hero-overline', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, 0.3)
       .fromTo('.hero-title-line', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.2, ease: 'power4.out' }, 0.5)
       .fromTo('.hero-title-accent', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.2, ease: 'power4.out' }, 0.7)
       .fromTo('.hero-sub', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.9 }, 1.0)
@@ -81,21 +67,6 @@ onMounted(async () => {
       .fromTo('.hero-image-quote', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.7 }, 1.6)
       .fromTo('.hero-scroll', { opacity: 0 }, { opacity: 1, duration: 0.8 }, 1.8)
 
-    // Parallax: hero bg drifts slower than content
-    gsap.fromTo('.hero-bg-image',
-      { yPercent: -5 },
-      {
-        yPercent: 10,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: hero.value,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-          invalidateOnRefresh: true,
-        },
-      }
-    )
   }, hero.value)
 })
 
@@ -114,34 +85,6 @@ onUnmounted(() => {
   position: relative;
   overflow: hidden;
   background: #09090B;
-}
-
-.hero-bg-wrap {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.hero-bg-image {
-  width: 100%;
-  height: 130%;
-  top: -15%;
-  position: relative;
-  object-fit: cover;
-  opacity: 0.2;
-  will-change: transform;
-}
-
-.hero-bg-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(9, 9, 11, 0.5) 0%,
-    rgba(9, 9, 11, 0.2) 40%,
-    rgba(9, 9, 11, 0.3) 70%,
-    rgba(9, 9, 11, 0.8) 100%
-  );
 }
 
 /* Asymmetric two-column layout */

@@ -51,11 +51,9 @@
     </section>
 
     <MarqueeStrip />
-    <ShowcaseSection />
     <CreatorPathwaySection />
     <PhilosophySection />
     <FeaturedSection />
-    <TalentIndexSection />
     <SealSection />
     <CtaSectionNew />
 
