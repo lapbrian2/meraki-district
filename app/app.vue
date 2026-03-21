@@ -1,4 +1,5 @@
 <template>
+  <SitePreloader />
   <NuxtLayout>
     <GhostWatermark />
     <ArchivalTimeline />
