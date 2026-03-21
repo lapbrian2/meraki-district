@@ -5,7 +5,9 @@
       <div class="section-default road-hero-content">
         <p class="overline reveal">Explore</p>
         <h1 class="road-hero-title word-reveal">The Districts</h1>
-        <p class="road-hero-sub reveal">Eleven districts, each with its own mandate. One shared infrastructure.</p>
+        <p class="road-hero-sub reveal">
+          Eleven districts, each with its own mandate. One shared infrastructure.
+        </p>
       </div>
     </section>
 
@@ -17,76 +19,69 @@
           <div ref="roadLine" class="road-line" />
         </div>
 
-        <!-- District stops -->
+        <!-- District stops — size varies by status -->
         <div
           v-for="(d, i) in districts"
           :key="d.slug"
           class="road-stop"
-          :class="{
-            'stop-left': i % 2 === 0,
-            'stop-right': i % 2 === 1,
-            'stop-expanded': expanded === d.slug,
-          }"
+          :class="[
+            i % 2 === 0 ? 'stop-left' : 'stop-right',
+            'stop--' + d.status,
+          ]"
           :style="{ '--color-accent': d.accentColor, '--color-accent-accessible': d.accentColorAccessible }"
         >
           <div class="stop-marker" />
-          <!-- Connector from card to center line -->
           <div class="stop-connector" />
 
-          <!-- Card with image -->
-          <div class="stop-card reveal" @click="toggle(d.slug)">
+          <NuxtLink :to="'/districts/' + d.slug" class="stop-card reveal">
+            <!-- Image -->
             <div class="stop-image">
-              <NuxtImg :src="d.image" :alt="d.name" loading="lazy" decoding="async" width="560" height="350" />
-              <span class="stop-status" :class="'status--' + d.status">
+              <NuxtImg :src="d.image" :alt="d.name" loading="lazy" decoding="async" width="600" height="400" />
+              <span class="stop-badge" :class="'badge--' + d.status">
                 {{ d.status === 'active' ? 'Active' : d.status === 'coming-soon' ? 'Coming soon' : 'In development' }}
               </span>
             </div>
-            <div class="stop-info">
-              <span class="stop-number">{{ d.number }}</span>
-              <span class="stop-type">{{ d.type }}</span>
+
+            <!-- Info -->
+            <div class="stop-body">
+              <div class="stop-meta">
+                <span class="stop-number">{{ d.number }}</span>
+                <span class="stop-type">{{ d.type }}</span>
+              </div>
               <h3 class="stop-name">{{ d.name }}</h3>
               <p class="stop-desc">{{ d.description }}</p>
-              <span class="stop-hint" :class="{ 'hint-open': expanded === d.slug }">
-                {{ expanded === d.slug ? 'Collapse' : 'Learn more' }}
-              </span>
-            </div>
-          </div>
 
-          <!-- Expanded detail panel -->
-          <Transition name="detail">
-            <div v-if="expanded === d.slug" class="stop-detail">
-              <blockquote class="stop-quote">&ldquo;{{ d.pullQuote }}&rdquo;</blockquote>
-              <div class="stop-offerings">
-                <span
-                  v-for="(offering, j) in d.offerings"
-                  :key="j"
-                  class="stop-offering"
-                >{{ offering }}</span>
+              <!-- Pull quote — visible on active/coming-soon cards -->
+              <blockquote v-if="d.status !== 'development'" class="stop-quote">
+                &ldquo;{{ d.pullQuote }}&rdquo;
+              </blockquote>
+
+              <!-- Offerings — visible on active cards -->
+              <div v-if="d.status === 'active'" class="stop-offerings">
+                <span v-for="(o, j) in d.offerings" :key="j" class="stop-tag">{{ o }}</span>
               </div>
-              <p v-if="d.statusNote" class="stop-note">{{ d.statusNote }}</p>
-              <NuxtLink :to="'/districts/' + d.slug" class="stop-enter">
-                Enter {{ d.name }} &rarr;
-              </NuxtLink>
+
+              <span v-if="d.statusNote" class="stop-note">{{ d.statusNote }}</span>
             </div>
-          </Transition>
+          </NuxtLink>
         </div>
       </div>
     </section>
 
-    <!-- Editorial + Links -->
+    <!-- Footer links -->
     <section class="road-footer section">
       <div class="section-default">
         <div class="rf-grid">
-          <NuxtLink to="/the-road" class="rf-card rf-editorial reveal">
+          <NuxtLink to="/the-road" class="rf-card rf-dark reveal">
             <span class="rf-type">Publishing & Editorial</span>
             <h3>The Road</h3>
-            <p>Essays, dispatches, and cultural criticism for creators who think deeply about their practice.</p>
+            <p>Essays, dispatches, and cultural criticism for creators who think deeply.</p>
             <span class="rf-link">Read &rarr;</span>
           </NuxtLink>
           <NuxtLink to="/about" class="rf-card reveal">
             <span class="rf-type">About</span>
             <h3>Our Story</h3>
-            <p>The origin, the founders, and the principles that shape every decision.</p>
+            <p>The origin, the founders, and the principles.</p>
             <span class="rf-link">Learn more &rarr;</span>
           </NuxtLink>
           <NuxtLink to="/apply" class="rf-card rf-accent reveal">
@@ -111,12 +106,6 @@ import { districts } from '~/composables/useDistricts'
 const pageRef = ref<HTMLElement | null>(null)
 const trackSection = ref<HTMLElement | null>(null)
 const roadLine = ref<HTMLElement | null>(null)
-
-const expanded = ref<string | null>(null)
-
-function toggle(slug: string) {
-  expanded.value = expanded.value === slug ? null : slug
-}
 
 useGsapScrollReveal(pageRef, '.reveal', { stagger: 0.06 })
 useWordReveal(pageRef, '.word-reveal')
@@ -148,7 +137,7 @@ onMounted(async () => {
       }
     )
 
-    // Clip-path image reveals
+    // Clip-path image reveals — direction matches card side
     gsap.utils.toArray<HTMLElement>('.stop-image').forEach((img, i) => {
       const isLeft = i % 2 === 0
       gsap.fromTo(img,
@@ -227,11 +216,12 @@ useHead({
 
 .road-track {
   position: relative;
-  max-width: 1000px;
+  max-width: 1060px;
   margin: 0 auto;
   padding: 0 var(--content-padding);
 }
 
+/* Center line with glow */
 .road-line-wrap {
   position: absolute;
   left: 50%;
@@ -247,15 +237,15 @@ useHead({
   background: linear-gradient(to bottom, transparent 0%, var(--color-gold) 2%, var(--color-gold) 98%, transparent 100%);
   opacity: 0.3;
   transform-origin: top center;
-  box-shadow: 0 0 12px color-mix(in srgb, var(--color-gold) 15%, transparent);
+  box-shadow: 0 0 15px color-mix(in srgb, var(--color-gold) 12%, transparent);
 }
 
-/* ─── Stop ─── */
+/* ─── Stop (each district) ─── */
 .road-stop {
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-16);
 }
 
 .road-stop:last-child {
@@ -264,12 +254,12 @@ useHead({
 
 .stop-left {
   align-items: flex-start;
-  padding-right: calc(50% + var(--space-8));
+  padding-right: calc(50% + var(--space-12));
 }
 
 .stop-right {
   align-items: flex-end;
-  padding-left: calc(50% + var(--space-8));
+  padding-left: calc(50% + var(--space-12));
 }
 
 /* ─── Marker ─── */
@@ -283,39 +273,41 @@ useHead({
   transform: translateX(-50%);
   z-index: 3;
   box-shadow:
-    0 0 8px color-mix(in srgb, var(--color-accent) 50%, transparent),
-    0 0 20px color-mix(in srgb, var(--color-accent) 20%, transparent);
+    0 0 10px color-mix(in srgb, var(--color-accent) 50%, transparent),
+    0 0 24px color-mix(in srgb, var(--color-accent) 20%, transparent);
 }
 
-/* ─── Connector from card to center line ─── */
+/* ─── Connector from card to line ─── */
 .stop-connector {
   position: absolute;
   top: calc(var(--space-8) + 4px);
   height: 1px;
-  background: linear-gradient(to right, var(--color-accent), transparent);
   opacity: 0.2;
   z-index: 2;
 }
 
 .stop-left .stop-connector {
   left: calc(50% + 6px);
-  right: calc(50% + var(--space-8) + 1px);
+  right: calc(50% + var(--space-12));
   background: linear-gradient(to left, var(--color-accent), transparent);
 }
 
 .stop-right .stop-connector {
   right: calc(50% + 6px);
-  left: calc(50% + var(--space-8) + 1px);
+  left: calc(50% + var(--space-12));
+  background: linear-gradient(to right, var(--color-accent), transparent);
 }
 
 /* ─── Card ─── */
 .stop-card {
-  max-width: 460px;
+  display: block;
   width: 100%;
-  background: color-mix(in srgb, var(--color-dark-bg) 80%, transparent);
+  text-decoration: none;
+  color: inherit;
+  background-image: none;
+  background: color-mix(in srgb, var(--color-dark-bg) 85%, transparent);
   border: 1px solid rgba(250, 250, 249, 0.06);
   overflow: hidden;
-  cursor: pointer;
   transition: border-color var(--duration-normal) ease,
               box-shadow var(--duration-normal) ease,
               transform var(--duration-normal) var(--ease-out);
@@ -335,20 +327,40 @@ useHead({
   color: var(--color-accent);
 }
 
-.stop-card:hover .stop-hint {
-  color: var(--color-accent);
-  opacity: 1;
+/* ─── Status-based card sizing ─── */
+/* Active districts: larger, more content */
+.stop--active .stop-card {
+  max-width: 480px;
 }
 
-.stop-expanded .stop-card {
-  border-color: var(--color-accent);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+.stop--active .stop-image {
+  aspect-ratio: 16 / 9;
+}
+
+/* Coming soon: medium */
+.stop--coming-soon .stop-card {
+  max-width: 440px;
+}
+
+.stop--coming-soon .stop-image {
+  aspect-ratio: 16 / 10;
+}
+
+/* Development: compact */
+.stop--development .stop-card {
+  max-width: 400px;
+}
+
+.stop--development .stop-image {
+  aspect-ratio: 2 / 1;
+}
+
+.stop--development .stop-image img {
+  opacity: 0.7;
 }
 
 /* ─── Image ─── */
 .stop-image {
-  aspect-ratio: 16 / 10;
   overflow: hidden;
   position: relative;
 }
@@ -361,49 +373,55 @@ useHead({
   transition: transform 0.6s var(--ease-out);
 }
 
-.stop-status {
+/* ─── Status badge ─── */
+.stop-badge {
   position: absolute;
   top: var(--space-3);
   right: var(--space-3);
   font-size: 0.5625rem;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: var(--tracking-widest);
-  padding: 0.2rem 0.5rem;
-  backdrop-filter: blur(8px);
+  padding: 0.25rem 0.6rem;
+  backdrop-filter: blur(12px);
   z-index: 2;
 }
 
-.status--active {
-  color: var(--color-success);
-  background: rgba(22, 163, 74, 0.15);
+.badge--active {
+  color: #fff;
+  background: rgba(22, 163, 74, 0.7);
 }
 
-.status--coming-soon {
-  color: var(--color-gold);
-  background: rgba(184, 150, 78, 0.15);
+.badge--coming-soon {
+  color: #fff;
+  background: rgba(184, 150, 78, 0.6);
 }
 
-.status--development {
-  color: var(--color-dark-muted);
-  background: rgba(250, 250, 249, 0.08);
+.badge--development {
+  color: rgba(250, 250, 249, 0.7);
+  background: rgba(250, 250, 249, 0.1);
 }
 
-/* ─── Info ─── */
-.stop-info {
-  padding: var(--space-4) var(--space-6) var(--space-5);
+/* ─── Body ─── */
+.stop-body {
+  padding: var(--space-5) var(--space-6) var(--space-6);
   position: relative;
 }
 
+.stop-meta {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
 .stop-number {
-  position: absolute;
-  top: var(--space-3);
-  right: var(--space-6);
   font-family: var(--font-mono);
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 300;
   letter-spacing: var(--tracking-ultra-wide);
   color: var(--color-accent);
-  opacity: 0.1;
+  opacity: 0.12;
   line-height: 1;
 }
 
@@ -412,8 +430,6 @@ useHead({
   text-transform: uppercase;
   letter-spacing: var(--tracking-widest);
   color: var(--color-accent);
-  display: block;
-  margin-bottom: var(--space-1);
 }
 
 .stop-name {
@@ -430,114 +446,50 @@ useHead({
   font-size: var(--text-small);
   color: var(--color-dark-muted);
   line-height: var(--leading-normal);
-  margin-bottom: var(--space-3);
 }
 
-.stop-hint {
-  font-size: var(--text-overline);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-widest);
-  color: var(--color-dark-muted);
-  opacity: 0.5;
-  transition: color var(--duration-fast) ease, opacity var(--duration-fast) ease;
-}
-
-.hint-open {
-  color: var(--color-accent);
-  opacity: 0.7;
-}
-
-/* ─── Detail transition ─── */
-.detail-enter-active {
-  transition: max-height 0.5s var(--ease-out), opacity 0.4s ease;
-  overflow: hidden;
-}
-
-.detail-leave-active {
-  transition: max-height 0.3s ease, opacity 0.2s ease;
-  overflow: hidden;
-}
-
-.detail-enter-from {
-  max-height: 0;
-  opacity: 0;
-}
-
-.detail-enter-to {
-  max-height: 400px;
-  opacity: 1;
-}
-
-.detail-leave-from {
-  max-height: 400px;
-  opacity: 1;
-}
-
-.detail-leave-to {
-  max-height: 0;
-  opacity: 0;
-}
-
-/* ─── Expanded detail panel ─── */
-.stop-detail {
-  max-width: 460px;
-  width: 100%;
-  padding: var(--space-6);
-  border: 1px solid rgba(250, 250, 249, 0.06);
-  border-top: none;
-  background: color-mix(in srgb, var(--color-dark-bg) 60%, transparent);
-}
-
+/* ─── Pull quote (visible on active + coming-soon) ─── */
 .stop-quote {
   font-family: var(--font-display);
-  font-size: var(--text-body);
+  font-size: var(--text-small);
   font-style: italic;
   font-weight: 300;
   color: var(--color-dark-text);
   line-height: var(--leading-relaxed);
-  margin-bottom: var(--space-6);
+  margin-top: var(--space-4);
   padding-left: var(--space-4);
   border-left: 2px solid var(--color-accent);
+  opacity: 0.8;
 }
 
+/* ─── Offering tags (visible on active) ─── */
 .stop-offerings {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  margin-bottom: var(--space-6);
+  margin-top: var(--space-4);
 }
 
-.stop-offering {
-  font-size: var(--text-caption);
+.stop-tag {
+  font-size: 0.625rem;
   color: var(--color-dark-muted);
   padding: var(--space-1) var(--space-3);
   border: 1px solid rgba(250, 250, 249, 0.1);
   letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
 }
 
+/* ─── Status note ─── */
 .stop-note {
+  display: block;
   font-size: var(--text-caption);
   color: var(--color-accent);
-  margin-bottom: var(--space-4);
-}
-
-.stop-enter {
-  font-size: var(--text-overline);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-widest);
-  color: var(--color-accent);
-  background-image: none;
-  transition: opacity var(--duration-fast) ease;
-}
-
-.stop-enter:hover {
-  opacity: 0.7;
+  margin-top: var(--space-3);
 }
 
 /* ─── Footer links ─── */
 .road-footer {
-  padding-top: var(--space-16);
-  padding-bottom: var(--space-16);
+  padding: var(--space-16) 0;
 }
 
 .rf-grid {
@@ -557,9 +509,7 @@ useHead({
   transition: background var(--duration-normal) ease;
 }
 
-.rf-card:hover {
-  background: var(--color-surface);
-}
+.rf-card:hover { background: var(--color-surface); }
 
 .rf-type {
   font-size: var(--text-overline);
@@ -591,26 +541,17 @@ useHead({
   color: var(--color-gold);
 }
 
-.rf-editorial {
+.rf-dark {
   background: var(--color-dark-bg);
   color: var(--color-dark-text);
 }
-
-.rf-editorial:hover {
-  background: var(--color-graphite);
-}
-
-.rf-editorial p {
-  color: var(--color-dark-muted);
-}
+.rf-dark:hover { background: var(--color-graphite); }
+.rf-dark p { color: var(--color-dark-muted); }
 
 .rf-accent {
   border-left: 2px solid var(--color-gold);
 }
-
-.rf-accent h3 {
-  color: var(--color-gold-accessible);
-}
+.rf-accent h3 { color: var(--color-gold-accessible); }
 
 /* ─── Mobile ─── */
 @media (max-width: 768px) {
@@ -619,9 +560,7 @@ useHead({
     text-align: left;
   }
 
-  .road-hero-sub {
-    margin-left: 0;
-  }
+  .road-hero-sub { margin-left: 0; }
 
   .road-line-wrap {
     left: var(--space-4);
@@ -639,36 +578,25 @@ useHead({
     transform: translateX(-50%);
   }
 
-  .stop-connector {
-    display: none;
-  }
+  .stop-connector { display: none; }
 
-  .stop-card,
-  .stop-detail {
+  .stop--active .stop-card,
+  .stop--coming-soon .stop-card,
+  .stop--development .stop-card {
     max-width: none;
   }
 
-  .rf-grid {
-    grid-template-columns: 1fr;
-  }
+  .rf-grid { grid-template-columns: 1fr; }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .road-track {
-    max-width: 800px;
-  }
+  .road-track { max-width: 860px; }
 
-  .stop-card,
-  .stop-detail {
-    max-width: 360px;
-  }
+  .stop--active .stop-card { max-width: 380px; }
+  .stop--coming-soon .stop-card { max-width: 350px; }
+  .stop--development .stop-card { max-width: 320px; }
 
-  .rf-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .rf-editorial {
-    grid-column: 1 / -1;
-  }
+  .rf-grid { grid-template-columns: 1fr 1fr; }
+  .rf-dark { grid-column: 1 / -1; }
 }
 </style>
