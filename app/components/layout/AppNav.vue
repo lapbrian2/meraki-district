@@ -9,9 +9,6 @@
             <NuxtLink to="/districts" class="nav-link">Districts</NuxtLink>
             <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
             <NuxtLink to="/community" class="nav-link">Community</NuxtLink>
-            <NuxtLink to="/bridge" class="nav-link">Bridge</NuxtLink>
-            <NuxtLink to="/pavilion" class="nav-link">Pavilion</NuxtLink>
-            <NuxtLink to="/institute" class="nav-link">Institute</NuxtLink>
             <NuxtLink to="/about" class="nav-link">About</NuxtLink>
           </nav>
           <div class="nav-right">
@@ -29,9 +26,6 @@
           <NuxtLink to="/districts" class="nav-link">Districts</NuxtLink>
           <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
           <NuxtLink to="/community" class="nav-link">Community</NuxtLink>
-          <NuxtLink to="/bridge" class="nav-link">Bridge</NuxtLink>
-          <NuxtLink to="/pavilion" class="nav-link">Pavilion</NuxtLink>
-          <NuxtLink to="/institute" class="nav-link">Institute</NuxtLink>
           <NuxtLink to="/about" class="nav-link">About</NuxtLink>
         </nav>
         <NuxtLink to="/apply" class="nav-apply">Apply</NuxtLink>
@@ -115,10 +109,10 @@ const mobileLinks = [
   { to: '/districts', label: 'Districts' },
   { to: '/the-road', label: 'The Road' },
   { to: '/community', label: 'Community' },
-  { to: '/bridge', label: 'Bridge' },
-  { to: '/pavilion', label: 'Pavilion' },
-  { to: '/institute', label: 'Institute' },
   { to: '/about', label: 'About' },
+  { to: '/institute', label: 'Institute' },
+  { to: '/pavilion', label: 'Pavilion' },
+  { to: '/bridge', label: 'Bridge' },
 ]
 
 useNavAnimation({ navRef, overlayRef, mobileOpen })
@@ -238,7 +232,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 600px;
+  max-width: 520px;
 }
 
 .nav-right {
