@@ -87,6 +87,15 @@ onUnmounted(() => {
   background: #09090B;
 }
 
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(184,150,78,0.06) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Asymmetric two-column layout */
 .hero-layout {
   position: relative;

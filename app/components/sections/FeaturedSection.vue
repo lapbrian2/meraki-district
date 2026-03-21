@@ -210,6 +210,12 @@ onMounted(() => {
   flex-direction: column;
   cursor: pointer;
   background-image: none;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.featured-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .featured-image {

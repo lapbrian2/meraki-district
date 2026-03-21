@@ -263,12 +263,12 @@ const featuredArtists: Artist[] = [
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(100%) sepia(20%) contrast(1.1);
-  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 0.6s ease-in-out;
+  filter: grayscale(100%) sepia(20%) brightness(0.8) contrast(1.1);
+  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .fa-hero:hover .fa-hero-image img {
-  filter: grayscale(0) sepia(0) contrast(1);
+  filter: grayscale(0) sepia(0) brightness(1) contrast(1);
 }
 
 .fa-hero-info {
@@ -321,11 +321,16 @@ const featuredArtists: Artist[] = [
   background: var(--color-background, #FAFAF9);
   border: 1px solid var(--color-rule, rgba(184,150,78,0.15));
   overflow: hidden;
-  transition: background 0.3s ease, border-color 0.3s ease;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
-.fa-card:hover { background: var(--color-surface, #F4F4F5); border-color: var(--color-gold); }
+.fa-card:hover {
+  background: var(--color-surface, #F4F4F5);
+  border-color: var(--color-gold);
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.2);
+}
 .fa-card:hover .fa-image img { transform: scale(1.08) translateY(-2%); }
 .fa-card:hover .fa-overlay { opacity: 1; }
 
@@ -340,12 +345,12 @@ const featuredArtists: Artist[] = [
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(100%) sepia(20%) contrast(1.1);
-  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 0.6s ease-in-out;
+  filter: grayscale(100%) sepia(20%) brightness(0.8) contrast(1.1);
+  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .fa-card:hover .fa-image img {
-  filter: grayscale(0) sepia(0) contrast(1);
+  filter: grayscale(0) sepia(0) brightness(1) contrast(1);
 }
 
 .fa-overlay {
@@ -432,10 +437,12 @@ const featuredArtists: Artist[] = [
   position: absolute;
   bottom: calc(var(--space-8) * -0.5);
   left: calc(var(--space-6) * -0.5);
-  background: var(--color-surface);
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(10px);
   padding: var(--space-6) var(--space-8);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--color-border);
+  border: none;
+  border-left: 1px solid var(--color-gold);
   max-width: 320px;
   z-index: 2;
 }
@@ -445,7 +452,7 @@ const featuredArtists: Artist[] = [
   font-size: var(--text-h4);
   font-weight: 300;
   line-height: var(--leading-snug);
-  color: var(--color-text);
+  color: var(--color-dark-text);
   margin-bottom: var(--space-3);
 }
 
