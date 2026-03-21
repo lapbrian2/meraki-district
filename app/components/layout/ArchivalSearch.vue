@@ -5,6 +5,7 @@
         <div class="search-modal" role="dialog" aria-modal="true" aria-label="Search the archive">
           <div class="search-input-wrap">
             <span class="search-icon material-symbols-outlined" aria-hidden="true">search</span>
+            <span class="ink-pulse-cursor" aria-hidden="true" />
             <input
               ref="inputRef"
               v-model="query"
@@ -357,6 +358,16 @@ onUnmounted(() => {
   padding-right: var(--content-padding);
 }
 
+/* Vignette overlay */
+.search-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
 /* Transition */
 .search-fade-enter-active {
   transition: opacity 0.25s var(--ease-out);
@@ -425,6 +436,30 @@ onUnmounted(() => {
   color: var(--color-gold);
   font-size: 1.25rem;
   opacity: 0.6;
+}
+
+/* Ink pulse cursor */
+.ink-pulse-cursor {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  opacity: 0.8;
+  flex-shrink: 0;
+  animation: inkPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes inkPulse {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  50%  { transform: scale(1.4); opacity: 0.3; }
+  100% { transform: scale(1);   opacity: 0.8; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ink-pulse-cursor {
+    animation: none;
+    opacity: 0.6;
+  }
 }
 
 .search-input {
@@ -568,13 +603,37 @@ onUnmounted(() => {
   padding: var(--space-3) var(--space-4);
   border-left: 2px solid transparent;
   text-align: left;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  position: relative;
+  transition: border-color 1.2s cubic-bezier(0.2, 0, 0.2, 1),
+              background 1.2s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.result-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(184, 150, 78, 0.15), transparent 70%);
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.2, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.result-card.selected::before,
+.result-card:hover::before {
+  opacity: 1;
 }
 
 .result-card.selected,
 .result-card:hover {
   border-left-color: var(--color-gold);
   background: rgba(184, 150, 78, 0.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result-card,
+  .result-card::before {
+    transition: none;
+  }
 }
 
 .result-badge {
@@ -706,9 +765,9 @@ onUnmounted(() => {
 .search-hint kbd {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  padding: 1px 4px;
-  border: 1px solid rgba(250, 250, 249, 0.12);
-  border-radius: 3px;
+  padding: 2px 8px;
+  border: 1px solid rgba(184, 150, 78, 0.2);
+  border-radius: 4px;
   color: rgba(250, 250, 249, 0.35);
 }
 

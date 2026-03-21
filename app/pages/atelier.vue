@@ -19,6 +19,39 @@
     <SectionDivider />
 
     <!-- ============================================
+         ATMOSPHERIC QUOTE
+    ============================================= -->
+    <section class="atelier-quote section section-dark">
+      <div class="section-narrow">
+        <p class="atmospheric-quote reveal">
+          <em>&ldquo;{{ currentQuote }}&rdquo;</em>
+        </p>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
+         PROGRESS INDICATOR — 84% to Fellow
+    ============================================= -->
+    <section ref="progressSection" class="atelier-progress section section-dark">
+      <div class="section-default">
+        <div class="progress-header">
+          <p class="overline reveal">Pathway</p>
+          <div class="progress-meta reveal">
+            <span class="progress-label">84% to Fellow</span>
+            <span class="progress-tier">Current: Verified</span>
+          </div>
+        </div>
+        <div class="progress-bar-track reveal" aria-label="Progress to Fellow status: 84%">
+          <div class="progress-bar-fill" :style="{ width: '84%' }" />
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
          DASHBOARD PREVIEW — Bordered grid
     ============================================= -->
     <section ref="dashboardSection" class="atelier-dashboard section section-dark">
@@ -36,9 +69,16 @@
           <article
             v-for="module in modules"
             :key="module.title"
-            class="dashboard-card reveal"
+            class="dashboard-card lift-card reveal"
           >
-            <span class="dashboard-icon material-symbols-outlined">{{ module.icon }}</span>
+            <div class="dashboard-card-header">
+              <span class="dashboard-icon material-symbols-outlined">{{ module.icon }}</span>
+              <span
+                class="module-status-icon material-symbols-outlined"
+                :class="module.locked ? 'module-locked' : 'module-available'"
+                :aria-label="module.locked ? 'Requires higher tier' : 'Available'"
+              >{{ module.locked ? 'lock' : 'play_circle' }}</span>
+            </div>
             <h3 class="dashboard-card-name">{{ module.title }}</h3>
             <p class="dashboard-card-desc">{{ module.description }}</p>
             <div v-if="module.visual" class="dashboard-visual">
@@ -60,6 +100,28 @@
               </div>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
+         ACTIVITY LOG
+    ============================================= -->
+    <section ref="activitySection" class="atelier-activity section section-dark">
+      <div class="section-default">
+        <p class="overline reveal">Recent Activity</p>
+        <div class="activity-log">
+          <div
+            v-for="entry in activityLog"
+            :key="entry.id"
+            class="activity-entry reveal"
+          >
+            <span class="activity-time">{{ entry.time }}</span>
+            <span class="activity-agent">{{ entry.agent }}</span>
+            <span class="activity-action">{{ entry.action }}</span>
+          </div>
         </div>
       </div>
     </section>
@@ -130,10 +192,18 @@ const heroSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(heroSection, '.reveal')
 useWordReveal(heroSection, '.word-reveal')
 
+/* -- Progress ----------------------------------- */
+const progressSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(progressSection, '.reveal', { stagger: 0.1 })
+
 /* -- Dashboard ---------------------------------- */
 const dashboardSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(dashboardSection, '.reveal', { stagger: 0.08 })
 useWordReveal(dashboardSection, '.word-reveal')
+
+/* -- Activity ----------------------------------- */
+const activitySection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(activitySection, '.reveal', { stagger: 0.1 })
 
 /* -- Access ------------------------------------- */
 const accessSection = ref<HTMLElement | null>(null)
@@ -144,6 +214,26 @@ useWordReveal(accessSection, '.word-reveal')
 const ctaSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(ctaSection, '.reveal')
 useWordReveal(ctaSection, '.word-reveal', { stagger: 0.08 })
+
+/* -- Atmospheric quote rotation ----------------- */
+const quotes = [
+  'The canvas is a mirror of the mind\u2019s quietude',
+  'Every mark carries the weight of intention',
+  'The practice remembers what the practitioner forgets',
+  'Silence is the first material of every serious work',
+]
+const currentQuoteIndex = ref(0)
+const currentQuote = computed(() => quotes[currentQuoteIndex.value])
+
+let quoteInterval: ReturnType<typeof setInterval> | null = null
+onMounted(() => {
+  quoteInterval = setInterval(() => {
+    currentQuoteIndex.value = (currentQuoteIndex.value + 1) % quotes.length
+  }, 8000)
+})
+onUnmounted(() => {
+  if (quoteInterval) clearInterval(quoteInterval)
+})
 
 /* -- Custom GSAP animations -------------------- */
 let ctx: gsap.Context | null = null
@@ -200,6 +290,7 @@ interface DashboardModule {
   title: string
   description: string
   visual?: string
+  locked?: boolean
 }
 
 const modules: DashboardModule[] = [
@@ -208,31 +299,59 @@ const modules: DashboardModule[] = [
     title: 'Pathway Status',
     description: 'Track your progression through the districts.',
     visual: 'progress',
+    locked: false,
   },
   {
     icon: 'work',
     title: 'Active Projects',
     description: 'Manage commissions, submissions, and collaborations.',
+    locked: false,
   },
   {
     icon: 'inventory_2',
     title: 'The Archive',
     description: 'Your personal vault of published and in-progress work.',
+    locked: false,
   },
   {
     icon: 'event',
     title: 'Office Hours',
     description: 'Book sessions with Fellows and visiting practitioners.',
+    locked: true,
   },
   {
     icon: 'analytics',
     title: 'Analytics',
     description: 'Understand your reach across the districts.',
+    locked: true,
   },
   {
     icon: 'rss_feed',
     title: 'District Feed',
     description: 'Curated updates from your active districts.',
+    locked: false,
+  },
+]
+
+/* -- Activity log ------------------------------- */
+const activityLog = [
+  {
+    id: 1,
+    time: '2h ago',
+    agent: 'Meridian Curator',
+    action: 'Portfolio reviewed and flagged for Fellow consideration',
+  },
+  {
+    id: 2,
+    time: '6h ago',
+    agent: 'Archive Indexer',
+    action: 'Three new works cataloged in District 04 collection',
+  },
+  {
+    id: 3,
+    time: '1d ago',
+    agent: 'Bridge Liaison',
+    action: 'Cross-district collaboration request approved',
   },
 ]
 </script>
@@ -276,6 +395,95 @@ const modules: DashboardModule[] = [
   .atelier-hero {
     padding-top: calc(var(--space-16) + 3rem);
     padding-bottom: var(--space-12);
+  }
+}
+
+/* =============================================
+   ATMOSPHERIC QUOTE
+   ============================================= */
+.atelier-quote {
+  padding: var(--space-16) var(--content-padding);
+  text-align: center;
+  background: var(--color-dark-bg);
+}
+
+.atmospheric-quote {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-dark-muted);
+  line-height: var(--leading-snug);
+  max-width: 36ch;
+  margin: 0 auto;
+  transition: opacity 0.6s ease;
+}
+
+/* =============================================
+   PROGRESS INDICATOR
+   ============================================= */
+.atelier-progress {
+  padding: var(--space-16) var(--content-padding);
+  background: var(--color-dark-bg);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--space-6);
+}
+
+.progress-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+}
+
+.progress-label {
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-gold);
+}
+
+.progress-tier {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+}
+
+.progress-bar-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(250, 250, 249, 0.08);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-gold), rgba(184, 150, 78, 0.6));
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-bar-fill {
+    transition: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .progress-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+  .progress-meta {
+    align-items: flex-start;
   }
 }
 
@@ -368,7 +576,6 @@ const modules: DashboardModule[] = [
 .dashboard-icon {
   font-size: 1.75rem;
   color: var(--color-gold);
-  margin-bottom: var(--space-8);
   display: block;
   font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
 }
@@ -441,6 +648,91 @@ const modules: DashboardModule[] = [
   min-width: 24px;
   align-self: flex-start;
   margin-top: 5px;
+}
+
+/* Module card header with status icon */
+.dashboard-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: var(--space-8);
+}
+
+.module-status-icon {
+  font-size: 1rem;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+}
+
+.module-available {
+  color: var(--color-gold);
+  opacity: 0.6;
+}
+
+.module-locked {
+  color: var(--color-dark-muted);
+  opacity: 0.35;
+}
+
+/* =============================================
+   ACTIVITY LOG
+   ============================================= */
+.atelier-activity {
+  padding: var(--space-16) var(--content-padding);
+  background: var(--color-dark-bg);
+}
+
+.activity-log {
+  margin-top: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.activity-entry {
+  display: grid;
+  grid-template-columns: 5rem 12rem 1fr;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid rgba(250, 250, 249, 0.06);
+  align-items: baseline;
+}
+
+.activity-entry:last-child {
+  border-bottom: none;
+}
+
+.activity-time {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-dark-muted);
+  white-space: nowrap;
+}
+
+.activity-agent {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--color-gold);
+  opacity: 0.8;
+}
+
+.activity-action {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--color-dark-muted);
+  line-height: var(--leading-normal);
+}
+
+@media (max-width: 768px) {
+  .activity-entry {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+  .activity-agent {
+    font-size: var(--text-caption);
+  }
 }
 
 @media (max-width: 1024px) {

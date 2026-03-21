@@ -81,6 +81,71 @@
       </div>
     </section>
 
+    <!-- VS The Workspace — Active production environment -->
+    <section ref="vsWorkspaceSection" class="vs-workspace section-dark">
+      <div class="section-default">
+        <p class="overline reveal">The Workspace</p>
+        <p class="vs-workspace-subtitle reveal">Active production environment</p>
+
+        <!-- Tab navigation bar -->
+        <nav class="vs-workspace-tabs reveal" aria-label="Workspace tabs">
+          <button class="vs-workspace-tab vs-workspace-tab--active" aria-current="page">Workspace</button>
+          <button class="vs-workspace-tab">Tech Stack</button>
+          <button class="vs-workspace-tab">Render Queue</button>
+          <button class="vs-workspace-tab">Team Library</button>
+          <button class="vs-workspace-tab">System Logs</button>
+        </nav>
+
+        <!-- Active Projects Grid -->
+        <div class="vs-workspace-grid">
+          <div class="vs-workspace-card vellum-card lift-card reveal">
+            <div class="vs-workspace-card-image archival-image" role="img" aria-label="Project Aurelius preview"></div>
+            <div class="vs-workspace-card-body">
+              <h3 class="vs-workspace-card-title"><em>Project Aurelius</em></h3>
+              <div class="vs-workspace-card-meta">
+                <span class="vs-workspace-badge vs-workspace-badge--active"><span class="vs-workspace-dot vs-workspace-dot--green"></span>Render 98%</span>
+                <span class="vs-workspace-state">Geometry Valid</span>
+              </div>
+              <div class="vs-workspace-card-footer">
+                <span class="vs-workspace-tag">Archival Sync</span>
+                <span class="vs-workspace-time">09:12 AM</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-workspace-card vellum-card lift-card reveal">
+            <div class="vs-workspace-card-image archival-image" role="img" aria-label="Monolith Update preview"></div>
+            <div class="vs-workspace-card-body">
+              <h3 class="vs-workspace-card-title"><em>Monolith Update</em></h3>
+              <div class="vs-workspace-card-meta">
+                <span class="vs-workspace-badge vs-workspace-badge--ready"><span class="vs-workspace-dot vs-workspace-dot--green"></span>Ready</span>
+                <span class="vs-workspace-state">Optimized</span>
+              </div>
+              <div class="vs-workspace-card-footer">
+                <span class="vs-workspace-tag">Cold Storage</span>
+                <span class="vs-workspace-time">Yesterday</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-workspace-card vellum-card lift-card reveal">
+            <div class="vs-workspace-card-image archival-image" role="img" aria-label="Exhibition 04 preview"></div>
+            <div class="vs-workspace-card-body">
+              <h3 class="vs-workspace-card-title"><em>Exhibition 04</em></h3>
+              <div class="vs-workspace-card-meta">
+                <span class="vs-workspace-badge vs-workspace-badge--staging"><span class="vs-workspace-dot vs-workspace-dot--gold"></span>Staging</span>
+                <span class="vs-workspace-state">Syncing...</span>
+              </div>
+              <div class="vs-workspace-card-footer">
+                <span class="vs-workspace-tag">Local Dev</span>
+                <span class="vs-workspace-time">Oct 24</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- VS The Vault — Repository metrics -->
     <section ref="vsVaultSection" class="vs-vault section">
       <div class="section-default vs-vault-inner">
@@ -560,6 +625,7 @@ const fromSection = ref<HTMLElement | null>(null)
 
 // Voight Studio section refs
 const vsSprintsSection = ref<HTMLElement | null>(null)
+const vsWorkspaceSection = ref<HTMLElement | null>(null)
 const vsVaultSection = ref<HTMLElement | null>(null)
 const vsPhilosophySection = ref<HTMLElement | null>(null)
 const vsCtaSection = ref<HTMLElement | null>(null)
@@ -582,6 +648,7 @@ useTilt(navSection, '.q-explore-card', { maxRotation: 2 })
 
 // Voight Studio composable animations
 useGsapScrollReveal(vsSprintsSection, '.reveal', { stagger: 0.1 })
+useGsapScrollReveal(vsWorkspaceSection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(vsVaultSection, '.reveal', { stagger: 0.12 })
 useGsapScrollReveal(vsPhilosophySection, '.reveal', { stagger: 0.12 })
 useGsapScrollReveal(vsCtaSection, '.reveal', { stagger: 0.1 })
@@ -1094,6 +1161,176 @@ onUnmounted(() => {
 
 .vs-sprint:hover .vs-sprint-link {
   opacity: 1;
+}
+
+/* VS The Workspace — Active production environment */
+.vs-workspace {
+  padding: var(--space-32) 0;
+  background: var(--color-dark-bg);
+}
+
+.vs-workspace .overline {
+  margin-bottom: var(--space-2);
+}
+
+.vs-workspace-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--color-dark-muted);
+  letter-spacing: var(--tracking-wide);
+  margin-bottom: var(--space-8);
+}
+
+.vs-workspace-tabs {
+  display: flex;
+  gap: var(--space-6);
+  border-bottom: 1px solid rgba(184, 150, 78, 0.12);
+  margin-bottom: var(--space-12);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.vs-workspace-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.vs-workspace-tab {
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-dark-muted);
+  padding: var(--space-3) 0;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  transition: color var(--duration-fast) ease;
+}
+
+.vs-workspace-tab:hover {
+  color: var(--color-dark-secondary);
+}
+
+.vs-workspace-tab--active {
+  color: var(--color-gold);
+}
+
+.vs-workspace-tab--active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-gold);
+}
+
+.vs-workspace-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.vs-workspace-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.vs-workspace-card-image {
+  width: 100%;
+  height: 160px;
+  background: linear-gradient(135deg, #2a2a2d 0%, #1a1a1d 50%, #222225 100%);
+  border-bottom: 1px solid rgba(184, 150, 78, 0.08);
+}
+
+.vs-workspace-card-body {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.vs-workspace-card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+  color: var(--color-dark-text);
+  line-height: var(--leading-snug);
+}
+
+.vs-workspace-card-title em {
+  font-style: italic;
+  font-variation-settings: 'WONK' 1;
+}
+
+.vs-workspace-card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.vs-workspace-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--color-dark-secondary);
+}
+
+.vs-workspace-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.vs-workspace-dot--green {
+  background: var(--color-success);
+  box-shadow: 0 0 6px rgba(22, 163, 74, 0.4);
+}
+
+.vs-workspace-dot--gold {
+  background: var(--color-gold);
+  box-shadow: 0 0 6px rgba(184, 150, 78, 0.4);
+}
+
+.vs-workspace-state {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+}
+
+.vs-workspace-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(184, 150, 78, 0.08);
+}
+
+.vs-workspace-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-dark-muted);
+  letter-spacing: var(--tracking-wide);
+}
+
+.vs-workspace-time {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-dark-muted);
+  opacity: 0.6;
 }
 
 /* VS The Vault — Repository metrics */
@@ -2143,6 +2380,11 @@ onUnmounted(() => {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* VS Workspace */
+  .vs-workspace-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   /* VS Vault */
   .vs-vault-number {
     font-size: clamp(3.5rem, 14vw, 6rem);
@@ -2268,6 +2510,10 @@ onUnmounted(() => {
   }
 
   .vs-sprints-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vs-workspace-grid {
     grid-template-columns: 1fr;
   }
 

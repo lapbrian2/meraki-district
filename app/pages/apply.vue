@@ -41,11 +41,14 @@
               <div v-if="i < steps.length - 1" class="step-connector" aria-hidden="true" />
             </div>
             <div class="step-content">
+              <p class="step-phase">Phase {{ step.number }}</p>
               <h3 class="step-title"><em>{{ step.title }}</em></h3>
               <p class="step-desc">{{ step.description }}</p>
             </div>
           </div>
         </div>
+
+        <p class="response-timeline reveal">Response within 14 days</p>
       </div>
     </section>
 
@@ -117,6 +120,8 @@
 </template>
 
 <script setup lang="ts">
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
 import { useWordReveal } from '~/composables/useWordReveal'
 import { useEmailCollection } from '~/composables/useEmailCollection'
@@ -156,22 +161,54 @@ useWordReveal(ctaSection, '.word-reveal')
 
 useGsapScrollReveal(closingSection, '.reveal')
 
+/* -- GSAP connector draw-in animation ----------- */
+let ctx: gsap.Context | null = null
+
+onMounted(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  ctx = gsap.context(() => {
+    const connectors = processSection.value?.querySelectorAll('.step-connector')
+    if (connectors) {
+      connectors.forEach((connector) => {
+        gsap.from(connector, {
+          scaleY: 0,
+          transformOrigin: 'top center',
+          duration: 0.8,
+          ease: 'power2.inOut',
+          scrollTrigger: {
+            trigger: connector,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        })
+      })
+    }
+  })
+})
+
+onUnmounted(() => {
+  ctx?.revert()
+})
+
 /* -- Data --------------------------------------- */
 const steps = [
   {
     number: '01',
-    title: 'Express Interest',
-    description: 'A declaration of creative intent. You submit your email and a brief description of your practice. This is not a portfolio review — it is a handshake.',
+    title: 'Signal of Intent',
+    description: 'Submit your portfolio and a statement of creative intent.',
   },
   {
     number: '02',
-    title: 'Portfolio Review',
-    description: 'A multi-district committee reviews your body of work. They are looking for depth of practice, consistency of vision, and evidence that the work is alive and evolving.',
+    title: 'Internal Discourse',
+    description: 'Blind peer review by seated practitioners.',
   },
   {
     number: '03',
-    title: 'Invitation',
-    description: 'If the work speaks, you receive an invitation to walk the road. Your profile enters the archive, your name enters the directory, and you gain access to The Bridge.',
+    title: 'Institutional Access',
+    description: 'District assignment and archival access granted.',
   },
 ]
 </script>
@@ -188,6 +225,8 @@ const steps = [
   min-height: 60vh;
   display: flex;
   align-items: flex-end;
+  position: relative;
+  background: radial-gradient(circle at center, rgba(148, 67, 40, 0.08) 0%, rgba(10, 10, 10, 1) 70%);
 }
 
 .apply-hero-title {
@@ -200,6 +239,7 @@ const steps = [
   margin-top: var(--space-4);
   margin-bottom: var(--space-8);
   max-width: 18ch;
+  text-shadow: 0 0 30px rgba(148, 67, 40, 0.2);
 }
 
 .apply-hero-sub {
@@ -263,6 +303,16 @@ const steps = [
 
 .step-content {
   padding-bottom: var(--space-12);
+}
+
+.step-phase {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  opacity: 0.6;
+  margin-bottom: var(--space-2);
 }
 
 .step-title {
@@ -391,6 +441,39 @@ const steps = [
 
 .entry-error {
   color: var(--color-error);
+}
+
+/* ─── Response Timeline ─── */
+.response-timeline {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+  text-align: center;
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid rgba(184, 150, 78, 0.15);
+}
+
+/* ─── Image reveal transition ─── */
+.apply-page img {
+  transition: filter 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─── Connector draw-in ─── */
+.step-connector {
+  transform-origin: top center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apply-hero-title {
+    text-shadow: none;
+  }
+  .step-connector {
+    transform: none;
+  }
 }
 
 /* ─── Closing Quote ─── */
