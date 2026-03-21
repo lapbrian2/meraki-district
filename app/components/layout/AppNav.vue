@@ -9,6 +9,7 @@
             <NuxtLink to="/districts" class="nav-link">Districts</NuxtLink>
             <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
             <NuxtLink to="/community" class="nav-link">Community</NuxtLink>
+            <NuxtLink to="/bridge" class="nav-link">Bridge</NuxtLink>
             <NuxtLink to="/about" class="nav-link">About</NuxtLink>
           </nav>
           <div class="nav-right">
@@ -26,6 +27,7 @@
           <NuxtLink to="/districts" class="nav-link">Districts</NuxtLink>
           <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
           <NuxtLink to="/community" class="nav-link">Community</NuxtLink>
+          <NuxtLink to="/bridge" class="nav-link">Bridge</NuxtLink>
           <NuxtLink to="/about" class="nav-link">About</NuxtLink>
         </nav>
         <NuxtLink to="/apply" class="nav-apply">Apply</NuxtLink>
@@ -109,6 +111,7 @@ const mobileLinks = [
   { to: '/districts', label: 'Districts' },
   { to: '/the-road', label: 'The Road' },
   { to: '/community', label: 'Community' },
+  { to: '/bridge', label: 'Bridge' },
   { to: '/about', label: 'About' },
 ]
 
