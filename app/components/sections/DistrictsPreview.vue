@@ -6,87 +6,33 @@
         <h2 class="word-reveal">Eleven districts, one road.</h2>
       </div>
 
-      <div ref="mapEl" class="roadmap-map">
-        <!-- SVG road path -->
-        <svg
-          ref="svgEl"
-          class="roadmap-svg"
-          :viewBox="`0 0 ${svgWidth} ${svgHeight}`"
-          preserveAspectRatio="xMidYMid meet"
-          aria-hidden="true"
-        >
-          <!-- Glow behind the road -->
-          <defs>
-            <filter id="road-glow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
-            </filter>
-          </defs>
-          <path
-            :d="roadD"
-            fill="none"
-            stroke="var(--color-gold)"
-            stroke-width="3"
-            stroke-linecap="round"
-            class="road-glow"
-            :filter="'url(#road-glow)'"
-          />
-          <path
-            ref="roadPath"
-            :d="roadD"
-            fill="none"
-            stroke="var(--color-gold)"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            class="road-line"
-          />
-        </svg>
+      <!-- The Road: alternating cards with connecting line -->
+      <div ref="trackEl" class="road-track">
+        <!-- Central gold line -->
+        <div class="road-line-wrap" aria-hidden="true">
+          <div ref="roadLine" class="road-line" />
+        </div>
 
-        <!-- District nodes -->
         <div
           v-for="(d, i) in districts"
           :key="d.slug"
-          class="roadmap-node"
-          :class="{ 'node-left': i % 2 === 0, 'node-right': i % 2 === 1 }"
-          :style="nodeStyle(i, d)"
+          class="road-stop"
+          :class="{ 'stop-left': i % 2 === 0, 'stop-right': i % 2 === 1 }"
+          :style="{ '--color-accent': d.accentColor }"
         >
-          <!-- Connector line from node to road -->
-          <div class="node-connector" />
-          <div class="node-marker" />
-          <NuxtLink :to="`/districts/${d.slug}`" class="node-card">
-            <span class="node-number">{{ d.number }}</span>
-            <div class="node-content">
-              <span class="node-type">{{ d.type }}</span>
-              <h3 class="node-name">{{ d.name }}</h3>
-              <p class="node-desc">{{ d.description }}</p>
-              <span class="node-link">Visit district &rarr;</span>
-            </div>
-          </NuxtLink>
-        </div>
-      </div>
+          <!-- Marker on the line -->
+          <div class="stop-marker" />
 
-      <!-- Spotlight: active districts beneath the map -->
-      <div class="roadmap-spotlight">
-        <div class="spotlight-header reveal">
-          <p class="overline">Now Open</p>
-          <h3 class="spotlight-title">Where the work is happening.</h3>
-        </div>
-        <div class="spotlight-grid">
-          <NuxtLink
-            v-for="d in activeDistricts"
-            :key="d.slug"
-            :to="'/districts/' + d.slug"
-            class="spotlight-card reveal"
-            :style="{ '--color-accent': d.accentColor }"
-          >
-            <div class="spotlight-image">
-              <NuxtImg :src="d.image" :alt="d.name" loading="lazy" decoding="async" width="600" height="400" />
+          <!-- Card -->
+          <NuxtLink :to="`/districts/${d.slug}`" class="stop-card reveal">
+            <div class="stop-image">
+              <NuxtImg :src="d.image" :alt="d.name" loading="lazy" decoding="async" width="480" height="300" />
             </div>
-            <div class="spotlight-info">
-              <span class="spotlight-number">{{ d.number }}</span>
-              <span class="spotlight-type">{{ d.type }}</span>
-              <h4 class="spotlight-name">{{ d.name }}</h4>
-              <p class="spotlight-desc">{{ d.description }}</p>
-              <span class="spotlight-link">Enter district &rarr;</span>
+            <div class="stop-info">
+              <span class="stop-number">{{ d.number }}</span>
+              <span class="stop-type">{{ d.type }}</span>
+              <h3 class="stop-name">{{ d.name }}</h3>
+              <p class="stop-desc">{{ d.description }}</p>
             </div>
           </NuxtLink>
         </div>
@@ -105,143 +51,75 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { useWordReveal } from '~/composables/useWordReveal'
 import { districts } from '~/composables/useDistricts'
-import type { District } from '~/composables/useDistricts'
 
 const section = ref<HTMLElement | null>(null)
-const mapEl = ref<HTMLElement | null>(null)
-const svgEl = ref<SVGSVGElement | null>(null)
-const roadPath = ref<SVGPathElement | null>(null)
+const trackEl = ref<HTMLElement | null>(null)
+const roadLine = ref<HTMLElement | null>(null)
 
-useGsapScrollReveal(section, '.reveal', { stagger: 0.08 })
+useGsapScrollReveal(section, '.reveal', { stagger: 0.06 })
 useWordReveal(section, '.word-reveal')
-
-const activeDistricts = computed(() => districts.filter(d => d.status === 'active'))
-
-// SVG dimensions — generous vertical space per node
-const svgWidth = 1000
-const svgHeight = 2200
-const nodeCount = districts.length
-const topPad = 80
-const bottomPad = 80
-const usableHeight = svgHeight - topPad - bottomPad
-const segmentHeight = usableHeight / (nodeCount - 1)
-
-// Build a serpentine road path with wider, smoother curves
-const roadD = computed(() => {
-  const centerX = svgWidth / 2
-  const amplitude = 280
-  const points: string[] = []
-
-  // Start above the first node
-  const firstX = centerX + amplitude * -1
-  points.push(`M ${centerX} 0`)
-  points.push(`C ${centerX} ${topPad * 0.5}, ${firstX} ${topPad * 0.7}, ${firstX} ${topPad}`)
-
-  for (let i = 1; i < nodeCount; i++) {
-    const prevY = topPad + segmentHeight * (i - 1)
-    const y = topPad + segmentHeight * i
-    const direction = i % 2 === 0 ? -1 : 1
-    const prevDir = (i - 1) % 2 === 0 ? -1 : 1
-    const x = centerX + amplitude * direction
-    const prevX = centerX + amplitude * prevDir
-
-    // Smooth S-curve control points
-    const cp1x = prevX
-    const cp1y = prevY + segmentHeight * 0.55
-    const cp2x = x
-    const cp2y = y - segmentHeight * 0.55
-
-    points.push(`C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x} ${y}`)
-  }
-
-  // End: curve from last node back to center bottom
-  const lastDir = (nodeCount - 1) % 2 === 0 ? -1 : 1
-  const lastX = centerX + amplitude * lastDir
-  const lastY = topPad + segmentHeight * (nodeCount - 1)
-  points.push(`C ${lastX} ${lastY + bottomPad * 0.5}, ${centerX} ${svgHeight - bottomPad * 0.3}, ${centerX} ${svgHeight}`)
-
-  return points.join(' ')
-})
-
-// Position nodes along the road
-function nodeStyle(i: number, d: District) {
-  const centerX = svgWidth / 2
-  const amplitude = 280
-  const y = topPad + segmentHeight * i
-  const direction = i % 2 === 0 ? -1 : 1
-  const x = centerX + amplitude * direction
-
-  const topPercent = (y / svgHeight) * 100
-  const leftPercent = (x / svgWidth) * 100
-
-  return {
-    top: `${topPercent}%`,
-    left: `${leftPercent}%`,
-    '--color-accent': d.accentColor,
-    '--color-accent-accessible': d.accentColorAccessible,
-  }
-}
 
 let ctx: gsap.Context | null = null
 
 onMounted(async () => {
-  if (!section.value || !roadPath.value) return
+  if (!section.value || !roadLine.value) return
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-  if (reducedMotion) {
-    section.value.querySelectorAll('.roadmap-node').forEach((el) => {
-      ;(el as HTMLElement).style.opacity = '1'
-    })
-    return
-  }
+  if (reducedMotion) return
 
   await waitForAncestorAnimations(section.value)
-  if (!section.value || !roadPath.value) return
+  if (!section.value || !roadLine.value) return
 
   gsap.registerPlugin(ScrollTrigger)
 
   ctx = gsap.context(() => {
-    const path = roadPath.value!
-    const glow = section.value!.querySelector('.road-glow') as SVGPathElement
-    const totalLength = path.getTotalLength()
+    // Draw the gold line as you scroll through the track
+    gsap.fromTo(roadLine.value!,
+      { scaleY: 0 },
+      {
+        scaleY: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: trackEl.value,
+          start: 'top 70%',
+          end: 'bottom 50%',
+          scrub: 0.6,
+        },
+      }
+    )
 
-    // Set up dash for draw animation
-    gsap.set(path, { strokeDasharray: totalLength, strokeDashoffset: totalLength })
-    if (glow) gsap.set(glow, { strokeDasharray: totalLength, strokeDashoffset: totalLength })
-
-    // Draw the road on scroll — synced to the map container
-    const drawTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: mapEl.value,
-        start: 'top 60%',
-        end: 'bottom 40%',
-        scrub: 0.8,
-      },
+    // Clip-path reveal on each card image
+    const images = gsap.utils.toArray<HTMLElement>('.stop-image')
+    images.forEach((img, i) => {
+      const isLeft = i % 2 === 0
+      gsap.fromTo(img,
+        { clipPath: isLeft ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)' },
+        {
+          clipPath: 'inset(0% 0% 0% 0%)',
+          duration: 1,
+          ease: 'power3.inOut',
+          scrollTrigger: {
+            trigger: img,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      )
     })
 
-    drawTl.to(path, { strokeDashoffset: 0, ease: 'none', duration: 1 }, 0)
-    if (glow) drawTl.to(glow, { strokeDashoffset: 0, ease: 'none', duration: 1 }, 0)
-
-    // Fade in nodes — each tied to the road's progress reaching their position
-    const nodes = gsap.utils.toArray<HTMLElement>('.roadmap-node')
-    nodes.forEach((node, i) => {
-      // Each node appears when the road draw reaches ~its vertical position
-      const nodeProgress = i / (nodeCount - 1)
-      // Convert to scroll position within the map
-      const startOffset = nodeProgress * 80 // 0% to 80% of the map height
-
-      gsap.fromTo(node,
-        { opacity: 0, y: 25, scale: 0.97 },
+    // Markers pulse in
+    const markers = gsap.utils.toArray<HTMLElement>('.stop-marker')
+    markers.forEach((marker) => {
+      gsap.fromTo(marker,
+        { scale: 0, opacity: 0 },
         {
-          opacity: 1,
-          y: 0,
           scale: 1,
-          duration: 0.7,
-          ease: 'power2.out',
+          opacity: 1,
+          duration: 0.4,
+          ease: 'back.out(2)',
           scrollTrigger: {
-            trigger: mapEl.value,
-            start: () => `top+=${startOffset}% 60%`,
+            trigger: marker,
+            start: 'top 80%',
             toggleActions: 'play none none none',
           },
         }
@@ -262,7 +140,7 @@ onUnmounted(() => {
 }
 
 .roadmap-header {
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-16);
   text-align: center;
 }
 
@@ -274,257 +152,110 @@ onUnmounted(() => {
   color: var(--color-dark-text);
 }
 
-/* Map container — tall enough for generous spacing */
-.roadmap-map {
+/* ─── Track: the road itself ─── */
+.road-track {
   position: relative;
-  width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  aspect-ratio: 1000 / 2200;
+  padding: var(--space-8) 0;
 }
 
-.roadmap-svg {
+/* Central gold line */
+.road-line-wrap {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  transform: translateX(-50%);
 }
 
 .road-line {
-  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--color-gold) 3%,
+    var(--color-gold) 97%,
+    transparent 100%
+  );
+  opacity: 0.3;
+  transform-origin: top center;
 }
 
-.road-glow {
-  opacity: 0.15;
+/* ─── Each stop along the road ─── */
+.road-stop {
+  position: relative;
+  display: flex;
+  margin-bottom: var(--space-12);
+  padding: 0 calc(50% + var(--space-12)) 0 0;
 }
 
-/* ─── Node positioning ─── */
-.roadmap-node {
+.road-stop:last-child {
+  margin-bottom: 0;
+}
+
+.stop-left {
+  padding: 0 calc(50% + var(--space-12)) 0 0;
+  justify-content: flex-end;
+}
+
+.stop-right {
+  padding: 0 0 0 calc(50% + var(--space-12));
+  justify-content: flex-start;
+}
+
+/* ─── Marker on the center line ─── */
+.stop-marker {
   position: absolute;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  opacity: 0;
-}
-
-/* ─── Connector line from card to road ─── */
-.node-connector {
-  position: absolute;
-  top: 50%;
-  width: 40px;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--color-accent));
-  opacity: 0.25;
-}
-
-.node-left .node-connector {
-  right: -40px;
-  background: linear-gradient(to left, transparent, var(--color-accent));
-}
-
-.node-right .node-connector {
-  left: -40px;
-}
-
-/* ─── Marker dot on the road ─── */
-.node-marker {
-  position: absolute;
-  width: 8px;
-  height: 8px;
+  left: 50%;
+  top: var(--space-8);
+  width: 10px;
+  height: 10px;
   background: var(--color-accent);
-  border-radius: 0;
-  top: 50%;
+  transform: translateX(-50%);
   z-index: 3;
   box-shadow:
     0 0 8px color-mix(in srgb, var(--color-accent) 50%, transparent),
-    0 0 24px color-mix(in srgb, var(--color-accent) 20%, transparent);
-  transition: transform var(--duration-normal) ease, box-shadow var(--duration-normal) ease;
-}
-
-.node-left .node-marker {
-  right: -44px;
-  transform: translateY(-50%);
-}
-
-.node-right .node-marker {
-  left: -44px;
-  transform: translateY(-50%);
-}
-
-.roadmap-node:hover .node-marker {
-  transform: translateY(-50%) scale(1.4);
-  box-shadow:
-    0 0 12px color-mix(in srgb, var(--color-accent) 60%, transparent),
-    0 0 32px color-mix(in srgb, var(--color-accent) 30%, transparent);
+    0 0 20px color-mix(in srgb, var(--color-accent) 20%, transparent);
 }
 
 /* ─── Card ─── */
-.node-card {
+.stop-card {
   display: block;
+  max-width: 420px;
+  width: 100%;
   text-decoration: none;
   color: inherit;
   background-image: none;
-  padding: var(--space-3) var(--space-6);
-  max-width: 300px;
-  position: relative;
-  transition: transform var(--duration-normal) var(--ease-out);
-}
-
-.node-left .node-card {
-  text-align: right;
-  margin-right: var(--space-12);
-}
-
-.node-right .node-card {
-  text-align: left;
-  margin-left: var(--space-12);
-}
-
-.node-card:hover {
-  transform: translateY(-3px);
-}
-
-.node-card:hover .node-name {
-  color: var(--color-accent);
-}
-
-.node-card:hover .node-desc {
-  opacity: 1;
-  max-height: 100px;
-  margin-top: var(--space-2);
-}
-
-.node-card:hover .node-link {
-  opacity: 1;
-  max-height: 30px;
-  margin-top: var(--space-3);
-}
-
-.node-card:hover .node-number {
-  opacity: 0.25;
-}
-
-/* ─── Number ─── */
-.node-number {
-  font-family: var(--font-mono);
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 300;
-  letter-spacing: var(--tracking-ultra-wide);
-  color: var(--color-accent);
-  opacity: 0.08;
-  line-height: 0.9;
-  display: block;
-  transition: opacity var(--duration-normal) ease;
-  pointer-events: none;
-  margin-bottom: var(--space-1);
-}
-
-/* ─── Type label ─── */
-.node-type {
-  font-size: var(--text-overline);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-widest);
-  color: var(--color-accent);
-  display: block;
-  margin-bottom: var(--space-1);
-}
-
-/* ─── Name ─── */
-.node-name {
-  font-family: var(--font-display);
-  font-size: var(--text-h3);
-  font-weight: 400;
-  color: var(--color-dark-text);
-  line-height: var(--leading-snug);
-  transition: color var(--duration-normal) ease;
-}
-
-/* ─── Description (expand on hover) ─── */
-.node-desc {
-  font-size: var(--text-small);
-  color: var(--color-dark-muted);
-  line-height: var(--leading-normal);
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.4s var(--ease-out),
-              opacity 0.3s ease,
-              margin-top 0.3s ease;
-}
-
-/* ─── Visit link (expand on hover) ─── */
-.node-link {
-  font-size: var(--text-overline);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-widest);
-  color: var(--color-accent);
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  display: block;
-  transition: max-height 0.3s var(--ease-out),
-              opacity 0.3s ease,
-              margin-top 0.3s ease;
-}
-
-/* ─── Spotlight: active districts ─── */
-.roadmap-spotlight {
-  margin-top: var(--space-16);
-  padding-top: var(--space-16);
-  border-top: 1px solid rgba(250, 250, 249, 0.06);
-}
-
-.spotlight-header {
-  margin-bottom: var(--space-12);
-}
-
-.spotlight-title {
-  font-family: var(--font-display);
-  font-size: var(--text-h2);
-  font-weight: 300;
-  color: var(--color-dark-text);
-  margin-top: var(--space-4);
-  letter-spacing: var(--tracking-snug);
-}
-
-.spotlight-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: rgba(250, 250, 249, 0.06);
-}
-
-.spotlight-card {
-  display: block;
   background: var(--color-dark-bg);
-  text-decoration: none;
-  color: inherit;
-  background-image: none;
+  border: 1px solid rgba(250, 250, 249, 0.06);
   overflow: hidden;
-  transition: background var(--duration-normal) ease;
+  transition: border-color var(--duration-normal) ease,
+              box-shadow var(--duration-normal) ease;
 }
 
-.spotlight-card:hover {
-  background: rgba(250, 250, 249, 0.03);
+.stop-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
 }
 
-.spotlight-card:hover .spotlight-image img {
-  transform: scale(1.03);
+.stop-card:hover .stop-image img {
+  transform: scale(1.04);
 }
 
-.spotlight-card:hover .spotlight-name {
+.stop-card:hover .stop-name {
   color: var(--color-accent);
 }
 
-.spotlight-card:hover .spotlight-link {
-  opacity: 1;
-}
-
-.spotlight-image {
+/* ─── Image ─── */
+.stop-image {
   aspect-ratio: 16 / 10;
   overflow: hidden;
 }
 
-.spotlight-image img {
+.stop-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -532,62 +263,57 @@ onUnmounted(() => {
   transition: transform 0.6s var(--ease-out);
 }
 
-.spotlight-info {
-  padding: var(--space-6) var(--space-8);
+/* ─── Info ─── */
+.stop-info {
+  padding: var(--space-4) var(--space-6) var(--space-6);
   position: relative;
 }
 
-.spotlight-number {
+.stop-number {
   position: absolute;
-  top: var(--space-6);
-  right: var(--space-8);
+  top: var(--space-4);
+  right: var(--space-6);
   font-family: var(--font-mono);
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 300;
   letter-spacing: var(--tracking-ultra-wide);
   color: var(--color-accent);
-  opacity: 0.1;
+  opacity: 0.12;
   line-height: 1;
 }
 
-.spotlight-type {
+.stop-type {
   font-size: var(--text-overline);
   text-transform: uppercase;
   letter-spacing: var(--tracking-widest);
   color: var(--color-accent);
   display: block;
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-1);
 }
 
-.spotlight-name {
+.stop-name {
   font-family: var(--font-display);
-  font-size: var(--text-h3);
+  font-size: var(--text-h4);
   font-weight: 400;
   color: var(--color-dark-text);
   line-height: var(--leading-snug);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-2);
   transition: color var(--duration-normal) ease;
 }
 
-.spotlight-desc {
+.stop-desc {
   font-size: var(--text-small);
   color: var(--color-dark-muted);
   line-height: var(--leading-normal);
-  margin-bottom: var(--space-4);
-}
-
-.spotlight-link {
-  font-size: var(--text-overline);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-widest);
-  color: var(--color-accent);
-  opacity: 0.6;
-  transition: opacity var(--duration-fast) ease;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ─── CTA ─── */
 .roadmap-cta {
-  margin-top: var(--space-12);
+  margin-top: var(--space-16);
   text-align: center;
 }
 
@@ -605,7 +331,7 @@ onUnmounted(() => {
   opacity: 0.7;
 }
 
-/* ─── Mobile: vertical road ─── */
+/* ─── Mobile ─── */
 @media (max-width: 768px) {
   .roadmap {
     padding: var(--space-16) 0;
@@ -613,101 +339,43 @@ onUnmounted(() => {
 
   .roadmap-header {
     text-align: left;
+    margin-bottom: var(--space-12);
   }
 
   .roadmap-header h2 {
     font-size: var(--text-h1);
   }
 
-  .roadmap-map {
-    aspect-ratio: auto;
-    height: auto;
-    max-width: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-12);
-    padding-left: var(--space-12);
-    position: relative;
-  }
-
-  .roadmap-svg {
-    display: none;
-  }
-
-  /* Vertical line on left */
-  .roadmap-map::before {
-    content: '';
-    position: absolute;
+  .road-line-wrap {
     left: var(--space-4);
-    top: 0;
-    bottom: 0;
-    width: 1.5px;
-    background: var(--color-gold);
-    opacity: 0.25;
-  }
-
-  .roadmap-node {
-    position: relative;
-    top: auto !important;
-    left: auto !important;
-    transform: none;
-    opacity: 1;
-  }
-
-  .node-connector {
-    display: none;
-  }
-
-  .node-marker {
-    position: absolute;
-    left: calc(-1 * var(--space-12) + var(--space-4) - 4px);
-    top: var(--space-6);
-    right: auto;
     transform: none;
   }
 
-  .node-left .node-card,
-  .node-right .node-card {
-    text-align: left;
-    margin-left: 0;
-    margin-right: 0;
+  .road-stop,
+  .stop-left,
+  .stop-right {
+    padding: 0 0 0 var(--space-12);
+    justify-content: flex-start;
+  }
+
+  .stop-marker {
+    left: var(--space-4);
+    transform: translateX(-50%);
+  }
+
+  .stop-card {
     max-width: none;
-  }
-
-  .node-desc {
-    max-height: none;
-    opacity: 0.6;
-    margin-top: var(--space-2);
-  }
-
-  .node-link {
-    max-height: none;
-    opacity: 1;
-    margin-top: var(--space-2);
-  }
-
-  .node-number {
-    font-size: 2rem;
-    opacity: 0.12;
-  }
-
-  .spotlight-grid {
-    grid-template-columns: 1fr;
   }
 }
 
 /* ─── Tablet ─── */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .roadmap-map {
+  .road-track {
     max-width: 800px;
   }
 
-  .node-card {
-    max-width: 260px;
-  }
-
-  .node-name {
-    font-size: var(--text-h4);
+  .stop-card {
+    max-width: 340px;
   }
 }
 </style>
