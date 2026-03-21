@@ -65,7 +65,7 @@ export const districts: District[] = [
     longDescription: 'The Provenance is a living archive. It documents creative process, catalogues precedent, and preserves the thinking behind the work\u2014not just the polished output. In an era of ephemeral content, it builds a permanent record of what it looks like to practice AI-native creativity with intention.',
     pullQuote: 'In an era of ephemeral content, we build a permanent record.',
     offerings: ['Process documentation', 'Creative archives', 'Precedent catalogues', 'Practice histories'],
-    status: 'development',
+    status: 'coming-soon',
     accentColor: '#8B7355', accentColorAccessible: '#6E5A42', fontVariation: "'WONK' 1, 'SOFT' 30, 'opsz' 72",
   },
   {
