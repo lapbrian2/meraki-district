@@ -40,7 +40,7 @@ import { useWordReveal } from '~/composables/useWordReveal'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal')
-useParallax(section, '.origin-bg-image', { speed: 0.08 })
+useParallax(section, '.origin-bg-image', { speed: 0.12 })
 useWordReveal(section, '.word-reveal')
 
 let ctx: gsap.Context | null = null
@@ -114,9 +114,10 @@ onUnmounted(() => {
 }
 
 .origin-title {
-  font-size: var(--text-h2);
+  font-size: var(--text-h1);
   font-weight: 300;
   line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-hero);
   color: var(--color-dark-text);
   margin-top: var(--space-8);
   margin-bottom: var(--space-8);

@@ -157,7 +157,9 @@ const principles = [
 
 .principle-number {
   font-family: var(--font-mono);
-  font-size: var(--text-overline);
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mega-wide);
   color: var(--color-text-muted);
   display: block;
   margin-bottom: var(--space-4);

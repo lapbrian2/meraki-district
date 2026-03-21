@@ -32,6 +32,7 @@ useWordReveal(section, '.word-reveal')
 .about-hero-title {
   font-size: var(--text-display);
   line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-hero);
   margin-top: var(--space-4);
   margin-bottom: var(--space-8);
 }
