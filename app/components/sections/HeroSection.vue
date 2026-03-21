@@ -34,8 +34,8 @@
       <!-- Right: architectural image with quote overlay -->
       <div class="hero-image-block reveal-image">
         <NuxtImg
-          src="/images/hero-bg.webp"
-          alt="Meraki District"
+          src="/images/origin-bg.webp"
+          alt="Meraki Road"
           class="hero-feature-image"
           loading="eager"
           width="600"
