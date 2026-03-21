@@ -649,6 +649,10 @@ const tiers = [
     width: 100%;
     text-align: center;
     padding: var(--space-4) var(--space-6);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 </style>

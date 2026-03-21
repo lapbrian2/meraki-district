@@ -247,12 +247,32 @@ const steps = [
 }
 
 @media (max-width: 768px) {
+  .pathway {
+    padding: var(--space-16) var(--content-padding);
+  }
+
+  .pathway-header {
+    margin-bottom: var(--space-12);
+  }
+
+  .pathway-title {
+    font-size: clamp(1.75rem, 5vw, var(--text-h1));
+  }
+
   .pathway-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .pathway-card {
+    padding: var(--space-6) var(--space-4);
+  }
+
   .pathway-card:nth-child(n+4) {
     margin-top: -1px;
+  }
+
+  .pathway-number {
+    font-size: clamp(2rem, 8vw, var(--text-display));
   }
 }
 

@@ -1305,6 +1305,41 @@ const opportunities: Opportunity[] = [
   .cta-button-ghost {
     width: 100%;
     text-align: center;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-cta {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .bento-consult-btn {
+    min-height: 44px;
+    width: 100%;
+  }
+
+  .bento-cta-btn {
+    min-height: 44px;
+    width: 100%;
+  }
+
+  .bento-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .filter-pill {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 

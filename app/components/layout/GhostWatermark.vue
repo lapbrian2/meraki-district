@@ -53,4 +53,10 @@ onMounted(() => {
   white-space: nowrap;
   user-select: none;
 }
+
+@media (max-width: 768px) {
+  .ghost-watermark {
+    display: none;
+  }
+}
 </style>

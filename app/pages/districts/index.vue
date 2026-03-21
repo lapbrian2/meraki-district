@@ -649,12 +649,32 @@ useHead({
     padding: var(--space-6) var(--space-6) var(--space-8);
   }
 
+  .dp-enter-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+  }
+
   .dp-coming-grid {
     grid-template-columns: 1fr;
   }
 
+  .dp-coming-card {
+    padding: var(--space-6) var(--space-5);
+  }
+
   .dp-dev-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dp-cta-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
 }
 

@@ -468,12 +468,20 @@ const featuredArtists: Artist[] = [
 }
 
 @media (max-width: 768px) {
+  .featured-artists {
+    padding: var(--space-8) var(--content-padding);
+  }
+
   .fa-hero {
     grid-template-columns: 1fr;
   }
 
   .fa-hero-image {
     aspect-ratio: 3 / 2;
+  }
+
+  .fa-hero-info {
+    padding: var(--space-6);
   }
 
   .fa-hero-info h3 {
@@ -483,9 +491,17 @@ const featuredArtists: Artist[] = [
   .fa-grid { grid-template-columns: repeat(2, 1fr); }
 
   .fa-quote-overlay { display: none; }
+
+  .fa-header h2 {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+  }
 }
 
 @media (max-width: 480px) {
   .fa-grid { grid-template-columns: 1fr; }
+
+  .fa-info h3 {
+    font-size: 1.125rem;
+  }
 }
 </style>

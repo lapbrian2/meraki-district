@@ -396,6 +396,17 @@ const exhibitions: Exhibition[] = [
   .hero-image {
     aspect-ratio: 16 / 9;
   }
+
+  .hero-stamp {
+    margin-bottom: var(--space-6);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(2.5rem, 10vw, var(--text-display));
+    max-width: none;
+  }
 }
 
 /* =============================================

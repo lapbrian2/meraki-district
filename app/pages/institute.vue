@@ -444,6 +444,14 @@ const ranks: Rank[] = [
     padding-top: calc(var(--space-16) + 3rem);
     padding-bottom: var(--space-12);
   }
+
+  .hero-cta {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
 }
 
 /* =============================================

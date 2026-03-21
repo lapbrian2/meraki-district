@@ -128,6 +128,7 @@ onUnmounted(() => {
   }
 
   .manifesto-text {
+    font-size: clamp(1.375rem, 4vw, var(--text-h2));
     margin-top: var(--space-4);
     margin-bottom: var(--space-6);
   }

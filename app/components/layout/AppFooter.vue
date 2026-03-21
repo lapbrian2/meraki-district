@@ -362,6 +362,31 @@ useGsapScrollReveal(footerRef, '.reveal', { stagger: 0.15 })
   .footer-closing {
     padding: var(--space-20) 0 var(--space-16);
   }
+
+  .footer-registry-input {
+    min-height: 44px;
+    padding: var(--space-3) 0;
+  }
+
+  .footer-registry-btn {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-links a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .footer-legal a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
 }
 
 /* Focus styles */

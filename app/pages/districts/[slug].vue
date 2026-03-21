@@ -1996,6 +1996,23 @@ onUnmounted(() => {
 /* RESPONSIVE                                                 */
 /* ═══════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
+  /* Nav dots — ensure touch targets */
+  .q-nav-dot {
+    width: 44px;
+    height: 44px;
+  }
+
+  .q-nav-inner {
+    gap: var(--space-1);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .q-nav-inner::-webkit-scrollbar {
+    display: none;
+  }
+
   /* VS Hero */
   .vs-hero {
     height: 70vh;
@@ -2024,6 +2041,13 @@ onUnmounted(() => {
   /* VS From */
   .vs-from-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* VS CTA */
+  .vs-cta-email {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   /* Prov Hero */
@@ -2066,6 +2090,13 @@ onUnmounted(() => {
     grid-template-columns: 1fr;
   }
 
+  /* Prov CTA */
+  .prov-cta-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
   /* Generic Hero */
   .q-hero {
     height: 55vh;
@@ -2096,6 +2127,7 @@ onUnmounted(() => {
     width: 100%;
     text-align: center;
     padding: var(--space-4) var(--space-6);
+    min-height: 44px;
   }
 
   .q-explore-grid {

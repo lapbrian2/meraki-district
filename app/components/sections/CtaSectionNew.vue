@@ -195,6 +195,24 @@ useMagnetic(section, '.cta-new-button', { strength: 0.2 })
     width: 100%;
     text-align: center;
     padding: var(--space-5) var(--space-8);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-new {
+    padding: var(--space-24) var(--content-padding);
+  }
+
+  .cta-new-watermark {
+    display: none;
+  }
+
+  .cta-new-heading {
+    font-size: clamp(2.5rem, 10vw, 4rem);
   }
 }
 </style>

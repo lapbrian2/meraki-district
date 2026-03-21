@@ -223,6 +223,40 @@ h1, h2, h3, h4,
   }
 }
 
+/* ─── Mobile responsive: section gap reduction, touch targets ─── */
+@media (max-width: 768px) {
+  .section {
+    padding-top: clamp(3rem, 6vw, 6rem);
+    padding-bottom: clamp(3rem, 6vw, 6rem);
+  }
+
+  /* Ensure all interactive elements meet 44px touch target */
+  button,
+  [role="button"],
+  .cta-button-gold,
+  .cta-button-ghost {
+    min-height: 44px;
+  }
+
+  /* Prevent horizontal overflow from letter-spacing on overlines */
+  .overline {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  /* Hide ghost watermarks on very small screens to prevent overflow */
+  .footer-watermark {
+    display: none;
+  }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

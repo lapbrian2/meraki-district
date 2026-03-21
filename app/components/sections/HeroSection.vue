@@ -331,6 +331,7 @@ onUnmounted(() => {
 
   .hero-title {
     text-align: center;
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
   }
 
   .hero-sub {
@@ -343,6 +344,23 @@ onUnmounted(() => {
     flex-direction: column;
     gap: var(--space-4);
     align-items: center;
+    width: 100%;
+  }
+
+  .hero-cta-primary {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-cta-secondary {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .hero-scroll {

@@ -301,6 +301,12 @@ onMounted(() => {
     font-size: var(--text-h3);
   }
 
+  .featured-read {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
   .featured-grid {
     grid-template-columns: 1fr;
     gap: var(--space-12);

@@ -585,6 +585,9 @@ onUnmounted(() => {
 
   .nav-mobile-logo {
     display: block;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 
   .nav {
@@ -594,6 +597,17 @@ onUnmounted(() => {
   .nav-toggle,
   .nav-mobile-logo {
     pointer-events: auto;
+  }
+
+  .mobile-link {
+    font-size: clamp(2rem, 8vw, var(--text-display));
+    min-height: 44px;
+  }
+
+  .mobile-apply {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 

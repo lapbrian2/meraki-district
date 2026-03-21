@@ -706,6 +706,21 @@ useSeoMeta({
     margin-top: var(--space-4);
   }
 
+  .apply-form-row {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .apply-input {
+    min-height: 44px;
+    border-right: 1px solid rgba(250, 250, 249, 0.2);
+  }
+
+  .apply-btn {
+    min-height: 44px;
+    width: 100%;
+  }
+
   .criteria-item {
     grid-template-columns: 3rem 1fr;
     gap: var(--space-3);
