@@ -321,7 +321,7 @@ const featuredArtists: Artist[] = [
   background: var(--color-background, #FAFAF9);
   border: 1px solid var(--color-rule, rgba(184,150,78,0.15));
   overflow: hidden;
-  transition: background 0.3s ease, border-color 0.3s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
 }
 
@@ -329,7 +329,7 @@ const featuredArtists: Artist[] = [
   background: var(--color-surface, #F4F4F5);
   border-color: var(--color-gold);
   transform: translateY(-8px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 60px -10px rgba(0,0,0,0.5), 0 0 40px -10px rgba(184, 150, 78, 0.15);
 }
 .fa-card:hover .fa-image img { transform: scale(1.08) translateY(-2%); }
 .fa-card:hover .fa-overlay { opacity: 1; }
