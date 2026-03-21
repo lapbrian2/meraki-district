@@ -37,13 +37,13 @@
         <div class="origin-rule reveal" aria-hidden="true" />
         <div class="origin-body-wrap">
           <p class="origin-body reveal">
-            Meraki Road started in 2018 with a question that wouldn&rsquo;t
-            go away: why does discovery in creative fields still depend on
-            algorithms that reward volume over craft?
+            Meraki Road started with a question that wouldn&rsquo;t go away:
+            why does discovery in creative fields still depend on algorithms
+            that reward volume over craft?
           </p>
           <p class="origin-body reveal">
-            Every platform we found optimised for engagement&mdash;likes,
-            shares, follower counts. None of them were built to surface the
+            Every platform optimises for engagement&mdash;likes, shares,
+            follower counts. None of them were built to surface the
             practitioners doing rigorous, patient work at the edges of their
             disciplines. The people shaping what AI-native creativity actually
             looks like were invisible to the infrastructure that was supposed
