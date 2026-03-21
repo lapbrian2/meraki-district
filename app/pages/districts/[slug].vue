@@ -171,6 +171,181 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- BESPOKE: The Provenance                                -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div v-else-if="district && isProvenance" ref="root" :style="{ '--color-accent': district.accentColor, '--color-accent-accessible': district.accentColorAccessible }">
+
+    <!-- Prov Hero — Full viewport, archival treatment -->
+    <section ref="heroSection" class="prov-hero">
+      <div class="prov-hero-image-wrap">
+        <NuxtImg
+          :src="district.image"
+          :alt="`${district.name} — ${district.type}`"
+          class="prov-hero-image archival-image"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          width="1920"
+          height="1080"
+        />
+        <div class="prov-hero-overlay" />
+      </div>
+      <div class="prov-hero-content">
+        <p class="prov-hero-subtitle">The Vault</p>
+        <h1 ref="heroTitle" class="prov-hero-title">The Provenance</h1>
+      </div>
+    </section>
+
+    <!-- District Navigator (shared) -->
+    <nav class="q-nav" aria-label="District navigation">
+      <div class="section-default q-nav-inner">
+        <NuxtLink
+          v-for="d in districts"
+          :key="d.slug"
+          :to="'/districts/' + d.slug"
+          class="q-nav-dot"
+          :class="{ 'q-nav-active': d.slug === slug }"
+          :style="{ '--dot-color': d.accentColor }"
+          :aria-label="d.name"
+          :aria-current="d.slug === slug ? 'page' : undefined"
+        >
+          <span class="q-nav-num">{{ d.number }}</span>
+        </NuxtLink>
+      </div>
+    </nav>
+
+    <!-- Prov Archival Philosophy — Asymmetric 7/5 grid -->
+    <section ref="provPhilosophySection" class="prov-philosophy section">
+      <div class="section-default prov-philosophy-grid">
+        <div class="prov-philosophy-quote">
+          <blockquote>
+            <p class="prov-philosophy-pullquote word-reveal">&ldquo;Every work deserves a lineage. Every lineage deserves a guardian.&rdquo;</p>
+          </blockquote>
+        </div>
+        <div class="prov-philosophy-body">
+          <div class="prov-philosophy-rule" aria-hidden="true" />
+          <p class="reveal">
+            The Provenance exists because creative work is fragile. Not the object itself&mdash;the context around it. Who made it, when, under what conditions, through whose hands it passed. Strip that away and you have an artifact without meaning.
+          </p>
+          <p class="reveal">
+            This district is the archival conscience of Meraki Road. A permanent record that treats provenance not as metadata but as material&mdash;as essential to the work as the medium it was made in. In a world that treats digital objects as infinitely reproducible and therefore disposable, The Provenance insists on permanence.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prov Verification Protocol — 3-column numbered cards -->
+    <section ref="provProtocolSection" class="prov-protocol section-dark">
+      <div class="section-default">
+        <p class="overline reveal">Verification Protocol</p>
+        <div class="prov-protocol-grid">
+          <div class="prov-protocol-card vellum-card reveal">
+            <span class="prov-protocol-number" aria-hidden="true">01</span>
+            <h3 class="prov-protocol-title"><em>Genesis Check</em></h3>
+            <p class="prov-protocol-desc">Metadata integrity validation. Every work enters the archive with its full provenance chain intact&mdash;origin, authorship, medium, and the conditions of its creation verified before a single byte is stored.</p>
+          </div>
+          <div class="prov-protocol-card vellum-card reveal">
+            <span class="prov-protocol-number" aria-hidden="true">02</span>
+            <h3 class="prov-protocol-title"><em>Consensus Layering</em></h3>
+            <p class="prov-protocol-desc">Distributed curator authentication. No single voice determines what endures. Each work is reviewed by an independent panel whose assessments are recorded as part of the permanent record.</p>
+          </div>
+          <div class="prov-protocol-card vellum-card reveal">
+            <span class="prov-protocol-number" aria-hidden="true">03</span>
+            <h3 class="prov-protocol-title"><em>Perpetual Audit</em></h3>
+            <p class="prov-protocol-desc">Continuous anomaly detection. The archive watches itself. Integrity checks run against every stored object, flagging drift before it becomes degradation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prov The Repository — Dark metric section -->
+    <section ref="provRepositorySection" class="prov-repository section">
+      <div class="section-default prov-repo-inner">
+        <div class="prov-repo-metric-wrap">
+          <p class="prov-repo-metric reveal">99.9%</p>
+          <p class="prov-repo-metric-label reveal">persistence</p>
+        </div>
+        <div class="prov-repo-body">
+          <div class="prov-repo-rule" aria-hidden="true" />
+          <p class="reveal">
+            Redundancy is not a feature. It is the founding assumption. Every object in The Provenance exists across geographically distributed nodes with independent verification layers. The commitment is unconditional&mdash;what enters the archive stays in the archive.
+          </p>
+          <blockquote class="prov-repo-quote reveal">
+            <p>&ldquo;An institution that cannot guarantee permanence has no business accepting custody.&rdquo;</p>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prov From The Provenance — Essay cards -->
+    <section ref="provFromSection" class="prov-from section-dark">
+      <div class="section-default">
+        <p class="overline reveal">From The Provenance</p>
+        <div class="prov-from-grid">
+          <NuxtLink to="/the-road" class="prov-from-card reveal">
+            <span class="prov-from-tag">Essay</span>
+            <h3>On the ethics of preservation in an era that incentivizes forgetting</h3>
+            <span class="prov-from-read">Read on The Road &rarr;</span>
+          </NuxtLink>
+          <NuxtLink to="/the-road" class="prov-from-card reveal">
+            <span class="prov-from-tag">Dispatch</span>
+            <h3>Why provenance is the last honest metadata in a world of synthetic attribution</h3>
+            <span class="prov-from-read">Read on The Road &rarr;</span>
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prov CTA — Quiet, institutional -->
+    <section ref="provCtaSection" class="prov-cta section">
+      <div class="section-default prov-cta-inner">
+        <h2 class="prov-cta-heading reveal">Submit work for archival review.</h2>
+        <p class="prov-cta-body reveal">
+          The Provenance accepts submissions on a rolling basis. Each work is evaluated against our verification protocol before admission to the permanent collection.
+        </p>
+        <NuxtLink to="/apply" class="prov-cta-link reveal">Begin submission &rarr;</NuxtLink>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- Explore More (shared) -->
+    <section ref="navSection" class="q-explore section">
+      <div class="section-default">
+        <p class="overline reveal">Explore more</p>
+        <div class="q-explore-grid">
+          <NuxtLink
+            v-if="prev"
+            :to="'/districts/' + prev.slug"
+            class="q-explore-card reveal"
+          >
+            <div class="q-explore-image parallax-container">
+              <NuxtImg :src="prev.image" :alt="prev.name" loading="lazy" decoding="async" width="600" height="338" />
+            </div>
+            <div class="q-explore-info">
+              <span class="q-explore-type">{{ prev.type }}</span>
+              <h3>{{ prev.name }}</h3>
+            </div>
+          </NuxtLink>
+          <NuxtLink
+            v-if="next"
+            :to="'/districts/' + next.slug"
+            class="q-explore-card reveal"
+          >
+            <div class="q-explore-image parallax-container">
+              <NuxtImg :src="next.image" :alt="next.name" loading="lazy" decoding="async" width="600" height="338" />
+            </div>
+            <div class="q-explore-info">
+              <span class="q-explore-type">{{ next.type }}</span>
+              <h3>{{ next.name }}</h3>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
   <!-- GENERIC: All other districts                           -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div v-else-if="district" ref="root" :style="{ '--color-accent': district.accentColor, '--color-accent-accessible': district.accentColorAccessible }">
@@ -357,6 +532,7 @@ const route = useRoute()
 const slug = computed(() => route.params.slug as string)
 const district = computed(() => useDistrict(slug.value))
 const isVoightStudio = computed(() => slug.value === 'voight-studio')
+const isProvenance = computed(() => slug.value === 'the-provenance')
 const currentIndex = computed(() => districts.findIndex(i => i.slug === slug.value))
 const prev = computed(() => currentIndex.value > 0 ? districts[currentIndex.value - 1] : null)
 const next = computed(() => currentIndex.value < districts.length - 1 ? districts[currentIndex.value + 1] : null)
@@ -386,6 +562,13 @@ const vsCapabilitiesSection = ref<HTMLElement | null>(null)
 const vsFromSection = ref<HTMLElement | null>(null)
 const vsCtaSection = ref<HTMLElement | null>(null)
 
+// The Provenance section refs
+const provPhilosophySection = ref<HTMLElement | null>(null)
+const provProtocolSection = ref<HTMLElement | null>(null)
+const provRepositorySection = ref<HTMLElement | null>(null)
+const provFromSection = ref<HTMLElement | null>(null)
+const provCtaSection = ref<HTMLElement | null>(null)
+
 // Composable-driven animations (run once on mount)
 useGsapScrollReveal(bodySection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(offeringsSection, '.reveal', { stagger: 0.08 })
@@ -401,6 +584,14 @@ useGsapScrollReveal(vsCapabilitiesSection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(vsFromSection, '.reveal', { stagger: 0.12 })
 useGsapScrollReveal(vsCtaSection, '.reveal', { stagger: 0.1 })
 useTilt(vsCapabilitiesSection, '.vs-capability', { maxRotation: 2 })
+
+// The Provenance composable animations
+useGsapScrollReveal(provPhilosophySection, '.reveal', { stagger: 0.12 })
+useGsapScrollReveal(provProtocolSection, '.reveal', { stagger: 0.1 })
+useGsapScrollReveal(provRepositorySection, '.reveal', { stagger: 0.12 })
+useGsapScrollReveal(provFromSection, '.reveal', { stagger: 0.12 })
+useGsapScrollReveal(provCtaSection, '.reveal', { stagger: 0.1 })
+useTilt(provProtocolSection, '.prov-protocol-card', { maxRotation: 2 })
 
 let ctx: gsap.Context | null = null
 
@@ -516,6 +707,74 @@ function initAnimations() {
         scrollTrigger: {
           trigger: '.vs-capabilities-grid',
           start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+    } else if (isProvenance.value) {
+      // ── The Provenance animations ──
+      // Hero image entrance
+      gsap.from('.prov-hero-image', {
+        scale: 1.15,
+        duration: 2.2,
+        ease: 'power3.out',
+      })
+
+      // Hero subtitle fade
+      gsap.from('.prov-hero-subtitle', {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        ease: 'power3.out',
+        delay: 0.4,
+      })
+
+      // Hero title word-reveal
+      if (heroTitle.value) {
+        wordReveal(heroTitle.value, { stagger: 0.08, duration: 1.2, y: 100 })
+      }
+
+      // Philosophy pull quote word-reveal on scroll
+      const provQuote = root.value?.querySelector('.prov-philosophy-pullquote')
+      if (provQuote) {
+        quoteWordReveal(provQuote as HTMLElement, '.prov-philosophy')
+      }
+
+      // Philosophy rule draw
+      gsap.from('.prov-philosophy-rule', {
+        scaleX: 0,
+        duration: 0.8,
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: '.prov-philosophy-rule',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+      // Protocol cards stagger
+      gsap.from('.prov-protocol-card', {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.prov-protocol-grid',
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+      // Repository metric counter
+      gsap.from('.prov-repo-metric', {
+        opacity: 0,
+        y: 30,
+        duration: 1.0,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.prov-repository',
+          start: 'top 75%',
           toggleActions: 'play none none none',
         },
       })
@@ -879,6 +1138,367 @@ onUnmounted(() => {
 }
 
 .vs-cta-email:hover {
+  border-color: var(--color-gold);
+}
+
+
+/* ═══════════════════════════════════════════════════════════ */
+/* THE PROVENANCE — Bespoke Styles                            */
+/* ═══════════════════════════════════════════════════════════ */
+
+/* Prov Hero — Full viewport, archival treatment */
+.prov-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.prov-hero-image-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.prov-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+  filter: sepia(15%) contrast(1.05) brightness(0.95);
+}
+
+.prov-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 10, 0.88) 0%,
+    rgba(10, 10, 10, 0.45) 35%,
+    rgba(10, 10, 10, 0.08) 70%,
+    transparent 100%
+  );
+}
+
+.prov-hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 var(--content-padding) var(--space-16);
+  width: 100%;
+  max-width: var(--content-max-width);
+}
+
+.prov-hero-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-4);
+}
+
+.prov-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.0;
+  color: #FAFAF9;
+  letter-spacing: var(--tracking-hero);
+  font-variation-settings: 'WONK' 1, 'SOFT' 0, 'opsz' 72;
+}
+
+/* Prov Archival Philosophy — Asymmetric 7/5 grid */
+.prov-philosophy {
+  padding-top: var(--space-32);
+  padding-bottom: var(--space-24);
+}
+
+.prov-philosophy-grid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.prov-philosophy-pullquote {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: 300;
+  font-style: italic;
+  line-height: var(--leading-snug);
+  color: var(--color-ink);
+  font-variation-settings: 'WONK' 1, 'SOFT' 80;
+}
+
+.prov-philosophy-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--color-gold);
+  margin-bottom: var(--space-8);
+  transform-origin: left;
+}
+
+.prov-philosophy-body p {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 50ch;
+  margin-bottom: var(--space-6);
+}
+
+.prov-philosophy-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Prov Verification Protocol — 3-column cards */
+.prov-protocol {
+  padding: var(--space-32) 0;
+}
+
+.prov-protocol .overline {
+  margin-bottom: var(--space-12);
+}
+
+.prov-protocol-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.prov-protocol-card {
+  padding: var(--space-8);
+  position: relative;
+  border-color: rgba(184, 150, 78, 0.08);
+  transition: border-color var(--duration-normal) ease,
+              transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.prov-protocol-card:hover {
+  border-color: rgba(184, 150, 78, 0.35);
+}
+
+.prov-protocol-number {
+  font-family: var(--font-mono);
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 200;
+  color: rgba(250, 250, 249, 0.06);
+  line-height: 1;
+  display: block;
+  margin-bottom: var(--space-6);
+  letter-spacing: var(--tracking-wide);
+}
+
+.prov-protocol-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 400;
+  color: var(--color-dark-text);
+  margin-bottom: var(--space-3);
+  line-height: var(--leading-snug);
+}
+
+.prov-protocol-title em {
+  font-style: italic;
+  font-variation-settings: 'WONK' 1, 'SOFT' 40;
+}
+
+.prov-protocol-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--color-dark-muted);
+  line-height: var(--leading-normal);
+  max-width: none;
+}
+
+/* Prov Repository — Dark metric section */
+.prov-repository {
+  padding: var(--space-32) 0;
+}
+
+.prov-repo-inner {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.prov-repo-metric-wrap {
+  text-align: left;
+}
+
+.prov-repo-metric {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 200;
+  line-height: 1;
+  color: var(--color-gold);
+  letter-spacing: var(--tracking-hero);
+  font-variation-settings: 'WONK' 1, 'opsz' 72;
+}
+
+.prov-repo-metric-label {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-top: var(--space-3);
+}
+
+.prov-repo-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--color-gold);
+  margin-bottom: var(--space-8);
+  transform-origin: left;
+}
+
+.prov-repo-body p {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 55ch;
+  margin-bottom: var(--space-6);
+}
+
+.prov-repo-quote {
+  border-left: 2px solid rgba(184, 150, 78, 0.3);
+  padding-left: var(--space-6);
+  margin-top: var(--space-4);
+}
+
+.prov-repo-quote p {
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-text-muted);
+  line-height: var(--leading-snug);
+  max-width: 45ch;
+  font-variation-settings: 'WONK' 1, 'SOFT' 60;
+}
+
+/* Prov From The Provenance — Essay cards */
+.prov-from {
+  padding: var(--space-24) 0 var(--space-16);
+}
+
+.prov-from .overline {
+  margin-bottom: var(--space-8);
+}
+
+.prov-from-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+.prov-from-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-8);
+  border: 1px solid var(--color-border);
+  background-image: none;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--duration-normal) ease,
+              background-color var(--duration-normal) ease;
+}
+
+.prov-from-card:hover {
+  border-color: var(--color-gold);
+  background-color: rgba(184, 150, 78, 0.04);
+}
+
+.prov-from-tag {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold-accessible);
+  margin-bottom: var(--space-4);
+  display: block;
+}
+
+.prov-from-card h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 400;
+  font-style: italic;
+  line-height: var(--leading-snug);
+  color: var(--color-dark-text);
+  margin-bottom: auto;
+  padding-bottom: var(--space-8);
+  font-variation-settings: 'WONK' 1, 'SOFT' 60;
+}
+
+.prov-from-read {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  opacity: 0.6;
+  transition: opacity var(--duration-fast) ease;
+}
+
+.prov-from-card:hover .prov-from-read {
+  opacity: 1;
+}
+
+/* Prov CTA — Quiet institutional */
+.prov-cta {
+  padding: var(--space-32) 0;
+}
+
+.prov-cta-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.prov-cta-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-ink);
+  margin-bottom: var(--space-6);
+  font-variation-settings: 'WONK' 1, 'SOFT' 80;
+}
+
+.prov-cta-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 45ch;
+  margin-bottom: var(--space-8);
+}
+
+.prov-cta-link {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  background-image: none;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(184, 150, 78, 0.4);
+  padding-bottom: 2px;
+  transition: border-color var(--duration-normal) ease;
+}
+
+.prov-cta-link:hover {
   border-color: var(--color-gold);
 }
 
@@ -1406,6 +2026,46 @@ onUnmounted(() => {
     grid-template-columns: 1fr;
   }
 
+  /* Prov Hero */
+  .prov-hero {
+    height: 70vh;
+    min-height: 400px;
+  }
+
+  .prov-hero-title {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  /* Prov Philosophy */
+  .prov-philosophy-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .prov-philosophy-pullquote {
+    font-size: var(--text-h2);
+  }
+
+  /* Prov Protocol */
+  .prov-protocol-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Prov Repository */
+  .prov-repo-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .prov-repo-metric {
+    font-size: clamp(3rem, 12vw, 5rem);
+  }
+
+  /* Prov From */
+  .prov-from-grid {
+    grid-template-columns: 1fr;
+  }
+
   /* Generic Hero */
   .q-hero {
     height: 55vh;
@@ -1449,6 +2109,10 @@ onUnmounted(() => {
   }
 
   .vs-capabilities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prov-protocol-grid {
     grid-template-columns: 1fr;
   }
 }
