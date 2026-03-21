@@ -1,75 +1,73 @@
 <template>
   <div ref="pageRef">
     <!-- Hero -->
-    <section class="road-hero section-dark">
-      <div class="section-default road-hero-content">
+    <section class="dg-hero section-dark">
+      <div class="section-wide dg-hero-content">
         <p class="overline reveal">Explore</p>
-        <h1 class="road-hero-title word-reveal">The Districts</h1>
-        <p class="road-hero-sub reveal">
+        <h1 class="dg-hero-title word-reveal">The Districts</h1>
+        <p class="dg-hero-sub reveal">
           Eleven districts, each with its own mandate. One shared infrastructure.
         </p>
       </div>
     </section>
 
-    <!-- The Road -->
-    <section ref="trackSection" class="road-section section-dark">
-      <div class="road-track">
-        <!-- Central gold line -->
-        <div class="road-line-wrap" aria-hidden="true">
-          <div ref="roadLine" class="road-line" />
-        </div>
-
-        <!-- District stops — size varies by status -->
-        <div
-          v-for="(d, i) in districts"
-          :key="d.slug"
-          class="road-stop"
-          :class="[
-            i % 2 === 0 ? 'stop-left' : 'stop-right',
-            'stop--' + d.status,
-          ]"
-          :style="{ '--color-accent': d.accentColor, '--color-accent-accessible': d.accentColorAccessible }"
-        >
-          <div class="stop-marker" />
-          <div class="stop-connector" />
-
-          <NuxtLink :to="'/districts/' + d.slug" class="stop-card reveal">
-            <!-- Image -->
-            <div class="stop-image">
-              <NuxtImg :src="d.image" :alt="d.name" loading="lazy" decoding="async" width="600" height="400" />
-              <span class="stop-badge" :class="'badge--' + d.status">
+    <!-- Editorial Grid -->
+    <section ref="gridSection" class="dg-section">
+      <div class="section-wide dg-body">
+        <div class="dg-grid">
+          <NuxtLink
+            v-for="(d, i) in districts"
+            :key="d.slug"
+            :to="'/districts/' + d.slug"
+            class="dg-card"
+            :class="['dg-' + d.layout, 'dg-status--' + d.status]"
+            :style="{ '--color-accent': d.accentColor, '--color-accent-accessible': d.accentColorAccessible }"
+          >
+            <div class="dg-image-wrap reveal-image">
+              <NuxtImg
+                class="dg-image"
+                :src="d.image"
+                :alt="`${d.name} — ${d.type}`"
+                loading="lazy"
+                decoding="async"
+                width="600"
+                height="400"
+              />
+              <span class="dg-badge" :class="'badge--' + d.status">
                 {{ d.status === 'active' ? 'Active' : d.status === 'coming-soon' ? 'Coming soon' : 'In development' }}
               </span>
             </div>
-
-            <!-- Info -->
-            <div class="stop-body">
-              <div class="stop-meta">
-                <span class="stop-number">{{ d.number }}</span>
-                <span class="stop-type">{{ d.type }}</span>
+            <div class="dg-content reveal">
+              <div class="dg-meta">
+                <span class="dg-number">{{ d.number }}</span>
+                <span class="dg-dot" aria-hidden="true" />
+                <span class="dg-type">{{ d.type }}</span>
               </div>
-              <h3 class="stop-name">{{ d.name }}</h3>
-              <p class="stop-desc">{{ d.description }}</p>
+              <h3 class="dg-name">{{ d.name }}</h3>
+              <p class="dg-desc">{{ d.description }}</p>
 
-              <!-- Pull quote — visible on active/coming-soon cards -->
-              <blockquote v-if="d.status !== 'development'" class="stop-quote">
+              <!-- Pull quote on hero/wide cards that are active or coming-soon -->
+              <blockquote
+                v-if="(d.layout === 'hero' || d.layout === 'wide') && d.status !== 'development'"
+                class="dg-quote"
+              >
                 &ldquo;{{ d.pullQuote }}&rdquo;
               </blockquote>
 
-              <!-- Offerings — visible on active cards -->
-              <div v-if="d.status === 'active'" class="stop-offerings">
-                <span v-for="(o, j) in d.offerings" :key="j" class="stop-tag">{{ o }}</span>
+              <!-- Offering tags on active hero/wide cards -->
+              <div v-if="d.status === 'active' && (d.layout === 'hero' || d.layout === 'wide')" class="dg-tags">
+                <span v-for="(o, j) in d.offerings" :key="j" class="dg-tag">{{ o }}</span>
               </div>
 
-              <span v-if="d.statusNote" class="stop-note">{{ d.statusNote }}</span>
+              <span v-if="d.statusNote" class="dg-note">{{ d.statusNote }}</span>
             </div>
           </NuxtLink>
         </div>
       </div>
     </section>
 
-    <!-- Footer links -->
-    <section class="road-footer section">
+    <!-- Footer -->
+    <section class="dg-footer section">
       <div class="section-default">
         <div class="rf-grid">
           <NuxtLink to="/the-road" class="rf-card rf-dark reveal">
@@ -100,78 +98,72 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
+import { useTilt } from '~/composables/useInteractions'
 import { useWordReveal } from '~/composables/useWordReveal'
 import { districts } from '~/composables/useDistricts'
 
 const pageRef = ref<HTMLElement | null>(null)
-const trackSection = ref<HTMLElement | null>(null)
-const roadLine = ref<HTMLElement | null>(null)
+const gridSection = ref<HTMLElement | null>(null)
 
 useGsapScrollReveal(pageRef, '.reveal', { stagger: 0.06 })
 useWordReveal(pageRef, '.word-reveal')
+useTilt(gridSection, '.dg-card', { maxRotation: 2 })
 
 let ctx: gsap.Context | null = null
 
 onMounted(async () => {
-  if (!pageRef.value || !roadLine.value) return
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  if (!gridSection.value) return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gridSection.value.querySelectorAll('.reveal-image').forEach((el) => {
+      ;(el as HTMLElement).style.clipPath = 'inset(0)'
+    })
+    return
+  }
 
-  await waitForAncestorAnimations(pageRef.value)
-  if (!pageRef.value || !roadLine.value) return
+  await waitForAncestorAnimations(gridSection.value)
+  if (!gridSection.value) return
 
   gsap.registerPlugin(ScrollTrigger)
 
   ctx = gsap.context(() => {
-    // Draw the gold line
-    gsap.fromTo(roadLine.value!,
-      { scaleY: 0 },
-      {
-        scaleY: 1,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: trackSection.value,
-          start: 'top 60%',
-          end: 'bottom 50%',
-          scrub: 0.6,
-        },
-      }
-    )
+    const cards = gsap.utils.toArray<HTMLElement>('.reveal-image')
 
-    // Clip-path image reveals — direction matches card side
-    gsap.utils.toArray<HTMLElement>('.stop-image').forEach((img, i) => {
-      const isLeft = i % 2 === 0
-      gsap.fromTo(img,
-        { clipPath: isLeft ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)' },
-        {
-          clipPath: 'inset(0% 0% 0% 0%)',
-          duration: 1,
-          ease: 'power3.inOut',
-          scrollTrigger: {
-            trigger: img,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        }
-      )
+    // Group by visual row for grid-aware stagger
+    const rows: Map<number, { el: HTMLElement; left: number }[]> = new Map()
+    cards.forEach((el) => {
+      const rect = el.getBoundingClientRect()
+      const rowKey = Math.round(rect.top / 50) * 50
+      if (!rows.has(rowKey)) rows.set(rowKey, [])
+      rows.get(rowKey)!.push({ el, left: rect.left })
     })
 
-    // Markers bounce in
-    gsap.utils.toArray<HTMLElement>('.stop-marker').forEach((marker) => {
-      gsap.fromTo(marker,
-        { scale: 0, opacity: 0 },
-        {
-          scale: 1, opacity: 1,
-          duration: 0.4,
-          ease: 'back.out(2)',
-          scrollTrigger: {
-            trigger: marker,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
-          },
-        }
-      )
+    const sortedRows = [...rows.entries()].sort((a, b) => a[0] - b[0])
+
+    sortedRows.forEach(([, rowCards]) => {
+      rowCards.sort((a, b) => a.left - b.left)
+      rowCards.forEach((card, colIndex) => {
+        const isLeftCard = colIndex === 0
+        const fromClip = isLeftCard
+          ? 'inset(0 100% 0 0)'
+          : 'inset(0 0 0 100%)'
+
+        gsap.fromTo(card.el,
+          { clipPath: fromClip },
+          {
+            clipPath: 'inset(0% 0% 0% 0%)',
+            duration: 1.1,
+            delay: colIndex * 0.15,
+            ease: 'power3.inOut',
+            scrollTrigger: {
+              trigger: card.el,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        )
+      })
     })
-  }, pageRef.value)
+  }, gridSection.value)
 })
 
 onUnmounted(() => {
@@ -181,19 +173,21 @@ onUnmounted(() => {
 useHead({
   title: 'Districts \u2014 Meraki Road',
   meta: [
-    { name: 'description', content: 'Navigate the eleven districts of Meraki Road. Find your way into a cultural ecosystem built for AI-native creators.' },
+    { name: 'description', content: 'Navigate the eleven districts of Meraki Road. A cultural ecosystem built for AI-native creators.' },
   ],
 })
 </script>
 
 <style scoped>
 /* ─── Hero ─── */
-.road-hero {
-  padding: calc(var(--space-32) + 3rem) 0 var(--space-16);
+.dg-hero {
+  position: relative;
+  overflow: hidden;
+  padding: calc(var(--space-32) + 3rem) var(--content-padding) var(--space-16);
   text-align: center;
 }
 
-.road-hero-title {
+.dg-hero-title {
   font-size: var(--text-display);
   line-height: var(--leading-tight);
   letter-spacing: var(--tracking-hero);
@@ -201,7 +195,7 @@ useHead({
   margin-top: var(--space-4);
 }
 
-.road-hero-sub {
+.dg-hero-sub {
   font-size: var(--text-body);
   color: var(--color-dark-muted);
   max-width: 44ch;
@@ -209,172 +203,73 @@ useHead({
   line-height: var(--leading-relaxed);
 }
 
-/* ─── Road Track ─── */
-.road-section {
-  padding: var(--space-8) 0 var(--space-24);
+/* ─── Grid Section ─── */
+.dg-section {
+  background: var(--color-background);
 }
 
-.road-track {
-  position: relative;
-  max-width: 1060px;
-  margin: 0 auto;
-  padding: 0 var(--content-padding);
+.dg-body {
+  padding: var(--space-16) var(--content-padding) var(--space-24);
 }
 
-/* Center line with glow */
-.road-line-wrap {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 1.5px;
-  transform: translateX(-50%);
-}
-
-.road-line {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent 0%, var(--color-gold) 2%, var(--color-gold) 98%, transparent 100%);
-  opacity: 0.3;
-  transform-origin: top center;
-  box-shadow: 0 0 15px color-mix(in srgb, var(--color-gold) 12%, transparent);
-}
-
-/* ─── Stop (each district) ─── */
-.road-stop {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: var(--space-16);
-}
-
-.road-stop:last-child {
-  margin-bottom: 0;
-}
-
-.stop-left {
-  align-items: flex-start;
-  padding-right: calc(50% + var(--space-12));
-}
-
-.stop-right {
-  align-items: flex-end;
-  padding-left: calc(50% + var(--space-12));
-}
-
-/* ─── Marker ─── */
-.stop-marker {
-  position: absolute;
-  left: 50%;
-  top: var(--space-8);
-  width: 10px;
-  height: 10px;
-  background: var(--color-accent);
-  transform: translateX(-50%);
-  z-index: 3;
-  box-shadow:
-    0 0 10px color-mix(in srgb, var(--color-accent) 50%, transparent),
-    0 0 24px color-mix(in srgb, var(--color-accent) 20%, transparent);
-}
-
-/* ─── Connector from card to line ─── */
-.stop-connector {
-  position: absolute;
-  top: calc(var(--space-8) + 4px);
-  height: 1px;
-  opacity: 0.2;
-  z-index: 2;
-}
-
-.stop-left .stop-connector {
-  left: calc(50% + 6px);
-  right: calc(50% + var(--space-12));
-  background: linear-gradient(to left, var(--color-accent), transparent);
-}
-
-.stop-right .stop-connector {
-  right: calc(50% + 6px);
-  left: calc(50% + var(--space-12));
-  background: linear-gradient(to right, var(--color-accent), transparent);
+/* ─── 12-Column Editorial Grid ─── */
+.dg-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
 }
 
 /* ─── Card ─── */
-.stop-card {
-  display: block;
-  width: 100%;
-  text-decoration: none;
-  color: inherit;
+.dg-card {
+  position: relative;
   background-image: none;
-  background: color-mix(in srgb, var(--color-dark-bg) 85%, transparent);
-  border: 1px solid rgba(250, 250, 249, 0.06);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
   overflow: hidden;
-  transition: border-color var(--duration-normal) ease,
-              box-shadow var(--duration-normal) ease,
-              transform var(--duration-normal) var(--ease-out);
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s var(--ease-out);
 }
 
-.stop-card:hover {
+.dg-card:hover {
   border-color: var(--color-accent);
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.35);
-  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
 }
 
-.stop-card:hover .stop-image img {
-  transform: scale(1.04);
-}
+.dg-card:hover .dg-image { transform: scale(1.04); }
+.dg-card:hover .dg-type { color: var(--color-accent); }
+.dg-card:hover .dg-name::after { transform: scaleX(1); }
 
-.stop-card:hover .stop-name {
-  color: var(--color-accent);
-}
+/* ─── Layout variants (same as DistrictsGrid) ─── */
+.dg-hero { grid-column: 1 / -1; }
+.dg-hero .dg-image { aspect-ratio: 21 / 9; }
 
-/* ─── Status-based card sizing ─── */
-/* Active districts: larger, more content */
-.stop--active .stop-card {
-  max-width: 480px;
-}
+.dg-wide { grid-column: span 7; }
+.dg-wide .dg-image { aspect-ratio: 3 / 2; }
 
-.stop--active .stop-image {
-  aspect-ratio: 16 / 9;
-}
+.dg-narrow { grid-column: span 5; }
+.dg-narrow .dg-image { aspect-ratio: 4 / 5; }
 
-/* Coming soon: medium */
-.stop--coming-soon .stop-card {
-  max-width: 440px;
-}
+.dg-half { grid-column: span 6; }
+.dg-half .dg-image { aspect-ratio: 4 / 3; }
 
-.stop--coming-soon .stop-image {
-  aspect-ratio: 16 / 10;
-}
-
-/* Development: compact */
-.stop--development .stop-card {
-  max-width: 400px;
-}
-
-.stop--development .stop-image {
-  aspect-ratio: 2 / 1;
-}
-
-.stop--development .stop-image img {
-  opacity: 0.7;
-}
+/* ─── Status dimming for development districts ─── */
+.dg-status--development .dg-image { opacity: 0.65; }
 
 /* ─── Image ─── */
-.stop-image {
+.dg-image-wrap {
   overflow: hidden;
   position: relative;
 }
 
-.stop-image img {
+.dg-image {
   width: 100%;
-  height: 100%;
   object-fit: cover;
-  display: block;
   transition: transform 0.6s var(--ease-out);
 }
 
 /* ─── Status badge ─── */
-.stop-badge {
+.dg-badge {
   position: absolute;
   top: var(--space-3);
   right: var(--space-3);
@@ -387,110 +282,123 @@ useHead({
   z-index: 2;
 }
 
-.badge--active {
-  color: #fff;
-  background: rgba(22, 163, 74, 0.7);
+.badge--active { color: #fff; background: rgba(22, 163, 74, 0.7); }
+.badge--coming-soon { color: #fff; background: rgba(184, 150, 78, 0.6); }
+.badge--development { color: rgba(250, 250, 249, 0.6); background: rgba(250, 250, 249, 0.08); }
+
+/* ─── Content ─── */
+.dg-content {
+  padding: var(--space-3) var(--space-5) var(--space-5);
 }
 
-.badge--coming-soon {
-  color: #fff;
-  background: rgba(184, 150, 78, 0.6);
+.dg-hero .dg-content {
+  padding: var(--space-4) var(--space-6) var(--space-6);
 }
 
-.badge--development {
-  color: rgba(250, 250, 249, 0.7);
-  background: rgba(250, 250, 249, 0.1);
-}
-
-/* ─── Body ─── */
-.stop-body {
-  padding: var(--space-5) var(--space-6) var(--space-6);
-  position: relative;
-}
-
-.stop-meta {
+.dg-meta {
   display: flex;
-  align-items: baseline;
-  gap: var(--space-3);
-  margin-bottom: var(--space-2);
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
 }
 
-.stop-number {
+.dg-number {
   font-family: var(--font-mono);
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 300;
-  letter-spacing: var(--tracking-ultra-wide);
-  color: var(--color-accent);
-  opacity: 0.12;
-  line-height: 1;
-}
-
-.stop-type {
-  font-size: var(--text-overline);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-widest);
-  color: var(--color-accent);
-}
-
-.stop-name {
-  font-family: var(--font-display);
-  font-size: var(--text-h3);
-  font-weight: 400;
-  color: var(--color-dark-text);
-  line-height: var(--leading-snug);
-  margin-bottom: var(--space-2);
-  transition: color var(--duration-normal) ease;
-}
-
-.stop-desc {
   font-size: var(--text-small);
-  color: var(--color-dark-muted);
+  font-weight: 500;
+  color: var(--color-accent-accessible);
+  letter-spacing: var(--tracking-mega-wide);
+}
+
+.dg-dot {
+  width: 3px;
+  height: 3px;
+  background: var(--color-text-muted);
+  opacity: 0.5;
+}
+
+.dg-type {
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-accent-accessible);
+  transition: color var(--duration-fast) ease;
+}
+
+.dg-name {
+  font-size: var(--text-h3);
+  margin-bottom: var(--space-1);
+  position: relative;
+  display: inline-block;
+}
+
+.dg-hero .dg-name { font-size: var(--text-h2); }
+
+.dg-name::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.dg-desc {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
   line-height: var(--leading-normal);
 }
 
-/* ─── Pull quote (visible on active + coming-soon) ─── */
-.stop-quote {
+.dg-hero .dg-desc {
+  max-width: 55ch;
+}
+
+/* ─── Pull quote (hero/wide + active/coming-soon only) ─── */
+.dg-quote {
   font-family: var(--font-display);
   font-size: var(--text-small);
   font-style: italic;
   font-weight: 300;
-  color: var(--color-dark-text);
+  color: var(--color-text);
   line-height: var(--leading-relaxed);
-  margin-top: var(--space-4);
+  margin-top: var(--space-3);
   padding-left: var(--space-4);
   border-left: 2px solid var(--color-accent);
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
-/* ─── Offering tags (visible on active) ─── */
-.stop-offerings {
+/* ─── Offering tags (active hero/wide only) ─── */
+.dg-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-top: var(--space-4);
+  gap: var(--space-1);
+  margin-top: var(--space-3);
 }
 
-.stop-tag {
-  font-size: 0.625rem;
-  color: var(--color-dark-muted);
-  padding: var(--space-1) var(--space-3);
-  border: 1px solid rgba(250, 250, 249, 0.1);
+.dg-tag {
+  font-size: 0.5625rem;
+  color: var(--color-text-muted);
+  padding: 0.15rem var(--space-2);
+  border: 1px solid var(--color-border);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
 }
 
 /* ─── Status note ─── */
-.stop-note {
+.dg-note {
   display: block;
   font-size: var(--text-caption);
-  color: var(--color-accent);
-  margin-top: var(--space-3);
+  color: var(--color-accent-accessible);
+  margin-top: var(--space-2);
 }
 
-/* ─── Footer links ─── */
-.road-footer {
-  padding: var(--space-16) 0;
-}
+/* ─── Footer ─── */
+.dg-footer { padding: var(--space-16) 0; }
 
 .rf-grid {
   display: grid;
@@ -520,81 +428,40 @@ useHead({
   margin-bottom: var(--space-3);
 }
 
-.rf-card h3 {
-  font-family: var(--font-display);
-  font-size: var(--text-h4);
-  font-weight: 400;
-  margin-bottom: var(--space-2);
-}
-
-.rf-card p {
-  font-size: var(--text-small);
-  color: var(--color-text-muted);
-  line-height: var(--leading-normal);
-  margin-bottom: var(--space-4);
-}
-
-.rf-link {
-  font-size: var(--text-overline);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-widest);
-  color: var(--color-gold);
-}
-
-.rf-dark {
-  background: var(--color-dark-bg);
-  color: var(--color-dark-text);
-}
+.rf-card h3 { font-family: var(--font-display); font-size: var(--text-h4); font-weight: 400; margin-bottom: var(--space-2); }
+.rf-card p { font-size: var(--text-small); color: var(--color-text-muted); line-height: var(--leading-normal); margin-bottom: var(--space-4); }
+.rf-link { font-size: var(--text-overline); text-transform: uppercase; letter-spacing: var(--tracking-widest); color: var(--color-gold); }
+.rf-dark { background: var(--color-dark-bg); color: var(--color-dark-text); }
 .rf-dark:hover { background: var(--color-graphite); }
 .rf-dark p { color: var(--color-dark-muted); }
-
-.rf-accent {
-  border-left: 2px solid var(--color-gold);
-}
+.rf-accent { border-left: 2px solid var(--color-gold); }
 .rf-accent h3 { color: var(--color-gold-accessible); }
 
-/* ─── Mobile ─── */
+/* ─── Responsive ─── */
 @media (max-width: 768px) {
-  .road-hero {
-    padding-top: calc(var(--space-16) + 3rem);
-    text-align: left;
+  .dg-hero-title { font-size: var(--text-h1); }
+  .dg-hero { text-align: left; padding-top: calc(var(--space-16) + 3rem); }
+  .dg-hero-sub { margin-left: 0; }
+
+  .dg-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
   }
 
-  .road-hero-sub { margin-left: 0; }
-
-  .road-line-wrap {
-    left: var(--space-4);
-    transform: none;
-  }
-
-  .stop-left,
-  .stop-right {
-    padding: 0 0 0 var(--space-12);
-    align-items: flex-start;
-  }
-
-  .stop-marker {
-    left: var(--space-4);
-    transform: translateX(-50%);
-  }
-
-  .stop-connector { display: none; }
-
-  .stop--active .stop-card,
-  .stop--coming-soon .stop-card,
-  .stop--development .stop-card {
-    max-width: none;
-  }
+  .dg-hero, .dg-wide, .dg-narrow, .dg-half { grid-column: 1 / -1; }
+  .dg-image { aspect-ratio: 3 / 2 !important; }
 
   .rf-grid { grid-template-columns: 1fr; }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .road-track { max-width: 860px; }
+  .dg-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
 
-  .stop--active .stop-card { max-width: 380px; }
-  .stop--coming-soon .stop-card { max-width: 350px; }
-  .stop--development .stop-card { max-width: 320px; }
+  .dg-hero { grid-column: 1 / -1; }
+  .dg-wide, .dg-narrow, .dg-half { grid-column: span 1; }
 
   .rf-grid { grid-template-columns: 1fr 1fr; }
   .rf-dark { grid-column: 1 / -1; }
