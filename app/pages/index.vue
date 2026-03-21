@@ -3,7 +3,6 @@
     <HeroSection />
     <ManifestoSection />
     <SectionDivider />
-    <PillarsSection />
 
     <!-- Featured Artists -->
     <section ref="artistsSection" class="featured-artists">
