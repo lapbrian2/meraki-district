@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
 
-const words = ['The work comes first', 'Mastery is a daily practice', 'Credentials are earned', 'Craft meets culture']
+const words = ['The tools are not the work', 'Taste is the differentiator', 'Depth over output', 'The work comes first']
 
 const marqueeEl = ref<HTMLElement | null>(null)
 let tickerFn: (() => void) | null = null

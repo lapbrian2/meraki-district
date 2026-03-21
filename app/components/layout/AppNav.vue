@@ -173,12 +173,36 @@ onUnmounted(() => {
   transform: translateY(-100%);
 }
 
-/* EXPANDED STATE (magazine masthead) */
+/* EXPANDED STATE (magazine masthead) — floats over dark hero */
 .nav-expanded {
   padding: var(--space-6) var(--content-padding) var(--space-4);
   opacity: 1;
   visibility: visible;
   transition: opacity 0.5s var(--ease-out), visibility 0.5s;
+}
+
+.nav-expanded .nav-logo {
+  color: var(--color-dark-text);
+}
+
+.nav-expanded .nav-link {
+  color: var(--color-dark-muted);
+}
+
+.nav-expanded .nav-link:hover {
+  color: var(--color-dark-text);
+}
+
+.nav-expanded .nav-link.router-link-active {
+  color: var(--color-dark-text);
+}
+
+.nav-expanded .nav-apply {
+  color: var(--color-dark-muted);
+}
+
+.nav-expanded .nav-apply:hover {
+  color: var(--color-gold);
 }
 
 .nav-expanded.collapsed {
@@ -209,7 +233,7 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   padding: var(--space-3) var(--content-padding);
-  background-color: rgba(250, 250, 249, 0.97);
+  background-color: color-mix(in srgb, var(--color-background) 97%, transparent);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   box-shadow: 0 1px 0 var(--rule-color);

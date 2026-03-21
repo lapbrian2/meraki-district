@@ -43,6 +43,20 @@
         </ul>
       </div>
 
+      <div class="footer-col footer-col-districts reveal">
+        <h4 class="overline">Districts</h4>
+        <ul>
+          <li v-for="d in activeDistricts" :key="d.slug">
+            <NuxtLink :to="'/districts/' + d.slug">{{ d.name }}</NuxtLink>
+          </li>
+        </ul>
+        <ul class="footer-coming-soon">
+          <li v-for="d in upcomingDistricts" :key="d.slug">
+            <NuxtLink :to="'/districts/' + d.slug">{{ d.name }}</NuxtLink>
+          </li>
+        </ul>
+      </div>
+
       <div class="footer-col reveal">
         <h4 class="overline">Legal</h4>
         <ul>
@@ -61,9 +75,13 @@
 <script setup lang="ts">
 import { useEmailCollection } from '~/composables/useEmailCollection'
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
+import { districts } from '~/composables/useDistricts'
 
 const year = computed(() => new Date().getFullYear())
 const { email, status, errorMessage, submit, reset } = useEmailCollection('newsletter')
+
+const activeDistricts = computed(() => districts.filter(d => d.status === 'active' || d.status === 'coming-soon'))
+const upcomingDistricts = computed(() => districts.filter(d => d.status === 'development'))
 
 const footerRef = ref<HTMLElement | null>(null)
 useGsapScrollReveal(footerRef, '.reveal', { stagger: 0.12 })
@@ -97,7 +115,7 @@ useGsapScrollReveal(footerRef, '.reveal', { stagger: 0.12 })
   max-width: var(--width-wide);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: var(--space-12);
   padding-bottom: var(--space-16);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -204,6 +222,16 @@ useGsapScrollReveal(footerRef, '.reveal', { stagger: 0.12 })
 
 .footer-col a:hover {
   color: var(--color-dark-text);
+}
+
+.footer-coming-soon {
+  margin-top: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer-coming-soon a {
+  opacity: 0.5;
 }
 
 .footer-bottom {

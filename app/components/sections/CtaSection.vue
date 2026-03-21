@@ -113,16 +113,19 @@ onUnmounted(() => {
   text-transform: uppercase;
   color: var(--color-dark-text);
   padding: var(--space-4) var(--space-12);
-  border: 1px solid rgba(250, 250, 249, 0.25);
+  border: 1px solid rgba(250, 250, 249, 0.2);
+  border-left: 2px solid var(--color-gold);
   background-image: none;
   background-color: transparent;
   transition: border-color var(--duration-normal) ease,
-              color var(--duration-normal) ease;
+              color var(--duration-normal) ease,
+              background-color var(--duration-normal) ease;
 }
 
 .cta-button:hover {
   border-color: var(--color-gold);
   color: var(--color-gold);
+  background-color: rgba(184, 150, 78, 0.06);
 }
 
 .cta-button:focus-visible {
