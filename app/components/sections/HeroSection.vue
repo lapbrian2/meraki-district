@@ -16,17 +16,17 @@
     <div class="hero-layout">
       <!-- Left: editorial text stack -->
       <div class="hero-text">
-        <p class="hero-overline">The Digital Square</p>
+        <p class="hero-overline">Est. 2026</p>
         <h1 class="hero-title">
-          <span class="hero-title-line">Where Creativity</span>
-          <span class="hero-title-accent">Becomes Opportunity.</span>
+          <span class="hero-title-line">Where craft</span>
+          <span class="hero-title-accent">meets culture.</span>
         </h1>
         <p class="hero-sub">
           A cultural ecosystem built for creators who hold ambition
           and integrity as a single standard.
         </p>
         <div class="hero-ctas">
-          <NuxtLink to="/districts" class="hero-cta-primary">Enter the District</NuxtLink>
+          <NuxtLink to="/districts" class="hero-cta-primary">Explore the Districts</NuxtLink>
           <NuxtLink to="/the-road" class="hero-cta-secondary">Read the Manifesto</NuxtLink>
         </div>
       </div>
