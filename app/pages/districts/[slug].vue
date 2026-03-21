@@ -310,6 +310,15 @@ function initAnimations() {
       wordReveal(heroTitle.value, { stagger: 0.06, duration: 1.0, y: 80 })
     }
 
+    // Body content entrance: slide up from below
+    gsap.from('.q-body', {
+      y: 60,
+      opacity: 0,
+      duration: 1.0,
+      ease: 'power3.out',
+      delay: 0.4,
+    })
+
     // Gold rule draw
     gsap.from('.q-rule', {
       scaleX: 0,
@@ -419,7 +428,7 @@ onUnmounted(() => {
   pointer-events: none;
 }
 
-/* District Navigator */
+/* District Navigator — museum wayfinding strip */
 .q-nav {
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
@@ -432,8 +441,23 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-1);
+  gap: 0;
   padding: var(--space-3) 0;
+  position: relative;
+}
+
+/* Connecting line between all dots */
+.q-nav-inner::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - var(--content-padding) * 2);
+  max-width: 440px;
+  height: 1px;
+  background: var(--color-border);
+  pointer-events: none;
 }
 
 .q-nav-dot {
@@ -441,17 +465,46 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   width: 36px;
-  height: 32px;
+  height: 36px;
   background-image: none;
   text-decoration: none;
   position: relative;
-  transition: background var(--duration-fast) ease;
+  z-index: 1;
+  transition: transform var(--duration-normal) var(--ease-out);
 }
 
 .q-nav-dot:hover {
-  background: rgba(0, 0, 0, 0.04);
+  transform: scale(1.15);
 }
 
+/* Node circle on the line */
+.q-nav-dot::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-border);
+  transition: width var(--duration-normal) var(--ease-out),
+              height var(--duration-normal) var(--ease-out),
+              background var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.q-nav-dot:hover::before {
+  width: 8px;
+  height: 8px;
+  background: var(--dot-color);
+}
+
+.q-nav-active::before {
+  width: 10px;
+  height: 10px;
+  background: var(--color-gold);
+  box-shadow: 0 0 8px rgba(184, 150, 78, 0.35);
+}
+
+/* Bottom indicator bar */
 .q-nav-dot::after {
   content: '';
   position: absolute;
@@ -475,11 +528,21 @@ onUnmounted(() => {
   font-weight: 500;
   letter-spacing: var(--tracking-wide);
   color: var(--color-text-muted);
-  transition: color var(--duration-fast) ease;
+  opacity: 0;
+  position: absolute;
+  bottom: -14px;
+  transition: color var(--duration-fast) ease,
+              opacity var(--duration-normal) var(--ease-out);
+  pointer-events: none;
+}
+
+.q-nav-dot:hover .q-nav-num,
+.q-nav-active .q-nav-num {
+  opacity: 1;
 }
 
 .q-nav-active .q-nav-num {
-  color: var(--color-accent);
+  color: var(--color-gold);
   font-weight: 600;
 }
 

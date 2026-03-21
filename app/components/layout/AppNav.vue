@@ -8,6 +8,7 @@
           <nav class="nav-links" aria-label="Main navigation">
             <NuxtLink to="/districts" class="nav-link">Districts</NuxtLink>
             <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
+            <NuxtLink to="/community" class="nav-link">Community</NuxtLink>
             <NuxtLink to="/about" class="nav-link">About</NuxtLink>
           </nav>
           <div class="nav-right">
@@ -24,6 +25,7 @@
         <nav class="nav-links" aria-label="Main navigation">
           <NuxtLink to="/districts" class="nav-link">Districts</NuxtLink>
           <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
+          <NuxtLink to="/community" class="nav-link">Community</NuxtLink>
           <NuxtLink to="/about" class="nav-link">About</NuxtLink>
         </nav>
         <NuxtLink to="/apply" class="nav-apply">Apply</NuxtLink>
@@ -106,6 +108,7 @@ const { isDark, toggle } = useDarkMode()
 const mobileLinks = [
   { to: '/districts', label: 'Districts' },
   { to: '/the-road', label: 'The Road' },
+  { to: '/community', label: 'Community' },
   { to: '/about', label: 'About' },
 ]
 
@@ -255,6 +258,7 @@ onUnmounted(() => {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  box-shadow: 0 1px 0 var(--color-gold);
 }
 
 .nav-compact-inner {

@@ -19,6 +19,7 @@
           v-for="(creator, i) in creators"
           :key="creator.name"
           class="ti-row reveal"
+          :data-tier="creator.tier.toLowerCase()"
         >
           <div class="ti-row-left">
             <span class="ti-number">{{ String(i + 1).padStart(3, '0') }}</span>
@@ -28,8 +29,11 @@
             </div>
           </div>
           <div class="ti-row-right">
-            <span :class="['ti-badge', creator.tier === 'Fellow' ? 'ti-badge--fellow' : '']">
-              <span class="material-symbols-outlined ti-badge-icon">verified</span>
+            <span :class="['ti-badge', 'ti-badge--' + creator.tier.toLowerCase()]">
+              <span
+                class="material-symbols-outlined ti-badge-icon"
+                :style="{ fontVariationSettings: (creator.tier === 'Fellow' || creator.tier === 'Legacy') ? '\'FILL\' 1' : '\'FILL\' 0' }"
+              >verified</span>
               {{ creator.tier }}
             </span>
             <span class="ti-affiliation">{{ creator.affiliation }}</span>
@@ -59,15 +63,15 @@ useWordReveal(section, '.word-reveal', { stagger: 0.06 })
 interface Creator {
   name: string
   discipline: string
-  tier: 'Fellow' | 'Verified'
+  tier: 'Associate' | 'Verified' | 'Fellow' | 'Legacy'
   affiliation: string
 }
 
 const creators: Creator[] = [
-  { name: 'Sable Chen', discipline: 'Visual Art & AI', tier: 'Fellow', affiliation: 'Ikigai Lab' },
+  { name: 'Sable Chen', discipline: 'Visual Art & AI', tier: 'Legacy', affiliation: 'Ikigai Lab' },
   { name: 'Tom\u00E1s Vega', discipline: 'Architecture & Computation', tier: 'Verified', affiliation: 'Institute' },
   { name: 'Maren Aoki', discipline: 'Sound Design', tier: 'Fellow', affiliation: 'Meraki Road' },
-  { name: 'Khalil Okonkwo', discipline: 'Interactive Narrative', tier: 'Verified', affiliation: 'Publishing' },
+  { name: 'Khalil Okonkwo', discipline: 'Interactive Narrative', tier: 'Associate', affiliation: 'Publishing' },
   { name: 'In\u00E9s Moreau', discipline: 'Data Sculpture', tier: 'Fellow', affiliation: 'Ikigai Lab' },
   { name: 'Zuri Nakamura', discipline: 'Generative Systems', tier: 'Verified', affiliation: 'Institute' },
 ]
@@ -182,6 +186,7 @@ const creators: Creator[] = [
   gap: var(--space-8);
 }
 
+/* ─── Tier badges ─── */
 .ti-badge {
   display: inline-flex;
   align-items: center;
@@ -191,22 +196,57 @@ const creators: Creator[] = [
   font-weight: 500;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  color: var(--color-dark-muted);
   padding: var(--space-1) var(--space-3);
   border: 1px solid var(--rule-color);
-}
-
-.ti-badge--fellow {
-  color: var(--color-gold);
-  border-color: rgba(184, 150, 78, 0.3);
+  color: var(--color-dark-muted);
 }
 
 .ti-badge-icon {
   font-size: 14px;
 }
 
+/* Associate — entry level, muted */
+.ti-badge--associate {
+  border-color: rgba(161, 161, 170, 0.15);
+  color: var(--color-dark-muted);
+}
+
+/* Verified — proven, gold accent */
+.ti-badge--verified {
+  border-color: rgba(184, 150, 78, 0.2);
+  color: var(--color-gold);
+}
+
+.ti-badge--verified .ti-badge-icon {
+  color: var(--color-gold);
+}
+
+/* Fellow — distinguished, gold fill */
+.ti-badge--fellow {
+  background: rgba(184, 150, 78, 0.15);
+  border-color: rgba(184, 150, 78, 0.3);
+  color: var(--color-gold);
+}
+
 .ti-badge--fellow .ti-badge-icon {
   color: var(--color-gold);
+}
+
+/* Legacy — highest honor, double border + gradient text */
+.ti-badge--legacy {
+  border: 2px solid rgba(184, 150, 78, 0.4);
+  box-shadow: inset 0 0 0 1px rgba(184, 150, 78, 0.2);
+  background: transparent;
+  color: var(--color-gold);
+  background-image: linear-gradient(135deg, #B8964E 0%, #D4B96A 50%, #B8964E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ti-badge--legacy .ti-badge-icon {
+  color: var(--color-gold);
+  -webkit-text-fill-color: var(--color-gold);
 }
 
 .ti-affiliation {

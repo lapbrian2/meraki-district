@@ -127,3 +127,31 @@
     --color-dark-bg: #111113;
   }
 }
+
+/* ─── Interaction Utilities ─── */
+
+/* Magnetic hover for cards — apply via useMagnetic composable */
+.magnetic-hover {
+  transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* Grayscale to color on hover */
+.grayscale-hover img {
+  filter: grayscale(1);
+  transition: filter 0.6s ease;
+}
+.grayscale-hover:hover img {
+  filter: grayscale(0);
+}
+
+/* Line draw underline — gold line draws left to right on hover */
+.line-draw {
+  background-image: linear-gradient(var(--color-gold), var(--color-gold));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.line-draw:hover {
+  background-size: 100% 1px;
+}

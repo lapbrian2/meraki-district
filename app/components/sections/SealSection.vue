@@ -20,7 +20,10 @@
           v-for="(tier, index) in tiers"
           :key="tier.name"
           class="seal-tier"
-          :class="{ 'seal-tier--gold': tier.accent }"
+          :class="[
+            { 'seal-tier--gold': tier.accent },
+            'seal-tier--' + tier.name.toLowerCase()
+          ]"
         >
           <div class="seal-tier-marker" aria-hidden="true" />
           <div class="seal-tier-ordinal">{{ tier.ordinal }}</div>
@@ -213,11 +216,31 @@ onUnmounted(() => {
   grid-template-columns: auto 1fr;
   gap: var(--space-8);
   padding: var(--space-12) 0;
+  padding-left: var(--space-6);
   border-bottom: 1px solid rgba(250, 250, 249, 0.06);
+  border-left: 2px solid transparent;
+  transition: border-left-color 0.6s ease;
 }
 
 .seal-tier:last-child {
   border-bottom: none;
+}
+
+/* Per-tier left accent borders */
+.seal-tier--associate {
+  border-left-color: rgba(161, 161, 170, 0.25);
+}
+
+.seal-tier--verified {
+  border-left-color: rgba(184, 150, 78, 0.3);
+}
+
+.seal-tier--master {
+  border-left-color: var(--color-gold);
+}
+
+.seal-tier--fellow {
+  border-left-color: var(--color-gold);
 }
 
 /* Node marker on the progress line */

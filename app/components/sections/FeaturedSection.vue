@@ -218,7 +218,8 @@ onMounted(() => {
   object-fit: cover;
   opacity: 0;
   transform: scale(0.97);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  filter: grayscale(1);
+  transition: opacity 0.8s ease, transform 0.8s ease, filter 0.6s ease;
 }
 
 .featured-image img.loaded {
@@ -228,6 +229,11 @@ onMounted(() => {
 
 .featured-card:hover .featured-image img.loaded {
   transform: scale(1.03);
+  filter: grayscale(0);
+}
+
+.featured-hero:hover .featured-image img.loaded {
+  filter: grayscale(0);
 }
 
 .featured-tag {

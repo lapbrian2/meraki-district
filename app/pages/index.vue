@@ -74,10 +74,12 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { useWordReveal } from '~/composables/useWordReveal'
+import { useMagnetic } from '~/composables/useInteractions'
 
 const artistsSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(artistsSection, '.reveal', { stagger: 0.1 })
 useWordReveal(artistsSection, '.word-reveal')
+useMagnetic(artistsSection, '.fa-card', { strength: 0.15 })
 
 // Clip-path image reveals for artist cards
 let artistCtx: gsap.Context | null = null
