@@ -5,7 +5,7 @@
         <p class="pillars-overline reveal">The Ecosystem</p>
         <h2 class="pillars-title word-reveal">The Curated Monolith</h2>
         <div class="pillars-rule" aria-hidden="true" />
-        <p class="pillars-sub reveal">A network of institutional pillars designed to foster growth, publication, and creative commerce.</p>
+        <p class="pillars-sub reveal">Six districts along one road, each built to serve a different dimension of creative practice.</p>
       </div>
 
       <div class="pillars-grid">
