@@ -1,73 +1,86 @@
 <template>
-  <footer ref="footerRef" class="footer section-dark">
-    <div class="footer-inner">
-      <div class="footer-brand reveal">
-        <p class="footer-logo">Meraki Road</p>
-        <p class="footer-tagline">Eleven districts for AI-native creators.</p>
-        <div class="footer-newsletter">
-          <p class="footer-newsletter-label">Dispatches from the Road</p>
-          <form class="footer-newsletter-form" @submit.prevent="submit" aria-label="Newsletter signup">
+  <footer ref="footerRef" class="footer">
+    <!-- Closing Statement -->
+    <div class="footer-closing reveal">
+      <p class="footer-closing-text">
+        <em>The road doesn't end. It just gets quieter.</em>
+      </p>
+    </div>
+
+    <!-- Giant faded brand watermark -->
+    <div class="footer-watermark" aria-hidden="true">MERAKI ROAD</div>
+
+    <!-- Gold rule -->
+    <div class="footer-rule" aria-hidden="true" />
+
+    <!-- Four columns -->
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-col footer-col-brand reveal">
+        <NuxtLink to="/" class="footer-logo"><em>Meraki Road</em></NuxtLink>
+        <p class="footer-tagline">Where craft meets culture. Eleven districts for practitioners who hold ambition and integrity as a single standard.</p>
+      </div>
+
+      <!-- Districts -->
+      <div class="footer-col reveal">
+        <h4 class="footer-heading">Districts</h4>
+        <ul class="footer-links">
+          <li v-for="d in activeDistricts" :key="d.slug">
+            <NuxtLink :to="'/districts/' + d.slug">{{ d.name }}</NuxtLink>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Institutional -->
+      <div class="footer-col reveal">
+        <h4 class="footer-heading">Institutional</h4>
+        <ul class="footer-links">
+          <li><NuxtLink to="/about">About</NuxtLink></li>
+          <li><NuxtLink to="/community">Community</NuxtLink></li>
+          <li><NuxtLink to="/apply">Apply</NuxtLink></li>
+          <li><NuxtLink to="/the-road">The Road</NuxtLink></li>
+        </ul>
+      </div>
+
+      <!-- Registry (Newsletter) -->
+      <div class="footer-col reveal">
+        <h4 class="footer-heading">Registry</h4>
+        <p class="footer-registry-desc">Dispatches from inside the districts. No noise.</p>
+        <form class="footer-registry-form" @submit.prevent="submit" aria-label="Newsletter signup">
+          <div class="footer-registry-input-wrap">
             <input
               v-model="email"
               type="email"
-              placeholder="your@email.com"
-              class="footer-newsletter-input"
-              aria-label="Email address for newsletter"
+              placeholder="Email address"
+              class="footer-registry-input"
+              aria-label="Email address"
               :disabled="status === 'success'"
               @focus="reset"
             />
             <button
               type="submit"
-              class="footer-newsletter-btn"
+              class="footer-registry-btn"
               :disabled="status === 'success' || status === 'submitting'"
+              aria-label="Subscribe"
             >
-              {{ status === 'submitting' ? 'Sending…' : status === 'success' ? 'Subscribed' : 'Subscribe' }}
+              <span class="material-symbols-outlined">arrow_forward</span>
             </button>
-          </form>
-          <p v-if="status === 'success'" class="footer-newsletter-feedback footer-newsletter-success">
-            You're on the list.
-          </p>
-          <p v-if="status === 'error'" class="footer-newsletter-feedback footer-newsletter-error">
-            {{ errorMessage }}
-          </p>
-        </div>
-      </div>
-
-      <div class="footer-col reveal">
-        <h4 class="overline">Navigate</h4>
-        <ul>
-          <li><NuxtLink to="/districts">Districts</NuxtLink></li>
-          <li><NuxtLink to="/the-road">The Road</NuxtLink></li>
-          <li><NuxtLink to="/about">About</NuxtLink></li>
-          <li><NuxtLink to="/apply">Apply</NuxtLink></li>
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-districts reveal">
-        <h4 class="overline">Districts</h4>
-        <ul>
-          <li v-for="d in activeDistricts" :key="d.slug">
-            <NuxtLink :to="'/districts/' + d.slug">{{ d.name }}</NuxtLink>
-          </li>
-        </ul>
-        <ul class="footer-coming-soon">
-          <li v-for="d in upcomingDistricts" :key="d.slug">
-            <NuxtLink :to="'/districts/' + d.slug">{{ d.name }}</NuxtLink>
-          </li>
-        </ul>
-      </div>
-
-      <div class="footer-col reveal">
-        <h4 class="overline">Legal</h4>
-        <ul>
-          <li><NuxtLink to="/privacy">Privacy</NuxtLink></li>
-          <li><NuxtLink to="/terms">Terms</NuxtLink></li>
-        </ul>
+          </div>
+          <p v-if="status === 'success'" class="footer-feedback footer-success">You're on the list.</p>
+          <p v-if="status === 'error'" class="footer-feedback footer-error">{{ errorMessage }}</p>
+        </form>
       </div>
     </div>
 
-    <div class="footer-bottom reveal">
-      <p>&copy; {{ year }} Meraki Productions Ltd. All rights reserved.</p>
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; {{ year }} MERAKI ROAD</p>
+      <nav class="footer-legal" aria-label="Legal links">
+        <NuxtLink to="/privacy">Privacy</NuxtLink>
+        <NuxtLink to="/terms">Terms</NuxtLink>
+        <span class="footer-legal-sep" aria-hidden="true">&middot;</span>
+        <NuxtLink to="/bridge">Press</NuxtLink>
+      </nav>
     </div>
   </footer>
 </template>
@@ -80,26 +93,61 @@ import { districts } from '~/composables/useDistricts'
 const year = computed(() => new Date().getFullYear())
 const { email, status, errorMessage, submit, reset } = useEmailCollection('newsletter')
 
-const activeDistricts = computed(() => districts.filter(d => d.status === 'active' || d.status === 'coming-soon'))
-const upcomingDistricts = computed(() => districts.filter(d => d.status === 'development'))
+const activeDistricts = computed(() =>
+  districts.filter(d => d.status === 'active' || d.status === 'coming-soon')
+)
 
 const footerRef = ref<HTMLElement | null>(null)
-useGsapScrollReveal(footerRef, '.reveal', { stagger: 0.12 })
+useGsapScrollReveal(footerRef, '.reveal', { stagger: 0.15 })
 </script>
 
 <style scoped>
 .footer {
-  padding: var(--space-16) var(--content-padding) var(--space-8);
-  border-top: none;
   position: relative;
+  background: #0D0D0F;
+  padding: 0 var(--content-padding);
+  overflow: hidden;
 }
 
-.footer::before {
-  content: '';
+/* Closing statement — the last line of the monograph */
+.footer-closing {
+  padding: var(--space-32) 0 var(--space-24);
+  text-align: center;
+  max-width: var(--width-wide);
+  margin: 0 auto;
+}
+
+.footer-closing-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(250, 250, 249, 0.5);
+  line-height: var(--leading-tight);
+  max-width: none;
+}
+
+/* Giant watermark */
+.footer-watermark {
   position: absolute;
-  top: 0;
-  left: var(--content-padding);
-  right: var(--content-padding);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: 20vw;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(250, 250, 249, 0.03);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+/* Gold rule separating closing from columns */
+.footer-rule {
+  max-width: var(--width-wide);
+  margin: 0 auto;
   height: 1px;
   background: linear-gradient(
     to right,
@@ -108,189 +156,223 @@ useGsapScrollReveal(footerRef, '.reveal', { stagger: 0.12 })
     var(--color-gold) 80%,
     transparent
   );
-  opacity: 0.4;
+  opacity: 0.3;
 }
 
-.footer-inner {
+/* Four-column grid */
+.footer-grid {
   max-width: var(--width-wide);
   margin: 0 auto;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: var(--space-12);
-  padding-bottom: var(--space-16);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: var(--space-16) 0;
 }
 
+/* Brand column */
 .footer-logo {
   font-family: var(--font-display);
   font-size: var(--text-h3);
   font-weight: 300;
-  color: var(--color-dark-text);
-  margin-bottom: var(--space-3);
+  font-style: italic;
+  color: rgba(250, 250, 249, 0.85);
+  background-image: none;
+  margin-bottom: var(--space-4);
+  display: inline-block;
+}
+
+.footer-logo:hover {
+  color: rgba(250, 250, 249, 1);
 }
 
 .footer-tagline {
-  color: var(--color-dark-muted);
+  color: rgba(250, 250, 249, 0.3);
   font-size: var(--text-small);
-  max-width: 30ch;
+  line-height: var(--leading-relaxed);
+  max-width: 32ch;
 }
 
-.footer-newsletter {
-  margin-top: var(--space-8);
-}
-
-.footer-newsletter-label {
-  font-size: var(--text-small);
-  color: var(--color-dark-muted);
-  margin-bottom: var(--space-3);
-  max-width: none;
-}
-
-.footer-newsletter-form {
-  display: flex;
-  gap: 0;
-  max-width: 320px;
-}
-
-.footer-newsletter-input {
-  flex: 1;
-  padding: var(--space-3) var(--space-4);
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-right: none;
-  color: var(--color-dark-text);
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  transition: border-color var(--duration-fast) ease;
-}
-
-.footer-newsletter-input::placeholder {
-  color: var(--color-dark-muted);
-}
-
-.footer-newsletter-input:focus {
-  border-color: var(--color-gold);
-  outline: none;
-}
-
-.footer-newsletter-input:focus-visible {
-  outline: 2px solid var(--color-gold);
-  outline-offset: -1px;
-}
-
-.footer-newsletter-btn {
-  padding: var(--space-3) var(--space-6);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: var(--color-dark-text);
+/* Column headings */
+.footer-heading {
   font-size: var(--text-overline);
   font-weight: 500;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  transition: border-color var(--duration-fast) ease,
-              color var(--duration-fast) ease;
+  color: rgba(250, 250, 249, 0.85);
+  margin-bottom: var(--space-6);
 }
 
-.footer-newsletter-btn:hover {
-  border-color: var(--color-gold);
-  color: var(--color-gold);
-}
-
-.footer-newsletter-btn:focus-visible {
-  outline: 2px solid var(--color-gold);
-  outline-offset: 2px;
-}
-
-.footer-col .overline {
-  font-weight: 500;
-}
-
-.footer-col ul {
+/* Links */
+.footer-links {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  margin-top: var(--space-4);
 }
 
-.footer-col a {
-  color: var(--color-dark-muted);
+.footer-links a {
+  color: rgba(250, 250, 249, 0.35);
   font-size: var(--text-small);
-  background-image: linear-gradient(var(--color-gold), var(--color-gold));
-  transition: color var(--duration-fast) ease,
-              background-size var(--duration-normal) ease;
+  background-image: none;
+  transition: color 0.3s ease;
 }
 
-.footer-col a:hover {
-  color: var(--color-dark-text);
-}
-
-.footer-coming-soon {
-  margin-top: var(--space-2);
-  padding-top: var(--space-2);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.footer-coming-soon a {
-  opacity: 0.5;
-}
-
-.footer-bottom {
-  max-width: var(--width-wide);
-  margin: var(--space-8) auto 0;
-  text-align: center;
-}
-
-.footer-bottom p {
-  font-size: var(--text-caption);
-  color: var(--color-dark-muted);
-  max-width: none;
-}
-
-.footer-newsletter-input:disabled,
-.footer-newsletter-btn:disabled {
-  opacity: 0.5;
-}
-
-.footer-newsletter-feedback {
-  margin-top: var(--space-2);
-  font-size: var(--text-caption);
-  max-width: none;
-}
-
-.footer-newsletter-success {
+.footer-links a:hover {
   color: var(--color-gold);
 }
 
-.footer-newsletter-error {
-  color: #e55;
+/* Registry (newsletter) */
+.footer-registry-desc {
+  color: rgba(250, 250, 249, 0.35);
+  font-size: var(--text-small);
+  margin-bottom: var(--space-4);
+  max-width: none;
+  line-height: var(--leading-relaxed);
 }
 
-@media (max-width: 768px) {
-  .footer-inner {
+.footer-registry-input-wrap {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid rgba(250, 250, 249, 0.15);
+  transition: border-color 0.3s ease;
+}
+
+.footer-registry-input-wrap:focus-within {
+  border-color: var(--color-gold);
+}
+
+.footer-registry-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: rgba(250, 250, 249, 0.85);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  padding: var(--space-2) 0;
+  letter-spacing: var(--tracking-wide);
+}
+
+.footer-registry-input::placeholder {
+  color: rgba(250, 250, 249, 0.2);
+  text-transform: uppercase;
+  font-size: var(--text-overline);
+  letter-spacing: var(--tracking-widest);
+}
+
+.footer-registry-input:focus {
+  outline: none;
+}
+
+.footer-registry-btn {
+  color: var(--color-gold);
+  background: transparent;
+  border: none;
+  padding: var(--space-2);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.footer-registry-btn:hover {
+  transform: translateX(4px);
+}
+
+.footer-registry-btn .material-symbols-outlined {
+  font-size: 1.25rem;
+}
+
+.footer-feedback {
+  font-size: var(--text-caption);
+  margin-top: var(--space-2);
+  max-width: none;
+}
+
+.footer-success { color: var(--color-gold); }
+.footer-error { color: #e55; }
+
+/* Bottom bar */
+.footer-bottom {
+  max-width: var(--width-wide);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-8) 0;
+  border-top: 1px solid rgba(250, 250, 249, 0.05);
+}
+
+.footer-copyright {
+  font-size: 0.5625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(250, 250, 249, 0.3);
+  max-width: none;
+}
+
+.footer-legal {
+  display: flex;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.footer-legal a {
+  font-size: 0.5625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(250, 250, 249, 0.2);
+  background-image: none;
+  transition: color 0.3s ease;
+}
+
+.footer-legal a:hover {
+  color: rgba(250, 250, 249, 0.6);
+}
+
+.footer-legal-sep {
+  color: rgba(250, 250, 249, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .footer-grid {
     grid-template-columns: 1fr 1fr;
+    gap: var(--space-10);
+  }
+
+  .footer-col-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
     gap: var(--space-8);
   }
 
-  .footer-brand {
-    grid-column: 1 / -1;
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-4);
+    text-align: center;
   }
 
-  .footer-col-districts {
-    grid-column: 1 / -1;
+  .footer-watermark {
+    font-size: 30vw;
   }
 
-  .footer-col-districts ul {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .footer-closing {
+    padding: var(--space-20) 0 var(--space-16);
   }
+}
 
-  .footer-coming-soon {
-    grid-template-columns: 1fr 1fr;
-    display: grid;
-  }
+/* Focus styles */
+.footer-registry-input:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
 
-  .footer-newsletter-form {
-    max-width: none;
-  }
+.footer-links a:focus-visible,
+.footer-legal a:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
 }
 </style>
