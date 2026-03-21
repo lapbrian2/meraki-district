@@ -4,7 +4,7 @@
       <p class="overline reveal">From The Road</p>
       <h2 class="word-reveal">Featured thinking</h2>
       <p class="featured-intro reveal">
-        Essays, dispatches, and frameworks from practitioners inside the ecosystem.
+        Essays, dispatches, and frameworks from practitioners along the road.
       </p>
 
       <div v-if="posts && posts.length" class="featured-layout">

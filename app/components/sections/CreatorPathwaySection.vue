@@ -47,7 +47,7 @@ const steps = [
   },
   {
     name: 'Develop',
-    description: 'Deepen mastery within the ecosystem.',
+    description: 'Deepen mastery across the districts.',
   },
   {
     name: 'Publish',

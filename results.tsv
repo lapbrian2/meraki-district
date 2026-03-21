@@ -1,0 +1,6 @@
+commit	build_time_ms	bundle_kb	status	description
+a4923f4	86669	4312	keep	baseline
+235e07a	107664	4312	discard	disable sourcemaps + vite build opts
+c91bdc9	83344	4312	keep	disable devtools
+26a8864	52731	4312	keep	disable sourcemaps globally
+8bf4e17	55019	4312	discard	nitro compress/minify off

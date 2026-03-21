@@ -2,7 +2,7 @@
   <section ref="section" class="districts">
     <div class="districts-hero section-dark">
       <div class="section-wide districts-hero-content">
-        <p class="overline reveal">The Ecosystem</p>
+        <p class="overline reveal">The Districts</p>
         <h2 class="districts-title word-reveal">
           Eleven districts along one road.
         </h2>

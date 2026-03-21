@@ -7,14 +7,14 @@
         <div class="fn-brand reveal">
           <NuxtLink to="/" class="fn-logo">Meraki Road</NuxtLink>
           <p class="fn-tagline">
-            Where craft meets culture. A creative ecosystem for practitioners
+            Where craft meets culture. Eleven districts for practitioners
             who hold ambition and integrity as a single standard.
           </p>
         </div>
 
         <!-- Col 2: Pillars -->
-        <nav class="fn-nav reveal" aria-label="Pillars">
-          <h4 class="fn-nav-heading">Pillars</h4>
+        <nav class="fn-nav reveal" aria-label="Districts">
+          <h4 class="fn-nav-heading">Districts</h4>
           <ul>
             <li><NuxtLink to="/districts/meraki-road">Meraki Road</NuxtLink></li>
             <li><NuxtLink to="/districts/ikigai-lab">Ikigai Lab</NuxtLink></li>
@@ -24,8 +24,8 @@
         </nav>
 
         <!-- Col 3: Institutional -->
-        <nav class="fn-nav reveal" aria-label="Institutional">
-          <h4 class="fn-nav-heading">Institutional</h4>
+        <nav class="fn-nav reveal" aria-label="About">
+          <h4 class="fn-nav-heading">About</h4>
           <ul>
             <li><NuxtLink to="/fellowships">Fellowships</NuxtLink></li>
             <li><NuxtLink to="/verification">Verification</NuxtLink></li>
@@ -38,7 +38,7 @@
         <div class="fn-newsletter reveal">
           <h4 class="fn-nav-heading">Newsletter</h4>
           <p class="fn-newsletter-text">
-            Dispatches from inside the ecosystem. No noise.
+            Dispatches from inside the districts. No noise.
           </p>
 
           <form

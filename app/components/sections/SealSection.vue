@@ -55,7 +55,7 @@ const tiers = [
     name: 'Associate',
     ordinal: 'I',
     accent: false,
-    description: 'Entry to the ecosystem. Complete foundational coursework and demonstrate active practice. The first step toward recognition.',
+    description: 'Entry to the districts. Complete foundational coursework and demonstrate active practice. The first step toward recognition.',
   },
   {
     name: 'Verified',
@@ -67,7 +67,7 @@ const tiers = [
     name: 'Master',
     ordinal: 'III',
     accent: true,
-    description: 'Recognised expertise. Published work, a mentorship track record, and demonstrated institutional impact. The standard bearers.',
+    description: 'Recognised expertise. Published work, a mentorship track record, and demonstrated impact. The standard bearers.',
   },
   {
     name: 'Fellow',

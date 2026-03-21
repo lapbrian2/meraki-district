@@ -32,7 +32,7 @@
           <div class="legal-section">
             <h2>What This Site Is</h2>
             <p>
-              Meraki Road is a cultural ecosystem for AI-native creators. The Site currently serves
+              Meraki Road is eleven districts for AI-native creators. The Site currently serves
               as an informational platform and waitlist for upcoming services. We do not currently offer
               user accounts, paid services, or transactional functionality through the Site.
             </p>

@@ -3,7 +3,7 @@
     <div class="footer-inner">
       <div class="footer-brand reveal">
         <p class="footer-logo">Meraki Road</p>
-        <p class="footer-tagline">A cultural ecosystem for AI-native creators.</p>
+        <p class="footer-tagline">Eleven districts for AI-native creators.</p>
         <div class="footer-newsletter">
           <p class="footer-newsletter-label">Dispatches from the Road</p>
           <form class="footer-newsletter-form" @submit.prevent="submit" aria-label="Newsletter signup">

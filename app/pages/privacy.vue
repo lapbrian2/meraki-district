@@ -20,7 +20,7 @@
             <h2>Who We Are</h2>
             <p>
               This site is operated by Meraki Productions Ltd. ("Meraki Road," "we," "us," or "our").
-              We are a cultural ecosystem for AI-native creators. This privacy policy explains how we handle
+              Meraki Road is eleven districts for AI-native creators. This privacy policy explains how we handle
               information collected through merakidistrict.ai and any related services.
             </p>
             <p>

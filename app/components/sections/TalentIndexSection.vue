@@ -9,7 +9,7 @@
         </div>
         <p class="ti-subtitle">
           A curated registry of verified practitioners<br />
-          within the Meraki Road ecosystem.
+          across the Meraki Road districts.
         </p>
       </div>
 
@@ -41,7 +41,7 @@
       <!-- Bottom link -->
       <div class="ti-footer reveal">
         <NuxtLink to="/apply" class="ti-apply-link">
-          Apply for Institutional Verification &rarr;
+          Apply for Verification &rarr;
         </NuxtLink>
       </div>
     </div>

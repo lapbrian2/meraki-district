@@ -9,7 +9,7 @@
           <span class="hero-title-accent">meets culture.</span>
         </h1>
         <p class="hero-sub">
-          A cultural ecosystem built for creators who hold ambition
+          Eleven districts built for creators who hold ambition
           and integrity as a single standard.
         </p>
         <div class="hero-ctas">

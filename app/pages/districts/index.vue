@@ -4,7 +4,7 @@
     <section class="st-hero">
       <div class="st-hero-inner">
         <p class="st-overline reveal">Districts</p>
-        <h1 class="st-display word-reveal">The Ecosystem</h1>
+        <h1 class="st-display word-reveal">The Districts</h1>
         <p class="st-subtitle reveal">
           Eleven districts, each with its own mandate. One shared infrastructure.
         </p>
@@ -162,7 +162,7 @@ onUnmounted(() => {
 useHead({
   title: 'Districts \u2014 Meraki Road',
   meta: [
-    { name: 'description', content: 'Navigate the eleven districts of Meraki Road. A cultural ecosystem built for AI-native creators.' },
+    { name: 'description', content: 'Navigate the eleven districts of Meraki Road. Eleven districts built for AI-native creators.' },
   ],
 })
 </script>

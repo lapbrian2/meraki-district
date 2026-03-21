@@ -110,7 +110,7 @@
             Meet on Meraki Road.
           </h2>
           <p class="cta-card-sub">
-            A cultural ecosystem for creators who refuse to separate ambition from integrity.
+            Eleven districts for creators who refuse to separate ambition from integrity.
           </p>
           <div class="cta-card-buttons">
             <NuxtLink to="/districts" class="cta-btn cta-btn--outline">
@@ -178,7 +178,7 @@ const steps = [
   {
     ordinal: 'II',
     label: 'Step 2',
-    description: 'Complete your application with a portfolio, a statement of practice, and a brief description of what you hope to build within the ecosystem.',
+    description: 'Complete your application with a portfolio, a statement of practice, and a brief description of what you hope to build across the districts.',
   },
   {
     ordinal: 'III',

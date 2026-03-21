@@ -23,7 +23,7 @@
           <div class="hero-right reveal">
             <blockquote class="hero-quote">
               <p class="hero-quote-text">
-                We kept looking for the institution that took this work seriously.
+                We kept looking for the place that took this work seriously.
                 It didn&rsquo;t exist, so we built it.
               </p>
               <cite class="hero-quote-cite">&mdash; Brian &amp; Rachel</cite>

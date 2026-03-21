@@ -1,98 +1,71 @@
 <template>
-  <section ref="sectionRef" class="pillars">
-    <div class="pillars-inner">
-      <div class="pillars-header">
-        <p class="pillars-overline reveal">The Ecosystem</p>
-        <h2 class="pillars-title word-reveal">The Curated Monolith</h2>
-        <div class="pillars-rule" aria-hidden="true" />
-        <p class="pillars-sub reveal">Six districts along one road, each built to serve a different dimension of creative practice.</p>
+  <section ref="sectionRef" class="districts-grid-section">
+    <div class="dgs-inner">
+      <div class="dgs-header">
+        <p class="dgs-overline reveal">The Districts</p>
+        <h2 class="dgs-title word-reveal">Eleven districts, one road.</h2>
+        <div class="dgs-rule" aria-hidden="true" />
+        <p class="dgs-sub reveal">Each built to serve a different dimension of creative practice.</p>
       </div>
 
-      <div class="pillars-grid">
-        <div
-          v-for="(pillar, i) in pillars"
-          :key="pillar.name"
-          class="pillar-card reveal"
-          :class="{ 'pillar-elevated': i === 1 || i === 4 }"
+      <div class="dgs-grid">
+        <NuxtLink
+          v-for="(d, i) in districts"
+          :key="d.slug"
+          :to="`/districts/${d.slug}`"
+          class="dgs-card reveal"
+          :class="{ 'dgs-elevated': i % 3 === 1 }"
         >
-          <span class="pillar-icon material-symbols-outlined">{{ pillar.icon }}</span>
-          <h3 class="pillar-name">{{ pillar.name }}</h3>
-          <p class="pillar-desc">{{ pillar.description }}</p>
-          <NuxtLink :to="pillar.to" class="pillar-link">{{ pillar.action }} →</NuxtLink>
-        </div>
+          <span class="dgs-icon material-symbols-outlined">{{ iconMap[d.slug] || 'category' }}</span>
+          <span class="dgs-number">{{ d.number }}</span>
+          <h3 class="dgs-name">{{ d.name }}</h3>
+          <p class="dgs-type">{{ d.type }}</p>
+          <p class="dgs-desc">{{ d.description }}</p>
+          <span class="dgs-link">Explore →</span>
+        </NuxtLink>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+import { districts } from '~/composables/useDistricts'
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
 import { useWordReveal } from '~/composables/useWordReveal'
 
 const sectionRef = ref<HTMLElement | null>(null)
-useGsapScrollReveal(sectionRef, '.reveal', { stagger: 0.08 })
+useGsapScrollReveal(sectionRef, '.reveal', { stagger: 0.06 })
 useWordReveal(sectionRef, '.word-reveal')
 
-const pillars = [
-  {
-    name: 'Meraki Road',
-    icon: 'route',
-    description: 'The central social artery connecting creators through high-prestige discourse.',
-    action: 'Explore',
-    to: '/the-road',
-  },
-  {
-    name: 'Ikigai Lab',
-    icon: 'biotech',
-    description: 'Incubating purpose through experimental creative technologies and practice.',
-    action: 'Incubate',
-    to: '/districts',
-  },
-  {
-    name: 'Institute',
-    icon: 'school',
-    description: 'The pedagogical heart for advanced artistic theory and professional mastery.',
-    action: 'Enroll',
-    to: '/districts',
-  },
-  {
-    name: 'Publishing',
-    icon: 'menu_book',
-    description: 'Archiving the voices that define our generation through curated editions.',
-    action: 'Browse',
-    to: '/districts',
-  },
-  {
-    name: 'Pavilion',
-    icon: 'gallery_thumbnail',
-    description: 'The digital gallery for premier exhibitions and verified archival works.',
-    action: 'View Gallery',
-    to: '/districts',
-  },
-  {
-    name: 'The Bridge',
-    icon: 'shortcut',
-    description: 'The transactional conduit for global creative commerce and partnerships.',
-    action: 'Connect',
-    to: '/districts',
-  },
-]
+const iconMap: Record<string, string> = {
+  'voight-studio': 'brush',
+  'the-road': 'edit_road',
+  'meridian': 'explore',
+  'fieldwork': 'school',
+  'the-provenance': 'inventory_2',
+  'basecamp': 'groups',
+  'common-ground': 'event',
+  'the-mint': 'storefront',
+  'the-seal': 'verified',
+  'the-collective': 'handshake',
+  'the-frame': 'movie',
+}
 </script>
 
 <style scoped>
-.pillars {
+.districts-grid-section {
   padding: var(--space-32) var(--content-padding);
   background: var(--color-surface);
   border-top: 1px solid var(--rule-color);
   border-bottom: 1px solid var(--rule-color);
 }
 
-.pillars-inner {
+.dgs-inner {
   max-width: 1440px;
   margin: 0 auto;
 }
 
-.pillars-header {
+.dgs-header {
   text-align: center;
   margin-bottom: var(--space-24);
   display: flex;
@@ -100,7 +73,7 @@ const pillars = [
   align-items: center;
 }
 
-.pillars-overline {
+.dgs-overline {
   font-family: var(--font-body);
   font-size: var(--text-overline);
   font-weight: 500;
@@ -110,7 +83,7 @@ const pillars = [
   margin-bottom: var(--space-4);
 }
 
-.pillars-title {
+.dgs-title {
   font-size: var(--text-h1);
   font-weight: 300;
   font-style: italic;
@@ -118,14 +91,14 @@ const pillars = [
   margin-bottom: var(--space-6);
 }
 
-.pillars-rule {
+.dgs-rule {
   width: 64px;
   height: 1px;
   background: var(--rule-color);
   margin-bottom: var(--space-6);
 }
 
-.pillars-sub {
+.dgs-sub {
   font-family: var(--font-body);
   font-size: var(--text-small);
   letter-spacing: var(--tracking-wide);
@@ -135,108 +108,137 @@ const pillars = [
   line-height: var(--leading-relaxed);
 }
 
-/* 3x2 bordered grid */
-.pillars-grid {
+/* Bordered grid — 3 columns for 11 items */
+.dgs-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   border: 1px solid var(--rule-color);
 }
 
-.pillar-card {
-  padding: var(--space-12);
+.dgs-card {
+  padding: var(--space-10) var(--space-8);
   border-right: 1px solid var(--rule-color);
   border-bottom: 1px solid var(--rule-color);
   transition: background-color 0.5s var(--ease-out);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  background-image: none;
 }
 
-.pillar-card:nth-child(3n) {
+/* Remove right border on every 3rd card */
+.dgs-card:nth-child(3n) {
   border-right: none;
 }
 
-.pillar-card:nth-child(n+4) {
+/* Remove bottom border on last row (items 10, 11 — and 12 if it existed) */
+.dgs-card:nth-child(n+10) {
   border-bottom: none;
 }
 
-.pillar-card:hover {
+.dgs-card:hover {
   background: var(--color-background);
 }
 
-.pillar-elevated {
-  background: var(--color-surface);
+.dgs-elevated {
+  background: rgba(184, 150, 78, 0.03);
 }
 
-.pillar-icon {
-  font-size: 1.75rem;
+.dgs-icon {
+  font-size: 1.5rem;
   color: var(--color-gold);
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-6);
   display: block;
   font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
 }
 
-.pillar-name {
+.dgs-number {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-text-muted);
+  opacity: 0.4;
+  margin-bottom: var(--space-2);
+}
+
+.dgs-name {
   font-family: var(--font-display);
   font-size: var(--text-h3);
   font-weight: 300;
   font-style: italic;
   color: var(--color-ink);
+  margin-bottom: var(--space-2);
+  transition: color 0.3s ease;
+}
+
+.dgs-card:hover .dgs-name {
+  color: var(--color-gold);
+}
+
+.dgs-type {
+  font-size: 0.5625rem;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-gold);
   margin-bottom: var(--space-4);
 }
 
-.pillar-desc {
+.dgs-desc {
   font-size: var(--text-overline);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--color-text-muted);
   line-height: var(--leading-relaxed);
-  margin-bottom: var(--space-8);
+  margin-bottom: auto;
+  padding-bottom: var(--space-6);
 }
 
-.pillar-link {
+.dgs-link {
   font-size: var(--text-overline);
   font-weight: 500;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
   color: var(--color-gold);
-  background-image: none;
   transition: padding-left 0.3s var(--ease-out);
 }
 
-.pillar-link:hover {
+.dgs-card:hover .dgs-link {
   padding-left: var(--space-2);
 }
 
 @media (max-width: 1024px) {
-  .pillars-grid {
+  .dgs-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .pillar-card:nth-child(3n) {
+  .dgs-card:nth-child(3n) {
     border-right: 1px solid var(--rule-color);
   }
 
-  .pillar-card:nth-child(2n) {
+  .dgs-card:nth-child(2n) {
     border-right: none;
   }
 
-  .pillar-card:nth-child(n+4) {
+  .dgs-card:nth-child(n+10) {
     border-bottom: 1px solid var(--rule-color);
   }
 
-  .pillar-card:nth-child(n+5) {
+  .dgs-card:nth-child(n+11) {
     border-bottom: none;
   }
 }
 
 @media (max-width: 640px) {
-  .pillars-grid {
+  .dgs-grid {
     grid-template-columns: 1fr;
   }
 
-  .pillar-card {
-    border-right: none;
+  .dgs-card {
+    border-right: none !important;
   }
 
-  .pillar-card:last-child {
+  .dgs-card:last-child {
     border-bottom: none;
   }
 }

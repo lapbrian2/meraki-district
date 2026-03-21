@@ -12,7 +12,7 @@
       </h2>
 
       <p class="cta-new-subtitle reveal">
-        A cultural ecosystem for creators who refuse to separate ambition from integrity
+        Eleven districts for creators who refuse to separate ambition from integrity
       </p>
 
       <NuxtLink to="/apply" class="cta-new-button reveal">
