@@ -332,6 +332,7 @@ onUnmounted(() => {
 .nav-link:hover {
   color: var(--color-ink);
   letter-spacing: 0.18em;
+  text-shadow: 0 0 12px rgba(148, 67, 40, 0.4);
 }
 
 .nav-link:hover::after {
