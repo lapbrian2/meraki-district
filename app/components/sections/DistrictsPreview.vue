@@ -64,6 +64,34 @@
         </div>
       </div>
 
+      <!-- Spotlight: active districts beneath the map -->
+      <div class="roadmap-spotlight">
+        <div class="spotlight-header reveal">
+          <p class="overline">Now Open</p>
+          <h3 class="spotlight-title">Where the work is happening.</h3>
+        </div>
+        <div class="spotlight-grid">
+          <NuxtLink
+            v-for="d in activeDistricts"
+            :key="d.slug"
+            :to="'/districts/' + d.slug"
+            class="spotlight-card reveal"
+            :style="{ '--color-accent': d.accentColor }"
+          >
+            <div class="spotlight-image">
+              <NuxtImg :src="d.image" :alt="d.name" loading="lazy" decoding="async" width="600" height="400" />
+            </div>
+            <div class="spotlight-info">
+              <span class="spotlight-number">{{ d.number }}</span>
+              <span class="spotlight-type">{{ d.type }}</span>
+              <h4 class="spotlight-name">{{ d.name }}</h4>
+              <p class="spotlight-desc">{{ d.description }}</p>
+              <span class="spotlight-link">Enter district &rarr;</span>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
+
       <div class="roadmap-cta reveal">
         <NuxtLink to="/districts" class="roadmap-link">Explore all districts &rarr;</NuxtLink>
       </div>
@@ -86,6 +114,8 @@ const roadPath = ref<SVGPathElement | null>(null)
 
 useGsapScrollReveal(section, '.reveal', { stagger: 0.08 })
 useWordReveal(section, '.word-reveal')
+
+const activeDistricts = computed(() => districts.filter(d => d.status === 'active'))
 
 // SVG dimensions — generous vertical space per node
 const svgWidth = 1000
@@ -436,6 +466,125 @@ onUnmounted(() => {
               margin-top 0.3s ease;
 }
 
+/* ─── Spotlight: active districts ─── */
+.roadmap-spotlight {
+  margin-top: var(--space-16);
+  padding-top: var(--space-16);
+  border-top: 1px solid rgba(250, 250, 249, 0.06);
+}
+
+.spotlight-header {
+  margin-bottom: var(--space-12);
+}
+
+.spotlight-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 300;
+  color: var(--color-dark-text);
+  margin-top: var(--space-4);
+  letter-spacing: var(--tracking-snug);
+}
+
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(250, 250, 249, 0.06);
+}
+
+.spotlight-card {
+  display: block;
+  background: var(--color-dark-bg);
+  text-decoration: none;
+  color: inherit;
+  background-image: none;
+  overflow: hidden;
+  transition: background var(--duration-normal) ease;
+}
+
+.spotlight-card:hover {
+  background: rgba(250, 250, 249, 0.03);
+}
+
+.spotlight-card:hover .spotlight-image img {
+  transform: scale(1.03);
+}
+
+.spotlight-card:hover .spotlight-name {
+  color: var(--color-accent);
+}
+
+.spotlight-card:hover .spotlight-link {
+  opacity: 1;
+}
+
+.spotlight-image {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.spotlight-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.spotlight-info {
+  padding: var(--space-6) var(--space-8);
+  position: relative;
+}
+
+.spotlight-number {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-8);
+  font-family: var(--font-mono);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  letter-spacing: var(--tracking-ultra-wide);
+  color: var(--color-accent);
+  opacity: 0.1;
+  line-height: 1;
+}
+
+.spotlight-type {
+  font-size: var(--text-overline);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-accent);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.spotlight-name {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 400;
+  color: var(--color-dark-text);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-3);
+  transition: color var(--duration-normal) ease;
+}
+
+.spotlight-desc {
+  font-size: var(--text-small);
+  color: var(--color-dark-muted);
+  line-height: var(--leading-normal);
+  margin-bottom: var(--space-4);
+}
+
+.spotlight-link {
+  font-size: var(--text-overline);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-accent);
+  opacity: 0.6;
+  transition: opacity var(--duration-fast) ease;
+}
+
 /* ─── CTA ─── */
 .roadmap-cta {
   margin-top: var(--space-12);
@@ -540,6 +689,10 @@ onUnmounted(() => {
   .node-number {
     font-size: 2rem;
     opacity: 0.12;
+  }
+
+  .spotlight-grid {
+    grid-template-columns: 1fr;
   }
 }
 
