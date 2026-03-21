@@ -30,6 +30,8 @@
           :style="{ '--color-accent': d.accentColor, '--color-accent-accessible': d.accentColorAccessible }"
         >
           <div class="stop-marker" />
+          <!-- Connector from card to center line -->
+          <div class="stop-connector" />
 
           <!-- Card with image -->
           <div class="stop-card reveal" @click="toggle(d.slug)">
@@ -44,24 +46,29 @@
               <span class="stop-type">{{ d.type }}</span>
               <h3 class="stop-name">{{ d.name }}</h3>
               <p class="stop-desc">{{ d.description }}</p>
+              <span class="stop-hint" :class="{ 'hint-open': expanded === d.slug }">
+                {{ expanded === d.slug ? 'Collapse' : 'Learn more' }}
+              </span>
             </div>
           </div>
 
           <!-- Expanded detail panel -->
-          <div v-if="expanded === d.slug" class="stop-detail">
-            <blockquote class="stop-quote">&ldquo;{{ d.pullQuote }}&rdquo;</blockquote>
-            <div class="stop-offerings">
-              <span
-                v-for="(offering, j) in d.offerings"
-                :key="j"
-                class="stop-offering"
-              >{{ offering }}</span>
+          <Transition name="detail">
+            <div v-if="expanded === d.slug" class="stop-detail">
+              <blockquote class="stop-quote">&ldquo;{{ d.pullQuote }}&rdquo;</blockquote>
+              <div class="stop-offerings">
+                <span
+                  v-for="(offering, j) in d.offerings"
+                  :key="j"
+                  class="stop-offering"
+                >{{ offering }}</span>
+              </div>
+              <p v-if="d.statusNote" class="stop-note">{{ d.statusNote }}</p>
+              <NuxtLink :to="'/districts/' + d.slug" class="stop-enter">
+                Enter {{ d.name }} &rarr;
+              </NuxtLink>
             </div>
-            <p v-if="d.statusNote" class="stop-note">{{ d.statusNote }}</p>
-            <NuxtLink :to="'/districts/' + d.slug" class="stop-enter">
-              Enter {{ d.name }} &rarr;
-            </NuxtLink>
-          </div>
+          </Transition>
         </div>
       </div>
     </section>
@@ -238,8 +245,9 @@ useHead({
   width: 100%;
   height: 100%;
   background: linear-gradient(to bottom, transparent 0%, var(--color-gold) 2%, var(--color-gold) 98%, transparent 100%);
-  opacity: 0.25;
+  opacity: 0.3;
   transform-origin: top center;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--color-gold) 15%, transparent);
 }
 
 /* ─── Stop ─── */
@@ -279,6 +287,27 @@ useHead({
     0 0 20px color-mix(in srgb, var(--color-accent) 20%, transparent);
 }
 
+/* ─── Connector from card to center line ─── */
+.stop-connector {
+  position: absolute;
+  top: calc(var(--space-8) + 4px);
+  height: 1px;
+  background: linear-gradient(to right, var(--color-accent), transparent);
+  opacity: 0.2;
+  z-index: 2;
+}
+
+.stop-left .stop-connector {
+  left: calc(50% + 6px);
+  right: calc(50% + var(--space-8) + 1px);
+  background: linear-gradient(to left, var(--color-accent), transparent);
+}
+
+.stop-right .stop-connector {
+  right: calc(50% + 6px);
+  left: calc(50% + var(--space-8) + 1px);
+}
+
 /* ─── Card ─── */
 .stop-card {
   max-width: 460px;
@@ -287,24 +316,34 @@ useHead({
   border: 1px solid rgba(250, 250, 249, 0.06);
   overflow: hidden;
   cursor: pointer;
-  transition: border-color var(--duration-normal) ease, box-shadow var(--duration-normal) ease;
+  transition: border-color var(--duration-normal) ease,
+              box-shadow var(--duration-normal) ease,
+              transform var(--duration-normal) var(--ease-out);
 }
 
 .stop-card:hover {
   border-color: var(--color-accent);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.35);
+  transform: translateY(-4px);
 }
 
 .stop-card:hover .stop-image img {
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
 
 .stop-card:hover .stop-name {
   color: var(--color-accent);
 }
 
+.stop-card:hover .stop-hint {
+  color: var(--color-accent);
+  opacity: 1;
+}
+
 .stop-expanded .stop-card {
   border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
 /* ─── Image ─── */
@@ -357,14 +396,14 @@ useHead({
 
 .stop-number {
   position: absolute;
-  top: var(--space-4);
+  top: var(--space-3);
   right: var(--space-6);
   font-family: var(--font-mono);
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 300;
   letter-spacing: var(--tracking-ultra-wide);
   color: var(--color-accent);
-  opacity: 0.12;
+  opacity: 0.1;
   line-height: 1;
 }
 
@@ -391,6 +430,52 @@ useHead({
   font-size: var(--text-small);
   color: var(--color-dark-muted);
   line-height: var(--leading-normal);
+  margin-bottom: var(--space-3);
+}
+
+.stop-hint {
+  font-size: var(--text-overline);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-dark-muted);
+  opacity: 0.5;
+  transition: color var(--duration-fast) ease, opacity var(--duration-fast) ease;
+}
+
+.hint-open {
+  color: var(--color-accent);
+  opacity: 0.7;
+}
+
+/* ─── Detail transition ─── */
+.detail-enter-active {
+  transition: max-height 0.5s var(--ease-out), opacity 0.4s ease;
+  overflow: hidden;
+}
+
+.detail-leave-active {
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+  overflow: hidden;
+}
+
+.detail-enter-from {
+  max-height: 0;
+  opacity: 0;
+}
+
+.detail-enter-to {
+  max-height: 400px;
+  opacity: 1;
+}
+
+.detail-leave-from {
+  max-height: 400px;
+  opacity: 1;
+}
+
+.detail-leave-to {
+  max-height: 0;
+  opacity: 0;
 }
 
 /* ─── Expanded detail panel ─── */
@@ -552,6 +637,10 @@ useHead({
   .stop-marker {
     left: var(--space-4);
     transform: translateX(-50%);
+  }
+
+  .stop-connector {
+    display: none;
   }
 
   .stop-card,
