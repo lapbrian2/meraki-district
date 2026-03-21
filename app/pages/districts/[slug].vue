@@ -383,12 +383,12 @@ onUnmounted(() => {
   position: relative;
   object-fit: cover;
   will-change: transform;
-  filter: grayscale(1);
-  transition: filter 0.6s ease;
+  filter: grayscale(100%) sepia(20%) contrast(1.1);
+  transition: filter 0.6s ease-in-out;
 }
 
 .q-hero:hover .q-hero-image {
-  filter: grayscale(0);
+  filter: grayscale(0) sepia(0) contrast(1);
 }
 
 .q-hero-overlay {
@@ -798,13 +798,13 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(1);
+  filter: grayscale(100%) sepia(20%) contrast(1.1);
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.6s ease;
+              filter 0.6s ease-in-out;
 }
 
 .q-explore-card:hover .q-explore-image img {
-  filter: grayscale(0);
+  filter: grayscale(0) sepia(0) contrast(1);
 }
 
 /* Parallax container interaction */

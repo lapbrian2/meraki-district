@@ -182,7 +182,7 @@
     <section ref="testimonialSection" class="testimonial section section-dark">
       <div class="section-wide">
         <div class="testimonial-grid">
-          <div class="testimonial-portrait reveal">
+          <div class="testimonial-portrait grayscale-hover reveal">
             <NuxtImg
               src="/images/institute/testimonial-portrait.webp"
               alt="Fellow practitioner in studio"

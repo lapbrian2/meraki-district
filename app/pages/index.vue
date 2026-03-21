@@ -263,12 +263,12 @@ const featuredArtists: Artist[] = [
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(1);
-  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 0.6s ease;
+  filter: grayscale(100%) sepia(20%) contrast(1.1);
+  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 0.6s ease-in-out;
 }
 
 .fa-hero:hover .fa-hero-image img {
-  filter: grayscale(0);
+  filter: grayscale(0) sepia(0) contrast(1);
 }
 
 .fa-hero-info {
@@ -340,12 +340,12 @@ const featuredArtists: Artist[] = [
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(1);
-  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 0.6s ease;
+  filter: grayscale(100%) sepia(20%) contrast(1.1);
+  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 0.6s ease-in-out;
 }
 
 .fa-card:hover .fa-image img {
-  filter: grayscale(0);
+  filter: grayscale(0) sepia(0) contrast(1);
 }
 
 .fa-overlay {

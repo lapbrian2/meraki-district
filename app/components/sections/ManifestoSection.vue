@@ -28,6 +28,10 @@ const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal')
 useWordReveal(section, '.word-reveal')
 
+// Key words get full opacity; connectors get 40%
+const keyWords = new Set(['future', 'creative', 'practice', 'demands', 'districts', 'worthy', 'human', 'craft', 'machine', 'capability.', 'capability'])
+const connectorWords = new Set(['The', 'the', 'of', 'both', 'and'])
+
 let ctx: gsap.Context | null = null
 
 onMounted(async () => {
@@ -51,6 +55,20 @@ onMounted(async () => {
       },
     })
   }, section.value)
+
+  // Apply philosophy word opacity after useWordReveal has split the text
+  await nextTick()
+  const manifestoEl = section.value?.querySelector('.manifesto-text')
+  if (manifestoEl) {
+    manifestoEl.querySelectorAll('.wr-word').forEach((wordEl) => {
+      const word = (wordEl.textContent || '').replace(/[.,]/g, '')
+      if (connectorWords.has(wordEl.textContent || '') || connectorWords.has(word)) {
+        wordEl.classList.add('philosophy-word--connector')
+      } else if (keyWords.has(word) || keyWords.has(wordEl.textContent || '')) {
+        wordEl.classList.add('philosophy-word--key')
+      }
+    })
+  }
 })
 
 onUnmounted(() => {
@@ -93,6 +111,14 @@ onUnmounted(() => {
 
 .manifesto-body:last-child {
   margin-bottom: 0;
+}
+
+/* Philosophy word opacity variation — key words at full, connectors at 40% */
+:deep(.philosophy-word--key) {
+  opacity: 1;
+}
+:deep(.philosophy-word--connector) {
+  opacity: 0.4;
 }
 
 @media (max-width: 768px) {
