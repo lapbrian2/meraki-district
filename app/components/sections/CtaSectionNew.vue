@@ -65,7 +65,7 @@ useMagnetic(section, '.cta-new-button', { strength: 0.2 })
 .cta-new-watermark-track {
   display: flex;
   gap: 0.02em;
-  animation: watermarkDrift 30s linear infinite alternate;
+  animation: watermarkDrift 25s linear infinite alternate;
 }
 
 .cta-new-watermark-letter {
