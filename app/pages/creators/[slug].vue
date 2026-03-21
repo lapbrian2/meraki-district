@@ -62,7 +62,9 @@
             class="gallery-entry reveal"
             :class="`gallery-entry--${(i % 3) + 1}`"
           >
+            <span class="gallery-plate-number">Plate No. {{ String(i + 1).padStart(3, '0') }}</span>
             <div class="gallery-plate grayscale-hover">
+              <span v-if="i === 0" class="gallery-curators-selection">Curator&rsquo;s Selection</span>
               <NuxtImg
                 :src="work.image"
                 :alt="work.title"
@@ -188,6 +190,66 @@ const creators: Creator[] = [
     curatorName: 'Maren Aoki',
     metricValue: '4,402',
     metricLabel: 'recorded interactions across six exhibitions',
+  },
+  {
+    slug: 'elena-voss',
+    name: 'Elena Voss',
+    discipline: 'Spatial Installation & Light Sculpture',
+    seal: 'Fellow',
+    heroImage: '/images/districts/the-frame.webp',
+    pullQuote: 'I don\'t illuminate spaces. I reveal the darkness that was always there.',
+    bio: 'Elena Voss constructs immersive environments where architecture dissolves into light. Her installations transform industrial spaces into meditative chambers, using precisely calibrated LEDs and reflective surfaces to alter the viewer\'s perception of scale and time.',
+    portfolio: [
+      {
+        title: 'Threshold Study No. 7',
+        image: '/images/districts/meridian.webp',
+        description: 'A site-specific installation in a decommissioned power station. 200 suspended LED filaments respond to ambient sound, creating a breathing luminous field.',
+      },
+      {
+        title: 'Negative Volume',
+        image: '/images/districts/the-collective.webp',
+        description: 'A chamber of blackout panels and edge-lit glass that inverts the viewer\'s sense of interior and exterior. Exhibited at the Venice Architecture Biennale.',
+      },
+      {
+        title: 'After Image',
+        image: '/images/districts/the-frame.webp',
+        description: 'A triptych of rooms calibrated to specific wavelengths. Visitors move through blue, amber, and ultraviolet chambers, each altering color perception for minutes afterward.',
+      },
+    ],
+    curatorNote: 'Voss doesn\'t build installations — she builds perceptual conditions. Her work reminds us that light is not decoration. It is architecture\'s most honest material.',
+    curatorName: 'Haruto Ise',
+    metricValue: '7,231',
+    metricLabel: 'recorded interactions across fourteen exhibitions',
+  },
+  {
+    slug: 'tomas-vega',
+    name: 'Tomas Vega',
+    discipline: 'Generative Architecture & Computational Form',
+    seal: 'Verified',
+    heroImage: '/images/districts/meridian.webp',
+    pullQuote: 'Architecture should compute itself into existence.',
+    bio: 'Tomas Vega works at the intersection of algorithmic design and physical fabrication. His structures emerge from recursive computational processes, each iteration refining form through environmental data and material constraints.',
+    portfolio: [
+      {
+        title: 'Recursive Pavilion',
+        image: '/images/districts/the-frame.webp',
+        description: 'A self-similar timber structure generated from a single branching algorithm. Each joint angle is derived from local wind data collected over twelve months.',
+      },
+      {
+        title: 'Erosion Machine',
+        image: '/images/districts/the-collective.webp',
+        description: 'A concrete form shaped by simulated weathering. The algorithm applies ten thousand years of erosion in forty-eight hours of computation.',
+      },
+      {
+        title: 'Latent Façade',
+        image: '/images/districts/meridian.webp',
+        description: 'A building skin whose panel geometry is derived from a neural network trained on vernacular architecture. No two panels share the same dimensions.',
+      },
+    ],
+    curatorNote: 'Vega treats computation not as a tool but as a collaborator with its own aesthetic instincts. His buildings feel grown rather than designed — which is precisely the point.',
+    curatorName: 'Lena Ortiz',
+    metricValue: '4,892',
+    metricLabel: 'recorded interactions across eight exhibitions',
   },
 ]
 
@@ -363,9 +425,36 @@ useWordReveal(ctaSection, '.word-reveal')
   grid-column: 2 / 9;
 }
 
+.gallery-plate-number {
+  font-family: var(--font-mono);
+  font-size: var(--text-overline);
+  font-weight: 400;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
 .gallery-plate {
   overflow: hidden;
   margin-bottom: var(--space-4);
+  position: relative;
+}
+
+.gallery-curators-selection {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-ink);
+  background: var(--color-gold);
+  padding: 4px 10px;
 }
 
 .gallery-image {

@@ -1,10 +1,10 @@
 <template>
   <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- BESPOKE: Voight Studio                                 -->
+  <!-- BESPOKE: Voight Studio — Deep-Work Portal              -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div v-if="district && isVoightStudio" ref="root" :style="{ '--color-accent': district.accentColor, '--color-accent-accessible': district.accentColorAccessible }">
 
-    <!-- VS Hero — Full viewport, image IS the hero -->
+    <!-- VS Hero — Full viewport, archival image background -->
     <section ref="heroSection" class="vs-hero">
       <div class="vs-hero-image-wrap">
         <NuxtImg
@@ -19,8 +19,19 @@
         />
         <div class="vs-hero-overlay" />
       </div>
+      <div class="vs-hero-metrics">
+        <div class="vs-metric reveal">
+          <span class="vs-metric-label">Render Velocity</span>
+          <span class="vs-metric-value">99.8%</span>
+        </div>
+        <div class="vs-metric reveal">
+          <span class="vs-metric-dot" aria-hidden="true" />
+          <span class="vs-metric-label">Data Integrity</span>
+          <span class="vs-metric-value">Active</span>
+        </div>
+      </div>
       <div class="vs-hero-content">
-        <p class="vs-hero-subtitle">The Foundry</p>
+        <p class="vs-hero-subtitle">The Engine Room</p>
         <h1 ref="heroTitle" class="vs-hero-title">Voight Studio</h1>
       </div>
     </section>
@@ -43,13 +54,65 @@
       </div>
     </nav>
 
+    <!-- VS Active Sprints — 3-column card grid -->
+    <section ref="vsSprintsSection" class="vs-sprints section-dark">
+      <div class="section-default">
+        <p class="overline reveal">Active Sprints</p>
+        <div class="vs-sprints-grid">
+          <div class="vs-sprint vellum-card reveal">
+            <span class="vs-sprint-number" aria-hidden="true">01</span>
+            <h3 class="vs-sprint-title"><em>Brand Architecture</em></h3>
+            <p class="vs-sprint-desc">Strategic identity systems that carry organizational logic from naming through to spatial wayfinding. Not decoration&mdash;infrastructure.</p>
+            <a href="mailto:hello@merakiroad.com" class="vs-sprint-link">View Sprint &rarr;</a>
+          </div>
+          <div class="vs-sprint vellum-card reveal">
+            <span class="vs-sprint-number" aria-hidden="true">02</span>
+            <h3 class="vs-sprint-title"><em>Digital Production</em></h3>
+            <p class="vs-sprint-desc">Full-stack creative builds where design and engineering share a single conversation. Interfaces that respect the people who use them.</p>
+            <a href="mailto:hello@merakiroad.com" class="vs-sprint-link">View Sprint &rarr;</a>
+          </div>
+          <div class="vs-sprint vellum-card reveal">
+            <span class="vs-sprint-number" aria-hidden="true">03</span>
+            <h3 class="vs-sprint-title"><em>Technical Direction</em></h3>
+            <p class="vs-sprint-desc">Framework and infrastructure decisions made by people who understand both the engineering constraints and the creative ambition.</p>
+            <a href="mailto:hello@merakiroad.com" class="vs-sprint-link">View Sprint &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VS The Vault — Repository metrics -->
+    <section ref="vsVaultSection" class="vs-vault section">
+      <div class="section-default vs-vault-inner">
+        <div class="vs-vault-hero-metric">
+          <p class="vs-vault-number reveal">12,842</p>
+          <p class="vs-vault-label reveal">Assets</p>
+        </div>
+        <div class="vs-vault-breakdown">
+          <div class="vs-vault-col reveal">
+            <span class="vs-vault-col-number">4,216</span>
+            <span class="vs-vault-col-label">Structural Meshes</span>
+          </div>
+          <div class="vs-vault-col reveal">
+            <span class="vs-vault-col-number">5,891</span>
+            <span class="vs-vault-col-label">Material Library</span>
+          </div>
+          <div class="vs-vault-col reveal">
+            <span class="vs-vault-col-number">2,735</span>
+            <span class="vs-vault-col-label">Logic Snippets</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- VS Studio Philosophy — Asymmetric 7/5 grid -->
     <section ref="vsPhilosophySection" class="vs-philosophy section">
       <div class="section-default vs-philosophy-grid">
         <div class="vs-philosophy-quote">
           <blockquote>
-            <p class="vs-philosophy-pullquote word-reveal">&ldquo;Design is the silent negotiation between what a thing needs to be and what it deserves to become.&rdquo;</p>
+            <p class="vs-philosophy-pullquote word-reveal">&ldquo;The machine does not replace the artisan; it amplifies the memory of the work itself.&rdquo;</p>
           </blockquote>
+          <p class="vs-philosophy-attribution reveal">&mdash; Voight Studio Principle</p>
         </div>
         <div class="vs-philosophy-body">
           <div class="vs-philosophy-rule" aria-hidden="true" />
@@ -63,71 +126,10 @@
       </div>
     </section>
 
-    <!-- VS Capabilities — 2x3 numbered cards -->
-    <section ref="vsCapabilitiesSection" class="vs-capabilities section-dark">
-      <div class="section-default">
-        <p class="overline reveal">Capabilities</p>
-        <div class="vs-capabilities-grid">
-          <div class="vs-capability vellum-card reveal">
-            <span class="vs-capability-number" aria-hidden="true">01</span>
-            <h3 class="vs-capability-title"><em>Brand Identity</em></h3>
-            <p class="vs-capability-desc">Visual systems that carry weight beyond a logo.</p>
-          </div>
-          <div class="vs-capability vellum-card reveal">
-            <span class="vs-capability-number" aria-hidden="true">02</span>
-            <h3 class="vs-capability-title"><em>Digital Products</em></h3>
-            <p class="vs-capability-desc">Interfaces built for practitioners, not users.</p>
-          </div>
-          <div class="vs-capability vellum-card reveal">
-            <span class="vs-capability-number" aria-hidden="true">03</span>
-            <h3 class="vs-capability-title"><em>Creative Direction</em></h3>
-            <p class="vs-capability-desc">The invisible architecture behind every exhibition.</p>
-          </div>
-          <div class="vs-capability vellum-card reveal">
-            <span class="vs-capability-number" aria-hidden="true">04</span>
-            <h3 class="vs-capability-title"><em>Spatial Design</em></h3>
-            <p class="vs-capability-desc">Physical spaces that command presence.</p>
-          </div>
-          <div class="vs-capability vellum-card reveal">
-            <span class="vs-capability-number" aria-hidden="true">05</span>
-            <h3 class="vs-capability-title"><em>Publication Design</em></h3>
-            <p class="vs-capability-desc">The monograph as medium.</p>
-          </div>
-          <div class="vs-capability vellum-card reveal">
-            <span class="vs-capability-number" aria-hidden="true">06</span>
-            <h3 class="vs-capability-title"><em>Motion &amp; Film</em></h3>
-            <p class="vs-capability-desc">Moving images with the gravity of still ones.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- VS From the Studio — Essay cards -->
-    <section ref="vsFromSection" class="vs-from section">
-      <div class="section-default">
-        <p class="overline reveal">From Voight Studio</p>
-        <div class="vs-from-grid">
-          <NuxtLink to="/the-road" class="vs-from-card reveal">
-            <span class="vs-from-tag">Essay</span>
-            <h3>On the relationship between restraint and ambition in creative practice</h3>
-            <span class="vs-from-read">Read on The Road &rarr;</span>
-          </NuxtLink>
-          <NuxtLink to="/the-road" class="vs-from-card reveal">
-            <span class="vs-from-tag">Dispatch</span>
-            <h3>Why the best briefs are the ones that leave room for the answer to change</h3>
-            <span class="vs-from-read">Read on The Road &rarr;</span>
-          </NuxtLink>
-        </div>
-      </div>
-    </section>
-
     <!-- VS CTA — Quiet invitation -->
     <section ref="vsCtaSection" class="vs-cta section-dark">
       <div class="section-default vs-cta-inner">
         <h2 class="vs-cta-heading reveal">Start a conversation.</h2>
-        <p class="vs-cta-body reveal">
-          Voight Studio is currently accepting select engagements.
-        </p>
         <a href="mailto:hello@merakiroad.com" class="vs-cta-email reveal">hello@merakiroad.com</a>
       </div>
     </section>
@@ -557,9 +559,9 @@ const navSection = ref<HTMLElement | null>(null)
 const fromSection = ref<HTMLElement | null>(null)
 
 // Voight Studio section refs
+const vsSprintsSection = ref<HTMLElement | null>(null)
+const vsVaultSection = ref<HTMLElement | null>(null)
 const vsPhilosophySection = ref<HTMLElement | null>(null)
-const vsCapabilitiesSection = ref<HTMLElement | null>(null)
-const vsFromSection = ref<HTMLElement | null>(null)
 const vsCtaSection = ref<HTMLElement | null>(null)
 
 // The Provenance section refs
@@ -579,11 +581,11 @@ useParallax(heroSection, '.q-hero-image', { speed: 0.08 })
 useTilt(navSection, '.q-explore-card', { maxRotation: 2 })
 
 // Voight Studio composable animations
+useGsapScrollReveal(vsSprintsSection, '.reveal', { stagger: 0.1 })
+useGsapScrollReveal(vsVaultSection, '.reveal', { stagger: 0.12 })
 useGsapScrollReveal(vsPhilosophySection, '.reveal', { stagger: 0.12 })
-useGsapScrollReveal(vsCapabilitiesSection, '.reveal', { stagger: 0.1 })
-useGsapScrollReveal(vsFromSection, '.reveal', { stagger: 0.12 })
 useGsapScrollReveal(vsCtaSection, '.reveal', { stagger: 0.1 })
-useTilt(vsCapabilitiesSection, '.vs-capability', { maxRotation: 2 })
+useTilt(vsSprintsSection, '.vs-sprint', { maxRotation: 2 })
 
 // The Provenance composable animations
 useGsapScrollReveal(provPhilosophySection, '.reveal', { stagger: 0.12 })
@@ -657,7 +659,7 @@ function initAnimations() {
 
   ctx = gsap.context(() => {
     if (isVoightStudio.value) {
-      // ── Voight Studio animations ──
+      // ── Voight Studio — Deep-Work Portal animations ──
       // Hero image entrance
       gsap.from('.vs-hero-image', {
         scale: 1.15,
@@ -674,10 +676,61 @@ function initAnimations() {
         delay: 0.4,
       })
 
+      // Hero metrics fade in
+      gsap.from('.vs-metric', {
+        opacity: 0,
+        x: 20,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: 'power3.out',
+        delay: 0.8,
+      })
+
       // Hero title word-reveal
       if (heroTitle.value) {
         wordReveal(heroTitle.value, { stagger: 0.08, duration: 1.2, y: 100 })
       }
+
+      // Sprint cards stagger
+      gsap.from('.vs-sprint', {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.vs-sprints-grid',
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+      // Vault hero metric counter
+      gsap.from('.vs-vault-number', {
+        opacity: 0,
+        y: 30,
+        duration: 1.0,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.vs-vault',
+          start: 'top 75%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+      // Vault breakdown columns
+      gsap.from('.vs-vault-col', {
+        y: 20,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.vs-vault-breakdown',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      })
 
       // Philosophy pull quote word-reveal on scroll
       const philosophyQuote = root.value?.querySelector('.vs-philosophy-pullquote')
@@ -693,20 +746,6 @@ function initAnimations() {
         scrollTrigger: {
           trigger: '.vs-philosophy-rule',
           start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      })
-
-      // Capability cards stagger
-      gsap.from('.vs-capability', {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.vs-capabilities-grid',
-          start: 'top 80%',
           toggleActions: 'play none none none',
         },
       })
@@ -856,10 +895,10 @@ onUnmounted(() => {
 
 <style scoped>
 /* ═══════════════════════════════════════════════════════════ */
-/* VOIGHT STUDIO — Bespoke Styles                            */
+/* VOIGHT STUDIO — Deep-Work Portal Styles                    */
 /* ═══════════════════════════════════════════════════════════ */
 
-/* VS Hero — Full viewport, image as hero */
+/* VS Hero — Full viewport, archival image background */
 .vs-hero {
   position: relative;
   height: 100vh;
@@ -886,11 +925,54 @@ onUnmounted(() => {
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(10, 10, 10, 0.85) 0%,
-    rgba(10, 10, 10, 0.4) 35%,
-    rgba(10, 10, 10, 0.05) 70%,
+    rgba(10, 10, 10, 0.88) 0%,
+    rgba(10, 10, 10, 0.45) 35%,
+    rgba(10, 10, 10, 0.08) 70%,
     transparent 100%
   );
+}
+
+.vs-hero-metrics {
+  position: absolute;
+  top: var(--space-8);
+  right: var(--content-padding);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+.vs-metric {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.vs-metric-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-success);
+  box-shadow: 0 0 6px rgba(22, 163, 74, 0.5);
+  flex-shrink: 0;
+}
+
+.vs-metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: rgba(250, 250, 249, 0.5);
+}
+
+.vs-metric-value {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  color: rgba(250, 250, 249, 0.8);
 }
 
 .vs-hero-content {
@@ -922,6 +1004,154 @@ onUnmounted(() => {
   font-variation-settings: 'WONK' 1, 'SOFT' 0, 'opsz' 72;
 }
 
+/* VS Active Sprints — 3-column card grid */
+.vs-sprints {
+  padding: var(--space-32) 0;
+}
+
+.vs-sprints .overline {
+  margin-bottom: var(--space-12);
+}
+
+.vs-sprints-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.vs-sprint {
+  padding: var(--space-8);
+  position: relative;
+  border-color: rgba(184, 150, 78, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--duration-normal) ease,
+              transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.vs-sprint:hover {
+  border-color: rgba(184, 150, 78, 0.35);
+}
+
+.vs-sprint-number {
+  font-family: var(--font-mono);
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 200;
+  color: rgba(250, 250, 249, 0.06);
+  line-height: 1;
+  display: block;
+  margin-bottom: var(--space-6);
+  letter-spacing: var(--tracking-wide);
+}
+
+.vs-sprint-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 400;
+  color: var(--color-dark-text);
+  margin-bottom: var(--space-3);
+  line-height: var(--leading-snug);
+}
+
+.vs-sprint-title em {
+  font-style: italic;
+  font-variation-settings: 'WONK' 1, 'SOFT' 40;
+}
+
+.vs-sprint-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--color-dark-muted);
+  line-height: var(--leading-normal);
+  max-width: none;
+  margin-bottom: auto;
+  padding-bottom: var(--space-6);
+}
+
+.vs-sprint-link {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  background-image: none;
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity var(--duration-fast) ease;
+}
+
+.vs-sprint:hover .vs-sprint-link {
+  opacity: 1;
+}
+
+/* VS The Vault — Repository metrics */
+.vs-vault {
+  padding: var(--space-32) 0;
+  background: var(--color-dark-bg);
+}
+
+.vs-vault-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.vs-vault-hero-metric {
+  text-align: center;
+}
+
+.vs-vault-number {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 12vw, 10rem);
+  font-weight: 200;
+  line-height: 1;
+  color: var(--color-gold);
+  letter-spacing: var(--tracking-hero);
+  font-variation-settings: 'WONK' 1, 'opsz' 72;
+}
+
+.vs-vault-label {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-ultra-wide);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+  margin-top: var(--space-3);
+}
+
+.vs-vault-breakdown {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  border-top: 1px solid rgba(184, 150, 78, 0.15);
+  padding-top: var(--space-8);
+}
+
+.vs-vault-col {
+  text-align: center;
+}
+
+.vs-vault-col-number {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 300;
+  color: var(--color-gold);
+  display: block;
+  margin-bottom: var(--space-2);
+  font-variation-settings: 'WONK' 1, 'opsz' 72;
+}
+
+.vs-vault-col-label {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+}
+
 /* VS Philosophy — Asymmetric 7/5 grid */
 .vs-philosophy {
   padding-top: var(--space-32);
@@ -945,6 +1175,14 @@ onUnmounted(() => {
   font-variation-settings: 'WONK' 1, 'SOFT' 80;
 }
 
+.vs-philosophy-attribution {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  margin-top: var(--space-4);
+  letter-spacing: var(--tracking-wide);
+}
+
 .vs-philosophy-rule {
   width: 48px;
   height: 1px;
@@ -966,135 +1204,6 @@ onUnmounted(() => {
   margin-bottom: 0;
 }
 
-/* VS Capabilities — 2x3 numbered cards */
-.vs-capabilities {
-  padding: var(--space-32) 0;
-}
-
-.vs-capabilities .overline {
-  margin-bottom: var(--space-12);
-}
-
-.vs-capabilities-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
-}
-
-.vs-capability {
-  padding: var(--space-8);
-  position: relative;
-  border-color: rgba(184, 150, 78, 0.08);
-  transition: border-color var(--duration-normal) ease,
-              transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-.vs-capability:hover {
-  border-color: rgba(184, 150, 78, 0.35);
-}
-
-.vs-capability-number {
-  font-family: var(--font-mono);
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
-  font-weight: 200;
-  color: rgba(250, 250, 249, 0.06);
-  line-height: 1;
-  display: block;
-  margin-bottom: var(--space-6);
-  letter-spacing: var(--tracking-wide);
-}
-
-.vs-capability-title {
-  font-family: var(--font-display);
-  font-size: var(--text-h3);
-  font-weight: 400;
-  color: var(--color-dark-text);
-  margin-bottom: var(--space-3);
-  line-height: var(--leading-snug);
-}
-
-.vs-capability-title em {
-  font-style: italic;
-  font-variation-settings: 'WONK' 1, 'SOFT' 40;
-}
-
-.vs-capability-desc {
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  color: var(--color-dark-muted);
-  line-height: var(--leading-normal);
-  max-width: none;
-}
-
-/* VS From the Studio — Essay cards */
-.vs-from {
-  padding-bottom: var(--space-16);
-}
-
-.vs-from .overline {
-  margin-bottom: var(--space-8);
-}
-
-.vs-from-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-6);
-}
-
-.vs-from-card {
-  display: flex;
-  flex-direction: column;
-  padding: var(--space-8);
-  border: 1px solid var(--color-border);
-  background-image: none;
-  text-decoration: none;
-  color: inherit;
-  transition: border-color var(--duration-normal) ease,
-              background-color var(--duration-normal) ease;
-}
-
-.vs-from-card:hover {
-  border-color: var(--color-gold);
-  background-color: var(--color-surface);
-}
-
-.vs-from-tag {
-  font-family: var(--font-body);
-  font-size: var(--text-overline);
-  font-weight: 500;
-  letter-spacing: var(--tracking-widest);
-  text-transform: uppercase;
-  color: var(--color-gold-accessible);
-  margin-bottom: var(--space-4);
-  display: block;
-}
-
-.vs-from-card h3 {
-  font-family: var(--font-display);
-  font-size: var(--text-h3);
-  font-weight: 400;
-  font-style: italic;
-  line-height: var(--leading-snug);
-  color: var(--color-ink);
-  margin-bottom: auto;
-  padding-bottom: var(--space-8);
-  font-variation-settings: 'WONK' 1, 'SOFT' 60;
-}
-
-.vs-from-read {
-  font-family: var(--font-body);
-  font-size: var(--text-overline);
-  letter-spacing: var(--tracking-widest);
-  text-transform: uppercase;
-  color: var(--color-gold);
-  opacity: 0.6;
-  transition: opacity var(--duration-fast) ease;
-}
-
-.vs-from-card:hover .vs-from-read {
-  opacity: 1;
-}
-
 /* VS CTA — Quiet invitation */
 .vs-cta {
   padding: var(--space-32) 0;
@@ -1113,17 +1222,8 @@ onUnmounted(() => {
   font-weight: 300;
   font-style: italic;
   color: var(--color-dark-text);
-  margin-bottom: var(--space-6);
-  font-variation-settings: 'WONK' 1, 'SOFT' 80;
-}
-
-.vs-cta-body {
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  color: var(--color-dark-muted);
-  line-height: var(--leading-relaxed);
-  max-width: 40ch;
   margin-bottom: var(--space-8);
+  font-variation-settings: 'WONK' 1, 'SOFT' 80;
 }
 
 .vs-cta-email {
@@ -2023,6 +2123,32 @@ onUnmounted(() => {
     font-size: clamp(2.5rem, 10vw, 4rem);
   }
 
+  .vs-hero-metrics {
+    top: var(--space-16);
+  }
+
+  /* VS Sprints */
+  .vs-sprints-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* VS Vault */
+  .vs-vault-number {
+    font-size: clamp(3.5rem, 14vw, 6rem);
+  }
+
+  .vs-vault-breakdown {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .vs-vault-col {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+
   /* VS Philosophy */
   .vs-philosophy-grid {
     grid-template-columns: 1fr;
@@ -2031,16 +2157,6 @@ onUnmounted(() => {
 
   .vs-philosophy-pullquote {
     font-size: var(--text-h2);
-  }
-
-  /* VS Capabilities */
-  .vs-capabilities-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* VS From */
-  .vs-from-grid {
-    grid-template-columns: 1fr;
   }
 
   /* VS CTA */
@@ -2140,7 +2256,7 @@ onUnmounted(() => {
     grid-template-columns: 1fr;
   }
 
-  .vs-capabilities-grid {
+  .vs-sprints-grid {
     grid-template-columns: 1fr;
   }
 
