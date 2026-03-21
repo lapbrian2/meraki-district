@@ -42,6 +42,7 @@
           </span>
           <span class="dp-hero-type">{{ d.type }}</span>
           <h2 class="dp-hero-name">{{ d.name }}</h2>
+          <p class="dp-hero-subtitle">{{ d.subtitle }}</p>
           <p class="dp-hero-desc">{{ d.longDescription || d.description }}</p>
           <NuxtLink :to="`/districts/${d.slug}`" class="dp-enter-btn">
             Enter District →
@@ -72,6 +73,7 @@
           </span>
           <span class="dp-coming-type">{{ d.type }}</span>
           <h3 class="dp-coming-name">{{ d.name }}</h3>
+          <p class="dp-coming-subtitle">{{ d.subtitle }}</p>
           <p class="dp-coming-desc">{{ d.description }}</p>
           <span v-if="d.statusNote" class="dp-status-note">{{ d.statusNote }}</span>
         </NuxtLink>
@@ -98,6 +100,7 @@
             In Development
           </span>
           <h3 class="dp-dev-name">{{ d.name }}</h3>
+          <p class="dp-dev-subtitle">{{ d.subtitle }}</p>
           <span class="dp-dev-type">{{ d.type }}</span>
         </div>
       </div>
@@ -270,6 +273,7 @@ useHead({
   overflow: hidden;
   margin-bottom: var(--space-6);
   transition: border-color 0.4s ease;
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.4);
 }
 
 .dp-hero-card:last-child {
@@ -293,6 +297,15 @@ useHead({
   aspect-ratio: 3/2;
   overflow: hidden;
   position: relative;
+}
+
+.dp-hero-card-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.3) 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .dp-hero-card-image a {
@@ -346,8 +359,19 @@ useHead({
   font-weight: 300;
   font-size: clamp(1.75rem, 3vw, 2.75rem);
   color: var(--color-ink, #FAFAF9);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-1);
   transition: color 0.3s ease;
+}
+
+.dp-hero-subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: var(--text-small);
+  color: var(--color-gold);
+  opacity: 0.6;
+  margin-bottom: var(--space-4);
+  letter-spacing: var(--tracking-wide);
 }
 
 .dp-hero-card:hover .dp-hero-name {
@@ -440,8 +464,19 @@ useHead({
   font-weight: 300;
   font-size: var(--text-h3);
   color: var(--color-ink, #FAFAF9);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-1);
   transition: color 0.3s ease;
+}
+
+.dp-coming-subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.75rem;
+  color: var(--color-gold);
+  opacity: 0.5;
+  margin-bottom: var(--space-3);
+  letter-spacing: var(--tracking-wide);
 }
 
 .dp-coming-card:hover .dp-coming-name {
@@ -508,8 +543,19 @@ useHead({
   font-weight: 300;
   font-size: 1.0625rem;
   color: var(--color-ink, #FAFAF9);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.125rem;
   transition: color 0.3s ease;
+}
+
+.dp-dev-subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.625rem;
+  color: var(--color-gold);
+  opacity: 0.4;
+  margin-bottom: 0.25rem;
+  letter-spacing: var(--tracking-wide);
 }
 
 .dp-dev-card:hover .dp-dev-name {

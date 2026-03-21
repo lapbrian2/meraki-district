@@ -263,7 +263,7 @@ const featuredArtists: Artist[] = [
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(100%) sepia(20%) brightness(0.8) contrast(1.1);
+  filter: grayscale(100%) sepia(20%) brightness(0.6) contrast(1.1);
   transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -345,7 +345,7 @@ const featuredArtists: Artist[] = [
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(100%) sepia(20%) brightness(0.8) contrast(1.1);
+  filter: grayscale(100%) sepia(20%) brightness(0.6) contrast(1.1);
   transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

@@ -1307,4 +1307,32 @@ const opportunities: Opportunity[] = [
     text-align: center;
   }
 }
+
+/* ─── Seal Badge Pulse Ring ─── */
+.seal-base {
+  position: relative;
+}
+
+.seal-verified::after,
+.seal-fellow::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  border: 1px solid rgba(184, 150, 78, 0.2);
+  animation: sealPulse 3s ease-in-out infinite;
+}
+
+@keyframes sealPulse {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.15); opacity: 0.6; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seal-verified::after,
+  .seal-fellow::after {
+    animation: none;
+    opacity: 0.3;
+  }
+}
 </style>

@@ -86,7 +86,7 @@
 
   /* Surface */
   --surface-radius: 0px;
-  --section-gap: clamp(5rem, 10vw, 12.5rem);
+  --section-gap: clamp(6rem, 12vw, 12.5rem);
   --content-max-width: 1200px;
   --content-padding: clamp(1.5rem, 4vw, 4rem);
   --rule-color: rgba(9, 9, 11, 0.12);
@@ -143,7 +143,7 @@
 
 /* Grayscale to color on hover */
 .grayscale-hover img {
-  filter: grayscale(100%) sepia(20%) brightness(0.8) contrast(1.1);
+  filter: grayscale(100%) sepia(20%) brightness(0.6) contrast(1.1);
   transition: filter 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .grayscale-hover:hover img {
@@ -152,7 +152,7 @@
 
 /* Archival image treatment */
 .archival-image {
-  filter: grayscale(100%) sepia(20%) brightness(0.8) contrast(1.1);
+  filter: grayscale(100%) sepia(20%) brightness(0.6) contrast(1.1);
   transition: filter 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .archival-image:hover {
