@@ -67,7 +67,7 @@
         <NuxtLink to="/apply" class="link-card link-card--accent">
           <h3>Apply</h3>
           <p>Join Meraki Road. For creators ready to go further.</p>
-          <span class="card-link">Apply now &rarr;</span>
+          <span class="card-link">Express interest &rarr;</span>
         </NuxtLink>
       </div>
     </section>

@@ -17,10 +17,28 @@
       </div>
       <div class="q-hero-content section-default">
         <p class="overline">{{ district.type }}</p>
-        <h1 ref="heroTitle" class="q-hero-title" :style="{ fontFamily: district.displayFont + ', serif' }">{{ district.name }}</h1>
+        <h1 ref="heroTitle" class="q-hero-title" :style="{ fontVariationSettings: district.fontVariation }">{{ district.name }}</h1>
         <span class="q-hero-number">{{ district.number }}</span>
       </div>
     </section>
+
+    <!-- District Navigator -->
+    <nav class="q-nav" aria-label="District navigation">
+      <div class="section-default q-nav-inner">
+        <NuxtLink
+          v-for="d in districts"
+          :key="d.slug"
+          :to="'/districts/' + d.slug"
+          class="q-nav-dot"
+          :class="{ 'q-nav-active': d.slug === slug }"
+          :style="{ '--dot-color': d.accentColor }"
+          :aria-label="d.name"
+          :aria-current="d.slug === slug ? 'page' : undefined"
+        >
+          <span class="q-nav-num">{{ d.number }}</span>
+        </NuxtLink>
+      </div>
+    </nav>
 
     <!-- Body -->
     <section ref="bodySection" class="q-body section">
@@ -154,9 +172,6 @@ useHead(computed(() => ({
     { name: 'description', content: district.value.description },
     { property: 'og:title', content: district.value.name + ' \u2014 Meraki Road' },
     { property: 'og:description', content: district.value.description },
-  ] : [],
-  link: district.value?.displayFont ? [
-    { rel: 'stylesheet', href: `https://fonts.googleapis.com/css2?family=${encodeURIComponent(district.value.displayFont)}:wght@300;400;700&display=swap` },
   ] : [],
 })))
 
@@ -377,6 +392,74 @@ onUnmounted(() => {
   opacity: 0.12;
   line-height: 1;
   pointer-events: none;
+}
+
+/* District Navigator */
+.q-nav {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.q-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-3) 0;
+}
+
+.q-nav-dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 32px;
+  background-image: none;
+  text-decoration: none;
+  position: relative;
+  transition: background var(--duration-fast) ease;
+}
+
+.q-nav-dot:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.q-nav-dot::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--dot-color);
+  transition: width var(--duration-normal) var(--ease-out);
+}
+
+.q-nav-dot:hover::after,
+.q-nav-active::after {
+  width: 100%;
+}
+
+.q-nav-num {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) ease;
+}
+
+.q-nav-active .q-nav-num {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.q-nav-dot:hover .q-nav-num {
+  color: var(--color-ink);
 }
 
 /* Body */

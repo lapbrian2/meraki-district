@@ -11,7 +11,7 @@
         with a demonstrated body of work. No follower counts. No application fees.
         Just evidence of practice.
       </p>
-      <NuxtLink to="/apply" class="cta-button reveal">Apply Now &rarr;</NuxtLink>
+      <NuxtLink to="/apply" class="cta-button reveal">Express Interest &rarr;</NuxtLink>
     </div>
   </section>
 </template>

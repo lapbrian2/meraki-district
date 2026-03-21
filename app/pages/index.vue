@@ -2,7 +2,9 @@
   <div>
     <HeroSection />
     <ManifestoSection />
-    <StatsSection />
+    <SectionDivider />
+    <DistrictsPreview />
+    <PhilosophySection />
     <SectionDivider />
 
     <!-- Featured Artists -->
@@ -36,9 +38,8 @@
     </section>
 
     <MarqueeStrip />
-    <PhilosophySection />
     <FeaturedSection />
-    <DistrictsPreview />
+    <StatsSection />
     <SealSection />
     <CtaSection />
 
@@ -143,7 +144,7 @@ const featuredArtists: Artist[] = [
   {
     name: 'Sable Chen',
     discipline: 'Visual Art & AI',
-    bio: 'Working at the intersection of machine vision and traditional painting. Her neural portraits have been exhibited at MoMA PS1 and the Serpentine\u2014each piece a negotiation between what the model sees and what the hand knows.',
+    bio: 'Working at the intersection of machine vision and traditional painting. Her neural portraits explore the negotiation between what the model sees and what the hand knows\u2014each piece a conversation between two forms of intelligence.',
     image: '/images/districts/voight-studio.webp',
   },
   {
@@ -167,7 +168,7 @@ const featuredArtists: Artist[] = [
   {
     name: 'In\u00e9s Moreau',
     discipline: 'Motion & Film',
-    bio: 'Director and motion designer whose work lives in the space between documentary and generative cinema. Her AI-assisted films have screened at Tribeca and Rotterdam.',
+    bio: 'Director and motion designer whose work lives in the space between documentary and generative cinema. Her AI-assisted short films have been selected for international exhibition and festival programmes.',
     image: '/images/districts/basecamp.webp',
   },
   {

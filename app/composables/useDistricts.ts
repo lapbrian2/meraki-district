@@ -13,7 +13,7 @@ export interface District {
   statusNote?: string
   accentColor: string
   accentColorAccessible: string
-  displayFont: string
+  fontVariation: string
 }
 
 export const districts: District[] = [
@@ -25,7 +25,7 @@ export const districts: District[] = [
     pullQuote: 'The best work happens when ambition meets restraint.',
     offerings: ['Design strategy', 'Brand identity', 'Creative direction', 'Visual systems'],
     status: 'active', statusNote: 'Now accepting select engagements.',
-    accentColor: '#B8964E', accentColorAccessible: '#856A32', displayFont: 'Playfair Display',
+    accentColor: '#B8964E', accentColorAccessible: '#856A32', fontVariation: "'WONK' 1, 'SOFT' 0, 'opsz' 72",
   },
   {
     number: '02', name: 'The Road', slug: 'the-road',
@@ -35,7 +35,7 @@ export const districts: District[] = [
     pullQuote: 'Substantive writing for creators who think deeply about their practice.',
     offerings: ['Long-form essays', 'Cultural criticism', 'Creator interviews', 'Field dispatches'],
     status: 'active', statusNote: 'Publishing weekly.',
-    accentColor: '#C2785C', accentColorAccessible: '#9E5E44', displayFont: 'Lora',
+    accentColor: '#C2785C', accentColorAccessible: '#9E5E44', fontVariation: "'WONK' 1, 'SOFT' 50, 'opsz' 48",
   },
   {
     number: '03', name: 'Meridian', slug: 'meridian',
@@ -45,7 +45,7 @@ export const districts: District[] = [
     pullQuote: 'Research that moves at the speed of practice.',
     offerings: ['Trend intelligence', 'Tool evaluations', 'Framework development', 'Strategic foresight'],
     status: 'coming-soon', statusNote: 'Launching Q3 2026.',
-    accentColor: '#5B8A72', accentColorAccessible: '#477058', displayFont: 'DM Serif Display',
+    accentColor: '#5B8A72', accentColorAccessible: '#477058', fontVariation: "'WONK' 0, 'SOFT' 0, 'opsz' 72",
   },
   {
     number: '04', name: 'Fieldwork', slug: 'fieldwork',
@@ -55,7 +55,7 @@ export const districts: District[] = [
     pullQuote: 'Mastery requires deliberate practice, honest feedback, and sustained commitment.',
     offerings: ['Cohort intensives', 'Mentorship programs', 'Structured learning paths', 'Peer critique'],
     status: 'coming-soon', statusNote: 'First cohort forming now.',
-    accentColor: '#D4915E', accentColorAccessible: '#B07442', displayFont: 'Bitter',
+    accentColor: '#D4915E', accentColorAccessible: '#B07442', fontVariation: "'WONK' 1, 'SOFT' 100, 'opsz' 48",
   },
   {
     number: '05', name: 'The Provenance', slug: 'the-provenance',
@@ -65,7 +65,7 @@ export const districts: District[] = [
     pullQuote: 'In an era of ephemeral content, we build a permanent record.',
     offerings: ['Process documentation', 'Creative archives', 'Precedent catalogues', 'Practice histories'],
     status: 'development',
-    accentColor: '#8B7355', accentColorAccessible: '#6E5A42', displayFont: 'Cormorant Garamond',
+    accentColor: '#8B7355', accentColorAccessible: '#6E5A42', fontVariation: "'WONK' 1, 'SOFT' 30, 'opsz' 72",
   },
   {
     number: '06', name: 'Basecamp', slug: 'basecamp',
@@ -75,7 +75,7 @@ export const districts: District[] = [
     pullQuote: 'Find peers who match your commitment and challenge your assumptions.',
     offerings: ['Curated community', 'Peer matching', 'Working groups', 'Accountability circles'],
     status: 'coming-soon', statusNote: 'Applications opening soon.',
-    accentColor: '#6B8FA3', accentColorAccessible: '#537184', displayFont: 'Source Serif 4',
+    accentColor: '#6B8FA3', accentColorAccessible: '#537184', fontVariation: "'WONK' 0, 'SOFT' 80, 'opsz' 48",
   },
   {
     number: '07', name: 'Common Ground', slug: 'common-ground',
@@ -85,7 +85,7 @@ export const districts: District[] = [
     pullQuote: 'The gatherings that lead to genuine creative exchange.',
     offerings: ['Intimate salons', 'Studio visits', 'Working sessions', 'Collaborative sprints'],
     status: 'development',
-    accentColor: '#9B7E6B', accentColorAccessible: '#7D6454', displayFont: 'Libre Baskerville',
+    accentColor: '#9B7E6B', accentColorAccessible: '#7D6454', fontVariation: "'WONK' 1, 'SOFT' 60, 'opsz' 36",
   },
   {
     number: '08', name: 'The Mint', slug: 'the-mint',
@@ -95,7 +95,7 @@ export const districts: District[] = [
     pullQuote: 'Build a sustainable practice without compromising your values.',
     offerings: ['Revenue infrastructure', 'Fair splits', 'Creator storefronts', 'Ethical monetization'],
     status: 'development',
-    accentColor: '#7A9A6D', accentColorAccessible: '#5F7B54', displayFont: 'Crimson Pro',
+    accentColor: '#7A9A6D', accentColorAccessible: '#5F7B54', fontVariation: "'WONK' 0, 'SOFT' 40, 'opsz' 72",
   },
   {
     number: '09', name: 'The Seal', slug: 'the-seal',
@@ -105,7 +105,7 @@ export const districts: District[] = [
     pullQuote: 'Every credential is earned through the work itself.',
     offerings: ['Four-tier credentials', 'Peer review', 'Portfolio assessment', 'Community recognition'],
     status: 'development',
-    accentColor: '#8B7D9B', accentColorAccessible: '#6E6280', displayFont: 'Spectral',
+    accentColor: '#8B7D9B', accentColorAccessible: '#6E6280', fontVariation: "'WONK' 1, 'SOFT' 20, 'opsz' 48",
   },
   {
     number: '10', name: 'The Collective', slug: 'the-collective',
@@ -115,7 +115,7 @@ export const districts: District[] = [
     pullQuote: 'Does it make the work better?',
     offerings: ['Strategic partnerships', 'Joint ventures', 'Cross-ecosystem projects', 'Creator opportunities'],
     status: 'development',
-    accentColor: '#A0784C', accentColorAccessible: '#805F3A', displayFont: 'Merriweather',
+    accentColor: '#A0784C', accentColorAccessible: '#805F3A', fontVariation: "'WONK' 0, 'SOFT' 70, 'opsz' 36",
   },
   {
     number: '11', name: 'The Frame', slug: 'the-frame',
@@ -125,7 +125,7 @@ export const districts: District[] = [
     pullQuote: 'The best moving image work deserves better than algorithmic feeds and autoplay.',
     offerings: ['Curated screenings', 'Director profiles', 'Motion showcases', 'Film criticism'],
     status: 'coming-soon', statusNote: 'Accepting submissions Q3 2026.',
-    accentColor: '#6B7B8D', accentColorAccessible: '#546273', displayFont: 'Instrument Serif',
+    accentColor: '#6B7B8D', accentColorAccessible: '#546273', fontVariation: "'WONK' 1, 'SOFT' 10, 'opsz' 72",
   },
 ]
 
