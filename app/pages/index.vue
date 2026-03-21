@@ -11,10 +11,25 @@
         <h2 class="word-reveal">The Creators</h2>
         <p class="fa-subtitle">Six practitioners building at the intersection of craft and computation.</p>
       </div>
+      <!-- Hero artist: first creator, horizontal layout -->
+      <div class="fa-hero" @click="activeArtist = featuredArtists[0]">
+        <div class="fa-hero-image reveal-image">
+          <NuxtImg :src="featuredArtists[0].image" :alt="featuredArtists[0].name" loading="lazy" decoding="async" width="600" height="800" />
+          <div class="fa-overlay"><span class="fa-peek">View artist</span></div>
+        </div>
+        <div class="fa-hero-info reveal">
+          <span class="fa-index">01</span>
+          <span class="fa-discipline">{{ featuredArtists[0].discipline }}</span>
+          <h3>{{ featuredArtists[0].name }}</h3>
+          <p class="fa-hero-bio">{{ featuredArtists[0].bio }}</p>
+        </div>
+      </div>
+
+      <!-- Remaining artists -->
       <div class="fa-grid">
         <div
-          v-for="(artist, i) in featuredArtists"
-          :key="i"
+          v-for="(artist, i) in featuredArtists.slice(1)"
+          :key="i + 1"
           class="fa-card"
           @click="activeArtist = artist"
         >
@@ -25,7 +40,7 @@
             </div>
           </div>
           <div class="fa-info reveal">
-            <span class="fa-index">{{ String(i + 1).padStart(2, '0') }}</span>
+            <span class="fa-index">{{ String(i + 2).padStart(2, '0') }}</span>
             <span class="fa-discipline">{{ artist.discipline }}</span>
             <h3>{{ artist.name }}</h3>
             <p>{{ artist.bio }}</p>
@@ -211,10 +226,84 @@ const featuredArtists: Artist[] = [
   line-height: 1.6;
 }
 
+/* Hero artist: full-width horizontal layout */
+.fa-hero {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  border: 1px solid var(--color-rule, rgba(184,150,78,0.15));
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fa-hero:hover {
+  border-color: var(--color-gold);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+.fa-hero:hover .fa-hero-image img { transform: scale(1.03); }
+.fa-hero:hover .fa-overlay { opacity: 1; }
+.fa-hero:hover .fa-hero-info h3 { background-size: 100% 1px; }
+
+.fa-hero-image {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  position: relative;
+}
+
+.fa-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fa-hero-info {
+  padding: var(--space-8) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.fa-hero-info h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-h2);
+  margin-bottom: var(--space-4);
+  line-height: var(--leading-snug);
+  display: inline;
+  background-image: linear-gradient(var(--color-gold), var(--color-gold));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s var(--ease-out);
+}
+
+.fa-hero-bio {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary, #71717A);
+  line-height: var(--leading-relaxed);
+  margin-top: var(--space-4);
+}
+
+.fa-hero-info .fa-index {
+  position: static;
+  margin-bottom: var(--space-4);
+  opacity: 0.3;
+}
+
+.fa-hero-info .fa-discipline {
+  margin-bottom: var(--space-2);
+}
+
+/* Remaining artists grid */
 .fa-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1rem, 2vw, 1.5rem);
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(0.75rem, 1.5vw, 1rem);
 }
 
 .fa-card {
@@ -322,11 +411,27 @@ const featuredArtists: Artist[] = [
   margin-top: 0.4rem;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+  .fa-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .fa-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .fa-hero-image {
+    aspect-ratio: 3 / 2;
+  }
+
+  .fa-hero-info h3 {
+    font-size: var(--text-h3);
+  }
+
   .fa-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   .fa-grid { grid-template-columns: 1fr; }
 }
 </style>

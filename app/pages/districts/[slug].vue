@@ -74,6 +74,29 @@
       </div>
     </section>
 
+    <!-- From This District (active only) -->
+    <section v-if="district.status === 'active'" ref="fromSection" class="q-from section-dark">
+      <div class="section-default">
+        <p class="overline reveal">From This District</p>
+        <div class="q-from-content reveal">
+          <template v-if="district.slug === 'the-road'">
+            <p class="q-from-body">
+              The Road publishes weekly. Long-form essays, cultural criticism, and field dispatches
+              from practitioners who treat writing as a creative discipline.
+            </p>
+            <NuxtLink to="/the-road" class="q-from-link">Read the latest &rarr;</NuxtLink>
+          </template>
+          <template v-else-if="district.slug === 'voight-studio'">
+            <p class="q-from-body">
+              Voight Studio is currently accepting select engagements. Design strategy, brand identity,
+              creative direction, and visual systems for ventures building at the edge.
+            </p>
+            <NuxtLink to="/apply" class="q-from-link">Start a conversation &rarr;</NuxtLink>
+          </template>
+        </div>
+      </div>
+    </section>
+
     <!-- Status -->
     <section ref="statusSection" class="q-status-section section">
       <div class="section-narrow">
@@ -187,6 +210,8 @@ const navSection = ref<HTMLElement | null>(null)
 // Composable-driven animations (run once on mount)
 useGsapScrollReveal(bodySection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(offeringsSection, '.reveal', { stagger: 0.08 })
+const fromSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(fromSection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(statusSection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(navSection, '.reveal', { stagger: 0.12 })
 useParallax(heroSection, '.q-hero-image', { speed: 0.08 })
@@ -504,6 +529,36 @@ onUnmounted(() => {
   color: var(--color-dark-text);
   max-width: none;
   font-variation-settings: 'WONK' 1, 'SOFT' 80;
+}
+
+/* Offerings */
+/* From This District */
+.q-from {
+  padding: var(--space-16) 0;
+}
+
+.q-from-body {
+  font-size: var(--text-body);
+  color: var(--color-dark-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 55ch;
+  margin-bottom: var(--space-6);
+}
+
+.q-from-link {
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background-image: none;
+  border-left: 2px solid var(--color-accent);
+  padding-left: var(--space-4);
+  transition: opacity var(--duration-fast) ease;
+}
+
+.q-from-link:hover {
+  opacity: 0.7;
 }
 
 /* Offerings */
