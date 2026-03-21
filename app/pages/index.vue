@@ -122,17 +122,17 @@ onUnmounted(() => {
 })
 
 useHead({
-  title: 'Meraki Road \u2014 Where craft meets culture',
+  title: 'Meraki District \u2014 Where Creativity Becomes Opportunity',
   meta: [
     { name: 'description', content: 'A cultural ecosystem for AI-native creators. Eleven districts, one road, a new standard for creative practice.' },
-    { property: 'og:title', content: 'Meraki Road \u2014 Where craft meets culture' },
+    { property: 'og:title', content: 'Meraki District \u2014 Where Creativity Becomes Opportunity' },
   ],
 })
 
 useSeoMeta({
-  ogTitle: 'Meraki Road \u2014 Where craft meets culture',
+  ogTitle: 'Meraki District \u2014 Where Creativity Becomes Opportunity',
   ogDescription: 'A cultural ecosystem for AI-native creators. Eleven districts, one road, a new standard for creative practice.',
-  twitterTitle: 'Meraki Road \u2014 Where craft meets culture',
+  twitterTitle: 'Meraki District \u2014 Where Creativity Becomes Opportunity',
   twitterDescription: 'A cultural ecosystem for AI-native creators. Eleven districts, one road, a new standard for creative practice.',
 })
 

@@ -3,15 +3,16 @@
     <!-- Expanded state: magazine masthead (desktop only, scrollY < 100) -->
     <div class="nav-expanded" :class="{ collapsed: isScrolled }">
       <div class="nav-expanded-inner">
-        <NuxtLink to="/" class="nav-logo">Meraki Road</NuxtLink>
+        <NuxtLink to="/" class="nav-logo"><em>Meraki District</em></NuxtLink>
         <div class="nav-expanded-row">
           <nav class="nav-links" aria-label="Main navigation">
+            <NuxtLink to="/the-road" class="nav-link">Meraki Road</NuxtLink>
             <NuxtLink to="/districts" class="nav-link">Districts</NuxtLink>
-            <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
             <NuxtLink to="/about" class="nav-link">About</NuxtLink>
-            <span class="nav-dot" aria-hidden="true">&middot;</span>
-            <NuxtLink to="/apply" class="nav-apply">Apply</NuxtLink>
           </nav>
+          <div class="nav-right">
+            <NuxtLink to="/apply" class="nav-apply">Apply</NuxtLink>
+          </div>
         </div>
       </div>
     </div>
@@ -19,10 +20,10 @@
     <!-- Compact state: single-row utility bar (scrollY >= 100) -->
     <div class="nav-compact" :class="{ active: isScrolled }">
       <div class="nav-compact-inner">
-        <NuxtLink to="/" class="nav-logo">Meraki Road</NuxtLink>
+        <NuxtLink to="/" class="nav-logo"><em>Meraki District</em></NuxtLink>
         <nav class="nav-links" aria-label="Main navigation">
+          <NuxtLink to="/the-road" class="nav-link">Meraki Road</NuxtLink>
           <NuxtLink to="/districts" class="nav-link">Districts</NuxtLink>
-          <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
           <NuxtLink to="/about" class="nav-link">About</NuxtLink>
         </nav>
         <NuxtLink to="/apply" class="nav-apply">Apply</NuxtLink>
@@ -40,7 +41,7 @@
     </button>
 
     <!-- Mobile logo (always visible on mobile) -->
-    <NuxtLink to="/" class="nav-mobile-logo" :class="{ inverted: mobileOpen }">Meraki Road</NuxtLink>
+    <NuxtLink to="/" class="nav-mobile-logo" :class="{ inverted: mobileOpen }">Meraki District</NuxtLink>
 
     <!-- Theme toggle (ClientOnly prevents SSR hydration mismatch on icon swap) -->
     <ClientOnly>
@@ -223,7 +224,14 @@ onUnmounted(() => {
 .nav-expanded-row {
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
 }
 
 /* COMPACT STATE (utility bar) */
@@ -274,10 +282,15 @@ onUnmounted(() => {
   font-family: var(--font-display);
   font-size: var(--text-h3);
   font-weight: 300;
+  font-style: italic;
   letter-spacing: var(--tracking-tight);
   color: var(--color-ink);
   background-image: none;
   white-space: nowrap;
+}
+
+.nav-logo em {
+  font-style: italic;
 }
 
 .nav-links {
