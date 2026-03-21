@@ -12,14 +12,13 @@
           </p>
         </div>
 
-        <!-- Col 2: Pillars -->
-        <nav class="fn-nav reveal" aria-label="Districts">
+        <!-- Col 2: Districts -->
+        <nav class="fn-nav fn-nav--districts reveal" aria-label="Districts">
           <h4 class="fn-nav-heading">Districts</h4>
           <ul>
-            <li><NuxtLink to="/districts/meraki-road">Meraki Road</NuxtLink></li>
-            <li><NuxtLink to="/districts/ikigai-lab">Ikigai Lab</NuxtLink></li>
-            <li><NuxtLink to="/districts/institute">Institute</NuxtLink></li>
-            <li><NuxtLink to="/districts/publishing">Publishing</NuxtLink></li>
+            <li v-for="d in districts" :key="d.slug">
+              <NuxtLink :to="`/districts/${d.slug}`">{{ d.name }}</NuxtLink>
+            </li>
           </ul>
         </nav>
 
@@ -94,6 +93,7 @@
 <script setup lang="ts">
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
 import { useEmailCollection } from '~/composables/useEmailCollection'
+import { districts } from '~/composables/useDistricts'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.1 })
@@ -111,7 +111,7 @@ const { email, status, errorMessage, submit, reset } = useEmailCollection('newsl
 /* ─── Grid ─── */
 .fn-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  grid-template-columns: 1.5fr 2fr 1fr 1.5fr;
   gap: var(--space-12);
   padding-bottom: var(--space-16);
   border-bottom: 1px solid var(--rule-color);
@@ -157,6 +157,12 @@ const { email, status, errorMessage, submit, reset } = useEmailCollection('newsl
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+}
+
+.fn-nav--districts ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2) var(--space-6);
 }
 
 .fn-nav a {
