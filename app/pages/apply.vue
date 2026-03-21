@@ -3,7 +3,7 @@
     <section ref="section" class="page-hero section section-dark">
       <div class="section-narrow">
         <p class="overline reveal">Join Meraki Road</p>
-        <h1 class="page-hero-title reveal">
+        <h1 class="page-hero-title word-reveal">
           Apply
         </h1>
         <p class="page-hero-sub reveal">
@@ -47,7 +47,7 @@
     <section ref="criteriaSection" class="apply-criteria section">
       <div class="section-narrow">
         <p class="overline reveal">What We Look For</p>
-        <h2 class="criteria-title reveal">Three things that matter</h2>
+        <h2 class="criteria-title word-reveal">Three things that matter</h2>
         <div class="criteria-grid">
           <div class="criteria-card reveal">
             <span class="criteria-number">01</span>
@@ -72,7 +72,7 @@
     <section ref="processSection" class="apply-process section section-dark">
       <div class="section-narrow">
         <p class="overline reveal">The Process</p>
-        <h2 class="process-title reveal">How it works</h2>
+        <h2 class="process-title word-reveal">How it works</h2>
         <div class="process-steps">
           <div class="process-step reveal">
             <span class="process-label">Step 1</span>
@@ -94,6 +94,7 @@
 
 <script setup lang="ts">
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
+import { useWordReveal } from '~/composables/useWordReveal'
 import { useEmailCollection } from '~/composables/useEmailCollection'
 
 const section = ref<HTMLElement | null>(null)
@@ -102,6 +103,9 @@ const processSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal')
 useGsapScrollReveal(criteriaSection, '.reveal', { stagger: 0.12 })
 useGsapScrollReveal(processSection, '.reveal', { stagger: 0.1 })
+useWordReveal(section, '.word-reveal')
+useWordReveal(criteriaSection, '.word-reveal')
+useWordReveal(processSection, '.word-reveal')
 
 const { email, status, errorMessage, submit, reset } = useEmailCollection('apply')
 
@@ -258,8 +262,10 @@ useSeoMeta({
 
 .criteria-number {
   font-family: var(--font-mono);
-  font-size: var(--text-caption);
+  font-size: var(--text-small);
+  font-weight: 500;
   color: var(--color-gold-accessible);
+  letter-spacing: var(--tracking-mega-wide);
   display: block;
   margin-bottom: var(--space-3);
 }

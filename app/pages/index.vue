@@ -6,10 +6,10 @@
     <SectionDivider />
 
     <!-- Featured Artists -->
-    <section class="featured-artists">
+    <section ref="artistsSection" class="featured-artists">
       <div class="fa-header">
-        <p class="fa-overline">Featured</p>
-        <h2>The Creators</h2>
+        <p class="fa-overline reveal">Featured</p>
+        <h2 class="word-reveal">The Creators</h2>
         <p class="fa-subtitle">Six practitioners building at the intersection of craft and computation.</p>
       </div>
       <div class="fa-grid">
@@ -19,13 +19,13 @@
           class="fa-card"
           @click="activeArtist = artist"
         >
-          <div class="fa-image">
+          <div class="fa-image reveal-image">
             <NuxtImg :src="artist.image" :alt="artist.name" loading="lazy" decoding="async" width="400" height="533" />
             <div class="fa-overlay">
               <span class="fa-peek">View artist</span>
             </div>
           </div>
-          <div class="fa-info">
+          <div class="fa-info reveal">
             <span class="fa-index">{{ String(i + 1).padStart(2, '0') }}</span>
             <span class="fa-discipline">{{ artist.discipline }}</span>
             <h3>{{ artist.name }}</h3>
@@ -38,6 +38,7 @@
     <MarqueeStrip />
     <PhilosophySection />
     <FeaturedSection />
+    <DistrictsPreview />
     <SealSection />
     <CtaSection />
 
@@ -55,6 +56,57 @@
 </template>
 
 <script setup lang="ts">
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
+import { useWordReveal } from '~/composables/useWordReveal'
+
+const artistsSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(artistsSection, '.reveal', { stagger: 0.1 })
+useWordReveal(artistsSection, '.word-reveal')
+
+// Clip-path image reveals for artist cards
+let artistCtx: gsap.Context | null = null
+
+onMounted(async () => {
+  if (!artistsSection.value) return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    artistsSection.value.querySelectorAll('.reveal-image').forEach((el) => {
+      ;(el as HTMLElement).style.clipPath = 'inset(0)'
+    })
+    return
+  }
+
+  await waitForAncestorAnimations(artistsSection.value)
+  if (!artistsSection.value) return
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  artistCtx = gsap.context(() => {
+    const images = gsap.utils.toArray<HTMLElement>('.reveal-image')
+    images.forEach((el, i) => {
+      gsap.fromTo(el,
+        { clipPath: 'inset(100% 0 0 0)' },
+        {
+          clipPath: 'inset(0% 0% 0% 0%)',
+          duration: 1.1,
+          delay: (i % 3) * 0.15,
+          ease: 'power3.inOut',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      )
+    })
+  }, artistsSection.value)
+})
+
+onUnmounted(() => {
+  artistCtx?.revert()
+})
+
 useHead({
   title: 'Meraki Road \u2014 Where craft meets culture',
   meta: [
@@ -223,9 +275,10 @@ const featuredArtists: Artist[] = [
   top: 1rem;
   right: 1.25rem;
   font-family: var(--font-mono);
-  font-size: 0.5625rem;
+  font-size: var(--text-small);
+  font-weight: 500;
   color: var(--color-gold);
-  letter-spacing: 0.1em;
+  letter-spacing: var(--tracking-mega-wide);
   opacity: 0.5;
   transition: opacity 0.3s ease;
 }

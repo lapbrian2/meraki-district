@@ -62,10 +62,33 @@ onUnmounted(() => {
 <style scoped>
 .marquee {
   overflow: hidden;
-  padding: var(--space-6) 0;
+  padding: var(--space-8) 0;
   border-top: 1px solid var(--rule-color);
   border-bottom: 1px solid var(--rule-color);
   background: var(--color-background);
+  position: relative;
+}
+
+/* Edge fade for polish */
+.marquee::before,
+.marquee::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.marquee::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-background), transparent);
+}
+
+.marquee::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-background), transparent);
 }
 
 .marquee-track {
@@ -81,7 +104,7 @@ onUnmounted(() => {
 
 .marquee-word {
   font-family: var(--font-display);
-  font-size: var(--text-h3);
+  font-size: var(--text-h2);
   font-weight: 300;
   letter-spacing: var(--tracking-wide);
   color: var(--color-text-muted);

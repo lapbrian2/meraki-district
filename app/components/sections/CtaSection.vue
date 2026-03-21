@@ -17,7 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { useWordReveal } from '~/composables/useWordReveal'
 import { useMagnetic } from '~/composables/useInteractions'
 
@@ -25,6 +27,36 @@ const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal')
 useWordReveal(section, '.word-reveal', { stagger: 0.08 })
 useMagnetic(section, '.cta-button', { strength: 0.25 })
+
+// Scroll-driven rule animation
+let ctx: gsap.Context | null = null
+
+onMounted(async () => {
+  if (!section.value) return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  await waitForAncestorAnimations(section.value)
+  if (!section.value) return
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  ctx = gsap.context(() => {
+    gsap.from('.cta-rule', {
+      scaleX: 0,
+      duration: 0.8,
+      ease: 'power2.inOut',
+      scrollTrigger: {
+        trigger: '.cta-rule',
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+    })
+  }, section.value)
+})
+
+onUnmounted(() => {
+  ctx?.revert()
+})
 </script>
 
 <style scoped>
@@ -44,6 +76,7 @@ useMagnetic(section, '.cta-button', { strength: 0.25 })
   height: 1px;
   background: var(--color-gold);
   margin-bottom: var(--space-12);
+  transform-origin: center;
 }
 
 .cta-overline {
@@ -57,10 +90,11 @@ useMagnetic(section, '.cta-button', { strength: 0.25 })
 }
 
 .cta-title {
-  font-size: var(--text-h1);
+  font-size: var(--text-display);
   font-weight: 300;
   color: var(--color-dark-text);
   margin-bottom: var(--space-6);
+  letter-spacing: var(--tracking-hero);
 }
 
 .cta-body {
