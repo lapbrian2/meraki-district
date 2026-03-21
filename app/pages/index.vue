@@ -2,6 +2,7 @@
   <div>
     <HeroSection />
     <ManifestoSection />
+    <StatsSection />
     <SectionDivider />
 
     <!-- Featured Artists -->

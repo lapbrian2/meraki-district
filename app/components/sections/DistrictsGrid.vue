@@ -17,6 +17,7 @@
           :to="`/districts/${inst.slug}`"
           class="inst-card"
           :class="[`inst-${inst.layout}`]"
+          :style="{ '--color-accent': inst.accentColor, '--color-accent-accessible': inst.accentColorAccessible }"
         >
           <div class="inst-image-wrap reveal-image">
             <NuxtImg
@@ -161,7 +162,7 @@ onUnmounted(() => {
 }
 
 .inst-card:hover {
-  border-color: var(--color-gold);
+  border-color: var(--color-accent);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
 }
 
@@ -170,7 +171,7 @@ onUnmounted(() => {
 }
 
 .inst-card:hover .inst-type {
-  color: var(--color-gold);
+  color: var(--color-accent);
 }
 
 .inst-card:hover .inst-name::after {
@@ -244,8 +245,10 @@ onUnmounted(() => {
 
 .inst-number {
   font-family: var(--font-mono);
-  font-size: var(--text-caption);
-  color: var(--color-text-muted);
+  font-size: var(--text-small);
+  color: var(--color-accent-accessible);
+  letter-spacing: var(--tracking-mega-wide);
+  font-weight: 500;
 }
 
 .inst-dot {
@@ -262,7 +265,7 @@ onUnmounted(() => {
   font-weight: 500;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--color-gold-accessible);
+  color: var(--color-accent-accessible);
 }
 
 .inst-name {
@@ -279,7 +282,7 @@ onUnmounted(() => {
   left: 0;
   width: 100%;
   height: 1px;
-  background: var(--color-gold);
+  background: var(--color-accent);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s var(--ease-out);

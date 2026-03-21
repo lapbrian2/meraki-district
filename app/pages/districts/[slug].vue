@@ -1,5 +1,5 @@
 <template>
-  <div v-if="district" ref="root">
+  <div v-if="district" ref="root" :style="{ '--color-accent': district.accentColor, '--color-accent-accessible': district.accentColorAccessible }">
     <!-- Hero -->
     <section ref="heroSection" class="q-hero">
       <div class="q-hero-image-wrap">
@@ -17,7 +17,7 @@
       </div>
       <div class="q-hero-content section-default">
         <p class="overline">{{ district.type }}</p>
-        <h1 ref="heroTitle" class="q-hero-title">{{ district.name }}</h1>
+        <h1 ref="heroTitle" class="q-hero-title" :style="{ fontFamily: district.displayFont + ', serif' }">{{ district.name }}</h1>
         <span class="q-hero-number">{{ district.number }}</span>
       </div>
     </section>
@@ -154,6 +154,9 @@ useHead(computed(() => ({
     { name: 'description', content: district.value.description },
     { property: 'og:title', content: district.value.name + ' \u2014 Meraki Road' },
     { property: 'og:description', content: district.value.description },
+  ] : [],
+  link: district.value?.displayFont ? [
+    { rel: 'stylesheet', href: `https://fonts.googleapis.com/css2?family=${encodeURIComponent(district.value.displayFont)}:wght@300;400;700&display=swap` },
   ] : [],
 })))
 
@@ -352,7 +355,7 @@ onUnmounted(() => {
 }
 
 .q-hero-content .overline {
-  color: var(--color-gold);
+  color: var(--color-accent);
   margin-bottom: var(--space-3);
 }
 
@@ -360,15 +363,20 @@ onUnmounted(() => {
   font-size: var(--text-display);
   color: var(--color-dark-text);
   line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-hero);
 }
 
 .q-hero-number {
-  display: block;
-  margin-top: var(--space-4);
+  position: absolute;
+  bottom: var(--space-16);
+  right: var(--content-padding);
   font-family: var(--font-mono);
-  font-size: var(--text-caption);
-  color: var(--color-dark-muted);
-  letter-spacing: var(--tracking-widest);
+  font-size: clamp(4rem, 8vw, 7rem);
+  color: var(--color-accent);
+  letter-spacing: var(--tracking-ultra-wide);
+  opacity: 0.12;
+  line-height: 1;
+  pointer-events: none;
 }
 
 /* Body */
@@ -377,7 +385,7 @@ onUnmounted(() => {
 .q-rule {
   width: 48px;
   height: 1px;
-  background: var(--color-gold);
+  background: var(--color-accent);
   margin-bottom: var(--space-12);
   transform-origin: left;
 }
@@ -443,8 +451,8 @@ onUnmounted(() => {
 .q-offering-index {
   font-family: var(--font-mono);
   font-size: 0.625rem;
-  color: var(--color-gold);
-  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  letter-spacing: var(--tracking-mega-wide);
   display: block;
   margin-bottom: var(--space-4);
 }
@@ -470,7 +478,7 @@ onUnmounted(() => {
 .q-status-marker {
   width: 8px;
   height: 8px;
-  background: var(--color-gold);
+  background: var(--color-accent);
   flex-shrink: 0;
   margin-top: var(--space-1);
   animation: statusPulse 2s ease-in-out infinite;
@@ -482,7 +490,7 @@ onUnmounted(() => {
 }
 
 .q-status--coming-soon .q-status-marker {
-  background: var(--color-gold);
+  background: var(--color-accent);
 }
 
 @keyframes statusPulse {
@@ -495,7 +503,7 @@ onUnmounted(() => {
   font-weight: 500;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--color-gold-accessible);
+  color: var(--color-accent-accessible);
   margin-bottom: var(--space-2);
   max-width: none;
 }
@@ -536,8 +544,8 @@ onUnmounted(() => {
 }
 
 .q-cta-button:hover {
-  border-color: var(--color-gold);
-  color: var(--color-gold);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 /* Explore More */
@@ -589,7 +597,7 @@ onUnmounted(() => {
   font-size: 0.5625rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--color-gold);
+  color: var(--color-accent);
   display: block;
   margin-bottom: var(--space-2);
 }

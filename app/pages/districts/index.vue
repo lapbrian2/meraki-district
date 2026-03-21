@@ -18,6 +18,7 @@
           v-for="d in districts"
           :key="d.slug"
           class="q-card"
+          :style="{ '--color-accent': d.accentColor, '--color-accent-accessible': d.accentColorAccessible }"
           @click="openDistrict(d)"
         >
           <div class="q-img">
@@ -188,7 +189,7 @@ watch(activeDistrict, (d) => {
   transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-.q-card:hover { background: var(--color-surface, #F4F4F5); border-color: var(--color-gold); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06); }
+.q-card:hover { background: var(--color-surface, #F4F4F5); border-color: var(--color-accent); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06); }
 .q-card:hover .q-img img { transform: scale(1.03); }
 .q-card:hover .q-overlay { opacity: 1; }
 
@@ -210,12 +211,14 @@ watch(activeDistrict, (d) => {
   position: absolute;
   top: 0.6rem;
   left: 0.6rem;
-  font-size: 0.5625rem;
-  letter-spacing: 0.14em;
-  color: rgba(250, 250, 249, 0.85);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-mega-wide);
+  color: rgba(250, 250, 249, 0.9);
   background: rgba(9, 9, 11, 0.55);
   backdrop-filter: blur(8px);
-  padding: 0.2rem 0.5rem;
+  padding: 0.25rem 0.6rem;
   text-transform: uppercase;
   z-index: 2;
 }
@@ -247,7 +250,7 @@ watch(activeDistrict, (d) => {
   font-size: 0.5625rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--color-gold-accessible);
+  color: var(--color-accent-accessible);
   margin-bottom: 0.3rem;
   display: block;
 }
@@ -259,7 +262,7 @@ watch(activeDistrict, (d) => {
   margin-bottom: 0.3rem;
   line-height: 1.15;
   display: inline;
-  background-image: linear-gradient(var(--color-gold), var(--color-gold));
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
   background-size: 0% 1px;
   background-position: 0 100%;
   background-repeat: no-repeat;

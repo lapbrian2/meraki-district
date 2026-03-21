@@ -48,6 +48,13 @@
   --tracking-snug: -0.01em;
   --tracking-wide: 0.1em;
   --tracking-widest: 0.14em;
+  --tracking-hero: -0.05em;
+  --tracking-mega-wide: 0.2em;
+  --tracking-ultra-wide: 0.3em;
+
+  /* District accent — overridden per-district via inline style */
+  --color-accent: var(--color-gold);
+  --color-accent-accessible: var(--color-gold-accessible);
 
   /* Layout */
   --grid-columns: 12;

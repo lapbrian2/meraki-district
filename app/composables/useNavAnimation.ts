@@ -27,21 +27,35 @@ export function useNavAnimation(options: UseNavAnimationOptions) {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reducedMotion) return
 
-    ctx = gsap.context(() => {
-      // Entrance animation - once per session
-      if (!hasAnimated.value) {
+    const preloaderDone = useState('preloaderDone', () => false)
+
+    function runEntrance() {
+      if (!navRef.value || hasAnimated.value) return
+      ctx = gsap.context(() => {
         const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
-        tl.from('.nav-logo', { opacity: 0, y: -10, duration: 0.6 }, 0.8)
+        tl.from('.nav-logo', { opacity: 0, y: -10, duration: 0.6 }, 0)
           .from('.nav-link', {
             opacity: 0, y: -8, duration: 0.5,
             stagger: 0.08,
-          }, 1.0)
-          .from('.nav-apply', { opacity: 0, y: -8, duration: 0.5 }, 1.2)
+          }, 0.2)
+          .from('.nav-apply', { opacity: 0, y: -8, duration: 0.5 }, 0.4)
 
         hasAnimated.value = true
-      }
-    }, navRef.value)
+      }, navRef.value!)
+    }
+
+    // Gate entrance on preloader completion
+    if (preloaderDone.value) {
+      runEntrance()
+    } else {
+      const stop = watch(preloaderDone, (val) => {
+        if (val) {
+          stop()
+          runEntrance()
+        }
+      })
+    }
   })
 
   // Mobile overlay open/close
