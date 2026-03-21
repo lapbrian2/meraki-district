@@ -3,6 +3,7 @@
     <HeroSection />
     <ManifestoSection />
     <SectionDivider />
+    <PillarsSection />
 
     <!-- Featured Artists -->
     <section ref="artistsSection" class="featured-artists">
@@ -50,11 +51,13 @@
     </section>
 
     <MarqueeStrip />
+    <ShowcaseSection />
+    <CreatorPathwaySection />
     <PhilosophySection />
     <FeaturedSection />
-    <DistrictsPreview />
+    <TalentIndexSection />
     <SealSection />
-    <CtaSection />
+    <CtaSectionNew />
 
     <!-- Lightbox -->
     <LightboxOverlay

@@ -6,7 +6,7 @@
     <main id="main-content">
       <slot />
     </main>
-    <AppFooter />
+    <AppFooterNew />
     <SocialSidebar />
   </div>
 </template>
