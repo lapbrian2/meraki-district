@@ -1,7 +1,11 @@
 <template>
   <section ref="section" class="cta-new">
-    <!-- Giant watermark -->
-    <span class="cta-new-watermark" aria-hidden="true">MERAKI ROAD</span>
+    <!-- Giant watermark — slow scroll reveal -->
+    <div class="cta-new-watermark" aria-hidden="true">
+      <span class="cta-new-watermark-track">
+        <span v-for="(letter, i) in 'MERAKI'" :key="i" class="cta-new-watermark-letter" :style="{ animationDelay: `${i * 1.2}s` }">{{ letter }}</span>
+      </span>
+    </div>
 
     <div class="section-narrow cta-new-inner">
       <h2 class="cta-new-heading word-reveal">
@@ -44,29 +48,65 @@ useMagnetic(section, '.cta-new-button', { strength: 0.2 })
   justify-content: center;
 }
 
-/* ─── Watermark ─── */
+/* ─── Watermark — slow letter drift ─── */
 .cta-new-watermark {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.cta-new-watermark-track {
+  display: flex;
+  gap: 0.02em;
+  animation: watermarkDrift 30s linear infinite alternate;
+}
+
+.cta-new-watermark-letter {
   font-family: var(--font-display);
   font-size: 30vw;
   font-weight: 300;
   font-style: italic;
-  letter-spacing: var(--tracking-tight);
-  white-space: nowrap;
-  color: var(--color-ink);
-  opacity: 0.03;
-  pointer-events: none;
-  user-select: none;
   line-height: 1;
-  animation: parallax 20s linear infinite alternate;
+  color: var(--color-ink);
+  opacity: 0;
+  animation: letterReveal 3s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  display: inline-block;
 }
 
-@keyframes parallax {
-  0% { transform: translate(-50%, -50%) scale(1) translateY(0); }
-  100% { transform: translate(-50%, -50%) scale(1.1) translateY(-2%); }
+@keyframes letterReveal {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 0.04;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+@keyframes watermarkDrift {
+  0% { transform: translateX(-3%); }
+  100% { transform: translateX(3%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-new-watermark-letter {
+    animation: none;
+    opacity: 0.03;
+    filter: none;
+  }
+  .cta-new-watermark-track {
+    animation: none;
+  }
 }
 
 /* ─── Content ─── */
@@ -147,7 +187,7 @@ useMagnetic(section, '.cta-new-button', { strength: 0.2 })
     padding: var(--space-32) var(--content-padding);
   }
 
-  .cta-new-watermark {
+  .cta-new-watermark-letter {
     font-size: 50vw;
   }
 
