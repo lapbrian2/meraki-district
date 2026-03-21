@@ -692,45 +692,53 @@ function initAnimations() {
       }
 
       // Sprint cards stagger
-      gsap.from('.vs-sprint', {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.vs-sprints-grid',
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      })
+      gsap.fromTo('.vs-sprint',
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.12,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.vs-sprints-grid',
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      )
 
       // Vault hero metric counter
-      gsap.from('.vs-vault-number', {
-        opacity: 0,
-        y: 30,
-        duration: 1.0,
-        ease: 'power3.out',
-        scrollTrigger: {
+      gsap.fromTo('.vs-vault-number',
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          ease: 'power3.out',
+          scrollTrigger: {
           trigger: '.vs-vault',
           start: 'top 75%',
-          toggleActions: 'play none none none',
+          toggleActions: 'play none none reverse',
         },
       })
 
       // Vault breakdown columns
-      gsap.from('.vs-vault-col', {
-        y: 20,
-        opacity: 0,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.vs-vault-breakdown',
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      })
+      gsap.fromTo('.vs-vault-col',
+        { y: 20, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.vs-vault-breakdown',
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      )
 
       // Philosophy pull quote word-reveal on scroll
       const philosophyQuote = root.value?.querySelector('.vs-philosophy-pullquote')
@@ -739,16 +747,19 @@ function initAnimations() {
       }
 
       // Philosophy rule draw
-      gsap.from('.vs-philosophy-rule', {
-        scaleX: 0,
-        duration: 0.8,
-        ease: 'power2.inOut',
-        scrollTrigger: {
-          trigger: '.vs-philosophy-rule',
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      })
+      gsap.fromTo('.vs-philosophy-rule',
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          duration: 0.8,
+          ease: 'power2.inOut',
+          scrollTrigger: {
+            trigger: '.vs-philosophy-rule',
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      )
 
     } else if (isProvenance.value) {
       // ── The Provenance animations ──
