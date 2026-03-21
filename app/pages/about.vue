@@ -22,7 +22,17 @@
       </div>
     </section>
 
-    <SectionDivider />
+    <!-- Full-bleed origin image — the dawn workshop -->
+    <section class="origin-image-break reveal" aria-hidden="true">
+      <div class="origin-image-wrap">
+        <NuxtImg
+          src="/images/origin-bg.webp"
+          alt=""
+          class="origin-image archival-image"
+          loading="lazy"
+        />
+      </div>
+    </section>
 
     <!-- ============================================
          ORIGIN NARRATIVE — "Bridging the Gap"
@@ -542,6 +552,40 @@ const principles = [
     width: 100%;
     text-align: center;
     padding: var(--space-4) var(--space-6);
+  }
+}
+
+/* ─── Full-bleed origin image break ─── */
+.origin-image-break {
+  width: 100vw;
+  margin-left: calc(-1 * var(--content-padding));
+  height: 50vh;
+  min-height: 320px;
+  overflow: hidden;
+  position: relative;
+}
+
+.origin-image-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.origin-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  transition: transform 8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.origin-image-break:hover .origin-image {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .origin-image-break {
+    height: 35vh;
   }
 }
 </style>
