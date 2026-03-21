@@ -12,6 +12,9 @@
             <NuxtLink to="/about" class="nav-link">About</NuxtLink>
           </nav>
           <div class="nav-right">
+            <button class="nav-search-btn" aria-label="Search the archive" title="Search (Ctrl+K)" @click="openSearch">
+              <span class="material-symbols-outlined nav-search-icon">search</span>
+            </button>
             <NuxtLink to="/apply" class="nav-apply">Apply</NuxtLink>
           </div>
         </div>
@@ -28,9 +31,23 @@
           <NuxtLink to="/community" class="nav-link">Community</NuxtLink>
           <NuxtLink to="/about" class="nav-link">About</NuxtLink>
         </nav>
-        <NuxtLink to="/apply" class="nav-apply">Apply</NuxtLink>
+        <div class="nav-right">
+          <button class="nav-search-btn" aria-label="Search the archive" title="Search (Ctrl+K)" @click="openSearch">
+            <span class="material-symbols-outlined nav-search-icon">search</span>
+          </button>
+          <NuxtLink to="/apply" class="nav-apply">Apply</NuxtLink>
+        </div>
       </div>
     </div>
+
+    <!-- Mobile search -->
+    <button
+      class="nav-mobile-search"
+      aria-label="Search the archive"
+      @click="openSearch"
+    >
+      <span class="material-symbols-outlined">search</span>
+    </button>
 
     <!-- Mobile toggle -->
     <button
@@ -95,6 +112,7 @@
 <script setup lang="ts">
 import { useNavAnimation } from '~/composables/useNavAnimation'
 import { useDarkMode } from '~/composables/useDarkMode'
+import { useArchivalSearch } from '~/composables/useArchivalSearch'
 
 const navRef = ref<HTMLElement | null>(null)
 const overlayRef = ref<HTMLElement | null>(null)
@@ -104,6 +122,7 @@ const isHidden = ref(false)
 let lastScroll = 0
 
 const { isDark, toggle } = useDarkMode()
+const { open: openSearch } = useArchivalSearch()
 
 const mobileLinks = [
   { to: '/districts', label: 'Districts' },
@@ -238,6 +257,7 @@ onUnmounted(() => {
 .nav-right {
   display: flex;
   align-items: center;
+  gap: var(--space-4);
 }
 
 /* COMPACT STATE (utility bar) */
@@ -350,6 +370,38 @@ onUnmounted(() => {
 
 .nav-link:focus-visible,
 .nav-apply:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+/* SEARCH BUTTON */
+.nav-search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--color-text-muted);
+  transition: color 0.2s ease;
+}
+
+.nav-search-btn:hover {
+  color: var(--color-gold);
+}
+
+.nav-search-icon {
+  font-size: 1.125rem;
+}
+
+.nav-expanded .nav-search-btn {
+  color: var(--color-dark-muted);
+}
+
+.nav-expanded .nav-search-btn:hover {
+  color: var(--color-gold);
+}
+
+.nav-search-btn:focus-visible {
   outline: 2px solid var(--color-gold);
   outline-offset: 4px;
 }
@@ -572,6 +624,34 @@ onUnmounted(() => {
   z-index: 1;
 }
 
+/* MOBILE SEARCH */
+.nav-mobile-search {
+  display: none;
+  position: fixed;
+  top: var(--space-4);
+  right: calc(var(--content-padding) + 60px);
+  z-index: 101;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink);
+  transition: color 0.2s ease;
+}
+
+.nav-mobile-search:hover {
+  color: var(--color-gold);
+}
+
+.nav-mobile-search .material-symbols-outlined {
+  font-size: 1.25rem;
+}
+
+.nav-mobile-search:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .nav-expanded,
@@ -580,6 +660,10 @@ onUnmounted(() => {
   }
 
   .nav-toggle {
+    display: flex;
+  }
+
+  .nav-mobile-search {
     display: flex;
   }
 
@@ -595,7 +679,8 @@ onUnmounted(() => {
   }
 
   .nav-toggle,
-  .nav-mobile-logo {
+  .nav-mobile-logo,
+  .nav-mobile-search {
     pointer-events: auto;
   }
 

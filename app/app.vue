@@ -3,6 +3,7 @@
   <NuxtLayout>
     <GhostWatermark />
     <ArchivalTimeline />
+    <ArchivalSearch />
     <NuxtPage />
   </NuxtLayout>
 </template>
