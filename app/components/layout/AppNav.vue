@@ -3,11 +3,11 @@
     <!-- Expanded state: magazine masthead (desktop only, scrollY < 100) -->
     <div class="nav-expanded" :class="{ collapsed: isScrolled }">
       <div class="nav-expanded-inner">
-        <NuxtLink to="/" class="nav-logo"><em>Meraki District</em></NuxtLink>
+        <NuxtLink to="/" class="nav-logo"><em>Meraki Road</em></NuxtLink>
         <div class="nav-expanded-row">
           <nav class="nav-links" aria-label="Main navigation">
-            <NuxtLink to="/the-road" class="nav-link">Meraki Road</NuxtLink>
             <NuxtLink to="/districts" class="nav-link">Districts</NuxtLink>
+            <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
             <NuxtLink to="/about" class="nav-link">About</NuxtLink>
           </nav>
           <div class="nav-right">
@@ -20,10 +20,10 @@
     <!-- Compact state: single-row utility bar (scrollY >= 100) -->
     <div class="nav-compact" :class="{ active: isScrolled }">
       <div class="nav-compact-inner">
-        <NuxtLink to="/" class="nav-logo"><em>Meraki District</em></NuxtLink>
+        <NuxtLink to="/" class="nav-logo"><em>Meraki Road</em></NuxtLink>
         <nav class="nav-links" aria-label="Main navigation">
-          <NuxtLink to="/the-road" class="nav-link">Meraki Road</NuxtLink>
           <NuxtLink to="/districts" class="nav-link">Districts</NuxtLink>
+          <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
           <NuxtLink to="/about" class="nav-link">About</NuxtLink>
         </nav>
         <NuxtLink to="/apply" class="nav-apply">Apply</NuxtLink>
@@ -41,7 +41,7 @@
     </button>
 
     <!-- Mobile logo (always visible on mobile) -->
-    <NuxtLink to="/" class="nav-mobile-logo" :class="{ inverted: mobileOpen }">Meraki District</NuxtLink>
+    <NuxtLink to="/" class="nav-mobile-logo" :class="{ inverted: mobileOpen }">Meraki Road</NuxtLink>
 
     <!-- Theme toggle (ClientOnly prevents SSR hydration mismatch on icon swap) -->
     <ClientOnly>

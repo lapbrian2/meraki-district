@@ -3,7 +3,7 @@
     <Teleport to="body">
       <div v-if="!done" ref="preloader" class="preloader" aria-hidden="true">
         <div class="preloader-content">
-          <span class="preloader-logo"><em>Meraki District</em></span>
+          <span class="preloader-logo"><em>Meraki Road</em></span>
           <div class="preloader-rule" />
         </div>
       </div>
