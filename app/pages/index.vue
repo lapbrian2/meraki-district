@@ -3,9 +3,6 @@
     <HeroSection />
     <ManifestoSection />
     <SectionDivider />
-    <DistrictsPreview />
-    <PhilosophySection />
-    <SectionDivider />
 
     <!-- Featured Artists -->
     <section ref="artistsSection" class="featured-artists">
@@ -38,8 +35,9 @@
     </section>
 
     <MarqueeStrip />
+    <PhilosophySection />
     <FeaturedSection />
-    <StatsSection />
+    <DistrictsPreview />
     <SealSection />
     <CtaSection />
 
