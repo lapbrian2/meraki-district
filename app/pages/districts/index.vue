@@ -2,74 +2,57 @@
   <div ref="pageRef" class="districts-page">
     <!-- Hero -->
     <section class="dp-hero">
-      <p class="dp-overline reveal">Districts</p>
       <h1 class="dp-display word-reveal">Eleven districts, one road.</h1>
       <p class="dp-subtitle reveal">
         Each with its own mandate. Each built to serve a different dimension of creative practice.
+        This is the directory.
       </p>
       <div class="dp-rule reveal" aria-hidden="true" />
     </section>
 
-    <!-- Active Districts — hero treatment -->
+    <!-- Phase I — Active Districts (hero-sized alternating cards) -->
     <section ref="activeSection" class="dp-active">
       <p class="dp-section-label reveal">
         <span class="dp-label-dot dp-dot--active" />
         Active
       </p>
 
-      <!-- Flagship: Voight Studio, full-width with image -->
-      <NuxtLink
-        :to="`/districts/${active[0].slug}`"
-        class="dp-flagship reveal"
+      <div
+        v-for="(d, i) in active"
+        :key="d.slug"
+        class="dp-hero-card reveal"
+        :class="{ 'dp-hero-card--flipped': i % 2 !== 0 }"
       >
-        <div class="dp-flagship-image">
-          <NuxtImg
-            :src="active[0].image"
-            :alt="active[0].name"
-            loading="lazy"
-            width="800"
-            height="500"
-          />
-        </div>
-        <div class="dp-flagship-info">
-          <span class="dp-number">{{ active[0].number }}</span>
-          <span class="dp-type">{{ active[0].type }}</span>
-          <h2 class="dp-name dp-name--lg">{{ active[0].name }}</h2>
-          <p class="dp-desc">{{ active[0].longDescription || active[0].description }}</p>
-          <span class="dp-cta">Explore district →</span>
-        </div>
-      </NuxtLink>
-
-      <!-- Row 2: asymmetric 7/5 for remaining active -->
-      <div class="dp-active-row">
-        <NuxtLink
-          v-for="d in active.slice(1)"
-          :key="d.slug"
-          :to="`/districts/${d.slug}`"
-          class="dp-active-card reveal"
-        >
-          <div class="dp-active-image">
+        <div class="dp-hero-card-image grayscale-hover">
+          <NuxtLink :to="`/districts/${d.slug}`" tabindex="-1" aria-hidden="true">
             <NuxtImg
               :src="d.image"
               :alt="d.name"
               loading="lazy"
-              width="600"
-              height="400"
+              width="900"
+              height="600"
             />
-          </div>
-          <div class="dp-active-info">
-            <span class="dp-number">{{ d.number }}</span>
-            <span class="dp-type">{{ d.type }}</span>
-            <h3 class="dp-name">{{ d.name }}</h3>
-            <p class="dp-desc">{{ d.description }}</p>
-            <span class="dp-cta">Explore →</span>
-          </div>
-        </NuxtLink>
+          </NuxtLink>
+        </div>
+        <div class="dp-hero-card-content">
+          <span class="dp-hero-number">{{ d.number }}</span>
+          <span class="dp-badge dp-badge--active">
+            <span class="dp-badge-dot dp-badge-dot--active" />
+            Active
+          </span>
+          <span class="dp-hero-type">{{ d.type }}</span>
+          <h2 class="dp-hero-name">{{ d.name }}</h2>
+          <p class="dp-hero-desc">{{ d.longDescription || d.description }}</p>
+          <NuxtLink :to="`/districts/${d.slug}`" class="dp-enter-btn">
+            Enter District →
+          </NuxtLink>
+        </div>
       </div>
     </section>
 
-    <!-- Coming Soon — medium cards -->
+    <!-- Phase II — Coming Soon (medium text-dominant cards) -->
     <section ref="comingSection" class="dp-coming">
+      <p class="dp-section-overline reveal">Emerging Territories</p>
       <p class="dp-section-label reveal">
         <span class="dp-label-dot dp-dot--coming" />
         Coming Soon
@@ -82,39 +65,41 @@
           :to="`/districts/${d.slug}`"
           class="dp-coming-card reveal"
         >
-          <span class="dp-card-icon material-symbols-outlined">{{ getIcon(d.slug) }}</span>
-          <span class="dp-number">{{ d.number }}</span>
-          <span class="dp-type">{{ d.type }}</span>
-          <h3 class="dp-name">{{ d.name }}</h3>
-          <p class="dp-desc">{{ d.description }}</p>
+          <span class="dp-coming-number">{{ d.number }}</span>
+          <span class="dp-badge dp-badge--coming">
+            <span class="dp-badge-dot dp-badge-dot--coming" />
+            Coming Soon
+          </span>
+          <span class="dp-coming-type">{{ d.type }}</span>
+          <h3 class="dp-coming-name">{{ d.name }}</h3>
+          <p class="dp-coming-desc">{{ d.description }}</p>
           <span v-if="d.statusNote" class="dp-status-note">{{ d.statusNote }}</span>
         </NuxtLink>
       </div>
     </section>
 
-    <!-- In Development — compact rows -->
+    <!-- Future Frontiers — In Development (compact grid) -->
     <section ref="devSection" class="dp-dev">
+      <p class="dp-section-overline reveal">Future Frontiers</p>
       <p class="dp-section-label reveal">
         <span class="dp-label-dot dp-dot--dev" />
         In Development
       </p>
 
-      <div class="dp-dev-list">
-        <NuxtLink
+      <div class="dp-dev-grid">
+        <div
           v-for="d in development"
           :key="d.slug"
-          :to="`/districts/${d.slug}`"
-          class="dp-dev-row reveal"
+          class="dp-dev-card reveal"
         >
           <span class="dp-dev-number">{{ d.number }}</span>
-          <span class="dp-card-icon material-symbols-outlined">{{ getIcon(d.slug) }}</span>
-          <div class="dp-dev-info">
-            <h3 class="dp-dev-name">{{ d.name }}</h3>
-            <span class="dp-dev-type">{{ d.type }}</span>
-          </div>
-          <p class="dp-dev-desc">{{ d.description }}</p>
-          <span class="dp-dev-arrow material-symbols-outlined">arrow_forward</span>
-        </NuxtLink>
+          <span class="dp-badge dp-badge--dev">
+            <span class="dp-badge-dot dp-badge-dot--dev" />
+            In Development
+          </span>
+          <h3 class="dp-dev-name">{{ d.name }}</h3>
+          <span class="dp-dev-type">{{ d.type }}</span>
+        </div>
       </div>
     </section>
 
@@ -147,24 +132,6 @@ const active = districts.filter(d => d.status === 'active')
 const comingSoon = districts.filter(d => d.status === 'coming-soon')
 const development = districts.filter(d => d.status === 'development')
 
-const iconMap: Record<string, string> = {
-  'voight-studio': 'brush',
-  'the-road': 'edit_road',
-  'meridian': 'explore',
-  'fieldwork': 'school',
-  'the-provenance': 'inventory_2',
-  'basecamp': 'groups',
-  'common-ground': 'event',
-  'the-mint': 'storefront',
-  'the-seal': 'verified',
-  'the-collective': 'handshake',
-  'the-frame': 'videocam',
-}
-
-function getIcon(slug: string): string {
-  return iconMap[slug] || 'circle'
-}
-
 useHead({
   title: 'Districts — Meraki Road',
   meta: [
@@ -181,46 +148,49 @@ useHead({
 
 /* ─── Hero ─── */
 .dp-hero {
-  padding: calc(var(--space-32) + 3rem) var(--content-padding) var(--space-16);
+  padding: calc(var(--space-32) + 4rem) var(--content-padding) var(--space-16);
   max-width: 64rem;
   margin: 0 auto;
-}
-
-.dp-overline {
-  font-size: var(--text-overline);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-widest);
-  color: var(--color-gold);
-  margin-bottom: var(--space-4);
+  text-align: center;
 }
 
 .dp-display {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2.75rem, 6vw, 5rem);
   line-height: 1.05;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tracking-tight);
   margin-bottom: var(--space-4);
+  justify-content: center;
 }
 
 .dp-subtitle {
   font-size: 1.0625rem;
   font-weight: 300;
   color: var(--color-text-muted);
-  line-height: 1.6;
-  max-width: 42ch;
+  line-height: 1.65;
+  max-width: 44ch;
+  margin: 0 auto;
 }
 
 .dp-rule {
   width: 4rem;
   height: 1px;
   background: var(--rule-color);
-  margin-top: var(--space-8);
+  margin: var(--space-8) auto 0;
 }
 
 /* ─── Section Labels ─── */
+.dp-section-overline {
+  font-size: var(--text-overline);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-gold);
+  margin-bottom: var(--space-2);
+}
+
 .dp-section-label {
   font-size: var(--text-overline);
   font-weight: 500;
@@ -243,159 +213,178 @@ useHead({
 .dp-dot--coming { background: var(--color-gold); }
 .dp-dot--dev { background: var(--color-text-muted); opacity: 0.5; }
 
-/* ─── Shared tokens ─── */
-.dp-number {
+/* ─── Status Badges ─── */
+.dp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
   font-size: 0.625rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  color: var(--color-text-muted);
-  opacity: 0.5;
-  display: block;
-  margin-bottom: 0.25rem;
-}
-
-.dp-type {
-  font-size: 0.5625rem;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--tracking-wide);
+  padding: 0.25rem 0.625rem;
+  border-radius: 2px;
+  margin-bottom: var(--space-3);
+}
+
+.dp-badge--active {
+  color: #16A34A;
+  background: rgba(22, 163, 74, 0.08);
+  border: 1px solid rgba(22, 163, 74, 0.2);
+}
+
+.dp-badge--coming {
   color: var(--color-gold);
-  display: block;
-  margin-bottom: 0.5rem;
+  background: rgba(184, 150, 78, 0.08);
+  border: 1px solid rgba(184, 150, 78, 0.2);
 }
 
-.dp-name {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 300;
-  font-size: var(--text-h3);
-  color: var(--color-ink, #FAFAF9);
-  margin-bottom: 0.5rem;
-  transition: color 0.3s ease;
-}
-
-.dp-name--lg {
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-}
-
-.dp-desc {
-  font-size: var(--text-small);
-  font-weight: 300;
-  line-height: 1.6;
+.dp-badge--dev {
   color: var(--color-text-muted);
+  background: rgba(113, 113, 122, 0.08);
+  border: 1px solid rgba(113, 113, 122, 0.15);
 }
 
-.dp-cta {
-  font-size: var(--text-overline);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-widest);
-  color: var(--color-gold);
-  margin-top: auto;
-  padding-top: var(--space-4);
-  transition: padding-left 0.3s ease;
+.dp-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
 }
 
-/* ─── Active Section ─── */
+.dp-badge-dot--active { background: #16A34A; }
+.dp-badge-dot--coming { background: var(--color-gold); }
+.dp-badge-dot--dev { background: var(--color-text-muted); }
+
+/* ─── Phase I: Active — Hero Cards ─── */
 .dp-active {
   padding: 0 var(--content-padding) var(--space-16);
   max-width: 76rem;
   margin: 0 auto;
 }
 
-/* Flagship card */
-.dp-flagship {
+.dp-hero-card {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
   border: 1px solid var(--rule-color);
   overflow: hidden;
-  margin-bottom: var(--space-4);
-  text-decoration: none;
-  color: inherit;
-  background-image: none;
-  transition: border-color 0.3s ease;
+  margin-bottom: var(--space-6);
+  transition: border-color 0.4s ease;
 }
 
-.dp-flagship:hover {
+.dp-hero-card:last-child {
+  margin-bottom: 0;
+}
+
+.dp-hero-card:hover {
   border-color: var(--color-gold);
 }
 
-.dp-flagship:hover .dp-name { color: var(--color-gold); }
-.dp-flagship:hover .dp-cta { padding-left: 0.5rem; }
-
-.dp-flagship-image {
-  aspect-ratio: 16/10;
-  overflow: hidden;
+/* Flip image/content sides on alternate cards */
+.dp-hero-card--flipped .dp-hero-card-image {
+  order: 2;
 }
 
-.dp-flagship-image img {
+.dp-hero-card--flipped .dp-hero-card-content {
+  order: 1;
+}
+
+.dp-hero-card-image {
+  aspect-ratio: 3/2;
+  overflow: hidden;
+  position: relative;
+}
+
+.dp-hero-card-image a {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  background-image: none;
+}
+
+.dp-hero-card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.dp-flagship:hover .dp-flagship-image img {
-  transform: scale(1.04);
+.dp-hero-card:hover .dp-hero-card-image img {
+  transform: scale(1.05);
 }
 
-.dp-flagship-info {
-  padding: var(--space-8) var(--space-10);
+.dp-hero-card-content {
+  padding: var(--space-10) var(--space-12);
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-/* Active row: asymmetric */
-.dp-active-row {
-  display: grid;
-  grid-template-columns: 7fr 5fr;
-  gap: var(--space-4);
+.dp-hero-number {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 1;
+  color: var(--color-text-muted);
+  opacity: 0.15;
+  margin-bottom: var(--space-2);
 }
 
-.dp-active-card {
-  border: 1px solid var(--rule-color);
-  overflow: hidden;
+.dp-hero-type {
+  font-size: 0.625rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-mega-wide);
+  color: var(--color-gold);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.dp-hero-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  color: var(--color-ink, #FAFAF9);
+  margin-bottom: var(--space-4);
+  transition: color 0.3s ease;
+}
+
+.dp-hero-card:hover .dp-hero-name {
+  color: var(--color-gold);
+}
+
+.dp-hero-desc {
+  font-size: var(--text-small);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-6);
+  max-width: 48ch;
+}
+
+.dp-enter-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-8);
+  background: var(--color-gold);
+  color: var(--color-background);
+  font-size: var(--text-overline);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
   text-decoration: none;
-  color: inherit;
   background-image: none;
-  display: flex;
-  flex-direction: column;
-  transition: border-color 0.3s ease;
+  transition: opacity 0.3s ease, padding-left 0.3s ease;
+  align-self: flex-start;
 }
 
-.dp-active-card:hover {
-  border-color: var(--color-gold);
+.dp-enter-btn:hover {
+  opacity: 0.85;
+  padding-left: var(--space-10);
 }
 
-.dp-active-card:hover .dp-name { color: var(--color-gold); }
-.dp-active-card:hover .dp-cta { padding-left: 0.5rem; }
-
-.dp-active-image {
-  aspect-ratio: 16/10;
-  overflow: hidden;
-}
-
-.dp-active-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.dp-active-card:hover .dp-active-image img {
-  transform: scale(1.04);
-}
-
-.dp-active-info {
-  padding: var(--space-6) var(--space-6) var(--space-8);
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-/* ─── Coming Soon Section ─── */
+/* ─── Phase II: Coming Soon — Medium Cards ─── */
 .dp-coming {
   padding: var(--space-16) var(--content-padding);
   max-width: 76rem;
@@ -405,40 +394,66 @@ useHead({
 
 .dp-coming-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  border: 1px solid var(--rule-color);
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
 }
 
 .dp-coming-card {
-  padding: var(--space-10) var(--space-8);
-  border-right: 1px solid var(--rule-color);
-  border-bottom: 1px solid var(--rule-color);
+  padding: var(--space-8) var(--space-6);
+  border: 1px solid var(--rule-color);
   text-decoration: none;
   color: inherit;
   background-image: none;
   display: flex;
   flex-direction: column;
-  transition: background 0.35s ease;
+  transition: background 0.35s ease, border-color 0.35s ease;
 }
-
-.dp-coming-card:nth-child(2n) { border-right: none; }
-.dp-coming-card:nth-child(n+3) { border-bottom: none; }
 
 .dp-coming-card:hover {
   background: var(--color-surface);
+  border-color: rgba(184, 150, 78, 0.3);
 }
 
-.dp-coming-card:hover .dp-name { color: var(--color-gold); }
-
-.dp-card-icon {
-  font-size: 1.5rem;
+.dp-coming-number {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1;
   color: var(--color-text-muted);
-  margin-bottom: var(--space-6);
-  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  opacity: 0.12;
+  margin-bottom: var(--space-3);
+}
+
+.dp-coming-type {
+  font-size: 0.5625rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-mega-wide);
+  color: var(--color-gold);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.dp-coming-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: var(--text-h3);
+  color: var(--color-ink, #FAFAF9);
+  margin-bottom: var(--space-3);
   transition: color 0.3s ease;
 }
 
-.dp-coming-card:hover .dp-card-icon { color: var(--color-gold); }
+.dp-coming-card:hover .dp-coming-name {
+  color: var(--color-gold);
+}
+
+.dp-coming-desc {
+  font-size: var(--text-small);
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
 
 .dp-status-note {
   font-size: var(--text-overline);
@@ -448,7 +463,7 @@ useHead({
   font-style: italic;
 }
 
-/* ─── Development Section — compact rows ─── */
+/* ─── Future Frontiers: In Development — Compact Grid ─── */
 .dp-dev {
   padding: var(--space-16) var(--content-padding);
   max-width: 76rem;
@@ -456,85 +471,59 @@ useHead({
   border-top: 1px solid var(--rule-color);
 }
 
-.dp-dev-list {
-  border-top: 1px solid var(--rule-color);
-}
-
-.dp-dev-row {
+.dp-dev-grid {
   display: grid;
-  grid-template-columns: 3rem 2rem 1fr 2fr 2rem;
-  align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-5) var(--space-4);
-  border-bottom: 1px solid var(--rule-color);
-  text-decoration: none;
-  color: inherit;
-  background-image: none;
-  opacity: 0.6;
-  transition: opacity 0.3s ease, background 0.3s ease;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-3);
 }
 
-.dp-dev-row:hover {
-  opacity: 1;
-  background: var(--color-surface);
-}
-
-.dp-dev-row:hover .dp-dev-name { color: var(--color-gold); }
-.dp-dev-row:hover .dp-dev-arrow { color: var(--color-gold); transform: translateX(4px); }
-
-.dp-dev-number {
-  font-size: 0.625rem;
-  letter-spacing: 0.2em;
-  color: var(--color-text-muted);
-  opacity: 0.5;
-}
-
-.dp-dev-row .dp-card-icon {
-  font-size: 1.25rem;
-  margin-bottom: 0;
-}
-
-.dp-dev-info {
+.dp-dev-card {
+  padding: var(--space-6) var(--space-4);
+  border: 1px solid var(--rule-color);
   display: flex;
   flex-direction: column;
+  opacity: 0.6;
+  transition: opacity 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+}
+
+.dp-dev-card:hover {
+  opacity: 1;
+  background: var(--color-surface);
+  border-color: rgba(113, 113, 122, 0.3);
+}
+
+.dp-dev-number {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  line-height: 1;
+  color: var(--color-text-muted);
+  opacity: 0.15;
+  margin-bottom: var(--space-3);
 }
 
 .dp-dev-name {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 300;
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   color: var(--color-ink, #FAFAF9);
+  margin-bottom: 0.25rem;
   transition: color 0.3s ease;
 }
 
+.dp-dev-card:hover .dp-dev-name {
+  color: var(--color-gold);
+}
+
 .dp-dev-type {
-  font-size: 0.5625rem;
+  font-size: 0.5rem;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--tracking-widest);
   color: var(--color-text-muted);
 }
 
-.dp-dev-desc {
-  font-size: var(--text-small);
-  color: var(--color-text-muted);
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.dp-dev-arrow {
-  font-size: 1.125rem;
-  color: var(--color-text-muted);
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-
-.dp-dev-row:hover .dp-dev-arrow { opacity: 1; }
-
-/* ─── CTA ─── */
+/* ─── Footer CTA ─── */
 .dp-cta-section {
   padding: var(--space-32) var(--content-padding);
   text-align: center;
@@ -552,6 +541,7 @@ useHead({
   font-weight: 300;
   font-size: clamp(2rem, 4vw, 3.5rem);
   margin-bottom: var(--space-4);
+  justify-content: center;
 }
 
 .dp-cta-sub {
@@ -576,9 +566,19 @@ useHead({
 .dp-cta-btn:hover { opacity: 0.85; }
 
 /* ─── Responsive ─── */
+@media (max-width: 1200px) {
+  .dp-dev-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 1024px) {
-  .dp-active-row {
-    grid-template-columns: 1fr 1fr;
+  .dp-coming-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dp-dev-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -587,36 +587,34 @@ useHead({
     padding-top: calc(var(--space-16) + 3rem);
   }
 
-  .dp-flagship {
+  .dp-hero-card {
     grid-template-columns: 1fr;
   }
 
-  .dp-active-row {
-    grid-template-columns: 1fr;
+  .dp-hero-card--flipped .dp-hero-card-image {
+    order: 0;
+  }
+
+  .dp-hero-card--flipped .dp-hero-card-content {
+    order: 0;
+  }
+
+  .dp-hero-card-content {
+    padding: var(--space-6) var(--space-6) var(--space-8);
   }
 
   .dp-coming-grid {
     grid-template-columns: 1fr;
   }
 
-  .dp-coming-card {
-    border-right: none !important;
+  .dp-dev-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
-  .dp-coming-card:nth-child(n+3) {
-    border-bottom: 1px solid var(--rule-color);
-  }
-
-  .dp-coming-card:last-child {
-    border-bottom: none;
-  }
-
-  .dp-dev-row {
-    grid-template-columns: 2.5rem 1.5rem 1fr 1.5rem;
-  }
-
-  .dp-dev-desc {
-    display: none;
+@media (max-width: 480px) {
+  .dp-dev-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>

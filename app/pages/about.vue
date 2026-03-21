@@ -2,33 +2,60 @@
   <div class="about-page">
 
     <!-- ============================================
-         HERO — Asymmetric 7/5 grid
-         Left: overline + display heading + subtitle
-         Right: pull quote
+         HERO — Left-aligned, clean
+         Overline + italic Fraunces heading + pull quote
     ============================================= -->
     <section ref="heroSection" class="about-hero section section-dark">
-      <div class="section-wide">
-        <div class="hero-grid">
-          <div class="hero-left">
-            <p class="overline reveal">About</p>
-            <h1 class="about-hero-title word-reveal">
-              The people behind the road.
-            </h1>
-            <p class="about-hero-sub reveal">
-              Meraki Road was founded by two people who arrived at the same
-              conclusion from opposite directions: the creators shaping this era
-              deserve better infrastructure than what exists.
-            </p>
-          </div>
-          <div class="hero-right reveal">
-            <blockquote class="hero-quote">
-              <p class="hero-quote-text">
-                We kept looking for the place that took this work seriously.
-                It didn&rsquo;t exist, so we built it.
-              </p>
-              <cite class="hero-quote-cite">&mdash; Brian &amp; Rachel</cite>
-            </blockquote>
-          </div>
+      <div class="section-default">
+        <p class="overline reveal">About Meraki Road</p>
+        <h1 class="about-hero-title word-reveal">
+          <em>Built by practitioners, for practitioners.</em>
+        </h1>
+        <blockquote class="hero-quote reveal">
+          <p class="hero-quote-text">
+            We didn&rsquo;t set out to build a platform. We set out to build a
+            sanctuary&mdash;a place where the work speaks first and the algorithm
+            never gets a vote.
+          </p>
+          <cite class="hero-quote-cite">&mdash; Brian Lapinski</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
+         ORIGIN NARRATIVE — "Bridging the Gap"
+         Left-aligned body copy, warm palette
+    ============================================= -->
+    <section ref="originSection" class="origin section">
+      <div class="section-default">
+        <p class="overline reveal">The Origin</p>
+        <h2 class="origin-title word-reveal">
+          <em>Bridging the Gap Between Talent and Visibility</em>
+        </h2>
+        <div class="origin-rule reveal" aria-hidden="true" />
+        <div class="origin-body-wrap">
+          <p class="origin-body reveal">
+            Meraki Road started in 2018 with a question that wouldn&rsquo;t
+            go away: why does discovery in creative fields still depend on
+            algorithms that reward volume over craft?
+          </p>
+          <p class="origin-body reveal">
+            Every platform we found optimised for engagement&mdash;likes,
+            shares, follower counts. None of them were built to surface the
+            practitioners doing rigorous, patient work at the edges of their
+            disciplines. The people shaping what AI-native creativity actually
+            looks like were invisible to the infrastructure that was supposed
+            to serve them.
+          </p>
+          <p class="origin-body reveal">
+            So we stopped looking. We built the institution ourselves&mdash;a
+            publishing house, a credentialing body, a research practice, and a
+            gathering place, all held together by one conviction: that this
+            work deserves the same permanence and seriousness as every creative
+            discipline that came before it.
+          </p>
         </div>
       </div>
     </section>
@@ -36,102 +63,53 @@
     <SectionDivider />
 
     <!-- ============================================
-         FOUNDERS — Staggered 3-col (2 founders, visual offset)
-         Grayscale portraits, hover to color
+         FOUNDERS — Side-by-side cards (FoundersGrid)
     ============================================= -->
     <FoundersGrid />
 
-    <!-- ============================================
-         ORIGIN — Bordered section with hover state
-         Overline > italic heading > rule > body
-    ============================================= -->
-    <section ref="originSection" class="origin section">
-      <div class="origin-bg-wrap">
-        <NuxtImg
-          src="/images/origin-bg.webp"
-          alt=""
-          class="origin-bg-image"
-          loading="lazy"
-          decoding="async"
-          width="1920"
-          height="1080"
-        />
-        <div class="origin-bg-overlay" />
-      </div>
-      <div class="section-default origin-content">
-        <div class="origin-grid">
-          <div class="origin-header">
-            <p class="overline reveal">The Origin</p>
-            <h2 class="origin-title word-reveal">
-              <em>We couldn&rsquo;t find what we were looking for.</em>
-            </h2>
-          </div>
-          <div class="origin-body-col">
-            <div class="origin-rule" aria-hidden="true" />
-            <p class="origin-body reveal">
-              We looked for something with weight. Something built like the institutions that shaped every creative discipline before this one&mdash;designed for creators working at the frontier of what&rsquo;s possible.
-            </p>
-            <p class="origin-body reveal">
-              The gap is infrastructure. Places that take this work seriously. Standards that mean something. A publishing house, a credential, a research practice, a gathering place&mdash;all built around the conviction that AI-native creative work is a legitimate discipline that deserves legitimate support.
-            </p>
-            <p class="origin-body origin-body--coda reveal">
-              We built it.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <SectionDivider />
 
     <!-- ============================================
-         PRINCIPLES — Staggered 3-column cards
-         Ikigai Lab pattern: 0 / mt-16 / mt-32 offset
-         Bordered cards with hover states
+         ETHOS — 2x3 grid of numbered principles
+         Typography-driven, no background fills
     ============================================= -->
-    <section ref="principlesSection" class="principles section">
+    <section ref="ethosSection" class="ethos section">
       <div class="section-wide">
-        <div class="principles-header">
-          <p class="overline reveal">How We Work</p>
-          <h2 class="principles-title word-reveal"><em>Guiding principles</em></h2>
-          <p class="principles-intro reveal">
-            Three convictions that shape every decision at Meraki Road &mdash; from
-            what we publish to who we invite.
-          </p>
+        <div class="ethos-header">
+          <p class="overline reveal">Our Ethos</p>
+          <h2 class="ethos-title word-reveal"><em>Six Fundamental Principles</em></h2>
         </div>
 
-        <div class="principles-stagger-grid">
+        <div class="ethos-grid">
           <article
-            v-for="(principle, index) in principles"
-            :key="principle.title"
-            class="principle-card"
-            :class="`principle-card--${index}`"
+            v-for="principle in principles"
+            :key="principle.number"
+            class="ethos-card reveal"
           >
-            <span class="principle-number">{{ principle.number }}</span>
-            <h3 class="principle-card-title">{{ principle.title }}</h3>
-            <div class="principle-rule" aria-hidden="true" />
-            <p class="principle-body">{{ principle.body }}</p>
+            <span class="ethos-number">{{ principle.number }}</span>
+            <h3 class="ethos-card-title">{{ principle.title }}</h3>
+            <p class="ethos-card-body">{{ principle.body }}</p>
           </article>
         </div>
       </div>
     </section>
 
+    <SectionDivider />
+
     <!-- ============================================
-         CTA — Centered with bordered treatment
+         CTA — "The road is open." + dual buttons
     ============================================= -->
     <section ref="ctaSection" class="cta section-dark">
       <div class="section-narrow cta-inner">
-        <div class="cta-rule" aria-hidden="true" />
-        <p class="overline reveal">Join Meraki Road</p>
-        <h2 class="cta-title word-reveal">
-          The road is open.
-        </h2>
-        <p class="cta-body reveal">
-          We are accepting applications from creators, researchers, and builders
-          with a demonstrated body of work. No follower counts. No application fees.
-          Just evidence of practice.
-        </p>
-        <NuxtLink to="/apply" class="cta-button reveal">Express Interest &rarr;</NuxtLink>
+        <h2 class="cta-title word-reveal">The road is open.</h2>
+        <div class="cta-buttons reveal">
+          <NuxtLink to="/apply" class="cta-button cta-button--primary">
+            Join the District &rarr;
+          </NuxtLink>
+          <NuxtLink to="/archive" class="cta-button cta-button--secondary">
+            View the Archive &rarr;
+          </NuxtLink>
+        </div>
       </div>
     </section>
 
@@ -144,47 +122,45 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 import { useWordReveal } from '~/composables/useWordReveal'
 import { useMagnetic, useTilt } from '~/composables/useInteractions'
-import { useParallax } from '~/composables/useParallax'
 
-/* ── SEO ─────────────────────────────────── */
+/* -- SEO ---------------------------------------- */
 useHead({
-  title: 'About — Meraki Road',
+  title: 'About \u2014 Meraki Road',
   meta: [
-    { name: 'description', content: 'The people behind Meraki Road. Two paths, one conviction: that AI-native creative work deserves real districts.' },
+    { name: 'description', content: 'Built by practitioners, for practitioners. The people and principles behind Meraki Road.' },
   ],
 })
 
 useSeoMeta({
-  ogTitle: 'About — Meraki Road',
-  ogDescription: 'The people behind Meraki Road. Two paths, one conviction: that AI-native creative work deserves real districts.',
-  twitterTitle: 'About — Meraki Road',
-  twitterDescription: 'The people behind Meraki Road. Two paths, one conviction: that AI-native creative work deserves real districts.',
+  ogTitle: 'About \u2014 Meraki Road',
+  ogDescription: 'Built by practitioners, for practitioners. The people and principles behind Meraki Road.',
+  twitterTitle: 'About \u2014 Meraki Road',
+  twitterDescription: 'Built by practitioners, for practitioners. The people and principles behind Meraki Road.',
 })
 
-/* ── Hero ────────────────────────────────── */
+/* -- Hero --------------------------------------- */
 const heroSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(heroSection, '.reveal')
 useWordReveal(heroSection, '.word-reveal')
 
-/* ── Origin ──────────────────────────────── */
+/* -- Origin ------------------------------------- */
 const originSection = ref<HTMLElement | null>(null)
-useGsapScrollReveal(originSection, '.reveal')
-useParallax(originSection, '.origin-bg-image', { speed: 0.12 })
+useGsapScrollReveal(originSection, '.reveal', { stagger: 0.12 })
 useWordReveal(originSection, '.word-reveal')
 
-/* ── Principles ──────────────────────────── */
-const principlesSection = ref<HTMLElement | null>(null)
-useGsapScrollReveal(principlesSection, '.reveal', { stagger: 0.1 })
-useTilt(principlesSection, '.principle-card', { maxRotation: 2 })
-useWordReveal(principlesSection, '.word-reveal')
+/* -- Ethos -------------------------------------- */
+const ethosSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(ethosSection, '.reveal', { stagger: 0.1 })
+useTilt(ethosSection, '.ethos-card', { maxRotation: 2 })
+useWordReveal(ethosSection, '.word-reveal')
 
-/* ── CTA ─────────────────────────────────── */
+/* -- CTA ---------------------------------------- */
 const ctaSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(ctaSection, '.reveal')
 useWordReveal(ctaSection, '.word-reveal', { stagger: 0.08 })
 useMagnetic(ctaSection, '.cta-button', { strength: 0.25 })
 
-/* ── GSAP context for custom animations ─── */
+/* -- Custom GSAP animations -------------------- */
 let ctx: gsap.Context | null = null
 
 onMounted(async () => {
@@ -192,7 +168,6 @@ onMounted(async () => {
 
   gsap.registerPlugin(ScrollTrigger)
 
-  // Wait for hero to be ready
   if (heroSection.value) {
     await waitForAncestorAnimations(heroSection.value)
   }
@@ -213,13 +188,12 @@ onMounted(async () => {
       })
     }
 
-    /* Principle cards stagger entrance */
-    const cards = principlesSection.value?.querySelectorAll('.principle-card')
+    /* Ethos card stagger entrance */
+    const cards = ethosSection.value?.querySelectorAll('.ethos-card')
     cards?.forEach((card) => {
-      const number = card.querySelector('.principle-number')
-      const title = card.querySelector('.principle-card-title')
-      const rule = card.querySelector('.principle-rule')
-      const body = card.querySelector('.principle-body')
+      const number = card.querySelector('.ethos-number')
+      const title = card.querySelector('.ethos-card-title')
+      const body = card.querySelector('.ethos-card-body')
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -229,38 +203,16 @@ onMounted(async () => {
         },
       })
 
-      tl.fromTo(card,
-        { '--border-scale': 0 },
-        { '--border-scale': 1, duration: 0.8, ease: 'power2.inOut' },
-      0)
-      .from(number!, {
+      tl.from(number!, {
         opacity: 0, scale: 0.5, duration: 0.5, ease: 'power3.out',
-      }, 0.2)
+      }, 0)
       .from(title!, {
         opacity: 0, y: 20, duration: 0.6, ease: 'power3.out',
-      }, 0.3)
-      .from(rule!, {
-        scaleX: 0, duration: 0.6, ease: 'power2.inOut',
-      }, 0.35)
+      }, 0.15)
       .from(body!, {
         opacity: 0, y: 15, duration: 0.6, ease: 'power3.out',
-      }, 0.4)
+      }, 0.25)
     })
-
-    /* CTA rule draw-in */
-    const ctaRule = ctaSection.value?.querySelector('.cta-rule')
-    if (ctaRule) {
-      gsap.from(ctaRule, {
-        scaleX: 0,
-        duration: 0.8,
-        ease: 'power2.inOut',
-        scrollTrigger: {
-          trigger: ctaRule,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      })
-    }
   })
 })
 
@@ -268,29 +220,44 @@ onUnmounted(() => {
   ctx?.revert()
 })
 
-/* ── Data ────────────────────────────────── */
+/* -- Data --------------------------------------- */
 const principles = [
   {
     number: '01',
-    title: 'Craft over convenience',
-    body: 'We treat AI as a medium that demands mastery. The tool is available to everyone. The craft takes dedicated practice.',
+    title: 'Invisible Shell',
+    body: 'Technology should be the gallery frame, not the painting. Our infrastructure disappears so the work can breathe. Every interface decision serves the creator\u2019s intent, never the platform\u2019s.',
   },
   {
     number: '02',
-    title: 'Depth over output',
-    body: 'We\u2019d rather publish one thing worth reading than ten things worth scrolling past. Volume is easy. Substance is the work.',
+    title: 'Radical Intent',
+    body: 'We choose friction over frictionlessness. Slowing down is a feature. The things worth making resist convenience\u2014they demand presence, attention, and deliberate craft.',
   },
   {
     number: '03',
-    title: 'Earned, not purchased',
-    body: 'Our credentials, our community, our standards\u2014they carry weight because they require demonstrated practice and real contribution.',
+    title: 'Meritocratic Signal',
+    body: 'Visibility here is earned through demonstrated practice, not purchased through promotion. Our credentialing carries weight because it cannot be gamed, only proven.',
+  },
+  {
+    number: '04',
+    title: 'Institutional Weight',
+    body: 'We build for permanence. Every standard, every credential, every published work is designed to endure\u2014not trend. The road is meant to outlast any single season.',
+  },
+  {
+    number: '05',
+    title: 'Human Trace',
+    body: 'Asymmetry and soul over algorithmic polish. We preserve the handmade quality in everything we publish\u2014the rough edges that prove a human was here and meant it.',
+  },
+  {
+    number: '06',
+    title: 'Sustained Presence',
+    body: 'We favour slow engagement over viral moments. Depth compounds. The practitioners who stay and build are worth more to this ecosystem than the ones who pass through.',
   },
 ]
 </script>
 
 <style scoped>
 /* =============================================
-   HERO — Asymmetric 7/5 grid
+   HERO — Left-aligned, clean
    ============================================= */
 .about-hero {
   padding-top: calc(var(--space-32) + 3rem);
@@ -298,39 +265,28 @@ const principles = [
   background-color: var(--color-background);
 }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: 7fr 5fr;
-  gap: var(--space-16);
-  align-items: center;
-}
-
-.hero-left {
-  /* Overline + display heading + subtitle */
-}
-
 .about-hero-title {
   font-size: var(--text-display);
+  font-weight: 300;
   line-height: var(--leading-tight);
   letter-spacing: var(--tracking-hero);
   margin-top: var(--space-4);
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-12);
   color: var(--color-ink);
+  max-width: 18ch;
 }
 
-.about-hero-sub {
-  font-size: var(--text-h4);
-  font-weight: 400;
-  color: var(--color-text-muted);
-  line-height: var(--leading-relaxed);
-  max-width: 50ch;
+.about-hero-title em {
+  font-family: var(--font-display);
+  font-style: italic;
 }
 
-/* Quote block — large italic serif */
+/* Pull quote */
 .hero-quote {
   border-left: 2px solid var(--color-gold);
   padding-left: var(--space-8);
   margin: 0;
+  max-width: 55ch;
 }
 
 .hero-quote-text {
@@ -341,7 +297,6 @@ const principles = [
   line-height: var(--leading-snug);
   letter-spacing: var(--tracking-tight);
   color: var(--color-ink);
-  max-width: none;
 }
 
 .hero-quote-cite {
@@ -362,82 +317,18 @@ const principles = [
     padding-bottom: var(--space-12);
   }
 
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-  }
-
   .hero-quote {
     padding-left: var(--space-6);
-    margin-top: var(--space-4);
   }
 }
 
 /* =============================================
-   ORIGIN — Bordered asymmetric two-column
+   ORIGIN — Left-aligned narrative
    ============================================= */
 .origin {
   padding-top: var(--space-24);
   padding-bottom: var(--space-24);
-  position: relative;
-  overflow: hidden;
-  background-color: var(--color-dark-bg);
-  color: var(--color-dark-text);
-}
-
-.origin h2,
-.origin h3 {
-  color: var(--color-dark-text);
-}
-
-.origin .overline {
-  color: var(--color-gold);
-}
-
-.origin-bg-wrap {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.origin-bg-image {
-  width: 100%;
-  height: 130%;
-  top: -15%;
-  position: relative;
-  object-fit: cover;
-  opacity: 0.5;
-  will-change: transform;
-  filter: grayscale(1);
-}
-
-.origin-bg-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(24, 24, 27, 0.4) 0%,
-    rgba(24, 24, 27, 0.1) 40%,
-    rgba(24, 24, 27, 0.5) 100%
-  );
-  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.5);
-}
-
-.origin-content {
-  position: relative;
-  z-index: 1;
-}
-
-.origin-grid {
-  display: grid;
-  grid-template-columns: 5fr 7fr;
-  gap: var(--space-16);
-  align-items: start;
-}
-
-.origin-header {
-  position: sticky;
-  top: calc(var(--space-16) + 3rem);
+  background-color: var(--color-surface);
 }
 
 .origin-title {
@@ -445,13 +336,14 @@ const principles = [
   font-weight: 300;
   line-height: var(--leading-snug);
   letter-spacing: var(--tracking-hero);
-  color: var(--color-dark-text);
-  margin-top: var(--space-8);
-  margin-bottom: 0;
-  max-width: none;
+  color: var(--color-ink);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-8);
+  max-width: 22ch;
 }
 
 .origin-title em {
+  font-family: var(--font-display);
   font-style: italic;
 }
 
@@ -463,22 +355,19 @@ const principles = [
   transform-origin: left;
 }
 
+.origin-body-wrap {
+  max-width: 65ch;
+}
+
 .origin-body {
   font-size: var(--text-body);
-  color: var(--color-dark-muted);
+  color: var(--color-text-muted);
   line-height: var(--leading-relaxed);
   margin-bottom: var(--space-6);
 }
 
-.origin-body--coda {
+.origin-body:last-child {
   margin-bottom: 0;
-  color: var(--color-dark-text);
-  font-family: var(--font-display);
-  font-size: var(--text-h3);
-  font-weight: 300;
-  line-height: var(--leading-snug);
-  letter-spacing: var(--tracking-tight);
-  margin-top: var(--space-8);
 }
 
 @media (max-width: 768px) {
@@ -486,152 +375,90 @@ const principles = [
     padding-top: var(--space-16);
     padding-bottom: var(--space-16);
   }
-
-  .origin-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-  }
-
-  .origin-header {
-    position: static;
-  }
 }
 
 /* =============================================
-   PRINCIPLES — Staggered 3-column (Ikigai Lab)
+   ETHOS — 2x3 grid of numbered principles
    ============================================= */
-.principles {
-  background-color: var(--color-surface);
+.ethos {
+  background-color: var(--color-background);
 }
 
-.principles-header {
-  text-align: center;
+.ethos-header {
   margin-bottom: var(--space-16);
 }
 
-.principles-title {
+.ethos-title {
   margin-top: var(--space-4);
-  margin-bottom: var(--space-6);
+  margin-bottom: 0;
 }
 
-.principles-title em {
+.ethos-title em {
+  font-family: var(--font-display);
   font-style: italic;
 }
 
-.principles-intro {
-  font-size: var(--text-body);
-  color: var(--color-text-muted);
-  line-height: var(--leading-relaxed);
-  max-width: 45ch;
-  margin: 0 auto;
-}
-
-/* Staggered 3-column grid */
-.principles-stagger-grid {
+/* 2-column, 3-row grid */
+.ethos-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-8);
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12) var(--space-16);
 }
 
-/* Ikigai Lab stagger: col 1 normal, col 2 mt-16, col 3 mt-32 */
-.principle-card--0 {
-  margin-top: 0;
-}
-
-.principle-card--1 {
-  margin-top: var(--space-16);
-}
-
-.principle-card--2 {
-  margin-top: var(--space-32);
-}
-
-/* Card — bordered with hover */
-.principle-card {
-  padding: var(--space-8);
-  border: 1px solid var(--rule-color);
-  background-color: transparent;
-  transition:
-    border-color var(--duration-normal) ease,
-    background-color var(--duration-normal) ease;
+/* Card — typography-driven, no background fills */
+.ethos-card {
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--rule-color);
   cursor: default;
+  transition: border-color var(--duration-normal) ease;
 }
 
-.principle-card:hover {
+.ethos-card:hover {
   border-color: var(--color-gold);
-  background-color: rgba(184, 150, 78, 0.04);
 }
 
-.principle-number {
+.ethos-number {
   font-family: var(--font-mono);
   font-size: var(--text-small);
   font-weight: 500;
   letter-spacing: var(--tracking-mega-wide);
-  color: var(--color-text-muted);
-  display: block;
-  margin-bottom: var(--space-4);
-  transition: color var(--duration-normal) ease, transform var(--duration-normal) ease;
-}
-
-.principle-card:hover .principle-number {
   color: var(--color-gold);
-  transform: scale(1.15);
-  transform-origin: left center;
+  display: block;
+  margin-bottom: var(--space-3);
+  transition: transform var(--duration-normal) ease;
 }
 
-.principle-card-title {
+.ethos-card:hover .ethos-number {
+  transform: translateX(4px);
+}
+
+.ethos-card-title {
   font-size: var(--text-h3);
-  margin-bottom: var(--space-4);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
   transition: color var(--duration-normal) ease;
 }
 
-.principle-card:hover .principle-card-title {
+.ethos-card:hover .ethos-card-title {
   color: var(--color-gold-accessible);
 }
 
-.principle-rule {
-  width: 32px;
-  height: 1px;
-  background: var(--color-gold);
-  margin-bottom: var(--space-4);
-  transform-origin: left;
-}
-
-.principle-body {
+.ethos-card-body {
   font-size: var(--text-body);
   color: var(--color-text-muted);
   line-height: var(--leading-relaxed);
-}
-
-@media (max-width: 1024px) {
-  .principles-stagger-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .principle-card--1 {
-    margin-top: var(--space-12);
-  }
-
-  .principle-card--2 {
-    margin-top: 0;
-  }
+  max-width: 42ch;
 }
 
 @media (max-width: 768px) {
-  .principles-stagger-grid {
+  .ethos-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-
-  .principle-card--0,
-  .principle-card--1,
-  .principle-card--2 {
-    margin-top: 0;
+    gap: var(--space-8);
   }
 }
 
 /* =============================================
-   CTA — Centered with rule
+   CTA — Centered with dual buttons
    ============================================= */
 .cta {
   padding: var(--space-32) var(--content-padding);
@@ -644,28 +471,19 @@ const principles = [
   align-items: center;
 }
 
-.cta-rule {
-  width: 48px;
-  height: 1px;
-  background: var(--color-gold);
-  margin-bottom: var(--space-12);
-  transform-origin: center;
-}
-
 .cta-title {
   font-size: var(--text-display);
   font-weight: 300;
   color: var(--color-dark-text);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-12);
   letter-spacing: var(--tracking-hero);
 }
 
-.cta-body {
-  color: var(--color-dark-muted);
-  margin-bottom: var(--space-12);
-  line-height: var(--leading-relaxed);
-  max-width: 45ch;
-  font-size: var(--text-body);
+.cta-buttons {
+  display: flex;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .cta-button {
@@ -674,21 +492,35 @@ const principles = [
   font-weight: 500;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--color-dark-text);
   padding: var(--space-4) var(--space-12);
-  border: 1px solid rgba(250, 250, 249, 0.2);
-  border-left: 2px solid var(--color-gold);
   background-image: none;
   background-color: transparent;
-  transition: border-color var(--duration-normal) ease,
-              color var(--duration-normal) ease,
-              background-color var(--duration-normal) ease;
+  transition:
+    border-color var(--duration-normal) ease,
+    color var(--duration-normal) ease,
+    background-color var(--duration-normal) ease;
 }
 
-.cta-button:hover {
+.cta-button--primary {
+  color: var(--color-dark-text);
+  border: 1px solid rgba(250, 250, 249, 0.2);
+  border-left: 2px solid var(--color-gold);
+}
+
+.cta-button--primary:hover {
   border-color: var(--color-gold);
   color: var(--color-gold);
   background-color: rgba(184, 150, 78, 0.06);
+}
+
+.cta-button--secondary {
+  color: var(--color-dark-muted);
+  border: 1px solid rgba(250, 250, 249, 0.1);
+}
+
+.cta-button--secondary:hover {
+  border-color: rgba(250, 250, 249, 0.3);
+  color: var(--color-dark-text);
 }
 
 .cta-button:focus-visible {
@@ -699,6 +531,11 @@ const principles = [
 @media (max-width: 768px) {
   .cta {
     padding: var(--space-16) var(--content-padding);
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    width: 100%;
   }
 
   .cta-button {
