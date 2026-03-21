@@ -6,7 +6,7 @@
           v-for="(letter, i) in letters"
           :key="i"
           class="preloader-letter"
-          :style="{ animationDelay: `${i * 80}ms` }"
+          :style="{ animationDelay: `${i * 120}ms` }"
         >{{ letter }}</span>
       </h1>
       <div class="preloader-line" />
@@ -54,15 +54,15 @@ onMounted(() => {
     return
   }
 
-  // Start exit sequence at 2.0s
+  // Start exit sequence at 3.0s (let it breathe)
   setTimeout(() => {
     exiting.value = true
-  }, 2000)
+  }, 3000)
 
-  // Remove from DOM after exit animation completes (2.0s delay + 0.5s slide)
+  // Remove from DOM after exit animation completes (3.0s delay + 1.2s slide)
   setTimeout(() => {
     finish()
-  }, 2500)
+  }, 4200)
 })
 
 function finish() {
@@ -112,7 +112,7 @@ function finish() {
 .preloader-letter {
   opacity: 0;
   filter: blur(4px);
-  animation: inkAbsorb 0.6s ease forwards;
+  animation: inkAbsorb 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards;
   display: inline-block;
 }
 
@@ -123,7 +123,7 @@ function finish() {
   margin-top: 1rem;
   transform: scaleX(0);
   transform-origin: center;
-  animation: lineGrow 0.4s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+  animation: lineGrow 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards;
 }
 
 .preloader-subtitle {
@@ -135,12 +135,12 @@ function finish() {
   color: var(--color-dark-secondary, #D4D4D8);
   margin: 0.75rem 0 0;
   opacity: 0;
-  animation: subtitleFade 0.4s ease 1.6s forwards;
+  animation: subtitleFade 0.5s ease 2.3s forwards;
 }
 
 /* Exit: entire preloader slides up */
 .preloader--exit {
-  animation: slideUp 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation: slideUp 1.2s cubic-bezier(0.76, 0, 0.24, 1) forwards;
 }
 
 /* ─── Keyframes ─── */
