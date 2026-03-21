@@ -10,6 +10,8 @@
             <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
             <NuxtLink to="/community" class="nav-link">Community</NuxtLink>
             <NuxtLink to="/bridge" class="nav-link">Bridge</NuxtLink>
+            <NuxtLink to="/pavilion" class="nav-link">Pavilion</NuxtLink>
+            <NuxtLink to="/institute" class="nav-link">Institute</NuxtLink>
             <NuxtLink to="/about" class="nav-link">About</NuxtLink>
           </nav>
           <div class="nav-right">
@@ -28,6 +30,8 @@
           <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
           <NuxtLink to="/community" class="nav-link">Community</NuxtLink>
           <NuxtLink to="/bridge" class="nav-link">Bridge</NuxtLink>
+          <NuxtLink to="/pavilion" class="nav-link">Pavilion</NuxtLink>
+          <NuxtLink to="/institute" class="nav-link">Institute</NuxtLink>
           <NuxtLink to="/about" class="nav-link">About</NuxtLink>
         </nav>
         <NuxtLink to="/apply" class="nav-apply">Apply</NuxtLink>
@@ -112,6 +116,8 @@ const mobileLinks = [
   { to: '/the-road', label: 'The Road' },
   { to: '/community', label: 'Community' },
   { to: '/bridge', label: 'Bridge' },
+  { to: '/pavilion', label: 'Pavilion' },
+  { to: '/institute', label: 'Institute' },
   { to: '/about', label: 'About' },
 ]
 
