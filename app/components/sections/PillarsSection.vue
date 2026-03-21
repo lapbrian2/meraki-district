@@ -10,19 +10,21 @@
 
       <div class="dgs-grid">
         <NuxtLink
-          v-for="(d, i) in districts"
+          v-for="(d, i) in featured"
           :key="d.slug"
           :to="`/districts/${d.slug}`"
           class="dgs-card reveal"
-          :class="{ 'dgs-elevated': i % 3 === 1 }"
+          :class="{ 'dgs-elevated': i === 1 || i === 4 }"
         >
           <span class="dgs-icon material-symbols-outlined">{{ iconMap[d.slug] || 'category' }}</span>
-          <span class="dgs-number">{{ d.number }}</span>
           <h3 class="dgs-name">{{ d.name }}</h3>
-          <p class="dgs-type">{{ d.type }}</p>
-          <p class="dgs-desc">{{ d.description }}</p>
+          <p class="dgs-desc">{{ d.type }}</p>
           <span class="dgs-link">Explore →</span>
         </NuxtLink>
+      </div>
+
+      <div class="dgs-footer reveal">
+        <NuxtLink to="/districts" class="dgs-view-all">View all 11 districts →</NuxtLink>
       </div>
     </div>
   </section>
@@ -34,8 +36,11 @@ import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
 import { useWordReveal } from '~/composables/useWordReveal'
 
 const sectionRef = ref<HTMLElement | null>(null)
-useGsapScrollReveal(sectionRef, '.reveal', { stagger: 0.06 })
+useGsapScrollReveal(sectionRef, '.reveal', { stagger: 0.08 })
 useWordReveal(sectionRef, '.word-reveal')
+
+// Show 6 key districts on homepage — full list lives at /districts
+const featured = districts.slice(0, 6)
 
 const iconMap: Record<string, string> = {
   'voight-studio': 'brush',
@@ -108,7 +113,7 @@ const iconMap: Record<string, string> = {
   line-height: var(--leading-relaxed);
 }
 
-/* Bordered grid — 3 columns for 11 items */
+/* 3x2 bordered grid — matches Stitch layout */
 .dgs-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -116,7 +121,7 @@ const iconMap: Record<string, string> = {
 }
 
 .dgs-card {
-  padding: var(--space-10) var(--space-8);
+  padding: var(--space-12);
   border-right: 1px solid var(--rule-color);
   border-bottom: 1px solid var(--rule-color);
   transition: background-color 0.5s var(--ease-out);
@@ -127,13 +132,13 @@ const iconMap: Record<string, string> = {
   background-image: none;
 }
 
-/* Remove right border on every 3rd card */
+/* 3x2: remove right border on col 3 */
 .dgs-card:nth-child(3n) {
   border-right: none;
 }
 
-/* Remove bottom border on last row (items 10, 11 — and 12 if it existed) */
-.dgs-card:nth-child(n+10) {
+/* 3x2: remove bottom border on row 2 */
+.dgs-card:nth-child(n+4) {
   border-bottom: none;
 }
 
@@ -141,25 +146,20 @@ const iconMap: Record<string, string> = {
   background: var(--color-background);
 }
 
+.dgs-card:hover .dgs-name {
+  color: var(--color-gold);
+}
+
 .dgs-elevated {
   background: rgba(184, 150, 78, 0.03);
 }
 
 .dgs-icon {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   color: var(--color-gold);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-12);
   display: block;
   font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-}
-
-.dgs-number {
-  font-family: var(--font-body);
-  font-size: var(--text-overline);
-  letter-spacing: var(--tracking-widest);
-  color: var(--color-text-muted);
-  opacity: 0.4;
-  margin-bottom: var(--space-2);
 }
 
 .dgs-name {
@@ -168,20 +168,8 @@ const iconMap: Record<string, string> = {
   font-weight: 300;
   font-style: italic;
   color: var(--color-ink);
-  margin-bottom: var(--space-2);
-  transition: color 0.3s ease;
-}
-
-.dgs-card:hover .dgs-name {
-  color: var(--color-gold);
-}
-
-.dgs-type {
-  font-size: 0.5625rem;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-widest);
-  color: var(--color-gold);
   margin-bottom: var(--space-4);
+  transition: color 0.3s ease;
 }
 
 .dgs-desc {
@@ -190,8 +178,7 @@ const iconMap: Record<string, string> = {
   text-transform: uppercase;
   color: var(--color-text-muted);
   line-height: var(--leading-relaxed);
-  margin-bottom: auto;
-  padding-bottom: var(--space-6);
+  margin-bottom: var(--space-8);
 }
 
 .dgs-link {
@@ -201,10 +188,34 @@ const iconMap: Record<string, string> = {
   text-transform: uppercase;
   color: var(--color-gold);
   transition: padding-left 0.3s var(--ease-out);
+  margin-top: auto;
 }
 
 .dgs-card:hover .dgs-link {
   padding-left: var(--space-2);
+}
+
+/* View all link */
+.dgs-footer {
+  text-align: center;
+  margin-top: var(--space-16);
+}
+
+.dgs-view-all {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  background-image: none;
+  border-bottom: 1px solid rgba(184, 150, 78, 0.3);
+  padding-bottom: 0.25rem;
+  transition: border-color 0.3s ease;
+}
+
+.dgs-view-all:hover {
+  border-color: var(--color-gold);
 }
 
 @media (max-width: 1024px) {
@@ -220,11 +231,11 @@ const iconMap: Record<string, string> = {
     border-right: none;
   }
 
-  .dgs-card:nth-child(n+10) {
+  .dgs-card:nth-child(n+4) {
     border-bottom: 1px solid var(--rule-color);
   }
 
-  .dgs-card:nth-child(n+11) {
+  .dgs-card:nth-child(n+5) {
     border-bottom: none;
   }
 }
