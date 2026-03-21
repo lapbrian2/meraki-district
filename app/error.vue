@@ -1,18 +1,19 @@
 <template>
-  <div class="error-page section-dark">
-    <div class="error-content">
-      <p class="error-code">{{ error?.statusCode || 500 }}</p>
-      <p class="overline">{{ errorLabel }}</p>
-      <div class="error-rule" aria-hidden="true" />
-      <h1 class="error-title">{{ errorTitle }}</h1>
-      <p class="error-body">{{ errorBody }}</p>
-      <div class="error-actions">
-        <NuxtLink to="/" class="error-cta" @click="clearError">
-          Back to Meraki Road
-        </NuxtLink>
-        <NuxtLink v-if="error?.statusCode === 404" to="/districts" class="error-link" @click="clearError('/districts')">
-          Browse districts
-        </NuxtLink>
+  <div class="lost-manuscript">
+    <!-- Ghost 404 watermark -->
+    <span class="lost-watermark" aria-hidden="true">{{ error?.statusCode || 500 }}</span>
+
+    <!-- Warm vignette -->
+    <div class="lost-vignette" aria-hidden="true" />
+
+    <div class="lost-content">
+      <p class="lost-overline">{{ overlineText }}</p>
+      <h1 class="lost-heading"><em>{{ headingText }}</em></h1>
+      <p class="lost-body">{{ bodyText }}</p>
+      <div class="lost-links">
+        <NuxtLink to="/" class="lost-link lost-link--primary" @click="handleClear('/')">Return to the road</NuxtLink>
+        <NuxtLink v-if="code === 404" to="/districts" class="lost-link" @click="handleClear('/districts')">Explore the districts</NuxtLink>
+        <NuxtLink v-else to="/" class="lost-link" @click="handleClear('/')">Try again</NuxtLink>
       </div>
     </div>
   </div>
@@ -23,111 +24,146 @@ const props = defineProps<{ error: { statusCode: number; message: string } }>()
 
 const code = props.error?.statusCode || 500
 
-const errorLabel = computed(() => {
-  if (code === 404) return 'Not Found'
-  if (code === 403) return 'Forbidden'
-  return 'Error'
+const overlineText = computed(() => {
+  if (code === 404) return 'UNWRITTEN'
+  if (code === 403) return 'RESTRICTED'
+  return 'INTERRUPTED'
 })
 
-const errorTitle = computed(() => {
-  if (code === 404) return 'This page doesn\u2019t exist yet.'
-  if (code === 403) return 'You don\u2019t have access to this page.'
-  return 'Something went wrong.'
+const headingText = computed(() => {
+  if (code === 404) return 'This page hasn\u2019t been written yet.'
+  if (code === 403) return 'This corridor is not yet open.'
+  return 'Something came undone.'
 })
 
-const errorBody = computed(() => {
-  if (code === 404) return 'The page you\u2019re looking for may have moved, or it hasn\u2019t been built yet.'
-  if (code === 403) return 'This area is restricted. If you believe this is an error, please contact us.'
-  return 'An unexpected error occurred. Please try again, or return to the homepage.'
+const bodyText = computed(() => {
+  if (code === 404) return 'You\u2019ve found a room that\u2019s still being built. The road has many corridors \u2014 some are just quieter than others.'
+  if (code === 403) return 'This area is reserved. If you believe you should have access, reach out directly.'
+  return 'An unexpected fault in the manuscript. The page you were reading may have shifted, or the binding gave way.'
 })
 
 useHead({
   title: `${code} \u2014 Meraki Road`,
+  meta: [
+    { name: 'robots', content: 'noindex' },
+  ],
 })
 
-const clearError = (path = '/') => clearNuxtError({ redirect: path })
+const handleClear = (path = '/') => clearNuxtError({ redirect: path })
 </script>
 
 <style scoped>
-.error-page {
+.lost-manuscript {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  background: #0a0a0a;
+  position: relative;
+  overflow: hidden;
   padding: var(--space-12) var(--content-padding);
 }
 
-.error-content {
-  max-width: 500px;
-}
-
-.error-code {
+/* Ghost watermark */
+.lost-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-family: var(--font-display);
-  font-size: clamp(4rem, 10vw, 7rem);
-  font-weight: 300;
-  color: rgba(250, 250, 249, 0.06);
+  font-size: 40vw;
+  font-weight: 200;
+  font-style: italic;
   line-height: 1;
-  letter-spacing: var(--tracking-tight);
-  margin-bottom: var(--space-2);
+  color: rgba(250, 250, 249, 0.03);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.05em;
 }
 
-.error-rule {
-  width: 32px;
-  height: 1px;
-  background: var(--color-gold);
-  margin: var(--space-4) auto var(--space-6);
+/* Warm vignette */
+.lost-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(184, 150, 78, 0.06) 100%);
+  pointer-events: none;
 }
 
-.error-title {
-  font-size: var(--text-h2);
-  color: var(--color-dark-text);
+/* Content */
+.lost-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 520px;
+}
+
+.lost-overline {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-gold);
   margin-bottom: var(--space-6);
 }
 
-.error-body {
-  font-size: var(--text-body);
-  color: var(--color-dark-muted);
-  line-height: var(--leading-relaxed);
-  margin-bottom: var(--space-12);
-  max-width: none;
+.lost-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  font-style: normal;
+  line-height: var(--leading-snug);
+  color: #FAFAF9;
+  margin-bottom: var(--space-8);
+  letter-spacing: var(--tracking-tight);
 }
 
-.error-actions {
+.lost-heading em {
+  font-style: italic;
+  font-variation-settings: 'WONK' 1, 'SOFT' 80;
+}
+
+.lost-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: #A1A1AA;
+  line-height: var(--leading-relaxed);
+  max-width: 40ch;
+  margin: 0 auto var(--space-12);
+}
+
+.lost-links {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-4);
 }
 
-.error-cta {
-  display: inline-block;
+.lost-link {
+  font-family: var(--font-body);
   font-size: var(--text-small);
-  font-weight: 500;
-  letter-spacing: var(--tracking-widest);
-  text-transform: uppercase;
-  color: var(--color-gold);
-  border: 1px solid var(--color-gold);
-  padding: var(--space-4) var(--space-12);
-  background-image: none;
-  transition: background-color var(--duration-normal) ease,
-              color var(--duration-normal) ease;
-}
-
-.error-cta:hover {
-  background-color: var(--color-gold);
-  color: var(--color-ink);
-}
-
-.error-link {
-  font-size: var(--text-small);
-  color: var(--color-dark-muted);
   letter-spacing: var(--tracking-wide);
+  color: #A1A1AA;
+  text-decoration: none;
   background-image: none;
-  transition: color var(--duration-fast) ease;
+  border-bottom: 1px solid rgba(184, 150, 78, 0.3);
+  padding-bottom: 2px;
+  transition: color var(--duration-normal) ease,
+              border-color var(--duration-normal) ease;
 }
 
-.error-link:hover {
+.lost-link:hover {
   color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+.lost-link--primary {
+  color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+.lost-link--primary:hover {
+  color: #FAFAF9;
+  border-color: #FAFAF9;
 }
 </style>
