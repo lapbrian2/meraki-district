@@ -36,7 +36,7 @@
           <article
             v-for="feature in features"
             :key="feature.title"
-            class="feature-card reveal"
+            class="feature-card vellum-card reveal"
           >
             <span class="feature-icon material-symbols-outlined">{{ feature.icon }}</span>
             <h3 class="feature-name">{{ feature.title }}</h3>

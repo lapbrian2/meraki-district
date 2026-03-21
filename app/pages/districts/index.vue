@@ -20,7 +20,7 @@
       <div
         v-for="(d, i) in active"
         :key="d.slug"
-        class="dp-hero-card reveal"
+        class="dp-hero-card vellum-card reveal"
         :class="{ 'dp-hero-card--flipped': i % 2 !== 0 }"
       >
         <div class="dp-hero-card-image grayscale-hover">
@@ -63,7 +63,7 @@
           v-for="d in comingSoon"
           :key="d.slug"
           :to="`/districts/${d.slug}`"
-          class="dp-coming-card reveal"
+          class="dp-coming-card vellum-card reveal"
         >
           <span class="dp-coming-number">{{ d.number }}</span>
           <span class="dp-badge dp-badge--coming">

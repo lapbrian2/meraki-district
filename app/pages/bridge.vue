@@ -81,7 +81,7 @@
       <div class="section-wide">
         <div class="bento-grid">
           <!-- Card 1: compact (col-span-4) -->
-          <article class="bento-card bento-compact reveal">
+          <article class="bento-card bento-compact vellum-card reveal">
             <div class="bento-photo-wrap grayscale-hover">
               <div class="bento-photo-placeholder">
                 <span class="material-symbols-outlined bento-photo-icon">person</span>
@@ -101,7 +101,7 @@
           </article>
 
           <!-- Card 2: wide (col-span-8) -->
-          <article class="bento-card bento-wide reveal">
+          <article class="bento-card bento-wide vellum-card reveal">
             <div class="bento-wide-image grayscale-hover">
               <NuxtImg
                 src="/images/districts/the-frame.webp"
@@ -129,7 +129,7 @@
           </article>
 
           <!-- Card 3: compact (col-span-4) -->
-          <article class="bento-card bento-compact reveal">
+          <article class="bento-card bento-compact vellum-card reveal">
             <div class="bento-photo-wrap grayscale-hover">
               <div class="bento-photo-placeholder">
                 <span class="material-symbols-outlined bento-photo-icon">person</span>
@@ -148,7 +148,7 @@
           </article>
 
           <!-- Card 4: compact (col-span-4) -->
-          <article class="bento-card bento-compact reveal">
+          <article class="bento-card bento-compact vellum-card reveal">
             <div class="bento-photo-wrap grayscale-hover">
               <div class="bento-photo-placeholder">
                 <span class="material-symbols-outlined bento-photo-icon">person</span>
@@ -168,7 +168,7 @@
           </article>
 
           <!-- Card 5: CTA card (col-span-4) -->
-          <article class="bento-card bento-cta reveal">
+          <article class="bento-card bento-cta vellum-card reveal">
             <span class="material-symbols-outlined bento-cta-icon">groups</span>
             <h3 class="bento-cta-title">Access the Full Index</h3>
             <p class="bento-cta-body">

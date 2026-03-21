@@ -30,7 +30,7 @@
             v-for="post in posts.slice(1)"
             :key="post.path"
             :to="post.path"
-            class="featured-card reveal"
+            class="featured-card vellum-card reveal"
           >
             <div class="featured-image">
               <NuxtImg :src="post.image" :alt="`${post.tag}: ${post.title}`" loading="lazy" decoding="async" width="400" height="267" @load="onImageLoad" />

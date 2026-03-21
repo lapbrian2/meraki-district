@@ -169,6 +169,7 @@
 </template>
 
 <script setup lang="ts">
+import { gsap } from 'gsap'
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
 import { useWordReveal } from '~/composables/useWordReveal'
 
@@ -211,6 +212,64 @@ useWordReveal(storeSection, '.word-reveal')
 const ctaSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(ctaSection, '.reveal')
 useWordReveal(ctaSection, '.word-reveal', { stagger: 0.08 })
+
+/* -- Curator's Loupe ---------------------------- */
+onMounted(() => {
+  if (!import.meta.client) return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  const grid = exhibitionsSection.value?.querySelector('.exhibitions-grid')
+  if (!grid) return
+
+  // Create loupe element
+  const loupe = document.createElement('div')
+  loupe.className = 'curator-loupe'
+  ;(grid as HTMLElement).style.position = 'relative'
+  grid.appendChild(loupe)
+
+  const loupeImg = document.createElement('div')
+  loupeImg.className = 'curator-loupe-img'
+  loupe.appendChild(loupeImg)
+
+  const imageWraps = grid.querySelectorAll('.exhibition-image-wrap')
+
+  imageWraps.forEach((wrap) => {
+    const wrapEl = wrap as HTMLElement
+    const imgEl = wrapEl.querySelector('img')
+
+    wrapEl.addEventListener('mouseenter', () => {
+      const src = imgEl?.getAttribute('src') || ''
+      loupeImg.style.backgroundImage = `url(${src})`
+      loupe.classList.add('active')
+    })
+
+    wrapEl.addEventListener('mousemove', (e: MouseEvent) => {
+      const gridRect = (grid as HTMLElement).getBoundingClientRect()
+      const wrapRect = wrapEl.getBoundingClientRect()
+
+      const mouseX = e.clientX - gridRect.left
+      const mouseY = e.clientY - gridRect.top
+
+      // Position loupe with GSAP lag
+      gsap.to(loupe, {
+        left: mouseX - 60,
+        top: mouseY - 60,
+        duration: 0.3,
+        ease: 'power2.out',
+      })
+
+      // Track cursor position relative to image for background-position
+      const relX = ((e.clientX - wrapRect.left) / wrapRect.width) * 100
+      const relY = ((e.clientY - wrapRect.top) / wrapRect.height) * 100
+      loupeImg.style.backgroundPosition = `${relX}% ${relY}%`
+      loupeImg.style.backgroundSize = `${wrapRect.width * 1.1}px ${wrapRect.height * 1.1}px`
+    })
+
+    wrapEl.addEventListener('mouseleave', () => {
+      loupe.classList.remove('active')
+    })
+  })
+})
 
 /* -- Data --------------------------------------- */
 interface Exhibition {
@@ -808,5 +867,36 @@ const exhibitions: Exhibition[] = [
     width: 100%;
     text-align: center;
   }
+}
+
+/* =============================================
+   CURATOR'S LOUPE — Exhibition grid magnifier
+   (global because elements are dynamically created)
+   ============================================= */
+:global(.curator-loupe) {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid rgba(184, 150, 78, 0.3);
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 0 20px rgba(184, 150, 78, 0.1);
+}
+
+:global(.curator-loupe.active) {
+  opacity: 1;
+}
+
+:global(.curator-loupe-img) {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  filter: grayscale(0) saturate(1.1);
+  transform: scale(1.1);
 }
 </style>

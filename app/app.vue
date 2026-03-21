@@ -1,5 +1,7 @@
 <template>
   <NuxtLayout>
+    <GhostWatermark />
+    <ArchivalTimeline />
     <NuxtPage />
   </NuxtLayout>
 </template>

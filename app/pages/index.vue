@@ -34,7 +34,7 @@
         <div
           v-for="(artist, i) in featuredArtists.slice(1)"
           :key="i + 1"
-          class="fa-card"
+          class="fa-card vellum-card"
           @click="activeArtist = artist"
         >
           <div class="fa-image reveal-image parallax-container">

@@ -4,7 +4,7 @@
       <!-- Left: editorial text stack -->
       <div class="hero-text">
         <p class="hero-overline">Est. 2026</p>
-        <h1 class="hero-title reveal-text">
+        <h1 ref="heroTitle" class="hero-title reveal-text ink-reveal">
           <span class="hero-title-line">Where craft</span>
           <span class="hero-title-accent">meets culture.</span>
         </h1>
@@ -44,10 +44,28 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { waitForAncestorAnimations } from '~/composables/useGsapScrollReveal'
 
 const hero = ref<HTMLElement | null>(null)
+const heroTitle = ref<HTMLElement | null>(null)
 let ctx: gsap.Context | null = null
 
 onMounted(async () => {
   if (!hero.value) return
+
+  // Ink-reveal Intersection Observer for hero title
+  if (heroTitle.value && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.2 }
+    )
+    observer.observe(heroTitle.value)
+  }
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
   await waitForAncestorAnimations(hero.value)
