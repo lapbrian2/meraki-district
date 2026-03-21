@@ -275,6 +275,20 @@ useGsapScrollReveal(footerRef, '.reveal', { stagger: 0.12 })
     grid-column: 1 / -1;
   }
 
+  .footer-col-districts {
+    grid-column: 1 / -1;
+  }
+
+  .footer-col-districts ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-coming-soon {
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+  }
+
   .footer-newsletter-form {
     max-width: none;
   }

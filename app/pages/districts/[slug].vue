@@ -99,7 +99,7 @@
           <p class="q-cta-text">
             Want to be notified when {{ district.name }} opens?
           </p>
-          <NuxtLink to="/apply" class="q-cta-button">Join the waitlist</NuxtLink>
+          <NuxtLink to="/apply" class="q-cta-button">Express interest &rarr;</NuxtLink>
         </div>
       </div>
     </section>
@@ -621,14 +621,18 @@ onUnmounted(() => {
   text-transform: uppercase;
   color: var(--color-ink);
   padding: var(--space-3) var(--space-8);
-  border: 1px solid var(--color-ink);
+  border: 1px solid var(--color-border);
+  border-left: 2px solid var(--color-accent);
   background-image: none;
-  transition: border-color var(--duration-fast) ease, color var(--duration-fast) ease;
+  transition: border-color var(--duration-fast) ease,
+              color var(--duration-fast) ease,
+              background-color var(--duration-fast) ease;
 }
 
 .q-cta-button:hover {
   border-color: var(--color-accent);
   color: var(--color-accent);
+  background-color: color-mix(in srgb, var(--color-accent) 6%, transparent);
 }
 
 /* Explore More */
