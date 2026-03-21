@@ -65,9 +65,12 @@ onUnmounted(() => {
 }
 
 .manifesto-text {
+  font-family: var(--font-display);
   font-size: var(--text-h2);
   font-weight: 300;
+  font-style: italic;
   line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
   margin-top: var(--space-8);
   margin-bottom: var(--space-8);
   max-width: none;

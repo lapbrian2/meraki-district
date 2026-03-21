@@ -13,9 +13,13 @@
       </div>
       <!-- Hero artist: first creator, horizontal layout -->
       <div class="fa-hero" @click="activeArtist = featuredArtists[0]">
-        <div class="fa-hero-image reveal-image">
+        <div class="fa-hero-image reveal-image parallax-container">
           <NuxtImg :src="featuredArtists[0].image" :alt="featuredArtists[0].name" loading="lazy" decoding="async" width="600" height="800" />
           <div class="fa-overlay"><span class="fa-peek">View artist</span></div>
+          <div class="fa-quote-overlay">
+            <p class="fa-quote-text"><em>"{{ featuredArtists[0].bio.split('.')[0] }}."</em></p>
+            <p class="fa-quote-attr">{{ featuredArtists[0].name }}</p>
+          </div>
         </div>
         <div class="fa-hero-info reveal">
           <span class="fa-index">01</span>
@@ -33,7 +37,7 @@
           class="fa-card"
           @click="activeArtist = artist"
         >
-          <div class="fa-image reveal-image">
+          <div class="fa-image reveal-image parallax-container">
             <NuxtImg :src="artist.image" :alt="artist.name" loading="lazy" decoding="async" width="400" height="533" />
             <div class="fa-overlay">
               <span class="fa-peek">View artist</span>
@@ -244,7 +248,7 @@ const featuredArtists: Artist[] = [
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
 }
 
-.fa-hero:hover .fa-hero-image img { transform: scale(1.03); }
+.fa-hero:hover .fa-hero-image img { transform: scale(1.08) translateY(-2%); }
 .fa-hero:hover .fa-overlay { opacity: 1; }
 .fa-hero:hover .fa-hero-info h3 { background-size: 100% 1px; }
 
@@ -259,7 +263,12 @@ const featuredArtists: Artist[] = [
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: grayscale(1);
+  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 0.6s ease;
+}
+
+.fa-hero:hover .fa-hero-image img {
+  filter: grayscale(0);
 }
 
 .fa-hero-info {
@@ -317,7 +326,7 @@ const featuredArtists: Artist[] = [
 }
 
 .fa-card:hover { background: var(--color-surface, #F4F4F5); border-color: var(--color-gold); }
-.fa-card:hover .fa-image img { transform: scale(1.03); }
+.fa-card:hover .fa-image img { transform: scale(1.08) translateY(-2%); }
 .fa-card:hover .fa-overlay { opacity: 1; }
 
 .fa-image {
@@ -331,7 +340,12 @@ const featuredArtists: Artist[] = [
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: grayscale(1);
+  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 0.6s ease;
+}
+
+.fa-card:hover .fa-image img {
+  filter: grayscale(0);
 }
 
 .fa-overlay {
@@ -413,6 +427,35 @@ const featuredArtists: Artist[] = [
   margin-top: 0.4rem;
 }
 
+/* Quote overlay on hero artist image */
+.fa-quote-overlay {
+  position: absolute;
+  bottom: calc(var(--space-8) * -0.5);
+  left: calc(var(--space-6) * -0.5);
+  background: var(--color-surface);
+  padding: var(--space-6) var(--space-8);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--color-border);
+  max-width: 320px;
+  z-index: 2;
+}
+
+.fa-quote-text {
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  font-weight: 300;
+  line-height: var(--leading-snug);
+  color: var(--color-text);
+  margin-bottom: var(--space-3);
+}
+
+.fa-quote-attr {
+  font-size: var(--text-overline);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-gold);
+}
+
 @media (max-width: 1024px) {
   .fa-grid { grid-template-columns: repeat(3, 1fr); }
 }
@@ -431,6 +474,8 @@ const featuredArtists: Artist[] = [
   }
 
   .fa-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .fa-quote-overlay { display: none; }
 }
 
 @media (max-width: 480px) {

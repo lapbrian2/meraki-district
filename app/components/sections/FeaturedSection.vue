@@ -1,7 +1,7 @@
 <template>
   <section ref="section" class="featured section">
     <div class="section-default">
-      <p class="overline reveal">From The Road</p>
+      <p class="overline reveal"><span class="section-number">05.</span> From The Road</p>
       <h2 class="word-reveal">Featured thinking</h2>
       <p class="featured-intro reveal">
         Essays, dispatches, and frameworks from practitioners along the road.
@@ -127,6 +127,12 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.section-number {
+  font-family: var(--font-mono);
+  color: var(--color-gold);
+  margin-right: 0.5em;
+}
+
 .featured h2 {
   margin-top: var(--space-4);
   margin-bottom: var(--space-4);

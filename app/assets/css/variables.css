@@ -155,3 +155,44 @@
 .line-draw:hover {
   background-size: 100% 1px;
 }
+
+/* Seal system */
+.seal-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 9px;
+  padding: 4px 12px;
+  border-width: 1px;
+}
+.seal-associate { border-color: rgba(161,161,170,0.3); color: var(--color-text-muted); background: transparent; }
+.seal-verified { border-color: rgba(184,150,78,0.3); color: var(--color-gold); background: rgba(184,150,78,0.05); }
+.seal-fellow { border-color: var(--color-gold); color: var(--color-gold); background: rgba(184,150,78,0.12); }
+.seal-legacy { border: 2px solid var(--color-gold); color: var(--color-gold); background: rgba(184,150,78,0.08); }
+
+/* Parallax container hover */
+.parallax-container img {
+  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.parallax-container:hover img {
+  transform: scale(1.08) translateY(-2%);
+}
+
+/* Spatial depth inset shadow */
+.spatial-depth {
+  box-shadow: inset 0 20px 40px -20px rgba(0,0,0,0.15), inset 0 -20px 40px -20px rgba(0,0,0,0.1);
+}
+
+/* Reveal text clip-path animation */
+.reveal-text {
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  animation: revealText 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+@keyframes revealText {
+  0% { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); }
+  100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+}

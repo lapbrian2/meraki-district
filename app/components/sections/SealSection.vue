@@ -30,6 +30,7 @@
           <div class="seal-tier-content">
             <span class="seal-tier-level">Tier {{ tier.ordinal }}</span>
             <h3 class="seal-tier-name">{{ tier.name }}</h3>
+            <span class="seal-base" :class="'seal-' + tier.name.toLowerCase()">{{ tier.name }}</span>
             <p class="seal-tier-desc">{{ tier.description }}</p>
           </div>
         </div>
@@ -189,6 +190,28 @@ onUnmounted(() => {
   padding-left: 3rem;
 }
 
+/* Seal badge classes */
+.seal-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 9px;
+  padding: 4px 12px;
+  border-width: 1px;
+  border-style: solid;
+  margin-bottom: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.seal-associate { border-color: rgba(161, 161, 170, 0.3); color: var(--color-dark-muted); background: transparent; }
+.seal-verified { border-color: rgba(184, 150, 78, 0.3); color: var(--color-gold); background: rgba(184, 150, 78, 0.05); }
+.seal-master { border-color: var(--color-gold); color: var(--color-gold); background: rgba(184, 150, 78, 0.12); }
+.seal-fellow { border: 2px solid var(--color-gold); color: var(--color-gold); background: rgba(184, 150, 78, 0.08); }
+
 /* Vertical progress track */
 .seal-progress-track {
   position: absolute;
@@ -196,7 +219,7 @@ onUnmounted(() => {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: rgba(250, 250, 249, 0.08);
+  background: rgba(250, 250, 249, 0.12);
 }
 
 .seal-progress-fill {
@@ -205,8 +228,9 @@ onUnmounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, var(--color-gold), rgba(184, 150, 78, 0.4));
+  background: linear-gradient(to bottom, rgba(161, 161, 170, 0.4), var(--color-gold), rgba(184, 150, 78, 0.8));
   transform-origin: top center;
+  box-shadow: 0 0 8px rgba(184, 150, 78, 0.3);
 }
 
 /* Individual tier */

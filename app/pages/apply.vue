@@ -389,6 +389,23 @@ useSeoMeta({
   align-items: center;
   padding: var(--space-6) 0;
   border-bottom: 1px solid rgba(250, 250, 249, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.criteria-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(184, 150, 78, 0.05);
+  transform: translateY(100%);
+  transition: transform 0.7s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.criteria-item:hover::before {
+  transform: translateY(0);
 }
 
 .criteria-item:first-child {
@@ -493,6 +510,21 @@ useSeoMeta({
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
+}
+
+.process-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(184, 150, 78, 0.05);
+  transform: translateY(100%);
+  transition: transform 0.7s ease;
+  pointer-events: none;
+}
+
+.process-card:hover::before {
+  transform: translateY(0);
 }
 
 .process-card:last-child {
@@ -505,12 +537,15 @@ useSeoMeta({
 
 .process-card-ordinal {
   font-family: var(--font-display);
-  font-size: var(--text-h1);
+  font-size: clamp(3rem, 6vw, 4.5rem);
   font-weight: 300;
   font-style: italic;
   color: var(--color-gold);
+  opacity: 0.4;
   line-height: 1;
   margin-bottom: var(--space-6);
+  position: relative;
+  z-index: 1;
 }
 
 .process-card-connector {

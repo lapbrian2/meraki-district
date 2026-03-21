@@ -2,7 +2,7 @@
   <div v-if="district" ref="root" :style="{ '--color-accent': district.accentColor, '--color-accent-accessible': district.accentColorAccessible }">
     <!-- Hero -->
     <section ref="heroSection" class="q-hero">
-      <div class="q-hero-image-wrap">
+      <div class="q-hero-image-wrap parallax-container">
         <NuxtImg
           :src="district.image"
           :alt="`${district.name} \u2014 ${district.type}`"
@@ -139,7 +139,7 @@
             :to="'/districts/' + prev.slug"
             class="q-explore-card reveal"
           >
-            <div class="q-explore-image">
+            <div class="q-explore-image parallax-container">
               <NuxtImg :src="prev.image" :alt="prev.name" loading="lazy" decoding="async" width="600" height="338" />
             </div>
             <div class="q-explore-info">
@@ -152,7 +152,7 @@
             :to="'/districts/' + next.slug"
             class="q-explore-card reveal"
           >
-            <div class="q-explore-image">
+            <div class="q-explore-image parallax-container">
               <NuxtImg :src="next.image" :alt="next.name" loading="lazy" decoding="async" width="600" height="338" />
             </div>
             <div class="q-explore-info">
@@ -383,6 +383,12 @@ onUnmounted(() => {
   position: relative;
   object-fit: cover;
   will-change: transform;
+  filter: grayscale(1);
+  transition: filter 0.6s ease;
+}
+
+.q-hero:hover .q-hero-image {
+  filter: grayscale(0);
 }
 
 .q-hero-overlay {
@@ -394,6 +400,7 @@ onUnmounted(() => {
     rgba(9, 9, 11, 0.35) 45%,
     rgba(9, 9, 11, 0.08) 100%
   );
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.5);
 }
 
 .q-hero-content {
@@ -791,7 +798,23 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: grayscale(1);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.6s ease;
+}
+
+.q-explore-card:hover .q-explore-image img {
+  filter: grayscale(0);
+}
+
+/* Parallax container interaction */
+.parallax-container img {
+  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1),
+              filter 0.6s ease;
+}
+
+.parallax-container:hover img {
+  transform: scale(1.08) translateY(-2%);
 }
 
 .q-explore-info {

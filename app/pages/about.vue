@@ -408,6 +408,7 @@ const principles = [
   object-fit: cover;
   opacity: 0.5;
   will-change: transform;
+  filter: grayscale(1);
 }
 
 .origin-bg-overlay {
@@ -419,6 +420,7 @@ const principles = [
     rgba(24, 24, 27, 0.1) 40%,
     rgba(24, 24, 27, 0.5) 100%
   );
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.5);
 }
 
 .origin-content {

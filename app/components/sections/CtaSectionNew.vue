@@ -61,6 +61,12 @@ useMagnetic(section, '.cta-new-button', { strength: 0.2 })
   pointer-events: none;
   user-select: none;
   line-height: 1;
+  animation: parallax 20s linear infinite alternate;
+}
+
+@keyframes parallax {
+  0% { transform: translate(-50%, -50%) scale(1) translateY(0); }
+  100% { transform: translate(-50%, -50%) scale(1.1) translateY(-2%); }
 }
 
 /* ─── Content ─── */
@@ -122,7 +128,8 @@ useMagnetic(section, '.cta-new-button', { strength: 0.2 })
 .cta-new-button:hover {
   background-color: #a07f3e;
   background-size: 0;
-  box-shadow: 0 4px 24px rgba(184, 150, 78, 0.25);
+  transform: translateY(-0.5rem);
+  box-shadow: 0 8px 32px rgba(184, 150, 78, 0.35);
 }
 
 .cta-new-button:active {

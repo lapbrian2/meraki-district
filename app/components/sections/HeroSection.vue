@@ -1,10 +1,10 @@
 <template>
-  <section ref="hero" class="hero">
+  <section ref="hero" class="hero spatial-depth">
     <div class="hero-layout">
       <!-- Left: editorial text stack -->
       <div class="hero-text">
         <p class="hero-overline">Est. 2026</p>
-        <h1 class="hero-title">
+        <h1 class="hero-title reveal-text">
           <span class="hero-title-line">Where craft</span>
           <span class="hero-title-accent">meets culture.</span>
         </h1>
@@ -125,6 +125,7 @@ onUnmounted(() => {
   letter-spacing: var(--tracking-hero);
   margin-bottom: var(--space-8);
   text-align: left;
+  animation-delay: 0.4s;
 }
 
 .hero-title-line {

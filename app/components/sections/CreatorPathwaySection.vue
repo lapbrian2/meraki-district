@@ -21,6 +21,7 @@
         >
           <span class="pathway-number">{{ String(i + 1).padStart(2, '0') }}</span>
           <h3 class="pathway-step-name">{{ step.name }}</h3>
+          <span v-if="step.seal" class="seal-base" :class="'seal-' + step.seal.toLowerCase()">{{ step.seal }}</span>
           <p class="pathway-step-desc">{{ step.description }}</p>
         </div>
       </div>
@@ -40,26 +41,32 @@ const steps = [
   {
     name: 'Enter',
     description: 'Join Meraki Road and engage the community.',
+    seal: 'Associate',
   },
   {
     name: 'Discover',
     description: 'Find your creative direction through practice.',
+    seal: 'Associate',
   },
   {
     name: 'Develop',
     description: 'Deepen mastery across the districts.',
+    seal: 'Verified',
   },
   {
     name: 'Publish',
     description: 'Share your work through curated channels.',
+    seal: 'Verified',
   },
   {
     name: 'Exhibit',
     description: 'Showcase in the digital galleries.',
+    seal: 'Fellow',
   },
   {
     name: 'Connect',
     description: 'Bridge to professional opportunity.',
+    seal: 'Resident',
   },
 ]
 </script>
@@ -135,7 +142,7 @@ const steps = [
   left: 0;
   right: 0;
   height: 1px;
-  background: rgba(250, 250, 249, 0.12);
+  background: rgba(250, 250, 249, 0.3);
   pointer-events: none;
 }
 
@@ -147,7 +154,9 @@ const steps = [
   background: var(--color-surface);
   position: relative;
   z-index: 1;
-  transition: border-color var(--duration-normal) ease;
+  transition: border-color var(--duration-normal) ease,
+              transform var(--duration-normal) cubic-bezier(0.33, 1, 0.68, 1),
+              box-shadow var(--duration-normal) ease;
 }
 
 /* Collapse double borders between adjacent cards */
@@ -157,7 +166,30 @@ const steps = [
 
 .pathway-card:hover {
   border-color: var(--color-gold);
+  transform: translateY(-0.5rem);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
+
+/* Seal badge classes */
+.seal-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 9px;
+  padding: 4px 12px;
+  border-width: 1px;
+  border-style: solid;
+  margin-bottom: var(--space-4);
+}
+
+.seal-associate { border-color: rgba(161, 161, 170, 0.3); color: var(--color-dark-muted); background: transparent; }
+.seal-verified { border-color: rgba(184, 150, 78, 0.3); color: var(--color-gold); background: rgba(184, 150, 78, 0.05); }
+.seal-fellow { border-color: var(--color-gold); color: var(--color-gold); background: rgba(184, 150, 78, 0.12); }
+.seal-resident { border: 2px solid var(--color-gold); color: var(--color-gold); background: rgba(184, 150, 78, 0.08); }
 
 .pathway-number {
   font-family: var(--font-display);
