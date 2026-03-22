@@ -6,22 +6,20 @@
 
     <!-- The Map Video -->
     <section ref="videoSection" class="map-video-section section-dark">
-      <div class="section-default">
-        <div class="map-video-header">
-          <p class="overline reveal">The Journey</p>
-          <h2 class="word-reveal"><em>The Creator Pathway</em></h2>
-        </div>
-        <div class="map-video-wrap reveal">
-          <video
-            class="map-video"
-            src="/videos/meraki-map.mp4"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-          />
-        </div>
+      <div class="map-video-header">
+        <p class="overline reveal">The Journey</p>
+        <h2 class="word-reveal"><em>The Creator Pathway</em></h2>
+      </div>
+      <div class="map-video-wrap reveal">
+        <video
+          class="map-video"
+          src="/videos/meraki-map.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        />
       </div>
     </section>
 
@@ -232,12 +230,12 @@ const featuredArtists: Artist[] = [
 <style scoped>
 /* Map Video Section */
 .map-video-section {
-  padding: var(--section-gap) 0;
+  padding: 0;
 }
 
 .map-video-header {
   text-align: center;
-  margin-bottom: var(--space-12);
+  padding: var(--space-16) var(--content-padding) var(--space-8);
 }
 
 .map-video-header h2 {
@@ -249,10 +247,7 @@ const featuredArtists: Artist[] = [
 }
 
 .map-video-wrap {
-  max-width: 1200px;
-  margin: 0 auto;
-  border: 1px solid rgba(250, 250, 249, 0.08);
-  overflow: hidden;
+  width: 100%;
 }
 
 .map-video {
