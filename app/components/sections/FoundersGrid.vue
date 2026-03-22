@@ -88,13 +88,13 @@ const founders = [
   {
     name: 'Brian Lapinski',
     role: 'Co-founder',
-    bio: "A developer who came to AI through building, not theorising. Brian spent years constructing the tools and infrastructure he wished existed for creative practitioners\u2014then realised the gap was bigger than any single tool could fill. Meraki Road is the ecosystem he kept looking for and couldn\u2019t find.",
+    bio: "A developer who came to AI through building, not theorising. Brian spent years constructing the tools and infrastructure he wished existed for creative practitioners\u2014then realised the gap was bigger than any single tool could fill. Meraki Road is the structure he kept looking for and couldn\u2019t find.",
     image: '/images/founders/brian.jpg',
   },
   {
     name: 'Rachel Gaia',
     role: 'Co-founder',
-    bio: "Classically trained musician, design entrepreneur, AI-native artist\u2014Rachel has reinvented her practice three times and knows what it costs. She brings decades of learning what makes creative work worth experiencing, and shapes the editorial voice and creative vision that holds the ecosystem together.",
+    bio: "Classically trained musician, design entrepreneur, AI-native artist\u2014Rachel has reinvented her practice three times and knows what it costs. She brings decades of learning what makes creative work worth experiencing, and shapes the editorial voice and creative vision that holds Meraki Road together.",
     image: '/images/founders/rachel.webp',
   },
 ]

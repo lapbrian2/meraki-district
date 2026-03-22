@@ -150,7 +150,7 @@ watch(() => panel.value, (el) => {
   width: 100%;
   max-height: 85vh;
   overflow: hidden;
-  background: var(--color-background, #FAFAF9);
+  background: var(--color-background);
   border: 1px solid rgba(184, 150, 78, 0.2);
 }
 
@@ -179,7 +179,7 @@ watch(() => panel.value, (el) => {
 
 .lightbox-action:hover {
   background: rgba(9, 9, 11, 0.8);
-  color: var(--color-gold, #B8964E);
+  color: var(--color-gold);
 }
 
 .lightbox-image {
@@ -206,7 +206,7 @@ watch(() => panel.value, (el) => {
   font-size: 0.625rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--color-gold, #B8964E);
+  color: var(--color-gold);
   margin-bottom: 0.5rem;
   display: block;
 }
@@ -238,7 +238,7 @@ watch(() => panel.value, (el) => {
   font-size: 0.6875rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--color-gold, #B8964E);
+  color: var(--color-gold);
   border: 1px solid rgba(184, 150, 78, 0.3);
   padding: 0.6rem 1.25rem;
   text-decoration: none;
@@ -248,7 +248,7 @@ watch(() => panel.value, (el) => {
 
 .lightbox-cta:hover {
   background: rgba(184, 150, 78, 0.08);
-  border-color: var(--color-gold, #B8964E);
+  border-color: var(--color-gold);
 }
 
 /* Transitions */

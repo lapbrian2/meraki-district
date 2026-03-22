@@ -102,7 +102,7 @@
             <h2 class="standard-title"><em>Stewardship over extraction</em></h2>
             <p class="standard-desc">
               Every district exists to serve the practitioners who use it. Revenue is
-              reinvested into the ecosystem. Fair splits are non-negotiable. We succeed
+              reinvested into the districts. Fair splits are non-negotiable. We succeed
               only when the creators within the system succeed.
             </p>
           </article>
@@ -294,6 +294,14 @@ useGsapScrollReveal(ctaSection, '.reveal', { stagger: 0.1 })
 @media (max-width: 768px) {
   .standards-hero {
     padding-top: calc(var(--space-32) + 2rem);
+  }
+
+  .standards-hero-title {
+    font-size: clamp(2rem, 8vw, var(--text-display));
+  }
+
+  .standards-cta-heading {
+    font-size: clamp(1.75rem, 6vw, var(--text-h1));
   }
 
   .standard {

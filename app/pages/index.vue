@@ -26,6 +26,11 @@
           <span class="fa-discipline">{{ featuredArtists[0].discipline }}</span>
           <h3>{{ featuredArtists[0].name }}</h3>
           <p class="fa-hero-bio">{{ featuredArtists[0].bio }}</p>
+          <div class="fa-hero-meta">
+            <span class="fa-meta-id">MRD-4821</span>
+            <span class="fa-meta-dot">&middot;</span>
+            <span class="seal-base seal-verified">Verified</span>
+          </div>
         </div>
       </div>
 
@@ -219,6 +224,7 @@ const featuredArtists: Artist[] = [
 .fa-header h2 {
   font-family: var(--font-display);
   font-weight: 300;
+  font-style: italic;
   font-size: clamp(2rem, 4vw, 3rem);
   letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
@@ -226,7 +232,7 @@ const featuredArtists: Artist[] = [
 
 .fa-subtitle {
   font-size: 0.9375rem;
-  color: var(--color-text-secondary, #71717A);
+  color: var(--color-text-secondary);
   max-width: 480px;
   margin: 0 auto;
   line-height: 1.6;
@@ -295,7 +301,7 @@ const featuredArtists: Artist[] = [
 
 .fa-hero-bio {
   font-size: var(--text-body);
-  color: var(--color-text-secondary, #71717A);
+  color: var(--color-text-secondary);
   line-height: var(--leading-relaxed);
   margin-top: var(--space-4);
 }
@@ -310,6 +316,27 @@ const featuredArtists: Artist[] = [
   margin-bottom: var(--space-2);
 }
 
+.fa-hero-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule-color);
+}
+
+.fa-meta-id {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+  letter-spacing: var(--tracking-wide);
+}
+
+.fa-meta-dot {
+  color: var(--color-text-muted);
+  opacity: 0.4;
+}
+
 /* Remaining artists grid */
 .fa-grid {
   display: grid;
@@ -318,7 +345,7 @@ const featuredArtists: Artist[] = [
 }
 
 .fa-card {
-  background: var(--color-background, #FAFAF9);
+  background: var(--color-background);
   border: 1px solid var(--color-rule, rgba(184,150,78,0.15));
   overflow: hidden;
   transition: background 0.3s ease, border-color 0.3s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -423,7 +450,7 @@ const featuredArtists: Artist[] = [
 
 .fa-info p {
   font-size: 0.75rem;
-  color: var(--color-text-secondary, #71717A);
+  color: var(--color-text-secondary);
   line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 3;

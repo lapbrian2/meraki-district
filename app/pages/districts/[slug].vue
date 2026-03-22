@@ -480,6 +480,217 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- BESPOKE: The Seal — Credentials & Standards             -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div v-else-if="district && isSeal" ref="root" :style="{ '--color-accent': district.accentColor, '--color-accent-accessible': district.accentColorAccessible }">
+
+    <!-- Seal Hero — Full viewport, archival image background -->
+    <section ref="heroSection" class="seal-hero">
+      <div class="seal-hero-image-wrap">
+        <NuxtImg
+          :src="district.image"
+          :alt="`${district.name} — ${district.type}`"
+          class="seal-hero-image archival-image"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          width="1920"
+          height="1080"
+        />
+        <div class="seal-hero-overlay" />
+      </div>
+      <div class="seal-hero-content">
+        <p class="seal-hero-subtitle">District 09</p>
+        <h1 ref="heroTitle" class="seal-hero-title">The Seal</h1>
+        <p class="seal-hero-tagline">Where credentials are earned through the work itself.</p>
+      </div>
+    </section>
+
+    <!-- District Navigator (shared) -->
+    <nav class="q-nav" aria-label="District navigation">
+      <div class="section-default q-nav-inner">
+        <NuxtLink
+          v-for="d in districts"
+          :key="d.slug"
+          :to="'/districts/' + d.slug"
+          class="q-nav-dot"
+          :class="{ 'q-nav-active': d.slug === slug }"
+          :style="{ '--dot-color': d.accentColor }"
+          :aria-label="d.name"
+          :aria-current="d.slug === slug ? 'page' : undefined"
+        >
+          <span class="q-nav-num">{{ d.number }}</span>
+        </NuxtLink>
+      </div>
+    </nav>
+
+    <!-- Seal Philosophy — Asymmetric 7/5 grid -->
+    <section ref="sealPhilosophySection" class="seal-philosophy section">
+      <div class="section-default seal-philosophy-grid">
+        <div class="seal-philosophy-quote">
+          <blockquote>
+            <p class="seal-philosophy-pullquote word-reveal">&ldquo;A title without evidence is decoration. A credential without practice is noise.&rdquo;</p>
+          </blockquote>
+        </div>
+        <div class="seal-philosophy-body">
+          <div class="seal-philosophy-rule" aria-hidden="true" />
+          <p class="reveal">
+            The Seal exists because the creative world has a credentialing problem. Certificates that measure attendance, not ability. Badges that signal payment, not practice. Titles that accumulate without accountability. The result is a landscape where the signal-to-noise ratio makes it nearly impossible to tell who has done the work and who has simply claimed it.
+          </p>
+          <p class="reveal">
+            This district is the correction. A four-tier system where every level requires demonstrated practice, peer review, and real contribution. Nothing is purchased. Nothing is honorary. Every credential is backed by the weight of work that earned it.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Four Tiers — Visual progression -->
+    <section ref="sealTiersSection" class="seal-tiers section-dark">
+      <div class="section-default">
+        <p class="overline reveal">The Four Tiers</p>
+        <h2 class="seal-tiers-heading reveal">Each level demands more. Each level means more.</h2>
+        <div class="seal-tiers-grid">
+          <div v-for="tier in sealTiers" :key="tier.name" class="seal-tier-card vellum-card" :class="'seal-tier-card--' + tier.slug">
+            <div class="seal-tier-card-header">
+              <span class="seal-tier-ordinal">{{ tier.ordinal }}</span>
+              <span class="seal-base" :class="'seal-' + tier.slug">{{ tier.name }}</span>
+            </div>
+            <h3 class="seal-tier-card-title"><em>{{ tier.name }}</em></h3>
+            <p class="seal-tier-card-tagline">{{ tier.tagline }}</p>
+            <div class="seal-tier-card-rule" aria-hidden="true" />
+            <div class="seal-tier-card-requires">
+              <p class="seal-tier-card-requires-label">Requires</p>
+              <ul class="seal-tier-card-reqs">
+                <li v-for="req in tier.requires" :key="req">{{ req }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Credentialing Process — Vertical timeline -->
+    <section ref="sealProcessSection" class="seal-process section">
+      <div class="section-default">
+        <p class="overline reveal">The Process</p>
+        <h2 class="seal-process-heading reveal">How credentials are earned</h2>
+        <p class="seal-process-desc reveal">
+          No shortcuts. No fast-tracks. Every practitioner follows the same path,
+          evaluated against the same standard. The process is designed to surface
+          the work, not the narrative around it.
+        </p>
+        <div class="seal-process-track">
+          <div class="seal-process-line" aria-hidden="true" />
+          <div v-for="step in credentialingSteps" :key="step.number" class="seal-process-step">
+            <div class="seal-process-dot" />
+            <div class="seal-process-step-content">
+              <span class="seal-process-step-number">{{ step.number }}</span>
+              <h3 class="seal-process-step-title"><em>{{ step.title }}</em></h3>
+              <p class="seal-process-step-body">{{ step.body }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What Each Tier Unlocks — 2x2 grid -->
+    <section ref="sealUnlocksSection" class="seal-unlocks section-dark">
+      <div class="section-default">
+        <p class="overline reveal">What You Unlock</p>
+        <h2 class="seal-unlocks-heading reveal">Every tier opens new ground</h2>
+        <div class="seal-unlocks-grid">
+          <div v-for="tier in sealTiers" :key="tier.name" class="seal-unlock-card reveal">
+            <div class="seal-unlock-header">
+              <span class="seal-base" :class="'seal-' + tier.slug">{{ tier.name }}</span>
+            </div>
+            <ul class="seal-unlock-list">
+              <li v-for="perk in tier.unlocks" :key="perk">
+                <span class="material-symbols-outlined seal-unlock-check">check_circle</span>
+                {{ perk }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Current Fellows — Verified creators -->
+    <section ref="sealFellowsSection" class="seal-fellows section">
+      <div class="section-default">
+        <p class="overline reveal">Current Fellows</p>
+        <h2 class="seal-fellows-heading reveal">Those who set the standard</h2>
+        <div class="seal-fellows-grid">
+          <div v-for="fellow in currentFellows" :key="fellow.name" class="seal-fellow-card vellum-card reveal">
+            <div class="seal-fellow-header">
+              <span class="seal-fellow-initial">{{ fellow.initials }}</span>
+              <span class="seal-fellow-verified">
+                <span class="material-symbols-outlined">verified</span>
+              </span>
+            </div>
+            <h3 class="seal-fellow-name"><em>{{ fellow.name }}</em></h3>
+            <p class="seal-fellow-discipline">{{ fellow.discipline }}</p>
+            <p class="seal-fellow-bio">{{ fellow.bio }}</p>
+            <span class="seal-base seal-fellow">Fellow</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA — Apply for credentialing -->
+    <section ref="sealCtaSection" class="seal-cta section-dark">
+      <div class="section-default seal-cta-inner">
+        <span class="material-symbols-outlined seal-cta-icon" aria-hidden="true">workspace_premium</span>
+        <h2 class="seal-cta-heading reveal">Ready to earn your credential?</h2>
+        <p class="seal-cta-body reveal">
+          The Seal accepts applications on a rolling basis. Submit your portfolio,
+          demonstrate your practice, and let the work speak for itself.
+        </p>
+        <div class="seal-cta-actions reveal">
+          <NuxtLink to="/apply" class="seal-cta-btn seal-cta-btn--primary">Begin Application &rarr;</NuxtLink>
+          <NuxtLink to="/districts" class="seal-cta-btn seal-cta-btn--secondary">Explore All Districts &rarr;</NuxtLink>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- Explore More (shared) -->
+    <section ref="navSection" class="q-explore section">
+      <div class="section-default">
+        <p class="overline reveal">Explore more</p>
+        <div class="q-explore-grid">
+          <NuxtLink
+            v-if="prev"
+            :to="'/districts/' + prev.slug"
+            class="q-explore-card reveal"
+          >
+            <div class="q-explore-image parallax-container">
+              <NuxtImg :src="prev.image" :alt="prev.name" loading="lazy" decoding="async" width="600" height="338" />
+            </div>
+            <div class="q-explore-info">
+              <span class="q-explore-type">{{ prev.type }}</span>
+              <h3>{{ prev.name }}</h3>
+            </div>
+          </NuxtLink>
+          <NuxtLink
+            v-if="next"
+            :to="'/districts/' + next.slug"
+            class="q-explore-card reveal"
+          >
+            <div class="q-explore-image parallax-container">
+              <NuxtImg :src="next.image" :alt="next.name" loading="lazy" decoding="async" width="600" height="338" />
+            </div>
+            <div class="q-explore-info">
+              <span class="q-explore-type">{{ next.type }}</span>
+              <h3>{{ next.name }}</h3>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
   <!-- GENERIC: All other districts                           -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div v-else-if="district" ref="root" :style="{ '--color-accent': district.accentColor, '--color-accent-accessible': district.accentColorAccessible }">
@@ -667,6 +878,7 @@ const slug = computed(() => route.params.slug as string)
 const district = computed(() => useDistrict(slug.value))
 const isVoightStudio = computed(() => slug.value === 'voight-studio')
 const isProvenance = computed(() => slug.value === 'the-provenance')
+const isSeal = computed(() => slug.value === 'the-seal')
 const currentIndex = computed(() => districts.findIndex(i => i.slug === slug.value))
 const prev = computed(() => currentIndex.value > 0 ? districts[currentIndex.value - 1] : null)
 const next = computed(() => currentIndex.value < districts.length - 1 ? districts[currentIndex.value + 1] : null)
@@ -706,6 +918,14 @@ const provRepositorySection = ref<HTMLElement | null>(null)
 const provFromSection = ref<HTMLElement | null>(null)
 const provCtaSection = ref<HTMLElement | null>(null)
 
+// The Seal section refs
+const sealTiersSection = ref<HTMLElement | null>(null)
+const sealProcessSection = ref<HTMLElement | null>(null)
+const sealUnlocksSection = ref<HTMLElement | null>(null)
+const sealFellowsSection = ref<HTMLElement | null>(null)
+const sealPhilosophySection = ref<HTMLElement | null>(null)
+const sealCtaSection = ref<HTMLElement | null>(null)
+
 // Composable-driven animations (run once on mount)
 useGsapScrollReveal(bodySection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(offeringsSection, '.reveal', { stagger: 0.08 })
@@ -734,6 +954,163 @@ useGsapScrollReveal(provFromSection, '.reveal', { stagger: 0.12 })
 useGsapScrollReveal(provCtaSection, '.reveal', { stagger: 0.1 })
 useTilt(provProtocolSection, '.prov-protocol-card', { maxRotation: 2 })
 useTilt(provDataGridSection, '.prov-datagrid-card', { maxRotation: 1.5 })
+
+// The Seal composable animations
+useGsapScrollReveal(sealTiersSection, '.reveal', { stagger: 0.12 })
+useGsapScrollReveal(sealProcessSection, '.reveal', { stagger: 0.1 })
+useGsapScrollReveal(sealUnlocksSection, '.reveal', { stagger: 0.1 })
+useGsapScrollReveal(sealFellowsSection, '.reveal', { stagger: 0.12 })
+useGsapScrollReveal(sealPhilosophySection, '.reveal', { stagger: 0.12 })
+useGsapScrollReveal(sealCtaSection, '.reveal', { stagger: 0.1 })
+useTilt(sealTiersSection, '.seal-tier-card', { maxRotation: 2 })
+useTilt(sealFellowsSection, '.seal-fellow-card', { maxRotation: 1.5 })
+
+/* ── The Seal — Tier data ── */
+interface SealTier {
+  name: string
+  slug: string
+  ordinal: string
+  tagline: string
+  requires: string[]
+  unlocks: string[]
+}
+
+const sealTiers: SealTier[] = [
+  {
+    name: 'Associate',
+    slug: 'associate',
+    ordinal: 'I',
+    tagline: 'The entry point. Demonstrate active practice and foundational commitment.',
+    requires: [
+      'Active portfolio with 5+ works',
+      'Completed foundational coursework',
+      'Community contribution (critique, workshop, or mentorship)',
+    ],
+    unlocks: [
+      'District access across all 12 verticals',
+      'Community workspace and peer network',
+      'Meraki Road profile with verified badge',
+      'Access to open calls and group exhibitions',
+    ],
+  },
+  {
+    name: 'Verified',
+    slug: 'verified',
+    ordinal: 'II',
+    tagline: 'Peer-reviewed. A body of work that speaks for itself.',
+    requires: [
+      'Peer-reviewed portfolio (3 reviewers)',
+      '12+ months of consistent output',
+      'Published or exhibited work',
+      'Active mentorship participation',
+    ],
+    unlocks: [
+      'Private View invitations',
+      'Priority placement in curated exhibitions',
+      'Meraki Publishing House submission access',
+      'Verified credential displayed across all districts',
+    ],
+  },
+  {
+    name: 'Fellow',
+    slug: 'fellow',
+    ordinal: 'III',
+    tagline: 'Recognised expertise. The standard bearers.',
+    requires: [
+      'Sustained body of work (3+ years)',
+      'Published critical writing or research',
+      'Track record of mentorship',
+      'Panel review by existing Fellows',
+    ],
+    unlocks: [
+      'Solo exhibition eligibility',
+      'Curatorial board participation',
+      'Fellow-only residency programmes',
+      'Voting rights on credentialing panels',
+    ],
+  },
+  {
+    name: 'Legacy',
+    slug: 'legacy',
+    ordinal: 'IV',
+    tagline: 'Highest distinction. Practice that shaped the practice of others.',
+    requires: [
+      'Significant contribution to the field',
+      'Body of work spanning 5+ years',
+      'Nominated by existing Legacy holders',
+      'Unanimous panel approval',
+    ],
+    unlocks: [
+      'Permanent collection in The Provenance',
+      'Named fellowship endowment',
+      'Advisory board position',
+      'Legacy seal on all future work',
+    ],
+  },
+]
+
+interface CredentialingStep {
+  number: string
+  title: string
+  body: string
+}
+
+const credentialingSteps: CredentialingStep[] = [
+  {
+    number: '01',
+    title: 'Portfolio Submission',
+    body: 'Submit your body of work through the application portal. Include process documentation, exhibition history, and a practitioner statement. The work speaks first\u2014context follows.',
+  },
+  {
+    number: '02',
+    title: 'Peer Review',
+    body: 'Three independent reviewers evaluate your portfolio against the tier requirements. Reviews are blind\u2014your name, following, and credentials are stripped. Only the work is assessed.',
+  },
+  {
+    number: '03',
+    title: 'Panel Discussion',
+    body: 'Reviewers convene to discuss the submission. Disagreements are documented. The goal is not consensus for its own sake but honest evaluation of whether the work meets the standard.',
+  },
+  {
+    number: '04',
+    title: 'Credential Issued',
+    body: 'Approved practitioners receive their tier credential. It appears across all districts, attached to every work in the archive, and backed by the full weight of the review process.',
+  },
+]
+
+interface SealFellow {
+  name: string
+  initials: string
+  discipline: string
+  bio: string
+}
+
+const currentFellows: SealFellow[] = [
+  {
+    name: 'Nadia Vasquez',
+    initials: 'N.V.',
+    discipline: 'Curatorial Practice & Archives',
+    bio: 'Fifteen years building permanent collections for cultural institutions. Her frameworks for archival integrity are referenced across the field.',
+  },
+  {
+    name: 'Ryo Tanaka',
+    initials: 'R.T.',
+    discipline: 'Computational Art & Generative Systems',
+    bio: 'Pioneer in latent-space aesthetics. Published researcher whose generative works bridge mathematics and visual culture.',
+  },
+  {
+    name: 'Sable Chen',
+    initials: 'S.C.',
+    discipline: 'Visual Art & Machine Intelligence',
+    bio: 'Works at the boundary of neural networks and traditional painting. Her practice treats AI as collaborator, not tool\u2014each piece a negotiation between two forms of intelligence.',
+  },
+  {
+    name: 'Khalil Okonkwo',
+    initials: 'K.O.',
+    discipline: 'Volumetric Sculpture & Preservation',
+    bio: 'Sculptor working in photogrammetry and volumetric capture. His archives preserve disappearing cultural artifacts as living 3D records.',
+  },
+]
 
 let ctx: gsap.Context | null = null
 
@@ -980,6 +1357,87 @@ function initAnimations() {
         },
       })
 
+    } else if (isSeal.value) {
+      // ── The Seal animations ──
+      // Hero image entrance
+      gsap.from('.seal-hero-image', {
+        scale: 1.15,
+        duration: 2.2,
+        ease: 'power3.out',
+      })
+
+      // Hero subtitle fade
+      gsap.from('.seal-hero-subtitle', {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        ease: 'power3.out',
+        delay: 0.4,
+      })
+
+      // Hero title word-reveal
+      if (heroTitle.value) {
+        wordReveal(heroTitle.value, { stagger: 0.08, duration: 1.2, y: 100 })
+      }
+
+      // Tier cards stagger
+      gsap.from('.seal-tier-card', {
+        y: 50,
+        opacity: 0,
+        duration: 0.9,
+        stagger: 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.seal-tiers-grid',
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+      // Process steps stagger
+      gsap.from('.seal-process-step', {
+        x: -30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.seal-process-track',
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+      // Process line draw
+      gsap.from('.seal-process-line', {
+        scaleY: 0,
+        duration: 1.2,
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: '.seal-process-track',
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+      // Philosophy pull quote
+      const sealQuote = root.value?.querySelector('.seal-philosophy-pullquote')
+      if (sealQuote) {
+        quoteWordReveal(sealQuote as HTMLElement, '.seal-philosophy')
+      }
+
+      // Philosophy rule draw
+      gsap.from('.seal-philosophy-rule', {
+        scaleX: 0,
+        duration: 0.8,
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: '.seal-philosophy-rule',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      })
+
     } else {
       // ── Generic district animations ──
       gsap.from('.q-hero-image', {
@@ -1161,7 +1619,7 @@ onUnmounted(() => {
   font-weight: 300;
   font-style: italic;
   line-height: 1.0;
-  color: #FAFAF9;
+  color: var(--color-dark-text);
   letter-spacing: var(--tracking-hero);
   font-variation-settings: 'WONK' 1, 'SOFT' 0, 'opsz' 72;
 }
@@ -1784,7 +2242,7 @@ onUnmounted(() => {
   font-weight: 300;
   font-style: italic;
   line-height: 1.0;
-  color: #FAFAF9;
+  color: var(--color-dark-text);
   letter-spacing: var(--tracking-hero);
   font-variation-settings: 'WONK' 1, 'SOFT' 0, 'opsz' 72;
 }
@@ -1955,7 +2413,7 @@ onUnmounted(() => {
   height: 9px;
   border-radius: 50%;
   border: 1px solid var(--color-gold);
-  background: #09090B;
+  background: var(--color-dark-bg);
 }
 
 .prov-timeline-dot--active {
@@ -3013,5 +3471,525 @@ onUnmounted(() => {
   .prov-protocol-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* THE SEAL — Credentials & Standards Styles                   */
+/* ═══════════════════════════════════════════════════════════ */
+
+.seal-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.seal-hero-image-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.seal-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.seal-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 10, 0.88) 0%,
+    rgba(10, 10, 10, 0.45) 35%,
+    rgba(10, 10, 10, 0.08) 70%,
+    rgba(10, 10, 10, 0.15) 100%
+  );
+}
+
+.seal-hero-content {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-16) var(--content-padding) var(--space-12);
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.seal-hero-subtitle {
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-accent, var(--color-gold));
+  margin-bottom: var(--space-4);
+}
+
+.seal-hero-title {
+  font-size: var(--text-display);
+  font-family: var(--font-display);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-hero);
+  color: var(--color-dark-text);
+  margin-bottom: var(--space-4);
+}
+
+.seal-hero-tagline {
+  font-size: var(--text-body);
+  color: var(--color-dark-muted);
+  line-height: var(--leading-normal);
+  max-width: 42ch;
+}
+
+@media (max-width: 768px) {
+  .seal-hero { min-height: 500px; }
+  .seal-hero-content { padding-bottom: var(--space-8); }
+}
+
+/* Seal Philosophy */
+.seal-philosophy {
+  padding: var(--space-24) var(--content-padding);
+  background: var(--color-background);
+}
+
+.seal-philosophy-grid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.seal-philosophy-pullquote {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-light);
+  font-style: italic;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+}
+
+.seal-philosophy-body p {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-6);
+}
+
+.seal-philosophy-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--color-accent, var(--color-gold));
+  margin-bottom: var(--space-8);
+  transform-origin: left center;
+}
+
+@media (max-width: 768px) {
+  .seal-philosophy-grid { grid-template-columns: 1fr; gap: var(--space-8); }
+}
+
+/* Seal Tiers */
+.seal-tiers {
+  padding: var(--space-24) var(--content-padding);
+}
+
+.seal-tiers-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-light);
+  font-style: italic;
+  color: var(--color-dark-text);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-16);
+  max-width: 32ch;
+}
+
+.seal-tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+.seal-tier-card {
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.seal-tier-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.seal-tier-ordinal {
+  font-family: var(--font-mono);
+  font-size: var(--text-h1);
+  font-weight: 200;
+  color: var(--color-accent, var(--color-gold));
+  opacity: 0.3;
+}
+
+.seal-tier-card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-light);
+  color: var(--color-dark-text);
+}
+
+.seal-tier-card-title em { font-style: italic; }
+
+.seal-tier-card-tagline {
+  font-size: var(--text-small);
+  color: var(--color-dark-muted);
+  line-height: var(--leading-normal);
+}
+
+.seal-tier-card-rule {
+  width: 100%;
+  height: 1px;
+  background: rgba(184, 150, 78, 0.15);
+}
+
+.seal-tier-card-requires-label {
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+  margin-bottom: var(--space-3);
+}
+
+.seal-tier-card-reqs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.seal-tier-card-reqs li {
+  font-size: var(--text-caption);
+  color: var(--color-dark-secondary);
+  line-height: var(--leading-normal);
+  padding-left: var(--space-4);
+  position: relative;
+}
+
+.seal-tier-card-reqs li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent, var(--color-gold));
+  opacity: 0.4;
+}
+
+.seal-tier-card--associate { border-color: rgba(161, 161, 170, 0.15); }
+.seal-tier-card--verified { border-color: rgba(184, 150, 78, 0.2); }
+.seal-tier-card--fellow { border-color: rgba(184, 150, 78, 0.35); }
+.seal-tier-card--legacy { border-color: var(--color-gold); border-width: 2px; }
+.seal-tier-card--legacy .seal-tier-ordinal { opacity: 0.6; }
+.seal-tier-card--fellow .seal-tier-ordinal { opacity: 0.45; }
+
+@media (max-width: 1024px) {
+  .seal-tiers-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .seal-tiers-grid { grid-template-columns: 1fr; }
+}
+
+/* Seal Process */
+.seal-process {
+  padding: var(--space-24) var(--content-padding);
+  background: var(--color-background);
+}
+
+.seal-process-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-light);
+  font-style: italic;
+  color: var(--color-ink);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.seal-process-desc {
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 56ch;
+  margin-bottom: var(--space-16);
+}
+
+.seal-process-track {
+  position: relative;
+  padding-left: var(--space-12);
+}
+
+.seal-process-line {
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--color-accent, var(--color-gold)), rgba(184, 150, 78, 0.2));
+  transform-origin: top center;
+}
+
+.seal-process-step {
+  position: relative;
+  padding-bottom: var(--space-12);
+}
+.seal-process-step:last-child { padding-bottom: 0; }
+
+.seal-process-dot {
+  position: absolute;
+  left: calc(-1 * var(--space-12) + 5px);
+  top: 4px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent, var(--color-gold));
+  background: var(--color-background);
+}
+
+.seal-process-step-number {
+  font-family: var(--font-mono);
+  font-size: var(--text-overline);
+  color: var(--color-accent, var(--color-gold));
+  letter-spacing: var(--tracking-wide);
+  margin-bottom: var(--space-2);
+  display: block;
+}
+
+.seal-process-step-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-light);
+  color: var(--color-ink);
+  margin-bottom: var(--space-3);
+}
+.seal-process-step-title em { font-style: italic; }
+
+.seal-process-step-body {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 56ch;
+}
+
+/* Seal Unlocks */
+.seal-unlocks {
+  padding: var(--space-24) var(--content-padding);
+}
+
+.seal-unlocks-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-light);
+  font-style: italic;
+  color: var(--color-dark-text);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-12);
+}
+
+.seal-unlocks-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-8);
+}
+
+.seal-unlock-card {
+  padding: var(--space-8);
+  border: 1px solid rgba(184, 150, 78, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.seal-unlock-header { margin-bottom: var(--space-6); }
+
+.seal-unlock-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.seal-unlock-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--text-small);
+  color: var(--color-dark-secondary);
+  line-height: var(--leading-normal);
+}
+
+.seal-unlock-check {
+  font-size: 16px;
+  color: var(--color-accent, var(--color-gold));
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .seal-unlocks-grid { grid-template-columns: 1fr; }
+}
+
+/* Seal Fellows */
+.seal-fellows {
+  padding: var(--space-24) var(--content-padding);
+  background: var(--color-background);
+}
+
+.seal-fellows-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-light);
+  font-style: italic;
+  color: var(--color-ink);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-12);
+}
+
+.seal-fellows-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+.seal-fellow-card {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.seal-fellow-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+
+.seal-fellow-initial {
+  font-family: var(--font-mono);
+  font-size: var(--text-h3);
+  font-weight: 200;
+  color: var(--color-accent, var(--color-gold));
+  opacity: 0.5;
+}
+
+.seal-fellow-verified { color: var(--color-gold); }
+.seal-fellow-verified .material-symbols-outlined { font-size: 20px; }
+
+.seal-fellow-name {
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  font-weight: var(--weight-light);
+  color: var(--color-ink);
+}
+.seal-fellow-name em { font-style: italic; }
+
+.seal-fellow-discipline {
+  font-size: var(--text-caption);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.seal-fellow-bio {
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
+}
+
+@media (max-width: 1024px) {
+  .seal-fellows-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .seal-fellows-grid { grid-template-columns: 1fr; }
+}
+
+/* Seal CTA */
+.seal-cta {
+  padding: var(--space-24) var(--content-padding);
+  text-align: center;
+}
+
+.seal-cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.seal-cta-icon {
+  font-size: 2.5rem;
+  color: var(--color-accent, var(--color-gold));
+  margin-bottom: var(--space-4);
+}
+
+.seal-cta-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: var(--weight-light);
+  font-style: italic;
+  line-height: var(--leading-tight);
+  color: var(--color-dark-text);
+}
+
+.seal-cta-body {
+  font-size: var(--text-body);
+  color: var(--color-dark-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 48ch;
+  margin-bottom: var(--space-8);
+}
+
+.seal-cta-actions {
+  display: flex;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.seal-cta-btn {
+  font-size: var(--text-small);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  transition: opacity var(--duration-normal) ease, transform var(--duration-normal) ease, color var(--duration-normal) ease;
+}
+
+.seal-cta-btn--primary {
+  color: var(--color-dark-bg);
+  padding: var(--space-4) var(--space-8);
+  background: var(--color-gold);
+  background-image: none;
+}
+.seal-cta-btn--primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.seal-cta-btn--primary:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 4px; }
+
+.seal-cta-btn--secondary {
+  color: var(--color-dark-muted);
+  background-image: none;
+}
+.seal-cta-btn--secondary:hover { color: var(--color-gold); }
+.seal-cta-btn--secondary:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 4px; }
+
+@media (max-width: 480px) {
+  .seal-cta-actions { flex-direction: column; }
 }
 </style>

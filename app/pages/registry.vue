@@ -612,7 +612,7 @@ const filteredEntries = computed(() => {
   border-radius: 50%;
 }
 
-.district-status-dot--active { background: #16A34A; }
+.district-status-dot--active { background: var(--color-success); }
 .district-status-dot--coming { background: var(--color-gold); }
 .district-status-dot--dev { background: var(--color-text-muted); opacity: 0.4; }
 
@@ -666,8 +666,8 @@ const filteredEntries = computed(() => {
 }
 
 .cta-button-gold:hover {
-  background-color: #a07f3e;
-  border-color: #a07f3e;
+  background-color: var(--color-gold-accessible);
+  border-color: var(--color-gold-accessible);
   background-size: 0;
 }
 
@@ -690,6 +690,10 @@ const filteredEntries = computed(() => {
     min-height: auto;
   }
 
+  .registry-hero-title {
+    font-size: clamp(2rem, 8vw, var(--text-display));
+  }
+
   .fellows-grid {
     grid-template-columns: 1fr;
   }
@@ -700,6 +704,36 @@ const filteredEntries = computed(() => {
 
   .district-type {
     display: none;
+  }
+
+  .filter-chip {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-bar {
+    min-height: 44px;
+  }
+
+  .cta-title {
+    font-size: clamp(1.75rem, 6vw, var(--text-h1));
+  }
+
+  .cta-button-gold {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .fellow-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .registry-cta {

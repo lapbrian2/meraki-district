@@ -47,7 +47,7 @@
           <div class="typo-pair-example">
             <h3 class="typo-pair-heading">Twelve Districts, One Road</h3>
             <p class="typo-pair-body">
-              A creative ecosystem built for practitioners who hold ambition and
+              A creative network built for practitioners who hold ambition and
               integrity as a single standard. Where craft meets culture, and every
               maker finds their district.
             </p>
@@ -206,7 +206,7 @@ const hierarchy = [
     italic: false,
     tracking: 'var(--tracking-normal)',
     leading: 'var(--leading-relaxed)',
-    text: 'A creative ecosystem built for practitioners who hold ambition and integrity as a single standard.',
+    text: 'A creative network built for practitioners who hold ambition and integrity as a single standard.',
   },
   {
     label: 'Caption',
@@ -237,7 +237,7 @@ const hierarchy = [
   justify-content: center;
   text-align: center;
   padding: var(--space-32) var(--content-padding) var(--space-16);
-  background: #09090B;
+  background: var(--color-dark-bg);
   position: relative;
 }
 

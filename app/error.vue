@@ -58,7 +58,7 @@ const handleClear = (path = '/') => clearNuxtError({ redirect: path })
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0a0a0a;
+  background: var(--color-background);
   position: relative;
   overflow: hidden;
   padding: var(--space-12) var(--content-padding);
@@ -113,7 +113,7 @@ const handleClear = (path = '/') => clearNuxtError({ redirect: path })
   font-weight: 300;
   font-style: normal;
   line-height: var(--leading-snug);
-  color: #FAFAF9;
+  color: var(--color-dark-text);
   margin-bottom: var(--space-8);
   letter-spacing: var(--tracking-tight);
 }
@@ -126,7 +126,7 @@ const handleClear = (path = '/') => clearNuxtError({ redirect: path })
 .lost-body {
   font-family: var(--font-body);
   font-size: var(--text-body);
-  color: #A1A1AA;
+  color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
   max-width: 40ch;
   margin: 0 auto var(--space-12);
@@ -143,7 +143,7 @@ const handleClear = (path = '/') => clearNuxtError({ redirect: path })
   font-family: var(--font-body);
   font-size: var(--text-small);
   letter-spacing: var(--tracking-wide);
-  color: #A1A1AA;
+  color: var(--color-dark-muted);
   text-decoration: none;
   background-image: none;
   border-bottom: 1px solid rgba(184, 150, 78, 0.3);
@@ -163,7 +163,7 @@ const handleClear = (path = '/') => clearNuxtError({ redirect: path })
 }
 
 .lost-link--primary:hover {
-  color: #FAFAF9;
-  border-color: #FAFAF9;
+  color: var(--color-dark-text);
+  border-color: var(--color-dark-text);
 }
 </style>

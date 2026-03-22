@@ -420,9 +420,32 @@ const discourseThreads = [
     padding-bottom: var(--space-12);
   }
 
+  .collective-hero-title {
+    font-size: clamp(2.5rem, 10vw, var(--text-display));
+  }
+
   .hero-pillars {
     flex-wrap: wrap;
     gap: var(--space-3);
+  }
+}
+
+/* CTA mobile heading clamp + touch target */
+@media (max-width: 768px) {
+  .cta-title {
+    font-size: clamp(2rem, 8vw, var(--text-display));
+  }
+
+  .archive-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .discourse-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 

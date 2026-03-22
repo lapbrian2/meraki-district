@@ -518,6 +518,9 @@ const metrics: Metric[] = [
 
 @media (max-width: 768px) {
   .meridian-hero { padding-top: calc(var(--space-16) + 3rem); padding-bottom: var(--space-12); }
+  .hero-title { font-size: clamp(2.5rem, 10vw, var(--text-display)); }
+  .cta-title { font-size: clamp(1.75rem, 6vw, var(--text-h1)); }
+  .cta-button-gold { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
 }
 
 @media (max-width: 480px) {

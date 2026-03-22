@@ -617,7 +617,7 @@ const pastExhibitions: PastExhibition[] = [
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: var(--tracking-widest);
-  color: #16A34A;
+  color: var(--color-success);
   margin-top: var(--space-2);
 }
 
@@ -748,8 +748,8 @@ const pastExhibitions: PastExhibition[] = [
 }
 
 .cta-button-gold:hover {
-  background-color: #a07f3e;
-  border-color: #a07f3e;
+  background-color: var(--color-gold-accessible);
+  border-color: var(--color-gold-accessible);
   background-size: 0;
 }
 
@@ -774,10 +774,16 @@ const pastExhibitions: PastExhibition[] = [
 
   .circuit-hero-title {
     max-width: none;
+    font-size: clamp(2rem, 8vw, var(--text-display));
   }
 
   .categories-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .category-card {
+    min-height: 44px;
+    padding: var(--space-6) var(--space-3);
   }
 
   .exhibition-card {
@@ -800,6 +806,13 @@ const pastExhibitions: PastExhibition[] = [
     padding: var(--space-6);
   }
 
+  .exhibition-cta {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .touring-grid {
     grid-template-columns: 1fr;
   }
@@ -810,6 +823,19 @@ const pastExhibitions: PastExhibition[] = [
 
   .archive-location {
     display: none;
+  }
+
+  .cta-title {
+    font-size: clamp(1.75rem, 6vw, var(--text-h1));
+  }
+
+  .cta-button-gold {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
   }
 
   .circuit-cta {

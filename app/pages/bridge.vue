@@ -556,9 +556,20 @@ const opportunities: Opportunity[] = [
     padding-bottom: var(--space-12);
   }
 
+  .bridge-hero-title {
+    font-size: clamp(2rem, 8vw, var(--text-display));
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
     gap: var(--space-8);
+  }
+
+  .hero-cta {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .hero-quote-card {
@@ -567,6 +578,13 @@ const opportunities: Opportunity[] = [
     right: auto;
     margin-top: var(--space-4);
     max-width: none;
+  }
+
+  .filter-pill {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -1294,6 +1312,23 @@ const opportunities: Opportunity[] = [
 @media (max-width: 768px) {
   .bridge-cta {
     padding: var(--space-16) var(--content-padding);
+  }
+
+  .cta-title {
+    font-size: clamp(2rem, 8vw, var(--text-display));
+  }
+
+  .case-cta {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .partner-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .cta-buttons {

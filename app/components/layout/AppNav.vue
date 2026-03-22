@@ -137,7 +137,11 @@ const mobileLinks = [
   { to: '/founders', label: 'Founders' },
   { to: '/manifesto', label: 'Manifesto' },
   { to: '/institute', label: 'Institute' },
+  { to: '/submit', label: 'Submit Work' },
   { to: '/pavilion', label: 'Pavilion' },
+  { to: '/fashion-atelier', label: 'Fashion Atelier' },
+  { to: '/frame', label: 'The Frame' },
+  { to: '/governance', label: 'Governance' },
   { to: '/private-view', label: 'Private View' },
   { to: '/meridian', label: 'Meridian' },
   { to: '/bridge', label: 'Bridge' },
@@ -515,7 +519,7 @@ onUnmounted(() => {
   right: 0;
   bottom: 0;
   z-index: 100;
-  background: var(--color-dark-bg, #09090B);
+  background: var(--color-dark-bg);
   clip-path: circle(0% at calc(100% - 2rem) 1.5rem);
   visibility: hidden;
   display: flex;

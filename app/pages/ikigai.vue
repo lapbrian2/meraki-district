@@ -501,8 +501,8 @@ const journeyOptions = [
 }
 
 .step-continue:hover:not(:disabled) {
-  background-color: #a07f3e;
-  border-color: #a07f3e;
+  background-color: var(--color-gold-accessible);
+  border-color: var(--color-gold-accessible);
 }
 
 .step-continue:disabled {
@@ -651,8 +651,8 @@ const journeyOptions = [
 }
 
 .result-btn--primary:hover {
-  background-color: #a07f3e;
-  border-color: #a07f3e;
+  background-color: var(--color-gold-accessible);
+  border-color: var(--color-gold-accessible);
 }
 
 .result-btn--ghost {
@@ -682,6 +682,14 @@ const journeyOptions = [
     padding-top: calc(var(--space-16) + 3rem);
     padding-bottom: var(--space-16);
     min-height: auto;
+  }
+
+  .ikigai-hero-title {
+    font-size: clamp(2.5rem, 10vw, var(--text-display));
+  }
+
+  .result-district-name {
+    font-size: clamp(2rem, 8vw, var(--text-display));
   }
 
   .card-grid--2x2,

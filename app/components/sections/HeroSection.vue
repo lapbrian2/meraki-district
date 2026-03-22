@@ -209,7 +209,7 @@ onUnmounted(() => {
   display: inline-block;
   padding: var(--space-3) var(--space-8);
   background: var(--color-gold);
-  color: #09090B;
+  color: var(--color-ink);
   font-size: var(--text-overline);
   font-weight: 600;
   letter-spacing: var(--tracking-widest);
@@ -219,7 +219,7 @@ onUnmounted(() => {
 }
 
 .hero-cta-primary:hover {
-  background: #C9A55E;
+  background: var(--color-gold-accessible);
   transform: translateY(-1px);
 }
 

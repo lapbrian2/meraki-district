@@ -5,9 +5,10 @@
       <p class="dp-overline reveal">The Districts</p>
       <h1 class="dp-display word-reveal">Twelve districts, one road.</h1>
       <p class="dp-subtitle reveal">
-        Each with its own mandate. Each built to serve a different dimension of creative practice.
-        This is the directory.
+        Each with its own mandate. Each built to serve a different dimension
+        of creative practice. This is the directory.
       </p>
+      <p class="dp-archival-note reveal">Archival Index &middot; Last Sync: Live</p>
       <div class="dp-rule reveal" aria-hidden="true" />
       <div class="dp-hero-stats reveal">
         <div class="dp-stat">
@@ -68,6 +69,9 @@
               :key="offering"
               class="dp-offering-tag"
             >{{ offering }}</span>
+          </div>
+          <div class="dp-hero-meta">
+            <span class="dp-verified-id">VERIFIED_ID: MD-{{ d.number }}-VX</span>
           </div>
           <NuxtLink :to="`/districts/${d.slug}`" class="dp-enter-btn">
             Enter District &rarr;
@@ -180,7 +184,7 @@ useHead({
 <style scoped>
 .districts-page {
   background: var(--color-background);
-  color: var(--color-ink, #FAFAF9);
+  color: var(--color-ink);
 }
 
 /* ─── Hero ─── */
@@ -261,6 +265,33 @@ useHead({
   color: var(--color-text-muted);
 }
 
+.dp-archival-note {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  opacity: 0.4;
+  margin-top: var(--space-4);
+}
+
+.dp-hero-meta {
+  margin-bottom: var(--space-4);
+}
+
+.dp-verified-id {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-muted);
+  opacity: 0.35;
+  transition: opacity 0.3s ease;
+}
+
+.dp-hero-card:hover .dp-verified-id {
+  opacity: 0.7;
+}
+
 /* ─── Phase Headers ─── */
 .dp-phase-header {
   margin-bottom: var(--space-8);
@@ -294,7 +325,7 @@ useHead({
   border-radius: 50%;
 }
 
-.dp-dot--active { background: #16A34A; }
+.dp-dot--active { background: var(--color-success); }
 .dp-dot--coming { background: var(--color-gold); }
 .dp-dot--dev { background: var(--color-text-muted); opacity: 0.5; }
 
@@ -343,7 +374,7 @@ useHead({
 }
 
 .dp-stamp--active {
-  color: #16A34A;
+  color: var(--color-success);
   border-color: rgba(22, 163, 74, 0.35);
   background: rgba(22, 163, 74, 0.06);
 }
@@ -456,7 +487,7 @@ useHead({
   font-style: italic;
   font-weight: 300;
   font-size: clamp(1.75rem, 3vw, 2.75rem);
-  color: var(--color-ink, #FAFAF9);
+  color: var(--color-ink);
   margin-bottom: var(--space-1);
   transition: color 0.3s ease;
 }
@@ -574,7 +605,7 @@ useHead({
   font-style: italic;
   font-weight: 300;
   font-size: var(--text-h3);
-  color: var(--color-ink, #FAFAF9);
+  color: var(--color-ink);
   margin-bottom: var(--space-1);
   transition: color 0.3s ease;
 }
@@ -645,7 +676,7 @@ useHead({
   font-style: italic;
   font-weight: 300;
   font-size: var(--text-body);
-  color: var(--color-ink, #FAFAF9);
+  color: var(--color-ink);
 }
 
 .dp-dev-type {

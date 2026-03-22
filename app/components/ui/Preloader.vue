@@ -79,7 +79,7 @@ onMounted(() => {
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: var(--color-ink, #09090B);
+  background: var(--color-ink);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,7 +95,7 @@ onMounted(() => {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 3vw, 2.25rem);
   font-weight: 300;
-  color: var(--color-dark-text, #FAFAF9);
+  color: var(--color-dark-text);
   letter-spacing: var(--tracking-wide);
   margin-bottom: var(--space-4);
 }

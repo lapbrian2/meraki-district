@@ -98,7 +98,7 @@ onUnmounted(() => {
 }
 
 .cta-body {
-  color: var(--color-dark-muted, #A1A1AA);
+  color: var(--color-dark-muted);
   margin-bottom: var(--space-12);
   line-height: var(--leading-relaxed);
   max-width: 45ch;

@@ -541,8 +541,8 @@ const principles: Principle[] = [
 }
 
 .cta-button-gold:hover {
-  background-color: #a07f3e;
-  border-color: #a07f3e;
+  background-color: var(--color-gold-accessible);
+  border-color: var(--color-gold-accessible);
   background-size: 0;
 }
 
@@ -651,6 +651,22 @@ const principles: Principle[] = [
   .cta-button-ghost {
     width: 100%;
     text-align: center;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .essay-heading {
+    font-size: clamp(1.75rem, 6vw, var(--text-h1));
+  }
+
+  .preface-quote {
+    font-size: var(--text-h3);
+  }
+
+  .cta-title {
+    font-size: clamp(1.75rem, 6vw, var(--text-h1));
   }
 }
 </style>

@@ -52,6 +52,28 @@
     <SectionDivider />
 
     <!-- ============================================
+         WORKSPACE HUB — Quick district navigation
+    ============================================= -->
+    <section ref="hubSection" class="atelier-hub section section-dark">
+      <div class="section-wide">
+        <p class="overline reveal">Your Workspaces</p>
+        <div class="hub-grid">
+          <NuxtLink
+            v-for="hub in workspaceHubs"
+            :key="hub.label"
+            :to="hub.to"
+            class="hub-tile lift-card reveal"
+          >
+            <span class="hub-icon material-symbols-outlined">{{ hub.icon }}</span>
+            <span class="hub-label">{{ hub.label }}</span>
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
          DASHBOARD PREVIEW — Bordered grid
     ============================================= -->
     <section ref="dashboardSection" class="atelier-dashboard section section-dark">
@@ -129,6 +151,30 @@
     <SectionDivider />
 
     <!-- ============================================
+         EARNED CREDENTIALS
+    ============================================= -->
+    <section ref="credentialsSection" class="atelier-credentials section section-dark">
+      <div class="section-default">
+        <p class="overline reveal">Earned Credentials</p>
+        <div class="credentials-row">
+          <div
+            v-for="cred in credentials"
+            :key="cred.label"
+            class="credential-badge reveal"
+            :class="{ 'credential-badge--locked': !cred.earned }"
+          >
+            <span class="credential-icon material-symbols-outlined">{{ cred.icon }}</span>
+            <span class="credential-label">{{ cred.label }}</span>
+            <span v-if="cred.earned" class="credential-date">{{ cred.date }}</span>
+            <span v-else class="credential-requirement">{{ cred.requirement }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
          ACCESS REQUIREMENTS
     ============================================= -->
     <section ref="accessSection" class="atelier-access section section-dark">
@@ -196,6 +242,10 @@ useWordReveal(heroSection, '.word-reveal')
 const progressSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(progressSection, '.reveal', { stagger: 0.1 })
 
+/* -- Workspace Hub ------------------------------ */
+const hubSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(hubSection, '.reveal', { stagger: 0.06 })
+
 /* -- Dashboard ---------------------------------- */
 const dashboardSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(dashboardSection, '.reveal', { stagger: 0.08 })
@@ -204,6 +254,10 @@ useWordReveal(dashboardSection, '.word-reveal')
 /* -- Activity ----------------------------------- */
 const activitySection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(activitySection, '.reveal', { stagger: 0.1 })
+
+/* -- Credentials -------------------------------- */
+const credentialsSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(credentialsSection, '.reveal', { stagger: 0.1 })
 
 /* -- Access ------------------------------------- */
 const accessSection = ref<HTMLElement | null>(null)
@@ -331,6 +385,24 @@ const modules: DashboardModule[] = [
     description: 'Curated updates from your active districts.',
     locked: false,
   },
+]
+
+/* -- Workspace hubs ----------------------------- */
+const workspaceHubs = [
+  { icon: 'dashboard', label: 'The Atelier', to: '/atelier' },
+  { icon: 'architecture', label: 'Meraki Studio', to: '/districts/voight-studio' },
+  { icon: 'explore', label: 'The Road', to: '/the-road' },
+  { icon: 'history_edu', label: 'Institute', to: '/institute' },
+  { icon: 'edit_note', label: 'Publishing', to: '/the-road' },
+  { icon: 'palette', label: 'Pavilion', to: '/pavilion' },
+  { icon: 'hub', label: 'The Bridge', to: '/bridge' },
+]
+
+/* -- Credentials -------------------------------- */
+const credentials = [
+  { icon: 'person', label: 'Associate', earned: true, date: 'Nov 2024' },
+  { icon: 'verified', label: 'Verified', earned: true, date: 'Jan 2025' },
+  { icon: 'workspace_premium', label: 'Fellow', earned: false, requirement: 'Requires 10 curations' },
 ]
 
 /* -- Activity log ------------------------------- */
@@ -773,6 +845,147 @@ const activityLog = [
 
   .dashboard-card:last-child {
     border-bottom: none;
+  }
+}
+
+/* =============================================
+   WORKSPACE HUB — Quick navigation tiles
+   ============================================= */
+.atelier-hub {
+  padding: var(--space-16) var(--content-padding);
+  background: var(--color-dark-bg);
+}
+
+.hub-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.hub-tile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid rgba(250, 250, 249, 0.08);
+  color: var(--color-dark-muted);
+  background-image: none;
+  background-color: transparent;
+  transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+}
+
+.hub-tile:hover {
+  border-color: rgba(184, 150, 78, 0.3);
+  color: var(--color-gold);
+  background-color: rgba(184, 150, 78, 0.04);
+}
+
+.hub-icon {
+  font-size: 1.125rem;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+}
+
+.hub-label {
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+}
+
+@media (max-width: 768px) {
+  .hub-grid {
+    gap: var(--space-2);
+  }
+
+  .hub-tile {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-caption);
+  }
+}
+
+/* =============================================
+   EARNED CREDENTIALS
+   ============================================= */
+.atelier-credentials {
+  padding: var(--space-16) var(--content-padding);
+  background: var(--color-dark-bg);
+}
+
+.credentials-row {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.credential-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-8);
+  border: 1px solid rgba(184, 150, 78, 0.2);
+  text-align: center;
+  min-width: 140px;
+  transition: border-color 0.3s ease;
+}
+
+.credential-badge:hover {
+  border-color: rgba(184, 150, 78, 0.4);
+}
+
+.credential-badge--locked {
+  border-color: rgba(250, 250, 249, 0.06);
+  opacity: 0.45;
+}
+
+.credential-badge--locked:hover {
+  border-color: rgba(250, 250, 249, 0.12);
+}
+
+.credential-icon {
+  font-size: 1.5rem;
+  color: var(--color-gold);
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+.credential-badge--locked .credential-icon {
+  color: var(--color-dark-muted);
+}
+
+.credential-label {
+  font-size: var(--text-small);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-dark-text);
+}
+
+.credential-date {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-dark-muted);
+}
+
+.credential-requirement {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-dark-muted);
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .credentials-row {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .credential-badge {
+    flex-direction: row;
+    min-width: auto;
+    padding: var(--space-3) var(--space-5);
+    gap: var(--space-3);
   }
 }
 

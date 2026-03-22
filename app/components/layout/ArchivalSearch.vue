@@ -149,11 +149,11 @@ const sitePages = [
   { title: 'About', path: '/about', description: 'The origin, the philosophy, the people.', icon: 'info' },
   { title: 'Apply', path: '/apply', description: 'Submit your practice for consideration.', icon: 'edit_note' },
   { title: 'Community', path: '/community', description: 'Where practitioners find their people.', icon: 'groups' },
-  { title: 'Bridge', path: '/bridge', description: 'Connecting disciplines across the ecosystem.', icon: 'hub' },
+  { title: 'Bridge', path: '/bridge', description: 'Connecting disciplines across Meraki Road.', icon: 'hub' },
   { title: 'Institute', path: '/institute', description: 'Structured learning for serious practitioners.', icon: 'school' },
   { title: 'Pavilion', path: '/pavilion', description: 'A showcase space for featured work.', icon: 'gallery_thumbnail' },
   { title: 'Meraki Publishing House', path: '/the-road', description: 'Long-form writing and cultural criticism.', icon: 'article' },
-  { title: 'Districts', path: '/districts', description: 'All twelve districts of the ecosystem.', icon: 'map' },
+  { title: 'Districts', path: '/districts', description: 'All twelve districts of Meraki Road.', icon: 'map' },
 ]
 
 const creators = [
@@ -471,7 +471,7 @@ onUnmounted(() => {
   font-size: 1.5rem;
   font-weight: 300;
   font-style: italic;
-  color: #FAFAF9;
+  color: var(--color-dark-text);
   letter-spacing: var(--tracking-snug);
   caret-color: var(--color-gold);
 }
@@ -490,7 +490,7 @@ onUnmounted(() => {
 }
 
 .search-clear:hover {
-  color: #FAFAF9;
+  color: var(--color-dark-text);
 }
 
 /* RESULTS CONTAINER */

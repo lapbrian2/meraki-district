@@ -68,6 +68,10 @@
                 width="640"
                 height="800"
               />
+              <span class="specimen-status-badge reveal">
+                <span class="material-symbols-outlined specimen-status-icon">lock</span>
+                Restricted Access
+              </span>
             </div>
           </div>
           <div class="specimen-content">
@@ -114,6 +118,50 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
+         REGISTRY — RSVP & Access Protocol
+    ============================================= -->
+    <section ref="registrySection" class="registry section">
+      <div class="section-narrow">
+        <div class="registry-inner">
+          <span class="material-symbols-outlined registry-icon reveal">how_to_reg</span>
+          <h2 class="registry-heading word-reveal"><em>Request Access</em></h2>
+          <p class="registry-text reveal">
+            Attendance is limited. Each Private View accommodates no more than
+            forty guests. Submit your credentials below and we will confirm
+            your place within five working days.
+          </p>
+          <form class="registry-form reveal" @submit.prevent>
+            <div class="registry-field">
+              <label class="registry-label" for="pv-name">Full Name</label>
+              <input id="pv-name" type="text" class="registry-input" placeholder="As it appears on your credential" autocomplete="name" />
+            </div>
+            <div class="registry-field">
+              <label class="registry-label" for="pv-email">Contact</label>
+              <input id="pv-email" type="email" class="registry-input" placeholder="your@email.com" autocomplete="email" />
+            </div>
+            <div class="registry-field">
+              <label class="registry-label" for="pv-tier">Credential Tier</label>
+              <select id="pv-tier" class="registry-input registry-select">
+                <option value="" disabled selected>Select your tier</option>
+                <option value="associate">Associate</option>
+                <option value="verified">Verified</option>
+                <option value="fellow">Fellow</option>
+                <option value="legacy">Legacy</option>
+              </select>
+            </div>
+            <button type="submit" class="registry-submit">Request Access &rarr;</button>
+          </form>
+          <p class="registry-note reveal">
+            Priority is given to Fellow and Legacy credential holders.
+            All attendees are subject to the viewing protocol.
+          </p>
         </div>
       </div>
     </section>
@@ -287,6 +335,11 @@ useWordReveal(ritualSection, '.word-reveal')
 const specimenSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(specimenSection, '.reveal', { stagger: 0.08 })
 useWordReveal(specimenSection, '.word-reveal')
+
+/* -- Registry ----------------------------------- */
+const registrySection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(registrySection, '.reveal', { stagger: 0.08 })
+useWordReveal(registrySection, '.word-reveal')
 
 /* -- Sequence ----------------------------------- */
 const sequenceSection = ref<HTMLElement | null>(null)
@@ -489,6 +542,9 @@ const pastViews: PastView[] = [
 
 @media (max-width: 768px) {
   .pv-hero { padding-top: calc(var(--space-16) + 3rem); padding-bottom: var(--space-12); }
+  .hero-title { font-size: clamp(2.5rem, 10vw, var(--text-display)); }
+  .hero-cta-gold { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+  .cta-title { font-size: clamp(1.75rem, 6vw, var(--text-h1)); }
 }
 
 @media (max-width: 480px) {
@@ -970,5 +1026,147 @@ const pastViews: PastView[] = [
 
 @media (max-width: 480px) {
   .cta-buttons { flex-direction: column; }
+}
+
+/* =============================================
+   REGISTRY — RSVP & Access Protocol
+   ============================================= */
+.registry {
+  padding: var(--space-24) var(--content-padding);
+  background: var(--color-background);
+}
+
+.registry-inner {
+  text-align: center;
+}
+
+.registry-icon {
+  font-size: 2rem;
+  color: var(--color-gold);
+  margin-bottom: var(--space-4);
+  display: inline-block;
+}
+
+.registry-heading {
+  font-size: var(--text-h2);
+  font-family: var(--font-display);
+  font-weight: 300;
+  color: var(--color-ink);
+  margin-bottom: var(--space-6);
+}
+
+.registry-heading em { font-style: italic; }
+
+.registry-text {
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 52ch;
+  margin: 0 auto var(--space-12);
+}
+
+.registry-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 420px;
+  margin: 0 auto var(--space-8);
+  text-align: left;
+}
+
+.registry-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.registry-label {
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.registry-input {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-4);
+  transition: border-color var(--duration-normal) ease, box-shadow var(--duration-normal) ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.registry-input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(184, 150, 78, 0.15);
+}
+
+.registry-input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+.registry-select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6B73' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+  padding-right: var(--space-12);
+}
+
+.registry-submit {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-dark-bg);
+  padding: var(--space-4) var(--space-8);
+  background: var(--color-gold);
+  border: none;
+  cursor: pointer;
+  transition: opacity var(--duration-normal) ease, transform var(--duration-normal) ease;
+  align-self: flex-start;
+}
+
+.registry-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+.registry-submit:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 4px; }
+
+.registry-note {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+  max-width: 48ch;
+  margin: 0 auto;
+  line-height: var(--leading-normal);
+}
+
+/* Specimen Status Badge */
+.specimen-status-badge {
+  position: absolute;
+  bottom: var(--space-4);
+  right: var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-dark-text);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid rgba(184, 150, 78, 0.25);
+}
+
+.specimen-status-icon {
+  font-size: 14px;
+  color: var(--color-gold);
 }
 </style>

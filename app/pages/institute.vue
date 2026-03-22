@@ -11,10 +11,12 @@
           <em>Purpose &amp; Mastery.</em>
         </h1>
         <p class="hero-subtitle reveal">
-          The pedagogical core of Meraki Road. A space where practitioners
-          sharpen their craft through structured inquiry, rigorous practice,
-          and the kind of mentorship that only comes from working alongside
-          those who've been in the arena.
+          Where practitioners sharpen their craft through structured inquiry,
+          rigorous practice, and the kind of mentorship that only comes from
+          working alongside those who've been in the arena.
+        </p>
+        <p class="hero-credo reveal">
+          <em>&ldquo;The hand follows the soul.&rdquo;</em>
         </p>
         <NuxtLink to="/apply" class="hero-cta reveal">
           Begin Your Development Journey &rarr;
@@ -54,9 +56,8 @@
           <h2 class="ikigai-title word-reveal"><em>The Ikigai Lab</em></h2>
           <p class="ikigai-desc reveal">
             Every practitioner enters through the same door: self-knowledge.
-            The Ikigai Lab maps the intersection of what ignites you, what
-            you've spent years refining, and where the culture is genuinely
-            hungry for that work.
+            The Ikigai Lab maps where your obsession, your skill, and the
+            culture's genuine hunger for that work all converge.
           </p>
         </div>
 
@@ -71,6 +72,7 @@
                 width="400"
                 height="500"
               />
+              <span class="ikigai-card-id">MD-2801-P</span>
             </div>
             <h3 class="ikigai-card-title"><em>The Interior Fire</em></h3>
             <p class="ikigai-card-desc">
@@ -90,6 +92,7 @@
                 width="400"
                 height="500"
               />
+              <span class="ikigai-card-id">MD-2802-S</span>
             </div>
             <h3 class="ikigai-card-title"><em>Technical Precision</em></h3>
             <p class="ikigai-card-desc">
@@ -110,6 +113,7 @@
                 width="400"
                 height="500"
               />
+              <span class="ikigai-card-id">MD-2803-R</span>
             </div>
             <h3 class="ikigai-card-title"><em>Cultural Resonance</em></h3>
             <p class="ikigai-card-desc">
@@ -134,8 +138,8 @@
           <p class="overline reveal">Curriculum</p>
           <h2 class="seals-title word-reveal"><em>Seals of Mastery</em></h2>
           <p class="seals-desc reveal">
-            Two structured programs that form the backbone of Institute practice.
-            Complete both to earn full institutional standing.
+            Two structured programs that form the backbone of the Institute.
+            Complete both to earn full practitioner standing.
           </p>
         </div>
 
@@ -239,9 +243,9 @@
           <p class="overline reveal">Progression</p>
           <h2 class="ascension-title word-reveal"><em>The Ascension</em></h2>
           <p class="ascension-desc reveal">
-            Institutional rank earned through demonstrated practice, not
-            credentials. Each tier unlocks new resources, deeper access,
-            and greater responsibility within the community.
+            Rank earned through demonstrated practice, not credentials.
+            Each tier unlocks new resources, deeper access, and greater
+            responsibility within the community.
           </p>
         </div>
 
@@ -322,7 +326,7 @@
           <em>Begin your development journey.</em>
         </h2>
         <p class="cta-subtitle reveal">
-          JOIN A COMMUNITY OF PRACTITIONERS COMMITTED TO LIFELONG CRAFT
+          FOR PRACTITIONERS COMMITTED TO LIFELONG CRAFT
         </p>
         <div class="cta-buttons reveal">
           <NuxtLink to="/apply" class="cta-button-gold">Enroll as Fellow</NuxtLink>
@@ -423,7 +427,7 @@ const seals: Seal[] = [
     modules: [
       'Autonomous Practice (8 weeks)',
       'Public Presentation (4 weeks)',
-      'Institutional Contribution (6 weeks)',
+      'Community Contribution (6 weeks)',
       'Legacy Documentation (2 weeks)',
     ],
   },
@@ -505,7 +509,7 @@ const ranks: Rank[] = [
     seal: 'seal-legacy',
     label: 'Tier IV',
     title: 'Fellow',
-    description: 'Lifetime access. Full institutional privileges, mentorship roles, and a permanent seat at the table.',
+    description: 'Lifetime access. Full privileges, mentorship roles, and a permanent seat at the table.',
   },
 ]
 </script>
@@ -557,6 +561,16 @@ const ranks: Rank[] = [
   line-height: var(--leading-relaxed);
   max-width: 48ch;
   margin-bottom: var(--space-8);
+}
+
+.hero-credo {
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  font-weight: 300;
+  color: var(--color-dark-muted);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-8);
+  opacity: 0.6;
 }
 
 .hero-cta {
@@ -690,7 +704,27 @@ const ranks: Rank[] = [
 .ikigai-card-2 { margin-top: var(--space-8); }
 .ikigai-card-3 { margin-top: var(--space-16); }
 
-.ikigai-card-image { overflow: hidden; aspect-ratio: 4 / 5; }
+.ikigai-card-image { overflow: hidden; aspect-ratio: 4 / 5; position: relative; }
+
+.ikigai-card-id {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-dark-text);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  padding: 2px 8px;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.ikigai-card:hover .ikigai-card-id {
+  opacity: 1;
+}
 
 .ikigai-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 

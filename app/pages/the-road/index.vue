@@ -473,7 +473,7 @@ const archiveEntries: ArchiveEntry[] = [
 .featured-image {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: linear-gradient(135deg, #27272A 0%, #18181B 40%, #27272A 100%);
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-dark-bg) 40%, var(--color-surface) 100%);
   display: block;
 }
 
@@ -588,7 +588,7 @@ const archiveEntries: ArchiveEntry[] = [
 .essay-image {
   width: 100%;
   aspect-ratio: 16 / 10;
-  background: linear-gradient(135deg, #27272A 0%, #18181B 40%, #27272A 100%);
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-dark-bg) 40%, var(--color-surface) 100%);
   display: block;
 }
 
@@ -695,7 +695,7 @@ const archiveEntries: ArchiveEntry[] = [
 .interlude-image {
   width: 100%;
   aspect-ratio: 4 / 5;
-  background: linear-gradient(135deg, #27272A 0%, #18181B 40%, #27272A 100%);
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-dark-bg) 40%, var(--color-surface) 100%);
   display: block;
 }
 

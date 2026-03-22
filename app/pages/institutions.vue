@@ -243,7 +243,7 @@ useHead({
 <style scoped>
 .inst-page {
   background: var(--color-background);
-  color: var(--color-ink, #FAFAF9);
+  color: var(--color-ink);
 }
 
 /* ─── Hero ─── */
@@ -373,7 +373,7 @@ useHead({
   font-style: italic;
   font-weight: 300;
   font-size: var(--text-h3);
-  color: var(--color-ink, #FAFAF9);
+  color: var(--color-ink);
   margin-bottom: var(--space-2);
 }
 
@@ -462,7 +462,7 @@ useHead({
   font-style: italic;
   font-weight: 300;
   font-size: var(--text-small);
-  color: var(--color-ink, #FAFAF9);
+  color: var(--color-ink);
   margin-bottom: var(--space-1);
 }
 
@@ -541,7 +541,7 @@ useHead({
   font-style: italic;
   font-weight: 300;
   font-size: var(--text-h4);
-  color: var(--color-ink, #FAFAF9);
+  color: var(--color-ink);
   margin-bottom: var(--space-2);
   transition: color 0.3s ease;
 }
@@ -614,7 +614,7 @@ useHead({
 }
 
 .also-cell:hover .also-label {
-  color: var(--color-ink, #FAFAF9);
+  color: var(--color-ink);
 }
 
 .also-arrow {
@@ -645,7 +645,7 @@ useHead({
   font-weight: 300;
   font-size: clamp(1.5rem, 3vw, 2.25rem);
   line-height: var(--leading-snug);
-  color: var(--color-ink, #FAFAF9);
+  color: var(--color-ink);
   margin-bottom: var(--space-8);
 }
 
@@ -750,6 +750,18 @@ useHead({
 
   .seal-tier-arrow {
     font-size: 0.625rem;
+  }
+
+  .also-cell {
+    min-height: 44px;
+  }
+
+  .dir-cell {
+    min-height: 44px;
+  }
+
+  .district-entry {
+    min-height: 44px;
   }
 }
 </style>

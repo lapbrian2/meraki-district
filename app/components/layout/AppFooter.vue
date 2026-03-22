@@ -104,7 +104,7 @@ useGsapScrollReveal(footerRef, '.reveal', { stagger: 0.15 })
 <style scoped>
 .footer {
   position: relative;
-  background: #0D0D0F;
+  background: var(--color-dark-bg);
   padding: 0 var(--content-padding);
   overflow: hidden;
 }
@@ -287,7 +287,7 @@ useGsapScrollReveal(footerRef, '.reveal', { stagger: 0.15 })
 }
 
 .footer-success { color: var(--color-gold); }
-.footer-error { color: #e55; }
+.footer-error { color: var(--color-error); }
 
 /* Bottom bar */
 .footer-bottom {

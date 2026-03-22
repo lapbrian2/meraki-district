@@ -238,7 +238,7 @@ const creators: Creator[] = [
   box-shadow: inset 0 0 0 1px rgba(184, 150, 78, 0.2);
   background: transparent;
   color: var(--color-gold);
-  background-image: linear-gradient(135deg, #B8964E 0%, #D4B96A 50%, #B8964E 100%);
+  background-image: linear-gradient(135deg, var(--color-gold) 0%, #D4B96A 50%, var(--color-gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

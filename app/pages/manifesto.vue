@@ -55,7 +55,7 @@
     <SectionDivider />
 
     <!-- ============================================
-         THE ELEVEN DISTRICTS — Alternating full-width
+         THE TWELVE DISTRICTS — Alternating full-width
     ============================================= -->
     <section ref="districtsSection" class="manifesto-districts section">
       <div class="section-wide">
@@ -255,6 +255,10 @@ onUnmounted(() => {
   .manifesto-hero {
     padding-top: calc(var(--space-16) + 3rem);
     padding-bottom: var(--space-12);
+  }
+
+  .manifesto-hero-title {
+    font-size: clamp(2.5rem, 10vw, var(--text-display));
   }
 }
 
@@ -475,6 +479,10 @@ onUnmounted(() => {
 @media (max-width: 768px) {
   .manifesto-cta {
     padding: var(--space-16) var(--content-padding);
+  }
+
+  .cta-title {
+    font-size: clamp(2rem, 8vw, var(--text-display));
   }
 
   .cta-button {

@@ -907,8 +907,8 @@ useWordReveal(ctaSection, '.word-reveal')
 }
 
 .cta-button-gold:hover {
-  background-color: #a07f3e;
-  border-color: #a07f3e;
+  background-color: var(--color-gold-accessible);
+  border-color: var(--color-gold-accessible);
   background-size: 0;
 }
 

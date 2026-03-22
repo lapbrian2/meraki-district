@@ -166,7 +166,7 @@ useMagnetic(section, '.cta-new-button', { strength: 0.2 })
 }
 
 .cta-new-button:hover {
-  background-color: #a07f3e;
+  background-color: var(--color-gold-accessible);
   background-size: 0;
   transform: translateY(-0.5rem);
   box-shadow: 0 8px 32px rgba(184, 150, 78, 0.35);

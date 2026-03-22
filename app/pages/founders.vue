@@ -854,8 +854,16 @@ const commissions = [
 }
 
 @media (max-width: 768px) {
+  .founders-hero-title {
+    font-size: clamp(2rem, 8vw, var(--text-display));
+  }
+
   .founders-cta {
     padding: var(--space-16) var(--content-padding);
+  }
+
+  .cta-title {
+    font-size: clamp(2rem, 8vw, var(--text-display));
   }
 
   .cta-buttons {
@@ -871,6 +879,18 @@ const commissions = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .production-cta {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .commission-cta {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 

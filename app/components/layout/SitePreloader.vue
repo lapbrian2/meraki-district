@@ -87,7 +87,7 @@ function finish() {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #0a0a0a;
+  background: var(--color-background);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,7 +105,7 @@ function finish() {
   font-size: clamp(3rem, 8vw, 6rem);
   font-style: italic;
   font-weight: 300;
-  color: var(--color-dark-text, #FAFAF9);
+  color: var(--color-dark-text);
   letter-spacing: var(--tracking-tight);
   line-height: 1;
   margin: 0;
@@ -158,7 +158,7 @@ function finish() {
   left: 0;
   right: 0;
   height: 50%;
-  background: #0a0a0a;
+  background: var(--color-background);
   z-index: 1;
   transform: scaleY(0);
 }

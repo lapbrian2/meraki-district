@@ -260,7 +260,7 @@ const principles = [
   {
     number: '06',
     title: 'Sustained Presence',
-    body: 'We favour slow engagement over viral moments. Depth compounds. The practitioners who stay and build are worth more to this ecosystem than the ones who pass through.',
+    body: 'We favour slow engagement over viral moments. Depth compounds. The practitioners who stay and build are worth more than the ones who pass through.',
   },
 ]
 </script>

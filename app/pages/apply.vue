@@ -472,8 +472,8 @@ const steps = [
 }
 
 .entry-btn:hover:not(:disabled) {
-  background-color: #a07f3e;
-  border-color: #a07f3e;
+  background-color: var(--color-gold-accessible);
+  border-color: var(--color-gold-accessible);
 }
 
 .entry-btn:focus-visible {
