@@ -38,7 +38,7 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
   overflow: hidden;
 }
 
@@ -48,7 +48,7 @@ onMounted(() => {
   font-style: italic;
   font-size: clamp(60px, 8vw, 120px);
   font-weight: 300;
-  opacity: 0.02;
+  opacity: 0.04;
   color: var(--color-gold);
   white-space: nowrap;
   user-select: none;
