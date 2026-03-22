@@ -57,15 +57,28 @@ onMounted(() => {
     return
   }
 
-  // Start exit sequence at 3.2s (let protocol line breathe)
-  setTimeout(() => {
-    exiting.value = true
-  }, 3200)
+  // Wait for fonts to load, then start exit
+  const fontReady = document.fonts.ready.then(() => {
+    // Minimum 2s so the animation plays, max 3s so it never blocks too long
+    const elapsed = performance.now()
+    const remaining = Math.max(0, 2000 - elapsed)
+    return new Promise(resolve => setTimeout(resolve, remaining))
+  })
 
-  // Remove from DOM after exit animation completes (3.2s delay + 1.4s curtain reveal)
+  fontReady.then(() => {
+    exiting.value = true
+    setTimeout(() => {
+      finish()
+    }, 1400) // curtain reveal duration
+  })
+
+  // Safety net — never block longer than 3.5s even if fonts fail
   setTimeout(() => {
-    finish()
-  }, 4600)
+    if (visible.value) {
+      exiting.value = true
+      setTimeout(finish, 1400)
+    }
+  }, 3500)
 })
 
 function finish() {

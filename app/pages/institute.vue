@@ -689,6 +689,13 @@ const ritualPhases: RitualPhase[] = [
   padding: var(--space-8) var(--space-12);
   border: 1px solid var(--color-border);
   gap: var(--space-8);
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 4px 24px -8px rgba(0,0,0,0.12);
+  transition: border-color 0.3s ease;
+}
+
+.residents-card:hover {
+  border-color: rgba(184, 150, 78, 0.2);
 }
 
 .residents-stat {
@@ -776,10 +783,17 @@ const ritualPhases: RitualPhase[] = [
   background: var(--color-surface);
   border: 1px solid transparent;
   padding: 0;
-  transition: border-color var(--duration-normal) ease;
+  transition: border-color 0.4s var(--ease-vellum),
+              box-shadow 0.4s var(--ease-vellum),
+              transform 0.4s var(--ease-vellum);
 }
 
-.ikigai-card:hover { border-color: var(--color-border); }
+.ikigai-card:hover {
+  border-color: var(--color-border);
+  box-shadow: 0 16px 48px -12px rgba(0,0,0,0.3),
+              0 0 24px -8px rgba(184, 150, 78, 0.06);
+  transform: translateY(-4px);
+}
 .ikigai-card-1 { margin-top: 0; }
 .ikigai-card-2 { margin-top: var(--space-8); }
 .ikigai-card-3 { margin-top: var(--space-16); }
@@ -889,6 +903,16 @@ const ritualPhases: RitualPhase[] = [
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transition: border-color 0.4s var(--ease-vellum),
+              box-shadow 0.4s var(--ease-vellum),
+              transform 0.4s var(--ease-vellum);
+  border: 1px solid transparent;
+}
+
+.seal-card:hover {
+  border-color: rgba(184, 150, 78, 0.15);
+  box-shadow: 0 12px 40px -12px rgba(0,0,0,0.3);
+  transform: translateY(-3px);
 }
 
 .seal-card-image {
@@ -1008,10 +1032,17 @@ const ritualPhases: RitualPhase[] = [
   padding: var(--space-8);
   display: flex;
   flex-direction: column;
-  transition: border-color var(--duration-normal) ease, transform var(--duration-normal) ease;
+  transition: border-color 0.4s var(--ease-vellum),
+              transform 0.4s var(--ease-vellum),
+              box-shadow 0.4s var(--ease-vellum);
 }
 
-.pathway-card:hover { border-color: var(--color-gold); transform: translateY(-2px); }
+.pathway-card:hover {
+  border-color: var(--color-gold);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px -12px rgba(0,0,0,0.4),
+              0 0 20px -8px rgba(184, 150, 78, 0.08);
+}
 
 .pathway-card-number {
   font-family: var(--font-mono);
@@ -1120,14 +1151,16 @@ const ritualPhases: RitualPhase[] = [
   display: flex;
   align-items: center;
   gap: var(--space-6);
-  padding: var(--space-5) 0;
+  padding: var(--space-5) var(--space-3);
   border-bottom: 1px solid var(--color-border);
   cursor: pointer;
-  transition: background-color var(--duration-normal) ease;
+  transition: background-color var(--duration-normal) ease,
+              padding-left 0.3s ease;
 }
 
 .journal-entry:hover {
   background-color: rgba(184, 150, 78, 0.03);
+  padding-left: var(--space-5);
 }
 
 .journal-entry-badge {
@@ -1586,6 +1619,37 @@ const ritualPhases: RitualPhase[] = [
   .institute-cta { padding: var(--space-16) var(--content-padding); }
   .cta-buttons { flex-direction: column; width: 100%; }
   .cta-button-gold, .cta-button-ghost { width: 100%; text-align: center; }
+}
+
+/* ─── Reduced Motion Guards ─── */
+@media (prefers-reduced-motion: reduce) {
+  .ikigai-card {
+    transition: border-color var(--duration-normal) ease;
+  }
+  .ikigai-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .pathway-card {
+    transition: border-color var(--duration-normal) ease;
+  }
+  .pathway-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .seal-card {
+    transition: none;
+  }
+  .seal-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .journal-entry {
+    transition: background-color var(--duration-normal) ease;
+  }
+  .journal-entry:hover {
+    padding-left: var(--space-3);
+  }
 }
 
 /* =============================================

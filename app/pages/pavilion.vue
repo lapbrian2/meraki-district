@@ -485,7 +485,20 @@ const partners: string[] = [
 
 .hero-image-frame { margin-bottom: var(--space-12); }
 
-.hero-image-wrap { position: relative; overflow: hidden; }
+.hero-image-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Vellum gradient overlay on hero image — dark fade from bottom */
+.hero-image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(9, 9, 11, 0.6) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 1;
+}
 
 .hero-image {
   width: 100%;
@@ -747,7 +760,14 @@ const partners: string[] = [
   gap: var(--space-8);
 }
 
-.exhibition-card { cursor: pointer; }
+.exhibition-card {
+  cursor: pointer;
+  transition: transform 0.4s var(--ease-curator);
+}
+
+.exhibition-card:hover {
+  transform: translateY(-3px);
+}
 
 .exhibition-card--offset { margin-top: var(--space-12); }
 
@@ -869,6 +889,11 @@ const partners: string[] = [
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transition: transform 0.4s var(--ease-curator), border-color 0.4s ease;
+}
+
+.preview-card:hover {
+  transform: translateY(-4px);
 }
 
 .preview-card-image {
@@ -955,11 +980,15 @@ const partners: string[] = [
   justify-content: center;
   padding: var(--space-6) var(--space-4);
   border: 1px solid var(--color-border);
-  transition: border-color var(--duration-normal) ease;
+  transition: border-color var(--duration-normal) ease,
+              background-color var(--duration-normal) ease,
+              transform var(--duration-normal) ease;
 }
 
 .partner-logo:hover {
   border-color: var(--color-gold);
+  background-color: rgba(184, 150, 78, 0.03);
+  transform: translateY(-2px);
 }
 
 .partner-name {
@@ -995,6 +1024,15 @@ const partners: string[] = [
   text-align: center;
   padding: var(--space-16) var(--space-12);
   border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: inset 0 0 80px -20px rgba(0,0,0,0.3);
+  transition: border-color 0.4s var(--ease-vellum), box-shadow 0.4s var(--ease-vellum);
+}
+
+.store-card:hover {
+  border-color: rgba(184, 150, 78, 0.2);
+  box-shadow: inset 0 0 80px -20px rgba(0,0,0,0.3),
+              0 0 40px -10px rgba(184, 150, 78, 0.06);
 }
 
 .store-icon { font-size: 32px; color: var(--color-gold); margin-bottom: var(--space-6); }
@@ -1131,6 +1169,31 @@ const partners: string[] = [
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
   color: var(--color-gold);
+}
+
+/* ─── Reduced Motion Guards ─── */
+@media (prefers-reduced-motion: reduce) {
+  .exhibition-card {
+    transition: none;
+  }
+  .exhibition-card:hover {
+    transform: none;
+  }
+  .preview-card {
+    transition: none;
+  }
+  .preview-card:hover {
+    transform: none;
+  }
+  .store-card {
+    transition: none;
+  }
+  .partner-logo {
+    transition: border-color var(--duration-normal) ease;
+  }
+  .partner-logo:hover {
+    transform: none;
+  }
 }
 
 /* =============================================

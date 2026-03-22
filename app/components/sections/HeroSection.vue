@@ -118,7 +118,7 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: sepia(10%) contrast(1.05);
+  filter: sepia(15%) contrast(1.1) brightness(0.55);
   transition: transform 8s ease-out;
 }
 
@@ -127,15 +127,16 @@ onUnmounted(() => {
   transform: scale(1.03);
 }
 
-/* Gradient overlay — dark at bottom/left for text, vignette with gold accent */
+/* Gradient overlay — Stitch vignette + warm edge + directional darkening */
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 70% 30%, rgba(184,150,78,0.06) 0%, transparent 60%),
-    linear-gradient(to right, rgba(9,9,11,0.88) 0%, rgba(9,9,11,0.5) 50%, rgba(9,9,11,0.15) 100%),
-    linear-gradient(to top, rgba(9,9,11,0.92) 0%, transparent 40%);
+    radial-gradient(circle, transparent 20%, rgba(14, 14, 16, 0.85) 100%),
+    radial-gradient(ellipse at 70% 30%, rgba(231,194,117,0.04) 0%, transparent 50%),
+    linear-gradient(to right, rgba(9,9,11,0.92) 0%, rgba(9,9,11,0.55) 50%, rgba(9,9,11,0.2) 100%),
+    linear-gradient(to top, rgba(9,9,11,0.95) 0%, transparent 35%);
   pointer-events: none;
   z-index: 1;
 }
@@ -197,6 +198,7 @@ onUnmounted(() => {
 .hero-title-accent {
   display: block;
   color: var(--color-gold);
+  text-shadow: 0 0 60px rgba(184, 150, 78, 0.25), 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 
 .hero-sub {
@@ -232,7 +234,8 @@ onUnmounted(() => {
 
 .hero-cta-primary:hover {
   background: var(--color-gold-accessible);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px -4px rgba(184, 150, 78, 0.35);
 }
 
 .hero-cta-secondary {
@@ -309,7 +312,7 @@ onUnmounted(() => {
 .hero-scroll-line {
   width: 1px;
   height: 48px;
-  background: linear-gradient(to bottom, var(--color-dark-muted), transparent);
+  background: linear-gradient(to bottom, rgba(184, 150, 78, 0.5), transparent);
   animation: scrollPulse 2s ease-in-out infinite;
 }
 

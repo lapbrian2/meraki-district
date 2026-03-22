@@ -261,11 +261,12 @@ onUnmounted(() => {
   height: 12px;
   background: rgba(250, 250, 249, 0.15);
   transform: translateX(-3px);
-  transition: background 0.6s ease;
+  transition: background 0.6s ease, box-shadow 0.6s ease;
 }
 
 .seal-tier--gold .seal-tier-marker {
   background: var(--color-gold);
+  box-shadow: 0 0 12px rgba(184, 150, 78, 0.4);
 }
 
 /* Ordinal (massive display) */

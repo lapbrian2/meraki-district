@@ -169,7 +169,7 @@ useMagnetic(section, '.cta-new-button', { strength: 0.2 })
   background-color: var(--color-gold-accessible);
   background-size: 0;
   transform: translateY(-0.5rem);
-  box-shadow: 0 8px 32px rgba(184, 150, 78, 0.35);
+  box-shadow: 0 12px 40px -4px rgba(184, 150, 78, 0.4), 0 0 0 1px rgba(184, 150, 78, 0.15);
 }
 
 .cta-new-button:active {

@@ -265,7 +265,7 @@ const featuredArtists: Artist[] = [
   position: absolute;
   left: 0;
   right: 0;
-  height: 300px;
+  height: 350px;
   pointer-events: none;
   z-index: 1;
 }
@@ -330,8 +330,8 @@ const featuredArtists: Artist[] = [
 }
 
 .fa-hero:hover {
-  border-color: var(--color-gold);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  border-color: rgba(184, 150, 78, 0.35);
+  box-shadow: 0 12px 48px -8px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(184, 150, 78, 0.08);
 }
 
 .fa-hero:hover .fa-hero-image img { transform: scale(1.08) translateY(-2%); }
@@ -344,17 +344,31 @@ const featuredArtists: Artist[] = [
   position: relative;
 }
 
+.fa-hero-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  z-index: 1;
+  transition: box-shadow 0.8s ease;
+}
+
+.fa-hero:hover .fa-hero-image::after {
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
+}
+
 .fa-hero-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(100%) sepia(20%) brightness(0.6) contrast(1.1);
-  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 1s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: grayscale(100%) sepia(15%) brightness(0.55) contrast(1.15);
+  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .fa-hero:hover .fa-hero-image img {
-  filter: grayscale(0) sepia(0) brightness(1) contrast(1);
+  filter: grayscale(0) sepia(8%) brightness(0.85) contrast(1.05);
 }
 
 .fa-hero-info {
@@ -434,9 +448,9 @@ const featuredArtists: Artist[] = [
 
 .fa-card:hover {
   background: var(--color-surface, #F4F4F5);
-  border-color: var(--color-gold);
-  transform: translateY(-8px);
-  box-shadow: 0 20px 60px -10px rgba(0,0,0,0.5), 0 0 40px -10px rgba(184, 150, 78, 0.15);
+  border-color: rgba(184, 150, 78, 0.35);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px -8px rgba(0,0,0,0.45), 0 0 32px -8px rgba(184, 150, 78, 0.12);
 }
 .fa-card:hover .fa-image img { transform: scale(1.08) translateY(-2%); }
 .fa-card:hover .fa-overlay { opacity: 1; }
@@ -447,28 +461,44 @@ const featuredArtists: Artist[] = [
   position: relative;
 }
 
+.fa-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  transition: box-shadow 0.8s ease;
+}
+
+.fa-card:hover .fa-image::after {
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.25);
+}
+
 .fa-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(100%) sepia(20%) brightness(0.6) contrast(1.1);
-  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 1s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: grayscale(100%) sepia(15%) brightness(0.55) contrast(1.15);
+  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .fa-card:hover .fa-image img {
-  filter: grayscale(0) sepia(0) brightness(1) contrast(1);
+  filter: grayscale(0) sepia(8%) brightness(0.85) contrast(1.05);
 }
 
 .fa-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(9, 9, 11, 0.3);
+  background: rgba(9, 9, 11, 0.35);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 2;
 }
 
 .fa-peek {
@@ -544,12 +574,13 @@ const featuredArtists: Artist[] = [
   position: absolute;
   bottom: calc(var(--space-8) * -0.5);
   left: calc(var(--space-6) * -0.5);
-  background: rgba(10,10,10,0.85);
-  backdrop-filter: blur(10px);
+  background: rgba(5, 5, 5, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   padding: var(--space-6) var(--space-8);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  border: none;
-  border-left: 1px solid var(--color-gold);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(184, 150, 78, 0.08);
+  border-left: 2px solid var(--color-gold);
   max-width: 320px;
   z-index: 2;
 }

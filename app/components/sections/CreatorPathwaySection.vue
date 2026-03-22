@@ -171,9 +171,10 @@ const steps = [
 }
 
 .pathway-card:hover {
-  border-color: var(--color-gold);
+  border-color: rgba(184, 150, 78, 0.35);
   transform: translateY(-0.5rem);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.4), 0 0 24px -6px rgba(184, 150, 78, 0.1);
+  background: var(--color-surface-container-low, var(--color-surface));
 }
 
 /* Seal badge overrides (base styles in variables.css) */
@@ -189,10 +190,15 @@ const steps = [
   font-size: var(--text-display);
   font-weight: 200;
   color: var(--color-gold);
-  opacity: 0.2;
+  opacity: 0.15;
   line-height: 1;
   display: block;
   margin-bottom: var(--space-6);
+  transition: opacity 0.5s ease;
+}
+
+.pathway-card:hover .pathway-number {
+  opacity: 0.35;
 }
 
 .pathway-step-name {

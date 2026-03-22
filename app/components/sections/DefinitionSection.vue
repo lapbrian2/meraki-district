@@ -128,12 +128,13 @@ onUnmounted(() => {
   max-width: 36ch;
   line-height: var(--leading-snug);
   letter-spacing: var(--tracking-tight);
+  text-shadow: 0 0 40px rgba(184, 150, 78, 0.15);
 }
 
 .definition-rule {
   width: 100%;
   height: 1px;
-  background: var(--rule-color);
+  background: linear-gradient(to right, rgba(184, 150, 78, 0.15), var(--rule-color), rgba(184, 150, 78, 0.15));
   transform-origin: left;
 }
 

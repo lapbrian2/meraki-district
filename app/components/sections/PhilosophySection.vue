@@ -62,7 +62,8 @@ useWordReveal(section, '.word-reveal', { stagger: 0.08 })
   top: -15%;
   position: relative;
   object-fit: cover;
-  opacity: 0.12;
+  opacity: 0.1;
+  filter: sepia(15%) contrast(1.1);
   will-change: transform;
 }
 
@@ -86,6 +87,18 @@ useWordReveal(section, '.word-reveal', { stagger: 0.08 })
   border-left: 2px solid var(--color-gold);
   padding-left: var(--space-8);
   margin: var(--space-12) 0;
+  position: relative;
+}
+
+.philosophy-quote::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  box-shadow: 0 0 20px rgba(184, 150, 78, 0.3), 0 0 40px rgba(184, 150, 78, 0.1);
+  pointer-events: none;
 }
 
 .philosophy-quote p {

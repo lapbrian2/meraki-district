@@ -637,11 +637,21 @@ const opportunities: Opportunity[] = [
   position: absolute;
   bottom: -2rem;
   right: -1.5rem;
-  background: var(--color-surface);
+  background: rgba(245, 245, 240, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--rule-color);
   padding: var(--space-6);
   max-width: 280px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.2),
+              0 0 24px -8px rgba(184, 150, 78, 0.06);
+  transition: transform 0.5s var(--ease-curator), box-shadow 0.5s var(--ease-curator);
+}
+
+.hero-image-wrap:hover .hero-quote-card {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.3),
+              0 0 32px -8px rgba(184, 150, 78, 0.1);
 }
 
 .hero-quote-text {
@@ -813,6 +823,7 @@ const opportunities: Opportunity[] = [
   background: rgba(184, 150, 78, 0.03);
   border: 1px solid rgba(184, 150, 78, 0.1);
   margin-bottom: var(--space-2);
+  box-shadow: inset 0 0 60px -20px rgba(184, 150, 78, 0.04);
 }
 
 .talent-avatar-wrap {
@@ -1323,15 +1334,37 @@ const opportunities: Opportunity[] = [
 .partner-card {
   border: 1px solid rgba(250, 250, 249, 0.08);
   padding: var(--space-6);
-  transition: border-color var(--duration-normal) ease,
-              background-color var(--duration-normal) ease;
+  transition: border-color 0.4s var(--ease-vellum),
+              background-color 0.4s var(--ease-vellum),
+              box-shadow 0.4s var(--ease-vellum),
+              transform 0.4s var(--ease-vellum);
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .partner-card:hover {
   border-color: rgba(184, 150, 78, 0.3);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 12px 40px -12px rgba(0,0,0,0.4),
+              0 0 20px -8px rgba(184, 150, 78, 0.06);
+  transform: translateY(-3px);
+}
+
+/* Gold left accent on hover */
+.partner-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 0;
+  background: var(--color-gold);
+  transition: height 0.5s var(--ease-vellum);
+}
+
+.partner-card:hover::before {
+  height: 100%;
 }
 
 .partner-type-label {
@@ -1668,6 +1701,25 @@ const opportunities: Opportunity[] = [
   .seal-fellow::after {
     animation: none;
     opacity: 0.3;
+  }
+
+  .hero-quote-card {
+    transition: none;
+  }
+  .hero-image-wrap:hover .hero-quote-card {
+    transform: none;
+  }
+
+  .partner-card {
+    transition: border-color var(--duration-normal) ease,
+                background-color var(--duration-normal) ease;
+  }
+  .partner-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .partner-card::before {
+    transition: none;
   }
 }
 </style>

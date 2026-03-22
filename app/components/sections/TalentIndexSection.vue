@@ -144,7 +144,8 @@ const creators: Creator[] = [
 }
 
 .ti-row:hover {
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: rgba(231, 194, 117, 0.02);
+  box-shadow: inset 3px 0 0 var(--color-gold);
 }
 
 .ti-row-left {
@@ -241,7 +242,7 @@ const creators: Creator[] = [
 /* Legacy — highest honor, double border + gradient text */
 .ti-badge--legacy {
   border: 2px solid rgba(184, 150, 78, 0.4);
-  box-shadow: inset 0 0 0 1px rgba(184, 150, 78, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(184, 150, 78, 0.2), 0 0 16px -4px rgba(184, 150, 78, 0.15);
   background: transparent;
   color: var(--color-gold);
   background-image: linear-gradient(135deg, var(--color-gold) 0%, #D4B96A 50%, var(--color-gold) 100%);

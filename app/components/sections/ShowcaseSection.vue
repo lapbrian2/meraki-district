@@ -188,6 +188,7 @@ onMounted(() => {
 .showcase-archive-btn:hover {
   border-color: var(--color-gold);
   color: var(--color-gold);
+  box-shadow: 0 4px 20px -4px rgba(184, 150, 78, 0.2);
 }
 
 .showcase-rule {
@@ -213,6 +214,21 @@ onMounted(() => {
 .showcase-image {
   overflow: hidden;
   margin-bottom: var(--space-6);
+  position: relative;
+  border: 1px solid rgba(184, 150, 78, 0.08);
+}
+
+.showcase-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  transition: box-shadow 0.8s ease;
+}
+
+.showcase-item:hover .showcase-image::after {
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
 }
 
 .showcase-image--portrait {
@@ -229,7 +245,8 @@ onMounted(() => {
   object-fit: cover;
   opacity: 0;
   transform: scale(1);
-  transition: opacity 0.8s ease, transform 1.5s ease;
+  filter: grayscale(100%) sepia(15%) brightness(0.55) contrast(1.15);
+  transition: opacity 0.8s ease, transform 1.5s ease, filter 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .showcase-image img.loaded {
@@ -238,6 +255,7 @@ onMounted(() => {
 
 .showcase-item:hover .showcase-image img.loaded {
   transform: scale(1.04);
+  filter: grayscale(0) sepia(8%) brightness(0.85) contrast(1.05);
 }
 
 /* ─── Item text ─── */
