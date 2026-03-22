@@ -34,9 +34,9 @@
             placeholder="Search the registry..."
             aria-label="Search the Meraki Road registry"
           />
-          <span v-if="searchQuery" class="search-clear" @click="searchQuery = ''">
+          <button v-if="searchQuery" class="search-clear" aria-label="Clear search" @click="searchQuery = ''">
             <span class="material-symbols-outlined">close</span>
-          </span>
+          </button>
         </div>
 
         <div class="filter-row reveal">
@@ -349,10 +349,14 @@ const filteredEntries = computed(() => {
   flex: 1;
   background: transparent;
   border: none;
-  outline: none;
   font-family: var(--font-body);
   font-size: var(--text-body);
   color: var(--color-dark-text);
+}
+
+.search-input:focus {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
 }
 
 .search-input::placeholder {

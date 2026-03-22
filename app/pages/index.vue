@@ -18,7 +18,8 @@
           muted
           loop
           playsinline
-          preload="metadata"
+          preload="none"
+          poster="/images/hero-bg-new.webp"
         />
       </div>
     </section>
@@ -127,8 +128,6 @@ onMounted(async () => {
 
   await waitForAncestorAnimations(artistsSection.value)
   if (!artistsSection.value) return
-
-  gsap.registerPlugin(ScrollTrigger)
 
   artistCtx = gsap.context(() => {
     const images = gsap.utils.toArray<HTMLElement>('.reveal-image')

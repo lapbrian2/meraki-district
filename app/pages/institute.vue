@@ -65,7 +65,7 @@
           <article class="ikigai-card ikigai-card-1 reveal">
             <div class="ikigai-card-image grayscale-hover">
               <NuxtImg
-                src="/images/institute/interior-fire.webp"
+                src="/images/ikigai.webp"
                 alt="Artist working intently in studio with warm light"
                 class="ikigai-img"
                 loading="lazy"
@@ -85,7 +85,7 @@
           <article class="ikigai-card ikigai-card-2 reveal">
             <div class="ikigai-card-image grayscale-hover">
               <NuxtImg
-                src="/images/institute/technical-precision.webp"
+                src="/images/districts/voight-studio.webp"
                 alt="Close-up of hands calibrating a precision instrument"
                 class="ikigai-img"
                 loading="lazy"
@@ -106,7 +106,7 @@
           <article class="ikigai-card ikigai-card-3 reveal">
             <div class="ikigai-card-image grayscale-hover">
               <NuxtImg
-                src="/images/institute/cultural-resonance.webp"
+                src="/images/districts/meridian.webp"
                 alt="Gallery opening with engaged audience viewing installations"
                 class="ikigai-img"
                 loading="lazy"
@@ -316,7 +316,7 @@
         <div class="testimonial-grid">
           <div class="testimonial-portrait grayscale-hover reveal">
             <NuxtImg
-              src="/images/institute/testimonial-portrait.webp"
+              src="/images/districts/the-road.webp"
               alt="Fellow practitioner in studio"
               class="testimonial-img"
               loading="lazy"

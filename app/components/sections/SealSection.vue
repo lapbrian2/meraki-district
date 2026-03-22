@@ -88,8 +88,6 @@ onMounted(async () => {
   await waitForAncestorAnimations(section.value)
   if (!section.value) return
 
-  gsap.registerPlugin(ScrollTrigger)
-
   ctx = gsap.context(() => {
     // Progress line fills as you scroll through tiers
     if (progressFill.value) {

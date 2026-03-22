@@ -208,7 +208,11 @@ const { email, status, errorMessage, submit, reset } = useEmailCollection('newsl
   font-family: var(--font-body);
   font-size: var(--text-small);
   color: var(--color-dark-text);
-  outline: none;
+}
+
+.fn-input-wrap input:focus {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
 }
 
 .fn-input-wrap input::placeholder {

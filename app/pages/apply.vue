@@ -168,8 +168,6 @@ let ctx: gsap.Context | null = null
 onMounted(() => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-  gsap.registerPlugin(ScrollTrigger)
-
   ctx = gsap.context(() => {
     const connectors = processSection.value?.querySelectorAll('.step-connector')
     if (connectors) {
@@ -427,7 +425,8 @@ const steps = [
 
 .entry-input:focus {
   border-color: transparent;
-  outline: none;
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
 }
 
 .entry-input:focus-visible {

@@ -44,7 +44,7 @@
     <!-- ============================================
          STEP 01: UPLOAD
     ============================================= -->
-    <section v-if="currentStep === 0" ref="uploadSection" class="submit-upload section section-dark">
+    <section v-show="currentStep === 0" ref="uploadSection" class="submit-upload section section-dark">
       <div class="section-default">
         <div class="form-header">
           <span class="form-step-label reveal">01. Upload</span>
@@ -89,7 +89,7 @@
     <!-- ============================================
          STEP 02: METADATA
     ============================================= -->
-    <section v-if="currentStep === 1" ref="metadataSection" class="submit-metadata section section-dark">
+    <section v-show="currentStep === 1" ref="metadataSection" class="submit-metadata section section-dark">
       <div class="section-default">
         <div class="form-header">
           <span class="form-step-label reveal">02. Metadata Schema</span>
@@ -171,7 +171,7 @@
     <!-- ============================================
          STEP 03: VERIFICATION
     ============================================= -->
-    <section v-if="currentStep === 2" ref="verifySection" class="submit-verify section section-dark">
+    <section v-show="currentStep === 2" ref="verifySection" class="submit-verify section section-dark">
       <div class="section-default">
         <div class="form-header">
           <span class="form-step-label reveal">03. Verification</span>
@@ -717,7 +717,8 @@ function submitWork() {
 .field-input:focus,
 .field-textarea:focus,
 .field-select:focus {
-  outline: none;
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
   border-color: var(--color-gold);
 }
 

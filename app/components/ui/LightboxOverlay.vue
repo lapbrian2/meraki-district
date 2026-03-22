@@ -295,6 +295,17 @@ watch(() => panel.value, (el) => {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-enter-active .lightbox-panel,
+  .lightbox-leave-active .lightbox-panel {
+    animation: none;
+  }
+  .lightbox-enter-active,
+  .lightbox-leave-active {
+    transition: opacity 0.15s ease;
+  }
+}
+
 /* Responsive */
 @media (max-width: 700px) {
   .lightbox-panel {

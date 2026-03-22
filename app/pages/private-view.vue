@@ -1101,7 +1101,8 @@ const pastViews: PastView[] = [
 }
 
 .registry-input:focus {
-  outline: none;
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
   border-color: var(--color-gold);
   box-shadow: 0 0 0 3px rgba(184, 150, 78, 0.15);
 }

@@ -331,8 +331,6 @@ let ctx: gsap.Context | null = null
 onMounted(async () => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-  gsap.registerPlugin(ScrollTrigger)
-
   if (heroSection.value) {
     await waitForAncestorAnimations(heroSection.value)
   }

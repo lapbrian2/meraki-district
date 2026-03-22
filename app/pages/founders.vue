@@ -293,8 +293,6 @@ let ctx: gsap.Context | null = null
 onMounted(async () => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-  gsap.registerPlugin(ScrollTrigger)
-
   if (heroSection.value) {
     await waitForAncestorAnimations(heroSection.value)
   }
@@ -355,7 +353,7 @@ const founders = [
     badges: ['Creative Technology', 'AI Systems', 'Strategy'],
     seal: { icon: 'workspace_premium', label: 'Distinguished Fellow', class: 'seal-base seal-fellow' },
     bio: 'A developer who came to AI through building, not theorising. Brian spent years constructing the tools and infrastructure he wished existed for creative practitioners\u2014then realised the gap was bigger than any single tool could fill. Meraki Road is the structure he kept looking for and couldn\u2019t find: a place where rigorous creative work gets the permanence and visibility it deserves.',
-    image: '/images/founders/brian.jpg',
+    image: '/images/founders/brian.webp',
   },
   {
     name: 'Rachel Lapinski',

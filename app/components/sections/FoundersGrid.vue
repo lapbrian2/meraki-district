@@ -19,7 +19,7 @@
             />
           </div>
           <div class="founder-content reveal">
-            <h2 class="founder-name">{{ founder.name }}</h2>
+            <h3 class="founder-name">{{ founder.name }}</h3>
             <p class="founder-role">{{ founder.role }}</p>
             <p class="founder-bio">{{ founder.bio }}</p>
           </div>
@@ -52,8 +52,6 @@ onMounted(async () => {
 
   await waitForAncestorAnimations(section.value)
   if (!section.value) return
-
-  gsap.registerPlugin(ScrollTrigger)
 
   ctx = gsap.context(() => {
     gsap.utils.toArray<HTMLElement>('.reveal-image').forEach((el, i) => {
@@ -89,7 +87,7 @@ const founders = [
     name: 'Brian Lapinski',
     role: 'Co-founder',
     bio: "A developer who came to AI through building, not theorising. Brian spent years constructing the tools and infrastructure he wished existed for creative practitioners\u2014then realised the gap was bigger than any single tool could fill. Meraki Road is the structure he kept looking for and couldn\u2019t find.",
-    image: '/images/founders/brian.jpg',
+    image: '/images/founders/brian.webp',
   },
   {
     name: 'Rachel Gaia',

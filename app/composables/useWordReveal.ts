@@ -46,8 +46,6 @@ export function useWordReveal(
     await waitForAncestorAnimations(container.value)
     if (!container.value) return
 
-    gsap.registerPlugin(ScrollTrigger)
-
     // Split text into word spans before animating
     container.value.querySelectorAll(selector).forEach((el) => {
       const text = el.textContent || ''

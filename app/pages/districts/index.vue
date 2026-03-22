@@ -179,6 +179,14 @@ useHead({
     { name: 'description', content: 'Twelve districts, one road. Navigate the creative infrastructure of Meraki Road.' },
   ],
 })
+
+useSeoMeta({
+  ogTitle: 'Districts — Meraki Road',
+  ogDescription: 'Twelve districts, one road. Navigate the creative infrastructure of Meraki Road.',
+  ogImage: 'https://meraki-district.vercel.app/images/og-default.png',
+  twitterTitle: 'Districts — Meraki Road',
+  twitterDescription: 'Twelve districts, one road. Navigate the creative infrastructure of Meraki Road.',
+})
 </script>
 
 <style scoped>

@@ -887,10 +887,16 @@ useHead(computed(() => ({
   title: district.value ? district.value.name + ' \u2014 Meraki Road' : 'Meraki Road',
   meta: district.value ? [
     { name: 'description', content: district.value.description },
-    { property: 'og:title', content: district.value.name + ' \u2014 Meraki Road' },
-    { property: 'og:description', content: district.value.description },
   ] : [],
 })))
+
+useSeoMeta(computed(() => district.value ? {
+  ogTitle: district.value.name + ' \u2014 Meraki Road',
+  ogDescription: district.value.description,
+  ogImage: 'https://meraki-district.vercel.app/images/og-default.png',
+  twitterTitle: district.value.name + ' \u2014 Meraki Road',
+  twitterDescription: district.value.description,
+} : {}))
 
 const root = ref<HTMLElement | null>(null)
 const heroSection = ref<HTMLElement | null>(null)
@@ -1171,7 +1177,6 @@ function initAnimations() {
   if (!root.value) return
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-  gsap.registerPlugin(ScrollTrigger)
   ctx?.revert()
 
   ctx = gsap.context(() => {
@@ -1211,7 +1216,7 @@ function initAnimations() {
           scrollTrigger: {
             trigger: '.vs-sprints-grid',
             start: 'top 85%',
-            toggleActions: 'play none none reverse',
+            toggleActions: 'play none none none',
           },
         }
       )
@@ -1232,7 +1237,7 @@ function initAnimations() {
           scrollTrigger: {
             trigger: '.vs-philosophy-rule',
             start: 'top 85%',
-            toggleActions: 'play none none reverse',
+            toggleActions: 'play none none none',
           },
         }
       )
@@ -1505,6 +1510,13 @@ watch(slug, async () => {
   window.scrollTo(0, 0)
   await nextTick()
   await nextTick()
+  if (!root.value) {
+    const stop = watch(() => root.value, (val) => {
+      if (val) { initAnimations(); stop() }
+    })
+    return
+  }
+  await waitForAncestorAnimations(root.value)
   initAnimations()
 })
 

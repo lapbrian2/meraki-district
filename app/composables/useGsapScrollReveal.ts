@@ -69,8 +69,6 @@ export function useGsapScrollReveal(
     // Re-check after async gap (component may have unmounted)
     if (!container.value) return
 
-    gsap.registerPlugin(ScrollTrigger)
-
     ctx = gsap.context(() => {
       gsap.fromTo(selector,
         { opacity: 0, y },

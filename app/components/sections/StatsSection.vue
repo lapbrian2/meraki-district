@@ -47,8 +47,6 @@ onMounted(async () => {
   await waitForAncestorAnimations(section.value)
   if (!section.value) return
 
-  gsap.registerPlugin(ScrollTrigger)
-
   ctx = gsap.context(() => {
     stats.forEach((stat, i) => {
       const proxy = { value: 0 }

@@ -48,8 +48,6 @@ onMounted(async () => {
   await waitForAncestorAnimations(section.value)
   if (!section.value) return
 
-  gsap.registerPlugin(ScrollTrigger)
-
   ctx = gsap.context(() => {
     const cards = section.value!.querySelectorAll('.principle-card')
 

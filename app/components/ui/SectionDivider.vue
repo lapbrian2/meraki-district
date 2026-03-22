@@ -23,8 +23,6 @@ onMounted(async () => {
   await waitForAncestorAnimations(divider.value)
   if (!divider.value) return
 
-  gsap.registerPlugin(ScrollTrigger)
-
   ctx = gsap.context(() => {
     const lines = divider.value!.querySelectorAll('.divider-line')
     const ornament = divider.value!.querySelector('.divider-ornament')

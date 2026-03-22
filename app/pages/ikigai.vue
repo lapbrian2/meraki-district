@@ -165,8 +165,7 @@
             <div class="result-rule" aria-hidden="true" />
             <p class="result-description">{{ resultDistrict.description }}</p>
             <p class="result-alignment-note">
-              Your alignment suggests a practice rooted in making.
-              {{ resultDistrict.name }} is where craft meets production.
+              {{ resultAlignment }}
             </p>
             <div class="result-actions">
               <NuxtLink :to="'/districts/' + resultDistrict.slug" class="result-btn result-btn--primary">
@@ -207,8 +206,64 @@ useSeoMeta({
 
 /* -- Districts data ----------------------------- */
 const { districts } = useDistricts()
+
+/* -- Scoring algorithm: drive (primary) + medium (tiebreaker) -- */
+const driveToDistrict: Record<number, string> = {
+  0: 'voight-studio',   // Making things
+  1: 'meridian',        // Understanding systems
+  2: 'basecamp',        // Connecting people
+  3: 'the-provenance',  // Preserving what matters
+}
+
+const mediumToDistrict: Record<number, string> = {
+  0: 'voight-studio',   // Visual Art → voight-studio (or the-provenance)
+  1: 'the-frame',       // Sound & Music → the-frame
+  2: 'the-road',        // Written Word → the-road (Publishing House)
+  3: 'fieldwork',       // Code & Systems → fieldwork (R&D Lab)
+  4: 'voight-studio',   // Physical Objects → voight-studio
+  5: 'the-frame',       // Motion & Film → the-frame
+}
+
+// Cross-reference combos where medium overrides drive
+const crossRefOverrides: Record<string, Record<number, string>> = {
+  'voight-studio': { 1: 'the-frame', 2: 'the-road', 3: 'fieldwork', 5: 'the-frame' },
+  'meridian':      { 0: 'voight-studio', 4: 'voight-studio', 5: 'the-frame' },
+  'basecamp':      { 1: 'the-frame', 2: 'the-road', 3: 'fieldwork', 5: 'the-frame' },
+  'the-provenance': { 1: 'the-frame', 3: 'fieldwork', 5: 'the-frame' },
+}
+
+const alignmentTexts: Record<string, string> = {
+  'voight-studio': 'Your alignment suggests a practice rooted in making. Meraki Studio is where craft meets production.',
+  'meridian': 'Your alignment suggests a mind drawn to patterns and navigation. Meridian is where systems become clarity.',
+  'basecamp': 'Your alignment suggests a practice built on connection. Basecamp is where community becomes craft.',
+  'the-provenance': 'Your alignment suggests a dedication to permanence. The Provenance is where memory becomes mission.',
+  'the-frame': 'Your alignment suggests a practice in motion and sound. The Frame is where time-based work finds its lens.',
+  'the-road': 'Your alignment suggests a voice that needs the page. The Publishing House is where words become record.',
+  'fieldwork': 'Your alignment suggests a builder\u2019s instinct. Fieldwork is where inquiry meets invention.',
+}
+
+const computedSlug = computed(() => {
+  const drive = selections.drive
+  const medium = selections.medium
+  if (drive === null) return 'voight-studio'
+
+  const primary = driveToDistrict[drive] ?? 'voight-studio'
+  if (medium === null) return primary
+
+  // Check cross-reference overrides
+  const overrides = crossRefOverrides[primary]
+  if (overrides && overrides[medium] !== undefined) {
+    return overrides[medium]
+  }
+  return primary
+})
+
 const resultDistrict = computed(() => {
-  return districts.find(d => d.slug === 'voight-studio')!
+  return districts.find(d => d.slug === computedSlug.value)!
+})
+
+const resultAlignment = computed(() => {
+  return alignmentTexts[computedSlug.value] ?? alignmentTexts['voight-studio']
 })
 
 /* -- Section refs ------------------------------- */

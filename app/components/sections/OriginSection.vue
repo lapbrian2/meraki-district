@@ -52,8 +52,6 @@ onMounted(async () => {
   await waitForAncestorAnimations(section.value)
   if (!section.value) return
 
-  gsap.registerPlugin(ScrollTrigger)
-
   ctx = gsap.context(() => {
     gsap.from('.origin-rule', {
       scaleX: 0,

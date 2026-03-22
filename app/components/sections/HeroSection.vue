@@ -67,8 +67,6 @@ onMounted(async () => {
   await waitForAncestorAnimations(hero.value)
   if (!hero.value) return
 
-  gsap.registerPlugin(ScrollTrigger)
-
   ctx = gsap.context(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 

@@ -150,6 +150,14 @@ useHead({
   ],
 })
 
+useSeoMeta({
+  ogTitle: 'Typography — Meraki Road',
+  ogDescription: 'The typographic system behind Meraki Road — weights, pairings, tracking, and hierarchy.',
+  ogImage: 'https://meraki-district.vercel.app/images/og-default.png',
+  twitterTitle: 'Typography — Meraki Road',
+  twitterDescription: 'The typographic system behind Meraki Road — weights, pairings, tracking, and hierarchy.',
+})
+
 // Specimens data
 const specimens = [
   { weight: 200, name: 'Light', specimen: 'Quiet Reflections', italic: true },

@@ -238,6 +238,14 @@ useHead({
     { name: 'description', content: 'A visual map of every institution in Meraki District — the creator pathway from entry to industry.' },
   ],
 })
+
+useSeoMeta({
+  ogTitle: 'Institutions — Meraki District',
+  ogDescription: 'A visual map of every institution in Meraki District — the creator pathway from entry to industry.',
+  ogImage: 'https://meraki-district.vercel.app/images/og-default.png',
+  twitterTitle: 'Institutions — Meraki District',
+  twitterDescription: 'A visual map of every institution in Meraki District — the creator pathway from entry to industry.',
+})
 </script>
 
 <style scoped>

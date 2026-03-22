@@ -260,7 +260,8 @@ useGsapScrollReveal(footerRef, '.reveal', { stagger: 0.15 })
 }
 
 .footer-registry-input:focus {
-  outline: none;
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
 }
 
 .footer-registry-btn {

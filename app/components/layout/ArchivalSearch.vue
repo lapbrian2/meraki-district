@@ -13,6 +13,7 @@
               class="search-input"
               placeholder="Search the archive..."
               autocomplete="off"
+              aria-label="Search the archive"
               @keydown="onKeydown"
             />
             <button v-if="query" class="search-clear" aria-label="Clear search" @click="query = ''">&#xd7;</button>
@@ -466,7 +467,6 @@ onUnmounted(() => {
   flex: 1;
   background: none;
   border: none;
-  outline: none;
   font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 300;
@@ -474,6 +474,11 @@ onUnmounted(() => {
   color: var(--color-dark-text);
   letter-spacing: var(--tracking-snug);
   caret-color: var(--color-gold);
+}
+
+.search-input:focus {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
 }
 
 .search-input::placeholder {

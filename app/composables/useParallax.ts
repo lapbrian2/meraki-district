@@ -30,8 +30,6 @@ export function useParallax(
     await waitForAncestorAnimations(container.value)
     if (!container.value) return
 
-    gsap.registerPlugin(ScrollTrigger)
-
     ctx = gsap.context(() => {
       const img = container.value!.querySelector(imageSelector)
       if (!img) return
