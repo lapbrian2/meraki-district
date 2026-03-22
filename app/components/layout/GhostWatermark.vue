@@ -52,6 +52,26 @@ onMounted(() => {
   color: var(--color-gold);
   white-space: nowrap;
   user-select: none;
+  animation: ghostDrift 25s ease-in-out infinite alternate;
+}
+
+.ghost-watermark span:nth-child(2) { animation-delay: -5s; animation-duration: 30s; }
+.ghost-watermark span:nth-child(3) { animation-delay: -10s; animation-duration: 22s; }
+.ghost-watermark span:nth-child(4) { animation-delay: -15s; animation-duration: 28s; }
+.ghost-watermark span:nth-child(5) { animation-delay: -8s; animation-duration: 32s; }
+
+@keyframes ghostDrift {
+  0% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(30px) translateY(-15px); }
+  50% { transform: translateX(-20px) translateY(10px); }
+  75% { transform: translateX(15px) translateY(-8px); }
+  100% { transform: translateX(-10px) translateY(20px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ghost-watermark span {
+    animation: none;
+  }
 }
 
 @media (max-width: 768px) {
