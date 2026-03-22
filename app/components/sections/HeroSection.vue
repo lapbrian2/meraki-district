@@ -1,5 +1,13 @@
 <template>
   <section ref="hero" class="hero spatial-depth">
+    <div class="hero-bg-wrap" aria-hidden="true">
+      <img
+        src="/images/hero-bg-new.webp"
+        alt=""
+        class="hero-bg-image"
+        loading="eager"
+      />
+    </div>
     <div class="hero-layout">
       <!-- Left: editorial text stack -->
       <div class="hero-text">
@@ -99,6 +107,28 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) sepia(20%) contrast(1.1) brightness(0.25);
+  opacity: 0.5;
+}
+
+.hero-layout {
+  position: relative;
+  z-index: 1;
   padding: var(--space-24) var(--content-padding);
   position: relative;
   overflow: hidden;
