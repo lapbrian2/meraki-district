@@ -199,12 +199,12 @@ const steps = [
   {
     number: '01',
     title: 'Share Your Work',
-    description: 'Send us what you have — a portfolio, a project, a body of work in progress. No minimum. Just real.',
+    description: 'Send us what you have. An image, portfolio or a body of work in progress. No minimum. Just real.',
   },
   {
     number: '02',
     title: 'A Conversation',
-    description: 'We review your work and reach out. Not a gatekeeping exercise — a genuine exchange about where you are and where you want to go.',
+    description: 'We review your work and reach out. Not a gatekeeping exercise. A genuine exchange about where you are and where you want to go.',
   },
   {
     number: '03',
