@@ -193,7 +193,7 @@
     <section class="inst-cta">
       <div class="inst-cta-inner reveal">
         <p class="inst-cta-lead">Every institution serves the creator. Every creator strengthens the district.</p>
-        <NuxtLink to="/apply" class="inst-cta-btn">Begin Your Journey &rarr;</NuxtLink>
+        <NuxtLink to="/apply" class="inst-cta-btn">Apply to Meraki Road &rarr;</NuxtLink>
       </div>
     </section>
   </div>

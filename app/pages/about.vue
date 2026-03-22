@@ -116,8 +116,8 @@
           <NuxtLink to="/apply" class="cta-button cta-button--primary">
             Join the District &rarr;
           </NuxtLink>
-          <NuxtLink to="/archive" class="cta-button cta-button--secondary">
-            View the Archive &rarr;
+          <NuxtLink to="/districts" class="cta-button cta-button--secondary">
+            View the Districts &rarr;
           </NuxtLink>
         </div>
       </div>

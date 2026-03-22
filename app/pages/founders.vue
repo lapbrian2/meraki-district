@@ -215,8 +215,8 @@
           <NuxtLink to="/apply" class="cta-button cta-button--gold">
             Start a Conversation &rarr;
           </NuxtLink>
-          <NuxtLink to="/archive" class="cta-button cta-button--ghost">
-            View the Archive &rarr;
+          <NuxtLink to="/the-road" class="cta-button cta-button--ghost">
+            View Published Work &rarr;
           </NuxtLink>
         </div>
       </div>
@@ -405,13 +405,13 @@ const caseStudies = [
     client: 'Internal \u2014 Meraki Road Press',
     title: 'The Weight of Practice: A Monograph Series',
     description: 'A twelve-volume editorial programme documenting practitioners who have sustained creative rigour across decades. Each volume pairs long-form interview with archival reproductions, printed on uncoated stock with hand-tipped plates.',
-    link: '/archive',
+    link: '/the-road',
   },
   {
     client: 'Commissioned \u2014 Southbank Cultural Trust',
     title: 'Cartography of the Unseen',
     description: 'Brand architecture and digital production for a city-wide exhibition mapping overlooked creative communities. Delivered wayfinding system, exhibition catalogue, and a companion microsite with geo-located artist profiles.',
-    link: '/archive',
+    link: '/the-road',
   },
 ]
 

@@ -9,7 +9,7 @@
           <p class="showcase-sub">Selected works from creators shaping the next wave of visual culture.</p>
         </div>
         <div class="showcase-header-right">
-          <NuxtLink to="/gallery" class="showcase-archive-btn">
+          <NuxtLink to="/pavilion" class="showcase-archive-btn">
             View Full Archive
           </NuxtLink>
         </div>
@@ -55,7 +55,7 @@
               <p class="showcase-item-overline">{{ items[1].category }}</p>
               <h3 class="showcase-item-title">{{ items[1].title }}</h3>
             </div>
-            <NuxtLink to="/gallery" class="showcase-arrow" aria-label="View work">
+            <NuxtLink to="/pavilion" class="showcase-arrow" aria-label="View work">
               <span class="material-symbols-outlined">arrow_forward</span>
             </NuxtLink>
           </div>

@@ -22,7 +22,7 @@
         </p>
         <div class="hero-ctas">
           <NuxtLink to="/districts" class="hero-cta-primary">Explore the Districts</NuxtLink>
-          <NuxtLink to="/the-road" class="hero-cta-secondary">Read the Manifesto</NuxtLink>
+          <NuxtLink to="/manifesto" class="hero-cta-secondary">Read the Manifesto</NuxtLink>
         </div>
       </div>
 

@@ -26,9 +26,9 @@
         <nav class="fn-nav reveal" aria-label="About">
           <h4 class="fn-nav-heading">About</h4>
           <ul>
-            <li><NuxtLink to="/fellowships">Fellowships</NuxtLink></li>
-            <li><NuxtLink to="/verification">Verification</NuxtLink></li>
-            <li><NuxtLink to="/the-road">Manifesto</NuxtLink></li>
+            <li><NuxtLink to="/collective">Collective</NuxtLink></li>
+            <li><NuxtLink to="/standards">Standards</NuxtLink></li>
+            <li><NuxtLink to="/manifesto">Manifesto</NuxtLink></li>
             <li><NuxtLink to="/governance">Governance</NuxtLink></li>
           </ul>
         </nav>
@@ -83,7 +83,7 @@
           <span class="fn-divider" aria-hidden="true">|</span>
           <NuxtLink to="/terms">Terms</NuxtLink>
           <span class="fn-divider" aria-hidden="true">|</span>
-          <NuxtLink to="/press">Press</NuxtLink>
+          <NuxtLink to="/bridge">Press</NuxtLink>
         </nav>
       </div>
     </div>

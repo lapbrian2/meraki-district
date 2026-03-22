@@ -6,14 +6,14 @@
     ============================================= -->
     <section ref="heroSection" class="manifesto-hero section section-dark">
       <div class="section-narrow manifesto-hero-inner">
-        <p class="overline reveal">Foundational Charter</p>
+        <p class="overline reveal">The Charter</p>
         <h1 class="manifesto-hero-title word-reveal">
-          <em>The Manifesto</em>
+          <em>The Meraki Manifesto</em>
         </h1>
         <p class="manifesto-hero-sub reveal">
-          The cultural and ethical framework that governs every district,
-          every credential, and every piece of work published under the
-          Meraki Road standard.
+          The governing framework for how the twelve districts operate,
+          what they protect, and the standard every piece of work
+          published under Meraki Road must meet.
         </p>
       </div>
     </section>
@@ -28,25 +28,26 @@
         <p class="overline reveal">Preamble</p>
         <div class="preamble-body">
           <p class="preamble-text reveal">
-            We believe the best creative work is not produced in
-            isolation&mdash;it&rsquo;s shaped by structure, sharpened by honest
-            criticism, and sustained by a community that holds itself to a
-            higher standard than the market demands. Meraki Road exists because
-            none of that happens by accident.
+            The creative landscape is fractured. Talented practitioners
+            lack infrastructure. Visibility has no meaningful connection
+            to merit, and the platforms built to serve creators mostly
+            serve themselves. Meraki Road was built to fix that&mdash;to
+            give artists visibility, structure, and access to real
+            career opportunities.
           </p>
           <p class="preamble-text reveal">
-            This is not a social network. It is not a marketplace. It is a
-            network of twelve districts, each serving a distinct function in
-            the creative lifecycle&mdash;from research to publication, from
-            education to commerce, from credentialing to gathering. Together
-            they form a single, coherent structure where practitioners can do
-            their best work and have it seen by the people who matter.
+            Meraki Road is twelve districts, each serving a distinct
+            function in the creative lifecycle. Research, education,
+            production, publishing, exhibition, commerce, credentialing,
+            community. A coherent structure designed around the way
+            practitioners actually work&mdash;from first draft to
+            professional placement.
           </p>
           <p class="preamble-text reveal">
-            We built this for the creators who care more about craft than
-            clout. For the ones who stayed in the studio when everyone else
-            was chasing trends. The road was always here. We just gave it
-            an address.
+            This was built for practitioners who hold craft and ambition
+            as a single standard. The ones who stayed in the studio. The
+            ones who care about the work itself, long after the algorithm
+            has moved on.
           </p>
         </div>
       </div>
@@ -61,7 +62,7 @@
       <div class="section-wide">
         <div class="districts-header">
           <p class="overline reveal">The Twelve Districts</p>
-          <h2 class="districts-title word-reveal"><em>Structure with Purpose</em></h2>
+          <h2 class="districts-title word-reveal"><em>Each One Serves a Function</em></h2>
         </div>
 
         <div class="districts-list">
@@ -94,7 +95,7 @@
     ============================================= -->
     <section ref="ctaSection" class="manifesto-cta section-dark">
       <div class="section-narrow manifesto-cta-inner">
-        <h2 class="cta-title word-reveal">Commit to the Standard.</h2>
+        <h2 class="cta-title word-reveal">The Road Is Open.</h2>
         <div class="cta-buttons reveal">
           <NuxtLink to="/apply" class="cta-button cta-button--primary">
             Apply Now &rarr;
@@ -118,15 +119,15 @@ import { useDistricts } from '~/composables/useDistricts'
 useHead({
   title: 'Manifesto \u2014 Meraki Road',
   meta: [
-    { name: 'description', content: 'The foundational charter of Meraki Road. Twelve districts, one standard.' },
+    { name: 'description', content: 'The Meraki Manifesto. The governing framework for twelve districts built around the creative lifecycle.' },
   ],
 })
 
 useSeoMeta({
   ogTitle: 'Manifesto \u2014 Meraki Road',
-  ogDescription: 'The foundational charter of Meraki Road. Twelve districts, one standard.',
+  ogDescription: 'The Meraki Manifesto. The governing framework for twelve districts built around the creative lifecycle.',
   twitterTitle: 'Manifesto \u2014 Meraki Road',
-  twitterDescription: 'The foundational charter of Meraki Road. Twelve districts, one standard.',
+  twitterDescription: 'The Meraki Manifesto. The governing framework for twelve districts built around the creative lifecycle.',
 })
 
 /* -- Data --------------------------------------- */
