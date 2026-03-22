@@ -26,18 +26,6 @@
         </div>
       </div>
 
-      <!-- Right: architectural image with quote overlay -->
-      <div class="hero-image-block reveal-image">
-        <NuxtImg
-          src="/images/origin-bg.webp"
-          alt="Meraki Road"
-          class="hero-feature-image"
-          loading="eager"
-          width="600"
-          height="800"
-        />
-        <p class="hero-image-quote"><em>"Meet you at Meraki Road"</em></p>
-      </div>
     </div>
 
     <div class="hero-scroll" aria-hidden="true">
