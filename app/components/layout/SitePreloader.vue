@@ -57,27 +57,13 @@ onMounted(() => {
     return
   }
 
-  // Wait for fonts to load, then start exit
-  const fontReady = document.fonts.ready.then(() => {
-    // Minimum 2s so the animation plays, max 3s so it never blocks too long
-    const elapsed = performance.now()
-    const remaining = Math.max(0, 2000 - elapsed)
-    return new Promise(resolve => setTimeout(resolve, remaining))
-  })
-
-  fontReady.then(() => {
-    exiting.value = true
-    setTimeout(() => {
-      finish()
-    }, 1400) // curtain reveal duration
-  })
-
-  // Safety net — never block longer than 3.5s even if fonts fail
+  // Show the animation for 2.5s, then exit with 1s curtain reveal
   setTimeout(() => {
-    if (visible.value) {
-      exiting.value = true
-      setTimeout(finish, 1400)
-    }
+    exiting.value = true
+  }, 2500)
+
+  setTimeout(() => {
+    finish()
   }, 3500)
 })
 
