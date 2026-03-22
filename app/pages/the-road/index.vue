@@ -920,7 +920,7 @@ const archiveEntries: ArchiveEntry[] = [
    MASK REVEAL
    ============================================= */
 .mask-reveal {
-  filter: grayscale(100%);
+  filter: sepia(5%);
   transition: filter 0.7s ease, transform 0.7s ease;
 }
 

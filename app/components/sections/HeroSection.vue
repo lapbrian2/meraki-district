@@ -119,7 +119,7 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: sepia(10%) contrast(1.1) brightness(0.8);
+  filter: sepia(5%) contrast(1.05) brightness(0.9);
   transition: transform 8s ease-out;
 }
 
