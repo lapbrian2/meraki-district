@@ -222,7 +222,6 @@ onMounted(() => {
   content: '';
   position: absolute;
   inset: 0;
-  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.6);
   pointer-events: none;
   transition: box-shadow 0.8s ease;
 }
@@ -245,7 +244,7 @@ onMounted(() => {
   object-fit: cover;
   opacity: 0;
   transform: scale(1);
-  filter: grayscale(100%) sepia(15%) brightness(0.55) contrast(1.15);
+  filter: grayscale(100%) sepia(10%) brightness(0.8) contrast(1.05);
   transition: opacity 0.8s ease, transform 1.5s ease, filter 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -255,7 +254,7 @@ onMounted(() => {
 
 .showcase-item:hover .showcase-image img.loaded {
   transform: scale(1.04);
-  filter: grayscale(0) sepia(8%) brightness(0.85) contrast(1.05);
+  filter: grayscale(0) sepia(0) brightness(1) contrast(1.05);
 }
 
 /* ─── Item text ─── */

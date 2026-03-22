@@ -153,20 +153,20 @@
 
 /* Grayscale to color on hover — cinematic treatment (Stitch) */
 .grayscale-hover img {
-  filter: grayscale(100%) sepia(15%) brightness(0.55) contrast(1.15);
+  filter: grayscale(100%) sepia(10%) brightness(0.8) contrast(1.05);
   transition: filter 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .grayscale-hover:hover img {
-  filter: grayscale(0) sepia(8%) brightness(0.85) contrast(1.05);
+  filter: grayscale(0) sepia(0) brightness(1) contrast(1);
 }
 
 /* Archival image treatment — cinematic (Stitch) */
 .archival-image {
-  filter: grayscale(100%) sepia(15%) brightness(0.55) contrast(1.15);
+  filter: grayscale(100%) sepia(10%) brightness(0.8) contrast(1.05);
   transition: filter 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .archival-image:hover {
-  filter: grayscale(0) sepia(8%) brightness(0.85) contrast(1.05);
+  filter: grayscale(0) sepia(0) brightness(1) contrast(1);
 }
 
 /* Nav ink bleed hover */
@@ -366,11 +366,11 @@
 
 /* ─── Stitch: Image Cinematic Treatment ─── */
 .cinematic-image img {
-  filter: grayscale(100%) sepia(15%) brightness(0.55) contrast(1.15);
+  filter: grayscale(100%) sepia(10%) brightness(0.8) contrast(1.05);
   transition: filter 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .cinematic-image:hover img {
-  filter: grayscale(0) sepia(8%) brightness(0.85) contrast(1.05);
+  filter: grayscale(0) sepia(0) brightness(1) contrast(1);
 }
 
 /* ─── Stitch: Gold Glow Hover (warm ambient on interactive elements) ─── */

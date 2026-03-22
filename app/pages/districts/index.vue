@@ -411,7 +411,6 @@ useSeoMeta({
   margin-bottom: var(--space-8);
   transition: border-color 0.5s var(--ease-vellum),
               box-shadow 0.5s var(--ease-vellum);
-  box-shadow: inset 0 0 80px rgba(0,0,0,0.4),
               0 4px 40px -12px rgba(0,0,0,0.3);
 }
 
@@ -421,7 +420,6 @@ useSeoMeta({
 
 .dp-hero-card:hover {
   border-color: rgba(184, 150, 78, 0.4);
-  box-shadow: inset 0 0 80px rgba(0,0,0,0.4),
               0 20px 60px -20px rgba(0,0,0,0.5),
               0 0 40px -10px rgba(184, 150, 78, 0.08);
 }
@@ -461,7 +459,7 @@ useSeoMeta({
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%) brightness(0.6);
+  filter: grayscale(100%) brightness(0.8);
   transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
               filter 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -822,7 +820,6 @@ useSeoMeta({
     transition: none;
   }
   .dp-hero-card:hover {
-    box-shadow: inset 0 0 80px rgba(0,0,0,0.4), 0 4px 40px -12px rgba(0,0,0,0.3);
   }
   .dp-hero-card-image img {
     transition: none;

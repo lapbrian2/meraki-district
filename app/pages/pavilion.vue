@@ -1024,13 +1024,11 @@ const partners: string[] = [
   padding: var(--space-16) var(--space-12);
   border: 1px solid var(--color-border);
   background: rgba(255, 255, 255, 0.02);
-  box-shadow: inset 0 0 80px -20px rgba(0,0,0,0.3);
   transition: border-color 0.4s var(--ease-vellum), box-shadow 0.4s var(--ease-vellum);
 }
 
 .store-card:hover {
   border-color: rgba(184, 150, 78, 0.2);
-  box-shadow: inset 0 0 80px -20px rgba(0,0,0,0.3),
               0 0 40px -10px rgba(184, 150, 78, 0.06);
 }
 

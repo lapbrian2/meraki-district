@@ -349,7 +349,6 @@ const featuredArtists: Artist[] = [
   content: '';
   position: absolute;
   inset: 0;
-  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.6);
   pointer-events: none;
   z-index: 1;
   transition: box-shadow 0.8s ease;
@@ -364,12 +363,12 @@ const featuredArtists: Artist[] = [
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(100%) sepia(15%) brightness(0.55) contrast(1.15);
+  filter: grayscale(100%) sepia(10%) brightness(0.8) contrast(1.05);
   transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .fa-hero:hover .fa-hero-image img {
-  filter: grayscale(0) sepia(8%) brightness(0.85) contrast(1.05);
+  filter: grayscale(0) sepia(0) brightness(1) contrast(1.05);
 }
 
 .fa-hero-info {
@@ -466,7 +465,6 @@ const featuredArtists: Artist[] = [
   content: '';
   position: absolute;
   inset: 0;
-  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5);
   pointer-events: none;
   transition: box-shadow 0.8s ease;
 }
@@ -480,12 +478,12 @@ const featuredArtists: Artist[] = [
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(100%) sepia(15%) brightness(0.55) contrast(1.15);
+  filter: grayscale(100%) sepia(10%) brightness(0.8) contrast(1.05);
   transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .fa-card:hover .fa-image img {
-  filter: grayscale(0) sepia(8%) brightness(0.85) contrast(1.05);
+  filter: grayscale(0) sepia(0) brightness(1) contrast(1.05);
 }
 
 .fa-overlay {

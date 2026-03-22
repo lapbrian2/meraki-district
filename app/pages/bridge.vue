@@ -820,7 +820,6 @@ const opportunities: Opportunity[] = [
   background: rgba(184, 150, 78, 0.03);
   border: 1px solid rgba(184, 150, 78, 0.1);
   margin-bottom: var(--space-2);
-  box-shadow: inset 0 0 60px -20px rgba(184, 150, 78, 0.04);
 }
 
 .talent-avatar-wrap {

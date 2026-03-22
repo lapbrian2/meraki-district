@@ -228,7 +228,6 @@ onMounted(() => {
   content: '';
   position: absolute;
   inset: 0;
-  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.4);
   pointer-events: none;
   transition: box-shadow 0.8s ease;
 }
@@ -244,7 +243,7 @@ onMounted(() => {
   object-fit: cover;
   opacity: 0;
   transform: scale(0.97);
-  filter: grayscale(100%) sepia(15%) brightness(0.55) contrast(1.15);
+  filter: grayscale(100%) sepia(10%) brightness(0.8) contrast(1.05);
   transition: opacity 0.8s ease, transform 0.8s ease, filter 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -255,11 +254,11 @@ onMounted(() => {
 
 .featured-card:hover .featured-image img.loaded {
   transform: scale(1.03);
-  filter: grayscale(0) sepia(8%) brightness(0.85) contrast(1.05);
+  filter: grayscale(0) sepia(0) brightness(1) contrast(1.05);
 }
 
 .featured-hero:hover .featured-image img.loaded {
-  filter: grayscale(0) sepia(8%) brightness(0.85) contrast(1.05);
+  filter: grayscale(0) sepia(0) brightness(1) contrast(1.05);
 }
 
 .featured-tag {
