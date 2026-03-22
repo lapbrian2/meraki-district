@@ -4,6 +4,29 @@
     <ManifestoSection />
     <SectionDivider />
 
+    <!-- The Map Video -->
+    <section ref="videoSection" class="map-video-section section-dark">
+      <div class="section-default">
+        <div class="map-video-header">
+          <p class="overline reveal">The Journey</p>
+          <h2 class="word-reveal"><em>The Creator Pathway</em></h2>
+        </div>
+        <div class="map-video-wrap reveal">
+          <video
+            class="map-video"
+            src="/videos/meraki-map.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          />
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
     <!-- Featured Artists -->
     <section ref="artistsSection" class="featured-artists">
       <div class="fa-header">
@@ -85,7 +108,9 @@ import { useGsapScrollReveal, waitForAncestorAnimations } from '~/composables/us
 import { useWordReveal } from '~/composables/useWordReveal'
 import { useMagnetic } from '~/composables/useInteractions'
 
+const videoSection = ref<HTMLElement | null>(null)
 const artistsSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(videoSection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(artistsSection, '.reveal', { stagger: 0.1 })
 useWordReveal(artistsSection, '.word-reveal')
 useMagnetic(artistsSection, '.fa-card', { strength: 0.15 })
@@ -205,6 +230,36 @@ const featuredArtists: Artist[] = [
 </script>
 
 <style scoped>
+/* Map Video Section */
+.map-video-section {
+  padding: var(--section-gap) 0;
+}
+
+.map-video-header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.map-video-header h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: 300;
+  color: var(--color-dark-text);
+  justify-content: center;
+}
+
+.map-video-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 1px solid rgba(250, 250, 249, 0.08);
+  overflow: hidden;
+}
+
+.map-video {
+  width: 100%;
+  display: block;
+}
+
 .featured-artists {
   padding: var(--space-12) var(--content-padding);
   max-width: 1200px;
