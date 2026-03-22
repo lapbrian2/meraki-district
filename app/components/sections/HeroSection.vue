@@ -122,8 +122,8 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%) sepia(20%) contrast(1.1) brightness(0.25);
-  opacity: 0.5;
+  filter: grayscale(60%) sepia(15%) contrast(1.1) brightness(0.45);
+  opacity: 0.8;
 }
 
 .hero-layout {
