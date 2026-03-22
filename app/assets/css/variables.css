@@ -161,22 +161,22 @@
   transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-/* Subtle warmth on images — full color by default */
+/* Grayscale to color on hover — images reveal on interaction */
 .grayscale-hover img {
-  filter: sepia(5%) contrast(1.02);
-  transition: filter 0.6s ease;
+  filter: grayscale(100%) sepia(10%) contrast(1.05);
+  transition: filter 0.8s ease;
 }
 .grayscale-hover:hover img {
-  filter: sepia(0) contrast(1);
+  filter: grayscale(0) sepia(0) contrast(1);
 }
 
-/* Archival image treatment — subtle warm tone */
+/* Archival image treatment */
 .archival-image {
-  filter: sepia(5%) contrast(1.02);
-  transition: filter 0.6s ease;
+  filter: grayscale(100%) sepia(10%) contrast(1.05);
+  transition: filter 0.8s ease;
 }
 .archival-image:hover {
-  filter: sepia(0) contrast(1);
+  filter: grayscale(0) sepia(0) contrast(1);
 }
 
 /* Nav ink bleed hover */
@@ -374,13 +374,13 @@
   border: 1px solid rgba(184, 150, 78, 0.05);
 }
 
-/* ─── Subtle warm image treatment ─── */
+/* ─── Grayscale to color on hover ─── */
 .cinematic-image img {
-  filter: sepia(5%) contrast(1.02);
-  transition: filter 0.6s ease;
+  filter: grayscale(100%) sepia(10%) contrast(1.05);
+  transition: filter 0.8s ease;
 }
 .cinematic-image:hover img {
-  filter: sepia(0) contrast(1);
+  filter: grayscale(0) sepia(0) contrast(1);
 }
 
 /* ─── Stitch: Gold Glow Hover (warm ambient on interactive elements) ─── */

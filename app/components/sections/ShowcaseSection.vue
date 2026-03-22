@@ -244,7 +244,7 @@ onMounted(() => {
   object-fit: cover;
   opacity: 0;
   transform: scale(1);
-  filter: sepia(5%) contrast(1.02);
+  filter: grayscale(100%) sepia(10%) contrast(1.05);
   transition: opacity 0.8s ease, transform 1.5s ease, filter 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 

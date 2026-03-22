@@ -394,7 +394,7 @@ const featuredArtists: Artist[] = [
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: sepia(5%) contrast(1.02);
+  filter: grayscale(100%) sepia(10%) contrast(1.05);
   transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -510,7 +510,7 @@ const featuredArtists: Artist[] = [
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: sepia(5%) contrast(1.02);
+  filter: grayscale(100%) sepia(10%) contrast(1.05);
   transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), filter 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 

@@ -458,7 +458,7 @@ useSeoMeta({
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: sepia(5%) contrast(1.02);
+  filter: grayscale(100%) sepia(10%) contrast(1.05);
   transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
               filter 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }

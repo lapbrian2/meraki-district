@@ -2962,7 +2962,7 @@ onUnmounted(() => {
   position: relative;
   object-fit: cover;
   will-change: transform;
-  filter: sepia(5%) contrast(1.02);
+  filter: grayscale(100%) sepia(10%) contrast(1.05);
   transition: filter 0.6s ease-in-out;
 }
 
@@ -3376,7 +3376,7 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: sepia(5%) contrast(1.02);
+  filter: grayscale(100%) sepia(10%) contrast(1.05);
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
               filter 0.6s ease-in-out;
 }
