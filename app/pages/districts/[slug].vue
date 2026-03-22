@@ -54,28 +54,37 @@
       </div>
     </nav>
 
-    <!-- VS Active Sprints — 3-column card grid -->
+    <!-- VS Production Workflows — 3-phase card grid -->
     <section ref="vsSprintsSection" class="vs-sprints section-dark">
       <div class="section-default">
-        <p class="overline reveal">Active Sprints</p>
+        <p class="overline reveal">Production Workflows</p>
         <div class="vs-sprints-grid">
           <div class="vs-sprint vellum-card reveal">
             <span class="vs-sprint-number" aria-hidden="true">01</span>
-            <h3 class="vs-sprint-title"><em>Brand Architecture</em></h3>
-            <p class="vs-sprint-desc">Strategic identity systems that carry organizational logic from naming through to spatial wayfinding. Not decoration&mdash;infrastructure.</p>
-            <a href="mailto:hello@merakiroad.com" class="vs-sprint-link">View Sprint &rarr;</a>
+            <h3 class="vs-sprint-title"><em>Cinematic Synthesis</em></h3>
+            <p class="vs-sprint-desc">Visual identity forged through multi-layered composition. Brand systems, spatial design, and motion language converge into a single coherent output.</p>
+            <div class="vs-sprint-status">
+              <span class="vs-sprint-status-dot vs-sprint-status-dot--active" />
+              <span class="vs-sprint-status-label">In Production</span>
+            </div>
           </div>
           <div class="vs-sprint vellum-card reveal">
             <span class="vs-sprint-number" aria-hidden="true">02</span>
-            <h3 class="vs-sprint-title"><em>Digital Production</em></h3>
-            <p class="vs-sprint-desc">Full-stack creative builds where design and engineering share a single conversation. Interfaces that respect the people who use them.</p>
-            <a href="mailto:hello@merakiroad.com" class="vs-sprint-link">View Sprint &rarr;</a>
+            <h3 class="vs-sprint-title"><em>Archival Export</em></h3>
+            <p class="vs-sprint-desc">Every deliverable enters the permanent record. Assets are catalogued, versioned, and stored with full provenance chains intact before handoff.</p>
+            <div class="vs-sprint-status">
+              <span class="vs-sprint-status-dot vs-sprint-status-dot--staging" />
+              <span class="vs-sprint-status-label">Staging</span>
+            </div>
           </div>
           <div class="vs-sprint vellum-card reveal">
             <span class="vs-sprint-number" aria-hidden="true">03</span>
-            <h3 class="vs-sprint-title"><em>Technical Direction</em></h3>
-            <p class="vs-sprint-desc">Framework and infrastructure decisions made by people who understand both the engineering constraints and the creative ambition.</p>
-            <a href="mailto:hello@merakiroad.com" class="vs-sprint-link">View Sprint &rarr;</a>
+            <h3 class="vs-sprint-title"><em>Distribution Protocol</em></h3>
+            <p class="vs-sprint-desc">Controlled deployment across channels. Each asset is optimized for its destination&mdash;print, screen, spatial, motion&mdash;without degrading the source.</p>
+            <div class="vs-sprint-status">
+              <span class="vs-sprint-status-dot vs-sprint-status-dot--queued" />
+              <span class="vs-sprint-status-label">Queued</span>
+            </div>
           </div>
         </div>
       </div>
@@ -170,6 +179,48 @@
       </div>
     </section>
 
+    <!-- VS Fellow Showcase — Verified creators -->
+    <section ref="vsFellowSection" class="vs-fellow section-dark">
+      <div class="section-default">
+        <p class="overline reveal">Fellow Showcase</p>
+        <div class="vs-fellow-grid">
+          <div class="vs-fellow-card vellum-card reveal">
+            <div class="vs-fellow-header">
+              <span class="vs-fellow-initial">A.R.</span>
+              <span class="vs-fellow-verified">
+                <span class="material-symbols-outlined">verified</span>
+              </span>
+            </div>
+            <h3 class="vs-fellow-name"><em>Adrienne Ross</em></h3>
+            <p class="vs-fellow-role">Brand Architecture &middot; Visual Systems</p>
+            <p class="vs-fellow-bio">Spatial identity and wayfinding systems for cultural institutions. Seven years at the intersection of architecture and graphic design.</p>
+          </div>
+          <div class="vs-fellow-card vellum-card reveal">
+            <div class="vs-fellow-header">
+              <span class="vs-fellow-initial">M.K.</span>
+              <span class="vs-fellow-verified">
+                <span class="material-symbols-outlined">verified</span>
+              </span>
+            </div>
+            <h3 class="vs-fellow-name"><em>Marcus Kwan</em></h3>
+            <p class="vs-fellow-role">Motion Design &middot; Creative Direction</p>
+            <p class="vs-fellow-bio">Cinematic title sequences and motion identity. Former lead at two BAFTA-nominated studios before going independent.</p>
+          </div>
+          <div class="vs-fellow-card vellum-card reveal">
+            <div class="vs-fellow-header">
+              <span class="vs-fellow-initial">S.V.</span>
+              <span class="vs-fellow-verified">
+                <span class="material-symbols-outlined">verified</span>
+              </span>
+            </div>
+            <h3 class="vs-fellow-name"><em>Sana Voss</em></h3>
+            <p class="vs-fellow-role">Digital Production &middot; Technical Direction</p>
+            <p class="vs-fellow-bio">Full-stack creative engineering. Builds interfaces where design and code share a single conversation. Obsessive about performance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- VS Studio Philosophy — Asymmetric 7/5 grid -->
     <section ref="vsPhilosophySection" class="vs-philosophy section">
       <div class="section-default vs-philosophy-grid">
@@ -180,6 +231,10 @@
           <p class="vs-philosophy-attribution reveal">&mdash; Voight Studio Principle</p>
         </div>
         <div class="vs-philosophy-body">
+          <h3 class="vs-philosophy-heading reveal">
+            <span class="material-symbols-outlined vs-philosophy-icon">precision_manufacturing</span>
+            Studio Philosophy
+          </h3>
           <div class="vs-philosophy-rule" aria-hidden="true" />
           <p class="reveal">
             Voight Studio is the creative engine of Meraki Road. A full-service design practice that pairs strategic thinking with obsessive craft, working with ventures and cultural institutions that refuse to settle for conventional output.
@@ -191,11 +246,14 @@
       </div>
     </section>
 
-    <!-- VS CTA — Quiet invitation -->
+    <!-- VS CTA — Dual action -->
     <section ref="vsCtaSection" class="vs-cta section-dark">
       <div class="section-default vs-cta-inner">
         <h2 class="vs-cta-heading reveal">Start a conversation.</h2>
-        <a href="mailto:hello@merakiroad.com" class="vs-cta-email reveal">hello@merakiroad.com</a>
+        <div class="vs-cta-actions reveal">
+          <NuxtLink to="/apply" class="vs-cta-btn vs-cta-btn--primary">Enter Production View →</NuxtLink>
+          <a href="mailto:hello@merakiroad.com" class="vs-cta-btn vs-cta-btn--secondary">Archival Data →</a>
+        </div>
       </div>
     </section>
 
@@ -627,6 +685,7 @@ const fromSection = ref<HTMLElement | null>(null)
 const vsSprintsSection = ref<HTMLElement | null>(null)
 const vsWorkspaceSection = ref<HTMLElement | null>(null)
 const vsVaultSection = ref<HTMLElement | null>(null)
+const vsFellowSection = ref<HTMLElement | null>(null)
 const vsPhilosophySection = ref<HTMLElement | null>(null)
 const vsCtaSection = ref<HTMLElement | null>(null)
 
@@ -650,9 +709,11 @@ useTilt(navSection, '.q-explore-card', { maxRotation: 2 })
 useGsapScrollReveal(vsSprintsSection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(vsWorkspaceSection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(vsVaultSection, '.reveal', { stagger: 0.12 })
+useGsapScrollReveal(vsFellowSection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(vsPhilosophySection, '.reveal', { stagger: 0.12 })
 useGsapScrollReveal(vsCtaSection, '.reveal', { stagger: 0.1 })
 useTilt(vsSprintsSection, '.vs-sprint', { maxRotation: 2 })
+useTilt(vsFellowSection, '.vs-fellow-card', { maxRotation: 2 })
 
 // The Provenance composable animations
 useGsapScrollReveal(provPhilosophySection, '.reveal', { stagger: 0.12 })
@@ -1146,21 +1207,41 @@ onUnmounted(() => {
   padding-bottom: var(--space-6);
 }
 
-.vs-sprint-link {
-  font-family: var(--font-body);
-  font-size: var(--text-overline);
+.vs-sprint-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: auto;
+}
+
+.vs-sprint-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.vs-sprint-status-dot--active {
+  background: var(--color-success);
+  box-shadow: 0 0 6px rgba(22, 163, 74, 0.5);
+}
+
+.vs-sprint-status-dot--staging {
+  background: var(--color-gold);
+  box-shadow: 0 0 6px rgba(184, 150, 78, 0.4);
+}
+
+.vs-sprint-status-dot--queued {
+  background: var(--color-dark-muted);
+}
+
+.vs-sprint-status-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
   font-weight: 500;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--color-gold);
-  background-image: none;
-  text-decoration: none;
-  opacity: 0.6;
-  transition: opacity var(--duration-fast) ease;
-}
-
-.vs-sprint:hover .vs-sprint-link {
-  opacity: 1;
+  color: var(--color-dark-muted);
 }
 
 /* VS The Workspace — Active production environment */
@@ -1452,7 +1533,110 @@ onUnmounted(() => {
   margin-bottom: 0;
 }
 
-/* VS CTA — Quiet invitation */
+/* VS Fellow Showcase — Verified creators */
+.vs-fellow {
+  padding: var(--space-32) 0;
+}
+
+.vs-fellow .overline {
+  margin-bottom: var(--space-12);
+}
+
+.vs-fellow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.vs-fellow-card {
+  padding: var(--space-8);
+  border-color: rgba(184, 150, 78, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--duration-normal) ease;
+}
+
+.vs-fellow-card:hover {
+  border-color: rgba(184, 150, 78, 0.35);
+}
+
+.vs-fellow-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.vs-fellow-initial {
+  font-family: var(--font-mono);
+  font-size: var(--text-h3);
+  font-weight: 300;
+  color: rgba(250, 250, 249, 0.08);
+  letter-spacing: var(--tracking-wide);
+}
+
+.vs-fellow-verified {
+  color: var(--color-gold);
+  display: flex;
+  align-items: center;
+}
+
+.vs-fellow-verified .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.vs-fellow-name {
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  font-weight: 400;
+  color: var(--color-dark-text);
+  margin-bottom: var(--space-1);
+  line-height: var(--leading-snug);
+}
+
+.vs-fellow-name em {
+  font-style: italic;
+  font-variation-settings: 'WONK' 1, 'SOFT' 40;
+}
+
+.vs-fellow-role {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  opacity: 0.7;
+  margin-bottom: var(--space-4);
+}
+
+.vs-fellow-bio {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--color-dark-muted);
+  line-height: var(--leading-normal);
+}
+
+/* VS Philosophy heading with icon */
+.vs-philosophy-heading {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-gold);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.vs-philosophy-icon {
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+/* VS CTA — Dual action */
 .vs-cta {
   padding: var(--space-32) 0;
 }
@@ -1474,18 +1658,42 @@ onUnmounted(() => {
   font-variation-settings: 'WONK' 1, 'SOFT' 80;
 }
 
-.vs-cta-email {
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  color: var(--color-gold);
-  text-decoration: none;
-  background-image: none;
-  border-bottom: 1px solid rgba(184, 150, 78, 0.4);
-  padding-bottom: 2px;
-  transition: border-color var(--duration-normal) ease;
+.vs-cta-actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.vs-cta-email:hover {
+.vs-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-8);
+  font-size: var(--text-overline);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  text-decoration: none;
+  background-image: none;
+  transition: opacity var(--duration-normal) ease;
+}
+
+.vs-cta-btn--primary {
+  background: var(--color-gold);
+  color: var(--color-background);
+}
+
+.vs-cta-btn--primary:hover {
+  opacity: 0.85;
+}
+
+.vs-cta-btn--secondary {
+  background: transparent;
+  color: var(--color-gold);
+  border: 1px solid rgba(184, 150, 78, 0.4);
+}
+
+.vs-cta-btn--secondary:hover {
   border-color: var(--color-gold);
 }
 
@@ -2378,6 +2586,23 @@ onUnmounted(() => {
   /* VS Sprints */
   .vs-sprints-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* VS Fellow Showcase */
+  .vs-fellow-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  /* VS CTA */
+  .vs-cta-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .vs-cta-btn {
+    justify-content: center;
+    min-height: 44px;
   }
 
   /* VS Workspace */

@@ -3,7 +3,7 @@
     <div class="hero-layout">
       <!-- Left: editorial text stack -->
       <div class="hero-text">
-        <p class="hero-overline">Est. 2026</p>
+        <p class="hero-overline stamped-overline">Est. 2026</p>
         <h1 ref="heroTitle" class="hero-title reveal-text ink-reveal">
           <span class="hero-title-line">Where craft</span>
           <span class="hero-title-accent">meets culture.</span>
@@ -136,10 +136,7 @@ onUnmounted(() => {
 
 .hero-overline {
   font-family: var(--font-body);
-  font-size: var(--text-overline);
   font-weight: 500;
-  letter-spacing: var(--tracking-widest);
-  text-transform: uppercase;
   color: var(--color-gold);
   margin-bottom: var(--space-6);
 }
@@ -153,6 +150,7 @@ onUnmounted(() => {
   margin-bottom: var(--space-8);
   text-align: left;
   animation-delay: 0.4s;
+  text-shadow: 0 2px 40px rgba(184,150,78,0.15);
 }
 
 .hero-title-line {

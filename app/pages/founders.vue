@@ -96,6 +96,10 @@
             <div class="founder-content reveal">
               <h3 class="founder-name"><em>{{ founder.name }}</em></h3>
               <p class="founder-role">{{ founder.role }}</p>
+              <div v-if="founder.seal" class="founder-seal" :class="founder.seal.class">
+                <span class="material-symbols-outlined founder-seal-icon" aria-hidden="true">{{ founder.seal.icon }}</span>
+                {{ founder.seal.label }}
+              </div>
               <div class="founder-badges">
                 <span
                   v-for="badge in founder.badges"
@@ -139,16 +143,79 @@
     <SectionDivider />
 
     <!-- ============================================
+         PRODUCTIONS — From the Studio
+    ============================================= -->
+    <section ref="productionsSection" class="founders-productions section">
+      <div class="section-wide">
+        <div class="productions-header">
+          <p class="overline reveal">From the Studio</p>
+          <h2 class="productions-title word-reveal"><em>Institutional Productions</em></h2>
+        </div>
+
+        <div class="productions-grid">
+          <article
+            v-for="study in caseStudies"
+            :key="study.title"
+            class="production-card vellum-card reveal"
+          >
+            <div class="production-image grayscale-hover">
+              <div class="production-image-placeholder" />
+            </div>
+            <div class="production-content">
+              <p class="production-client">{{ study.client }}</p>
+              <h3 class="production-title"><em>{{ study.title }}</em></h3>
+              <p class="production-desc">{{ study.description }}</p>
+              <NuxtLink :to="study.link" class="production-cta line-draw">
+                View Case Study &rarr;
+              </NuxtLink>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
+         COMMISSIONS — Open Commissions
+    ============================================= -->
+    <section ref="commissionsSection" class="founders-commissions section">
+      <div class="section-wide">
+        <div class="commissions-header">
+          <p class="overline reveal">Now Accepting</p>
+          <h2 class="commissions-title word-reveal"><em>Open Commissions</em></h2>
+        </div>
+
+        <div class="commissions-grid">
+          <article
+            v-for="commission in commissions"
+            :key="commission.type"
+            class="commission-card reveal"
+          >
+            <p class="commission-type">{{ commission.type }}</p>
+            <h3 class="commission-card-title"><em>{{ commission.title }}</em></h3>
+            <p class="commission-desc">{{ commission.description }}</p>
+            <NuxtLink :to="commission.link" class="commission-cta line-draw">
+              Inquire &rarr;
+            </NuxtLink>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
          CTA — "The road is open." + dual buttons
     ============================================= -->
     <section ref="ctaSection" class="founders-cta section-dark">
       <div class="section-narrow founders-cta-inner">
         <h2 class="cta-title word-reveal">The road is open.</h2>
         <div class="cta-buttons reveal">
-          <NuxtLink to="/apply" class="cta-button cta-button--primary">
-            Join the District &rarr;
+          <NuxtLink to="/apply" class="cta-button cta-button--gold">
+            Start a Conversation &rarr;
           </NuxtLink>
-          <NuxtLink to="/archive" class="cta-button cta-button--secondary">
+          <NuxtLink to="/archive" class="cta-button cta-button--ghost">
             View the Archive &rarr;
           </NuxtLink>
         </div>
@@ -201,6 +268,18 @@ const ethosSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(ethosSection, '.reveal', { stagger: 0.1 })
 useTilt(ethosSection, '.ethos-card', { maxRotation: 2 })
 useWordReveal(ethosSection, '.word-reveal')
+
+/* -- Productions -------------------------------- */
+const productionsSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(productionsSection, '.reveal', { stagger: 0.12 })
+useWordReveal(productionsSection, '.word-reveal')
+useTilt(productionsSection, '.production-card', { maxRotation: 2 })
+
+/* -- Commissions -------------------------------- */
+const commissionsSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(commissionsSection, '.reveal', { stagger: 0.1 })
+useWordReveal(commissionsSection, '.word-reveal')
+useTilt(commissionsSection, '.commission-card', { maxRotation: 2 })
 
 /* -- CTA ---------------------------------------- */
 const ctaSection = ref<HTMLElement | null>(null)
@@ -274,6 +353,7 @@ const founders = [
     name: 'Brian Lapinski',
     role: 'Co-Founder',
     badges: ['Creative Technology', 'AI Systems', 'Strategy'],
+    seal: { icon: 'workspace_premium', label: 'Distinguished Fellow', class: 'seal-base seal-fellow' },
     bio: 'A developer who came to AI through building, not theorising. Brian spent years constructing the tools and infrastructure he wished existed for creative practitioners\u2014then realised the gap was bigger than any single tool could fill. Meraki Road is the structure he kept looking for and couldn\u2019t find: a place where rigorous creative work gets the permanence and visibility it deserves.',
     image: '/images/founders/brian.jpg',
   },
@@ -281,6 +361,7 @@ const founders = [
     name: 'Rachel Lapinski',
     role: 'Co-Founder',
     badges: ['Editorial Vision', 'Curation', 'Creative Direction'],
+    seal: { icon: 'verified', label: 'Verified Associate', class: 'seal-base seal-verified' },
     bio: 'Classically trained musician, design entrepreneur, AI-native artist\u2014Rachel has reinvented her practice three times and knows what it costs. She shapes the editorial voice and curatorial standard that holds Meraki Road together, ensuring every published work, every credential, and every gathering meets the bar that serious creative practice demands.',
     image: '/images/founders/rachel.webp',
   },
@@ -316,6 +397,42 @@ const principles = [
     number: '06',
     title: 'Sustained Presence',
     body: 'We favour slow engagement over viral moments. Depth compounds. The practitioners who stay and build are worth more than the ones who pass through.',
+  },
+]
+
+const caseStudies = [
+  {
+    client: 'Internal \u2014 Meraki Road Press',
+    title: 'The Weight of Practice: A Monograph Series',
+    description: 'A twelve-volume editorial programme documenting practitioners who have sustained creative rigour across decades. Each volume pairs long-form interview with archival reproductions, printed on uncoated stock with hand-tipped plates.',
+    link: '/archive',
+  },
+  {
+    client: 'Commissioned \u2014 Southbank Cultural Trust',
+    title: 'Cartography of the Unseen',
+    description: 'Brand architecture and digital production for a city-wide exhibition mapping overlooked creative communities. Delivered wayfinding system, exhibition catalogue, and a companion microsite with geo-located artist profiles.',
+    link: '/archive',
+  },
+]
+
+const commissions = [
+  {
+    type: 'Brand Architecture',
+    title: 'Identity & Positioning Systems',
+    description: 'Full-spectrum brand development for cultural institutions, studios, and independent practitioners. Strategy through execution.',
+    link: '/apply',
+  },
+  {
+    type: 'Digital Production',
+    title: 'Immersive Web & Editorial Platforms',
+    description: 'Bespoke digital experiences built with craft-level attention. Scroll-driven narratives, archival interfaces, portfolio systems.',
+    link: '/apply',
+  },
+  {
+    type: 'Strategic Consultation',
+    title: 'Creative Practice Advisory',
+    description: 'Positioning, visibility strategy, and infrastructure design for practitioners navigating the gap between making and being seen.',
+    link: '/apply',
   },
 ]
 </script>
@@ -533,7 +650,16 @@ const principles = [
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
   color: var(--color-gold-accessible);
+  margin-bottom: var(--space-3);
+}
+
+.founder-seal {
   margin-bottom: var(--space-4);
+  gap: var(--space-2);
+}
+
+.founder-seal-icon {
+  font-size: 14px;
 }
 
 .founder-badges {
@@ -676,6 +802,7 @@ const principles = [
   color: var(--color-dark-text);
   margin-bottom: var(--space-12);
   letter-spacing: var(--tracking-hero);
+  text-shadow: 0 2px 40px rgba(184,150,78,0.15);
 }
 
 .cta-buttons {
@@ -700,25 +827,24 @@ const principles = [
     background-color var(--duration-normal) ease;
 }
 
-.cta-button--primary {
-  color: var(--color-dark-text);
-  border: 1px solid rgba(250, 250, 249, 0.2);
-  border-left: 2px solid var(--color-gold);
+.cta-button--gold {
+  color: var(--color-ink);
+  background-color: var(--color-gold);
+  border: 1px solid var(--color-gold);
 }
 
-.cta-button--primary:hover {
-  border-color: var(--color-gold);
+.cta-button--gold:hover {
+  background-color: transparent;
   color: var(--color-gold);
-  background-color: rgba(184, 150, 78, 0.06);
 }
 
-.cta-button--secondary {
+.cta-button--ghost {
   color: var(--color-dark-muted);
-  border: 1px solid rgba(250, 250, 249, 0.1);
+  border: 1px solid rgba(250, 250, 249, 0.15);
 }
 
-.cta-button--secondary:hover {
-  border-color: rgba(250, 250, 249, 0.3);
+.cta-button--ghost:hover {
+  border-color: rgba(250, 250, 249, 0.4);
   color: var(--color-dark-text);
 }
 
@@ -745,6 +871,195 @@ const principles = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
+  }
+}
+
+/* =============================================
+   PRODUCTIONS — From the Studio
+   ============================================= */
+.founders-productions {
+  background-color: var(--color-surface);
+}
+
+.productions-header {
+  margin-bottom: var(--space-16);
+}
+
+.productions-title {
+  margin-top: var(--space-4);
+  margin-bottom: 0;
+}
+
+.productions-title em {
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+.productions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+}
+
+.production-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.production-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.production-image-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(184, 150, 78, 0.04) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border-bottom: 1px solid rgba(184, 150, 78, 0.1);
+}
+
+.production-content {
+  padding: var(--space-8);
+}
+
+.production-client {
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.production-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 300;
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-4);
+}
+
+.production-title em {
+  font-style: italic;
+}
+
+.production-desc {
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-6);
+  max-width: 45ch;
+}
+
+.production-cta {
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  text-decoration: none;
+  transition: color var(--duration-normal) ease;
+}
+
+.production-cta:hover {
+  color: var(--color-gold-accessible);
+}
+
+@media (max-width: 768px) {
+  .productions-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+}
+
+/* =============================================
+   COMMISSIONS — Open Commissions
+   ============================================= */
+.founders-commissions {
+  background-color: var(--color-background);
+}
+
+.commissions-header {
+  margin-bottom: var(--space-16);
+}
+
+.commissions-title {
+  margin-top: var(--space-4);
+  margin-bottom: 0;
+}
+
+.commissions-title em {
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+.commissions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+}
+
+.commission-card {
+  padding: var(--space-8);
+  border: 1px solid var(--rule-color);
+  transition: border-color var(--duration-normal) ease;
+}
+
+.commission-card:hover {
+  border-color: var(--color-gold);
+}
+
+.commission-type {
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.commission-card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 300;
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-4);
+}
+
+.commission-card-title em {
+  font-style: italic;
+}
+
+.commission-desc {
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-6);
+}
+
+.commission-cta {
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  text-decoration: none;
+  transition: color var(--duration-normal) ease;
+}
+
+.commission-cta:hover {
+  color: var(--color-gold-accessible);
+}
+
+@media (max-width: 768px) {
+  .commissions-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
   }
 }
 </style>

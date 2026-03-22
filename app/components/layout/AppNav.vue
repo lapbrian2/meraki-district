@@ -138,6 +138,7 @@ const mobileLinks = [
   { to: '/pavilion', label: 'Pavilion' },
   { to: '/bridge', label: 'Bridge' },
   { to: '/circuit', label: 'Circuit' },
+  { to: '/typography', label: 'Typography' },
 ]
 
 useNavAnimation({ navRef, overlayRef, mobileOpen })

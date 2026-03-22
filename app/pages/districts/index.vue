@@ -10,8 +10,9 @@
       <div class="dp-rule reveal" aria-hidden="true" />
     </section>
 
-    <!-- Phase I — Active Districts (hero-sized alternating cards) -->
+    <!-- Phase I: Operational — Active Districts (full-width hero cards) -->
     <section ref="activeSection" class="dp-active">
+      <p class="dp-phase-label reveal">Phase I: Operational</p>
       <p class="dp-section-label reveal">
         <span class="dp-label-dot dp-dot--active" />
         Active
@@ -36,9 +37,9 @@
         </div>
         <div class="dp-hero-card-content">
           <span class="dp-hero-number">{{ d.number }}</span>
-          <span class="dp-badge dp-badge--active">
-            <span class="dp-badge-dot dp-badge-dot--active" />
-            Active
+          <span class="dp-stamp dp-stamp--active reveal">
+            <span class="material-symbols-outlined dp-stamp-icon">verified</span>
+            Operational
           </span>
           <span class="dp-hero-type">{{ d.type }}</span>
           <h2 class="dp-hero-name">{{ d.name }}</h2>
@@ -51,59 +52,48 @@
       </div>
     </section>
 
-    <!-- Phase II — Coming Soon (medium text-dominant cards) -->
+    <!-- Phase II: Emerging Territories — Coming Soon (medium cards, 3-col grid) -->
     <section ref="comingSection" class="dp-coming">
-      <p class="dp-section-overline reveal">Emerging Territories</p>
+      <p class="dp-phase-label reveal">Phase II: Emerging Territories</p>
       <p class="dp-section-label reveal">
         <span class="dp-label-dot dp-dot--coming" />
         Coming Soon
       </p>
 
       <div class="dp-coming-grid">
-        <NuxtLink
+        <div
           v-for="d in comingSoon"
           :key="d.slug"
-          :to="`/districts/${d.slug}`"
           class="dp-coming-card vellum-card reveal"
         >
           <span class="dp-coming-number">{{ d.number }}</span>
-          <span class="dp-badge dp-badge--coming">
-            <span class="dp-badge-dot dp-badge-dot--coming" />
-            Coming Soon
-          </span>
-          <span class="dp-coming-type">{{ d.type }}</span>
           <h3 class="dp-coming-name">{{ d.name }}</h3>
-          <p class="dp-coming-subtitle">{{ d.subtitle }}</p>
+          <span class="dp-coming-type">{{ d.type }}</span>
           <p class="dp-coming-desc">{{ d.description }}</p>
-          <span v-if="d.statusNote" class="dp-status-note">{{ d.statusNote }}</span>
-        </NuxtLink>
+          <span class="dp-stamp dp-stamp--pending">Pending Deployment</span>
+        </div>
       </div>
     </section>
 
-    <!-- Future Frontiers — In Development (compact grid) -->
+    <!-- Future Frontiers — In Development (ultra-compact numbered list) -->
     <section ref="devSection" class="dp-dev">
-      <p class="dp-section-overline reveal">Future Frontiers</p>
+      <p class="dp-phase-label reveal">Future Frontiers</p>
       <p class="dp-section-label reveal">
         <span class="dp-label-dot dp-dot--dev" />
         In Development
       </p>
 
-      <div class="dp-dev-grid">
-        <div
+      <ol class="dp-dev-list">
+        <li
           v-for="d in development"
           :key="d.slug"
-          class="dp-dev-card reveal"
+          class="dp-dev-item reveal"
         >
           <span class="dp-dev-number">{{ d.number }}</span>
-          <span class="dp-badge dp-badge--dev">
-            <span class="dp-badge-dot dp-badge-dot--dev" />
-            In Development
-          </span>
-          <h3 class="dp-dev-name">{{ d.name }}</h3>
-          <p class="dp-dev-subtitle">{{ d.subtitle }}</p>
-          <span class="dp-dev-type">{{ d.type }}</span>
-        </div>
-      </div>
+          <span class="dp-dev-name">{{ d.name }}</span>
+          <span class="dp-dev-tag">{{ d.type }}</span>
+        </li>
+      </ol>
     </section>
 
     <!-- Footer CTA -->
@@ -166,6 +156,7 @@ useHead({
   letter-spacing: var(--tracking-tight);
   margin-bottom: var(--space-4);
   justify-content: center;
+  text-shadow: 0 2px 40px rgba(184,150,78,0.15);
 }
 
 .dp-subtitle {
@@ -184,16 +175,18 @@ useHead({
   margin: var(--space-8) auto 0;
 }
 
-/* ─── Section Labels ─── */
-.dp-section-overline {
-  font-size: var(--text-overline);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-widest);
+/* ─── Phase Labels ─── */
+.dp-phase-label {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: var(--text-h3);
   color: var(--color-gold);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
+  letter-spacing: var(--tracking-snug);
 }
 
+/* ─── Section Labels ─── */
 .dp-section-label {
   font-size: var(--text-overline);
   font-weight: 500;
@@ -216,47 +209,38 @@ useHead({
 .dp-dot--coming { background: var(--color-gold); }
 .dp-dot--dev { background: var(--color-text-muted); opacity: 0.5; }
 
-/* ─── Status Badges ─── */
-.dp-badge {
+/* ─── Stamped Badges ─── */
+.dp-stamp {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  font-size: 0.625rem;
-  font-weight: 600;
+  font-size: 0.5625rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  padding: 0.25rem 0.625rem;
-  border-radius: 2px;
+  letter-spacing: var(--tracking-widest);
+  padding: 0.3rem 0.75rem;
+  border: 1.5px solid;
   margin-bottom: var(--space-3);
+  align-self: flex-start;
 }
 
-.dp-badge--active {
+.dp-stamp-icon {
+  font-size: 12px;
+}
+
+.dp-stamp--active {
   color: #16A34A;
-  background: rgba(22, 163, 74, 0.08);
-  border: 1px solid rgba(22, 163, 74, 0.2);
+  border-color: rgba(22, 163, 74, 0.35);
+  background: rgba(22, 163, 74, 0.06);
 }
 
-.dp-badge--coming {
+.dp-stamp--pending {
   color: var(--color-gold);
-  background: rgba(184, 150, 78, 0.08);
-  border: 1px solid rgba(184, 150, 78, 0.2);
+  border-color: rgba(184, 150, 78, 0.35);
+  background: rgba(184, 150, 78, 0.06);
+  margin-top: auto;
+  padding-top: var(--space-4);
 }
-
-.dp-badge--dev {
-  color: var(--color-text-muted);
-  background: rgba(113, 113, 122, 0.08);
-  border: 1px solid rgba(113, 113, 122, 0.15);
-}
-
-.dp-badge-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-}
-
-.dp-badge-dot--active { background: #16A34A; }
-.dp-badge-dot--coming { background: var(--color-gold); }
-.dp-badge-dot--dev { background: var(--color-text-muted); }
 
 /* ─── Phase I: Active — Hero Cards ─── */
 .dp-active {
@@ -425,9 +409,6 @@ useHead({
 .dp-coming-card {
   padding: var(--space-8) var(--space-6);
   border: 1px solid var(--rule-color);
-  text-decoration: none;
-  color: inherit;
-  background-image: none;
   display: flex;
   flex-direction: column;
   transition: background 0.35s ease, border-color 0.35s ease;
@@ -455,7 +436,7 @@ useHead({
   letter-spacing: var(--tracking-mega-wide);
   color: var(--color-gold);
   display: block;
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
 }
 
 .dp-coming-name {
@@ -468,17 +449,6 @@ useHead({
   transition: color 0.3s ease;
 }
 
-.dp-coming-subtitle {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 0.75rem;
-  color: var(--color-gold);
-  opacity: 0.5;
-  margin-bottom: var(--space-3);
-  letter-spacing: var(--tracking-wide);
-}
-
 .dp-coming-card:hover .dp-coming-name {
   color: var(--color-gold);
 }
@@ -488,17 +458,10 @@ useHead({
   font-weight: 300;
   line-height: 1.6;
   color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
 }
 
-.dp-status-note {
-  font-size: var(--text-overline);
-  color: var(--color-gold);
-  opacity: 0.7;
-  margin-top: var(--space-4);
-  font-style: italic;
-}
-
-/* ─── Future Frontiers: In Development — Compact Grid ─── */
+/* ─── Future Frontiers: In Development — Ultra-Compact List ─── */
 .dp-dev {
   padding: var(--space-16) var(--content-padding);
   max-width: 76rem;
@@ -506,67 +469,57 @@ useHead({
   border-top: 1px solid var(--rule-color);
 }
 
-.dp-dev-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: var(--space-3);
+.dp-dev-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.dp-dev-card {
-  padding: var(--space-6) var(--space-4);
-  border: 1px solid var(--rule-color);
+.dp-dev-item {
   display: flex;
-  flex-direction: column;
-  opacity: 0.6;
-  transition: opacity 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--rule-color);
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
 }
 
-.dp-dev-card:hover {
-  opacity: 1;
-  background: var(--color-surface);
-  border-color: rgba(113, 113, 122, 0.3);
+.dp-dev-item:first-child {
+  border-top: 1px solid var(--rule-color);
+}
+
+.dp-dev-item:hover {
+  opacity: 0.8;
 }
 
 .dp-dev-number {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(1.5rem, 2vw, 2rem);
-  line-height: 1;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: 400;
   color: var(--color-text-muted);
-  opacity: 0.15;
-  margin-bottom: var(--space-3);
+  min-width: 2rem;
+  letter-spacing: var(--tracking-wide);
 }
 
 .dp-dev-name {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 300;
-  font-size: 1.0625rem;
+  font-size: var(--text-body);
   color: var(--color-ink, #FAFAF9);
-  margin-bottom: 0.125rem;
-  transition: color 0.3s ease;
 }
 
-.dp-dev-subtitle {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 0.625rem;
-  color: var(--color-gold);
-  opacity: 0.4;
-  margin-bottom: 0.25rem;
-  letter-spacing: var(--tracking-wide);
-}
-
-.dp-dev-card:hover .dp-dev-name {
-  color: var(--color-gold);
-}
-
-.dp-dev-type {
-  font-size: 0.5rem;
+.dp-dev-tag {
+  font-size: 0.5625rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: var(--tracking-widest);
   color: var(--color-text-muted);
+  padding: 0.125rem 0.5rem;
+  border: 1px solid var(--rule-color);
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 /* ─── Footer CTA ─── */
@@ -612,19 +565,9 @@ useHead({
 .dp-cta-btn:hover { opacity: 0.85; }
 
 /* ─── Responsive ─── */
-@media (max-width: 1200px) {
-  .dp-dev-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 @media (max-width: 1024px) {
   .dp-coming-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .dp-dev-grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -665,22 +608,12 @@ useHead({
     padding: var(--space-6) var(--space-5);
   }
 
-  .dp-dev-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .dp-cta-btn {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .dp-dev-grid {
-    grid-template-columns: 1fr;
   }
 }
 </style>

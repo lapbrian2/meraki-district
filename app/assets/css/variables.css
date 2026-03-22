@@ -207,14 +207,24 @@
   box-shadow: inset 0 20px 40px -20px rgba(0,0,0,0.15), inset 0 -20px 40px -20px rgba(0,0,0,0.1);
 }
 
-/* Reveal text clip-path animation */
+/* Clip-path text reveal */
 .reveal-text {
   clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
-  animation: revealText 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  animation: reveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
-@keyframes revealText {
+@keyframes reveal {
   0% { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); }
   100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+}
+
+/* Stamped overline badge */
+.stamped-overline {
+  padding: 2px 8px;
+  border: 1px solid rgba(184,150,78,0.3);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: inline-block;
 }
 
 /* Character stagger animation — 40ms stagger, 800ms duration */
