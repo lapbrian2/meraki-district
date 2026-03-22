@@ -28,26 +28,24 @@
         <p class="overline reveal">Preamble</p>
         <div class="preamble-body">
           <p class="preamble-text reveal">
-            The creative landscape is fractured. Talented practitioners
-            lack infrastructure. Visibility has no meaningful connection
-            to merit, and the platforms built to serve creators mostly
-            serve themselves. Meraki Road was built to fix that&mdash;to
-            give artists visibility, structure, and access to real
-            career opportunities.
+            We believe that creative work gains value when it is supported
+            by real structure. Meraki Road exists to give practitioners
+            visibility, development, and access to meaningful career
+            opportunities within a single, coherent creative network.
           </p>
           <p class="preamble-text reveal">
-            Meraki Road is twelve districts, each serving a distinct
-            function in the creative lifecycle. Research, education,
-            production, publishing, exhibition, commerce, credentialing,
-            community. A coherent structure designed around the way
-            practitioners actually work&mdash;from first draft to
-            professional placement.
+            Twelve districts serve distinct functions across the creative
+            lifecycle: research, education, production, publishing,
+            exhibition, commerce, credentialing, and community. Each one
+            connects to the others. Together they form the infrastructure
+            that allows practitioners to focus on the work and be seen by
+            the people who matter.
           </p>
           <p class="preamble-text reveal">
-            This was built for practitioners who hold craft and ambition
-            as a single standard. The ones who stayed in the studio. The
-            ones who care about the work itself, long after the algorithm
-            has moved on.
+            Meraki Road was built for practitioners who hold craft and
+            ambition as a single standard. For the ones who show up to
+            the studio every day, who believe that consistent practice
+            and honest collaboration produce the strongest creative work.
           </p>
         </div>
       </div>
