@@ -24,52 +24,133 @@
     <SectionDivider />
 
     <!-- ============================================
-         FEATURED ARTIFACTS — 2 large cards side by side
+         FEATURED ACQUISITION — Large hero product card
     ============================================= -->
-    <section ref="artifactsSection" class="featured-artifacts section">
+    <section ref="featuredSection" class="featured-acquisition section">
       <div class="section-wide">
-        <div class="artifacts-header">
-          <p class="overline reveal">Featured</p>
-          <h2 class="artifacts-title word-reveal"><em>Current Acquisitions</em></h2>
+        <div class="featured-product-card reveal">
+          <div class="featured-product-image grayscale-hover parallax-container">
+            <div class="featured-product-placeholder">
+              <span class="material-symbols-outlined featured-product-placeholder-icon">local_florist</span>
+            </div>
+            <div class="featured-provenance-badge">
+              <span class="material-symbols-outlined provenance-badge-icon">verified</span>
+              <span class="provenance-badge-text">Verified Provenance</span>
+            </div>
+          </div>
+          <div class="featured-product-details">
+            <div class="featured-product-meta">
+              <span class="featured-product-id">MR-A-048</span>
+              <span class="featured-product-date">March 2026</span>
+            </div>
+            <p class="overline reveal">Featured Acquisition</p>
+            <h2 class="featured-product-title word-reveal"><em>Botanical Monograph No. 04</em></h2>
+            <p class="featured-product-edition reveal">Limited Edition &mdash; 12 of 12 remaining</p>
+            <p class="featured-product-desc reveal">
+              Hand-pressed folio of forty-eight generative botanicals,
+              printed on archival cotton rag. Each copy carries a unique seed-hash
+              tied to the original diffusion parameters. Bound in linen boards
+              with a gilt-stamped spine, accompanied by a companion essay
+              on the algorithmic cultivation process.
+            </p>
+            <p class="featured-curator-note reveal">
+              <span class="material-symbols-outlined curator-note-icon">edit_note</span>
+              <em>Curator&rsquo;s note:</em> This folio represents the intersection of
+              botanical illustration tradition and generative systems. The seed-hash
+              provenance ensures each copy is computationally unique.
+            </p>
+            <div class="featured-product-actions reveal">
+              <button class="product-cta-gold">Acquire Artifact &mdash; $1,240</button>
+              <NuxtLink to="/pavilion" class="product-cta-ghost">View Full Provenance &rarr;</NuxtLink>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
+         EXHIBITION CATALOGUES — 3-column grid
+    ============================================= -->
+    <section ref="cataloguesSection" class="catalogues section section-dark">
+      <div class="section-wide">
+        <div class="catalogues-header">
+          <div class="catalogues-header-left">
+            <p class="overline reveal">Editions</p>
+            <h2 class="catalogues-title word-reveal"><em>Exhibition Catalogues</em></h2>
+          </div>
+          <NuxtLink to="#" class="catalogues-view-all reveal">
+            View All Editions &rarr;
+          </NuxtLink>
         </div>
 
-        <div class="artifacts-grid">
-          <!-- Card 1: Botanical Monograph -->
-          <article class="artifact-card vellum-card reveal">
-            <div class="artifact-image-area grayscale-hover">
-              <div class="artifact-placeholder">
-                <span class="material-symbols-outlined artifact-placeholder-icon">local_florist</span>
+        <div class="catalogues-grid">
+          <article
+            v-for="catalogue in catalogues"
+            :key="catalogue.title"
+            class="catalogue-card vellum-card reveal"
+          >
+            <div class="catalogue-image-area grayscale-hover">
+              <div class="catalogue-placeholder">
+                <span class="material-symbols-outlined catalogue-placeholder-icon">{{ catalogue.icon }}</span>
               </div>
-              <span class="artifact-badge seal-base seal-verified">Verified Provenance</span>
+              <div class="catalogue-verified">
+                <span class="material-symbols-outlined catalogue-verified-icon">verified</span>
+              </div>
             </div>
-            <div class="artifact-info">
-              <h3 class="artifact-name">Botanical Monograph No. 04</h3>
-              <p class="artifact-desc">
-                Hand-pressed folio of forty-eight generative botanicals,
-                printed on archival cotton rag. Edition of twelve.
-                Each copy carries a unique seed-hash tied to the original
-                diffusion parameters.
-              </p>
-              <button class="artifact-cta-gold">Acquire Artifact &mdash; $1,240</button>
+            <div class="catalogue-info">
+              <span class="catalogue-series">{{ catalogue.series }}</span>
+              <h3 class="catalogue-name"><em>{{ catalogue.title }}</em></h3>
+              <div class="catalogue-footer">
+                <span class="catalogue-price">{{ catalogue.price }}</span>
+                <span class="catalogue-edition">{{ catalogue.edition }}</span>
+              </div>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
 
-          <!-- Card 2: Lost Codex Reprint -->
-          <article class="artifact-card vellum-card reveal">
-            <div class="artifact-image-area grayscale-hover">
-              <div class="artifact-placeholder">
-                <span class="material-symbols-outlined artifact-placeholder-icon">history_edu</span>
+    <SectionDivider />
+
+    <!-- ============================================
+         MERAKI MINT — Limited edition collectibles
+    ============================================= -->
+    <section ref="mintSection" class="meraki-mint section">
+      <div class="section-wide">
+        <div class="mint-header">
+          <div class="mint-header-left">
+            <p class="overline reveal">Limited Editions</p>
+            <h2 class="mint-title word-reveal"><em>Meraki Mint</em></h2>
+            <p class="mint-desc reveal">
+              Curated artifacts and collectibles produced in limited runs.
+              Each piece is numbered, sealed, and issued with full chain-of-custody
+              documentation from creation to acquisition.
+            </p>
+          </div>
+        </div>
+
+        <div class="mint-grid">
+          <article
+            v-for="item in mintItems"
+            :key="item.title"
+            class="mint-card lift-card reveal"
+          >
+            <div class="mint-card-image grayscale-hover">
+              <div class="mint-card-placeholder">
+                <span class="material-symbols-outlined mint-card-icon">{{ item.icon }}</span>
               </div>
             </div>
-            <div class="artifact-info">
-              <h3 class="artifact-name">The Lost Codex Reprint</h3>
-              <p class="artifact-series">Archival Series &mdash; Literature</p>
-              <p class="artifact-desc">
-                A facsimile reproduction of the 1927 letterpress original,
-                rebound in linen with gilt-stamped spine. Includes a
-                companion essay on the typographic restoration process.
-              </p>
-              <NuxtLink to="/pavilion" class="artifact-link">View Inventory &rarr;</NuxtLink>
+            <div class="mint-card-info">
+              <span class="mint-card-category">{{ item.category }}</span>
+              <h3 class="mint-card-title"><em>{{ item.title }}</em></h3>
+              <div class="mint-card-footer">
+                <span class="mint-card-price">{{ item.price }}</span>
+                <NuxtLink to="#" class="mint-card-arrow" aria-label="View details">
+                  <span class="material-symbols-outlined">arrow_forward</span>
+                </NuxtLink>
+              </div>
             </div>
           </article>
         </div>
@@ -176,6 +257,33 @@ useSeoMeta({
 })
 
 /* -- Data --------------------------------------- */
+interface Catalogue {
+  title: string
+  icon: string
+  series: string
+  price: string
+  edition: string
+}
+
+const catalogues: Catalogue[] = [
+  { title: 'Pressure & Release', icon: 'print', series: 'Pavilion Exhibition', price: '$180', edition: 'Ed. of 200' },
+  { title: 'Latent Landscapes', icon: 'terrain', series: 'Digital Archival', price: '$220', edition: 'Ed. of 150' },
+  { title: 'Mark, Erase, Repeat', icon: 'gesture', series: 'Process Studies', price: '$160', edition: 'Ed. of 300' },
+]
+
+interface MintItem {
+  title: string
+  icon: string
+  category: string
+  price: string
+}
+
+const mintItems: MintItem[] = [
+  { title: 'Archival Ink Set No. 07', icon: 'palette', category: 'Studio Tools', price: '$85' },
+  { title: 'Specimen Poster Series', icon: 'image', category: 'Prints', price: '$45' },
+  { title: 'The Meraki Codex', icon: 'menu_book', category: 'Publications', price: '$120' },
+]
+
 interface VaultItem {
   id: string
   title: string
@@ -193,9 +301,17 @@ const heroSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(heroSection, '.reveal')
 useWordReveal(heroSection, '.word-reveal')
 
-const artifactsSection = ref<HTMLElement | null>(null)
-useGsapScrollReveal(artifactsSection, '.reveal', { stagger: 0.1 })
-useWordReveal(artifactsSection, '.word-reveal')
+const featuredSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(featuredSection, '.reveal', { stagger: 0.08 })
+useWordReveal(featuredSection, '.word-reveal')
+
+const cataloguesSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(cataloguesSection, '.reveal', { stagger: 0.1 })
+useWordReveal(cataloguesSection, '.word-reveal')
+
+const mintSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(mintSection, '.reveal', { stagger: 0.1 })
+useWordReveal(mintSection, '.word-reveal')
 
 const vaultSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(vaultSection, '.reveal', { stagger: 0.1 })
@@ -288,55 +404,33 @@ onUnmounted(() => {
 }
 
 /* =============================================
-   FEATURED ARTIFACTS
+   FEATURED ACQUISITION — Hero product card
    ============================================= */
-.featured-artifacts {
+.featured-acquisition {
   padding: var(--space-16) var(--content-padding);
   background: var(--color-surface);
 }
 
-.artifacts-header {
-  text-align: center;
-  margin-bottom: var(--space-12);
-}
-
-.artifacts-title {
-  font-size: var(--text-h1);
-  font-family: var(--font-display);
-  font-weight: 300;
-  color: var(--color-ink);
-  margin-top: var(--space-4);
-}
-
-.artifacts-title em {
-  font-style: italic;
-}
-
-.artifacts-grid {
+.featured-product-card {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-8);
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.artifact-card {
-  display: flex;
-  flex-direction: column;
-  padding: 0;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-12);
+  align-items: start;
+  border: 1px solid var(--color-border);
   overflow: hidden;
 }
 
-.artifact-image-area {
+.featured-product-image {
   position: relative;
-  background: var(--color-background);
   aspect-ratio: 4 / 3;
+  background: var(--color-background);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
-.artifact-placeholder {
+.featured-product-placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -344,52 +438,121 @@ onUnmounted(() => {
   height: 100%;
 }
 
-.artifact-placeholder-icon {
-  font-size: 3.5rem;
+.featured-product-placeholder-icon {
+  font-size: 4.5rem;
   color: var(--color-text-muted);
   font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
 }
 
-.artifact-badge {
+.featured-provenance-badge {
   position: absolute;
   top: var(--space-4);
   left: var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: rgba(9, 9, 11, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(184, 150, 78, 0.3);
 }
 
-.artifact-info {
-  padding: var(--space-6);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+.provenance-badge-icon {
+  font-size: 14px;
+  color: var(--color-gold);
 }
 
-.artifact-name {
-  font-family: var(--font-display);
-  font-size: var(--text-h3);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--color-ink);
-  margin-bottom: var(--space-2);
-}
-
-.artifact-series {
-  font-size: var(--text-overline);
+.provenance-badge-text {
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
   color: var(--color-gold);
+}
+
+.featured-product-details {
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+}
+
+.featured-product-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
   margin-bottom: var(--space-4);
 }
 
-.artifact-desc {
-  font-size: var(--text-body);
-  color: var(--color-text-muted);
-  line-height: var(--leading-relaxed);
-  margin-bottom: var(--space-6);
-  flex: 1;
+.featured-product-id {
+  font-family: var(--font-mono);
+  font-size: var(--text-overline);
+  color: var(--color-gold);
+  letter-spacing: var(--tracking-wide);
 }
 
-.artifact-cta-gold {
+.featured-product-date {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+}
+
+.featured-product-title {
+  font-size: var(--text-h1);
+  font-family: var(--font-display);
+  font-weight: 300;
+  color: var(--color-ink);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-2);
+  line-height: var(--leading-tight);
+}
+
+.featured-product-title em {
+  font-style: italic;
+}
+
+.featured-product-edition {
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-6);
+}
+
+.featured-product-desc {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-6);
+}
+
+.featured-curator-note {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  line-height: var(--leading-normal);
+  padding: var(--space-4);
+  border-left: 2px solid rgba(184, 150, 78, 0.3);
+  background: rgba(184, 150, 78, 0.03);
+  margin-bottom: var(--space-8);
+}
+
+.curator-note-icon {
+  font-size: 18px;
+  color: var(--color-gold);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.featured-product-actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.product-cta-gold {
   display: inline-block;
   font-size: var(--text-small);
   font-weight: 600;
@@ -402,41 +565,334 @@ onUnmounted(() => {
   cursor: pointer;
   transition: opacity var(--duration-normal) ease,
               transform var(--duration-normal) ease;
-  align-self: flex-start;
 }
 
-.artifact-cta-gold:hover {
+.product-cta-gold:hover {
   opacity: 0.9;
   transform: translateY(-1px);
 }
 
-.artifact-cta-gold:focus-visible {
+.product-cta-gold:focus-visible {
   outline: 2px solid var(--color-gold);
   outline-offset: 4px;
 }
 
-.artifact-link {
+.product-cta-ghost {
   font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  background-image: none;
+  transition: opacity var(--duration-normal) ease;
+}
+
+.product-cta-ghost:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 900px) {
+  .featured-product-card {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-product-details {
+    padding: var(--space-6);
+  }
+
+  .featured-product-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* =============================================
+   EXHIBITION CATALOGUES — 3-column grid
+   ============================================= */
+.catalogues {
+  padding: var(--space-24) var(--content-padding);
+}
+
+.catalogues-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--space-12);
+}
+
+.catalogues-title {
+  font-size: var(--text-h1);
+  font-family: var(--font-display);
+  font-weight: 300;
+  color: var(--color-dark-text);
+  margin-top: var(--space-3);
+  line-height: var(--leading-tight);
+}
+
+.catalogues-title em {
+  font-style: italic;
+}
+
+.catalogues-view-all {
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  background-image: none;
+  white-space: nowrap;
+  transition: opacity var(--duration-normal) ease;
+}
+
+.catalogues-view-all:hover {
+  opacity: 0.7;
+}
+
+.catalogues-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+}
+
+.catalogue-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.catalogue-image-area {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background: rgba(255, 255, 255, 0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.catalogue-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.catalogue-placeholder-icon {
+  font-size: 3rem;
+  color: var(--color-dark-muted);
+  font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
+}
+
+.catalogue-verified {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+}
+
+.catalogue-verified-icon {
+  font-size: 18px;
+  color: var(--color-gold);
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+}
+
+.catalogue-info {
+  padding: var(--space-5) var(--space-5);
+}
+
+.catalogue-series {
+  font-size: var(--text-overline);
   font-weight: 600;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
   color: var(--color-gold);
-  text-decoration: none;
-  transition: opacity var(--duration-normal) ease;
-  align-self: flex-start;
+  display: block;
+  margin-bottom: var(--space-2);
 }
 
-.artifact-link:hover {
-  opacity: 0.7;
+.catalogue-name {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 300;
+  color: var(--color-dark-text);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-4);
 }
 
-.artifact-link:focus-visible {
-  outline: 2px solid var(--color-gold);
-  outline-offset: 4px;
+.catalogue-name em {
+  font-style: italic;
+}
+
+.catalogue-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.catalogue-price {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--color-dark-text);
+}
+
+.catalogue-edition {
+  font-size: var(--text-caption);
+  color: var(--color-dark-muted);
+  letter-spacing: var(--tracking-wide);
 }
 
 @media (max-width: 768px) {
-  .artifacts-grid {
+  .catalogues {
+    padding: var(--space-16) var(--content-padding);
+  }
+
+  .catalogues-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .catalogues-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+}
+
+/* =============================================
+   MERAKI MINT — Limited editions 3-col grid
+   ============================================= */
+.meraki-mint {
+  padding: var(--space-24) var(--content-padding);
+  background: var(--color-surface);
+}
+
+.mint-header {
+  margin-bottom: var(--space-12);
+}
+
+.mint-title {
+  font-size: var(--text-h1);
+  font-family: var(--font-display);
+  font-weight: 300;
+  color: var(--color-ink);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-4);
+  line-height: var(--leading-tight);
+}
+
+.mint-title em {
+  font-style: italic;
+}
+
+.mint-desc {
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 52ch;
+}
+
+.mint-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+}
+
+.mint-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.mint-card-image {
+  aspect-ratio: 1 / 1;
+  background: var(--color-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mint-card-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mint-card-icon {
+  font-size: 2.5rem;
+  color: var(--color-text-muted);
+  font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
+}
+
+.mint-card-info {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.mint-card-category {
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-2);
+}
+
+.mint-card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  font-weight: 300;
+  color: var(--color-ink);
+  line-height: var(--leading-snug);
+  margin-bottom: auto;
+}
+
+.mint-card-title em {
+  font-style: italic;
+}
+
+.mint-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.mint-card-price {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.mint-card-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  background-image: none;
+  transition: border-color var(--duration-normal) ease,
+              color var(--duration-normal) ease,
+              background-color var(--duration-normal) ease;
+}
+
+.mint-card:hover .mint-card-arrow {
+  border-color: var(--color-gold);
+  color: var(--color-ink);
+  background-color: var(--color-gold);
+}
+
+@media (max-width: 768px) {
+  .meraki-mint {
+    padding: var(--space-16) var(--content-padding);
+  }
+
+  .mint-grid {
     grid-template-columns: 1fr;
   }
 }

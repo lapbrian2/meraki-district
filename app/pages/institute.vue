@@ -25,9 +25,29 @@
     <SectionDivider />
 
     <!-- ============================================
+         RESIDENT COUNT — Institutional credibility
+    ============================================= -->
+    <section ref="residentsSection" class="residents section">
+      <div class="section-default">
+        <div class="residents-card reveal">
+          <div class="residents-stat">
+            <span class="residents-number">247</span>
+            <span class="residents-label">Active Residents</span>
+          </div>
+          <div class="residents-meta">
+            <span class="residents-location">Distributed across 14 time zones</span>
+            <span class="residents-mandate">Building in service of craft, not credential.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
          IKIGAI LAB — Phase 01: Discovery
     ============================================= -->
-    <section ref="ikigaiSection" class="ikigai section">
+    <section ref="ikigaiSection" class="ikigai section section-dark">
       <div class="section-wide">
         <div class="ikigai-header">
           <p class="overline reveal">Phase 01</p>
@@ -106,12 +126,50 @@
     <SectionDivider />
 
     <!-- ============================================
+         CURRICULUM SEALS — 2-column program cards
+    ============================================= -->
+    <section ref="sealsSection" class="curriculum-seals section">
+      <div class="section-wide">
+        <div class="seals-header">
+          <p class="overline reveal">Curriculum</p>
+          <h2 class="seals-title word-reveal"><em>Seals of Mastery</em></h2>
+          <p class="seals-desc reveal">
+            Two structured programs that form the backbone of Institute practice.
+            Complete both to earn full institutional standing.
+          </p>
+        </div>
+
+        <div class="seals-grid">
+          <article v-for="seal in seals" :key="seal.title" class="seal-card vellum-card reveal">
+            <div class="seal-card-image grayscale-hover">
+              <div class="seal-card-placeholder">
+                <span class="material-symbols-outlined seal-card-icon">{{ seal.icon }}</span>
+              </div>
+            </div>
+            <div class="seal-card-body">
+              <span class="seal-card-badge">{{ seal.badge }}</span>
+              <h3 class="seal-card-title"><em>{{ seal.title }}</em></h3>
+              <ul class="seal-card-modules">
+                <li v-for="mod in seal.modules" :key="mod">{{ mod }}</li>
+              </ul>
+              <NuxtLink to="#" class="seal-card-cta">
+                <span class="material-symbols-outlined seal-card-arrow">arrow_forward</span>
+              </NuxtLink>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
          MASTERY PATHWAY — Course Cards
     ============================================= -->
     <section ref="pathwaySection" class="pathway section section-dark">
       <div class="section-wide">
         <div class="pathway-header">
-          <p class="overline reveal">Curriculum</p>
+          <p class="overline reveal">Masterclasses</p>
           <h2 class="pathway-title word-reveal"><em>Mastery Pathway</em></h2>
           <p class="pathway-desc reveal">
             Structured programs designed by working practitioners, not
@@ -141,9 +199,41 @@
     <SectionDivider />
 
     <!-- ============================================
+         SCHOLAR'S JOURNAL — Recent publications
+    ============================================= -->
+    <section ref="journalSection" class="scholars-journal section">
+      <div class="section-wide">
+        <div class="journal-header">
+          <div class="journal-header-left">
+            <p class="overline reveal">Publications</p>
+            <h2 class="journal-title word-reveal"><em>Scholar&rsquo;s Journal</em></h2>
+          </div>
+          <NuxtLink to="/the-road" class="journal-view-all reveal">
+            Full Archive &rarr;
+          </NuxtLink>
+        </div>
+
+        <div class="journal-list">
+          <article v-for="paper in papers" :key="paper.title" class="journal-entry reveal">
+            <span class="journal-entry-badge">{{ paper.badge }}</span>
+            <div class="journal-entry-body">
+              <h3 class="journal-entry-title"><em>{{ paper.title }}</em></h3>
+              <span class="journal-entry-meta">{{ paper.author }} &middot; {{ paper.duration }}</span>
+            </div>
+            <NuxtLink to="#" class="journal-entry-link" aria-label="Read paper">
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </NuxtLink>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
          THE ASCENSION — Rank Progression
     ============================================= -->
-    <section ref="ascensionSection" class="ascension section">
+    <section ref="ascensionSection" class="ascension section section-dark">
       <div class="section-wide">
         <div class="ascension-header">
           <p class="overline reveal">Progression</p>
@@ -179,7 +269,7 @@
     <!-- ============================================
          TESTIMONIAL — Institutional Voice
     ============================================= -->
-    <section ref="testimonialSection" class="testimonial section section-dark">
+    <section ref="testimonialSection" class="testimonial section">
       <div class="section-wide">
         <div class="testimonial-grid">
           <div class="testimonial-portrait grayscale-hover reveal">
@@ -268,15 +358,29 @@ const heroSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(heroSection, '.reveal')
 useWordReveal(heroSection, '.word-reveal')
 
+/* -- Residents ---------------------------------- */
+const residentsSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(residentsSection, '.reveal')
+
 /* -- Ikigai Lab --------------------------------- */
 const ikigaiSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(ikigaiSection, '.reveal', { stagger: 0.1 })
 useWordReveal(ikigaiSection, '.word-reveal')
 
+/* -- Curriculum Seals --------------------------- */
+const sealsSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(sealsSection, '.reveal', { stagger: 0.1 })
+useWordReveal(sealsSection, '.word-reveal')
+
 /* -- Mastery Pathway ---------------------------- */
 const pathwaySection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(pathwaySection, '.reveal', { stagger: 0.1 })
 useWordReveal(pathwaySection, '.word-reveal')
+
+/* -- Scholar's Journal -------------------------- */
+const journalSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(journalSection, '.reveal', { stagger: 0.06 })
+useWordReveal(journalSection, '.word-reveal')
 
 /* -- Ascension ---------------------------------- */
 const ascensionSection = ref<HTMLElement | null>(null)
@@ -293,6 +397,38 @@ useGsapScrollReveal(ctaSection, '.reveal')
 useWordReveal(ctaSection, '.word-reveal')
 
 /* -- Data --------------------------------------- */
+interface Seal {
+  title: string
+  icon: string
+  badge: string
+  modules: string[]
+}
+
+const seals: Seal[] = [
+  {
+    title: 'Seal I: Foundation',
+    icon: 'foundation',
+    badge: 'Core Curriculum',
+    modules: [
+      'Ikigai Alignment (4 weeks)',
+      'Material Intelligence (6 weeks)',
+      'Critique & Discourse (4 weeks)',
+      'Portfolio Architecture (2 weeks)',
+    ],
+  },
+  {
+    title: 'Seal II: Sovereignty',
+    icon: 'workspace_premium',
+    badge: 'Advanced Practice',
+    modules: [
+      'Autonomous Practice (8 weeks)',
+      'Public Presentation (4 weeks)',
+      'Institutional Contribution (6 weeks)',
+      'Legacy Documentation (2 weeks)',
+    ],
+  },
+]
+
 interface Course {
   title: string
   modules: number
@@ -319,6 +455,19 @@ const courses: Course[] = [
     level: 'Masterclass',
     description: 'Stories that branch, loop, and respond. Interactive fiction, generative narrative, and the emerging grammar of experiences that unfold differently for every audience.',
   },
+]
+
+interface Paper {
+  title: string
+  author: string
+  badge: string
+  duration: string
+}
+
+const papers: Paper[] = [
+  { title: 'On the Ethics of Algorithmic Curation', author: 'Lior Avital', badge: 'Peer Reviewed', duration: '12 min' },
+  { title: 'Material Intelligence in Digital Practice', author: 'Tomoko Iida', badge: 'Working Paper', duration: '18 min' },
+  { title: 'Against Legibility: A Defense of Opacity', author: 'Vera Morozova', badge: 'Fellow Thesis', duration: '24 min' },
 ]
 
 interface Rank {
@@ -399,9 +548,7 @@ const ranks: Rank[] = [
   color: var(--color-dark-text);
 }
 
-.hero-heading em {
-  font-style: italic;
-}
+.hero-heading em { font-style: italic; }
 
 .hero-subtitle {
   font-size: var(--text-body);
@@ -418,40 +565,82 @@ const ranks: Rank[] = [
   font-weight: 600;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--color-ink);
+  color: var(--color-dark-bg);
   padding: var(--space-4) var(--space-8);
   background-image: none;
   background-color: var(--color-gold);
   transition: opacity var(--duration-normal) ease, transform var(--duration-normal) ease;
 }
 
-.section-dark .hero-cta {
-  color: var(--color-dark-bg);
+.hero-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+.hero-cta:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 4px; }
+
+@media (max-width: 768px) {
+  .institute-hero { padding-top: calc(var(--space-16) + 3rem); padding-bottom: var(--space-12); }
+  .hero-cta { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; width: 100%; }
 }
 
-.hero-cta:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
+/* =============================================
+   RESIDENT COUNT — Institutional credibility
+   ============================================= */
+.residents {
+  padding: var(--space-12) var(--content-padding);
+  background: var(--color-background);
 }
 
-.hero-cta:focus-visible {
-  outline: 2px solid var(--color-gold);
-  outline-offset: 4px;
+.residents-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-8) var(--space-12);
+  border: 1px solid var(--color-border);
+  gap: var(--space-8);
+}
+
+.residents-stat {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+}
+
+.residents-number {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: 300;
+  color: var(--color-gold);
+  line-height: 1;
+}
+
+.residents-label {
+  font-size: var(--text-small);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.residents-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+}
+
+.residents-location {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+}
+
+.residents-mandate {
+  font-family: var(--font-display);
+  font-size: var(--text-small);
+  font-style: italic;
+  color: var(--color-text-secondary);
 }
 
 @media (max-width: 768px) {
-  .institute-hero {
-    padding-top: calc(var(--space-16) + 3rem);
-    padding-bottom: var(--space-12);
-  }
-
-  .hero-cta {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
+  .residents-card { flex-direction: column; align-items: flex-start; }
+  .residents-meta { align-items: flex-start; }
 }
 
 /* =============================================
@@ -459,7 +648,6 @@ const ranks: Rank[] = [
    ============================================= */
 .ikigai {
   padding: var(--space-24) var(--content-padding);
-  background-color: var(--color-background);
 }
 
 .ikigai-header {
@@ -471,14 +659,14 @@ const ranks: Rank[] = [
   font-size: var(--text-h1);
   font-family: var(--font-display);
   font-weight: 300;
-  color: var(--color-ink);
+  color: var(--color-dark-text);
   margin-bottom: var(--space-4);
   line-height: var(--leading-tight);
 }
 
 .ikigai-desc {
   font-size: var(--text-body);
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
   max-width: 52ch;
   margin: 0 auto;
@@ -497,46 +685,27 @@ const ranks: Rank[] = [
   transition: border-color var(--duration-normal) ease;
 }
 
-.ikigai-card:hover {
-  border-color: var(--color-border);
-}
+.ikigai-card:hover { border-color: var(--color-border); }
+.ikigai-card-1 { margin-top: 0; }
+.ikigai-card-2 { margin-top: var(--space-8); }
+.ikigai-card-3 { margin-top: var(--space-16); }
 
-.ikigai-card-1 {
-  margin-top: 0;
-}
+.ikigai-card-image { overflow: hidden; aspect-ratio: 4 / 5; }
 
-.ikigai-card-2 {
-  margin-top: var(--space-8);
-}
-
-.ikigai-card-3 {
-  margin-top: var(--space-16);
-}
-
-.ikigai-card-image {
-  overflow: hidden;
-  aspect-ratio: 4 / 5;
-}
-
-.ikigai-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+.ikigai-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .ikigai-card-title {
   font-family: var(--font-display);
   font-size: var(--text-h3);
   font-weight: 300;
-  color: var(--color-ink);
+  color: var(--color-dark-text);
   padding: var(--space-6) var(--space-6) var(--space-2);
   line-height: var(--leading-snug);
 }
 
 .ikigai-card-desc {
   font-size: var(--text-small);
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   line-height: var(--leading-normal);
   padding: 0 var(--space-6);
   margin-bottom: var(--space-4);
@@ -557,35 +726,147 @@ const ranks: Rank[] = [
   transition: background-size 0.5s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-.ikigai-card-link:hover {
-  background-size: 100% 1px;
-}
+.ikigai-card-link:hover { background-size: 100% 1px; }
 
 @media (max-width: 900px) {
-  .ikigai-grid {
-    grid-template-columns: 1fr;
-    max-width: 480px;
-    margin: 0 auto;
-  }
+  .ikigai-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .ikigai-card-1, .ikigai-card-2, .ikigai-card-3 { margin-top: 0; }
+}
 
-  .ikigai-card-1,
-  .ikigai-card-2,
-  .ikigai-card-3 {
-    margin-top: 0;
-  }
+/* =============================================
+   CURRICULUM SEALS — 2-column program cards
+   ============================================= */
+.curriculum-seals {
+  padding: var(--space-24) var(--content-padding);
+  background: var(--color-background);
+}
+
+.seals-header {
+  text-align: center;
+  margin-bottom: var(--space-16);
+}
+
+.seals-title {
+  font-size: var(--text-h1);
+  font-family: var(--font-display);
+  font-weight: 300;
+  color: var(--color-ink);
+  margin-bottom: var(--space-4);
+  line-height: var(--leading-tight);
+}
+
+.seals-title em { font-style: italic; }
+
+.seals-desc {
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 50ch;
+  margin: 0 auto;
+}
+
+.seals-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+}
+
+.seal-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.seal-card-image {
+  aspect-ratio: 16 / 9;
+  background: rgba(255, 255, 255, 0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seal-card-icon {
+  font-size: 3rem;
+  color: var(--color-text-muted);
+  font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
+}
+
+.seal-card-body {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.seal-card-badge {
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-3);
+}
+
+.seal-card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 300;
+  color: var(--color-ink);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-5);
+}
+
+.seal-card-title em { font-style: italic; }
+
+.seal-card-modules {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.seal-card-modules li {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  padding-left: var(--space-4);
+  border-left: 1px solid var(--color-border);
+  line-height: var(--leading-normal);
+}
+
+.seal-card-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  background-image: none;
+  align-self: flex-end;
+  transition: border-color var(--duration-normal) ease, color var(--duration-normal) ease, background-color var(--duration-normal) ease;
+}
+
+.seal-card:hover .seal-card-cta {
+  border-color: var(--color-gold);
+  color: var(--color-ink);
+  background-color: var(--color-gold);
+}
+
+.seal-card-arrow { font-size: 18px; }
+
+@media (max-width: 768px) {
+  .seals-grid { grid-template-columns: 1fr; }
 }
 
 /* =============================================
    MASTERY PATHWAY — Course Cards
    ============================================= */
-.pathway {
-  padding: var(--space-24) var(--content-padding);
-}
+.pathway { padding: var(--space-24) var(--content-padding); }
 
-.pathway-header {
-  text-align: center;
-  margin-bottom: var(--space-16);
-}
+.pathway-header { text-align: center; margin-bottom: var(--space-16); }
 
 .pathway-title {
   font-size: var(--text-h1);
@@ -604,11 +885,7 @@ const ranks: Rank[] = [
   margin: 0 auto;
 }
 
-.pathway-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-8);
-}
+.pathway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); }
 
 .pathway-card {
   position: relative;
@@ -617,14 +894,10 @@ const ranks: Rank[] = [
   padding: var(--space-8);
   display: flex;
   flex-direction: column;
-  transition: border-color var(--duration-normal) ease,
-              transform var(--duration-normal) ease;
+  transition: border-color var(--duration-normal) ease, transform var(--duration-normal) ease;
 }
 
-.pathway-card:hover {
-  border-color: var(--color-gold);
-  transform: translateY(-2px);
-}
+.pathway-card:hover { border-color: var(--color-gold); transform: translateY(-2px); }
 
 .pathway-card-number {
   font-family: var(--font-mono);
@@ -671,9 +944,7 @@ const ranks: Rank[] = [
   border: 1px solid var(--color-border);
   color: var(--color-dark-muted);
   background-image: none;
-  transition: border-color var(--duration-normal) ease,
-              color var(--duration-normal) ease,
-              background-color var(--duration-normal) ease;
+  transition: border-color var(--duration-normal) ease, color var(--duration-normal) ease, background-color var(--duration-normal) ease;
 }
 
 .pathway-card:hover .pathway-card-cta {
@@ -682,43 +953,151 @@ const ranks: Rank[] = [
   background-color: var(--color-gold);
 }
 
-.pathway-arrow {
-  font-size: 18px;
-}
+.pathway-arrow { font-size: 18px; }
 
 @media (max-width: 900px) {
-  .pathway-grid {
-    grid-template-columns: 1fr;
-    max-width: 480px;
-    margin: 0 auto;
-  }
+  .pathway-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+}
+
+/* =============================================
+   SCHOLAR'S JOURNAL — Recent publications
+   ============================================= */
+.scholars-journal {
+  padding: var(--space-24) var(--content-padding);
+  background: var(--color-background);
+}
+
+.journal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--space-12);
+}
+
+.journal-title {
+  font-size: var(--text-h1);
+  font-family: var(--font-display);
+  font-weight: 300;
+  color: var(--color-ink);
+  margin-top: var(--space-3);
+  line-height: var(--leading-tight);
+}
+
+.journal-title em { font-style: italic; }
+
+.journal-view-all {
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  background-image: none;
+  white-space: nowrap;
+  transition: opacity var(--duration-normal) ease;
+}
+
+.journal-view-all:hover { opacity: 0.7; }
+
+.journal-list {
+  border-top: 1px solid var(--color-border);
+}
+
+.journal-entry {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: background-color var(--duration-normal) ease;
+}
+
+.journal-entry:hover {
+  background-color: rgba(184, 150, 78, 0.03);
+}
+
+.journal-entry-badge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  border: 1px solid rgba(184, 150, 78, 0.25);
+  padding: 2px 8px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.journal-entry-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.journal-entry-title {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  font-weight: 400;
+  color: var(--color-ink);
+  line-height: var(--leading-snug);
+  transition: color var(--duration-normal) ease;
+}
+
+.journal-entry:hover .journal-entry-title {
+  color: var(--color-gold);
+}
+
+.journal-entry-title em { font-style: italic; }
+
+.journal-entry-meta {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+.journal-entry-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--color-gold);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity var(--duration-normal) ease, transform var(--duration-normal) ease;
+  background-image: none;
+  flex-shrink: 0;
+}
+
+.journal-entry:hover .journal-entry-link {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+  .journal-header { flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+  .journal-entry { flex-wrap: wrap; gap: var(--space-3); }
+  .journal-entry-link { display: none; }
 }
 
 /* =============================================
    THE ASCENSION — Rank Progression
    ============================================= */
-.ascension {
-  padding: var(--space-24) var(--content-padding);
-  background-color: var(--color-background);
-}
+.ascension { padding: var(--space-24) var(--content-padding); }
 
-.ascension-header {
-  text-align: center;
-  margin-bottom: var(--space-16);
-}
+.ascension-header { text-align: center; margin-bottom: var(--space-16); }
 
 .ascension-title {
   font-size: var(--text-h1);
   font-family: var(--font-display);
   font-weight: 300;
-  color: var(--color-ink);
+  color: var(--color-dark-text);
   margin-bottom: var(--space-4);
   line-height: var(--leading-tight);
 }
 
 .ascension-desc {
   font-size: var(--text-body);
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
   max-width: 50ch;
   margin: 0 auto;
@@ -737,12 +1116,7 @@ const ranks: Rank[] = [
   left: 10%;
   right: 10%;
   height: 1px;
-  background: linear-gradient(
-    to right,
-    var(--color-border),
-    var(--color-gold),
-    var(--color-border)
-  );
+  background: linear-gradient(to right, var(--color-border), var(--color-gold), var(--color-border));
 }
 
 .ascension-rank {
@@ -760,7 +1134,7 @@ const ranks: Rank[] = [
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-background);
+  background: var(--color-dark-bg);
   border: 1px solid var(--color-border);
   border-radius: 50%;
   position: relative;
@@ -768,50 +1142,38 @@ const ranks: Rank[] = [
   transition: border-color var(--duration-normal) ease;
 }
 
-.ascension-rank:hover .ascension-icon-wrap {
-  border-color: var(--color-gold);
-}
+.ascension-rank:hover .ascension-icon-wrap { border-color: var(--color-gold); }
 
 .ascension-icon {
   font-size: 24px;
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   transition: color var(--duration-normal) ease;
 }
 
-.ascension-rank:hover .ascension-icon {
-  color: var(--color-gold);
-}
+.ascension-rank:hover .ascension-icon { color: var(--color-gold); }
 
 .ascension-rank-title {
   font-family: var(--font-display);
   font-size: var(--text-h4);
   font-weight: 300;
-  color: var(--color-ink);
+  color: var(--color-dark-text);
   line-height: var(--leading-snug);
 }
 
 .ascension-rank-desc {
   font-size: var(--text-small);
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   line-height: var(--leading-normal);
   max-width: 22ch;
 }
 
 @media (max-width: 900px) {
-  .ascension-track {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-12) var(--space-8);
-  }
-
-  .ascension-line {
-    display: none;
-  }
+  .ascension-track { grid-template-columns: repeat(2, 1fr); gap: var(--space-12) var(--space-8); }
+  .ascension-line { display: none; }
 }
 
 @media (max-width: 480px) {
-  .ascension-track {
-    grid-template-columns: 1fr;
-  }
+  .ascension-track { grid-template-columns: 1fr; }
 }
 
 /* =============================================
@@ -819,6 +1181,7 @@ const ranks: Rank[] = [
    ============================================= */
 .testimonial {
   padding: var(--space-24) var(--content-padding);
+  background: var(--color-background);
 }
 
 .testimonial-grid {
@@ -828,9 +1191,7 @@ const ranks: Rank[] = [
   align-items: center;
 }
 
-.testimonial-portrait {
-  overflow: hidden;
-}
+.testimonial-portrait { overflow: hidden; }
 
 .testimonial-img {
   width: 100%;
@@ -841,69 +1202,43 @@ const ranks: Rank[] = [
   border-radius: 4px;
 }
 
-.testimonial-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
+.testimonial-content { display: flex; flex-direction: column; gap: var(--space-6); }
 
-.testimonial-quote-icon {
-  font-size: 48px;
-  color: var(--color-gold);
-  opacity: 0.4;
-}
+.testimonial-quote-icon { font-size: 48px; color: var(--color-gold); opacity: 0.4; }
 
-.testimonial-quote {
-  border: none;
-  padding: 0;
-  margin: 0;
-}
+.testimonial-quote { border: none; padding: 0; margin: 0; }
 
 .testimonial-quote p {
   font-family: var(--font-display);
   font-size: var(--text-h2);
   font-weight: 300;
   line-height: var(--leading-snug);
-  color: var(--color-dark-text);
+  color: var(--color-ink);
 }
 
-.testimonial-quote em {
-  font-style: italic;
-}
+.testimonial-quote em { font-style: italic; }
 
-.testimonial-attribution {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
+.testimonial-attribution { display: flex; flex-direction: column; gap: var(--space-2); }
 
 .testimonial-name {
   font-family: var(--font-body);
   font-size: var(--text-body);
   font-weight: 600;
-  color: var(--color-dark-text);
+  color: var(--color-ink);
   letter-spacing: var(--tracking-snug);
 }
 
-.testimonial-meta {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
+.testimonial-meta { display: flex; align-items: center; gap: var(--space-3); }
 
 .testimonial-discipline {
   font-size: var(--text-overline);
   font-weight: 500;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  color: var(--color-dark-muted);
+  color: var(--color-text-muted);
 }
 
-.testimonial-nav {
-  display: flex;
-  gap: var(--space-3);
-  margin-top: var(--space-4);
-}
+.testimonial-nav { display: flex; gap: var(--space-3); margin-top: var(--space-4); }
 
 .testimonial-nav-btn {
   display: inline-flex;
@@ -912,32 +1247,18 @@ const ranks: Rank[] = [
   width: 44px;
   height: 44px;
   border: 1px solid var(--color-border);
-  color: var(--color-dark-muted);
+  color: var(--color-text-muted);
   background: transparent;
   cursor: pointer;
-  transition: border-color var(--duration-normal) ease,
-              color var(--duration-normal) ease;
+  transition: border-color var(--duration-normal) ease, color var(--duration-normal) ease;
 }
 
-.testimonial-nav-btn:hover {
-  border-color: var(--color-gold);
-  color: var(--color-gold);
-}
-
-.testimonial-nav-btn:focus-visible {
-  outline: 2px solid var(--color-gold);
-  outline-offset: 2px;
-}
+.testimonial-nav-btn:hover { border-color: var(--color-gold); color: var(--color-gold); }
+.testimonial-nav-btn:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 2px; }
 
 @media (max-width: 768px) {
-  .testimonial-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-  }
-
-  .testimonial-quote p {
-    font-size: var(--text-h3);
-  }
+  .testimonial-grid { grid-template-columns: 1fr; gap: var(--space-8); }
+  .testimonial-quote p { font-size: var(--text-h3); }
 }
 
 /* =============================================
@@ -948,17 +1269,8 @@ const ranks: Rank[] = [
   text-align: center;
 }
 
-.cta-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.cta-icon {
-  font-size: 40px;
-  color: var(--color-gold);
-  margin-bottom: var(--space-6);
-}
+.cta-inner { display: flex; flex-direction: column; align-items: center; }
+.cta-icon { font-size: 40px; color: var(--color-gold); margin-bottom: var(--space-6); }
 
 .cta-heading {
   font-size: var(--text-h1);
@@ -970,9 +1282,7 @@ const ranks: Rank[] = [
   margin-bottom: var(--space-4);
 }
 
-.cta-heading em {
-  font-style: italic;
-}
+.cta-heading em { font-style: italic; }
 
 .cta-subtitle {
   font-size: var(--text-overline);
@@ -983,12 +1293,7 @@ const ranks: Rank[] = [
   margin-bottom: var(--space-8);
 }
 
-.cta-buttons {
-  display: flex;
-  gap: var(--space-4);
-  flex-wrap: wrap;
-  justify-content: center;
-}
+.cta-buttons { display: flex; gap: var(--space-4); flex-wrap: wrap; justify-content: center; }
 
 .cta-button-gold {
   display: inline-block;
@@ -1000,14 +1305,10 @@ const ranks: Rank[] = [
   padding: var(--space-4) var(--space-8);
   background-color: var(--color-gold);
   background-image: none;
-  transition: opacity var(--duration-normal) ease,
-              transform var(--duration-normal) ease;
+  transition: opacity var(--duration-normal) ease, transform var(--duration-normal) ease;
 }
 
-.cta-button-gold:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
+.cta-button-gold:hover { opacity: 0.9; transform: translateY(-1px); }
 
 .cta-button-ghost {
   display: inline-block;
@@ -1020,9 +1321,7 @@ const ranks: Rank[] = [
   border: 1px solid var(--color-border);
   background-image: none;
   background-color: transparent;
-  transition: border-color var(--duration-normal) ease,
-              color var(--duration-normal) ease,
-              background-color var(--duration-normal) ease;
+  transition: border-color var(--duration-normal) ease, color var(--duration-normal) ease, background-color var(--duration-normal) ease;
 }
 
 .cta-button-ghost:hover {
@@ -1038,19 +1337,19 @@ const ranks: Rank[] = [
 }
 
 @media (max-width: 768px) {
-  .institute-cta {
-    padding: var(--space-16) var(--content-padding);
-  }
+  .institute-cta { padding: var(--space-16) var(--content-padding); }
+  .cta-buttons { flex-direction: column; width: 100%; }
+  .cta-button-gold, .cta-button-ghost { width: 100%; text-align: center; }
+}
 
-  .cta-buttons {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .cta-button-gold,
-  .cta-button-ghost {
-    width: 100%;
-    text-align: center;
-  }
+/* =============================================
+   SHARED
+   ============================================= */
+.overline {
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
 }
 </style>

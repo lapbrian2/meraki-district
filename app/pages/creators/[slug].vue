@@ -24,20 +24,28 @@
             <span class="hero-discipline">{{ creator.discipline }}</span>
           </div>
           <h1 class="hero-name word-reveal">{{ creator.name }}</h1>
+          <p v-if="creator.registryId" class="hero-registry reveal">
+            Registry {{ creator.registryId }}
+          </p>
         </div>
       </div>
     </section>
 
     <!-- ============================================
-         ARTIST STATEMENT — Pull quote + body
+         CURATOR'S FOREWORD — Pull quote + body
     ============================================= -->
-    <section ref="statementSection" class="monograph-statement section section-dark">
+    <section ref="forewordSection" class="monograph-foreword section section-dark">
       <div class="section-default">
-        <div class="statement-grid">
-          <blockquote class="statement-quote reveal">
+        <div class="foreword-header">
+          <p class="overline reveal">{{ creator.district || 'Fellow Monograph' }}</p>
+          <h2 class="foreword-heading word-reveal"><em>The Curator&rsquo;s Foreword</em></h2>
+        </div>
+        <div class="foreword-grid">
+          <blockquote class="foreword-quote reveal">
             <p>&ldquo;{{ creator.pullQuote }}&rdquo;</p>
+            <cite class="foreword-cite">&mdash; {{ creator.curatorName }}</cite>
           </blockquote>
-          <div class="statement-body reveal">
+          <div class="foreword-body reveal">
             <p>{{ creator.bio }}</p>
           </div>
         </div>
@@ -52,7 +60,7 @@
         <div class="metadata-grid">
           <div class="metadata-card reveal">
             <span class="metadata-label">District</span>
-            <span class="metadata-value">Meraki Studio</span>
+            <span class="metadata-value">{{ creator.district || 'Meraki Studio' }}</span>
           </div>
           <div class="metadata-card reveal">
             <span class="metadata-label">Seal</span>
@@ -79,7 +87,7 @@
       <div class="section-wide">
         <div class="gallery-header">
           <p class="overline reveal">Selected Works</p>
-          <h2 class="gallery-title word-reveal"><em>Portfolio</em></h2>
+          <h2 class="gallery-title word-reveal"><em>The Collection</em></h2>
         </div>
 
         <div class="gallery-grid">
@@ -87,7 +95,7 @@
             v-for="(work, i) in creator.portfolio"
             :key="work.title"
             class="gallery-entry reveal"
-            :class="`gallery-entry--${(i % 3) + 1}`"
+            :class="`gallery-entry--${(i % 4) + 1}`"
           >
             <span class="gallery-plate-number">Plate No. {{ String(i + 1).padStart(3, '0') }}</span>
             <div class="gallery-plate">
@@ -104,6 +112,7 @@
             <div class="gallery-caption">
               <span class="gallery-entry-number">Entry No. {{ String(i + 1).padStart(3, '0') }}</span>
               <h3 class="gallery-entry-title"><em>{{ work.title }}</em></h3>
+              <p v-if="work.medium" class="gallery-entry-medium">{{ work.medium }}<span v-if="work.year">, {{ work.year }}</span></p>
               <p class="gallery-entry-desc">{{ work.description }}</p>
             </div>
           </article>
@@ -112,6 +121,43 @@
     </section>
 
     <SectionDivider />
+
+    <!-- ============================================
+         TECHNICAL SCHEMA — Process + Specs
+    ============================================= -->
+    <section v-if="creator.technicalSpecs" ref="schemaSection" class="monograph-schema section section-dark">
+      <div class="section-default">
+        <div class="schema-header">
+          <p class="overline reveal">Process</p>
+          <h2 class="schema-title word-reveal"><em>Workflow Architecture</em></h2>
+        </div>
+        <div class="schema-grid">
+          <div class="schema-workflow reveal">
+            <div
+              v-for="(step, i) in creator.technicalSpecs.workflow"
+              :key="step"
+              class="schema-step"
+            >
+              <span class="schema-step-num">{{ String(i + 1).padStart(2, '0') }}</span>
+              <span class="schema-step-label">{{ step }}</span>
+            </div>
+          </div>
+          <div class="schema-specs reveal">
+            <h3 class="schema-specs-heading">Technical Specifications</h3>
+            <div
+              v-for="spec in creator.technicalSpecs.specs"
+              :key="spec.label"
+              class="schema-spec-row"
+            >
+              <span class="schema-spec-label">{{ spec.label }}</span>
+              <span class="schema-spec-value">{{ spec.value }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider v-if="creator.technicalSpecs" />
 
     <!-- ============================================
          CURATOR'S NOTE
@@ -175,6 +221,18 @@ interface PortfolioItem {
   title: string
   image: string
   description: string
+  medium?: string
+  year?: string
+}
+
+interface TechnicalSpec {
+  label: string
+  value: string
+}
+
+interface TechnicalSpecs {
+  workflow: string[]
+  specs: TechnicalSpec[]
 }
 
 interface Creator {
@@ -185,11 +243,14 @@ interface Creator {
   heroImage: string
   pullQuote: string
   bio: string
+  district?: string
+  registryId?: string
   portfolio: PortfolioItem[]
   curatorNote: string
   curatorName: string
   metricValue: string
   metricLabel: string
+  technicalSpecs?: TechnicalSpecs
 }
 
 const creators: Creator[] = [
@@ -206,16 +267,22 @@ const creators: Creator[] = [
         title: 'Latent Garden',
         image: '/images/districts/meridian.webp',
         description: 'A series of large-format prints generated from a custom diffusion model trained on 19th-century botanical illustrations. Each piece is a single seed, never repeated.',
+        medium: 'Digital Lithograph',
+        year: '2025',
       },
       {
         title: 'The Weight of Inference',
         image: '/images/districts/the-collective.webp',
         description: 'An installation of 400 thermal-printed receipts, each containing a single AI-generated sentence about memory. Viewers take one. The piece diminishes over the course of the exhibition.',
+        medium: 'Thermal Print Installation',
+        year: '2024',
       },
       {
         title: 'Residual Self',
         image: '/images/districts/the-frame.webp',
         description: 'A triptych of self-portraits created by feeding personal photographs through progressively degraded models. The final panel is nearly abstract — only the gesture remains.',
+        medium: 'Mixed Generative Media',
+        year: '2024',
       },
     ],
     curatorNote: 'Chen\'s work resists the spectacle that defines so much AI art. Where others optimize for awe, she optimizes for honesty. The result is a body of work that feels less like technology and more like testimony.',
@@ -230,24 +297,48 @@ const creators: Creator[] = [
     seal: 'Fellow',
     heroImage: '/images/districts/the-frame.webp',
     pullQuote: 'I don\'t illuminate spaces. I reveal the darkness that was always there.',
-    bio: 'Elena Voss constructs immersive environments where architecture dissolves into light. Her installations transform industrial spaces into meditative chambers, using precisely calibrated LEDs and reflective surfaces to alter the viewer\'s perception of scale and time.',
+    bio: 'Elena Voss constructs immersive environments where architecture dissolves into light. Her installations transform industrial spaces into meditative chambers, using precisely calibrated LEDs and reflective surfaces to alter the viewer\'s perception of scale and time. Trained in physics and sculpture at the Royal College of Art, Voss treats light not as medium but as material — something with weight, texture, and consequence.',
+    district: 'District 11',
+    registryId: 'EV-11-0982-F',
     portfolio: [
       {
         title: 'Threshold Study No. 7',
         image: '/images/districts/meridian.webp',
-        description: 'A site-specific installation in a decommissioned power station. 200 suspended LED filaments respond to ambient sound, creating a breathing luminous field.',
+        description: 'A site-specific installation in a decommissioned power station. 200 suspended LED filaments respond to ambient sound, creating a breathing luminous field that maps the architecture of silence.',
+        medium: 'LED Filament Array, Sound Sensor',
+        year: '2026',
       },
       {
         title: 'Negative Volume',
         image: '/images/districts/the-collective.webp',
         description: 'A chamber of blackout panels and edge-lit glass that inverts the viewer\'s sense of interior and exterior. Exhibited at the Venice Architecture Biennale.',
+        medium: 'Blackout Panel, Edge-Lit Glass',
+        year: '2025',
       },
       {
         title: 'After Image',
         image: '/images/districts/the-frame.webp',
         description: 'A triptych of rooms calibrated to specific wavelengths. Visitors move through blue, amber, and ultraviolet chambers, each altering color perception for minutes afterward.',
+        medium: 'Wavelength-Calibrated Light Chamber',
+        year: '2025',
+      },
+      {
+        title: 'Latent Space Cartography',
+        image: '/images/districts/meridian.webp',
+        description: 'A neural mapping study that translates trained model weights into spatial coordinates. Light paths through the installation trace the decision boundaries of a vision model.',
+        medium: 'Neural Mapping Study',
+        year: '2024',
       },
     ],
+    technicalSpecs: {
+      workflow: ['Environmental Survey', 'Light Spectrum Analysis', 'Spatial Calibration', 'Perceptual Testing', 'Installation Deployment'],
+      specs: [
+        { label: 'Sampling Rate', value: '48kHz ambient audio' },
+        { label: 'Memory Depth', value: '72hr rolling archive' },
+        { label: 'Diffusion Steps', value: '150 per generation cycle' },
+        { label: 'Seed Entropy', value: 'Environmental (non-deterministic)' },
+      ],
+    },
     curatorNote: 'Voss doesn\'t build installations — she builds perceptual conditions. Her work reminds us that light is not decoration. It is architecture\'s most honest material.',
     curatorName: 'Haruto Ise',
     metricValue: '7,231',
@@ -266,16 +357,22 @@ const creators: Creator[] = [
         title: 'Recursive Pavilion',
         image: '/images/districts/the-frame.webp',
         description: 'A self-similar timber structure generated from a single branching algorithm. Each joint angle is derived from local wind data collected over twelve months.',
+        medium: 'Algorithmic Timber Structure',
+        year: '2025',
       },
       {
         title: 'Erosion Machine',
         image: '/images/districts/the-collective.webp',
         description: 'A concrete form shaped by simulated weathering. The algorithm applies ten thousand years of erosion in forty-eight hours of computation.',
+        medium: 'Simulated Concrete Erosion',
+        year: '2024',
       },
       {
-        title: 'Latent Façade',
+        title: 'Latent Facade',
         image: '/images/districts/meridian.webp',
         description: 'A building skin whose panel geometry is derived from a neural network trained on vernacular architecture. No two panels share the same dimensions.',
+        medium: 'Neural-Derived Panel System',
+        year: '2024',
       },
     ],
     curatorNote: 'Vega treats computation not as a tool but as a collaborator with its own aesthetic instincts. His buildings feel grown rather than designed — which is precisely the point.',
@@ -310,9 +407,10 @@ useSeoMeta({
 
 /* -- Section refs ------------------------------- */
 const heroSection = ref<HTMLElement | null>(null)
-const statementSection = ref<HTMLElement | null>(null)
+const forewordSection = ref<HTMLElement | null>(null)
 const metadataSection = ref<HTMLElement | null>(null)
 const gallerySection = ref<HTMLElement | null>(null)
+const schemaSection = ref<HTMLElement | null>(null)
 const curatorSection = ref<HTMLElement | null>(null)
 const metricsSection = ref<HTMLElement | null>(null)
 const ctaSection = ref<HTMLElement | null>(null)
@@ -320,12 +418,16 @@ const ctaSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(heroSection, '.reveal')
 useWordReveal(heroSection, '.word-reveal')
 
-useGsapScrollReveal(statementSection, '.reveal', { stagger: 0.1 })
+useGsapScrollReveal(forewordSection, '.reveal', { stagger: 0.1 })
+useWordReveal(forewordSection, '.word-reveal')
 
 useGsapScrollReveal(metadataSection, '.reveal', { stagger: 0.1 })
 
 useGsapScrollReveal(gallerySection, '.reveal', { stagger: 0.15 })
 useWordReveal(gallerySection, '.word-reveal')
+
+useGsapScrollReveal(schemaSection, '.reveal', { stagger: 0.08 })
+useWordReveal(schemaSection, '.word-reveal')
 
 useGsapScrollReveal(curatorSection, '.reveal', { stagger: 0.1 })
 
@@ -412,15 +514,37 @@ useWordReveal(ctaSection, '.word-reveal')
   text-shadow: 0 4px 60px rgba(0,0,0,0.8);
 }
 
-/* ─── Artist Statement ─── */
-.statement-grid {
+.hero-registry {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--color-dark-muted);
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  margin-top: var(--space-4);
+  opacity: 0.5;
+}
+
+/* ─── Curator's Foreword ─── */
+.foreword-header {
+  margin-bottom: var(--space-12);
+}
+
+.foreword-heading {
+  font-size: var(--text-h2);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-dark-text);
+  margin-top: var(--space-4);
+}
+
+.foreword-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-16);
   align-items: start;
 }
 
-.statement-quote {
+.foreword-quote {
   font-family: var(--font-display);
   font-size: var(--text-h2);
   font-weight: 300;
@@ -431,10 +555,53 @@ useWordReveal(ctaSection, '.word-reveal')
   padding-left: var(--space-6);
 }
 
-.statement-body {
+.foreword-cite {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-style: normal;
+  color: var(--color-gold);
+  letter-spacing: var(--tracking-wide);
+  margin-top: var(--space-4);
+}
+
+.foreword-body {
   font-size: var(--text-body);
   color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
+}
+
+/* ─── Exhibition Metadata ─── */
+.metadata-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+
+.metadata-card {
+  border: 1px solid rgba(184, 150, 78, 0.2);
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.metadata-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+}
+
+.metadata-value {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-dark-text);
 }
 
 /* ─── Portfolio Gallery — Staggered grid ─── */
@@ -467,6 +634,11 @@ useWordReveal(ctaSection, '.word-reveal')
 
 .gallery-entry--3 {
   grid-column: 2 / 9;
+}
+
+.gallery-entry--4 {
+  grid-column: 5 / 13;
+  margin-top: var(--space-16);
 }
 
 .gallery-plate-number {
@@ -540,11 +712,105 @@ useWordReveal(ctaSection, '.word-reveal')
   margin-bottom: var(--space-2);
 }
 
+.gallery-entry-medium {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-dark-muted);
+  letter-spacing: var(--tracking-wide);
+  margin-bottom: var(--space-2);
+  opacity: 0.6;
+}
+
 .gallery-entry-desc {
   font-size: var(--text-small);
   color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
   max-width: 50ch;
+}
+
+/* ─── Technical Schema ─── */
+.schema-header {
+  margin-bottom: var(--space-12);
+}
+
+.schema-title {
+  font-size: var(--text-h2);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-dark-text);
+  margin-top: var(--space-4);
+}
+
+.schema-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+}
+
+.schema-workflow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.schema-step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--rule-color);
+}
+
+.schema-step:first-child {
+  border-top: 1px solid var(--rule-color);
+}
+
+.schema-step-num {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--color-gold);
+  opacity: 0.6;
+  min-width: 2rem;
+}
+
+.schema-step-label {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--color-dark-text);
+}
+
+.schema-specs-heading {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-6);
+}
+
+.schema-spec-row {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--rule-color);
+}
+
+.schema-spec-row:first-of-type {
+  border-top: 1px solid var(--rule-color);
+}
+
+.schema-spec-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--color-dark-muted);
+  letter-spacing: var(--tracking-wide);
+}
+
+.schema-spec-value {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--color-dark-text);
 }
 
 /* ─── Curator's Note ─── */
@@ -651,40 +917,6 @@ useWordReveal(ctaSection, '.word-reveal')
   outline-offset: 4px;
 }
 
-/* ─── Exhibition Metadata ─── */
-.metadata-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-4);
-}
-
-.metadata-card {
-  border: 1px solid rgba(184, 150, 78, 0.2);
-  padding: var(--space-6) var(--space-4);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.metadata-label {
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  font-weight: 400;
-  letter-spacing: var(--tracking-mega-wide);
-  text-transform: uppercase;
-  color: var(--color-dark-muted);
-}
-
-.metadata-value {
-  font-family: var(--font-display);
-  font-size: var(--text-h3);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--color-dark-text);
-}
-
-/* ─── CTA Buttons ─── */
 .cta-buttons {
   display: flex;
   gap: var(--space-4);
@@ -745,9 +977,13 @@ useWordReveal(ctaSection, '.word-reveal')
     padding: var(--space-8) var(--content-padding);
   }
 
-  .statement-grid {
+  .foreword-grid {
     grid-template-columns: 1fr;
     gap: var(--space-8);
+  }
+
+  .metadata-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .gallery-grid {
@@ -757,18 +993,20 @@ useWordReveal(ctaSection, '.word-reveal')
 
   .gallery-entry--1,
   .gallery-entry--2,
-  .gallery-entry--3 {
+  .gallery-entry--3,
+  .gallery-entry--4 {
     grid-column: 1 / -1;
     margin-top: 0;
+  }
+
+  .schema-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
   }
 
   .monograph-cta {
     padding-top: var(--space-24);
     padding-bottom: var(--space-24);
-  }
-
-  .metadata-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 
   .cta-buttons {

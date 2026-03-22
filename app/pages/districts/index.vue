@@ -2,21 +2,38 @@
   <div ref="pageRef" class="districts-page">
     <!-- Hero -->
     <section class="dp-hero">
+      <p class="dp-overline reveal">The Districts</p>
       <h1 class="dp-display word-reveal">Twelve districts, one road.</h1>
       <p class="dp-subtitle reveal">
         Each with its own mandate. Each built to serve a different dimension of creative practice.
         This is the directory.
       </p>
       <div class="dp-rule reveal" aria-hidden="true" />
+      <div class="dp-hero-stats reveal">
+        <div class="dp-stat">
+          <span class="dp-stat-value">{{ active.length }}</span>
+          <span class="dp-stat-label">Operational</span>
+        </div>
+        <div class="dp-stat">
+          <span class="dp-stat-value">{{ comingSoon.length }}</span>
+          <span class="dp-stat-label">Emerging</span>
+        </div>
+        <div class="dp-stat">
+          <span class="dp-stat-value">{{ development.length }}</span>
+          <span class="dp-stat-label">Blueprint</span>
+        </div>
+      </div>
     </section>
 
     <!-- Phase I: Operational — Active Districts (full-width hero cards) -->
     <section ref="activeSection" class="dp-active">
-      <p class="dp-phase-label reveal">Phase I: Operational</p>
-      <p class="dp-section-label reveal">
-        <span class="dp-label-dot dp-dot--active" />
-        Active
-      </p>
+      <div class="dp-phase-header">
+        <p class="dp-phase-label reveal">Phase I: Operational</p>
+        <p class="dp-section-label reveal">
+          <span class="dp-label-dot dp-dot--active" />
+          Active
+        </p>
+      </div>
 
       <div
         v-for="(d, i) in active"
@@ -45,20 +62,36 @@
           <h2 class="dp-hero-name">{{ d.name }}</h2>
           <p class="dp-hero-subtitle">{{ d.subtitle }}</p>
           <p class="dp-hero-desc">{{ d.longDescription || d.description }}</p>
+          <div class="dp-hero-offerings">
+            <span
+              v-for="offering in d.offerings.slice(0, 4)"
+              :key="offering"
+              class="dp-offering-tag"
+            >{{ offering }}</span>
+          </div>
           <NuxtLink :to="`/districts/${d.slug}`" class="dp-enter-btn">
-            Enter District →
+            Enter District &rarr;
           </NuxtLink>
         </div>
+      </div>
+
+      <!-- Connection line between phases -->
+      <div class="dp-phase-connector" aria-hidden="true">
+        <div class="dp-connector-line" />
+        <span class="dp-connector-label">Phase transition</span>
+        <div class="dp-connector-line" />
       </div>
     </section>
 
     <!-- Phase II: Emerging Territories — Coming Soon (medium cards, 3-col grid) -->
     <section ref="comingSection" class="dp-coming">
-      <p class="dp-phase-label reveal">Phase II: Emerging Territories</p>
-      <p class="dp-section-label reveal">
-        <span class="dp-label-dot dp-dot--coming" />
-        Coming Soon
-      </p>
+      <div class="dp-phase-header">
+        <p class="dp-phase-label reveal">Phase II: Emerging Territories</p>
+        <p class="dp-section-label reveal">
+          <span class="dp-label-dot dp-dot--coming" />
+          Coming Soon
+        </p>
+      </div>
 
       <div class="dp-coming-grid">
         <div
@@ -70,18 +103,28 @@
           <h3 class="dp-coming-name">{{ d.name }}</h3>
           <span class="dp-coming-type">{{ d.type }}</span>
           <p class="dp-coming-desc">{{ d.description }}</p>
+          <div v-if="d.statusNote" class="dp-coming-note">{{ d.statusNote }}</div>
           <span class="dp-stamp dp-stamp--pending">Pending Deployment</span>
         </div>
+      </div>
+
+      <!-- Connection line between phases -->
+      <div class="dp-phase-connector" aria-hidden="true">
+        <div class="dp-connector-line" />
+        <span class="dp-connector-label">Future frontiers</span>
+        <div class="dp-connector-line" />
       </div>
     </section>
 
     <!-- Future Frontiers — In Development (ultra-compact numbered list) -->
     <section ref="devSection" class="dp-dev">
-      <p class="dp-phase-label reveal">Future Frontiers</p>
-      <p class="dp-section-label reveal">
-        <span class="dp-label-dot dp-dot--dev" />
-        In Development
-      </p>
+      <div class="dp-phase-header">
+        <p class="dp-phase-label reveal">Future Frontiers</p>
+        <p class="dp-section-label reveal">
+          <span class="dp-label-dot dp-dot--dev" />
+          In Development
+        </p>
+      </div>
 
       <ol class="dp-dev-list">
         <li
@@ -91,6 +134,7 @@
         >
           <span class="dp-dev-number">{{ d.number }}</span>
           <span class="dp-dev-name">{{ d.name }}</span>
+          <span class="dp-dev-type">{{ d.subtitle }}</span>
           <span class="dp-dev-tag">{{ d.type }}</span>
         </li>
       </ol>
@@ -101,7 +145,7 @@
       <div class="dp-cta-inner reveal">
         <h2 class="dp-cta-title word-reveal">Ready to walk the road?</h2>
         <p class="dp-cta-sub">For creators building at the intersection of craft and computation.</p>
-        <NuxtLink to="/apply" class="dp-cta-btn">Express Interest →</NuxtLink>
+        <NuxtLink to="/apply" class="dp-cta-btn">Express Interest &rarr;</NuxtLink>
       </div>
     </section>
   </div>
@@ -147,6 +191,16 @@ useHead({
   text-align: center;
 }
 
+.dp-overline {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-4);
+}
+
 .dp-display {
   font-family: var(--font-display);
   font-style: italic;
@@ -175,7 +229,43 @@ useHead({
   margin: var(--space-8) auto 0;
 }
 
-/* ─── Phase Labels ─── */
+.dp-hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-12);
+  margin-top: var(--space-12);
+}
+
+.dp-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.dp-stat-value {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-gold);
+  line-height: 1;
+}
+
+.dp-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ─── Phase Headers ─── */
+.dp-phase-header {
+  margin-bottom: var(--space-8);
+}
+
 .dp-phase-label {
   font-family: var(--font-display);
   font-style: italic;
@@ -196,7 +286,6 @@ useHead({
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: var(--space-8);
 }
 
 .dp-label-dot {
@@ -208,6 +297,31 @@ useHead({
 .dp-dot--active { background: #16A34A; }
 .dp-dot--coming { background: var(--color-gold); }
 .dp-dot--dev { background: var(--color-text-muted); opacity: 0.5; }
+
+/* ─── Phase Connector ─── */
+.dp-phase-connector {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-12) 0;
+}
+
+.dp-connector-line {
+  flex: 1;
+  height: 1px;
+  background: var(--rule-color);
+}
+
+.dp-connector-label {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: 400;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  opacity: 0.4;
+  white-space: nowrap;
+}
 
 /* ─── Stamped Badges ─── */
 .dp-stamp {
@@ -244,7 +358,7 @@ useHead({
 
 /* ─── Phase I: Active — Hero Cards ─── */
 .dp-active {
-  padding: 0 var(--content-padding) var(--space-16);
+  padding: 0 var(--content-padding) var(--space-6);
   max-width: 76rem;
   margin: 0 auto;
 }
@@ -260,7 +374,7 @@ useHead({
   box-shadow: inset 0 0 80px rgba(0,0,0,0.4);
 }
 
-.dp-hero-card:last-child {
+.dp-hero-card:last-of-type {
   margin-bottom: 0;
 }
 
@@ -311,7 +425,7 @@ useHead({
 }
 
 .dp-hero-card-content {
-  padding: var(--space-10) var(--space-12);
+  padding: var(--space-10, 2.5rem) var(--space-12);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -367,8 +481,25 @@ useHead({
   font-weight: 300;
   line-height: 1.7;
   color: var(--color-text-muted);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-4);
   max-width: 48ch;
+}
+
+.dp-hero-offerings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.dp-offering-tag {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-muted);
+  padding: 0.125rem 0.5rem;
+  border: 1px solid var(--rule-color);
 }
 
 .dp-enter-btn {
@@ -389,15 +520,14 @@ useHead({
 
 .dp-enter-btn:hover {
   opacity: 0.85;
-  padding-left: var(--space-10);
+  padding-left: var(--space-10, 2.5rem);
 }
 
 /* ─── Phase II: Coming Soon — Medium Cards ─── */
 .dp-coming {
-  padding: var(--space-16) var(--content-padding);
+  padding: var(--space-6) var(--content-padding) 0;
   max-width: 76rem;
   margin: 0 auto;
-  border-top: 1px solid var(--rule-color);
 }
 
 .dp-coming-grid {
@@ -461,12 +591,20 @@ useHead({
   margin-bottom: var(--space-4);
 }
 
+.dp-coming-note {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-dark-muted);
+  margin-bottom: var(--space-4);
+  opacity: 0.5;
+}
+
 /* ─── Future Frontiers: In Development — Ultra-Compact List ─── */
 .dp-dev {
-  padding: var(--space-16) var(--content-padding);
+  padding: 0 var(--content-padding) var(--space-16);
   max-width: 76rem;
   margin: 0 auto;
-  border-top: 1px solid var(--rule-color);
 }
 
 .dp-dev-list {
@@ -510,6 +648,15 @@ useHead({
   color: var(--color-ink, #FAFAF9);
 }
 
+.dp-dev-type {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  opacity: 0.5;
+}
+
 .dp-dev-tag {
   font-size: 0.5625rem;
   font-weight: 600;
@@ -551,7 +698,7 @@ useHead({
 
 .dp-cta-btn {
   display: inline-block;
-  padding: var(--space-4) var(--space-10);
+  padding: var(--space-4) var(--space-10, 2.5rem);
   background: var(--color-gold);
   color: var(--color-background);
   font-size: var(--text-overline);
@@ -574,6 +721,10 @@ useHead({
 @media (max-width: 768px) {
   .dp-hero {
     padding-top: calc(var(--space-16) + 3rem);
+  }
+
+  .dp-hero-stats {
+    gap: var(--space-8);
   }
 
   .dp-hero-card {
