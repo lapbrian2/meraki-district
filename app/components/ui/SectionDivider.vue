@@ -28,11 +28,14 @@ onMounted(async () => {
     const ornament = divider.value!.querySelector('.divider-ornament')
 
     lines.forEach((line, i) => {
+      const hasOrnament = divider.value!.querySelector('.divider-ornament')
       gsap.from(line, {
         scaleX: 0,
-        duration: 0.8,
+        duration: 1.2,
         ease: 'power2.inOut',
-        transformOrigin: i === 0 ? 'left center' : 'right center',
+        transformOrigin: hasOrnament
+          ? (i === 0 ? 'right center' : 'left center')
+          : 'center center',
         scrollTrigger: {
           trigger: divider.value,
           start: 'top 90%',
@@ -76,7 +79,14 @@ onUnmounted(() => {
 .divider-line {
   flex: 1;
   height: 1px;
-  background: var(--rule-color);
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-gold) 20%,
+    var(--color-gold) 80%,
+    transparent
+  );
+  opacity: 0.5;
 }
 
 .divider-ornament {

@@ -105,6 +105,7 @@ onUnmounted(() => {
   justify-content: center;
   position: relative;
   overflow: hidden;
+  background-color: var(--color-surface-dim, #0e0e10);
 }
 
 .hero-bg-wrap {
@@ -127,13 +128,14 @@ onUnmounted(() => {
   transform: scale(1.03);
 }
 
-/* Gradient overlay — Stitch vignette + warm edge + directional darkening */
+/* Gradient overlay — Dark Room aperture + warm edge + directional darkening */
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle, transparent 20%, rgba(14, 14, 16, 0.85) 100%),
+    radial-gradient(circle at center, transparent 20%, rgba(14, 14, 16, 0.85) 100%),
+    radial-gradient(ellipse at 50% 100%, rgba(184,150,78,0.04) 0%, transparent 60%),
     radial-gradient(ellipse at 70% 30%, rgba(231,194,117,0.04) 0%, transparent 50%),
     linear-gradient(to right, rgba(9,9,11,0.92) 0%, rgba(9,9,11,0.55) 50%, rgba(9,9,11,0.2) 100%),
     linear-gradient(to top, rgba(9,9,11,0.95) 0%, transparent 35%);

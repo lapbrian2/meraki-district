@@ -37,6 +37,7 @@
       </div>
       <!-- Hero artist: first creator, horizontal layout -->
       <div class="fa-hero" @click="activeArtist = featuredArtists[0]">
+        <span class="fa-specimen fa-specimen--hero">SPEC. 001</span>
         <div class="fa-hero-image reveal-image parallax-container">
           <NuxtImg :src="featuredArtists[0].image" :alt="featuredArtists[0].name" loading="lazy" decoding="async" width="600" height="800" />
           <div class="fa-overlay"><span class="fa-peek">View artist</span></div>
@@ -66,6 +67,7 @@
           class="fa-card vellum-card"
           @click="activeArtist = artist"
         >
+          <span class="fa-specimen">SPEC. {{ String(i + 2).padStart(3, '0') }}</span>
           <div class="fa-image reveal-image parallax-container">
             <NuxtImg :src="artist.image" :alt="artist.name" loading="lazy" decoding="async" width="400" height="533" />
             <div class="fa-overlay">
@@ -231,6 +233,34 @@ const featuredArtists: Artist[] = [
 </script>
 
 <style scoped>
+/* Dark Room: Specimen IDs */
+.fa-specimen {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--color-gold);
+  z-index: 3;
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.fa-card:hover .fa-specimen { opacity: 1; }
+
+.fa-specimen--hero {
+  top: 1rem;
+  left: 1rem;
+}
+
+.fa-hero:hover .fa-specimen--hero { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fa-specimen { transition: none; }
+}
+
 .section-number {
   font-family: var(--font-mono);
   color: var(--color-gold);
@@ -321,6 +351,7 @@ const featuredArtists: Artist[] = [
 
 /* Hero artist: full-width horizontal layout */
 .fa-hero {
+  position: relative;
   display: grid;
   grid-template-columns: 2fr 3fr;
   border: 1px solid var(--color-rule, rgba(184,150,78,0.15));
@@ -439,6 +470,7 @@ const featuredArtists: Artist[] = [
 }
 
 .fa-card {
+  position: relative;
   background: var(--color-background);
   border: 1px solid var(--color-rule, rgba(184,150,78,0.15));
   overflow: hidden;
