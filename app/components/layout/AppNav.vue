@@ -138,6 +138,8 @@ const mobileLinks = [
   { to: '/manifesto', label: 'Manifesto' },
   { to: '/institute', label: 'Institute' },
   { to: '/pavilion', label: 'Pavilion' },
+  { to: '/private-view', label: 'Private View' },
+  { to: '/meridian', label: 'Meridian' },
   { to: '/bridge', label: 'Bridge' },
   { to: '/mint', label: 'Mint' },
   { to: '/circuit', label: 'Circuit' },

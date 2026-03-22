@@ -11,7 +11,10 @@
       </h1>
       <div class="preloader-line" />
       <p class="preloader-subtitle">ROAD</p>
+      <p class="preloader-protocol">Establishing archival connection&hellip;</p>
     </div>
+    <div class="preloader-curtain preloader-curtain--top" />
+    <div class="preloader-curtain preloader-curtain--bottom" />
   </div>
 </template>
 
@@ -54,15 +57,15 @@ onMounted(() => {
     return
   }
 
-  // Start exit sequence at 3.0s (let it breathe)
+  // Start exit sequence at 3.2s (let protocol line breathe)
   setTimeout(() => {
     exiting.value = true
-  }, 3000)
+  }, 3200)
 
-  // Remove from DOM after exit animation completes (3.0s delay + 1.2s slide)
+  // Remove from DOM after exit animation completes (3.2s delay + 1.4s curtain reveal)
   setTimeout(() => {
     finish()
-  }, 4200)
+  }, 4600)
 })
 
 function finish() {
@@ -138,9 +141,50 @@ function finish() {
   animation: subtitleFade 0.5s ease 2.3s forwards;
 }
 
-/* Exit: entire preloader slides up */
+.preloader-protocol {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--color-dark-muted, #71717A);
+  margin: 1.25rem 0 0;
+  opacity: 0;
+  animation: protocolFade 0.4s ease 2.6s forwards;
+}
+
+/* Curtain reveal panels */
+.preloader-curtain {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: #0a0a0a;
+  z-index: 1;
+  transform: scaleY(0);
+}
+
+.preloader-curtain--top {
+  top: 0;
+  transform-origin: top center;
+}
+
+.preloader-curtain--bottom {
+  bottom: 0;
+  transform-origin: bottom center;
+}
+
+/* Exit: curtains slide apart to reveal page */
+.preloader--exit .preloader-content {
+  animation: contentFade 0.6s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.preloader--exit .preloader-curtain {
+  transform: scaleY(1);
+  animation: curtainReveal 0.8s cubic-bezier(0.76, 0, 0.24, 1) 0.4s forwards;
+}
+
 .preloader--exit {
-  animation: slideUp 1.2s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation: preloaderFinal 0.1s linear 1.2s forwards;
 }
 
 /* ─── Keyframes ─── */
@@ -174,12 +218,41 @@ function finish() {
   }
 }
 
-@keyframes slideUp {
+@keyframes protocolFade {
   from {
-    transform: translateY(0);
+    opacity: 0;
+    filter: blur(2px);
   }
   to {
-    transform: translateY(-100%);
+    opacity: 0.5;
+    filter: blur(0);
+  }
+}
+
+@keyframes contentFade {
+  from {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+@keyframes curtainReveal {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes preloaderFinal {
+  to {
+    visibility: hidden;
+    pointer-events: none;
   }
 }
 
@@ -202,10 +275,24 @@ function finish() {
     animation: none;
   }
 
+  .preloader-protocol {
+    opacity: 0.5;
+    animation: none;
+  }
+
   .preloader--exit {
     animation: none;
     opacity: 0;
     transition: opacity 0.3s ease;
+  }
+
+  .preloader--exit .preloader-content {
+    animation: none;
+  }
+
+  .preloader--exit .preloader-curtain {
+    animation: none;
+    display: none;
   }
 }
 </style>
