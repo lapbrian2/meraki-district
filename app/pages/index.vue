@@ -248,6 +248,28 @@ const featuredArtists: Artist[] = [
 
 .map-video-wrap {
   width: 100%;
+  position: relative;
+}
+
+.map-video-wrap::before,
+.map-video-wrap::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 300px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.map-video-wrap::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--color-dark-bg, #09090B), transparent);
+}
+
+.map-video-wrap::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--color-dark-bg, #09090B), transparent);
 }
 
 .map-video {
