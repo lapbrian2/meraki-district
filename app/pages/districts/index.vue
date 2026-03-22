@@ -458,14 +458,12 @@ useSeoMeta({
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%) sepia(10%) contrast(1.05);
-  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: sepia(5%) contrast(1.05);
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dp-hero-card:hover .dp-hero-card-image img {
   transform: scale(1.05);
-  filter: grayscale(0%) brightness(1);
 }
 
 .dp-hero-card-content {

@@ -2962,12 +2962,7 @@ onUnmounted(() => {
   position: relative;
   object-fit: cover;
   will-change: transform;
-  filter: grayscale(100%) sepia(10%) contrast(1.05);
-  transition: filter 0.6s ease-in-out;
-}
-
-.q-hero:hover .q-hero-image {
-  filter: sepia(0) contrast(1);
+  filter: sepia(5%) contrast(1.05);
 }
 
 .q-hero-overlay {
