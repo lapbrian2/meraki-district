@@ -107,7 +107,7 @@
               <p class="empty-suggestion">Try searching for a district, page, or creator — or browse:</p>
               <div class="empty-links">
                 <button class="empty-link" @click="go('/districts')">Districts</button>
-                <button class="empty-link" @click="go('/the-road')">The Road</button>
+                <button class="empty-link" @click="go('/the-road')">Publishing</button>
                 <button class="empty-link" @click="go('/apply')">Apply</button>
               </div>
             </div>
@@ -152,8 +152,8 @@ const sitePages = [
   { title: 'Bridge', path: '/bridge', description: 'Connecting disciplines across the ecosystem.', icon: 'hub' },
   { title: 'Institute', path: '/institute', description: 'Structured learning for serious practitioners.', icon: 'school' },
   { title: 'Pavilion', path: '/pavilion', description: 'A showcase space for featured work.', icon: 'gallery_thumbnail' },
-  { title: 'The Road', path: '/the-road', description: 'Long-form writing and cultural criticism.', icon: 'article' },
-  { title: 'Districts', path: '/districts', description: 'All eleven districts of the ecosystem.', icon: 'map' },
+  { title: 'Meraki Publishing House', path: '/the-road', description: 'Long-form writing and cultural criticism.', icon: 'article' },
+  { title: 'Districts', path: '/districts', description: 'All twelve districts of the ecosystem.', icon: 'map' },
 ]
 
 const creators = [
@@ -167,7 +167,7 @@ const creators = [
 
 const browseLinks = [
   { label: 'Districts', path: '/districts', icon: 'map' },
-  { label: 'The Road', path: '/the-road', icon: 'article' },
+  { label: 'Publishing', path: '/the-road', icon: 'article' },
   { label: 'Apply', path: '/apply', icon: 'edit_note' },
 ]
 

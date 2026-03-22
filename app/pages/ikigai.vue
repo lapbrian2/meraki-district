@@ -11,7 +11,7 @@
           <em>The Alignment</em>
         </h1>
         <p class="ikigai-hero-sub reveal">
-          Discover where your craft belongs within the eleven districts.
+          Discover where your craft belongs within the twelve districts.
         </p>
       </div>
     </section>
@@ -194,15 +194,15 @@ import { useDistricts } from '~/composables/useDistricts'
 useHead({
   title: 'The Alignment — Meraki Road',
   meta: [
-    { name: 'description', content: 'Discover where your creative practice belongs within the eleven districts of Meraki Road. An interactive alignment ritual for practitioners.' },
+    { name: 'description', content: 'Discover where your creative practice belongs within the twelve districts of Meraki Road. An interactive alignment ritual for practitioners.' },
   ],
 })
 
 useSeoMeta({
   ogTitle: 'The Alignment — Meraki Road',
-  ogDescription: 'Discover where your creative practice belongs within the eleven districts of Meraki Road.',
+  ogDescription: 'Discover where your creative practice belongs within the twelve districts of Meraki Road.',
   twitterTitle: 'The Alignment — Meraki Road',
-  twitterDescription: 'Discover where your creative practice belongs within the eleven districts of Meraki Road.',
+  twitterDescription: 'Discover where your creative practice belongs within the twelve districts of Meraki Road.',
 })
 
 /* -- Districts data ----------------------------- */

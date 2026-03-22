@@ -36,7 +36,7 @@
           </p>
           <p class="preamble-text reveal">
             This is not a social network. It is not a marketplace. It is a
-            network of eleven districts, each serving a distinct function in
+            network of twelve districts, each serving a distinct function in
             the creative lifecycle&mdash;from research to publication, from
             education to commerce, from credentialing to gathering. Together
             they form a single, coherent structure where practitioners can do
@@ -60,7 +60,7 @@
     <section ref="districtsSection" class="manifesto-districts section">
       <div class="section-wide">
         <div class="districts-header">
-          <p class="overline reveal">The Eleven Districts</p>
+          <p class="overline reveal">The Twelve Districts</p>
           <h2 class="districts-title word-reveal"><em>Structure with Purpose</em></h2>
         </div>
 
@@ -118,15 +118,15 @@ import { useDistricts } from '~/composables/useDistricts'
 useHead({
   title: 'Manifesto \u2014 Meraki Road',
   meta: [
-    { name: 'description', content: 'The foundational charter of Meraki Road. Eleven districts, one standard.' },
+    { name: 'description', content: 'The foundational charter of Meraki Road. Twelve districts, one standard.' },
   ],
 })
 
 useSeoMeta({
   ogTitle: 'Manifesto \u2014 Meraki Road',
-  ogDescription: 'The foundational charter of Meraki Road. Eleven districts, one standard.',
+  ogDescription: 'The foundational charter of Meraki Road. Twelve districts, one standard.',
   twitterTitle: 'Manifesto \u2014 Meraki Road',
-  twitterDescription: 'The foundational charter of Meraki Road. Eleven districts, one standard.',
+  twitterDescription: 'The foundational charter of Meraki Road. Twelve districts, one standard.',
 })
 
 /* -- Data --------------------------------------- */

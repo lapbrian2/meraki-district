@@ -40,7 +40,7 @@
     <section class="article-back section">
       <div class="section-default">
         <NuxtLink to="/the-road" class="article-back-link">
-          &larr; Back to The Road
+          &larr; Back to Meraki Publishing House
         </NuxtLink>
       </div>
     </section>
@@ -50,7 +50,7 @@
   <div v-else class="not-found section">
     <div class="section-narrow">
       <h1>Article not found</h1>
-      <p><NuxtLink to="/the-road">Back to The Road</NuxtLink></p>
+      <p><NuxtLink to="/the-road">Back to Meraki Publishing House</NuxtLink></p>
     </div>
   </div>
 </template>
@@ -114,17 +114,17 @@ const readingTime = computed(() => {
 
 // SEO
 useHead(computed(() => ({
-  title: article.value ? article.value.title + ' \u2014 The Road \u2014 Meraki Road' : 'The Road \u2014 Meraki Road',
+  title: article.value ? article.value.title + ' \u2014 Meraki Publishing House \u2014 Meraki Road' : 'Meraki Publishing House \u2014 Meraki Road',
   meta: article.value ? [
     { name: 'description', content: article.value.excerpt },
   ] : [],
 })))
 
 useSeoMeta(computed(() => ({
-  ogTitle: article.value ? article.value.title + ' \u2014 The Road' : 'The Road',
+  ogTitle: article.value ? article.value.title + ' \u2014 Meraki Publishing House' : 'Meraki Publishing House',
   ogDescription: article.value?.excerpt || '',
   ogImage: article.value?.image || '',
-  twitterTitle: article.value ? article.value.title + ' \u2014 The Road' : 'The Road',
+  twitterTitle: article.value ? article.value.title + ' \u2014 Meraki Publishing House' : 'Meraki Publishing House',
   twitterDescription: article.value?.excerpt || '',
 })))
 

@@ -7,7 +7,7 @@
       </h2>
       <div class="manifesto-rule" aria-hidden="true" />
       <p class="manifesto-body reveal">
-        Meraki Road is eleven districts. Each a world
+        Meraki Road is twelve districts. Each a world
         unto itself, united by a shared belief: that the most meaningful work
         comes from creators who have the infrastructure, the standards, and the space to pursue mastery.
       </p>

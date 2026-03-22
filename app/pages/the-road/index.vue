@@ -6,9 +6,9 @@
     ============================================= -->
     <section ref="heroSection" class="road-hero section section-dark">
       <div class="section-narrow road-hero-inner">
-        <span class="stamped-overline reveal">District 02 &mdash; Publishing</span>
+        <span class="stamped-overline reveal">District 02 &mdash; Publishing &amp; Editorial</span>
         <h1 class="road-hero-title word-reveal">
-          <em>The Road</em>
+          <em>Meraki Publishing House</em>
         </h1>
         <p class="road-hero-sub reveal">
           Long-form monographs and archival essays from practitioners who think
@@ -129,7 +129,7 @@
     <section ref="ctaSection" class="road-cta section-dark">
       <div class="section-narrow cta-inner">
         <p class="cta-text reveal">
-          The Road is open to practitioners who write as they build.
+          Meraki Publishing House is open to practitioners who write as they build.
         </p>
         <NuxtLink to="/apply" class="cta-button reveal">
           Submit an Essay
@@ -146,16 +146,16 @@ import { useWordReveal } from '~/composables/useWordReveal'
 
 /* -- SEO ---------------------------------------- */
 useHead({
-  title: 'The Road — Meraki Road',
+  title: 'Meraki Publishing House — Meraki Road',
   meta: [
     { name: 'description', content: 'District 02 — Long-form monographs and archival essays from practitioners who think through making.' },
   ],
 })
 
 useSeoMeta({
-  ogTitle: 'The Road — Meraki Road',
+  ogTitle: 'Meraki Publishing House — Meraki Road',
   ogDescription: 'Long-form monographs and archival essays from practitioners who think through making.',
-  twitterTitle: 'The Road — Meraki Road',
+  twitterTitle: 'Meraki Publishing House — Meraki Road',
   twitterDescription: 'Long-form monographs and archival essays from practitioners who think through making.',
 })
 

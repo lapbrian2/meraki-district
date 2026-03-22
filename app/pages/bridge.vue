@@ -172,7 +172,7 @@
             <span class="material-symbols-outlined bento-cta-icon">groups</span>
             <h3 class="bento-cta-title">Access the Full Index</h3>
             <p class="bento-cta-body">
-              Over forty verified practitioners across eleven districts.
+              Over forty verified practitioners across twelve districts.
               Browse the full talent registry.
             </p>
             <NuxtLink to="/apply" class="bento-cta-btn">Express Interest &rarr;</NuxtLink>

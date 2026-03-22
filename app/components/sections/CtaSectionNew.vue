@@ -9,14 +9,14 @@
 
     <div class="section-narrow cta-new-inner">
       <h2 class="cta-new-heading word-reveal">
-        Meet on
+        Meet you at
       </h2>
       <h2 class="cta-new-heading cta-new-heading--gold word-reveal">
         Meraki Road.
       </h2>
 
       <p class="cta-new-subtitle reveal">
-        Eleven districts for creators who refuse to separate ambition from integrity
+        Twelve districts for creators who refuse to separate ambition from integrity
       </p>
 
       <NuxtLink to="/apply" class="cta-new-button reveal">

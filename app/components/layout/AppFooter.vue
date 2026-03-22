@@ -18,7 +18,7 @@
       <!-- Brand -->
       <div class="footer-col footer-col-brand reveal">
         <NuxtLink to="/" class="footer-logo"><em>Meraki Road</em></NuxtLink>
-        <p class="footer-tagline">Where craft meets culture. Eleven districts for practitioners who hold ambition and integrity as a single standard.</p>
+        <p class="footer-tagline">Where craft meets culture. Twelve districts for practitioners who hold ambition and integrity as a single standard.</p>
       </div>
 
       <!-- Districts -->
@@ -38,7 +38,7 @@
           <li><NuxtLink to="/about">About</NuxtLink></li>
           <li><NuxtLink to="/community">Community</NuxtLink></li>
           <li><NuxtLink to="/apply">Apply</NuxtLink></li>
-          <li><NuxtLink to="/the-road">The Road</NuxtLink></li>
+          <li><NuxtLink to="/the-road">Publishing</NuxtLink></li>
         </ul>
       </div>
 

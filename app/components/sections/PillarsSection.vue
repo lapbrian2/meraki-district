@@ -3,7 +3,7 @@
     <div class="dgs-inner">
       <div class="dgs-header">
         <p class="dgs-overline reveal">The Districts</p>
-        <h2 class="dgs-title word-reveal">Eleven districts, one road.</h2>
+        <h2 class="dgs-title word-reveal">Twelve districts, one road.</h2>
         <div class="dgs-rule" aria-hidden="true" />
         <p class="dgs-sub reveal">Each built to serve a different dimension of creative practice.</p>
       </div>

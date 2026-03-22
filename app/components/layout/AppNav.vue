@@ -7,7 +7,7 @@
         <div class="nav-expanded-row">
           <nav class="nav-links" aria-label="Main navigation">
             <NuxtLink to="/districts" class="nav-link">Districts</NuxtLink>
-            <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
+            <NuxtLink to="/the-road" class="nav-link">Publishing</NuxtLink>
             <NuxtLink to="/community" class="nav-link">Community</NuxtLink>
             <NuxtLink to="/about" class="nav-link">About</NuxtLink>
           </nav>
@@ -27,7 +27,7 @@
         <NuxtLink to="/" class="nav-logo"><em>Meraki Road</em></NuxtLink>
         <nav class="nav-links" aria-label="Main navigation">
           <NuxtLink to="/districts" class="nav-link">Districts</NuxtLink>
-          <NuxtLink to="/the-road" class="nav-link">The Road</NuxtLink>
+          <NuxtLink to="/the-road" class="nav-link">Publishing</NuxtLink>
           <NuxtLink to="/community" class="nav-link">Community</NuxtLink>
           <NuxtLink to="/about" class="nav-link">About</NuxtLink>
         </nav>
@@ -126,7 +126,8 @@ const { open: openSearch } = useArchivalSearch()
 
 const mobileLinks = [
   { to: '/districts', label: 'Districts' },
-  { to: '/the-road', label: 'The Road' },
+  { to: '/institutions', label: 'Institutions' },
+  { to: '/the-road', label: 'Publishing' },
   { to: '/community', label: 'Community' },
   { to: '/collective', label: 'Collective' },
   { to: '/atelier', label: 'Atelier' },

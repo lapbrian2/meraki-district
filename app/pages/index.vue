@@ -130,16 +130,16 @@ onUnmounted(() => {
 useHead({
   title: 'Meraki Road \u2014 Where craft meets culture',
   meta: [
-    { name: 'description', content: 'Eleven districts, one road. A new standard for creative practice built for AI-native creators.' },
+    { name: 'description', content: 'Twelve districts, one road. A new standard for creative practice built for AI-native creators.' },
     { property: 'og:title', content: 'Meraki Road \u2014 Where craft meets culture' },
   ],
 })
 
 useSeoMeta({
   ogTitle: 'Meraki Road \u2014 Where craft meets culture',
-  ogDescription: 'Eleven districts, one road. A new standard for creative practice built for AI-native creators.',
+  ogDescription: 'Twelve districts, one road. A new standard for creative practice built for AI-native creators.',
   twitterTitle: 'Meraki Road \u2014 Where craft meets culture',
-  twitterDescription: 'Eleven districts, one road. A new standard for creative practice built for AI-native creators.',
+  twitterDescription: 'Twelve districts, one road. A new standard for creative practice built for AI-native creators.',
 })
 
 interface Artist {

@@ -1,7 +1,7 @@
 <template>
   <section ref="section" class="featured section">
     <div class="section-default">
-      <p class="overline reveal"><span class="section-number">05.</span> From The Road</p>
+      <p class="overline reveal"><span class="section-number">05.</span> From Meraki Publishing House</p>
       <h2 class="word-reveal">Featured thinking</h2>
       <p class="featured-intro reveal">
         Essays, dispatches, and frameworks from practitioners along the road.

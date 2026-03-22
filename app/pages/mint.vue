@@ -8,12 +8,15 @@
       <div class="section-narrow">
         <span class="stamped-overline reveal">District 08</span>
         <h1 class="mint-hero-title word-reveal">
-          <em>The Mint</em>
+          <em>The Pavilion Store</em>
         </h1>
         <p class="mint-hero-sub reveal">
           An archival marketplace for verified creative artifacts.
           Each piece is authenticated, cataloged, and traced back to
           its maker — because provenance is the only currency that appreciates.
+        </p>
+        <p class="mint-hero-sub reveal">
+          Home of <strong>Meraki Mint</strong> — our limited edition line of curated artifacts and collectibles.
         </p>
       </div>
     </section>
@@ -118,7 +121,7 @@
           <span class="material-symbols-outlined provenance-icon reveal">verified</span>
           <h2 class="provenance-title word-reveal"><em>Provenance Guarantee</em></h2>
           <p class="provenance-body reveal">
-            Every artifact in The Mint is authenticated through a multi-step
+            Every artifact in The Pavilion Store is authenticated through a multi-step
             verification process. We trace materials, confirm editions,
             and cross-reference creation metadata directly with the maker.
             Certificates of authenticity are issued on acquisition and
@@ -127,7 +130,7 @@
           <p class="provenance-body reveal">
             This is not a speculative market. There are no drops, no
             artificial scarcity games, no secondary-market inflation.
-            When you acquire from The Mint, you are collecting
+            When you acquire from The Pavilion Store, you are collecting
             the work itself — and the full story behind it.
           </p>
         </div>
@@ -159,17 +162,17 @@ import { useWordReveal } from '~/composables/useWordReveal'
 
 /* -- SEO ---------------------------------------- */
 useHead({
-  title: 'The Mint — Meraki Road',
+  title: 'The Pavilion Store — Meraki Road',
   meta: [
-    { name: 'description', content: 'The Mint: an archival marketplace for verified creative artifacts. Authenticated provenance, curated editions, and a personal vault for every collector.' },
+    { name: 'description', content: 'The Pavilion Store: an archival marketplace for verified creative artifacts. Featuring Meraki Mint limited editions. Authenticated provenance, curated editions, and a personal vault for every collector.' },
   ],
 })
 
 useSeoMeta({
-  ogTitle: 'The Mint — Meraki Road',
-  ogDescription: 'An archival marketplace for verified creative artifacts. Authenticated provenance, curated editions, and a personal vault for every collector.',
-  twitterTitle: 'The Mint — Meraki Road',
-  twitterDescription: 'An archival marketplace for verified creative artifacts. Authenticated provenance, curated editions, and a personal vault for every collector.',
+  ogTitle: 'The Pavilion Store — Meraki Road',
+  ogDescription: 'An archival marketplace for verified creative artifacts. Featuring Meraki Mint limited editions. Authenticated provenance, curated editions, and a personal vault for every collector.',
+  twitterTitle: 'The Pavilion Store — Meraki Road',
+  twitterDescription: 'An archival marketplace for verified creative artifacts. Featuring Meraki Mint limited editions. Authenticated provenance, curated editions, and a personal vault for every collector.',
 })
 
 /* -- Data --------------------------------------- */

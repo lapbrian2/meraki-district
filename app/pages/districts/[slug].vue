@@ -1,6 +1,6 @@
 <template>
   <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- BESPOKE: Voight Studio — Deep-Work Portal              -->
+  <!-- BESPOKE: Meraki Studio — Deep-Work Portal              -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div v-if="district && isVoightStudio" ref="root" :style="{ '--color-accent': district.accentColor, '--color-accent-accessible': district.accentColorAccessible }">
 
@@ -32,7 +32,7 @@
       </div>
       <div class="vs-hero-content">
         <p class="vs-hero-subtitle">The Engine Room</p>
-        <h1 ref="heroTitle" class="vs-hero-title">Voight Studio</h1>
+        <h1 ref="heroTitle" class="vs-hero-title">Meraki Studio</h1>
       </div>
     </section>
 
@@ -228,7 +228,7 @@
           <blockquote>
             <p class="vs-philosophy-pullquote word-reveal">&ldquo;The machine does not replace the artisan; it amplifies the memory of the work itself.&rdquo;</p>
           </blockquote>
-          <p class="vs-philosophy-attribution reveal">&mdash; Voight Studio Principle</p>
+          <p class="vs-philosophy-attribution reveal">&mdash; Meraki Studio Principle</p>
         </div>
         <div class="vs-philosophy-body">
           <h3 class="vs-philosophy-heading reveal">
@@ -237,7 +237,7 @@
           </h3>
           <div class="vs-philosophy-rule" aria-hidden="true" />
           <p class="reveal">
-            Voight Studio is the creative engine of Meraki Road. A full-service design practice that pairs strategic thinking with obsessive craft, working with ventures and cultural institutions that refuse to settle for conventional output.
+            Meraki Studio is the creative engine of Meraki Road. A full-service design practice that pairs strategic thinking with obsessive craft, working with ventures and cultural institutions that refuse to settle for conventional output.
           </p>
           <p class="reveal">
             Every engagement is a collaboration built on the belief that the best work happens when ambition meets restraint, and when both sides are willing to go further than comfortable. We don&rsquo;t decorate. We negotiate between form and function until the answer is inevitable.
@@ -514,12 +514,12 @@
           <NuxtLink to="/the-road" class="prov-from-card reveal">
             <span class="prov-from-tag">Essay</span>
             <h3>On the ethics of preservation in an era that incentivizes forgetting</h3>
-            <span class="prov-from-read">Read on The Road &rarr;</span>
+            <span class="prov-from-read">Read on Meraki Publishing House &rarr;</span>
           </NuxtLink>
           <NuxtLink to="/the-road" class="prov-from-card reveal">
             <span class="prov-from-tag">Dispatch</span>
             <h3>Why provenance is the last honest metadata in a world of synthetic attribution</h3>
-            <span class="prov-from-read">Read on The Road &rarr;</span>
+            <span class="prov-from-read">Read on Meraki Publishing House &rarr;</span>
           </NuxtLink>
         </div>
       </div>
@@ -662,7 +662,7 @@
         <div class="q-from-content reveal">
           <template v-if="district.slug === 'the-road'">
             <p class="q-from-body">
-              The Road publishes weekly. Long-form essays, cultural criticism, and field dispatches
+              Meraki Publishing House publishes weekly. Long-form essays, cultural criticism, and field dispatches
               from practitioners who treat writing as a creative discipline.
             </p>
             <NuxtLink to="/the-road" class="q-from-link">Read the latest &rarr;</NuxtLink>
@@ -788,7 +788,7 @@ const statusSection = ref<HTMLElement | null>(null)
 const navSection = ref<HTMLElement | null>(null)
 const fromSection = ref<HTMLElement | null>(null)
 
-// Voight Studio section refs
+// Meraki Studio section refs
 const vsSprintsSection = ref<HTMLElement | null>(null)
 const vsWorkspaceSection = ref<HTMLElement | null>(null)
 const vsVaultSection = ref<HTMLElement | null>(null)
@@ -815,7 +815,7 @@ useGsapScrollReveal(navSection, '.reveal', { stagger: 0.12 })
 useParallax(heroSection, '.q-hero-image', { speed: 0.08 })
 useTilt(navSection, '.q-explore-card', { maxRotation: 2 })
 
-// Voight Studio composable animations
+// Meraki Studio composable animations
 useGsapScrollReveal(vsSprintsSection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(vsWorkspaceSection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(vsVaultSection, '.reveal', { stagger: 0.12 })
@@ -901,7 +901,7 @@ function initAnimations() {
 
   ctx = gsap.context(() => {
     if (isVoightStudio.value) {
-      // ── Voight Studio — Deep-Work Portal animations ──
+      // ── Meraki Studio — Deep-Work Portal animations ──
       // Hero image entrance
       gsap.from('.vs-hero-image', {
         scale: 1.15,

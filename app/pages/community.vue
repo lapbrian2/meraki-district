@@ -211,7 +211,7 @@ const features = [
   {
     icon: 'forum',
     title: 'The Forum',
-    description: 'Threaded discussions across all eleven districts. Topic-based, practitioner-only.',
+    description: 'Threaded discussions across all twelve districts. Topic-based, practitioner-only.',
   },
   {
     icon: 'event',

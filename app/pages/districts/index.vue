@@ -2,7 +2,7 @@
   <div ref="pageRef" class="districts-page">
     <!-- Hero -->
     <section class="dp-hero">
-      <h1 class="dp-display word-reveal">Eleven districts, one road.</h1>
+      <h1 class="dp-display word-reveal">Twelve districts, one road.</h1>
       <p class="dp-subtitle reveal">
         Each with its own mandate. Each built to serve a different dimension of creative practice.
         This is the directory.
@@ -128,7 +128,7 @@ const development = districts.filter(d => d.status === 'development')
 useHead({
   title: 'Districts — Meraki Road',
   meta: [
-    { name: 'description', content: 'Eleven districts, one road. Navigate the creative infrastructure of Meraki Road.' },
+    { name: 'description', content: 'Twelve districts, one road. Navigate the creative infrastructure of Meraki Road.' },
   ],
 })
 </script>

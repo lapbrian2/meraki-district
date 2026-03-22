@@ -6,7 +6,7 @@
     ============================================= -->
     <section ref="heroSection" class="institute-hero section section-dark">
       <div class="section-narrow hero-inner">
-        <span class="overline-badge reveal">The Institute</span>
+        <span class="overline-badge reveal">Meraki Institute</span>
         <h1 class="hero-heading word-reveal">
           <em>Purpose &amp; Mastery.</em>
         </h1>
@@ -196,7 +196,7 @@
             <span class="material-symbols-outlined testimonial-quote-icon reveal">format_quote</span>
             <blockquote class="testimonial-quote reveal">
               <p>
-                <em>The Institute didn't teach me a new technique. It taught me
+                <em>Meraki Institute didn't teach me a new technique. It taught me
                 how to see my own practice clearly &mdash; what was habit, what was
                 craft, and what I'd been avoiding. That distinction changed
                 everything about the work I make now.</em>
@@ -250,16 +250,16 @@ import { useWordReveal } from '~/composables/useWordReveal'
 
 /* -- SEO ---------------------------------------- */
 useHead({
-  title: 'The Institute — Meraki Road',
+  title: 'Meraki Institute — Meraki Road',
   meta: [
-    { name: 'description', content: 'The Institute at Meraki Road: structured programs for practitioners pursuing purpose and mastery across creative disciplines.' },
+    { name: 'description', content: 'Meraki Institute at Meraki Road: structured programs for practitioners pursuing purpose and mastery across creative disciplines.' },
   ],
 })
 
 useSeoMeta({
-  ogTitle: 'The Institute — Meraki Road',
+  ogTitle: 'Meraki Institute — Meraki Road',
   ogDescription: 'Structured programs for practitioners pursuing purpose and mastery across creative disciplines.',
-  twitterTitle: 'The Institute — Meraki Road',
+  twitterTitle: 'Meraki Institute — Meraki Road',
   twitterDescription: 'Structured programs for practitioners pursuing purpose and mastery across creative disciplines.',
 })
 

@@ -52,7 +52,7 @@
         <div class="metadata-grid">
           <div class="metadata-card reveal">
             <span class="metadata-label">District</span>
-            <span class="metadata-value">Voight Studio</span>
+            <span class="metadata-value">Meraki Studio</span>
           </div>
           <div class="metadata-card reveal">
             <span class="metadata-label">Seal</span>

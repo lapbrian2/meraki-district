@@ -7,7 +7,7 @@
         <div class="fn-brand reveal">
           <NuxtLink to="/" class="fn-logo">Meraki Road</NuxtLink>
           <p class="fn-tagline">
-            Where craft meets culture. Eleven districts for practitioners
+            Where craft meets culture. Twelve districts for practitioners
             who hold ambition and integrity as a single standard.
           </p>
         </div>

@@ -9,7 +9,7 @@
           <span class="hero-title-accent">meets culture.</span>
         </h1>
         <p class="hero-sub">
-          Eleven districts built for creators who hold ambition
+          Twelve districts built for creators who hold ambition
           and integrity as a single standard.
         </p>
         <div class="hero-ctas">
@@ -28,7 +28,7 @@
           width="600"
           height="800"
         />
-        <p class="hero-image-quote"><em>"Meet on Meraki Road"</em></p>
+        <p class="hero-image-quote"><em>"Meet you at Meraki Road"</em></p>
       </div>
     </div>
 

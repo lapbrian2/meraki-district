@@ -45,7 +45,7 @@
         <div class="typo-pair-card vellum-card reveal">
           <p class="typo-pair-label">Heading + Body</p>
           <div class="typo-pair-example">
-            <h3 class="typo-pair-heading">Eleven Districts, One Road</h3>
+            <h3 class="typo-pair-heading">Twelve Districts, One Road</h3>
             <p class="typo-pair-body">
               A creative ecosystem built for practitioners who hold ambition and
               integrity as a single standard. Where craft meets culture, and every
@@ -56,7 +56,7 @@
         <div class="typo-pair-card vellum-card reveal">
           <p class="typo-pair-label">Label + Description</p>
           <div class="typo-pair-example">
-            <p class="typo-pair-overline">Voight Studio</p>
+            <p class="typo-pair-overline">Meraki Studio</p>
             <p class="typo-pair-desc">
               Where visual art meets machine intelligence — a space for creators
               working at the boundary of human expression and computational vision.
@@ -196,7 +196,7 @@ const hierarchy = [
     italic: true,
     tracking: 'var(--tracking-tight)',
     leading: 'var(--leading-snug)',
-    text: 'Meet on Meraki Road.',
+    text: 'Meet you at Meraki Road.',
   },
   {
     label: 'Body',
@@ -216,7 +216,7 @@ const hierarchy = [
     italic: false,
     tracking: 'var(--tracking-wide)',
     leading: 'var(--leading-normal)',
-    text: 'Visual Art & AI — Voight Studio',
+    text: 'Visual Art & AI — Meraki Studio',
   },
 ]
 </script>
