@@ -38,6 +38,44 @@
           >
             <span class="metric-value">{{ metric.value }}</span>
             <span class="metric-label">{{ metric.label }}</span>
+            <span v-if="metric.delta" class="metric-delta" :class="metric.deltaClass">
+              {{ metric.delta }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
+         EDITORIAL — Asymmetric 2-col (text + figure)
+    ============================================= -->
+    <section ref="editorialSection" class="quarterly-editorial section section-dark">
+      <div class="section-wide">
+        <div class="editorial-grid">
+          <div class="editorial-text">
+            <p class="overline reveal">I. Opening Statement</p>
+            <h2 class="editorial-title word-reveal"><em>The weight of the quarter</em></h2>
+            <p class="editorial-body reveal">
+              This quarter marked a turning point. Not in scale — seven
+              districts are still seven districts — but in depth. Two long-form
+              monographs entered the permanent archive. A new district was
+              chartered. The first Legacy Seal of 2026 was conferred. The work
+              is getting deeper, and the standards are keeping pace.
+            </p>
+            <p class="editorial-body reveal">
+              What you'll find in this issue: the numbers, the featured work,
+              reports from each district, the governance decisions that shaped
+              the quarter, and the editorial reflection that ties it together.
+            </p>
+            <NuxtLink to="#" class="editorial-cta reveal">Read the Full Statement &rarr;</NuxtLink>
+          </div>
+          <div class="editorial-figure reveal">
+            <div class="editorial-figure-placeholder">
+              <span class="editorial-figure-label">Figure 1.0</span>
+              <span class="editorial-figure-caption">Quarterly growth — submissions by district</span>
+            </div>
           </div>
         </div>
       </div>
@@ -80,6 +118,31 @@
     <SectionDivider />
 
     <!-- ============================================
+         FEATURED FELLOWS — 3-col profile grid
+    ============================================= -->
+    <section ref="fellowsSection" class="quarterly-fellows section section-dark">
+      <div class="section-default">
+        <p class="overline reveal">The Collective</p>
+        <h2 class="fellows-section-title word-reveal"><em>Featured Fellows</em></h2>
+
+        <div class="fellows-grid">
+          <article
+            v-for="fellow in featuredFellows"
+            :key="fellow.name"
+            class="fellow-profile-card reveal"
+          >
+            <div class="fellow-profile-avatar" :style="{ background: fellow.gradient }" />
+            <p class="fellow-profile-role">{{ fellow.role }}</p>
+            <h3 class="fellow-profile-name"><em>{{ fellow.name }}</em></h3>
+            <p class="fellow-profile-desc">{{ fellow.desc }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
          DISTRICT REPORT — Per-district summaries
     ============================================= -->
     <section ref="districtsSection" class="quarterly-districts section section-dark">
@@ -98,6 +161,10 @@
               <span class="report-count">{{ report.submissions }} submissions</span>
             </div>
             <p class="report-summary">{{ report.summary }}</p>
+            <div v-if="report.highlight" class="report-highlight">
+              <span class="report-highlight-label">Highlight</span>
+              <span class="report-highlight-text">{{ report.highlight }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -132,6 +199,38 @@
     <SectionDivider />
 
     <!-- ============================================
+         OBSERVATIONS — Two-column editorial reflections
+    ============================================= -->
+    <section ref="observationsSection" class="quarterly-observations section section-dark">
+      <div class="section-wide">
+        <div class="observations-grid">
+          <div class="observation-col reveal">
+            <p class="overline">Observation</p>
+            <h3 class="observation-title"><em>The quiet depth of slow quarters</em></h3>
+            <p class="observation-body">
+              Publishing submitted fewer pieces than any district this quarter.
+              But the two monographs that entered the archive were the longest,
+              most deeply researched entries in Meraki Road history. Volume is
+              not the signal. Depth is.
+            </p>
+          </div>
+          <div class="observation-col reveal">
+            <p class="overline">Observation</p>
+            <h3 class="observation-title"><em>AI attribution is the question of the year</em></h3>
+            <p class="observation-body">
+              The Digital Craft district opened a formal review of how AI-assisted
+              work is attributed, archived, and considered for Seal eligibility.
+              This is not a policy question. It is a craft question. And the answer
+              will define what this road values.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
          GOVERNANCE — Standards and decisions
     ============================================= -->
     <section ref="governanceSection" class="quarterly-governance section section-dark">
@@ -149,6 +248,9 @@
               <span class="governance-status stamped-overline">{{ decision.status }}</span>
               <h3 class="governance-item-title"><em>{{ decision.title }}</em></h3>
               <p class="governance-item-desc">{{ decision.desc }}</p>
+              <div v-if="decision.sponsor" class="governance-sponsor">
+                Sponsored by {{ decision.sponsor }}
+              </div>
             </div>
           </div>
         </div>
@@ -203,9 +305,12 @@ useSeoMeta({
 /* -- Section refs ------------------------------- */
 const heroSection = ref<HTMLElement | null>(null)
 const metricsSection = ref<HTMLElement | null>(null)
+const editorialSection = ref<HTMLElement | null>(null)
 const featuredSection = ref<HTMLElement | null>(null)
+const fellowsSection = ref<HTMLElement | null>(null)
 const districtsSection = ref<HTMLElement | null>(null)
 const notableSection = ref<HTMLElement | null>(null)
+const observationsSection = ref<HTMLElement | null>(null)
 const governanceSection = ref<HTMLElement | null>(null)
 const closingSection = ref<HTMLElement | null>(null)
 
@@ -215,14 +320,22 @@ useWordReveal(heroSection, '.word-reveal')
 useGsapScrollReveal(metricsSection, '.reveal', { stagger: 0.08 })
 useWordReveal(metricsSection, '.word-reveal')
 
+useGsapScrollReveal(editorialSection, '.reveal', { stagger: 0.1 })
+useWordReveal(editorialSection, '.word-reveal')
+
 useGsapScrollReveal(featuredSection, '.reveal', { stagger: 0.12 })
 useWordReveal(featuredSection, '.word-reveal')
+
+useGsapScrollReveal(fellowsSection, '.reveal', { stagger: 0.1 })
+useWordReveal(fellowsSection, '.word-reveal')
 
 useGsapScrollReveal(districtsSection, '.reveal', { stagger: 0.1 })
 useWordReveal(districtsSection, '.word-reveal')
 
 useGsapScrollReveal(notableSection, '.reveal', { stagger: 0.1 })
 useWordReveal(notableSection, '.word-reveal')
+
+useGsapScrollReveal(observationsSection, '.reveal', { stagger: 0.15 })
 
 useGsapScrollReveal(governanceSection, '.reveal', { stagger: 0.1 })
 useWordReveal(governanceSection, '.word-reveal')
@@ -231,12 +344,12 @@ useGsapScrollReveal(closingSection, '.reveal')
 
 /* -- Data --------------------------------------- */
 const metrics = [
-  { value: '142', label: 'Works Archived' },
-  { value: '38', label: 'New Practitioners' },
-  { value: '7', label: 'Active Districts' },
-  { value: '3', label: 'Seal Advancements' },
-  { value: '12', label: 'Publications' },
-  { value: '1', label: 'Legacy Conferral' },
+  { value: '142', label: 'Works Archived', delta: '+34 from Q4', deltaClass: 'delta-up' },
+  { value: '38', label: 'New Practitioners', delta: '+12 from Q4', deltaClass: 'delta-up' },
+  { value: '7', label: 'Active Districts', delta: '+1 new', deltaClass: 'delta-up' },
+  { value: '3', label: 'Seal Advancements', delta: null, deltaClass: '' },
+  { value: '12', label: 'Publications', delta: '+5 from Q4', deltaClass: 'delta-up' },
+  { value: '1', label: 'Legacy Conferral', delta: null, deltaClass: '' },
 ]
 
 const featuredWorks = [
@@ -266,31 +379,57 @@ const featuredWorks = [
   },
 ]
 
+const featuredFellows = [
+  {
+    name: 'Renata Vasquez',
+    role: 'Generative Systems',
+    desc: 'Leading the AI Attribution Framework review across Digital Craft and Visual Arts districts.',
+    gradient: 'linear-gradient(135deg, #27272A 0%, #3F3F46 50%, #18181B 100%)',
+  },
+  {
+    name: 'R. Whitfield',
+    role: 'Publishing & Print',
+    desc: 'Seventh Legacy Seal holder in Meraki Road history. Permanent archive contributor since 2023.',
+    gradient: 'linear-gradient(135deg, #18181B 0%, #27272A 50%, #09090B 100%)',
+  },
+  {
+    name: 'Idris Kone',
+    role: 'Spatial Narrative',
+    desc: 'Advised on the Architecture & Space founding charter. Bridging environmental design across districts.',
+    gradient: 'linear-gradient(135deg, #3F3F46 0%, #27272A 50%, #18181B 100%)',
+  },
+]
+
 const districtReports = [
   {
     name: 'Visual Arts',
     submissions: 47,
     summary: 'Strong quarter. Two new Fellows elevated. The annual open review drew 120 attendees — double last quarter. Print-based work dominated submissions.',
+    highlight: 'Open review attendance doubled',
   },
   {
     name: 'Digital Craft',
     submissions: 31,
     summary: 'Steady growth in generative and computational work. Three new Associates onboarded. Standards committee launched a review of attribution protocols for AI-assisted pieces.',
+    highlight: 'AI attribution review launched',
   },
   {
     name: 'Publishing',
     submissions: 22,
     summary: 'Quieter quarter by volume but deeper in scope. Two long-form monographs entered the archive. Cross-district collaboration with Visual Arts on a limited-edition print series.',
+    highlight: 'Two monographs archived',
   },
   {
     name: 'Architecture & Space',
     submissions: 18,
     summary: 'Inaugural quarter for this district. Focus on documentation and archival standards. Four founding Associates submitted spatial studies and site analyses.',
+    highlight: 'District formally chartered',
   },
   {
     name: 'Sound & Time-Based',
     submissions: 14,
     summary: 'Experimental audio work gaining traction. One Fellow nomination in progress. The district hosted its first listening session — invitation-only, recorded for the archive.',
+    highlight: 'First listening session held',
   },
 ]
 
@@ -322,26 +461,29 @@ const decisions = [
     status: 'Ratified',
     title: 'District Founding Protocol v2',
     desc: 'Updated the requirements for establishing a new district. Minimum four founding practitioners (up from three). Requires sponsorship from two existing district councils.',
+    sponsor: 'I. Kone & M. Delacroix',
   },
   {
     status: 'Under Review',
     title: 'AI Attribution Framework',
     desc: 'Proposed standards for documenting the role of AI tools in creative work. Covers disclosure requirements, archival metadata, and Seal eligibility for AI-assisted pieces.',
+    sponsor: 'R. Vasquez',
   },
   {
     status: 'Ratified',
     title: 'Quarterly Monograph Publication Standard',
     desc: 'Formalized the structure, review process, and publication schedule for this document. Each issue is now part of the permanent archive.',
+    sponsor: 'A. Osei',
   },
 ]
 </script>
 
 <style scoped>
-/* ═══════════════════════════════════════════════
-   QUARTERLY MONOGRAPH PAGE — State of the District (Dark Theme)
-   ═══════════════════════════════════════════════ */
+/* ===============================================
+   QUARTERLY MONOGRAPH PAGE — State of the District
+   =============================================== */
 
-/* ─── Hero ─── */
+/* --- Hero --- */
 .quarterly-hero {
   padding-top: calc(var(--space-32) + 3rem);
   padding-bottom: var(--space-24);
@@ -395,7 +537,7 @@ const decisions = [
   color: var(--color-gold);
 }
 
-/* ─── Metrics ─── */
+/* --- Metrics --- */
 .metrics-title {
   font-size: var(--text-h2);
   font-weight: 300;
@@ -438,7 +580,104 @@ const decisions = [
   opacity: 0.6;
 }
 
-/* ─── Featured Work ─── */
+.metric-delta {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  letter-spacing: var(--tracking-wide);
+  opacity: 0.5;
+}
+
+.delta-up {
+  color: var(--color-success);
+}
+
+/* --- Editorial --- */
+.quarterly-editorial {
+  padding: var(--space-24) var(--content-padding);
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
+}
+
+.editorial-grid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.editorial-title {
+  font-size: var(--text-h2);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-dark-text);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.editorial-body {
+  font-size: var(--text-body);
+  color: var(--color-dark-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 55ch;
+  margin-bottom: var(--space-6);
+}
+
+.editorial-cta {
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  background-image: none;
+  margin-top: var(--space-4);
+  transition: opacity var(--duration-normal) ease;
+}
+
+.editorial-cta:hover {
+  opacity: 0.7;
+}
+
+.editorial-figure-placeholder {
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, rgba(184, 150, 78, 0.06) 0%, rgba(184, 150, 78, 0.02) 100%);
+  border: 1px solid rgba(184, 150, 78, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: var(--space-6);
+  gap: var(--space-2);
+}
+
+.editorial-figure-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  opacity: 0.5;
+}
+
+.editorial-figure-caption {
+  font-size: var(--text-caption);
+  color: var(--color-dark-muted);
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .editorial-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .editorial-cta {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* --- Featured Work --- */
 .featured-title {
   font-size: var(--text-h2);
   font-weight: 300;
@@ -519,7 +758,77 @@ const decisions = [
   margin-bottom: var(--space-4);
 }
 
-/* ─── District Reports ─── */
+/* --- Featured Fellows --- */
+.quarterly-fellows {
+  padding: var(--space-24) var(--content-padding);
+  background-color: var(--color-dark-bg);
+}
+
+.fellows-section-title {
+  font-size: var(--text-h2);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-dark-text);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-12);
+}
+
+.fellows-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+}
+
+.fellow-profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
+}
+
+.fellow-profile-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 9999px;
+  border: 1px solid rgba(184, 150, 78, 0.15);
+}
+
+.fellow-profile-role {
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  opacity: 0.6;
+}
+
+.fellow-profile-name {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 300;
+  color: var(--color-dark-text);
+}
+
+.fellow-profile-name em {
+  font-style: italic;
+}
+
+.fellow-profile-desc {
+  font-size: var(--text-small);
+  color: var(--color-dark-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 30ch;
+}
+
+@media (max-width: 768px) {
+  .fellows-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+}
+
+/* --- District Reports --- */
 .districts-title {
   font-size: var(--text-h2);
   font-weight: 300;
@@ -573,9 +882,34 @@ const decisions = [
   color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
   max-width: 65ch;
+  margin-bottom: var(--space-4);
 }
 
-/* ─── Notable Events ─── */
+.report-highlight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(184, 150, 78, 0.06);
+}
+
+.report-highlight-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.report-highlight-text {
+  font-size: var(--text-small);
+  color: var(--color-dark-secondary);
+}
+
+/* --- Notable Events --- */
 .notable-title {
   font-size: var(--text-h2);
   font-weight: 300;
@@ -627,7 +961,49 @@ const decisions = [
   max-width: 55ch;
 }
 
-/* ─── Governance ─── */
+/* --- Observations --- */
+.quarterly-observations {
+  padding: var(--space-24) var(--content-padding);
+  background-color: var(--color-dark-bg);
+}
+
+.observations-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+}
+
+.observation-col .overline {
+  color: var(--color-gold);
+  margin-bottom: var(--space-4);
+}
+
+.observation-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 300;
+  color: var(--color-dark-text);
+  margin-bottom: var(--space-6);
+}
+
+.observation-title em {
+  font-style: italic;
+}
+
+.observation-body {
+  font-size: var(--text-body);
+  color: var(--color-dark-muted);
+  line-height: var(--leading-relaxed);
+}
+
+@media (max-width: 768px) {
+  .observations-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+}
+
+/* --- Governance --- */
 .governance-inner {
   display: flex;
   flex-direction: column;
@@ -679,7 +1055,16 @@ const decisions = [
   line-height: var(--leading-relaxed);
 }
 
-/* ─── Closing ─── */
+.governance-sponsor {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--color-gold);
+  opacity: 0.5;
+  letter-spacing: var(--tracking-wide);
+  margin-top: var(--space-4);
+}
+
+/* --- Closing --- */
 .closing-inner {
   text-align: center;
   display: flex;
@@ -708,7 +1093,7 @@ const decisions = [
   letter-spacing: var(--tracking-wide);
 }
 
-/* ─── Responsive ─── */
+/* --- Responsive --- */
 @media (max-width: 768px) {
   .quarterly-hero {
     padding-top: calc(var(--space-16) + 3rem);

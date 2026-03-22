@@ -26,7 +26,7 @@
     <SectionDivider />
 
     <!-- ============================================
-         FELLOWS DIRECTORY — 3-column card grid
+         FELLOWS DIRECTORY — Vertical profile entries
     ============================================= -->
     <section ref="fellowsSection" class="collective-fellows section">
       <div class="section-wide">
@@ -36,19 +36,24 @@
         </div>
         <div class="fellows-rule" aria-hidden="true" />
 
-        <div class="fellows-grid">
+        <div class="fellows-list">
           <article
             v-for="fellow in fellows"
             :key="fellow.name"
-            class="fellow-card vellum-card lift-card reveal"
+            class="fellow-entry reveal"
           >
-            <div class="fellow-image-wrap">
-              <div class="fellow-image-placeholder" :style="{ background: fellow.gradient }" />
+            <div class="fellow-avatar-col">
+              <div class="fellow-avatar" :style="{ background: fellow.gradient }" />
+              <span class="seal-base seal-fellow">Fellow</span>
             </div>
-            <div class="fellow-info">
+            <div class="fellow-details">
               <h3 class="fellow-name"><em>{{ fellow.name }}</em></h3>
               <p class="fellow-specialty">{{ fellow.specialty }}</p>
-              <span class="seal-base seal-fellow">Fellow</span>
+              <p v-if="fellow.focus" class="fellow-focus">{{ fellow.focus }}</p>
+            </div>
+            <div class="fellow-meta">
+              <span class="fellow-since">Since {{ fellow.since }}</span>
+              <NuxtLink to="#" class="fellow-monograph-link">View Monograph &rarr;</NuxtLink>
             </div>
           </article>
         </div>
@@ -65,6 +70,10 @@
         <div class="archive-header">
           <p class="overline reveal">The Archive</p>
           <h2 class="archive-title word-reveal"><em>The Archive Vault</em></h2>
+          <p class="archive-intro reveal">
+            Founding documents, position papers, and the written record
+            of how this collective governs itself.
+          </p>
         </div>
 
         <div class="archive-list">
@@ -77,6 +86,10 @@
             <div class="archive-body">
               <h3 class="archive-entry-title"><em>{{ entry.title }}</em></h3>
               <p class="archive-desc">{{ entry.description }}</p>
+              <div class="archive-entry-meta">
+                <span class="archive-author">{{ entry.author }}</span>
+                <span class="archive-date">{{ entry.date }}</span>
+              </div>
               <a href="#" class="archive-link">Access Fragment &rarr;</a>
             </div>
           </div>
@@ -87,9 +100,41 @@
     <SectionDivider />
 
     <!-- ============================================
-         CURRENT MANDATES — Institutional actions
+         ARCHIVAL SOLUTIONS — Two-column governance quotes
     ============================================= -->
-    <section ref="mandatesSection" class="collective-mandates section">
+    <section ref="solutionsSection" class="collective-solutions section">
+      <div class="section-default">
+        <div class="solutions-header">
+          <p class="overline reveal">Archival Solutions</p>
+          <h2 class="solutions-title word-reveal"><em>Positions & Precedent</em></h2>
+        </div>
+
+        <div class="solutions-grid">
+          <article
+            v-for="solution in archivalSolutions"
+            :key="solution.title"
+            class="solution-card vellum-card reveal"
+          >
+            <span class="material-symbols-outlined solution-icon">{{ solution.icon }}</span>
+            <h3 class="solution-card-title"><em>{{ solution.title }}</em></h3>
+            <blockquote class="solution-quote">
+              <p>&ldquo;{{ solution.quote }}&rdquo;</p>
+              <cite class="solution-cite">&mdash; {{ solution.author }}</cite>
+            </blockquote>
+            <span class="solution-status" :class="solution.statusClass">
+              {{ solution.status }}
+            </span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
+         CURRENT MANDATES — Governance actions
+    ============================================= -->
+    <section ref="mandatesSection" class="collective-mandates section section-dark">
       <div class="section-default">
         <div class="mandates-header">
           <p class="overline reveal">Active Directives</p>
@@ -106,6 +151,10 @@
             <span class="mandate-number">{{ mandate.number }}</span>
             <h3 class="mandate-name"><em>{{ mandate.title }}</em></h3>
             <p class="mandate-desc">{{ mandate.description }}</p>
+            <div class="mandate-footer">
+              <span class="mandate-sponsor">Sponsored by {{ mandate.sponsor }}</span>
+              <span class="mandate-vote-status stamped-overline">{{ mandate.voteStatus }}</span>
+            </div>
           </article>
         </div>
       </div>
@@ -116,7 +165,7 @@
     <!-- ============================================
          THE DISCOURSE — Dated discussion threads
     ============================================= -->
-    <section ref="discourseSection" class="collective-discourse section section-dark">
+    <section ref="discourseSection" class="collective-discourse section">
       <div class="section-default">
         <div class="discourse-header">
           <p class="overline reveal">Open Threads</p>
@@ -131,11 +180,15 @@
           >
             <div class="discourse-meta">
               <time class="discourse-date">{{ thread.date }}</time>
+              <span class="material-symbols-outlined discourse-icon">{{ thread.icon }}</span>
               <span class="discourse-tag">{{ thread.tag }}</span>
             </div>
             <h3 class="discourse-entry-title"><em>{{ thread.title }}</em></h3>
             <p class="discourse-excerpt">{{ thread.excerpt }}</p>
-            <a href="#" class="discourse-link">Continue Reading &rarr;</a>
+            <div class="discourse-footer">
+              <span class="discourse-replies">{{ thread.replies }} replies</span>
+              <a href="#" class="discourse-link">Continue Reading &rarr;</a>
+            </div>
           </article>
         </div>
       </div>
@@ -170,7 +223,7 @@ import { useWordReveal } from '~/composables/useWordReveal'
 useHead({
   title: 'The Collective — Meraki Road',
   meta: [
-    { name: 'description', content: 'The Fellowship Lounge: where seated practitioners shape the direction of Meraki Road. Archives, mandates, and institutional discourse.' },
+    { name: 'description', content: 'The Fellowship Lounge: where seated practitioners shape the direction of Meraki Road. Archives, mandates, and discourse.' },
   ],
 })
 
@@ -195,6 +248,11 @@ useWordReveal(fellowsSection, '.word-reveal')
 const archiveSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(archiveSection, '.reveal', { stagger: 0.1 })
 useWordReveal(archiveSection, '.word-reveal')
+
+/* -- Solutions ---------------------------------- */
+const solutionsSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(solutionsSection, '.reveal', { stagger: 0.12 })
+useWordReveal(solutionsSection, '.word-reveal')
 
 /* -- Mandates ----------------------------------- */
 const mandatesSection = ref<HTMLElement | null>(null)
@@ -278,50 +336,94 @@ const fellows = [
   {
     name: 'Renata Vasquez',
     specialty: 'Generative Systems & Emergent Form',
+    focus: 'Currently leading the AI Attribution Framework review.',
     gradient: 'linear-gradient(135deg, #27272A 0%, #3F3F46 50%, #18181B 100%)',
+    since: '2024',
   },
   {
     name: 'Idris Kone',
     specialty: 'Spatial Narrative & Environmental Design',
+    focus: 'Advising on the Architecture & Space district founding charter.',
     gradient: 'linear-gradient(135deg, #18181B 0%, #27272A 50%, #09090B 100%)',
+    since: '2024',
   },
   {
     name: 'Margaux Delacroix',
     specialty: 'Typographic Sculpture & Print Heritage',
+    focus: 'Archive curator for the Publishing district permanent collection.',
     gradient: 'linear-gradient(135deg, #3F3F46 0%, #27272A 50%, #18181B 100%)',
+    since: '2023',
   },
   {
     name: 'Soren Lindqvist',
     specialty: 'Algorithmic Composition & Sound Design',
+    focus: 'Overseeing the Sound & Time-Based district listening sessions.',
     gradient: 'linear-gradient(135deg, #09090B 0%, #18181B 50%, #27272A 100%)',
+    since: '2023',
   },
   {
     name: 'Amara Osei',
     specialty: 'Material Culture & Archival Practice',
+    focus: 'Writing the institutional memory preservation protocol.',
     gradient: 'linear-gradient(135deg, #27272A 0%, #09090B 50%, #3F3F46 100%)',
+    since: '2024',
   },
   {
     name: 'Takeshi Murakami',
     specialty: 'Interactive Installation & Kinetic Systems',
+    focus: 'Building the cross-district collaboration framework for The Bridge.',
     gradient: 'linear-gradient(135deg, #18181B 0%, #3F3F46 50%, #27272A 100%)',
+    since: '2025',
   },
 ]
 
 const archiveEntries = [
   {
     number: '01',
-    title: 'On the Nature of Institutional Memory',
-    description: 'A founding document examining how creative institutions preserve and transmit knowledge across generations of practitioners.',
+    title: 'On the Nature of Collective Memory',
+    description: 'A founding document examining how creative collectives preserve and transmit knowledge across generations of practitioners.',
+    author: 'M. Delacroix',
+    date: '2023.09',
   },
   {
     number: '02',
     title: 'The Mandate System: Origins and Intent',
     description: 'How collective directives emerge from discourse and become actionable commitments within the fellowship.',
+    author: 'I. Kone',
+    date: '2024.01',
   },
   {
     number: '03',
     title: 'Craft as Governance',
-    description: 'The argument for demonstrated mastery as the primary qualification for institutional decision-making.',
+    description: 'The argument for demonstrated mastery as the primary qualification for decision-making within the collective.',
+    author: 'R. Vasquez',
+    date: '2024.03',
+  },
+  {
+    number: '04',
+    title: 'The Archive as Living Document',
+    description: 'Why the record must evolve with the practitioners who create it. A case for mutable archival standards.',
+    author: 'A. Osei',
+    date: '2025.01',
+  },
+]
+
+const archivalSolutions = [
+  {
+    icon: 'history_edu',
+    title: 'Precedent: Founding Charter Amendments',
+    quote: 'The charter should breathe. A static document serves the founders, not the future.',
+    author: 'Margaux Delacroix, 2024 Annual Review',
+    status: 'Resolved',
+    statusClass: 'status-resolved',
+  },
+  {
+    icon: 'auto_stories',
+    title: 'Precedent: Cross-District Governance',
+    quote: 'When a mandate touches more than one district, both councils must sit at the table. No proxies.',
+    author: 'Idris Kone, Mandate 10.3 Proceedings',
+    status: 'Pending Implementation',
+    statusClass: 'status-pending',
   },
 ]
 
@@ -329,33 +431,58 @@ const mandates = [
   {
     number: '10.4',
     title: 'Standards of Admission',
-    description: 'Reviewing and codifying the criteria by which new fellows are nominated, evaluated, and seated. The current framework relies on peer endorsement and portfolio review—this mandate formalizes the weighting of each.',
+    description: 'Reviewing and codifying the criteria by which new fellows are nominated, evaluated, and seated. The current framework relies on peer endorsement and portfolio review — this mandate formalizes the weighting of each.',
+    sponsor: 'R. Vasquez',
+    voteStatus: 'In Review',
   },
   {
     number: '10.5',
     title: 'Archive Accessibility Protocol',
-    description: 'Establishing graduated access to the institutional archive. Associates gain read access to public fragments; verified practitioners unlock commentary threads; fellows hold editorial privilege over the living record.',
+    description: 'Establishing graduated access to the archive. Associates gain read access to public fragments; verified practitioners unlock commentary threads; fellows hold editorial privilege over the living record.',
+    sponsor: 'A. Osei',
+    voteStatus: 'Ratified',
+  },
+  {
+    number: '10.6',
+    title: 'AI Attribution Standards',
+    description: 'Defining disclosure requirements for AI-assisted work submitted to the archive. Covers metadata tagging, Seal eligibility, and provenance chain documentation.',
+    sponsor: 'S. Lindqvist',
+    voteStatus: 'In Review',
   },
 ]
 
 const discourseThreads = [
   {
     date: '2026.03.14',
+    icon: 'forum',
     tag: 'Governance',
     title: 'Should mandate proposals require unanimous consent?',
     excerpt: 'A thread on the tension between speed of action and depth of consensus. Three fellows weigh in on whether unanimity protects or paralyzes.',
+    replies: 14,
   },
   {
     date: '2026.03.09',
+    icon: 'edit_note',
     tag: 'Craft',
     title: 'The portfolio as living document',
-    excerpt: 'Practitioners discuss whether the static portfolio is an artifact of a slower era—and what replaces it when work is continuous and iterative.',
+    excerpt: 'Practitioners discuss whether the static portfolio is an artifact of a slower era — and what replaces it when work is continuous and iterative.',
+    replies: 8,
   },
   {
     date: '2026.03.02',
+    icon: 'inventory_2',
     tag: 'Heritage',
     title: 'What we owe the archive',
-    excerpt: 'On the responsibility of fellows to contribute to the institutional record, and the difference between documentation and knowledge.',
+    excerpt: 'On the responsibility of fellows to contribute to the record, and the difference between documentation and knowledge.',
+    replies: 11,
+  },
+  {
+    date: '2026.02.18',
+    icon: 'hub',
+    tag: 'Collaboration',
+    title: 'Cross-district projects: who leads?',
+    excerpt: 'When two districts collaborate on a commission through The Bridge, governance gets complicated. This thread proposes a rotating lead model.',
+    replies: 6,
   },
 ]
 </script>
@@ -428,27 +555,8 @@ const discourseThreads = [
   }
 }
 
-/* CTA mobile heading clamp + touch target */
-@media (max-width: 768px) {
-  .cta-title {
-    font-size: clamp(2rem, 8vw, var(--text-display));
-  }
-
-  .archive-link {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  .discourse-link {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-  }
-}
-
 /* =============================================
-   FELLOWS DIRECTORY
+   FELLOWS DIRECTORY — Vertical entries with avatars
    ============================================= */
 .collective-fellows {
   padding: var(--space-32) var(--content-padding);
@@ -485,40 +593,44 @@ const discourseThreads = [
   width: 100%;
   height: 1px;
   background: var(--rule-color);
-  margin-bottom: var(--space-16);
+  margin-bottom: var(--space-8);
   transform-origin: left;
 }
 
-.fellows-grid {
+.fellows-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.fellow-entry {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: auto 1fr auto;
   gap: var(--space-8);
+  align-items: start;
+  padding: var(--space-8) 0;
+  border-bottom: 1px solid var(--rule-color);
+  transition: background-color var(--duration-normal) ease;
 }
 
-.fellow-card {
-  padding: 0;
-  overflow: hidden;
-  cursor: default;
+.fellow-entry:hover {
+  background-color: rgba(184, 150, 78, 0.02);
 }
 
-.fellow-image-wrap {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
+.fellow-avatar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
 }
 
-.fellow-image-placeholder {
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1);
+.fellow-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 9999px;
+  border: 1px solid var(--rule-color);
 }
 
-.fellow-card:hover .fellow-image-placeholder {
-  transform: scale(1.05);
-}
-
-.fellow-info {
-  padding: var(--space-6) var(--space-6) var(--space-8);
+.fellow-details {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
@@ -544,15 +656,45 @@ const discourseThreads = [
   line-height: var(--leading-normal);
 }
 
-.fellow-info .seal-base {
-  margin-top: var(--space-3);
-  align-self: flex-start;
+.fellow-focus {
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 50ch;
+  margin-top: var(--space-1);
 }
 
-@media (max-width: 1024px) {
-  .fellows-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.fellow-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+.fellow-since {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+  letter-spacing: var(--tracking-wide);
+}
+
+.fellow-monograph-link {
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  background-image: none;
+  transition: opacity var(--duration-normal) ease;
+  white-space: nowrap;
+}
+
+.fellow-monograph-link:hover {
+  opacity: 0.7;
+}
+
+.fellow-entry .seal-base {
+  margin-top: 0;
 }
 
 @media (max-width: 768px) {
@@ -560,14 +702,36 @@ const discourseThreads = [
     padding: var(--space-16) var(--content-padding);
   }
 
-  .fellows-grid {
+  .fellow-entry {
     grid-template-columns: 1fr;
-    gap: var(--space-6);
+    gap: var(--space-4);
+  }
+
+  .fellow-avatar-col {
+    flex-direction: row;
+    gap: var(--space-4);
+  }
+
+  .fellow-avatar {
+    width: 56px;
+    height: 56px;
+  }
+
+  .fellow-meta {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-4);
   }
 
   .fellows-header {
     flex-direction: column;
     gap: var(--space-2);
+  }
+
+  .fellow-monograph-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 
@@ -589,10 +753,18 @@ const discourseThreads = [
   font-weight: 300;
   color: var(--color-dark-text);
   margin-top: var(--space-4);
+  margin-bottom: var(--space-6);
 }
 
 .archive-title em {
   font-style: italic;
+}
+
+.archive-intro {
+  font-size: var(--text-body);
+  color: var(--color-dark-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 55ch;
 }
 
 .archive-list {
@@ -651,6 +823,28 @@ const discourseThreads = [
   max-width: 55ch;
 }
 
+.archive-entry-meta {
+  display: flex;
+  gap: var(--space-6);
+  margin-top: var(--space-2);
+}
+
+.archive-author {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--color-gold);
+  opacity: 0.6;
+  letter-spacing: var(--tracking-wide);
+}
+
+.archive-date {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--color-dark-muted);
+  opacity: 0.5;
+  letter-spacing: var(--tracking-wide);
+}
+
 .archive-link {
   font-size: var(--text-overline);
   font-weight: 500;
@@ -681,6 +875,116 @@ const discourseThreads = [
   .archive-number {
     font-size: var(--text-h3);
   }
+
+  .archive-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* =============================================
+   ARCHIVAL SOLUTIONS — Two-column cards
+   ============================================= */
+.collective-solutions {
+  padding: var(--space-32) var(--content-padding);
+  background: var(--color-surface);
+  border-top: 1px solid var(--rule-color);
+  border-bottom: 1px solid var(--rule-color);
+}
+
+.solutions-header {
+  margin-bottom: var(--space-12);
+}
+
+.solutions-title {
+  font-size: var(--text-h1);
+  font-weight: 300;
+  color: var(--color-ink);
+  margin-top: var(--space-4);
+}
+
+.solutions-title em {
+  font-style: italic;
+}
+
+.solutions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+}
+
+.solution-card {
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.solution-icon {
+  font-size: 2rem;
+  color: var(--color-gold);
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+.solution-card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  font-weight: 300;
+  color: var(--color-ink);
+}
+
+.solution-card-title em {
+  font-style: italic;
+}
+
+.solution-quote {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-gold);
+}
+
+.solution-cite {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-style: normal;
+  color: var(--color-text-muted);
+  margin-top: var(--space-2);
+  letter-spacing: var(--tracking-wide);
+}
+
+.solution-status {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  align-self: flex-start;
+}
+
+.status-resolved {
+  color: var(--color-success);
+  border-color: rgba(22, 163, 74, 0.3);
+}
+
+.status-pending {
+  color: var(--color-gold);
+  border-color: rgba(184, 150, 78, 0.3);
+}
+
+@media (max-width: 768px) {
+  .collective-solutions {
+    padding: var(--space-16) var(--content-padding);
+  }
+
+  .solutions-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* =============================================
@@ -688,9 +992,8 @@ const discourseThreads = [
    ============================================= */
 .collective-mandates {
   padding: var(--space-32) var(--content-padding);
-  background: var(--color-surface);
-  border-top: 1px solid var(--rule-color);
-  border-bottom: 1px solid var(--rule-color);
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
 }
 
 .mandates-header {
@@ -700,7 +1003,7 @@ const discourseThreads = [
 .mandates-title {
   font-size: var(--text-h1);
   font-weight: 300;
-  color: var(--color-ink);
+  color: var(--color-dark-text);
   margin-top: var(--space-4);
 }
 
@@ -711,23 +1014,24 @@ const discourseThreads = [
 .mandates-rule {
   width: 100%;
   height: 1px;
-  background: var(--rule-color);
+  background: rgba(250, 250, 249, 0.08);
   margin-bottom: var(--space-16);
   transform-origin: left;
 }
 
 .mandates-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-8);
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
 }
 
 .mandate-card {
-  padding: var(--space-12);
+  padding: var(--space-8);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
   cursor: default;
+  border-color: rgba(250, 250, 249, 0.06);
 }
 
 .mandate-number {
@@ -742,7 +1046,7 @@ const discourseThreads = [
   font-family: var(--font-display);
   font-size: var(--text-h3);
   font-weight: 300;
-  color: var(--color-ink);
+  color: var(--color-dark-text);
 }
 
 .mandate-name em {
@@ -751,13 +1055,41 @@ const discourseThreads = [
 
 .mandate-desc {
   font-size: var(--text-body);
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
+}
+
+.mandate-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid rgba(250, 250, 249, 0.06);
+}
+
+.mandate-sponsor {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--color-dark-muted);
+  opacity: 0.6;
+  letter-spacing: var(--tracking-wide);
+}
+
+.mandate-vote-status {
+  font-family: var(--font-mono);
+  color: var(--color-gold);
 }
 
 .mandate-card:hover .mandate-name {
   color: var(--color-gold);
   transition: color 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+  .mandates-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 768px) {
@@ -775,18 +1107,18 @@ const discourseThreads = [
    ============================================= */
 .collective-discourse {
   padding: var(--space-32) var(--content-padding);
-  background-color: var(--color-dark-bg);
-  color: var(--color-dark-text);
+  background: var(--color-surface);
+  border-top: 1px solid var(--rule-color);
 }
 
 .discourse-header {
-  margin-bottom: var(--space-16);
+  margin-bottom: var(--space-12);
 }
 
 .discourse-title {
   font-size: var(--text-h1);
   font-weight: 300;
-  color: var(--color-dark-text);
+  color: var(--color-ink);
   margin-top: var(--space-4);
 }
 
@@ -801,7 +1133,7 @@ const discourseThreads = [
 
 .discourse-entry {
   padding: var(--space-8) 0;
-  border-bottom: 1px solid rgba(250, 250, 249, 0.08);
+  border-bottom: 1px solid var(--rule-color);
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
@@ -809,11 +1141,11 @@ const discourseThreads = [
 }
 
 .discourse-entry:first-child {
-  border-top: 1px solid rgba(250, 250, 249, 0.08);
+  border-top: 1px solid var(--rule-color);
 }
 
 .discourse-entry:hover {
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: rgba(184, 150, 78, 0.02);
 }
 
 .discourse-meta {
@@ -825,8 +1157,15 @@ const discourseThreads = [
 .discourse-date {
   font-family: var(--font-mono);
   font-size: var(--text-overline);
-  color: var(--color-dark-muted);
+  color: var(--color-text-muted);
   letter-spacing: var(--tracking-wide);
+}
+
+.discourse-icon {
+  font-size: 1.125rem;
+  color: var(--color-gold);
+  opacity: 0.5;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
 }
 
 .discourse-tag {
@@ -843,7 +1182,7 @@ const discourseThreads = [
   font-family: var(--font-display);
   font-size: var(--text-h3);
   font-weight: 300;
-  color: var(--color-dark-text);
+  color: var(--color-ink);
 }
 
 .discourse-entry-title em {
@@ -852,9 +1191,24 @@ const discourseThreads = [
 
 .discourse-excerpt {
   font-size: var(--text-body);
-  color: var(--color-dark-muted);
+  color: var(--color-text-muted);
   line-height: var(--leading-relaxed);
   max-width: 60ch;
+}
+
+.discourse-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  margin-top: var(--space-2);
+}
+
+.discourse-replies {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+  opacity: 0.6;
+  letter-spacing: var(--tracking-wide);
 }
 
 .discourse-link {
@@ -864,7 +1218,6 @@ const discourseThreads = [
   text-transform: uppercase;
   color: var(--color-gold);
   background-image: none;
-  margin-top: var(--space-1);
   transition: letter-spacing 0.3s var(--ease-out), opacity 0.2s ease;
   opacity: 0.8;
 }
@@ -877,6 +1230,12 @@ const discourseThreads = [
 @media (max-width: 768px) {
   .collective-discourse {
     padding: var(--space-16) var(--content-padding);
+  }
+
+  .discourse-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 
@@ -941,6 +1300,10 @@ const discourseThreads = [
 @media (max-width: 768px) {
   .collective-cta {
     padding: var(--space-16) var(--content-padding);
+  }
+
+  .cta-title {
+    font-size: clamp(2rem, 8vw, var(--text-display));
   }
 
   .cta-button {

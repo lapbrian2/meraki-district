@@ -4,7 +4,7 @@
       <!-- Header row -->
       <div class="showcase-header reveal">
         <div class="showcase-header-left">
-          <p class="overline">Exhibition</p>
+          <p class="overline"><span class="section-number">02.</span> Exhibition</p>
           <h2 class="showcase-title word-reveal">The Showcase</h2>
           <p class="showcase-sub">Selected works from creators shaping the next wave of visual culture.</p>
         </div>
@@ -35,6 +35,9 @@
           <p class="showcase-item-overline">{{ items[0].category }}</p>
           <h3 class="showcase-item-title">{{ items[0].title }}</h3>
           <p class="showcase-item-desc">{{ items[0].description }}</p>
+          <div v-if="items[0].quote" class="showcase-quote-overlay">
+            <p class="showcase-quote-text"><em>"{{ items[0].quote }}"</em></p>
+          </div>
         </div>
 
         <!-- Right item: landscape, full-bleed -->
@@ -78,6 +81,7 @@ interface ShowcaseItem {
   category: string
   title: string
   description?: string
+  quote?: string
 }
 
 const items: ShowcaseItem[] = [
@@ -86,6 +90,7 @@ const items: ShowcaseItem[] = [
     category: 'Visual Arts',
     title: 'Fragments of Stillness',
     description: 'A meditation on impermanence through layered mixed media — ink, plaster, and reclaimed paper.',
+    quote: 'The silence between marks is where the real work happens.',
   },
   {
     image: '/images/artist-2.webp',
@@ -116,6 +121,12 @@ onMounted(() => {
 .showcase-inner {
   max-width: 1440px;
   margin: 0 auto;
+}
+
+.section-number {
+  font-family: var(--font-mono);
+  color: var(--color-gold);
+  margin-right: 0.5em;
 }
 
 /* ─── Header ─── */
@@ -255,6 +266,21 @@ onMounted(() => {
   color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
   max-width: 28rem;
+}
+
+/* ─── Quote overlay ─── */
+.showcase-quote-overlay {
+  margin-top: var(--space-6);
+  padding-left: var(--space-6);
+  border-left: 1px solid var(--color-gold);
+}
+
+.showcase-quote-text {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  font-weight: 300;
+  line-height: var(--leading-snug);
+  color: var(--color-dark-muted);
 }
 
 /* ─── Right item info row ─── */

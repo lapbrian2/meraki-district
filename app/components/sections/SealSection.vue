@@ -188,27 +188,14 @@ onUnmounted(() => {
   padding-left: 3rem;
 }
 
-/* Seal badge classes */
+/* Seal badge overrides (base styles in variables.css) */
 .seal-base {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 9px;
-  padding: 4px 12px;
-  border-width: 1px;
   border-style: solid;
   margin-bottom: var(--space-4);
   margin-top: var(--space-2);
 }
 
-.seal-associate { border-color: rgba(161, 161, 170, 0.3); color: var(--color-dark-muted); background: transparent; }
-.seal-verified { border-color: rgba(184, 150, 78, 0.3); color: var(--color-gold); background: rgba(184, 150, 78, 0.05); }
 .seal-master { border-color: var(--color-gold); color: var(--color-gold); background: rgba(184, 150, 78, 0.12); }
-.seal-fellow { border: 2px solid var(--color-gold); color: var(--color-gold); background: rgba(184, 150, 78, 0.08); }
 
 /* Vertical progress track */
 .seal-progress-track {

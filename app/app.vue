@@ -3,13 +3,48 @@
     <GhostWatermark />
     <ArchivalTimeline />
     <ArchivalSearch />
-    <NuxtPage />
+
+    <!-- Vellum transition overlay — translucent sheet between pages -->
+    <div
+      ref="vellumOverlay"
+      class="vellum-transition-overlay"
+      :class="{ 'is-transitioning': isTransitioning }"
+      aria-hidden="true"
+    />
+
+    <NuxtPage
+      :transition="{
+        name: 'page',
+        mode: 'out-in',
+        onBeforeLeave,
+        onAfterEnter,
+      }"
+    />
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
 const route = useRoute()
 const requestUrl = useRequestURL()
+
+/* ─── Vellum transition state ─── */
+const isTransitioning = ref(false)
+const vellumOverlay = ref<HTMLElement | null>(null)
+
+function onBeforeLeave() {
+  isTransitioning.value = true
+}
+
+function onAfterEnter() {
+  // Small delay lets the enter filter animation finish before removing overlay
+  setTimeout(() => {
+    isTransitioning.value = false
+  }, 400)
+  // Scroll to top on page enter (Lenis may not auto-reset)
+  if (import.meta.client) {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+}
 
 useHead(computed(() => ({
   link: [

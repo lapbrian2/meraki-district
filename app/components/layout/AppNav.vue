@@ -150,6 +150,7 @@ const mobileLinks = [
   { to: '/bridge', label: 'Bridge' },
   { to: '/mint', label: 'Mint' },
   { to: '/circuit', label: 'Circuit' },
+  { to: '/circuit/milan', label: 'Milan Residency' },
   { to: '/typography', label: 'Typography' },
   { to: '/acquire', label: 'Acquire' },
   { to: '/legacy-ritual', label: 'Legacy Ritual' },

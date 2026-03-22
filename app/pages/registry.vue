@@ -8,51 +8,88 @@
       <div class="section-default">
         <p class="overline reveal">The Registry</p>
         <h1 class="registry-hero-title word-reveal">
-          <em>The institutional index.</em>
+          <em>The archival index.</em>
         </h1>
         <p class="registry-hero-sub reveal">
-          A living directory of every practitioner, monograph, and district
+          A living record of every practitioner, monograph, and district
           within the Meraki Road collective. Search by name, discipline, seal,
           or district affiliation.
         </p>
+        <div class="hero-stats reveal">
+          <div class="hero-stat">
+            <span class="hero-stat-value">{{ fellows.length }}</span>
+            <span class="hero-stat-label">Fellows</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">{{ registryDistricts.length }}</span>
+            <span class="hero-stat-label">Districts</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">4</span>
+            <span class="hero-stat-label">Seal Tiers</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <SectionDivider />
 
     <!-- ============================================
-         SEARCH / FILTER — Institutional search bar
+         SEARCH / FILTER — Enhanced archival search
     ============================================= -->
     <section ref="searchSection" class="registry-search section section-dark">
       <div class="section-wide">
         <div class="search-bar">
+          <span class="search-prefix">Registry</span>
           <span class="material-symbols-outlined search-icon">search</span>
           <input
             v-model="searchQuery"
             type="text"
             class="search-input"
-            placeholder="Search the registry..."
+            placeholder="Search the collective record..."
             aria-label="Search the Meraki Road registry"
           />
           <button v-if="searchQuery" class="search-clear" aria-label="Clear search" @click="searchQuery = ''">
             <span class="material-symbols-outlined">close</span>
           </button>
+          <span class="search-shortcut">&#8984;K</span>
         </div>
 
-        <div class="filter-row reveal">
-          <button
-            v-for="filter in filters"
-            :key="filter.key"
-            class="filter-chip"
-            :class="{ 'filter-chip--active': activeFilter === filter.key }"
-            @click="activeFilter = filter.key"
-          >
-            {{ filter.label }}
-          </button>
+        <!-- Classification filters -->
+        <div class="classification-row reveal">
+          <span class="classification-label">Classification</span>
+          <div class="filter-chips">
+            <button
+              v-for="filter in filters"
+              :key="filter.key"
+              class="filter-chip"
+              :class="{ 'filter-chip--active': activeFilter === filter.key }"
+              @click="activeFilter = filter.key"
+            >
+              {{ filter.label }}
+              <span class="filter-chip-count">{{ getFilterCount(filter.key) }}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Discipline filter row -->
+        <div class="discipline-row reveal">
+          <span class="discipline-label">Discipline</span>
+          <div class="discipline-tags">
+            <button
+              v-for="disc in disciplines"
+              :key="disc"
+              class="discipline-tag"
+              :class="{ 'discipline-tag--active': activeDiscipline === disc }"
+              @click="activeDiscipline = activeDiscipline === disc ? '' : disc"
+            >
+              {{ disc }}
+            </button>
+          </div>
         </div>
 
         <div class="search-meta reveal">
-          <span class="search-count">{{ filteredEntries.length }} entries found</span>
+          <span class="search-count">{{ String(filteredEntries.length).padStart(3, '0') }} Results</span>
           <span class="search-sort">Sorted by relevance</span>
         </div>
       </div>
@@ -66,8 +103,9 @@
     <section ref="fellowsSection" class="registry-fellows section section-dark">
       <div class="section-wide">
         <div class="fellows-header">
-          <p class="overline reveal">Section 01</p>
-          <h2 class="fellows-title word-reveal"><em>Fellows</em></h2>
+          <p class="overline reveal">Classification: Practitioner</p>
+          <h2 class="fellows-title word-reveal"><em>Fellows &amp; Creators</em></h2>
+          <p class="fellows-count reveal">{{ filteredFellows.length }} practitioners indexed</p>
         </div>
 
         <div class="fellows-grid">
@@ -85,16 +123,23 @@
                 width="400"
                 height="400"
               />
+              <span class="fellow-archive-ref">{{ fellow.registryId }}</span>
             </div>
             <div class="fellow-body">
-              <span class="fellow-id">{{ fellow.registryId }}</span>
-              <h3 class="fellow-name"><em>{{ fellow.name }}</em></h3>
-              <span class="fellow-discipline">{{ fellow.discipline }}</span>
-              <div class="fellow-tags">
+              <div class="fellow-seal-row">
                 <span class="seal-base" :class="`seal-${fellow.seal.toLowerCase()}`">
                   {{ fellow.seal }}
                 </span>
                 <span v-if="fellow.district" class="fellow-district-tag">{{ fellow.district }}</span>
+              </div>
+              <h3 class="fellow-name"><em>{{ fellow.name }}</em></h3>
+              <span class="fellow-discipline">{{ fellow.discipline }}</span>
+              <div class="fellow-disciplines">
+                <span
+                  v-for="tag in parseDisciplineTags(fellow.discipline)"
+                  :key="tag"
+                  class="fellow-disc-tag"
+                >{{ tag }}</span>
               </div>
               <NuxtLink :to="`/creators/${fellow.slug}`" class="fellow-link">
                 View Monograph &rarr;
@@ -113,19 +158,19 @@
     <section ref="districtsSection" class="registry-districts section section-dark">
       <div class="section-wide">
         <div class="districts-header">
-          <p class="overline reveal">Section 02</p>
+          <p class="overline reveal">Classification: District</p>
           <h2 class="districts-title word-reveal"><em>Districts</em></h2>
-          <p class="districts-count reveal">{{ registryDistricts.length }} sectors mapped</p>
+          <p class="districts-count reveal">{{ filteredDistricts.length }} sectors mapped</p>
         </div>
 
         <div class="districts-grid">
           <NuxtLink
-            v-for="district in registryDistricts"
+            v-for="district in filteredDistricts"
             :key="district.slug"
             :to="`/districts/${district.slug}`"
             class="district-entry reveal"
           >
-            <span class="district-sector">Sector {{ district.number }}</span>
+            <span class="district-sector">SEC_{{ district.number }}</span>
             <span class="district-name">{{ district.name }}</span>
             <span class="district-type">{{ district.type }}</span>
             <span
@@ -174,15 +219,15 @@ import { districts } from '~/composables/useDistricts'
 useHead({
   title: 'The Registry — Meraki Road',
   meta: [
-    { name: 'description', content: 'The institutional index of Meraki Road. A searchable directory of fellows, districts, and monographs.' },
+    { name: 'description', content: 'The archival index of Meraki Road. A searchable directory of fellows, districts, and monographs.' },
   ],
 })
 
 useSeoMeta({
   ogTitle: 'The Registry — Meraki Road',
-  ogDescription: 'The institutional index of Meraki Road. A searchable directory of fellows, districts, and monographs.',
+  ogDescription: 'The archival index of Meraki Road. A searchable directory of fellows, districts, and monographs.',
   twitterTitle: 'The Registry — Meraki Road',
-  twitterDescription: 'The institutional index of Meraki Road. A searchable directory of fellows, districts, and monographs.',
+  twitterDescription: 'The archival index of Meraki Road. A searchable directory of fellows, districts, and monographs.',
 })
 
 /* -- Section refs ------------------------------- */
@@ -209,6 +254,7 @@ useWordReveal(ctaSection, '.word-reveal')
 /* -- State -------------------------------------- */
 const searchQuery = ref('')
 const activeFilter = ref('all')
+const activeDiscipline = ref('')
 
 interface FilterOption {
   key: string
@@ -220,6 +266,8 @@ const filters: FilterOption[] = [
   { key: 'fellow', label: 'Fellows' },
   { key: 'verified', label: 'Verified' },
   { key: 'legacy', label: 'Legacy' },
+  { key: 'associate', label: 'Associate' },
+  { key: 'district', label: 'Districts' },
 ]
 
 /* -- Data --------------------------------------- */
@@ -261,38 +309,81 @@ const fellows: FellowEntry[] = [
     registryId: 'TV-03-1447-V',
     district: 'District 03',
   },
+  {
+    slug: 'julian-vane',
+    name: 'Julian Vane',
+    discipline: 'Architectural Ethics & Digital Preservation',
+    seal: 'Fellow',
+    image: '/images/districts/the-provenance.webp',
+    registryId: 'JV-05-0733-F',
+    district: 'District 05',
+  },
 ]
 
 const registryDistricts = districts
 
+/* -- Computed ----------------------------------- */
+const disciplines = computed(() => {
+  const all = fellows.map(f => parseDisciplineTags(f.discipline)).flat()
+  return [...new Set(all)]
+})
+
+function parseDisciplineTags(discipline: string): string[] {
+  return discipline.split(/\s*[&,]\s*/).map(s => s.trim()).filter(Boolean)
+}
+
+function getFilterCount(key: string): number {
+  if (key === 'all') return fellows.length + registryDistricts.length
+  if (key === 'district') return registryDistricts.length
+  return fellows.filter(f => f.seal.toLowerCase() === key).length
+}
+
 const filteredFellows = computed(() => {
   let result = fellows
-  if (activeFilter.value !== 'all') {
+
+  if (activeFilter.value !== 'all' && activeFilter.value !== 'district') {
     result = result.filter(f => f.seal.toLowerCase() === activeFilter.value)
   }
+
+  if (activeDiscipline.value) {
+    result = result.filter(f =>
+      parseDisciplineTags(f.discipline).some(t =>
+        t.toLowerCase() === activeDiscipline.value.toLowerCase()
+      )
+    )
+  }
+
   if (searchQuery.value) {
     const q = searchQuery.value.toLowerCase()
     result = result.filter(f =>
       f.name.toLowerCase().includes(q) ||
       f.discipline.toLowerCase().includes(q) ||
-      f.registryId.toLowerCase().includes(q)
+      f.registryId.toLowerCase().includes(q) ||
+      (f.district && f.district.toLowerCase().includes(q))
     )
   }
   return result
 })
 
+const filteredDistricts = computed(() => {
+  if (activeFilter.value !== 'all' && activeFilter.value !== 'district') return []
+  if (!searchQuery.value) return registryDistricts
+  const q = searchQuery.value.toLowerCase()
+  return registryDistricts.filter(d =>
+    d.name.toLowerCase().includes(q) ||
+    d.type.toLowerCase().includes(q) ||
+    d.number.includes(q)
+  )
+})
+
 const filteredEntries = computed(() => {
-  const fellowCount = filteredFellows.value.length
-  const districtCount = searchQuery.value
-    ? registryDistricts.filter(d => d.name.toLowerCase().includes(searchQuery.value.toLowerCase())).length
-    : registryDistricts.length
-  return Array(fellowCount + districtCount)
+  return filteredFellows.value.length + filteredDistricts.value.length
 })
 </script>
 
 <style scoped>
 /* ═══════════════════════════════════════════════
-   REGISTRY PAGE — Institutional Index (Dark)
+   REGISTRY PAGE — Archival Index (Dark)
    ═══════════════════════════════════════════════ */
 
 /* ─── Hero ─── */
@@ -321,6 +412,36 @@ const filteredEntries = computed(() => {
   color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
   max-width: 55ch;
+  margin-bottom: var(--space-12);
+}
+
+.hero-stats {
+  display: flex;
+  gap: var(--space-12);
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.hero-stat-value {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-gold);
+  line-height: 1;
+}
+
+.hero-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+  opacity: 0.5;
 }
 
 /* ─── Search Bar ─── */
@@ -337,6 +458,19 @@ const filteredEntries = computed(() => {
 
 .search-bar:focus-within {
   border-color: rgba(184, 150, 78, 0.4);
+}
+
+.search-prefix {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  padding: 2px 8px;
+  border: 1px solid rgba(184, 150, 78, 0.3);
+  white-space: nowrap;
+  opacity: 0.8;
 }
 
 .search-icon {
@@ -379,11 +513,37 @@ const filteredEntries = computed(() => {
   font-size: 1.125rem;
 }
 
-/* ─── Filter Chips ─── */
-.filter-row {
+.search-shortcut {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--color-dark-muted);
+  opacity: 0.3;
+  padding: 2px 6px;
+  border: 1px solid var(--rule-color);
+}
+
+/* ─── Classification Filter Row ─── */
+.classification-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.classification-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+  opacity: 0.5;
+  white-space: nowrap;
+  min-width: 7rem;
+}
+
+.filter-chips {
   display: flex;
   gap: var(--space-2);
-  margin-bottom: var(--space-6);
   flex-wrap: wrap;
 }
 
@@ -399,6 +559,9 @@ const filteredEntries = computed(() => {
   background: transparent;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .filter-chip:hover {
@@ -412,19 +575,79 @@ const filteredEntries = computed(() => {
   background: rgba(184, 150, 78, 0.08);
 }
 
+.filter-chip-count {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  opacity: 0.5;
+}
+
+/* ─── Discipline Tags ─── */
+.discipline-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.discipline-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+  opacity: 0.5;
+  white-space: nowrap;
+  min-width: 7rem;
+  padding-top: var(--space-2);
+}
+
+.discipline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.discipline-tag {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-dark-muted);
+  padding: 3px 10px;
+  border: 1px solid var(--rule-color);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.6;
+}
+
+.discipline-tag:hover {
+  opacity: 1;
+  border-color: rgba(184, 150, 78, 0.3);
+}
+
+.discipline-tag--active {
+  opacity: 1;
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  background: rgba(184, 150, 78, 0.06);
+}
+
 /* ─── Search Meta ─── */
 .search-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule-color);
 }
 
 .search-count {
   font-family: var(--font-mono);
   font-size: var(--text-caption);
-  color: var(--color-dark-muted);
-  letter-spacing: var(--tracking-wide);
+  color: var(--color-gold);
+  letter-spacing: var(--tracking-mega-wide);
   text-transform: uppercase;
+  font-weight: 600;
 }
 
 .search-sort {
@@ -448,6 +671,16 @@ const filteredEntries = computed(() => {
   margin-top: var(--space-4);
 }
 
+.fellows-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--color-dark-muted);
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  margin-top: var(--space-2);
+  opacity: 0.5;
+}
+
 .fellows-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -467,6 +700,7 @@ const filteredEntries = computed(() => {
 .fellow-image-wrap {
   aspect-ratio: 1;
   overflow: hidden;
+  position: relative;
 }
 
 .fellow-image {
@@ -476,6 +710,27 @@ const filteredEntries = computed(() => {
   display: block;
 }
 
+.fellow-archive-ref {
+  position: absolute;
+  bottom: var(--space-3);
+  left: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-dark-text);
+  background: rgba(9, 9, 11, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 2px 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.fellow-card:hover .fellow-archive-ref {
+  opacity: 1;
+}
+
 .fellow-body {
   padding: var(--space-5);
   display: flex;
@@ -483,13 +738,20 @@ const filteredEntries = computed(() => {
   gap: var(--space-2);
 }
 
-.fellow-id {
+.fellow-seal-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.fellow-district-tag {
   font-family: var(--font-mono);
-  font-size: 0.625rem;
+  font-size: 0.5625rem;
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
   color: var(--color-dark-muted);
-  letter-spacing: var(--tracking-mega-wide);
-  text-transform: uppercase;
-  opacity: 0.5;
+  padding: 0.125rem 0.5rem;
+  border: 1px solid var(--rule-color);
 }
 
 .fellow-name {
@@ -506,21 +768,21 @@ const filteredEntries = computed(() => {
   line-height: var(--leading-normal);
 }
 
-.fellow-tags {
+.fellow-disciplines {
   display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin-top: var(--space-2);
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: var(--space-1);
 }
 
-.fellow-district-tag {
+.fellow-disc-tag {
   font-family: var(--font-mono);
-  font-size: 0.5625rem;
-  font-weight: 400;
+  font-size: 0.5rem;
   letter-spacing: var(--tracking-wide);
   color: var(--color-dark-muted);
-  padding: 0.125rem 0.5rem;
+  padding: 1px 6px;
   border: 1px solid var(--rule-color);
+  opacity: 0.5;
 }
 
 .fellow-link {
@@ -590,8 +852,9 @@ const filteredEntries = computed(() => {
 .district-sector {
   font-family: var(--font-mono);
   font-size: var(--text-caption);
-  color: var(--color-dark-muted);
+  color: var(--color-gold);
   letter-spacing: var(--tracking-wide);
+  opacity: 0.7;
 }
 
 .district-name {
@@ -698,6 +961,11 @@ const filteredEntries = computed(() => {
     font-size: clamp(2rem, 8vw, var(--text-display));
   }
 
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: var(--space-6);
+  }
+
   .fellows-grid {
     grid-template-columns: 1fr;
   }
@@ -710,6 +978,17 @@ const filteredEntries = computed(() => {
     display: none;
   }
 
+  .classification-row,
+  .discipline-row {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .classification-label,
+  .discipline-label {
+    min-width: auto;
+  }
+
   .filter-chip {
     min-height: 44px;
     display: inline-flex;
@@ -719,6 +998,14 @@ const filteredEntries = computed(() => {
 
   .search-bar {
     min-height: 44px;
+  }
+
+  .search-prefix {
+    display: none;
+  }
+
+  .search-shortcut {
+    display: none;
   }
 
   .cta-title {

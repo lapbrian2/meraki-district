@@ -42,13 +42,13 @@
     <SectionDivider />
 
     <!-- ============================================
-         STEP 01: UPLOAD
+         PHASE 01: THE OFFERING
     ============================================= -->
     <section v-show="currentStep === 0" ref="uploadSection" class="submit-upload section section-dark">
       <div class="section-default">
         <div class="form-header">
-          <span class="form-step-label reveal">01. Upload</span>
-          <h2 class="form-title word-reveal"><em>Commence the Upload</em></h2>
+          <span class="form-step-label reveal">Phase 01</span>
+          <h2 class="form-title word-reveal"><em>The Offering</em></h2>
           <p class="form-subtitle reveal">
             Digital manuscript or visual artefact. Accepted formats: RAW, TIFF,
             PNG, PDF. Maximum 2.0GB per transmission.
@@ -87,16 +87,16 @@
     </section>
 
     <!-- ============================================
-         STEP 02: METADATA
+         PHASE 02: CLASSIFICATION
     ============================================= -->
     <section v-show="currentStep === 1" ref="metadataSection" class="submit-metadata section section-dark">
       <div class="section-default">
         <div class="form-header">
-          <span class="form-step-label reveal">02. Metadata Schema</span>
-          <h2 class="form-title word-reveal"><em>Classify the Specimen</em></h2>
+          <span class="form-step-label reveal">Phase 02</span>
+          <h2 class="form-title word-reveal"><em>Define the Work</em></h2>
           <p class="form-subtitle reveal">
-            Technical classification and conceptual anchoring. All fields
-            are sealed into the district ledger upon verification.
+            Technical classification and conceptual anchoring. Every field
+            is sealed into the district ledger upon verification.
           </p>
         </div>
 
@@ -169,22 +169,44 @@
     </section>
 
     <!-- ============================================
-         STEP 03: VERIFICATION
+         PHASE 03: SEAL THE RECORD
     ============================================= -->
     <section v-show="currentStep === 2" ref="verifySection" class="submit-verify section section-dark">
       <div class="section-default">
         <div class="form-header">
-          <span class="form-step-label reveal">03. Verification</span>
+          <span class="form-step-label reveal">Phase 03</span>
           <h2 class="form-title word-reveal"><em>Seal the Record</em></h2>
           <p class="form-subtitle reveal">
-            Review your submission before it enters the archive.
+            Select your commitment level and review the submission.
             Once sealed, the metadata becomes permanent.
           </p>
         </div>
 
+        <!-- Commitment tier selection -->
+        <div class="tier-selection">
+          <div
+            v-for="tier in commitmentTiers"
+            :key="tier.slug"
+            class="tier-card vellum-card reveal"
+            :class="{ 'tier-card--selected': form.tier === tier.slug }"
+            @click="form.tier = tier.slug"
+          >
+            <div class="tier-card-header">
+              <span class="material-symbols-outlined tier-card-icon">{{ tier.icon }}</span>
+              <span v-if="tier.recommended" class="tier-card-badge">Recommended</span>
+            </div>
+            <h3 class="tier-card-title"><em>{{ tier.name }}</em></h3>
+            <p class="tier-card-desc">{{ tier.description }}</p>
+            <button class="tier-card-action" :class="{ 'tier-card-action--active': form.tier === tier.slug }">
+              {{ form.tier === tier.slug ? 'Selected' : 'Select' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Verification summary -->
         <div class="verify-summary">
           <div class="verify-row reveal">
-            <span class="verify-label">Specimen</span>
+            <span class="verify-label">Work</span>
             <span class="verify-value">{{ form.title || 'Untitled' }}</span>
           </div>
           <div class="verify-row reveal">
@@ -203,6 +225,10 @@
             <span class="verify-label">District</span>
             <span class="verify-value">{{ form.district || '---' }}</span>
           </div>
+          <div class="verify-row reveal">
+            <span class="verify-label">Tier</span>
+            <span class="verify-value">{{ selectedTierName }}</span>
+          </div>
           <div v-if="uploadedFile" class="verify-row reveal">
             <span class="verify-label">File</span>
             <span class="verify-value">{{ uploadedFile.name }} ({{ formatFileSize(uploadedFile.size) }})</span>
@@ -215,11 +241,11 @@
         </div>
 
         <div class="form-actions reveal">
-          <button class="form-btn-primary" @click="submitWork">
+          <button class="form-btn-primary" :disabled="!form.tier" @click="submitWork">
             <span class="material-symbols-outlined form-btn-icon">lock</span>
             Seal &amp; Submit
           </button>
-          <button class="form-btn-ghost" @click="prevStep">&larr; Back to Metadata</button>
+          <button class="form-btn-ghost" @click="prevStep">&larr; Back</button>
         </div>
       </div>
     </section>
@@ -284,9 +310,9 @@ useWordReveal(verifySection, '.word-reveal')
 const currentStep = ref(0)
 
 const steps = [
-  { label: 'Upload' },
-  { label: 'Metadata' },
-  { label: 'Verification' },
+  { label: 'Offering' },
+  { label: 'Classification' },
+  { label: 'Seal' },
 ]
 
 function nextStep() {
@@ -341,9 +367,46 @@ const form = reactive({
   tooling: '',
   intent: '',
   district: '',
+  tier: '',
 })
 
 const mediums = ['Digital', 'Physical', 'Hybrid']
+
+/* -- Commitment tiers ------------------------------ */
+interface CommitmentTier {
+  slug: string
+  name: string
+  icon: string
+  description: string
+  recommended?: boolean
+}
+
+const commitmentTiers: CommitmentTier[] = [
+  {
+    slug: 'associate',
+    name: 'Associate',
+    icon: 'token',
+    description: 'Public archival entry. Your work is cataloged, searchable, and attributed to your practitioner profile.',
+  },
+  {
+    slug: 'verified',
+    name: 'Verified',
+    icon: 'verified',
+    description: 'Formal certification. Peer-reviewed placement with verification seal attached to the work.',
+    recommended: true,
+  },
+  {
+    slug: 'fellow',
+    name: 'Fellow',
+    icon: 'workspace_premium',
+    description: 'Permanent vault placement. Reserved for work that sets the standard for its district.',
+  },
+]
+
+const selectedTierName = computed(() => {
+  const tier = commitmentTiers.find(t => t.slug === form.tier)
+  return tier ? tier.name : '---'
+})
 
 function saveDraft() {
   // Placeholder for draft save functionality
@@ -798,6 +861,111 @@ function submitWork() {
 
 .radio-input:checked ~ .radio-text {
   color: var(--color-gold);
+}
+
+/* =============================================
+   COMMITMENT TIER SELECTION
+   ============================================= */
+.tier-selection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
+.tier-card {
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  cursor: pointer;
+  transition: border-color var(--duration-normal) ease,
+              transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tier-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(184, 150, 78, 0.25);
+}
+
+.tier-card--selected {
+  border-color: rgba(184, 150, 78, 0.5) !important;
+  background: rgba(184, 150, 78, 0.04);
+  box-shadow: 0 0 40px -10px rgba(184, 150, 78, 0.15);
+}
+
+.tier-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tier-card-icon {
+  font-size: 1.5rem;
+  color: var(--color-gold);
+  opacity: 0.6;
+  font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
+}
+
+.tier-card--selected .tier-card-icon {
+  opacity: 1;
+}
+
+.tier-card-badge {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid rgba(184, 150, 78, 0.3);
+}
+
+.tier-card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-light);
+  color: var(--color-dark-text);
+}
+.tier-card-title em { font-style: italic; }
+
+.tier-card-desc {
+  font-size: var(--text-small);
+  color: var(--color-dark-muted);
+  line-height: var(--leading-normal);
+  flex: 1;
+}
+
+.tier-card-action {
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid rgba(250, 250, 249, 0.1);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--duration-normal) ease;
+  align-self: flex-start;
+}
+
+.tier-card-action:hover {
+  border-color: rgba(184, 150, 78, 0.3);
+  color: var(--color-gold);
+}
+
+.tier-card-action--active {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-dark-bg);
+}
+
+@media (max-width: 768px) {
+  .tier-selection {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* =============================================

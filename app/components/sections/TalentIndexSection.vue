@@ -4,7 +4,7 @@
       <!-- Header -->
       <div class="ti-header reveal">
         <div class="ti-header-left">
-          <p class="ti-overline">Verification</p>
+          <p class="ti-overline"><span class="section-number">04.</span> Verification</p>
           <h2 class="ti-heading word-reveal">Talent Index</h2>
         </div>
         <p class="ti-subtitle">
@@ -81,6 +81,12 @@ const creators: Creator[] = [
 .talent-index {
   padding: var(--space-32) var(--content-padding);
   background-color: var(--color-background);
+}
+
+.section-number {
+  font-family: var(--font-mono);
+  color: var(--color-gold);
+  margin-right: 0.5em;
 }
 
 /* ─── Header ─── */

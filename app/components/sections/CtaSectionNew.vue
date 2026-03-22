@@ -16,7 +16,7 @@
       </h2>
 
       <p class="cta-new-subtitle reveal">
-        Twelve districts for creators who refuse to separate ambition from integrity
+        The digital square for creators who refuse to separate ambition from integrity
       </p>
 
       <NuxtLink to="/apply" class="cta-new-button reveal">

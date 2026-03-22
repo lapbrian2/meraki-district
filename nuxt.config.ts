@@ -3,7 +3,10 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
   sourcemap: false,
-  modules: ['@nuxtjs/sitemap', '@nuxt/content', '@nuxt/image'],
+  modules: ['@nuxtjs/sitemap', '@nuxt/content', '@nuxt/image', '@nuxtjs/supabase'],
+  supabase: {
+    redirect: false,
+  },
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL || 'https://meraki-district.vercel.app',
   },
@@ -15,6 +18,7 @@ export default defineNuxtConfig({
     '~/assets/css/variables.css',
     '~/assets/css/base.css',
     '~/assets/css/transitions.css',
+    '~/assets/css/interactions.css',
   ],
   build: {
     transpile: ['gsap'],
@@ -67,6 +71,6 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=swap' },
       ],
     },
-    pageTransition: { name: 'page', mode: 'out-in' },
+    /* pageTransition moved to <NuxtPage :transition> in app.vue for vellum overlay hooks */
   },
 })

@@ -3,7 +3,7 @@
     <div class="pathway-inner">
       <!-- Header -->
       <div class="pathway-header">
-        <p class="overline reveal">The Journey</p>
+        <p class="overline reveal"><span class="section-number">05.</span> The Journey</p>
         <h2 class="pathway-title word-reveal">The Creator Pathway</h2>
         <div class="pathway-rule" aria-hidden="true" />
         <p class="pathway-sub reveal">
@@ -72,6 +72,12 @@ const steps = [
 </script>
 
 <style scoped>
+.section-number {
+  font-family: var(--font-mono);
+  color: var(--color-gold);
+  margin-right: 0.5em;
+}
+
 .pathway {
   padding: var(--space-32) var(--content-padding);
   background: var(--color-dark-bg);
@@ -170,25 +176,12 @@ const steps = [
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-/* Seal badge classes */
+/* Seal badge overrides (base styles in variables.css) */
 .seal-base {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 9px;
-  padding: 4px 12px;
-  border-width: 1px;
   border-style: solid;
   margin-bottom: var(--space-4);
 }
 
-.seal-associate { border-color: rgba(161, 161, 170, 0.3); color: var(--color-dark-muted); background: transparent; }
-.seal-verified { border-color: rgba(184, 150, 78, 0.3); color: var(--color-gold); background: rgba(184, 150, 78, 0.05); }
-.seal-fellow { border-color: var(--color-gold); color: var(--color-gold); background: rgba(184, 150, 78, 0.12); }
 .seal-resident { border: 2px solid var(--color-gold); color: var(--color-gold); background: rgba(184, 150, 78, 0.08); }
 
 .pathway-number {

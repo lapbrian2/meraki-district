@@ -1,19 +1,30 @@
 <template>
   <section ref="section" class="manifesto section">
     <div class="section-narrow">
-      <p class="overline reveal">Our Conviction</p>
+      <p class="overline reveal"><span class="section-number">01.</span> Our Conviction</p>
       <h2 class="manifesto-text word-reveal">
         The future of creative practice demands districts worthy of both human craft and machine capability.
       </h2>
       <div class="manifesto-rule" aria-hidden="true" />
-      <p class="manifesto-body reveal">
-        Meraki Road is twelve districts. Each a world
-        unto itself, united by a shared belief: that the most meaningful work
-        comes from creators who have the infrastructure, the standards, and the space to pursue mastery.
-      </p>
-      <p class="manifesto-body reveal">
-        The creators who will define this era treat AI as a craft. They measure their work by depth. They understand that when everyone has access to the same tools, the differentiator is taste, judgment, and the willingness to go further.
-      </p>
+      <div class="manifesto-columns">
+        <div class="manifesto-col reveal">
+          <h3 class="manifesto-col-heading">The Problem</h3>
+          <p class="manifesto-body">
+            Creative platforms built for volume fail the creators who care about depth.
+            The infrastructure rewards speed over substance, reach over resonance.
+            The result: a generation of makers with world-class tools and nowhere worthy to use them.
+          </p>
+        </div>
+        <div class="manifesto-col reveal">
+          <h3 class="manifesto-col-heading">The Solution</h3>
+          <p class="manifesto-body">
+            Twelve districts, each a world unto itself, united by a shared belief:
+            the most meaningful work comes from creators who have the standards
+            and the space to pursue mastery. When everyone has access to the same tools,
+            the differentiator is taste, judgment, and the willingness to go further.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -100,6 +111,28 @@ onUnmounted(() => {
   transform-origin: left;
 }
 
+.section-number {
+  font-family: var(--font-mono);
+  color: var(--color-gold);
+  margin-right: 0.5em;
+}
+
+.manifesto-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+}
+
+.manifesto-col-heading {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-4);
+}
+
 .manifesto-body {
   font-size: var(--text-body);
   color: var(--color-text-muted);
@@ -129,6 +162,11 @@ onUnmounted(() => {
     font-size: clamp(1.375rem, 4vw, var(--text-h2));
     margin-top: var(--space-4);
     margin-bottom: var(--space-6);
+  }
+
+  .manifesto-columns {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
   }
 }
 </style>

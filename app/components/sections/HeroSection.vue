@@ -127,14 +127,28 @@ onUnmounted(() => {
   transform: scale(1.03);
 }
 
-/* Gradient overlay — dark at bottom/left for text, transparent at top/right to show image */
+/* Gradient overlay — dark at bottom/left for text, vignette with gold accent */
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to right, rgba(9,9,11,0.85) 0%, rgba(9,9,11,0.5) 50%, rgba(9,9,11,0.2) 100%),
-    linear-gradient(to top, rgba(9,9,11,0.9) 0%, transparent 40%);
+    radial-gradient(ellipse at 70% 30%, rgba(184,150,78,0.06) 0%, transparent 60%),
+    linear-gradient(to right, rgba(9,9,11,0.88) 0%, rgba(9,9,11,0.5) 50%, rgba(9,9,11,0.15) 100%),
+    linear-gradient(to top, rgba(9,9,11,0.92) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Bottom vignette for smoother section transition */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to top, var(--color-background), transparent);
   pointer-events: none;
   z-index: 1;
 }

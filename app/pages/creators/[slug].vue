@@ -380,6 +380,60 @@ const creators: Creator[] = [
     metricValue: '4,892',
     metricLabel: 'recorded interactions across eight exhibitions',
   },
+  {
+    slug: 'julian-vane',
+    name: 'Julian Vane',
+    discipline: 'Architectural Ethics & Digital Preservation',
+    seal: 'Fellow',
+    heroImage: '/images/districts/the-provenance.webp',
+    pullQuote: 'The artifact is not a static object. It is a temporal anchor — a fixed point around which the rest of the archive can orient itself.',
+    bio: 'Julian Vane has spent the better part of a decade working at the intersection of architectural practice and digital preservation. Where most archivists concern themselves with storage, Vane concerns himself with permanence — the difference between keeping a thing and keeping it alive. His methodology bridges the digital and the tactile, mimicking pre-digital archival processes to create records that resist the entropy inherent in contemporary file formats. Based in London and frequently embedded in the Provenance district, his work has been cited by preservation committees across three continents.',
+    district: 'District 05',
+    registryId: 'JV-05-0733-F',
+    portfolio: [
+      {
+        title: 'Monolith A-1',
+        image: '/images/districts/the-provenance.webp',
+        description: 'A single-block limestone casting that encodes twelve months of environmental data in surface relief. The stone itself becomes the archive — readable by touch, by light, by the passage of weather across its face.',
+        medium: 'Limestone Cast / Environmental Encoding',
+        year: '2025',
+      },
+      {
+        title: 'Fragment 09',
+        image: '/images/districts/fieldwork.webp',
+        description: 'Recovered and re-contextualized building fragments from a demolished Brutalist car park. Each fragment carries a layered documentation — original blueprints, demolition records, and Vane\'s own preservation annotations.',
+        medium: 'Concrete Fragment / Archival Overlay',
+        year: '2024',
+      },
+      {
+        title: 'Atmospheric Void',
+        image: '/images/districts/meridian.webp',
+        description: 'A climate-controlled chamber that preserves the exact atmospheric conditions of a space at a specific moment in time. Temperature, humidity, particulate density — the room itself is the record. Visitors enter a preserved instant.',
+        medium: 'Environmental Preservation Chamber',
+        year: '2024',
+      },
+      {
+        title: 'The Meridian Index',
+        image: '/images/districts/the-collective.webp',
+        description: 'A comprehensive cataloguing system that maps the provenance chains of 400 architectural artifacts. Each entry traces ownership, modification, degradation, and restoration through a custom notation Vane developed over three years.',
+        medium: 'Archival Notation System',
+        year: '2023',
+      },
+    ],
+    technicalSpecs: {
+      workflow: ['Geological Survey', 'Material Authentication', 'Environmental Calibration', 'Archival Encoding', 'Permanence Verification'],
+      specs: [
+        { label: 'Archival Depth', value: '12–22 layer encoding' },
+        { label: 'Precision Index', value: '94.2–99.9% fidelity' },
+        { label: 'Climate Tolerance', value: '±0.3°C / ±1.2% RH' },
+        { label: 'Substrate Lifespan', value: 'Estimated 800+ years' },
+      ],
+    },
+    curatorNote: 'Vane does not preserve things. He preserves the conditions under which things can be understood. That distinction is the entire practice — and it is rarer than it sounds.',
+    curatorName: 'Maren Aoki',
+    metricValue: '3,108',
+    metricLabel: 'recorded interactions across nine exhibitions',
+  },
 ]
 
 /* -- Route handling ----------------------------- */

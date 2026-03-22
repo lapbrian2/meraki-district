@@ -1,0 +1,261 @@
+/* ─── Advanced Interaction Patterns ───
+   Source: Stitch screen "Design Audit: Advanced Interaction Patterns"
+   All patterns include prefers-reduced-motion guards. */
+
+/* ─── 1. Curator's Loupe ───
+   Proximal magnification + tonal contrast shift on hover.
+   Apply to image containers — the child <img> gets the effect.
+   Simulates "leaning into a physical canvas." */
+.curator-loupe {
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.curator-loupe img,
+.curator-loupe video {
+  transition:
+    transform 600ms cubic-bezier(0.1, 0.9, 0.2, 1),
+    filter 600ms cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+.curator-loupe:hover img,
+.curator-loupe:hover video {
+  transform: scale(1.12);
+  filter: contrast(1.15) brightness(1.05);
+}
+
+/* ─── 2. Curator Hover ───
+   Subtle brightness lift with smooth easing.
+   Apply to any interactive element for a warm hover glow. */
+.curator-hover {
+  transition:
+    filter 400ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    color 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.curator-hover:hover {
+  filter: brightness(1.2);
+}
+
+/* ─── 3. Glass Panel ───
+   Frosted glass surface — heavier than vellum-card.
+   For modal overlays, feature panels, floating UI. */
+.glass-panel {
+  background: rgba(53, 52, 55, 0.1);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(184, 150, 78, 0.08);
+}
+
+/* Dark section variant */
+.dark-section .glass-panel,
+[data-theme="dark"] .glass-panel {
+  background: rgba(53, 52, 55, 0.15);
+  border-color: rgba(184, 150, 78, 0.12);
+}
+
+/* ─── 4. Vignette Overlay ───
+   Radial gradient darkening toward edges.
+   Apply to hero sections, full-bleed image containers.
+   pointer-events: none so it doesn't block interactions. */
+.vignette-overlay {
+  position: relative;
+}
+
+.vignette-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    transparent 20%,
+    rgba(9, 9, 11, 0.6) 80%,
+    rgba(9, 9, 11, 0.85) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Lighter variant for content sections */
+.vignette-overlay--subtle::after {
+  background: radial-gradient(
+    circle at 50% 50%,
+    transparent 40%,
+    rgba(9, 9, 11, 0.3) 100%
+  );
+}
+
+/* ─── 5. Atmospheric Depth Layers ───
+   Surface elevation tokens for layered dark UI.
+   Use on nested containers to create visual depth hierarchy. */
+.depth-void {
+  background-color: #131315;
+}
+
+.depth-ghost {
+  background-color: #201F22;
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.4);
+}
+
+.depth-core {
+  background-color: #2A2A2C;
+}
+
+/* ─── 6. Velocity Typography ───
+   CSS setup for GSAP-driven scroll-skew text.
+   The transform is applied by useVelocityText composable.
+   This class just sets up will-change and transform-origin. */
+.text-velocity {
+  will-change: transform;
+  transform-origin: left center;
+}
+
+/* ─── 7. Gold Glow Focus ───
+   Accessible focus ring with brand gold for keyboard navigation.
+   Replaces default browser outline on interactive elements. */
+.gold-focus:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+/* ─── 8. Ink Stamp Press ───
+   Click/active state that simulates a physical stamp press.
+   Brief scale-down + shadow collapse on press. */
+.ink-stamp-press {
+  transition: transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.ink-stamp-press:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── 9. Border Reveal ───
+   Gold border animates in from left on hover.
+   For cards, panels, list items. */
+.border-reveal {
+  position: relative;
+}
+
+.border-reveal::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-gold);
+  transition: width 600ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.border-reveal:hover::before {
+  width: 100%;
+}
+
+/* Left edge variant — vertical line reveals downward */
+.border-reveal--left::before {
+  width: 2px;
+  height: 0;
+  bottom: auto;
+  top: 0;
+  transition: height 600ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.border-reveal--left:hover::before {
+  height: 100%;
+  width: 2px;
+}
+
+/* ─── 10. Archival Sepia Tint ───
+   Warm sepia wash that lifts on hover — for historical/legacy content. */
+.archival-sepia {
+  filter: sepia(30%) brightness(0.95) contrast(1.05);
+  transition: filter 800ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.archival-sepia:hover {
+  filter: sepia(0%) brightness(1) contrast(1);
+}
+
+/* ─── 11. Scroll Fade In ───
+   CSS-only intersection observer fallback.
+   Use with useScrollReveal composable for JS-powered version.
+   Elements start invisible and slide up when .is-visible is toggled. */
+.scroll-fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 800ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 800ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.scroll-fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delay utilities — use with scroll-fade-in */
+.stagger-1 { transition-delay: 100ms; }
+.stagger-2 { transition-delay: 200ms; }
+.stagger-3 { transition-delay: 300ms; }
+.stagger-4 { transition-delay: 400ms; }
+.stagger-5 { transition-delay: 500ms; }
+
+/* ─── Reduced Motion Guards ─── */
+@media (prefers-reduced-motion: reduce) {
+  .curator-loupe img,
+  .curator-loupe video {
+    transition: none;
+  }
+  .curator-loupe:hover img,
+  .curator-loupe:hover video {
+    transform: none;
+    /* Keep tonal shift — it's not motion */
+    filter: contrast(1.15) brightness(1.05);
+  }
+
+  .curator-hover {
+    transition: none;
+  }
+
+  .ink-stamp-press {
+    transition: none;
+  }
+  .ink-stamp-press:active {
+    transform: none;
+  }
+
+  .border-reveal::before,
+  .border-reveal--left::before {
+    transition: none;
+  }
+  .border-reveal:hover::before {
+    width: 100%;
+  }
+  .border-reveal--left:hover::before {
+    height: 100%;
+  }
+
+  .archival-sepia {
+    transition: none;
+  }
+
+  .scroll-fade-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .text-velocity {
+    will-change: auto;
+  }
+
+  .stagger-1,
+  .stagger-2,
+  .stagger-3,
+  .stagger-4,
+  .stagger-5 {
+    transition-delay: 0ms;
+  }
+}

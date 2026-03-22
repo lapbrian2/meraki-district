@@ -1,13 +1,14 @@
 <template>
   <div>
     <HeroSection />
+    <DefinitionSection />
     <ManifestoSection />
     <SectionDivider />
 
     <!-- The Map Video -->
     <section ref="videoSection" class="map-video-section section-dark">
       <div class="map-video-header">
-        <p class="overline reveal">The Journey</p>
+        <p class="overline reveal"><span class="section-number">03.</span> The Journey</p>
         <h2 class="word-reveal"><em>The Creator Pathway</em></h2>
       </div>
       <div class="map-video-wrap reveal">
@@ -81,6 +82,8 @@
     </section>
 
     <MarqueeStrip />
+    <ShowcaseSection />
+    <TalentIndexSection />
     <CreatorPathwaySection />
     <PhilosophySection />
     <FeaturedSection />
@@ -227,6 +230,12 @@ const featuredArtists: Artist[] = [
 </script>
 
 <style scoped>
+.section-number {
+  font-family: var(--font-mono);
+  color: var(--color-gold);
+  margin-right: 0.5em;
+}
+
 /* Map Video Section */
 .map-video-section {
   padding: 0;

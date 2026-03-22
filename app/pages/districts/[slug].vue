@@ -544,6 +544,94 @@
       </div>
     </section>
 
+    <!-- Monograph Content — 2-column editorial + image stack -->
+    <section ref="sealMonographSection" class="seal-monograph section-dark">
+      <div class="section-default seal-monograph-grid">
+        <div class="seal-monograph-text">
+          <span class="seal-monograph-overline reveal">The Standard</span>
+          <h2 class="seal-monograph-heading word-reveal"><em>Silent Authority</em></h2>
+          <p class="reveal">
+            Most credentialing systems reward volume. Publish more, attend more, accumulate more.
+            The Seal inverts this. It measures what remains when the noise is stripped away&mdash;the
+            distilled body of work that a practitioner stands behind without qualification.
+          </p>
+          <p class="reveal">
+            A credential from The Seal carries weight because the process that issues it refuses
+            to compromise. Three independent reviewers. Blind evaluation. No legacy admits.
+            No purchased fast-tracks. The only currency accepted is demonstrated practice.
+          </p>
+
+          <!-- Specimen detail card -->
+          <div class="seal-specimen reveal">
+            <h3 class="seal-specimen-title">Specimen Properties</h3>
+            <div class="seal-specimen-row">
+              <span class="seal-specimen-label">Review Cycle</span>
+              <span class="seal-specimen-value">Rolling &middot; Quarterly Panel</span>
+            </div>
+            <div class="seal-specimen-row">
+              <span class="seal-specimen-label">Evaluation</span>
+              <span class="seal-specimen-value">Blind Peer Review (3 Reviewers)</span>
+            </div>
+            <div class="seal-specimen-row">
+              <span class="seal-specimen-label">Minimum Body</span>
+              <span class="seal-specimen-value">5 Works &middot; 12 Months Active</span>
+            </div>
+            <div class="seal-specimen-row">
+              <span class="seal-specimen-label">Verification</span>
+              <span class="seal-specimen-value">On-chain &middot; Permanent Record</span>
+            </div>
+            <div class="seal-specimen-row">
+              <span class="seal-specimen-label">Revocation</span>
+              <span class="seal-specimen-value">Panel Vote &middot; Evidence Required</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="seal-monograph-images">
+          <div class="seal-monograph-img-wrap reveal">
+            <NuxtImg
+              src="/images/districts/seal-archive-01.webp"
+              alt="Archival review process"
+              class="seal-monograph-img archival-image"
+              loading="lazy"
+              decoding="async"
+              width="560"
+              height="420"
+            />
+            <div class="seal-monograph-img-vignette" />
+          </div>
+          <div class="seal-monograph-img-wrap reveal">
+            <NuxtImg
+              src="/images/districts/seal-archive-02.webp"
+              alt="Credential verification"
+              class="seal-monograph-img archival-image"
+              loading="lazy"
+              decoding="async"
+              width="560"
+              height="340"
+            />
+            <div class="seal-monograph-img-vignette" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Archival Sequence — Horizontal scroll cards -->
+    <section ref="sealArchivalSection" class="seal-archival section">
+      <div class="section-default">
+        <p class="overline reveal">Archival Sequence</p>
+        <h2 class="seal-archival-heading reveal">The record of standards set</h2>
+        <div class="seal-archival-track">
+          <div v-for="(entry, i) in archivalEntries" :key="entry.label" class="seal-archival-card vellum-card reveal">
+            <span class="seal-archival-index">{{ String(i + 1).padStart(2, '0') }}</span>
+            <h3 class="seal-archival-card-title"><em>{{ entry.label }}</em></h3>
+            <p class="seal-archival-card-body">{{ entry.description }}</p>
+            <span class="seal-archival-card-meta">{{ entry.meta }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- The Four Tiers — Visual progression -->
     <section ref="sealTiersSection" class="seal-tiers section-dark">
       <div class="section-default">
@@ -931,6 +1019,8 @@ const sealUnlocksSection = ref<HTMLElement | null>(null)
 const sealFellowsSection = ref<HTMLElement | null>(null)
 const sealPhilosophySection = ref<HTMLElement | null>(null)
 const sealCtaSection = ref<HTMLElement | null>(null)
+const sealMonographSection = ref<HTMLElement | null>(null)
+const sealArchivalSection = ref<HTMLElement | null>(null)
 
 // Composable-driven animations (run once on mount)
 useGsapScrollReveal(bodySection, '.reveal', { stagger: 0.1 })
@@ -968,8 +1058,11 @@ useGsapScrollReveal(sealUnlocksSection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(sealFellowsSection, '.reveal', { stagger: 0.12 })
 useGsapScrollReveal(sealPhilosophySection, '.reveal', { stagger: 0.12 })
 useGsapScrollReveal(sealCtaSection, '.reveal', { stagger: 0.1 })
+useGsapScrollReveal(sealMonographSection, '.reveal', { stagger: 0.1 })
+useGsapScrollReveal(sealArchivalSection, '.reveal', { stagger: 0.12 })
 useTilt(sealTiersSection, '.seal-tier-card', { maxRotation: 2 })
 useTilt(sealFellowsSection, '.seal-fellow-card', { maxRotation: 1.5 })
+useTilt(sealArchivalSection, '.seal-archival-card', { maxRotation: 1.5 })
 
 /* ── The Seal — Tier data ── */
 interface SealTier {
@@ -1115,6 +1208,36 @@ const currentFellows: SealFellow[] = [
     initials: 'K.O.',
     discipline: 'Volumetric Sculpture & Preservation',
     bio: 'Sculptor working in photogrammetry and volumetric capture. His archives preserve disappearing cultural artifacts as living 3D records.',
+  },
+]
+
+/* ── The Seal — Archival sequence data ── */
+interface ArchivalEntry {
+  label: string
+  description: string
+  meta: string
+}
+
+const archivalEntries: ArchivalEntry[] = [
+  {
+    label: 'Founding Protocol',
+    description: 'The original credentialing framework. Written to ensure no credential could exist without a body of work behind it.',
+    meta: 'Established at inception',
+  },
+  {
+    label: 'Blind Review Standard',
+    description: 'The introduction of identity-stripped evaluation. Reviewers see work, not names, not follower counts, not gallery affiliations.',
+    meta: 'Active across all tiers',
+  },
+  {
+    label: 'Cross-District Recognition',
+    description: 'Credentials earned in The Seal carry across all districts. A Fellow in one domain is recognised in all.',
+    meta: 'Universal verification',
+  },
+  {
+    label: 'Revocation Framework',
+    description: 'Credentials can be revoked. Not easily, not lightly, but the mechanism exists because accountability requires it.',
+    meta: 'Panel vote required',
   },
 ]
 
@@ -1439,6 +1562,39 @@ function initAnimations() {
         scrollTrigger: {
           trigger: '.seal-philosophy-rule',
           start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+      // Monograph heading word-reveal
+      const monographHeading = root.value?.querySelector('.seal-monograph-heading')
+      if (monographHeading) {
+        quoteWordReveal(monographHeading as HTMLElement, '.seal-monograph')
+      }
+
+      // Specimen card slide in
+      gsap.from('.seal-specimen', {
+        y: 30,
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.seal-specimen',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+      // Archival cards stagger
+      gsap.from('.seal-archival-card', {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.seal-archival-track',
+          start: 'top 80%',
           toggleActions: 'play none none none',
         },
       })
@@ -3602,6 +3758,192 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
   .seal-philosophy-grid { grid-template-columns: 1fr; gap: var(--space-8); }
+}
+
+/* Seal Monograph — 2-column editorial + image stack */
+.seal-monograph {
+  padding: var(--space-24) var(--content-padding);
+}
+
+.seal-monograph-grid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.seal-monograph-overline {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-accent, var(--color-gold));
+  opacity: 0.7;
+  display: block;
+  margin-bottom: var(--space-4);
+}
+
+.seal-monograph-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: var(--weight-light);
+  color: var(--color-dark-text);
+  margin-bottom: var(--space-8);
+  line-height: var(--leading-tight);
+}
+.seal-monograph-heading em { font-style: italic; }
+
+.seal-monograph-text p {
+  font-size: var(--text-body);
+  color: var(--color-dark-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-6);
+}
+
+/* Specimen detail card */
+.seal-specimen {
+  margin-top: var(--space-8);
+  border: 1px solid rgba(184, 150, 78, 0.15);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.seal-specimen-title {
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-accent, var(--color-gold));
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid rgba(184, 150, 78, 0.1);
+}
+
+.seal-specimen-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-6);
+  border-bottom: 1px solid rgba(250, 250, 249, 0.04);
+}
+.seal-specimen-row:last-child { border-bottom: none; }
+
+.seal-specimen-label {
+  font-size: var(--text-caption);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+  flex-shrink: 0;
+}
+
+.seal-specimen-value {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-dark-secondary);
+  text-align: right;
+}
+
+/* Monograph image stack */
+.seal-monograph-images {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.seal-monograph-img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.seal-monograph-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.seal-monograph-img-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .seal-monograph-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  .seal-monograph-images {
+    order: -1;
+  }
+}
+
+/* Seal Archival Sequence */
+.seal-archival {
+  padding: var(--space-24) var(--content-padding);
+  background: var(--color-background);
+}
+
+.seal-archival-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-light);
+  font-style: italic;
+  color: var(--color-ink);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-12);
+}
+
+.seal-archival-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+.seal-archival-card {
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.seal-archival-index {
+  font-family: var(--font-mono);
+  font-size: var(--text-h2);
+  font-weight: 200;
+  color: var(--color-accent, var(--color-gold));
+  opacity: 0.25;
+}
+
+.seal-archival-card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  font-weight: var(--weight-light);
+  color: var(--color-ink);
+}
+.seal-archival-card-title em { font-style: italic; }
+
+.seal-archival-card-body {
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
+}
+
+.seal-archival-card-meta {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  opacity: 0.6;
+  margin-top: auto;
+}
+
+@media (max-width: 1024px) {
+  .seal-archival-track { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .seal-archival-track { grid-template-columns: 1fr; }
 }
 
 /* Seal Tiers */

@@ -75,108 +75,49 @@
     </section>
 
     <!-- ============================================
-         BENTO TALENT GRID — Mixed col-span cards
+         TALENT INDEX — Vertical profile cards
     ============================================= -->
     <section ref="gridSection" class="talent-grid section">
       <div class="section-wide">
-        <div class="bento-grid">
-          <!-- Card 1: compact (col-span-4) -->
-          <article class="bento-card bento-compact vellum-card reveal">
-            <div class="bento-photo-wrap grayscale-hover">
-              <div class="bento-photo-placeholder">
-                <span class="material-symbols-outlined bento-photo-icon">person</span>
+        <div class="talent-index">
+          <article
+            v-for="(talent, idx) in talentIndex"
+            :key="talent.name"
+            class="talent-entry reveal"
+            :class="{ 'talent-entry--featured': idx === 0 }"
+          >
+            <div class="talent-avatar-wrap">
+              <div class="talent-avatar" :style="{ background: talent.gradient }">
+                <span class="material-symbols-outlined talent-avatar-icon">person</span>
               </div>
+              <span class="seal-base" :class="talent.sealClass">{{ talent.seal }}</span>
             </div>
-            <div class="bento-info">
-              <h3 class="bento-name">Sable Chen</h3>
-              <p class="bento-discipline">Visual Art &amp; AI</p>
-              <span class="seal-base seal-legacy">Legacy</span>
-              <div class="bento-tags">
-                <span class="bento-tag">Diffusion</span>
-                <span class="bento-tag">Installation</span>
-                <span class="bento-tag">Mixed Media</span>
+            <div class="talent-details">
+              <h3 class="talent-name"><em>{{ talent.name }}</em></h3>
+              <p class="talent-discipline">{{ talent.discipline }}</p>
+              <div class="talent-tags">
+                <span v-for="tag in talent.tags" :key="tag" class="talent-tag">{{ tag }}</span>
               </div>
-              <NuxtLink to="#" class="bento-link">View Portfolio &rarr;</NuxtLink>
+              <p v-if="talent.quote" class="talent-quote">
+                &ldquo;{{ talent.quote }}&rdquo;
+              </p>
+            </div>
+            <div class="talent-actions">
+              <NuxtLink to="#" class="talent-portfolio-link">View Portfolio &rarr;</NuxtLink>
+              <button v-if="talent.consultable" class="talent-consult-btn">Consult for Project</button>
             </div>
           </article>
+        </div>
 
-          <!-- Card 2: wide (col-span-8) -->
-          <article class="bento-card bento-wide vellum-card reveal">
-            <div class="bento-wide-image grayscale-hover">
-              <NuxtImg
-                src="/images/districts/the-frame.webp"
-                alt="In&eacute;s Moreau studio"
-                class="bento-wide-img"
-                loading="lazy"
-                width="600"
-                height="400"
-              />
-            </div>
-            <div class="bento-wide-content">
-              <h3 class="bento-name">In&eacute;s Moreau</h3>
-              <p class="bento-discipline">Data Sculpture</p>
-              <span class="seal-base seal-fellow">Fellow</span>
-              <blockquote class="bento-quote">
-                &ldquo;I shape information into physical encounters. The data is the medium, not the message.&rdquo;
-              </blockquote>
-              <div class="bento-tags">
-                <span class="bento-tag">Data Viz</span>
-                <span class="bento-tag">Physical Computing</span>
-                <span class="bento-tag">Generative</span>
-              </div>
-              <button class="bento-consult-btn">Consult for Project</button>
-            </div>
-          </article>
-
-          <!-- Card 3: compact (col-span-4) -->
-          <article class="bento-card bento-compact vellum-card reveal">
-            <div class="bento-photo-wrap grayscale-hover">
-              <div class="bento-photo-placeholder">
-                <span class="material-symbols-outlined bento-photo-icon">person</span>
-              </div>
-            </div>
-            <div class="bento-info">
-              <h3 class="bento-name">Tom&aacute;s Vega</h3>
-              <p class="bento-discipline">Architecture &amp; Computation</p>
-              <span class="seal-base seal-verified">Verified</span>
-              <div class="bento-tags">
-                <span class="bento-tag">Parametric</span>
-                <span class="bento-tag">Spatial AI</span>
-              </div>
-              <NuxtLink to="#" class="bento-link">View Portfolio &rarr;</NuxtLink>
-            </div>
-          </article>
-
-          <!-- Card 4: compact (col-span-4) -->
-          <article class="bento-card bento-compact vellum-card reveal">
-            <div class="bento-photo-wrap grayscale-hover">
-              <div class="bento-photo-placeholder">
-                <span class="material-symbols-outlined bento-photo-icon">person</span>
-              </div>
-            </div>
-            <div class="bento-info">
-              <h3 class="bento-name">Zuri Nakamura</h3>
-              <p class="bento-discipline">Generative Systems</p>
-              <span class="seal-base seal-verified">Verified</span>
-              <div class="bento-tags">
-                <span class="bento-tag">Real-time</span>
-                <span class="bento-tag">WebGL</span>
-                <span class="bento-tag">Audio-reactive</span>
-              </div>
-              <NuxtLink to="#" class="bento-link">View Portfolio &rarr;</NuxtLink>
-            </div>
-          </article>
-
-          <!-- Card 5: CTA card (col-span-4) -->
-          <article class="bento-card bento-cta vellum-card reveal">
-            <span class="material-symbols-outlined bento-cta-icon">groups</span>
-            <h3 class="bento-cta-title">Access the Full Index</h3>
-            <p class="bento-cta-body">
-              Over forty verified practitioners across twelve districts.
-              Browse the full talent registry.
-            </p>
-            <NuxtLink to="/apply" class="bento-cta-btn">Express Interest &rarr;</NuxtLink>
-          </article>
+        <!-- CTA card at bottom of index -->
+        <div class="talent-cta-card vellum-card reveal">
+          <span class="material-symbols-outlined talent-cta-icon">groups</span>
+          <h3 class="talent-cta-title">Access the Full Index</h3>
+          <p class="talent-cta-body">
+            Over forty verified practitioners across twelve districts.
+            Browse the full talent registry.
+          </p>
+          <NuxtLink to="/apply" class="talent-cta-btn">Express Interest &rarr;</NuxtLink>
         </div>
       </div>
     </section>
@@ -184,12 +125,12 @@
     <SectionDivider />
 
     <!-- ============================================
-         CASE STUDY — Asymmetric 2-col
+         CASE STUDY — Numbered case with asymmetric 2-col
     ============================================= -->
     <section ref="caseSection" class="case-study section section-dark">
       <div class="section-wide">
         <div class="case-header">
-          <p class="overline reveal">Meraki Studio</p>
+          <p class="overline reveal">Case Study &middot; 042</p>
           <h2 class="case-title word-reveal"><em>From the Districts</em></h2>
         </div>
 
@@ -213,6 +154,10 @@
                 <span class="case-metric-label">Impact</span>
                 <span class="case-metric-value">12,400 visitors</span>
               </div>
+              <div class="case-metric">
+                <span class="case-metric-label">Districts</span>
+                <span class="case-metric-value">3 involved</span>
+              </div>
             </div>
             <NuxtLink to="#" class="case-cta reveal">Read the Case Study &rarr;</NuxtLink>
           </div>
@@ -233,9 +178,60 @@
     <SectionDivider />
 
     <!-- ============================================
+         OPEN POSITIONS — Commissions + Placements
+    ============================================= -->
+    <section ref="positionsSection" class="positions section">
+      <div class="section-wide">
+        <div class="positions-split">
+          <!-- Commissions column -->
+          <div class="positions-column">
+            <p class="overline reveal">Open Commissions</p>
+            <div class="positions-list">
+              <article
+                v-for="comm in commissions"
+                :key="comm.title"
+                class="position-row reveal"
+              >
+                <div class="position-info">
+                  <h3 class="position-title">{{ comm.title }}</h3>
+                  <p class="position-org">{{ comm.company }} &middot; {{ comm.location }}</p>
+                </div>
+                <NuxtLink to="#" class="position-arrow" aria-label="View commission">
+                  &rarr;
+                </NuxtLink>
+              </article>
+            </div>
+          </div>
+
+          <!-- Placements column -->
+          <div class="positions-column">
+            <p class="overline reveal">Full-Time Placements</p>
+            <div class="positions-list">
+              <article
+                v-for="place in placements"
+                :key="place.title"
+                class="position-row reveal"
+              >
+                <div class="position-info">
+                  <h3 class="position-title">{{ place.title }}</h3>
+                  <p class="position-org">{{ place.company }} &middot; {{ place.location }}</p>
+                </div>
+                <NuxtLink to="#" class="position-arrow" aria-label="View placement">
+                  &rarr;
+                </NuxtLink>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
          PARTNERSHIP OPPORTUNITIES — 1/3 + 2/3
     ============================================= -->
-    <section ref="partnersSection" class="partnerships section">
+    <section ref="partnersSection" class="partnerships section section-dark">
       <div class="section-wide">
         <div class="partners-grid">
           <div class="partners-sidebar">
@@ -278,6 +274,28 @@
               <p class="partner-desc">{{ opp.description }}</p>
               <NuxtLink to="#" class="partner-link">Inquire &rarr;</NuxtLink>
             </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         NETWORK EXPANSION CTA — Dual column
+    ============================================= -->
+    <section ref="networkSection" class="network-cta section">
+      <div class="section-default">
+        <div class="network-grid">
+          <div class="network-left">
+            <h2 class="network-title word-reveal"><em>Become an Industry Partner</em></h2>
+            <p class="network-desc reveal">
+              Connect your organization with verified creative talent across
+              twelve districts. The Bridge facilitates commissions, residencies,
+              fellowships, and consulting engagements.
+            </p>
+          </div>
+          <div class="network-right reveal">
+            <NuxtLink to="/apply" class="network-link-primary">Connect With Talent &rarr;</NuxtLink>
+            <NuxtLink to="#" class="network-link-secondary">Request Media Kit &rarr;</NuxtLink>
           </div>
         </div>
       </div>
@@ -327,7 +345,7 @@ useSeoMeta({
 })
 
 /* -- Filter state (UI only) --------------------- */
-const filterPills = ['All', 'Visual Art', 'Generative Design', 'Sound & Music', 'Motion & Film', 'Strategy']
+const filterPills = ['All', 'Visual Art', 'Generative Design', 'Sound & Music', 'Motion & Film', 'Architecture', 'Strategy']
 const activePill = ref('All')
 
 /* -- Hero --------------------------------------- */
@@ -349,10 +367,19 @@ const caseSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(caseSection, '.reveal', { stagger: 0.08 })
 useWordReveal(caseSection, '.word-reveal')
 
+/* -- Positions ---------------------------------- */
+const positionsSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(positionsSection, '.reveal', { stagger: 0.08 })
+
 /* -- Partnerships ------------------------------- */
 const partnersSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(partnersSection, '.reveal', { stagger: 0.08 })
 useWordReveal(partnersSection, '.word-reveal')
+
+/* -- Network ------------------------------------ */
+const networkSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(networkSection, '.reveal')
+useWordReveal(networkSection, '.word-reveal')
 
 /* -- CTA ---------------------------------------- */
 const ctaSection = ref<HTMLElement | null>(null)
@@ -384,6 +411,22 @@ onMounted(async () => {
         },
       })
     }
+
+    /* Position row lines draw-in */
+    const positionRows = positionsSection.value?.querySelectorAll('.position-row')
+    positionRows?.forEach((row) => {
+      gsap.from(row, {
+        opacity: 0,
+        x: -12,
+        duration: 0.5,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: row,
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+        },
+      })
+    })
   })
 })
 
@@ -392,6 +435,79 @@ onUnmounted(() => {
 })
 
 /* -- Data --------------------------------------- */
+interface TalentEntry {
+  name: string
+  discipline: string
+  tags: string[]
+  seal: string
+  sealClass: string
+  gradient: string
+  quote?: string
+  consultable?: boolean
+}
+
+const talentIndex: TalentEntry[] = [
+  {
+    name: 'Sable Chen',
+    discipline: 'Visual Art & AI',
+    tags: ['Diffusion', 'Installation', 'Mixed Media'],
+    seal: 'Legacy',
+    sealClass: 'seal-legacy',
+    gradient: 'linear-gradient(135deg, #27272A 0%, #3F3F46 50%, #18181B 100%)',
+    quote: 'The medium remembers what the hand forgets.',
+    consultable: true,
+  },
+  {
+    name: 'Ines Moreau',
+    discipline: 'Data Sculpture',
+    tags: ['Data Viz', 'Physical Computing', 'Generative'],
+    seal: 'Fellow',
+    sealClass: 'seal-fellow',
+    gradient: 'linear-gradient(135deg, #18181B 0%, #27272A 50%, #09090B 100%)',
+    quote: 'I shape information into physical encounters. The data is the medium, not the message.',
+    consultable: true,
+  },
+  {
+    name: 'Tomas Vega',
+    discipline: 'Architecture & Computation',
+    tags: ['Parametric', 'Spatial AI'],
+    seal: 'Verified',
+    sealClass: 'seal-verified',
+    gradient: 'linear-gradient(135deg, #3F3F46 0%, #27272A 50%, #18181B 100%)',
+    consultable: false,
+  },
+  {
+    name: 'Zuri Nakamura',
+    discipline: 'Generative Systems',
+    tags: ['Real-time', 'WebGL', 'Audio-reactive'],
+    seal: 'Verified',
+    sealClass: 'seal-verified',
+    gradient: 'linear-gradient(135deg, #09090B 0%, #18181B 50%, #27272A 100%)',
+    consultable: false,
+  },
+  {
+    name: 'Maren Aoki',
+    discipline: 'Sound & Spatial Design',
+    tags: ['Bioacoustic', 'Immersive', 'Installation'],
+    seal: 'Fellow',
+    sealClass: 'seal-fellow',
+    gradient: 'linear-gradient(135deg, #27272A 0%, #09090B 50%, #3F3F46 100%)',
+    consultable: true,
+  },
+]
+
+const commissions = [
+  { title: 'Generative Identity System', company: 'Fjord Collective', location: 'Remote' },
+  { title: 'Bioacoustic Installation', company: 'Nordic Arts Council', location: 'Oslo' },
+  { title: 'Parametric Facade Study', company: 'Mori Studio', location: 'Tokyo' },
+]
+
+const placements = [
+  { title: 'Creative AI Strategist', company: 'Aether Studio', location: 'Berlin' },
+  { title: 'Lead Generative Designer', company: 'Lumen Institute', location: 'London' },
+  { title: 'Spatial Computing Fellow', company: 'Meraki Road', location: 'Distributed' },
+]
+
 interface Opportunity {
   type: string
   company: string
@@ -488,7 +604,6 @@ const opportunities: Opportunity[] = [
   text-transform: uppercase;
   color: var(--color-ink);
   padding: var(--space-4) var(--space-8);
-  background: linear-gradient(135deg, var(--color-gold), #D4AF61);
   background-image: none;
   background-color: var(--color-gold);
   transition: opacity var(--duration-normal) ease, transform var(--duration-normal) ease;
@@ -577,13 +692,6 @@ const opportunities: Opportunity[] = [
     margin-top: var(--space-4);
     max-width: none;
   }
-
-  .filter-pill {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
 }
 
 /* =============================================
@@ -658,83 +766,109 @@ const opportunities: Opportunity[] = [
   outline-offset: 2px;
 }
 
+@media (max-width: 768px) {
+  .filter-pill {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 /* =============================================
-   BENTO TALENT GRID
+   TALENT INDEX — Vertical profile entries
    ============================================= */
 .talent-grid {
   padding: 0 var(--content-padding) var(--space-16);
   background: var(--color-surface);
 }
 
-.bento-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: var(--space-6);
+.talent-index {
+  display: flex;
+  flex-direction: column;
   max-width: 1440px;
   margin: 0 auto;
 }
 
-/* Compact card — col-span-4 */
-.bento-compact {
-  grid-column: span 4;
+.talent-entry {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-8);
+  align-items: start;
+  padding: var(--space-8) 0;
+  border-bottom: 1px solid var(--rule-color);
+  transition: background-color var(--duration-normal) ease;
+}
+
+.talent-entry:first-child {
+  border-top: 1px solid var(--rule-color);
+}
+
+.talent-entry:hover {
+  background-color: rgba(184, 150, 78, 0.02);
+}
+
+.talent-entry--featured {
+  padding: var(--space-12) var(--space-8);
+  background: rgba(184, 150, 78, 0.03);
+  border: 1px solid rgba(184, 150, 78, 0.1);
+  margin-bottom: var(--space-2);
+}
+
+.talent-avatar-wrap {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--rule-color);
-  padding: var(--space-6);
-  background: transparent;
-  transition: border-color var(--duration-normal) ease,
-              background-color var(--duration-normal) ease;
+  align-items: center;
+  gap: var(--space-3);
 }
 
-.bento-compact:hover {
-  border-color: var(--color-gold);
-  background: rgba(184, 150, 78, 0.03);
-}
-
-.bento-photo-wrap {
-  margin-bottom: var(--space-4);
-}
-
-.bento-photo-placeholder {
-  width: 56px;
-  height: 56px;
-  background: var(--color-background);
-  border: 1px solid var(--rule-color);
+.talent-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 9999px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid var(--rule-color);
 }
 
-.bento-photo-icon {
+.talent-avatar-icon {
   font-size: 1.5rem;
   color: var(--color-text-muted);
   font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
 }
 
-.bento-name {
+.talent-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.talent-name {
   font-family: var(--font-display);
   font-size: var(--text-h3);
   font-weight: 300;
-  font-style: italic;
   color: var(--color-ink);
-  margin-bottom: var(--space-1);
 }
 
-.bento-discipline {
+.talent-name em {
+  font-style: italic;
+}
+
+.talent-discipline {
   font-size: var(--text-small);
   color: var(--color-text-muted);
-  margin-bottom: var(--space-3);
+  letter-spacing: var(--tracking-wide);
 }
 
-.bento-tags {
+.talent-tags {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  margin-top: var(--space-3);
-  margin-bottom: var(--space-4);
+  margin-top: var(--space-2);
 }
 
-.bento-tag {
+.talent-tag {
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: var(--tracking-wide);
@@ -744,70 +878,45 @@ const opportunities: Opportunity[] = [
   padding: 2px 8px;
 }
 
-.bento-link {
+.talent-quote {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-top: var(--space-3);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-gold);
+  max-width: 50ch;
+}
+
+.talent-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: flex-end;
+  padding-top: var(--space-1);
+}
+
+.talent-portfolio-link {
   font-size: var(--text-overline);
   font-weight: 500;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
   color: var(--color-gold);
-  margin-top: auto;
   background-image: none;
   transition: opacity var(--duration-normal) ease;
+  white-space: nowrap;
 }
 
-.bento-link:hover {
+.talent-portfolio-link:hover {
   opacity: 0.7;
 }
 
-/* Wide card — col-span-8 */
-.bento-wide {
-  grid-column: span 8;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border: 1px solid var(--rule-color);
-  overflow: hidden;
-  transition: border-color var(--duration-normal) ease;
-}
-
-.bento-wide:hover {
-  border-color: var(--color-gold);
-}
-
-.bento-wide-image {
-  overflow: hidden;
-}
-
-.bento-wide-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.bento-wide-content {
-  padding: var(--space-8);
-  display: flex;
-  flex-direction: column;
-}
-
-.bento-quote {
-  font-family: var(--font-display);
-  font-size: var(--text-body);
-  font-weight: 300;
-  font-style: italic;
-  line-height: var(--leading-relaxed);
-  color: var(--color-text-secondary);
-  margin-top: var(--space-4);
-  margin-bottom: var(--space-2);
-  padding-left: var(--space-4);
-  border-left: 2px solid var(--color-gold);
-}
-
-.bento-consult-btn {
-  width: 100%;
-  margin-top: auto;
-  padding: var(--space-3) var(--space-6);
-  font-size: var(--text-small);
+.talent-consult-btn {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-overline);
   font-weight: 500;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
@@ -818,34 +927,34 @@ const opportunities: Opportunity[] = [
   transition: border-color var(--duration-normal) ease,
               color var(--duration-normal) ease,
               background-color var(--duration-normal) ease;
+  white-space: nowrap;
 }
 
-.bento-consult-btn:hover {
+.talent-consult-btn:hover {
   border-color: var(--color-gold);
   color: var(--color-gold);
   background: rgba(184, 150, 78, 0.06);
 }
 
-/* CTA card — col-span-4, gold background */
-.bento-cta {
-  grid-column: span 4;
+/* Talent CTA card */
+.talent-cta-card {
+  margin-top: var(--space-12);
+  padding: var(--space-12);
+  background: var(--color-gold);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: var(--space-8);
-  background: var(--color-gold);
-  color: var(--color-ink);
   border: none;
 }
 
-.bento-cta-icon {
+.talent-cta-icon {
   font-size: 2rem;
   color: var(--color-background);
   margin-bottom: var(--space-6);
   font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
 }
 
-.bento-cta-title {
+.talent-cta-title {
   font-family: var(--font-display);
   font-size: var(--text-h3);
   font-weight: 300;
@@ -854,14 +963,15 @@ const opportunities: Opportunity[] = [
   margin-bottom: var(--space-4);
 }
 
-.bento-cta-body {
+.talent-cta-body {
   font-size: var(--text-small);
   color: rgba(9, 9, 11, 0.7);
   line-height: var(--leading-relaxed);
   margin-bottom: var(--space-6);
+  max-width: 50ch;
 }
 
-.bento-cta-btn {
+.talent-cta-btn {
   font-size: var(--text-overline);
   font-weight: 600;
   letter-spacing: var(--tracking-widest);
@@ -870,52 +980,43 @@ const opportunities: Opportunity[] = [
   border: 1px solid rgba(9, 9, 11, 0.2);
   padding: var(--space-3) var(--space-6);
   background: transparent;
-  margin-top: auto;
   background-image: none;
   transition: background-color var(--duration-normal) ease,
               border-color var(--duration-normal) ease;
 }
 
-.bento-cta-btn:hover {
+.talent-cta-btn:hover {
   background: rgba(9, 9, 11, 0.08);
   border-color: rgba(9, 9, 11, 0.4);
 }
 
-@media (max-width: 1024px) {
-  .bento-grid {
-    grid-template-columns: repeat(8, 1fr);
-  }
-
-  .bento-compact {
-    grid-column: span 4;
-  }
-
-  .bento-wide {
-    grid-column: span 8;
-  }
-
-  .bento-cta {
-    grid-column: span 4;
-  }
-}
-
 @media (max-width: 768px) {
-  .bento-grid {
+  .talent-entry {
     grid-template-columns: 1fr;
+    gap: var(--space-4);
   }
 
-  .bento-compact,
-  .bento-wide,
-  .bento-cta {
-    grid-column: span 1;
+  .talent-avatar-wrap {
+    flex-direction: row;
+    gap: var(--space-4);
   }
 
-  .bento-wide {
-    grid-template-columns: 1fr;
+  .talent-actions {
+    flex-direction: row;
+    align-items: center;
   }
 
-  .bento-wide-image {
-    aspect-ratio: 16 / 9;
+  .talent-portfolio-link,
+  .talent-consult-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .talent-cta-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 
@@ -1051,7 +1152,104 @@ const opportunities: Opportunity[] = [
   }
 
   .case-metrics {
-    gap: var(--space-8);
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  .case-cta {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* =============================================
+   OPEN POSITIONS — 2-col split
+   ============================================= */
+.positions {
+  padding: var(--space-24) var(--content-padding);
+  background: var(--color-surface);
+}
+
+.positions-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.positions-column .overline {
+  margin-bottom: var(--space-6);
+}
+
+.positions-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.position-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--rule-color);
+  transition: background-color var(--duration-normal) ease;
+}
+
+.position-row:first-child {
+  border-top: 1px solid var(--rule-color);
+}
+
+.position-row:hover {
+  background-color: rgba(184, 150, 78, 0.02);
+}
+
+.position-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-ink);
+  margin-bottom: var(--space-1);
+}
+
+.position-org {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+  letter-spacing: var(--tracking-wide);
+}
+
+.position-arrow {
+  font-size: var(--text-h3);
+  color: var(--color-gold);
+  opacity: 0.4;
+  transition: opacity var(--duration-normal) ease, transform var(--duration-normal) ease;
+  background-image: none;
+  flex-shrink: 0;
+  margin-left: var(--space-4);
+}
+
+.position-row:hover .position-arrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .positions {
+    padding: var(--space-16) var(--content-padding);
+  }
+
+  .positions-split {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+
+  .position-arrow {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 
@@ -1060,7 +1258,8 @@ const opportunities: Opportunity[] = [
    ============================================= */
 .partnerships {
   padding: var(--space-24) var(--content-padding);
-  background: var(--color-surface);
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
 }
 
 .partners-grid {
@@ -1074,7 +1273,7 @@ const opportunities: Opportunity[] = [
 .partners-title {
   font-size: var(--text-h2);
   font-weight: 300;
-  color: var(--color-ink);
+  color: var(--color-dark-text);
   margin-top: var(--space-4);
   margin-bottom: var(--space-6);
 }
@@ -1085,7 +1284,7 @@ const opportunities: Opportunity[] = [
 
 .partners-desc {
   font-size: var(--text-body);
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
   margin-bottom: var(--space-8);
 }
@@ -1105,7 +1304,7 @@ const opportunities: Opportunity[] = [
   gap: var(--space-3);
   font-size: var(--text-small);
   font-weight: 500;
-  color: var(--color-text-secondary);
+  color: var(--color-dark-secondary);
 }
 
 .partners-type-icon {
@@ -1122,7 +1321,7 @@ const opportunities: Opportunity[] = [
 }
 
 .partner-card {
-  border: 1px solid var(--rule-color);
+  border: 1px solid rgba(250, 250, 249, 0.08);
   padding: var(--space-6);
   transition: border-color var(--duration-normal) ease,
               background-color var(--duration-normal) ease;
@@ -1131,8 +1330,8 @@ const opportunities: Opportunity[] = [
 }
 
 .partner-card:hover {
-  border-color: var(--color-gold);
-  background: rgba(184, 150, 78, 0.03);
+  border-color: rgba(184, 150, 78, 0.3);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .partner-type-label {
@@ -1148,7 +1347,7 @@ const opportunities: Opportunity[] = [
   font-family: var(--font-display);
   font-size: var(--text-body);
   font-weight: 300;
-  color: var(--color-text-secondary);
+  color: var(--color-dark-secondary);
   margin-bottom: var(--space-2);
 }
 
@@ -1159,13 +1358,13 @@ const opportunities: Opportunity[] = [
 .partner-title {
   font-size: var(--text-h4);
   font-weight: 500;
-  color: var(--color-ink);
+  color: var(--color-dark-text);
   margin-bottom: var(--space-3);
 }
 
 .partner-desc {
   font-size: var(--text-small);
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
   margin-bottom: var(--space-4);
 }
@@ -1205,6 +1404,110 @@ const opportunities: Opportunity[] = [
 
   .partners-cards {
     grid-template-columns: 1fr;
+  }
+
+  .partner-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* =============================================
+   NETWORK EXPANSION CTA — Dual column
+   ============================================= */
+.network-cta {
+  padding: var(--space-24) var(--content-padding);
+  background: var(--color-surface);
+  border-top: 1px solid var(--rule-color);
+}
+
+.network-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+.network-title {
+  font-size: var(--text-h2);
+  font-weight: 300;
+  color: var(--color-ink);
+  margin-bottom: var(--space-6);
+}
+
+.network-title em {
+  font-style: italic;
+}
+
+.network-desc {
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 50ch;
+}
+
+.network-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+
+.network-link-primary {
+  display: inline-block;
+  font-size: var(--text-small);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-ink);
+  padding: var(--space-4) var(--space-8);
+  background-color: var(--color-gold);
+  background-image: none;
+  transition: opacity var(--duration-normal) ease;
+}
+
+.network-link-primary:hover {
+  opacity: 0.9;
+}
+
+.network-link-secondary {
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  background-image: none;
+  transition: opacity var(--duration-normal) ease;
+}
+
+.network-link-secondary:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .network-cta {
+    padding: var(--space-16) var(--content-padding);
+  }
+
+  .network-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .network-link-primary {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .network-link-secondary {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 
@@ -1316,19 +1619,6 @@ const opportunities: Opportunity[] = [
     font-size: clamp(2rem, 8vw, var(--text-display));
   }
 
-  .case-cta {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .partner-link {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-  }
-
   .cta-buttons {
     flex-direction: column;
     width: 100%;
@@ -1349,29 +1639,6 @@ const opportunities: Opportunity[] = [
     display: inline-flex;
     align-items: center;
     width: 100%;
-    justify-content: center;
-  }
-
-  .bento-consult-btn {
-    min-height: 44px;
-    width: 100%;
-  }
-
-  .bento-cta-btn {
-    min-height: 44px;
-    width: 100%;
-  }
-
-  .bento-link {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  .filter-pill {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
     justify-content: center;
   }
 }

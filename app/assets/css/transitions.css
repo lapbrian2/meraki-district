@@ -1,22 +1,106 @@
-/* Page transitions
-   Enter: no CSS animation — GSAP scroll reveals handle all enter effects.
-   Leave: clip-path wipe upward for a clean, editorial exit.
-   Vue 3.5 uses Web Animations API for <Transition>, which conflicts with
-   GSAP's ScrollTrigger if both run during onMounted. Removing the enter
-   animation eliminates that conflict entirely. */
+/* ─── Vellum Slide: Page Transitions ───
+   Spec: Stitch screen "Vellum Slide: Transition Specification"
+
+   The vellum slide is an archival-feeling page transition that simulates
+   turning translucent vellum paper — the leaving page desaturates and
+   recedes while the entering page slides in from behind with a blur-to-
+   sharp reveal. The parallax offset (0.15x retreat on leaving content)
+   creates physical depth.
+
+   GSAP conflict note: enter animations must not trigger during onMounted
+   since ScrollTrigger initializes there. The enter-active class only
+   applies filter + opacity — no transforms that would fight GSAP.
+   The leaving page gets the full kinetic treatment. */
+
+/* ─── Shared transition properties ─── */
+.page-enter-active,
 .page-leave-active {
-  transition: clip-path 0.45s cubic-bezier(0.65, 0, 0.35, 1);
-}
-.page-leave-to {
-  clip-path: inset(0 0 100% 0);
+  will-change: transform, opacity, filter;
+  transform-origin: center center;
+  backface-visibility: hidden;
 }
 
+/* ─── Leave: outgoing page recedes like archival paper lifting ─── */
+.page-leave-active {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  transition:
+    transform 1200ms cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 1200ms cubic-bezier(0.23, 1, 0.32, 1),
+    filter 1200ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.page-leave-to {
+  transform: scale(0.98) translateY(-3%);
+  opacity: 0;
+  filter: grayscale(100%) brightness(0.8) blur(4px);
+}
+
+/* ─── Enter: incoming page emerges with desaturation-to-color reveal ─── */
+.page-enter-active {
+  z-index: 20;
+  transition:
+    filter 1200ms cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 800ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.page-enter-from {
+  opacity: 0;
+  filter: grayscale(100%) brightness(0.8) blur(40px);
+}
+
+.page-enter-to {
+  opacity: 1;
+  filter: grayscale(0) brightness(1) blur(0px);
+}
+
+/* ─── Vellum overlay element ───
+   Applied to .vellum-transition-overlay in app.vue.
+   A translucent vellum-colored sheet that flashes during transition
+   to simulate the physical paper passing between pages. */
+.vellum-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(250, 250, 249, 0.06) 0%,
+    rgba(184, 150, 78, 0.03) 50%,
+    rgba(9, 9, 11, 0.08) 100%
+  );
+  opacity: 0;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  transition: opacity 600ms cubic-bezier(0.23, 1, 0.32, 1),
+              backdrop-filter 600ms cubic-bezier(0.23, 1, 0.32, 1),
+              -webkit-backdrop-filter 600ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.vellum-transition-overlay.is-transitioning {
+  opacity: 1;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ─── Reduced motion: instant cut, no animation ─── */
 @media (prefers-reduced-motion: reduce) {
+  .page-enter-active,
   .page-leave-active {
-    transition: opacity 0.01ms;
+    transition: none;
+    will-change: auto;
+  }
+  .page-enter-from {
+    opacity: 0;
+    filter: none;
   }
   .page-leave-to {
-    clip-path: none;
     opacity: 0;
+    transform: none;
+    filter: none;
+  }
+  .vellum-transition-overlay {
+    display: none;
   }
 }

@@ -12,11 +12,17 @@
           </p>
         </div>
 
-        <!-- Col 2: Districts -->
+        <!-- Col 2: Districts by status -->
         <nav class="fn-nav fn-nav--districts reveal" aria-label="Districts">
-          <h4 class="fn-nav-heading">Districts</h4>
+          <h4 class="fn-nav-heading">Active Districts</h4>
           <ul>
-            <li v-for="d in districts" :key="d.slug">
+            <li v-for="d in activeDistricts" :key="d.slug">
+              <NuxtLink :to="`/districts/${d.slug}`">{{ d.name }}</NuxtLink>
+            </li>
+          </ul>
+          <h4 class="fn-nav-heading fn-nav-heading--sub">Emerging</h4>
+          <ul>
+            <li v-for="d in emergingDistricts" :key="d.slug">
               <NuxtLink :to="`/districts/${d.slug}`">{{ d.name }}</NuxtLink>
             </li>
           </ul>
@@ -75,6 +81,9 @@
         </div>
       </div>
 
+      <!-- Signature line -->
+      <p class="fn-signature reveal">The curated life is the only life worth examining.</p>
+
       <!-- Bottom bar -->
       <div class="fn-bottom">
         <p class="fn-copyright">&copy; 2026 Meraki Road</p>
@@ -97,6 +106,9 @@ import { districts } from '~/composables/useDistricts'
 
 const section = ref<HTMLElement | null>(null)
 useGsapScrollReveal(section, '.reveal', { stagger: 0.1 })
+
+const activeDistricts = computed(() => districts.filter(d => d.status === 'active'))
+const emergingDistricts = computed(() => districts.filter(d => d.status !== 'active'))
 
 const { email, status, errorMessage, submit, reset } = useEmailCollection('newsletter')
 </script>
@@ -152,6 +164,12 @@ const { email, status, errorMessage, submit, reset } = useEmailCollection('newsl
   margin-bottom: var(--space-6);
 }
 
+.fn-nav-heading--sub {
+  margin-top: var(--space-6);
+  font-size: 0.625rem;
+  color: var(--color-dark-muted);
+}
+
 .fn-nav ul {
   list-style: none;
   display: flex;
@@ -160,9 +178,9 @@ const { email, status, errorMessage, submit, reset } = useEmailCollection('newsl
 }
 
 .fn-nav--districts ul {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-2) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 .fn-nav a {
@@ -254,6 +272,19 @@ const { email, status, errorMessage, submit, reset } = useEmailCollection('newsl
 
 .fn-success-icon {
   font-size: 16px;
+}
+
+/* ─── Signature line ─── */
+.fn-signature {
+  font-family: var(--font-display);
+  font-size: var(--text-small);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-dark-muted);
+  text-align: center;
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--rule-color);
+  margin-top: var(--space-8);
 }
 
 /* ─── Bottom bar ─── */

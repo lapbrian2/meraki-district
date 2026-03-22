@@ -98,6 +98,11 @@
   --duration-normal: 300ms;
   --duration-slow: 600ms;
   --duration-scroll: 800ms;
+
+  /* Vellum transition tokens (Stitch spec) */
+  --ease-vellum: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-curator: cubic-bezier(0.1, 0.9, 0.2, 1);
+  --duration-vellum: 1200ms;
 }
 
 /* Dark mode — inverts the light palette while keeping dark sections unchanged */
