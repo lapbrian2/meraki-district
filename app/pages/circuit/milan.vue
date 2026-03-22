@@ -674,7 +674,7 @@ const featuredCreators: FeaturedCreator[] = [
   display: block;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  filter: grayscale(100%);
+  filter: sepia(5%);
   transition: filter 0.7s ease, transform 0.7s ease;
 }
 
