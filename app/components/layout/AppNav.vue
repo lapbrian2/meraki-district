@@ -137,6 +137,7 @@ const mobileLinks = [
   { to: '/institute', label: 'Institute' },
   { to: '/pavilion', label: 'Pavilion' },
   { to: '/bridge', label: 'Bridge' },
+  { to: '/mint', label: 'Mint' },
   { to: '/circuit', label: 'Circuit' },
   { to: '/typography', label: 'Typography' },
 ]

@@ -339,6 +339,110 @@
       </div>
     </nav>
 
+    <!-- Prov Entry Metadata — Institutional ledger header -->
+    <section ref="provMetadataSection" class="prov-metadata section">
+      <div class="section-default prov-metadata-inner">
+        <p class="prov-metadata-entry-no reveal">Entry No. <span class="prov-mono">05-774/X</span></p>
+        <h2 class="prov-metadata-title reveal">Artifact Provenance Record</h2>
+        <p class="prov-metadata-desc reveal">Immutable ledger entry for verified cultural objects under permanent archival custody.</p>
+        <div class="prov-metadata-rule" aria-hidden="true" />
+      </div>
+    </section>
+
+    <!-- Prov Data Grid — 3-column verification data -->
+    <section ref="provDataGridSection" class="prov-datagrid section-dark">
+      <div class="section-default">
+        <p class="overline reveal">Institutional Record</p>
+        <div class="prov-datagrid-grid">
+          <div class="prov-datagrid-card reveal">
+            <h3 class="prov-datagrid-card-label">Origin Data</h3>
+            <dl class="prov-datagrid-dl">
+              <div class="prov-datagrid-row">
+                <dt>Creation Date</dt>
+                <dd>2024.11.03</dd>
+              </div>
+              <div class="prov-datagrid-row">
+                <dt>Creator ID</dt>
+                <dd class="prov-mono">MRD-0577-A</dd>
+              </div>
+              <div class="prov-datagrid-row">
+                <dt>Materiality</dt>
+                <dd>Digital composite / mixed substrate</dd>
+              </div>
+            </dl>
+          </div>
+          <div class="prov-datagrid-card reveal">
+            <h3 class="prov-datagrid-card-label">Verification Layer</h3>
+            <dl class="prov-datagrid-dl">
+              <div class="prov-datagrid-row">
+                <dt>Node Consensus</dt>
+                <dd class="prov-mono">99.8%</dd>
+              </div>
+              <div class="prov-datagrid-row">
+                <dt>Hash Protocol</dt>
+                <dd class="prov-mono">SHA-256 / R3</dd>
+              </div>
+              <div class="prov-datagrid-row">
+                <dt>Custody Blocks</dt>
+                <dd class="prov-mono">2,418</dd>
+              </div>
+            </dl>
+          </div>
+          <div class="prov-datagrid-card reveal">
+            <h3 class="prov-datagrid-card-label">Exhibition Status</h3>
+            <dl class="prov-datagrid-dl">
+              <div class="prov-datagrid-row">
+                <dt>Gallery Location</dt>
+                <dd>Vault 03 &mdash; West Wing</dd>
+              </div>
+              <div class="prov-datagrid-row">
+                <dt>Access Level</dt>
+                <dd>Restricted / Fellow</dd>
+              </div>
+              <div class="prov-datagrid-row">
+                <dt>Next Cycle</dt>
+                <dd class="prov-mono">2026.Q3</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prov Ink-Trace History — Gold-line timeline -->
+    <section ref="provTimelineSection" class="prov-timeline section">
+      <div class="section-default">
+        <p class="overline reveal">Ink-Trace History</p>
+        <div class="prov-timeline-track">
+          <div class="prov-timeline-line" aria-hidden="true" />
+          <div class="prov-timeline-event reveal">
+            <div class="prov-timeline-dot" />
+            <div class="prov-timeline-content">
+              <p class="prov-timeline-label">Genesis Block</p>
+              <p class="prov-timeline-date prov-mono">2024.11.03 &mdash; 14:22 UTC</p>
+              <p class="prov-timeline-body">Initial creation entry. Object registered to permanent archive with full provenance chain established at point of origin.</p>
+            </div>
+          </div>
+          <div class="prov-timeline-event reveal">
+            <div class="prov-timeline-dot" />
+            <div class="prov-timeline-content">
+              <p class="prov-timeline-label">Transfer 08-B</p>
+              <p class="prov-timeline-date prov-mono">2025.02.17 &mdash; 09:41 UTC</p>
+              <p class="prov-timeline-body">Custody transfer to Vault 03 verified. Witness attribution: <span class="prov-mono">K. Vasquez / Archivist II</span></p>
+            </div>
+          </div>
+          <div class="prov-timeline-event reveal">
+            <div class="prov-timeline-dot prov-timeline-dot--active" />
+            <div class="prov-timeline-content">
+              <p class="prov-timeline-label">Current State</p>
+              <p class="prov-timeline-date prov-mono">Present</p>
+              <p class="prov-timeline-body">Object held under restricted access. Integrity verified. <span class="prov-timeline-badge">Verified</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Prov Archival Philosophy — Asymmetric 7/5 grid -->
     <section ref="provPhilosophySection" class="prov-philosophy section">
       <div class="section-default prov-philosophy-grid">
@@ -421,14 +525,17 @@
       </div>
     </section>
 
-    <!-- Prov CTA — Quiet, institutional -->
+    <!-- Prov Validate CTA — Institutional verification -->
     <section ref="provCtaSection" class="prov-cta section">
       <div class="section-default prov-cta-inner">
         <h2 class="prov-cta-heading reveal">Submit work for archival review.</h2>
         <p class="prov-cta-body reveal">
           The Provenance accepts submissions on a rolling basis. Each work is evaluated against our verification protocol before admission to the permanent collection.
         </p>
-        <NuxtLink to="/apply" class="prov-cta-link reveal">Begin submission &rarr;</NuxtLink>
+        <NuxtLink to="/apply" class="prov-validate-btn reveal">
+          <span class="material-symbols-outlined prov-validate-icon" aria-hidden="true">gavel</span>
+          Validate Now
+        </NuxtLink>
       </div>
     </section>
 
@@ -690,6 +797,9 @@ const vsPhilosophySection = ref<HTMLElement | null>(null)
 const vsCtaSection = ref<HTMLElement | null>(null)
 
 // The Provenance section refs
+const provMetadataSection = ref<HTMLElement | null>(null)
+const provDataGridSection = ref<HTMLElement | null>(null)
+const provTimelineSection = ref<HTMLElement | null>(null)
 const provPhilosophySection = ref<HTMLElement | null>(null)
 const provProtocolSection = ref<HTMLElement | null>(null)
 const provRepositorySection = ref<HTMLElement | null>(null)
@@ -716,12 +826,16 @@ useTilt(vsSprintsSection, '.vs-sprint', { maxRotation: 2 })
 useTilt(vsFellowSection, '.vs-fellow-card', { maxRotation: 2 })
 
 // The Provenance composable animations
+useGsapScrollReveal(provMetadataSection, '.reveal', { stagger: 0.1 })
+useGsapScrollReveal(provDataGridSection, '.reveal', { stagger: 0.12 })
+useGsapScrollReveal(provTimelineSection, '.reveal', { stagger: 0.15 })
 useGsapScrollReveal(provPhilosophySection, '.reveal', { stagger: 0.12 })
 useGsapScrollReveal(provProtocolSection, '.reveal', { stagger: 0.1 })
 useGsapScrollReveal(provRepositorySection, '.reveal', { stagger: 0.12 })
 useGsapScrollReveal(provFromSection, '.reveal', { stagger: 0.12 })
 useGsapScrollReveal(provCtaSection, '.reveal', { stagger: 0.1 })
 useTilt(provProtocolSection, '.prov-protocol-card', { maxRotation: 2 })
+useTilt(provDataGridSection, '.prov-datagrid-card', { maxRotation: 1.5 })
 
 let ctx: gsap.Context | null = null
 
@@ -917,6 +1031,58 @@ function initAnimations() {
       if (provQuote) {
         quoteWordReveal(provQuote as HTMLElement, '.prov-philosophy')
       }
+
+      // Metadata rule draw
+      gsap.from('.prov-metadata-rule', {
+        scaleX: 0,
+        duration: 0.8,
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: '.prov-metadata-rule',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+      // Data grid cards stagger
+      gsap.from('.prov-datagrid-card', {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.prov-datagrid-grid',
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+      // Timeline line draw
+      gsap.from('.prov-timeline-line', {
+        scaleY: 0,
+        duration: 1.2,
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: '.prov-timeline-track',
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+      // Timeline events stagger
+      gsap.from('.prov-timeline-event', {
+        x: -30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.prov-timeline-track',
+          start: 'top 75%',
+          toggleActions: 'play none none none',
+        },
+      })
 
       // Philosophy rule draw
       gsap.from('.prov-philosophy-rule', {
@@ -1766,6 +1932,224 @@ onUnmounted(() => {
   font-variation-settings: 'WONK' 1, 'SOFT' 0, 'opsz' 72;
 }
 
+/* Prov Mono utility */
+.prov-mono {
+  font-family: var(--font-mono);
+}
+
+/* Prov Entry Metadata — Institutional ledger header */
+.prov-metadata {
+  padding-top: var(--space-24);
+  padding-bottom: var(--space-16);
+}
+
+.prov-metadata-inner {
+  max-width: 640px;
+}
+
+.prov-metadata-entry-no {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-4);
+}
+
+.prov-metadata-entry-no .prov-mono {
+  font-size: var(--text-small);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-gold-accessible);
+}
+
+.prov-metadata-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 300;
+  font-style: italic;
+  line-height: var(--leading-snug);
+  color: var(--color-ink);
+  margin-bottom: var(--space-4);
+  font-variation-settings: 'WONK' 1, 'SOFT' 60;
+}
+
+.prov-metadata-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 50ch;
+  margin-bottom: var(--space-8);
+}
+
+.prov-metadata-rule {
+  width: 64px;
+  height: 1px;
+  background: var(--color-gold);
+  transform-origin: left;
+}
+
+/* Prov Data Grid — 3-column verification data */
+.prov-datagrid {
+  padding: var(--space-24) 0;
+}
+
+.prov-datagrid .overline {
+  margin-bottom: var(--space-12);
+}
+
+.prov-datagrid-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.prov-datagrid-card {
+  padding: var(--space-8);
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.02);
+  transition: border-color var(--duration-normal) ease,
+              transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.prov-datagrid-card:hover {
+  border-color: rgba(184, 150, 78, 0.35);
+}
+
+.prov-datagrid-card-label {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid rgba(184, 150, 78, 0.12);
+}
+
+.prov-datagrid-dl {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.prov-datagrid-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.prov-datagrid-row dt {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+}
+
+.prov-datagrid-row dd {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--color-dark-text);
+  line-height: var(--leading-normal);
+}
+
+/* Prov Ink-Trace History — Gold-line timeline */
+.prov-timeline {
+  padding: var(--space-24) 0 var(--space-16);
+}
+
+.prov-timeline .overline {
+  margin-bottom: var(--space-12);
+}
+
+.prov-timeline-track {
+  position: relative;
+  padding-left: var(--space-10);
+}
+
+.prov-timeline-line {
+  position: absolute;
+  left: 5px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--color-gold);
+  transform-origin: top;
+}
+
+.prov-timeline-event {
+  position: relative;
+  padding-bottom: var(--space-10);
+}
+
+.prov-timeline-event:last-child {
+  padding-bottom: 0;
+}
+
+.prov-timeline-dot {
+  position: absolute;
+  left: calc(-1 * var(--space-10) + 1px);
+  top: 4px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid var(--color-gold);
+  background: #09090B;
+}
+
+.prov-timeline-dot--active {
+  background: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(184, 150, 78, 0.2);
+}
+
+.prov-timeline-content {
+  padding-left: var(--space-4);
+}
+
+.prov-timeline-label {
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-ink);
+  margin-bottom: 2px;
+  font-variation-settings: 'WONK' 1, 'SOFT' 40;
+}
+
+.prov-timeline-date {
+  font-size: 0.75rem;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.prov-timeline-body {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 55ch;
+}
+
+.prov-timeline-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  border: 1px solid rgba(184, 150, 78, 0.3);
+  padding: 2px 8px;
+  margin-left: var(--space-2);
+  vertical-align: middle;
+}
+
 /* Prov Archival Philosophy — Asymmetric 7/5 grid */
 .prov-philosophy {
   padding-top: var(--space-32);
@@ -2040,7 +2424,10 @@ onUnmounted(() => {
   margin-bottom: var(--space-8);
 }
 
-.prov-cta-link {
+.prov-validate-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
   font-family: var(--font-body);
   font-size: var(--text-small);
   font-weight: 500;
@@ -2049,13 +2436,19 @@ onUnmounted(() => {
   color: var(--color-gold);
   background-image: none;
   text-decoration: none;
-  border-bottom: 1px solid rgba(184, 150, 78, 0.4);
-  padding-bottom: 2px;
-  transition: border-color var(--duration-normal) ease;
+  border: 1px solid rgba(184, 150, 78, 0.4);
+  padding: var(--space-3) var(--space-8);
+  transition: border-color var(--duration-normal) ease,
+              background-color var(--duration-normal) ease;
 }
 
-.prov-cta-link:hover {
+.prov-validate-icon {
+  font-size: 1.125rem;
+}
+
+.prov-validate-btn:hover {
   border-color: var(--color-gold);
+  background-color: rgba(184, 150, 78, 0.06);
 }
 
 
@@ -2654,6 +3047,26 @@ onUnmounted(() => {
     font-size: clamp(2.5rem, 10vw, 4rem);
   }
 
+  /* Prov Metadata */
+  .prov-metadata-title {
+    font-size: var(--text-h3);
+  }
+
+  /* Prov Data Grid */
+  .prov-datagrid-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  /* Prov Timeline */
+  .prov-timeline-track {
+    padding-left: var(--space-8);
+  }
+
+  .prov-timeline-dot {
+    left: calc(-1 * var(--space-8) + 1px);
+  }
+
   /* Prov Philosophy */
   .prov-philosophy-grid {
     grid-template-columns: 1fr;
@@ -2685,10 +3098,8 @@ onUnmounted(() => {
   }
 
   /* Prov CTA */
-  .prov-cta-link {
+  .prov-validate-btn {
     min-height: 44px;
-    display: inline-flex;
-    align-items: center;
   }
 
   /* Generic Hero */

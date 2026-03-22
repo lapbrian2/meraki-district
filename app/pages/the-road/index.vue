@@ -1,289 +1,660 @@
 <template>
-  <div>
-    <section ref="heroSection" class="page-hero section section-dark">
-      <div class="page-hero-bg-wrap">
-        <NuxtImg
-          src="/images/the-road-hero.webp"
-          alt=""
-          class="page-hero-bg-image"
-          loading="eager"
-          fetchpriority="high"
-          width="1920"
-          height="1080"
-        />
-        <div class="page-hero-bg-overlay" />
-      </div>
-      <div class="section-default page-hero-content">
-        <p class="overline reveal">Publishing &amp; Editorial</p>
-        <h1 class="page-hero-title word-reveal">
-          The Road
+  <div class="road-page">
+
+    <!-- ============================================
+         HERO — District 02 Publishing
+    ============================================= -->
+    <section ref="heroSection" class="road-hero section section-dark">
+      <div class="section-narrow road-hero-inner">
+        <span class="stamped-overline reveal">District 02 &mdash; Publishing</span>
+        <h1 class="road-hero-title word-reveal">
+          <em>The Road</em>
         </h1>
-        <p class="page-hero-sub reveal">
-          Long-form essays and cultural criticism shaped by creative practice.
+        <p class="road-hero-sub reveal">
+          Long-form monographs and archival essays from practitioners who think
+          through making. Not hot takes&mdash;considered writing shaped by years at
+          the bench, the press, and the screen.
         </p>
       </div>
     </section>
 
     <SectionDivider />
 
-    <section ref="gridSection" class="articles section">
-      <div class="section-default">
-        <div v-if="articles && articles.length" class="articles-grid">
-          <ArticleCard
-            v-for="article in articles"
-            :key="article.path"
-            :article="article"
-            :show-date="true"
-            class="reveal"
-          />
+    <!-- ============================================
+         FEATURED MONOGRAPH
+    ============================================= -->
+    <section ref="featuredSection" class="road-featured section section-dark">
+      <div class="section-wide">
+        <article class="featured-card reveal">
+          <div class="featured-image-wrap">
+            <div class="featured-image archival-image mask-reveal" />
+          </div>
+          <div class="featured-content">
+            <p class="overline reveal">Featured Monograph</p>
+            <h2 class="featured-title word-reveal">
+              <em>The Architecture of Silence</em>
+            </h2>
+            <p class="featured-author reveal">By Sable Chen</p>
+            <p class="featured-excerpt reveal">
+              A meditation on negative space in contemporary printmaking&mdash;how the
+              unmarked surface carries as much intention as the mark itself. Chen traces
+              the lineage from Zen calligraphy through Rauschenberg&rsquo;s white paintings
+              to the algorithmic voids of generative art, arguing that silence is not
+              absence but architecture.
+            </p>
+            <NuxtLink to="#" class="featured-cta reveal">
+              Read the Monograph &rarr;
+            </NuxtLink>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
+         RECENT ESSAYS — 3-column grid
+    ============================================= -->
+    <section ref="essaysSection" class="road-essays section section-dark">
+      <div class="section-wide">
+        <div class="essays-header">
+          <div class="essays-header-left">
+            <p class="overline reveal">Recent</p>
+            <h2 class="essays-heading word-reveal"><em>Essays</em></h2>
+          </div>
         </div>
 
-        <!-- Editorial empty state -->
-        <div v-else class="road-manifesto">
-          <div class="road-manifesto-inner reveal">
-            <div class="road-manifesto-rule" aria-hidden="true" />
-            <blockquote class="road-manifesto-quote">
-              <p>The tools are changing faster than the conversations about them.</p>
-            </blockquote>
-            <p class="road-manifesto-body">
-              The Road is where Meraki Road thinks in public. Long-form essays,
-              field dispatches, creator interviews, and cultural criticism for people
-              who believe that making things well still matters&mdash;even when
-              (especially when) the tools make it easy to make things fast.
-            </p>
-            <p class="road-manifesto-body">
-              We&rsquo;re writing the first essays now. Expect dispatches on AI-native
-              creative practice, profiles of builders who refuse to choose between
-              ambition and integrity, and honest criticism of the work&mdash;ours included.
-            </p>
-            <div class="road-manifesto-cta">
-              <p class="road-manifesto-label">Get notified when we publish</p>
-              <NuxtLink to="/apply" class="road-manifesto-button">
-                Join Meraki Road &rarr;
+        <div class="essays-grid">
+          <article
+            v-for="essay in essays"
+            :key="essay.title"
+            class="essay-card vellum-card reveal"
+          >
+            <div class="essay-image-wrap">
+              <div class="essay-image archival-image mask-reveal" />
+            </div>
+            <div class="essay-body">
+              <span class="essay-category">{{ essay.category }}</span>
+              <h3 class="essay-title"><em>{{ essay.title }}</em></h3>
+              <div class="essay-meta">
+                <span>{{ essay.date }}</span>
+                <span class="essay-meta-dot">&middot;</span>
+                <span>{{ essay.readTime }} min read</span>
+              </div>
+              <NuxtLink to="#" class="essay-link">
+                Continue Reading &rarr;
               </NuxtLink>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
     <SectionDivider />
-    <CtaSection />
+
+    <!-- ============================================
+         THE ARCHIVE — Numbered index
+    ============================================= -->
+    <section ref="archiveSection" class="road-archive section section-dark">
+      <div class="section-default">
+        <div class="archive-header">
+          <p class="overline reveal">Index</p>
+          <h2 class="archive-heading word-reveal"><em>The Archive</em></h2>
+        </div>
+
+        <ol class="archive-list">
+          <li
+            v-for="(entry, index) in archiveEntries"
+            :key="entry.title"
+            class="archive-entry reveal"
+          >
+            <span class="archive-number">{{ String(index + 1).padStart(2, '0') }}</span>
+            <div class="archive-entry-body">
+              <h3 class="archive-entry-title">{{ entry.title }}</h3>
+              <span class="archive-entry-author">{{ entry.author }}</span>
+              <span class="archive-entry-date">{{ entry.date }}</span>
+            </div>
+            <span class="archive-entry-tag">{{ entry.category }}</span>
+            <span class="archive-arrow">&rarr;</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
+         SUBMISSION CTA
+    ============================================= -->
+    <section ref="ctaSection" class="road-cta section-dark">
+      <div class="section-narrow cta-inner">
+        <p class="cta-text reveal">
+          The Road is open to practitioners who write as they build.
+        </p>
+        <NuxtLink to="/apply" class="cta-button reveal">
+          Submit an Essay
+        </NuxtLink>
+      </div>
+    </section>
+
   </div>
 </template>
 
 <script setup lang="ts">
 import { useGsapScrollReveal } from '~/composables/useGsapScrollReveal'
-import { useParallax } from '~/composables/useParallax'
 import { useWordReveal } from '~/composables/useWordReveal'
-import { useTilt } from '~/composables/useInteractions'
 
-const heroSection = ref<HTMLElement | null>(null)
-const gridSection = ref<HTMLElement | null>(null)
-
-useGsapScrollReveal(heroSection, '.reveal')
-useParallax(heroSection, '.page-hero-bg-image', { speed: 0.1 })
-useWordReveal(heroSection, '.word-reveal')
-useGsapScrollReveal(gridSection, '.reveal', { stagger: 0.12 })
-useTilt(gridSection, '.article-card', { maxRotation: 3 })
-
-const { data: articles } = await useAsyncData('the-road-listing', () =>
-  queryCollection('theRoad')
-    .where('published', '=', true)
-    .order('date', 'DESC')
-    .all()
-)
-
+/* -- SEO ---------------------------------------- */
 useHead({
-  title: 'The Road \u2014 Meraki Road',
+  title: 'The Road — Meraki Road',
   meta: [
-    { name: 'description', content: 'Long-form storytelling and cultural criticism for the AI-native era.' },
+    { name: 'description', content: 'District 02 — Long-form monographs and archival essays from practitioners who think through making.' },
   ],
 })
 
 useSeoMeta({
-  ogTitle: 'The Road \u2014 Meraki Road',
-  ogDescription: 'Long-form storytelling and cultural criticism for the AI-native era.',
-  twitterTitle: 'The Road \u2014 Meraki Road',
-  twitterDescription: 'Long-form storytelling and cultural criticism for the AI-native era.',
+  ogTitle: 'The Road — Meraki Road',
+  ogDescription: 'Long-form monographs and archival essays from practitioners who think through making.',
+  twitterTitle: 'The Road — Meraki Road',
+  twitterDescription: 'Long-form monographs and archival essays from practitioners who think through making.',
 })
+
+/* -- Scroll Reveals ----------------------------- */
+const heroSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(heroSection, '.reveal')
+useWordReveal(heroSection, '.word-reveal')
+
+const featuredSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(featuredSection, '.reveal', { stagger: 0.08 })
+useWordReveal(featuredSection, '.word-reveal')
+
+const essaysSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(essaysSection, '.reveal', { stagger: 0.12 })
+useWordReveal(essaysSection, '.word-reveal')
+
+const archiveSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(archiveSection, '.reveal', { stagger: 0.06 })
+useWordReveal(archiveSection, '.word-reveal')
+
+const ctaSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(ctaSection, '.reveal')
+
+/* -- Data --------------------------------------- */
+interface Essay {
+  title: string
+  category: string
+  date: string
+  readTime: number
+}
+
+const essays: Essay[] = [
+  { title: 'On the Ethics of Curation', category: 'Visual Arts', date: 'Mar 2026', readTime: 12 },
+  { title: 'Craft as Resistance', category: 'Practice', date: 'Feb 2026', readTime: 8 },
+  { title: 'The Weight of the Unsigned', category: 'Theory', date: 'Jan 2026', readTime: 15 },
+]
+
+interface ArchiveEntry {
+  title: string
+  author: string
+  date: string
+  category: string
+}
+
+const archiveEntries: ArchiveEntry[] = [
+  { title: 'The Architecture of Silence', author: 'Sable Chen', date: 'Mar 2026', category: 'Monograph' },
+  { title: 'On the Ethics of Curation', author: 'Lior Avital', date: 'Mar 2026', category: 'Visual Arts' },
+  { title: 'Craft as Resistance', author: 'Tomoko Iida', date: 'Feb 2026', category: 'Practice' },
+  { title: 'The Weight of the Unsigned', author: 'Marcus Okafor', date: 'Jan 2026', category: 'Theory' },
+  { title: 'Palimpsest as Method', author: 'Rune Elstad', date: 'Dec 2025', category: 'Process' },
+  { title: 'Against Legibility', author: 'Vera Morozova', date: 'Nov 2025', category: 'Criticism' },
+]
 </script>
 
 <style scoped>
-.page-hero {
+/* =============================================
+   HERO — Centered publishing intro
+   ============================================= */
+.road-hero {
   padding-top: calc(var(--space-32) + 3rem);
   padding-bottom: var(--space-16);
-  position: relative;
-  overflow: hidden;
-  min-height: 60vh;
+  text-align: center;
+}
+
+.road-hero-inner {
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
 }
 
-.page-hero-bg-wrap {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+.road-hero .stamped-overline {
+  color: var(--color-gold);
+  margin-bottom: var(--space-6);
 }
 
-.page-hero-bg-image {
-  width: 100%;
-  height: 130%;
-  top: -15%;
-  position: relative;
-  object-fit: cover;
-  opacity: 0.4;
-  will-change: transform;
-}
-
-.page-hero-bg-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(9, 9, 11, 0.3) 0%,
-    rgba(9, 9, 11, 0.15) 40%,
-    rgba(9, 9, 11, 0.5) 70%,
-    rgba(9, 9, 11, 0.8) 100%
-  );
-}
-
-.page-hero-content {
-  position: relative;
-  z-index: 1;
-}
-
-.page-hero-title {
+.road-hero-title {
   font-size: var(--text-display);
+  font-family: var(--font-display);
+  font-weight: 300;
   line-height: var(--leading-tight);
-  margin-top: var(--space-4);
-  margin-bottom: var(--space-8);
+  letter-spacing: var(--tracking-hero);
   color: var(--color-dark-text);
+  margin-bottom: var(--space-6);
 }
 
-.page-hero-sub {
-  font-size: var(--text-h4);
+.road-hero-title em {
+  font-style: italic;
+}
+
+.road-hero-sub {
+  font-size: var(--text-body);
   font-weight: 400;
   color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
-  max-width: 50ch;
+  max-width: 52ch;
 }
 
-.articles-grid {
+@media (max-width: 768px) {
+  .road-hero {
+    padding-top: calc(var(--space-16) + 3rem);
+    padding-bottom: var(--space-12);
+  }
+}
+
+/* =============================================
+   FEATURED MONOGRAPH
+   ============================================= */
+.featured-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+}
+
+.featured-image-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #27272A 0%, #18181B 40%, #27272A 100%);
+  display: block;
+}
+
+.featured-content {
+  max-width: 58ch;
+}
+
+.featured-title {
+  font-size: var(--text-h1);
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-dark-text);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-3);
+  text-shadow: 0 0 18px rgba(184, 150, 78, 0.15), 0 0 40px rgba(9, 9, 11, 0.6);
+}
+
+.featured-title em {
+  font-style: italic;
+}
+
+.featured-author {
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+  margin-bottom: var(--space-6);
+}
+
+.featured-excerpt {
+  font-size: var(--text-body);
+  font-weight: 400;
+  color: var(--color-dark-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-8);
+}
+
+.featured-cta {
+  display: inline-block;
+  font-size: var(--text-small);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-ink);
+  padding: var(--space-4) var(--space-8);
+  background: var(--color-gold);
+  background-image: none;
+  transition: opacity var(--duration-normal) ease,
+              transform var(--duration-normal) ease;
+}
+
+.featured-cta:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.featured-cta:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .featured-title {
+    font-size: var(--text-h2);
+  }
+}
+
+/* =============================================
+   RECENT ESSAYS — 3-column grid
+   ============================================= */
+.essays-header {
+  margin-bottom: var(--space-12);
+}
+
+.essays-heading {
+  font-size: var(--text-h1);
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: var(--leading-tight);
+  color: var(--color-dark-text);
+  margin-top: var(--space-3);
+}
+
+.essays-heading em {
+  font-style: italic;
+}
+
+.essays-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-8);
 }
 
-/* ── Editorial manifesto empty state ── */
-.road-manifesto {
-  max-width: var(--width-narrow);
-  margin: 0 auto;
-  padding: var(--space-16) 0 var(--space-24);
-}
-
-.road-manifesto-rule {
-  width: 48px;
-  height: 1px;
-  background: var(--color-gold);
-  margin-bottom: var(--space-12);
-}
-
-.road-manifesto-quote {
-  margin-bottom: var(--space-12);
-}
-
-.road-manifesto-quote p {
-  font-family: var(--font-display);
-  font-size: var(--text-h2);
-  font-weight: 300;
-  font-style: italic;
-  line-height: var(--leading-snug);
-  color: var(--color-ink);
-  max-width: none;
-  font-variation-settings: 'WONK' 1, 'SOFT' 80;
-}
-
-.road-manifesto-body {
-  font-size: var(--text-body);
-  color: var(--color-text-muted);
-  line-height: var(--leading-relaxed);
-  margin-bottom: var(--space-8);
-}
-
-.road-manifesto-cta {
-  margin-top: var(--space-16);
-  padding-top: var(--space-8);
-  border-top: 1px solid var(--color-border);
+.essay-card {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-8);
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.road-manifesto-label {
-  font-size: var(--text-small);
-  color: var(--color-text-muted);
+.essay-image-wrap {
+  position: relative;
+  overflow: hidden;
 }
 
-.road-manifesto-button {
-  font-size: var(--text-small);
-  font-weight: 500;
+.essay-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(135deg, #27272A 0%, #18181B 40%, #27272A 100%);
+  display: block;
+}
+
+.essay-body {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.essay-category {
+  font-size: var(--text-overline);
+  font-weight: 600;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--color-ink);
-  padding: var(--space-3) var(--space-8);
-  border: 1px solid var(--color-ink);
-  background-image: none;
-  transition: border-color var(--duration-fast) ease, color var(--duration-fast) ease;
-}
-
-.road-manifesto-button:hover {
-  border-color: var(--color-gold);
   color: var(--color-gold);
+  margin-bottom: var(--space-3);
 }
 
-/* Last card in a 3-col grid: span 2 cols if alone, or full width if single remainder */
-.articles-grid > .article-card:last-child:nth-child(3n + 1) {
-  grid-column: 1 / -1;
+.essay-title {
+  font-size: var(--text-h3);
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: var(--leading-snug);
+  color: var(--color-dark-text);
+  margin-bottom: var(--space-3);
 }
 
-.articles-grid > .article-card:last-child:nth-child(3n + 1) :deep(.article-card-image) {
-  aspect-ratio: 21 / 9;
+.essay-title em {
+  font-style: italic;
+}
+
+.essay-meta {
+  font-size: var(--text-caption);
+  color: var(--color-dark-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: auto;
+  padding-bottom: var(--space-6);
+}
+
+.essay-meta-dot {
+  opacity: 0.4;
+}
+
+.essay-link {
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-gold);
+  background-image: none;
+  transition: opacity var(--duration-normal) ease;
+}
+
+.essay-link:hover {
+  opacity: 0.7;
 }
 
 @media (min-width: 601px) and (max-width: 1024px) {
-  .articles-grid {
+  .essays-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-8);
   }
 }
 
 @media (max-width: 600px) {
-  .page-hero {
-    padding-top: calc(var(--space-16) + 3rem);
-    padding-bottom: var(--space-12);
-    min-height: 50vh;
-  }
-
-  .articles-grid {
+  .essays-grid {
     grid-template-columns: 1fr;
     gap: var(--space-12);
   }
+}
 
-  .road-manifesto-quote p {
-    font-size: var(--text-h3);
+/* =============================================
+   THE ARCHIVE — Bordered numbered index
+   ============================================= */
+.archive-header {
+  margin-bottom: var(--space-12);
+}
+
+.archive-heading {
+  font-size: var(--text-h1);
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: var(--leading-tight);
+  color: var(--color-dark-text);
+  margin-top: var(--space-3);
+}
+
+.archive-heading em {
+  font-style: italic;
+}
+
+.archive-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid rgba(250, 250, 249, 0.08);
+}
+
+.archive-entry {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid rgba(250, 250, 249, 0.08);
+  cursor: pointer;
+  transition: background-color var(--duration-normal) ease;
+}
+
+.archive-entry:hover {
+  background-color: rgba(184, 150, 78, 0.03);
+}
+
+.archive-number {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--color-dark-muted);
+  min-width: 2.5rem;
+  flex-shrink: 0;
+}
+
+.archive-entry-body {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.archive-entry-title {
+  font-size: var(--text-body);
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--color-dark-text);
+  transition: color var(--duration-normal) ease;
+}
+
+.archive-entry:hover .archive-entry-title {
+  color: var(--color-gold);
+}
+
+.archive-entry-author {
+  font-size: var(--text-caption);
+  color: var(--color-dark-muted);
+}
+
+.archive-entry-date {
+  font-size: var(--text-caption);
+  color: var(--color-dark-muted);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.archive-entry-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  border: 1px solid rgba(184, 150, 78, 0.25);
+  padding: 2px 8px;
+  flex-shrink: 0;
+}
+
+.archive-arrow {
+  font-size: var(--text-body);
+  color: var(--color-gold);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity var(--duration-normal) ease,
+              transform var(--duration-normal) ease;
+  flex-shrink: 0;
+}
+
+.archive-entry:hover .archive-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+  .archive-entry {
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    padding: var(--space-5) 0;
   }
 
-  .road-manifesto-cta {
+  .archive-entry-body {
     flex-direction: column;
-    align-items: stretch;
-    text-align: center;
+    gap: var(--space-1);
   }
 
-  .road-manifesto-button {
-    width: 100%;
-    text-align: center;
+  .archive-entry-date {
+    margin-left: 0;
+  }
+
+  .archive-arrow {
+    display: none;
+  }
+}
+
+/* =============================================
+   MASK REVEAL — Grayscale-to-color on hover
+   ============================================= */
+.mask-reveal {
+  filter: grayscale(100%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.mask-reveal:hover {
+  filter: grayscale(0);
+  transform: scale(1.02);
+}
+
+/* =============================================
+   SUBMISSION CTA
+   ============================================= */
+.road-cta {
+  padding: var(--space-32) var(--content-padding);
+  text-align: center;
+}
+
+.road-cta .cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta-text {
+  font-size: var(--text-h3);
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  line-height: var(--leading-snug);
+  color: var(--color-dark-secondary);
+  max-width: 40ch;
+  margin-bottom: var(--space-12);
+}
+
+.cta-button {
+  display: inline-block;
+  font-size: var(--text-small);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-ink);
+  padding: var(--space-4) var(--space-8);
+  background: var(--color-gold);
+  background-image: none;
+  transition: opacity var(--duration-normal) ease,
+              transform var(--duration-normal) ease;
+}
+
+.cta-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.cta-button:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .road-cta {
+    padding: var(--space-16) var(--content-padding);
   }
 }
 </style>
