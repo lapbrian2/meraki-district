@@ -128,6 +128,7 @@ const mobileLinks = [
   { to: '/districts', label: 'Districts' },
   { to: '/the-road', label: 'The Road' },
   { to: '/community', label: 'Community' },
+  { to: '/collective', label: 'Collective' },
   { to: '/atelier', label: 'Atelier' },
   { to: '/about', label: 'About' },
   { to: '/standards', label: 'Standards' },
