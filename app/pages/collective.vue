@@ -151,7 +151,7 @@
         <div class="cta-rule" aria-hidden="true" />
         <p class="overline reveal">Invitation</p>
         <h2 class="cta-title word-reveal">
-          This space is earned, not given.
+          The council for those shaping what comes next.
         </h2>
         <NuxtLink to="/apply" class="cta-button reveal">View Fellowship Requirements &rarr;</NuxtLink>
       </div>

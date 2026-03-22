@@ -12,9 +12,8 @@
           <em>The road is for those who walk it.</em>
         </h1>
         <p class="apply-hero-sub reveal">
-          Meraki Road does not recruit. It recognizes. This process exists
-          to ensure that every practitioner who enters the road carries the
-          weight of real work behind them.
+          Meraki Road is for practitioners at every stage — from first steps
+          to established mastery. Show us where you are. We'll meet you there.
         </p>
       </div>
     </section>
@@ -28,7 +27,7 @@
       <div class="section-default">
         <div class="process-header">
           <p class="overline reveal">The Process</p>
-          <h2 class="process-title word-reveal"><em>Three phases, no shortcuts</em></h2>
+          <h2 class="process-title word-reveal"><em>Three steps to get started</em></h2>
         </div>
 
         <div class="process-steps">
@@ -61,11 +60,10 @@
     <section ref="ctaSection" class="apply-cta section section-dark">
       <div class="section-narrow cta-inner">
         <h2 class="cta-title word-reveal">
-          <em>Initiate your entry.</em>
+          <em>Start the conversation.</em>
         </h2>
         <p class="cta-sub reveal">
-          Leave your email below. When the next review window opens,
-          you will receive the full application directly.
+          Drop your email below. We'll send you everything you need to get started.
         </p>
 
         <form class="entry-form reveal" @submit.prevent="submit" aria-label="Entry request signup">
@@ -110,10 +108,9 @@
         <blockquote class="closing-quote reveal">
           <p>
             <em>
-              The selectivity is not a gate. It is a recognition that the work
-              demands seriousness, and seriousness deserves a space built
-              to hold it. If you have spent years in practice, this is
-              the room that was built for you.
+              Whether you're just starting or deep into your practice,
+              the road meets you where you are. All we ask is that
+              you bring real work and honest ambition. That's enough.
             </em>
           </p>
         </blockquote>
@@ -201,18 +198,18 @@ onUnmounted(() => {
 const steps = [
   {
     number: '01',
-    title: 'Signal of Intent',
-    description: 'Submit your portfolio and a statement of creative intent.',
+    title: 'Share Your Work',
+    description: 'Send us what you have — a portfolio, a project, a body of work in progress. No minimum. Just real.',
   },
   {
     number: '02',
-    title: 'Internal Discourse',
-    description: 'Blind peer review by seated practitioners.',
+    title: 'A Conversation',
+    description: 'We review your work and reach out. Not a gatekeeping exercise — a genuine exchange about where you are and where you want to go.',
   },
   {
     number: '03',
-    title: 'Institutional Access',
-    description: 'District assignment and archival access granted.',
+    title: 'Find Your District',
+    description: 'Together we figure out which district fits your practice. You start as an Associate and grow from there.',
   },
 ]
 </script>
