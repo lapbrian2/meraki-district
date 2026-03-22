@@ -271,6 +271,44 @@
     <SectionDivider />
 
     <!-- ============================================
+         MASTERY RITUAL — 3-phase progression
+    ============================================= -->
+    <section ref="ritualSection" class="ritual section">
+      <div class="section-default">
+        <div class="ritual-header">
+          <p class="overline reveal">The Mastery Ritual</p>
+          <h2 class="ritual-title word-reveal"><em>Three thresholds. One transformation.</em></h2>
+          <p class="ritual-desc reveal">
+            Mastery is not a destination &mdash; it is a series of deliberate crossings.
+            Each phase demands something different from you. Each one changes
+            what the next phase can ask.
+          </p>
+        </div>
+
+        <div class="ritual-phases">
+          <article
+            v-for="(phase, i) in ritualPhases"
+            :key="phase.title"
+            class="ritual-phase reveal"
+          >
+            <div class="ritual-phase-marker">
+              <span class="ritual-phase-greek">{{ phase.greek }}</span>
+              <div class="ritual-phase-line" v-if="i < ritualPhases.length - 1" aria-hidden="true" />
+            </div>
+            <div class="ritual-phase-body">
+              <span class="ritual-phase-label">{{ phase.label }}</span>
+              <h3 class="ritual-phase-title"><em>{{ phase.title }}</em></h3>
+              <p class="ritual-phase-desc">{{ phase.description }}</p>
+              <span class="ritual-phase-validation">{{ phase.validation }}</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
          TESTIMONIAL — Institutional Voice
     ============================================= -->
     <section ref="testimonialSection" class="testimonial section">
@@ -317,19 +355,24 @@
     </section>
 
     <!-- ============================================
-         CTA — Begin Your Development Journey
+         CTA — The Enrollment Ceremony
     ============================================= -->
     <section ref="ctaSection" class="institute-cta section-dark">
       <div class="section-narrow cta-inner">
         <span class="material-symbols-outlined cta-icon reveal">school</span>
         <h2 class="cta-heading word-reveal">
-          <em>Begin your development journey.</em>
+          <em>Will you cross the threshold?</em>
         </h2>
         <p class="cta-subtitle reveal">
           FOR PRACTITIONERS COMMITTED TO LIFELONG CRAFT
         </p>
+        <p class="cta-ceremony reveal">
+          Enrollment is not an application &mdash; it is a declaration. You arrive
+          with the work you&rsquo;ve done. You leave with clarity about the work
+          ahead.
+        </p>
         <div class="cta-buttons reveal">
-          <NuxtLink to="/apply" class="cta-button-gold">Enroll as Fellow</NuxtLink>
+          <NuxtLink to="/apply" class="cta-button-gold">Begin the Ritual &rarr;</NuxtLink>
           <NuxtLink to="#" class="cta-button-ghost">View Curriculum</NuxtLink>
         </div>
       </div>
@@ -390,6 +433,11 @@ useWordReveal(journalSection, '.word-reveal')
 const ascensionSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(ascensionSection, '.reveal', { stagger: 0.12 })
 useWordReveal(ascensionSection, '.word-reveal')
+
+/* -- Ritual ------------------------------------- */
+const ritualSection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(ritualSection, '.reveal', { stagger: 0.15 })
+useWordReveal(ritualSection, '.word-reveal')
 
 /* -- Testimonial -------------------------------- */
 const testimonialSection = ref<HTMLElement | null>(null)
@@ -510,6 +558,38 @@ const ranks: Rank[] = [
     label: 'Tier IV',
     title: 'Fellow',
     description: 'Lifetime access. Full privileges, mentorship roles, and a permanent seat at the table.',
+  },
+]
+
+interface RitualPhase {
+  greek: string
+  label: string
+  title: string
+  description: string
+  validation: string
+}
+
+const ritualPhases: RitualPhase[] = [
+  {
+    greek: '\u03B1',
+    label: 'Phase Alpha',
+    title: 'Cognitive Alignment',
+    description: 'Demonstrate understanding of negative space, compositional tension, and the principles that govern how attention moves through a work. This is where you prove you can see before you prove you can build.',
+    validation: 'Validated through structured critique and portfolio defense.',
+  },
+  {
+    greek: '\u03B2',
+    label: 'Phase Beta',
+    title: 'Tonal Synthesis',
+    description: 'Master the twelve-layer depth system. Produce work that holds together across scale, medium, and context. This phase separates those who follow technique from those who internalize it.',
+    validation: 'Assessed through practical output and peer review.',
+  },
+  {
+    greek: '\u03B3',
+    label: 'Phase Gamma',
+    title: 'Final Manifestation',
+    description: 'Construct an archival anchor \u2014 a body of work that represents your transformation. This is not a thesis. It is evidence of what you became during the process.',
+    validation: 'Culminates in a completion ceremony at the District Summit.',
   },
 ]
 </script>
@@ -1211,6 +1291,130 @@ const ranks: Rank[] = [
 }
 
 /* =============================================
+   MASTERY RITUAL — 3-phase progression
+   ============================================= */
+.ritual {
+  padding: var(--space-24) var(--content-padding);
+  background: var(--color-background);
+}
+
+.ritual-header {
+  text-align: center;
+  margin-bottom: var(--space-16);
+}
+
+.ritual-title {
+  font-size: var(--text-h1);
+  font-family: var(--font-display);
+  font-weight: 300;
+  color: var(--color-ink);
+  margin-bottom: var(--space-4);
+  line-height: var(--leading-tight);
+}
+
+.ritual-title em { font-style: italic; }
+
+.ritual-desc {
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 52ch;
+  margin: 0 auto;
+}
+
+.ritual-phases {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ritual-phase {
+  display: flex;
+  gap: var(--space-8);
+}
+
+.ritual-phase-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 48px;
+}
+
+.ritual-phase-greek {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-gold);
+  background: var(--color-background);
+  position: relative;
+  z-index: 1;
+}
+
+.ritual-phase-line {
+  width: 1px;
+  flex: 1;
+  background: rgba(184, 150, 78, 0.2);
+  min-height: var(--space-8);
+}
+
+.ritual-phase-body {
+  padding-bottom: var(--space-12);
+}
+
+.ritual-phase-label {
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-2);
+  display: block;
+}
+
+.ritual-phase-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 300;
+  color: var(--color-ink);
+  margin-bottom: var(--space-4);
+  line-height: var(--leading-snug);
+}
+
+.ritual-phase-title em { font-style: italic; }
+
+.ritual-phase-desc {
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-4);
+}
+
+.ritual-phase-validation {
+  font-family: var(--font-mono);
+  font-size: var(--text-overline);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .ritual { padding: var(--space-16) var(--content-padding); }
+  .ritual-phase { gap: var(--space-4); }
+  .ritual-phase-marker { width: 36px; }
+  .ritual-phase-greek { width: 36px; height: 36px; font-size: var(--text-h3); }
+}
+
+/* =============================================
    TESTIMONIAL — Institutional Voice
    ============================================= */
 .testimonial {
@@ -1324,6 +1528,14 @@ const ranks: Rank[] = [
   letter-spacing: var(--tracking-mega-wide);
   text-transform: uppercase;
   color: var(--color-dark-muted);
+  margin-bottom: var(--space-6);
+}
+
+.cta-ceremony {
+  font-size: var(--text-body);
+  color: var(--color-dark-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 45ch;
   margin-bottom: var(--space-8);
 }
 

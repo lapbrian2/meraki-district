@@ -137,6 +137,9 @@ const mobileLinks = [
   { to: '/founders', label: 'Founders' },
   { to: '/manifesto', label: 'Manifesto' },
   { to: '/institute', label: 'Institute' },
+  { to: '/basecamp', label: 'Basecamp' },
+  { to: '/common-ground', label: 'Common Ground' },
+  { to: '/fieldwork', label: 'Fieldwork' },
   { to: '/submit', label: 'Submit Work' },
   { to: '/pavilion', label: 'Pavilion' },
   { to: '/fashion-atelier', label: 'Fashion Atelier' },
@@ -148,6 +151,10 @@ const mobileLinks = [
   { to: '/mint', label: 'Mint' },
   { to: '/circuit', label: 'Circuit' },
   { to: '/typography', label: 'Typography' },
+  { to: '/acquire', label: 'Acquire' },
+  { to: '/legacy-ritual', label: 'Legacy Ritual' },
+  { to: '/legacy-seal', label: 'Legacy Seal' },
+  { to: '/quarterly', label: 'Quarterly' },
 ]
 
 useNavAnimation({ navRef, overlayRef, mobileOpen })
