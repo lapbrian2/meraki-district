@@ -450,8 +450,7 @@ onUnmounted(() => {
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-1) var(--space-3);
-  background: rgba(9, 9, 11, 0.7);
-  backdrop-filter: blur(8px);
+  background: rgba(9, 9, 11, 0.88);
   border: 1px solid rgba(184, 150, 78, 0.3);
 }
 

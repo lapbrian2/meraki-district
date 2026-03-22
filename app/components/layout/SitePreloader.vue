@@ -127,7 +127,6 @@ function finish() {
 
 .preloader-letter {
   opacity: 0;
-  filter: blur(4px);
   animation: inkAbsorb 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards;
   display: inline-block;
 }
@@ -205,11 +204,9 @@ function finish() {
 @keyframes inkAbsorb {
   from {
     opacity: 0;
-    filter: blur(4px);
   }
   to {
     opacity: 1;
-    filter: blur(0);
   }
 }
 
@@ -234,22 +231,18 @@ function finish() {
 @keyframes protocolFade {
   from {
     opacity: 0;
-    filter: blur(2px);
   }
   to {
     opacity: 0.5;
-    filter: blur(0);
   }
 }
 
 @keyframes contentFade {
   from {
     opacity: 1;
-    filter: blur(0);
   }
   to {
     opacity: 0;
-    filter: blur(8px);
   }
 }
 

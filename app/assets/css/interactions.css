@@ -41,9 +41,7 @@
    Frosted glass surface — heavier than vellum-card.
    For modal overlays, feature panels, floating UI. */
 .glass-panel {
-  background: rgba(53, 52, 55, 0.1);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
+  background: rgba(9, 9, 11, 0.85);
   border: 1px solid rgba(184, 150, 78, 0.08);
 }
 
@@ -225,8 +223,7 @@
 }
 
 .vellum-layer {
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(9, 9, 11, 0.8);
   transform: translateZ(calc(var(--layer-index, 0) * 20px));
   transition: transform 600ms var(--ease-curator);
 }
@@ -276,9 +273,7 @@
   bottom: var(--space-6);
   right: var(--space-6);
   padding: var(--space-4) var(--space-6);
-  background: rgba(24, 24, 27, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(24, 24, 27, 0.97);
   border: 1px solid rgba(184, 150, 78, 0.2);
   color: var(--color-dark-text);
   font-size: var(--text-small);

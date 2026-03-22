@@ -812,8 +812,7 @@ const partners: string[] = [
   text-transform: uppercase;
   color: var(--color-gold);
   padding: 2px 8px;
-  background: rgba(9, 9, 11, 0.7);
-  backdrop-filter: blur(8px);
+  background: rgba(9, 9, 11, 0.88);
   border: 1px solid rgba(184, 150, 78, 0.2);
 }
 

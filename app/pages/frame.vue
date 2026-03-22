@@ -643,9 +643,8 @@ const schedule: Screening[] = [
   font-weight: 500;
   letter-spacing: var(--tracking-wide);
   color: var(--color-dark-text);
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.85);
   padding: var(--space-1) var(--space-2);
-  backdrop-filter: blur(4px);
 }
 
 .programme-card-body {

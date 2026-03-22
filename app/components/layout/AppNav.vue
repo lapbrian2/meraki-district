@@ -292,8 +292,8 @@ onUnmounted(() => {
   right: 0;
   padding: var(--space-3) var(--content-padding);
   background-color: color-mix(in srgb, var(--color-background) 97%, transparent);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
   box-shadow: 0 1px 0 var(--rule-color);
   opacity: 0;
   visibility: hidden;

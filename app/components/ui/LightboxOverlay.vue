@@ -136,9 +136,7 @@ watch(() => panel.value, (el) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(9, 9, 11, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(9, 9, 11, 0.92);
   padding: 2rem;
 }
 
@@ -164,8 +162,7 @@ watch(() => panel.value, (el) => {
 }
 
 .lightbox-action {
-  background: rgba(9, 9, 11, 0.5);
-  backdrop-filter: blur(8px);
+  background: rgba(9, 9, 11, 0.8);
   border: none;
   color: rgba(250, 250, 249, 0.85);
   width: 36px;

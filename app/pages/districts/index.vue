@@ -375,8 +375,6 @@ useSeoMeta({
   border: 1.5px solid;
   margin-bottom: var(--space-3);
   align-self: flex-start;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 
 .dp-stamp-icon {

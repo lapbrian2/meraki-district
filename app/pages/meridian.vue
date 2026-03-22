@@ -868,8 +868,7 @@ const metrics: Metric[] = [
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--color-dark-text);
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.85);
   padding: var(--space-1) var(--space-2);
 }
 

@@ -20,6 +20,7 @@
           loop
           playsinline
           preload="none"
+          loading="lazy"
           poster="/images/hero-bg-new.webp"
         />
       </div>
@@ -490,9 +491,7 @@ const featuredArtists: Artist[] = [
 .fa-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(9, 9, 11, 0.35);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  background: rgba(9, 9, 11, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -508,7 +507,7 @@ const featuredArtists: Artist[] = [
   color: rgba(250, 250, 249, 0.9);
   border: 1px solid rgba(250, 250, 249, 0.4);
   padding: 0.4rem 1rem;
-  backdrop-filter: blur(4px);
+  background: rgba(9, 9, 11, 0.5);
 }
 
 .fa-info {
@@ -574,9 +573,7 @@ const featuredArtists: Artist[] = [
   position: absolute;
   bottom: calc(var(--space-8) * -0.5);
   left: calc(var(--space-6) * -0.5);
-  background: rgba(5, 5, 5, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(5, 5, 5, 0.92);
   padding: var(--space-6) var(--space-8);
   box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(184, 150, 78, 0.08);

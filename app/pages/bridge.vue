@@ -637,14 +637,11 @@ const opportunities: Opportunity[] = [
   position: absolute;
   bottom: -2rem;
   right: -1.5rem;
-  background: rgba(245, 245, 240, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(245, 245, 240, 0.97);
   border: 1px solid var(--rule-color);
   padding: var(--space-6);
   max-width: 280px;
-  box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.2),
-              0 0 24px -8px rgba(184, 150, 78, 0.06);
+  box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.2);
   transition: transform 0.5s var(--ease-curator), box-shadow 0.5s var(--ease-curator);
 }
 

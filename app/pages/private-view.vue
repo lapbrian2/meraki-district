@@ -916,8 +916,7 @@ const pastViews: PastView[] = [
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--color-dark-text);
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.85);
   padding: var(--space-1) var(--space-2);
 }
 
@@ -1159,9 +1158,7 @@ const pastViews: PastView[] = [
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--color-dark-text);
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.88);
   padding: var(--space-1) var(--space-3);
   border: 1px solid rgba(184, 150, 78, 0.25);
 }

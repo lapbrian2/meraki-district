@@ -808,8 +808,7 @@ const ritualPhases: RitualPhase[] = [
   font-size: 0.5625rem;
   letter-spacing: var(--tracking-wide);
   color: var(--color-dark-text);
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.85);
   padding: 2px 8px;
   z-index: 1;
   opacity: 0;

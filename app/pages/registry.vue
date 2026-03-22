@@ -719,9 +719,7 @@ const filteredEntries = computed(() => {
   letter-spacing: var(--tracking-mega-wide);
   text-transform: uppercase;
   color: var(--color-dark-text);
-  background: rgba(9, 9, 11, 0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(9, 9, 11, 0.88);
   padding: 2px 8px;
   opacity: 0;
   transition: opacity 0.3s ease;

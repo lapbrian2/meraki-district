@@ -214,7 +214,7 @@
 
 /* Spatial depth inset shadow (Stitch vignette) */
 .spatial-depth {
-  box-shadow: inset 0 30px 60px -20px rgba(0,0,0,0.25), inset 0 -30px 60px -20px rgba(0,0,0,0.2);
+  box-shadow: inset 0 0 60px -20px rgba(0,0,0,0.3);
 }
 
 /* Clip-path text reveal */
@@ -270,16 +270,16 @@
   -webkit-mask-size: 200% 100%;
   mask-position: 100% 0;
   -webkit-mask-position: 100% 0;
-  filter: blur(4px);
+  opacity: 0;
   transition: mask-position 1.2s cubic-bezier(0.19, 1, 0.22, 1),
               -webkit-mask-position 1.2s cubic-bezier(0.19, 1, 0.22, 1),
-              filter 0.8s ease;
+              opacity 0.8s ease;
 }
 
 .ink-reveal.is-visible {
   mask-position: 0% 0;
   -webkit-mask-position: 0% 0;
-  filter: blur(0px);
+  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -293,11 +293,9 @@
 
 /* ─── Vellum Card Layering (Stitch refined) ─── */
 .vellum-card {
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: rgba(24, 24, 27, 0.85);
   border: 1px solid rgba(184, 150, 78, 0.08);
-  box-shadow: 0 40px 100px -20px rgba(0,0,0,0.7);
+  box-shadow: 0 20px 60px -20px rgba(0,0,0,0.5);
   transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
               border-color 0.5s ease,
               box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -306,7 +304,7 @@
 .vellum-card:hover {
   transform: translateY(-6px);
   border-color: rgba(184, 150, 78, 0.25);
-  box-shadow: 0 16px 48px -8px rgba(0,0,0,0.45), 0 0 32px -8px rgba(184, 150, 78, 0.12);
+  box-shadow: 0 16px 48px -8px rgba(0,0,0,0.45);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -326,7 +324,7 @@
 }
 .lift-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 60px -10px rgba(0,0,0,0.5), 0 0 40px -10px rgba(184, 150, 78, 0.15);
+  box-shadow: 0 20px 60px -10px rgba(0,0,0,0.5);
 }
 @media (prefers-reduced-motion: reduce) {
   .lift-card { transition: none; }
@@ -353,10 +351,7 @@
   z-index: 1;
 }
 
-/* ─── Stitch: Bento Shadow (deep inset for image containers) ─── */
-.bento-shadow {
-  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8);
-}
+/* ─── Stitch: Bento Shadow — REMOVED for GPU performance ─── */
 
 /* ─── Stitch: Institutional Border (subtle gold hairline) ─── */
 .institutional-border {
@@ -365,9 +360,7 @@
 
 /* ─── Stitch: Glass Surface (frosted panel) ─── */
 .glass-surface {
-  background: rgba(9, 9, 11, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(9, 9, 11, 0.9);
   border: 1px solid rgba(184, 150, 78, 0.05);
 }
 
@@ -385,5 +378,5 @@
   transition: box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .gold-glow-hover:hover {
-  box-shadow: 0 8px 40px -8px rgba(184, 150, 78, 0.2), 0 0 0 1px rgba(184, 150, 78, 0.12);
+  box-shadow: 0 8px 40px -8px rgba(184, 150, 78, 0.2);
 }
