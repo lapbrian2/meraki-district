@@ -77,9 +77,19 @@ onMounted(async () => {
       .fromTo('.hero-title-accent', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.2, ease: 'power4.out' }, 0.7)
       .fromTo('.hero-sub', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.9 }, 1.0)
       .fromTo('.hero-ctas', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 }, 1.3)
-      .fromTo('.hero-image-block', { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 1.4, ease: 'power2.out' }, 0.4)
-      .fromTo('.hero-image-quote', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.7 }, 1.6)
       .fromTo('.hero-scroll', { opacity: 0 }, { opacity: 1, duration: 0.8 }, 1.8)
+
+    // Parallax: background image moves slower than content on scroll
+    gsap.to('.hero-bg-image', {
+      yPercent: 20,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      },
+    })
 
   }, hero.value)
 })
@@ -110,38 +120,34 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(60%) sepia(15%) contrast(1.1) brightness(0.45);
-  opacity: 0.8;
+  filter: sepia(10%) contrast(1.05);
+  transition: transform 8s ease-out;
 }
 
-.hero-layout {
-  position: relative;
-  z-index: 1;
-  padding: var(--space-24) var(--content-padding);
-  position: relative;
-  overflow: hidden;
-  background: #09090B;
+/* Slow Ken Burns drift on load */
+.hero:hover .hero-bg-image {
+  transform: scale(1.03);
 }
 
+/* Gradient overlay — dark at bottom/left for text, transparent at top/right to show image */
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 40%, rgba(184,150,78,0.06) 100%);
+  background:
+    linear-gradient(to right, rgba(9,9,11,0.85) 0%, rgba(9,9,11,0.5) 50%, rgba(9,9,11,0.2) 100%),
+    linear-gradient(to top, rgba(9,9,11,0.9) 0%, transparent 40%);
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
-/* Asymmetric two-column layout */
+/* Layout — single column, text left, image shows through on right */
 .hero-layout {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: var(--width-wide);
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 0.8fr;
-  gap: var(--space-16);
-  align-items: center;
+  padding: var(--space-24) var(--content-padding);
   width: 100%;
 }
 
@@ -168,7 +174,7 @@ onUnmounted(() => {
   margin-bottom: var(--space-8);
   text-align: left;
   animation-delay: 0.4s;
-  text-shadow: 0 2px 40px rgba(184,150,78,0.15);
+  text-shadow: 0 2px 40px rgba(184,150,78,0.15), 0 4px 20px rgba(0,0,0,0.5);
 }
 
 .hero-title-line {
@@ -183,12 +189,13 @@ onUnmounted(() => {
 
 .hero-sub {
   font-size: var(--text-body);
-  color: var(--color-dark-muted);
+  color: var(--color-dark-text);
   max-width: 42ch;
   font-weight: 400;
   line-height: var(--leading-relaxed);
   margin-bottom: var(--space-12);
   text-align: left;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 
 /* Dual CTA */
