@@ -411,7 +411,7 @@ useSeoMeta({
   margin-bottom: var(--space-8);
   transition: border-color 0.5s var(--ease-vellum),
               box-shadow 0.5s var(--ease-vellum);
-              0 4px 40px -12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 40px -12px rgba(0,0,0,0.3);
 }
 
 .dp-hero-card:last-of-type {
@@ -420,8 +420,7 @@ useSeoMeta({
 
 .dp-hero-card:hover {
   border-color: rgba(184, 150, 78, 0.4);
-              0 20px 60px -20px rgba(0,0,0,0.5),
-              0 0 40px -10px rgba(184, 150, 78, 0.08);
+  box-shadow: 0 20px 60px -20px rgba(0,0,0,0.5);
 }
 
 /* Flip image/content sides on alternate cards */

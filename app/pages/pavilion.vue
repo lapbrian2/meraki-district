@@ -1029,7 +1029,7 @@ const partners: string[] = [
 
 .store-card:hover {
   border-color: rgba(184, 150, 78, 0.2);
-              0 0 40px -10px rgba(184, 150, 78, 0.06);
+  box-shadow: 0 0 40px -10px rgba(184, 150, 78, 0.06);
 }
 
 .store-icon { font-size: 32px; color: var(--color-gold); margin-bottom: var(--space-6); }
