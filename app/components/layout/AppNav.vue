@@ -131,6 +131,7 @@ const mobileLinks = [
   { to: '/collective', label: 'Collective' },
   { to: '/atelier', label: 'Atelier' },
   { to: '/about', label: 'About' },
+  { to: '/ikigai', label: 'Ikigai' },
   { to: '/standards', label: 'Standards' },
   { to: '/founders', label: 'Founders' },
   { to: '/manifesto', label: 'Manifesto' },

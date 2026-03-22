@@ -5,6 +5,7 @@
          HERO — The ritual begins
     ============================================= -->
     <section ref="heroSection" class="apply-hero section section-dark">
+      <div class="hero-atmosphere" aria-hidden="true" />
       <div class="section-default">
         <p class="overline reveal">Application</p>
         <h1 class="apply-hero-title word-reveal">
@@ -48,7 +49,7 @@
           </div>
         </div>
 
-        <p class="response-timeline reveal">Response within 14 days</p>
+        <p class="response-timeline stamped-overline reveal">Response within 14 days</p>
       </div>
     </section>
 
@@ -69,15 +70,18 @@
 
         <form class="entry-form reveal" @submit.prevent="submit" aria-label="Entry request signup">
           <div class="entry-form-row">
-            <input
-              v-model="email"
-              type="email"
-              placeholder="your@email.com"
-              class="entry-input"
-              aria-label="Email address"
-              :disabled="status === 'success'"
-              @focus="reset"
-            />
+            <div class="entry-input-wrap">
+              <input
+                v-model="email"
+                type="email"
+                placeholder="your@email.com"
+                class="entry-input"
+                aria-label="Email address"
+                :disabled="status === 'success'"
+                @focus="reset"
+              />
+              <span class="entry-input-border" aria-hidden="true" />
+            </div>
             <button
               type="submit"
               class="entry-btn"
@@ -227,6 +231,29 @@ const steps = [
   align-items: flex-end;
   position: relative;
   background: radial-gradient(circle at center, rgba(148, 67, 40, 0.08) 0%, rgba(10, 10, 10, 1) 70%);
+  overflow: hidden;
+}
+
+.hero-atmosphere {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(184,150,78,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(148,67,40,0.03) 0%, transparent 50%);
+  animation: atmosphereShift 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes atmosphereShift {
+  0% {
+    background-position: 0% 0%, 100% 100%;
+  }
+  50% {
+    background-position: 100% 100%, 0% 0%;
+  }
+  100% {
+    background-position: 0% 0%, 100% 100%;
+  }
 }
 
 .apply-hero-title {
@@ -260,6 +287,11 @@ const steps = [
   font-style: italic;
   color: var(--color-dark-text);
   margin-top: var(--space-4);
+}
+
+.apply-process .section-default {
+  display: flex;
+  flex-direction: column;
 }
 
 .process-steps {
@@ -299,6 +331,12 @@ const steps = [
     rgba(184, 150, 78, 0.1)
   );
   min-height: 3rem;
+  animation: connectorPulse 3s ease-in-out infinite;
+}
+
+@keyframes connectorPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
 }
 
 .step-content {
@@ -368,6 +406,11 @@ const steps = [
   gap: var(--space-4);
 }
 
+.entry-input-wrap {
+  position: relative;
+  width: 100%;
+}
+
 .entry-input {
   width: 100%;
   padding: var(--space-4) 0;
@@ -386,13 +429,29 @@ const steps = [
 }
 
 .entry-input:focus {
-  border-color: var(--color-gold);
+  border-color: transparent;
   outline: none;
 }
 
 .entry-input:focus-visible {
   outline: 2px solid var(--color-gold);
   outline-offset: 4px;
+}
+
+.entry-input-border {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  background: var(--color-gold);
+  transform: translateX(-50%);
+  transition: width 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+  pointer-events: none;
+}
+
+.entry-input:focus ~ .entry-input-border {
+  width: 100%;
 }
 
 .entry-input:disabled {
@@ -449,11 +508,15 @@ const steps = [
   font-size: var(--text-caption);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  color: var(--color-dark-muted);
+  color: var(--color-gold);
   text-align: center;
   margin-top: var(--space-8);
-  padding-top: var(--space-6);
-  border-top: 1px solid rgba(184, 150, 78, 0.15);
+  padding: 6px 16px;
+  border: 1px solid rgba(184, 150, 78, 0.3);
+  display: inline-block;
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ─── Image reveal transition ─── */
@@ -473,6 +536,14 @@ const steps = [
   }
   .step-connector {
     transform: none;
+    animation: none;
+    opacity: 0.4;
+  }
+  .hero-atmosphere {
+    animation: none;
+  }
+  .entry-input-border {
+    transition: none;
   }
 }
 

@@ -15,6 +15,7 @@
           height="900"
         />
         <div class="hero-overlay" />
+        <div class="hero-vignette" />
         <div class="hero-content section-wide">
           <div class="hero-meta reveal">
             <span class="seal-base" :class="`seal-${creator.seal.toLowerCase()}`">
@@ -43,6 +44,32 @@
       </div>
     </section>
 
+    <!-- ============================================
+         EXHIBITION METADATA — Key stats row
+    ============================================= -->
+    <section ref="metadataSection" class="monograph-metadata section section-dark">
+      <div class="section-default">
+        <div class="metadata-grid">
+          <div class="metadata-card reveal">
+            <span class="metadata-label">District</span>
+            <span class="metadata-value">Voight Studio</span>
+          </div>
+          <div class="metadata-card reveal">
+            <span class="metadata-label">Seal</span>
+            <span class="metadata-value">{{ creator.seal }}</span>
+          </div>
+          <div class="metadata-card reveal">
+            <span class="metadata-label">Portfolio Entries</span>
+            <span class="metadata-value">{{ creator.portfolio.length }}</span>
+          </div>
+          <div class="metadata-card reveal">
+            <span class="metadata-label">Total Interactions</span>
+            <span class="metadata-value">{{ creator.metricValue }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <SectionDivider />
 
     <!-- ============================================
@@ -63,7 +90,7 @@
             :class="`gallery-entry--${(i % 3) + 1}`"
           >
             <span class="gallery-plate-number">Plate No. {{ String(i + 1).padStart(3, '0') }}</span>
-            <div class="gallery-plate grayscale-hover">
+            <div class="gallery-plate">
               <span v-if="i === 0" class="gallery-curators-selection">Curator&rsquo;s Selection</span>
               <NuxtImg
                 :src="work.image"
@@ -125,9 +152,14 @@
           Commissions, consultations, and collaborative projects are arranged
           through The Bridge. All inquiries are reviewed by the practitioner directly.
         </p>
-        <NuxtLink to="/bridge" class="cta-button-gold reveal">
-          Commission This Practitioner &rarr;
-        </NuxtLink>
+        <div class="cta-buttons reveal">
+          <NuxtLink to="/bridge" class="cta-button-gold">
+            Commission Work &rarr;
+          </NuxtLink>
+          <NuxtLink to="/bridge" class="cta-button-ghost">
+            View on Bridge
+          </NuxtLink>
+        </div>
       </div>
     </section>
 
@@ -279,6 +311,7 @@ useSeoMeta({
 /* -- Section refs ------------------------------- */
 const heroSection = ref<HTMLElement | null>(null)
 const statementSection = ref<HTMLElement | null>(null)
+const metadataSection = ref<HTMLElement | null>(null)
 const gallerySection = ref<HTMLElement | null>(null)
 const curatorSection = ref<HTMLElement | null>(null)
 const metricsSection = ref<HTMLElement | null>(null)
@@ -288,6 +321,8 @@ useGsapScrollReveal(heroSection, '.reveal')
 useWordReveal(heroSection, '.word-reveal')
 
 useGsapScrollReveal(statementSection, '.reveal', { stagger: 0.1 })
+
+useGsapScrollReveal(metadataSection, '.reveal', { stagger: 0.1 })
 
 useGsapScrollReveal(gallerySection, '.reveal', { stagger: 0.15 })
 useWordReveal(gallerySection, '.word-reveal')
@@ -336,6 +371,14 @@ useWordReveal(ctaSection, '.word-reveal')
   );
 }
 
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
 .hero-content {
   position: relative;
   z-index: 1;
@@ -366,6 +409,7 @@ useWordReveal(ctaSection, '.word-reveal')
   letter-spacing: var(--tracking-hero);
   line-height: var(--leading-display);
   color: var(--color-dark-text);
+  text-shadow: 0 4px 60px rgba(0,0,0,0.8);
 }
 
 /* ─── Artist Statement ─── */
@@ -431,9 +475,10 @@ useWordReveal(ctaSection, '.word-reveal')
   font-weight: 400;
   letter-spacing: var(--tracking-mega-wide);
   text-transform: uppercase;
-  color: var(--color-dark-muted);
+  color: var(--color-gold);
   display: block;
   margin-bottom: var(--space-3);
+  opacity: 0.7;
 }
 
 .gallery-plate {
@@ -463,6 +508,13 @@ useWordReveal(ctaSection, '.word-reveal')
   display: block;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.gallery-plate:hover .gallery-image {
+  filter: grayscale(0);
+  transform: scale(1.02);
 }
 
 .gallery-caption {
@@ -599,6 +651,86 @@ useWordReveal(ctaSection, '.word-reveal')
   outline-offset: 4px;
 }
 
+/* ─── Exhibition Metadata ─── */
+.metadata-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+
+.metadata-card {
+  border: 1px solid rgba(184, 150, 78, 0.2);
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.metadata-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--color-dark-muted);
+}
+
+.metadata-value {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-dark-text);
+}
+
+/* ─── CTA Buttons ─── */
+.cta-buttons {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cta-button-ghost {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  padding: var(--space-4) var(--space-8);
+  border: 1px solid rgba(184, 150, 78, 0.4);
+  color: var(--color-gold);
+  background: transparent;
+  transition: border-color var(--duration-normal) ease,
+              background-color var(--duration-normal) ease;
+}
+
+.cta-button-ghost:hover {
+  border-color: var(--color-gold);
+  background: rgba(184, 150, 78, 0.08);
+}
+
+.cta-button-ghost:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-name {
+    text-shadow: none;
+  }
+  .gallery-image {
+    transition: none;
+  }
+  .gallery-plate:hover .gallery-image {
+    transform: none;
+  }
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 768px) {
   .monograph-hero {
@@ -633,6 +765,21 @@ useWordReveal(ctaSection, '.word-reveal')
   .monograph-cta {
     padding-top: var(--space-24);
     padding-bottom: var(--space-24);
+  }
+
+  .metadata-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cta-button-gold,
+  .cta-button-ghost {
+    width: 100%;
+    text-align: center;
   }
 }
 </style>
