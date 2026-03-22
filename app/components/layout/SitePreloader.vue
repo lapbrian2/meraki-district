@@ -204,9 +204,13 @@ function finish() {
 @keyframes inkAbsorb {
   from {
     opacity: 0;
+    filter: blur(4px);
+    transform: translateY(4px);
   }
   to {
     opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
   }
 }
 
@@ -231,18 +235,22 @@ function finish() {
 @keyframes protocolFade {
   from {
     opacity: 0;
+    filter: blur(3px);
   }
   to {
     opacity: 0.5;
+    filter: blur(0);
   }
 }
 
 @keyframes contentFade {
   from {
     opacity: 1;
+    filter: blur(0);
   }
   to {
     opacity: 0;
+    filter: blur(6px);
   }
 }
 
