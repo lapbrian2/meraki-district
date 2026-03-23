@@ -1,299 +1,278 @@
 <template>
-  <div v-if="visible" ref="preloaderRef" class="preloader" :class="{ 'preloader--exit': exiting }">
-    <div class="preloader-content">
-      <h1 class="preloader-title">
-        <span
-          v-for="(letter, i) in letters"
-          :key="i"
-          class="preloader-letter"
-          :style="{ animationDelay: `${i * 120}ms` }"
-        >{{ letter }}</span>
-      </h1>
-      <div class="preloader-line" />
-      <p class="preloader-subtitle">ROAD</p>
-      <p class="preloader-protocol">Establishing archival connection&hellip;</p>
-    </div>
-    <div class="preloader-curtain preloader-curtain--top" />
-    <div class="preloader-curtain preloader-curtain--bottom" />
+  <div v-if="visible" ref="preloaderRef" class="ritual" :class="{ 'ritual--exit': exiting }" @click="enter">
+    <!-- Vignette overlay -->
+    <div class="ritual-vignette" />
+    <!-- Paper texture -->
+    <div class="ritual-texture" />
+
+    <!-- Central monolith -->
+    <section class="ritual-center">
+      <h1 class="ritual-title">MERAKI ROAD</h1>
+      <p class="ritual-tagline">WHERE CRAFT MEETS CULTURE</p>
+      <div class="ritual-divider" />
+      <a class="ritual-enter" href="#">ENTRANCE</a>
+    </section>
+
+    <!-- District list at bottom -->
+    <aside class="ritual-districts">
+      <span v-for="(d, i) in districts" :key="d">
+        <template v-if="i > 0"><span class="ritual-dot">·</span></template>
+        {{ d }}
+      </span>
+    </aside>
+
+    <!-- Footer -->
+    <footer class="ritual-footer">
+      <span>© MMXXVI MERAKI ROAD</span>
+    </footer>
   </div>
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits<{
-  complete: []
-}>()
+const emit = defineEmits<{ complete: [] }>()
 
 const preloaderRef = ref<HTMLElement | null>(null)
 const visible = ref(true)
 const exiting = ref(false)
-const letters = 'MERAKI'.split('')
 
-// Skip if already shown this session
-const alreadyShown = ref(false)
+const districts = [
+  'I. MERAKI ROAD',
+  'II. IKIGAI LAB',
+  'III. MERAKI INSTITUTE',
+  'IV. PUBLISHING HOUSE',
+  'V. MERAKI STUDIO',
+  'VI. THE PROVENANCE',
+  'VII. THE PAVILION',
+  'VIII. THE BRIDGE',
+  'IX. THE SEAL',
+  'X. THE CIRCUIT',
+  'XI. THE COLLECTIVE',
+  'XII. FASHION ATELIER',
+]
 
 onMounted(() => {
   try {
     if (sessionStorage.getItem('meraki-preloader-shown')) {
-      alreadyShown.value = true
       visible.value = false
       emit('complete')
       return
     }
-  } catch {
-    // sessionStorage unavailable (private browsing) — show preloader anyway
-  }
+  } catch {}
 
-  // Block body scroll during preloader
   document.body.style.overflow = 'hidden'
 
-  // Check for reduced motion preference
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-  if (prefersReduced) {
-    // Show content briefly, then exit quickly
-    setTimeout(() => {
-      finish()
-    }, 500)
-    return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setTimeout(() => finish(), 500)
   }
-
-  // Show the animation for 2.5s, then exit with 1s curtain reveal
-  setTimeout(() => {
-    exiting.value = true
-  }, 2500)
-
-  setTimeout(() => {
-    finish()
-  }, 3500)
 })
+
+function enter() {
+  exiting.value = true
+  setTimeout(() => finish(), 800)
+}
 
 function finish() {
   visible.value = false
   document.body.style.overflow = ''
-
-  try {
-    sessionStorage.setItem('meraki-preloader-shown', '1')
-  } catch {
-    // sessionStorage unavailable — silently ignore
-  }
-
+  try { sessionStorage.setItem('meraki-preloader-shown', '1') } catch {}
   emit('complete')
 }
 </script>
 
 <style scoped>
-.preloader {
+.ritual {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: radial-gradient(circle at center, #0e0e10 20%, rgba(14,14,16,0.98) 100%);
+  background: #0e0e10;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
 }
 
-.preloader-content {
+.ritual-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, transparent 20%, rgba(14,14,16,0.95) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ritual-texture {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  z-index: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(231, 194, 117, 0.03) 2px,
+    rgba(231, 194, 117, 0.03) 3px
+  );
+}
+
+.ritual-center {
+  position: relative;
+  z-index: 10;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0;
+  animation: ritualFadeIn 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
-.preloader-title {
+.ritual-title {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 6rem);
   font-style: italic;
   font-weight: 300;
-  color: var(--color-dark-text);
-  letter-spacing: var(--tracking-tight);
-  line-height: 1;
-  margin: 0;
-  display: flex;
-}
-
-.preloader-letter {
-  opacity: 0;
-  animation: inkAbsorb 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-  display: inline-block;
+  font-size: clamp(4rem, 12vw, 10rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: #e5e1e4;
   text-shadow: 0 0 30px rgba(231, 194, 117, 0.2);
+  margin: 0;
+  user-select: none;
 }
 
-.preloader-line {
-  width: clamp(120px, 20vw, 200px);
-  height: 1px;
-  background: var(--color-gold);
-  margin-top: 1rem;
-  transform: scaleX(0);
-  transform-origin: center;
-  animation: lineGrow 0.7s cubic-bezier(0.19, 1, 0.22, 1) 1.8s forwards;
-}
-
-.preloader-subtitle {
+.ritual-tagline {
   font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.3em;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.6em;
   text-transform: uppercase;
-  color: var(--color-dark-secondary, #D4D4D8);
-  margin: 0.75rem 0 0;
-  opacity: 0;
-  animation: subtitleFade 0.5s ease 2.3s forwards;
+  color: rgba(229, 225, 228, 0.4);
+  margin: 1.5rem 0 0;
 }
 
-.preloader-protocol {
-  font-family: var(--font-mono, 'JetBrains Mono', monospace);
-  font-size: 0.625rem;
+.ritual-divider {
+  width: 0;
+  height: 1px;
+  background: var(--color-gold, #B8964E);
+  margin: 2rem 0;
+  animation: dividerGrow 0.8s cubic-bezier(0.19, 1, 0.22, 1) 1s forwards;
+}
+
+.ritual-enter {
+  font-family: var(--font-body);
+  font-size: 11px;
   font-weight: 400;
-  letter-spacing: 0.12em;
-  color: var(--color-dark-muted, #71717A);
-  margin: 1.25rem 0 0;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-gold, #B8964E);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
   opacity: 0;
-  animation: protocolFade 0.4s ease 2.6s forwards;
+  animation: ritualFadeIn 0.6s ease 1.5s forwards;
+  transition: letter-spacing 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  position: relative;
 }
 
-/* Curtain reveal panels */
-.preloader-curtain {
+.ritual-enter::after {
+  content: '';
   position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--color-gold, #B8964E);
+  transition: width 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  transform: translateX(-50%);
+}
+
+.ritual-enter:hover {
+  letter-spacing: 0.6em;
+}
+
+.ritual-enter:hover::after {
+  width: 120%;
+}
+
+.ritual-districts {
+  position: absolute;
+  bottom: 6rem;
   left: 0;
   right: 0;
-  height: 50%;
-  background: var(--color-background);
-  z-index: 1;
-  transform: scaleY(0);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0 3rem;
+  opacity: 0;
+  animation: ritualFadeIn 0.8s ease 2s forwards;
 }
 
-.preloader-curtain--top {
-  top: 0;
-  transform-origin: top center;
+.ritual-districts span {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(229, 225, 228, 0.15);
+  white-space: nowrap;
 }
 
-.preloader-curtain--bottom {
-  bottom: 0;
-  transform-origin: bottom center;
+.ritual-dot {
+  color: var(--color-gold, #B8964E);
+  margin: 0 0.25rem;
 }
 
-/* Exit: curtains slide apart to reveal page */
-.preloader--exit .preloader-content {
-  animation: contentFade 0.6s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+.ritual-footer {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  text-align: center;
+  opacity: 0;
+  animation: ritualFadeIn 0.5s ease 2.5s forwards;
 }
 
-.preloader--exit .preloader-curtain {
-  transform: scaleY(1);
-  animation: curtainReveal 0.8s cubic-bezier(0.76, 0, 0.24, 1) 0.4s forwards;
+.ritual-footer span {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(229, 225, 228, 0.2);
 }
 
-.preloader--exit {
-  animation: preloaderFinal 0.1s linear 1.2s forwards;
+/* Exit */
+.ritual--exit {
+  animation: ritualExit 0.8s cubic-bezier(0.76, 0, 0.24, 1) forwards;
 }
 
-/* ─── Keyframes ─── */
-
-@keyframes inkAbsorb {
-  from {
-    opacity: 0;
-    filter: blur(4px);
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0);
-  }
+/* Keyframes */
+@keyframes ritualFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes lineGrow {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
+@keyframes dividerGrow {
+  from { width: 0; }
+  to { width: clamp(120px, 20vw, 240px); }
 }
 
-@keyframes subtitleFade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+@keyframes ritualExit {
+  0% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.02); visibility: hidden; pointer-events: none; }
 }
 
-@keyframes protocolFade {
-  from {
-    opacity: 0;
-    filter: blur(3px);
-  }
-  to {
-    opacity: 0.5;
-    filter: blur(0);
-  }
-}
-
-@keyframes contentFade {
-  from {
-    opacity: 1;
-    filter: blur(0);
-  }
-  to {
-    opacity: 0;
-    filter: blur(6px);
-  }
-}
-
-@keyframes curtainReveal {
-  from {
-    transform: scaleY(1);
-  }
-  to {
-    transform: scaleY(0);
-  }
-}
-
-@keyframes preloaderFinal {
-  to {
-    visibility: hidden;
-    pointer-events: none;
-  }
-}
-
-/* ─── Reduced Motion ─── */
-
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .preloader-letter {
-    opacity: 1;
-    filter: none;
-    animation: none;
-  }
+  .ritual-center,
+  .ritual-enter,
+  .ritual-districts,
+  .ritual-footer { animation: none; opacity: 1; }
+  .ritual-divider { animation: none; width: clamp(120px, 20vw, 240px); }
+  .ritual--exit { animation: none; transition: opacity 0.3s ease; }
+}
 
-  .preloader-line {
-    transform: scaleX(1);
-    animation: none;
-  }
-
-  .preloader-subtitle {
-    opacity: 1;
-    animation: none;
-  }
-
-  .preloader-protocol {
-    opacity: 0.5;
-    animation: none;
-  }
-
-  .preloader--exit {
-    animation: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .preloader--exit .preloader-content {
-    animation: none;
-  }
-
-  .preloader--exit .preloader-curtain {
-    animation: none;
-    display: none;
-  }
+/* Mobile */
+@media (max-width: 768px) {
+  .ritual-districts { display: none; }
+  .ritual-title { font-size: clamp(2.5rem, 15vw, 5rem); }
 }
 </style>
