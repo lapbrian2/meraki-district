@@ -313,6 +313,8 @@ useGsapScrollReveal(ctaSection, '.reveal')
 useWordReveal(ctaSection, '.word-reveal', { stagger: 0.08 })
 
 /* -- Curator's Loupe ---------------------------- */
+let loupeCleanup: (() => void) | null = null
+
 onMounted(() => {
   if (!import.meta.client) return
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -330,42 +332,40 @@ onMounted(() => {
   loupe.appendChild(loupeImg)
 
   const imageWraps = grid.querySelectorAll('.exhibition-image-wrap')
+  const handlers: Array<{ el: HTMLElement; type: string; fn: EventListener }> = []
 
   imageWraps.forEach((wrap) => {
     const wrapEl = wrap as HTMLElement
     const imgEl = wrapEl.querySelector('img')
 
-    wrapEl.addEventListener('mouseenter', () => {
+    const onEnter = () => {
       const src = imgEl?.getAttribute('src') || ''
       loupeImg.style.backgroundImage = `url(${src})`
       loupe.classList.add('active')
-    })
-
-    wrapEl.addEventListener('mousemove', (e: MouseEvent) => {
+    }
+    const onMove = (e: Event) => {
+      const me = e as MouseEvent
       const gridRect = (grid as HTMLElement).getBoundingClientRect()
       const wrapRect = wrapEl.getBoundingClientRect()
-
-      const mouseX = e.clientX - gridRect.left
-      const mouseY = e.clientY - gridRect.top
-
-      gsap.to(loupe, {
-        left: mouseX - 60,
-        top: mouseY - 60,
-        duration: 0.3,
-        ease: 'power2.out',
-      })
-
-      const relX = ((e.clientX - wrapRect.left) / wrapRect.width) * 100
-      const relY = ((e.clientY - wrapRect.top) / wrapRect.height) * 100
-      loupeImg.style.backgroundPosition = `${relX}% ${relY}%`
+      gsap.to(loupe, { left: me.clientX - gridRect.left - 60, top: me.clientY - gridRect.top - 60, duration: 0.3, ease: 'power2.out' })
+      loupeImg.style.backgroundPosition = `${((me.clientX - wrapRect.left) / wrapRect.width) * 100}% ${((me.clientY - wrapRect.top) / wrapRect.height) * 100}%`
       loupeImg.style.backgroundSize = `${wrapRect.width * 1.1}px ${wrapRect.height * 1.1}px`
-    })
+    }
+    const onLeave = () => { loupe.classList.remove('active') }
 
-    wrapEl.addEventListener('mouseleave', () => {
-      loupe.classList.remove('active')
-    })
+    wrapEl.addEventListener('mouseenter', onEnter)
+    wrapEl.addEventListener('mousemove', onMove)
+    wrapEl.addEventListener('mouseleave', onLeave)
+    handlers.push({ el: wrapEl, type: 'mouseenter', fn: onEnter }, { el: wrapEl, type: 'mousemove', fn: onMove }, { el: wrapEl, type: 'mouseleave', fn: onLeave })
   })
+
+  loupeCleanup = () => {
+    handlers.forEach(h => h.el.removeEventListener(h.type, h.fn))
+    loupe.remove()
+  }
 })
+
+onUnmounted(() => { loupeCleanup?.() })
 
 /* -- Data --------------------------------------- */
 interface Exhibition {

@@ -1,6 +1,5 @@
 <template>
   <div class="layout">
-    <Preloader />
     <a href="#main-content" class="skip-to-content">Skip to content</a>
     <AppNav />
     <main id="main-content">
