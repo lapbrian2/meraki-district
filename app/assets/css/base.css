@@ -14,12 +14,16 @@ html.lenis, html.lenis body {
   scroll-behavior: auto !important;
 }
 
+html {
+  background-color: var(--color-background);
+}
+
 body {
   font-family: var(--font-body);
   font-size: var(--text-body);
   line-height: var(--leading-normal);
   color: var(--color-text);
-  background-color: var(--color-background);
+  background-color: transparent;
 }
 
 /* Typography */
