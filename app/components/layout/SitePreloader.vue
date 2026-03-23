@@ -86,7 +86,7 @@ function finish() {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: var(--color-background);
+  background: radial-gradient(circle at center, #0e0e10 20%, rgba(14,14,16,0.98) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,6 +115,7 @@ function finish() {
   opacity: 0;
   animation: inkAbsorb 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards;
   display: inline-block;
+  text-shadow: 0 0 30px rgba(231, 194, 117, 0.2);
 }
 
 .preloader-line {
@@ -124,7 +125,7 @@ function finish() {
   margin-top: 1rem;
   transform: scaleX(0);
   transform-origin: center;
-  animation: lineGrow 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards;
+  animation: lineGrow 0.7s cubic-bezier(0.19, 1, 0.22, 1) 1.8s forwards;
 }
 
 .preloader-subtitle {
