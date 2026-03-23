@@ -294,8 +294,8 @@
             </p>
           </div>
           <div class="network-right reveal">
-            <NuxtLink to="/apply" class="network-link-primary">Connect With Talent &rarr;</NuxtLink>
-            <NuxtLink to="#" class="network-link-secondary">Request Media Kit &rarr;</NuxtLink>
+            <NuxtLink to="/bridge/intake" class="network-link-primary">Submit a Project Brief &rarr;</NuxtLink>
+            <NuxtLink to="/apply" class="network-link-secondary">Connect With Talent &rarr;</NuxtLink>
           </div>
         </div>
       </div>

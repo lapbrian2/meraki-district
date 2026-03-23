@@ -2,22 +2,45 @@
   <div class="mint-page">
 
     <!-- ============================================
-         HERO — Full-width, centered
+         HERO — The Ritual of Acquisition
     ============================================= -->
     <section ref="heroSection" class="mint-hero section section-dark">
       <div class="section-narrow">
-        <span class="stamped-overline reveal">District 08</span>
+        <span class="stamped-overline reveal">The Pavilion Store &mdash; District 08</span>
         <h1 class="mint-hero-title word-reveal">
-          <em>The Pavilion Store</em>
+          <em>The Ritual of Acquisition</em>
         </h1>
         <p class="mint-hero-sub reveal">
-          An archival marketplace for verified creative artifacts.
-          Each piece is authenticated, cataloged, and traced back to
-          its maker — because provenance is the only currency that appreciates.
+          Every object in this archive was made with intention. Acquiring it should
+          feel the same way. No carts. No impulse. You choose a piece,
+          and the piece chooses its moment.
         </p>
         <p class="mint-hero-sub reveal">
-          Home of <strong>Meraki Mint</strong> — our limited edition line of curated artifacts and collectibles.
+          Home of <strong>Meraki Mint</strong> &mdash; limited edition artifacts released
+          in numbered sequences, each carrying full chain-of-custody documentation
+          from workshop to vault.
         </p>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ============================================
+         PHILOSOPHY — The Three Tenets
+    ============================================= -->
+    <section ref="philosophySection" class="ritual-philosophy section">
+      <div class="section-wide">
+        <div class="philosophy-header">
+          <p class="overline reveal">The Protocol</p>
+          <h2 class="philosophy-title word-reveal"><em>Three tenets of considered acquisition</em></h2>
+        </div>
+        <div class="tenets-grid">
+          <article v-for="tenet in tenets" :key="tenet.title" class="tenet-card vellum-card reveal">
+            <span class="tenet-numeral">{{ tenet.numeral }}</span>
+            <h3 class="tenet-title">{{ tenet.title }}</h3>
+            <p class="tenet-body">{{ tenet.body }}</p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -26,7 +49,7 @@
     <!-- ============================================
          FEATURED ACQUISITION — Large hero product card
     ============================================= -->
-    <section ref="featuredSection" class="featured-acquisition section">
+    <section ref="featuredSection" class="featured-acquisition section section-dark">
       <div class="section-wide">
         <div class="featured-product-card reveal">
           <div class="featured-product-image grayscale-hover parallax-container">
@@ -43,7 +66,7 @@
               <span class="featured-product-id">MR-A-048</span>
               <span class="featured-product-date">March 2026</span>
             </div>
-            <p class="overline reveal">Featured Acquisition</p>
+            <p class="overline reveal">Current Sequence</p>
             <h2 class="featured-product-title word-reveal"><em>Botanical Monograph No. 04</em></h2>
             <p class="featured-product-edition reveal">Limited Edition &mdash; 12 of 12 remaining</p>
             <p class="featured-product-desc reveal">
@@ -55,12 +78,12 @@
             </p>
             <p class="featured-curator-note reveal">
               <span class="material-symbols-outlined curator-note-icon">edit_note</span>
-              <em>Curator&rsquo;s note:</em> This folio represents the intersection of
-              botanical illustration tradition and generative systems. The seed-hash
-              provenance ensures each copy is computationally unique.
+              <em>Curator&rsquo;s note:</em> This folio represents the convergence of
+              botanical illustration tradition and generative practice. The seed-hash
+              provenance ensures each copy is computationally singular.
             </p>
             <div class="featured-product-actions reveal">
-              <button class="product-cta-gold">Acquire Artifact &mdash; $1,240</button>
+              <button class="product-cta-gold">Begin Acquisition &mdash; $1,240</button>
               <NuxtLink to="/pavilion" class="product-cta-ghost">View Full Provenance &rarr;</NuxtLink>
             </div>
           </div>
@@ -73,7 +96,7 @@
     <!-- ============================================
          EXHIBITION CATALOGUES — 3-column grid
     ============================================= -->
-    <section ref="cataloguesSection" class="catalogues section section-dark">
+    <section ref="cataloguesSection" class="catalogues section">
       <div class="section-wide">
         <div class="catalogues-header">
           <div class="catalogues-header-left">
@@ -117,16 +140,16 @@
     <!-- ============================================
          MERAKI MINT — Limited edition collectibles
     ============================================= -->
-    <section ref="mintSection" class="meraki-mint section">
+    <section ref="mintSection" class="meraki-mint section section-dark">
       <div class="section-wide">
         <div class="mint-header">
           <div class="mint-header-left">
-            <p class="overline reveal">Limited Editions</p>
+            <p class="overline reveal">Limited Sequences</p>
             <h2 class="mint-title word-reveal"><em>Meraki Mint</em></h2>
             <p class="mint-desc reveal">
-              Curated artifacts and collectibles produced in limited runs.
-              Each piece is numbered, sealed, and issued with full chain-of-custody
-              documentation from creation to acquisition.
+              Artifacts and collectibles produced in numbered sequences.
+              Each piece is sealed, cataloged, and issued with full provenance
+              from creation to vault. When a sequence closes, it closes forever.
             </p>
           </div>
         </div>
@@ -141,10 +164,12 @@
               <div class="mint-card-placeholder">
                 <span class="material-symbols-outlined mint-card-icon">{{ item.icon }}</span>
               </div>
+              <span v-if="item.sequenceOpen" class="mint-card-sequence-badge">Sequence Open</span>
             </div>
             <div class="mint-card-info">
               <span class="mint-card-category">{{ item.category }}</span>
               <h3 class="mint-card-title"><em>{{ item.title }}</em></h3>
+              <p class="mint-card-remaining">{{ item.remaining }}</p>
               <div class="mint-card-footer">
                 <span class="mint-card-price">{{ item.price }}</span>
                 <NuxtLink to="#" class="mint-card-arrow" aria-label="View details">
@@ -162,7 +187,7 @@
     <!-- ============================================
          THE VAULT — Personal collection view
     ============================================= -->
-    <section ref="vaultSection" class="the-vault section section-dark">
+    <section ref="vaultSection" class="the-vault section">
       <div class="section-wide">
         <div class="vault-header">
           <div class="vault-header-left">
@@ -185,6 +210,7 @@
             <div class="vault-item-info">
               <span class="vault-item-id">{{ item.id }}</span>
               <h3 class="vault-item-title">{{ item.title }}</h3>
+              <span class="vault-item-acquired">{{ item.acquired }}</span>
             </div>
           </article>
         </div>
@@ -194,9 +220,9 @@
     <SectionDivider />
 
     <!-- ============================================
-         PROVENANCE GUARANTEE — Text section
+         PROVENANCE GUARANTEE
     ============================================= -->
-    <section ref="provenanceSection" class="provenance section">
+    <section ref="provenanceSection" class="provenance section section-dark">
       <div class="section-narrow">
         <div class="provenance-inner">
           <span class="material-symbols-outlined provenance-icon reveal">verified</span>
@@ -212,19 +238,19 @@
             This is not a speculative market. There are no drops, no
             artificial scarcity games, no secondary-market inflation.
             When you acquire from The Pavilion Store, you are collecting
-            the work itself — and the full story behind it.
+            the work itself &mdash; and the full story behind it.
           </p>
         </div>
       </div>
     </section>
 
     <!-- ============================================
-         CTA — Centered, single button
+         CTA — Centered
     ============================================= -->
-    <section ref="ctaSection" class="mint-cta section-dark">
+    <section ref="ctaSection" class="mint-cta section">
       <div class="section-narrow cta-inner">
         <h2 class="cta-title word-reveal">
-          <em>Every artifact tells a story.</em>
+          <em>Every artifact tells a story. The ritual is how you earn it.</em>
         </h2>
         <div class="cta-buttons reveal">
           <NuxtLink to="/pavilion" class="cta-button-gold">Browse the Archive</NuxtLink>
@@ -245,18 +271,42 @@ import { useWordReveal } from '~/composables/useWordReveal'
 useHead({
   title: 'The Pavilion Store — Meraki Road',
   meta: [
-    { name: 'description', content: 'The Pavilion Store: an archival marketplace for verified creative artifacts. Featuring Meraki Mint limited editions. Authenticated provenance, curated editions, and a personal vault for every collector.' },
+    { name: 'description', content: 'The Pavilion Store: the ritual of acquisition. An archival marketplace for verified creative artifacts. Featuring Meraki Mint limited editions. Authenticated provenance, curated editions, and a personal vault for every collector.' },
   ],
 })
 
 useSeoMeta({
   ogTitle: 'The Pavilion Store — Meraki Road',
-  ogDescription: 'An archival marketplace for verified creative artifacts. Featuring Meraki Mint limited editions. Authenticated provenance, curated editions, and a personal vault for every collector.',
+  ogDescription: 'The ritual of acquisition. An archival marketplace for verified creative artifacts. Featuring Meraki Mint limited editions.',
   twitterTitle: 'The Pavilion Store — Meraki Road',
-  twitterDescription: 'An archival marketplace for verified creative artifacts. Featuring Meraki Mint limited editions. Authenticated provenance, curated editions, and a personal vault for every collector.',
+  twitterDescription: 'The ritual of acquisition. An archival marketplace for verified creative artifacts. Featuring Meraki Mint limited editions.',
 })
 
 /* -- Data --------------------------------------- */
+interface Tenet {
+  numeral: string
+  title: string
+  body: string
+}
+
+const tenets: Tenet[] = [
+  {
+    numeral: 'I',
+    title: 'Intention Before Transaction',
+    body: 'Acquisition begins with consideration. Browse slowly. Read the provenance. Understand who made it and why. The piece was not made in a hurry — your decision should not be either.',
+  },
+  {
+    numeral: 'II',
+    title: 'Provenance Is the Product',
+    body: 'Every artifact carries documentation from origin to vault. Materials, methods, edition number, maker identity. The certificate is not a formality — it is the second half of the work.',
+  },
+  {
+    numeral: 'III',
+    title: 'Once Closed, Closed Forever',
+    body: 'When a sequence sells through, it does not reopen. There are no reruns, no second pressings, no anniversary editions. Scarcity is not a marketing strategy here — it is the natural consequence of limited craft.',
+  },
+]
+
 interface Catalogue {
   title: string
   icon: string
@@ -276,30 +326,37 @@ interface MintItem {
   icon: string
   category: string
   price: string
+  remaining: string
+  sequenceOpen: boolean
 }
 
 const mintItems: MintItem[] = [
-  { title: 'Archival Ink Set No. 07', icon: 'palette', category: 'Studio Tools', price: '$85' },
-  { title: 'Specimen Poster Series', icon: 'image', category: 'Prints', price: '$45' },
-  { title: 'The Meraki Codex', icon: 'menu_book', category: 'Publications', price: '$120' },
+  { title: 'Archival Ink Set No. 07', icon: 'palette', category: 'Studio Tools', price: '$85', remaining: '18 of 50 remaining', sequenceOpen: true },
+  { title: 'Specimen Poster Series', icon: 'image', category: 'Prints', price: '$45', remaining: '6 of 24 remaining', sequenceOpen: true },
+  { title: 'The Meraki Codex', icon: 'menu_book', category: 'Publications', price: '$120', remaining: 'Sequence closed', sequenceOpen: false },
 ]
 
 interface VaultItem {
   id: string
   title: string
   icon: string
+  acquired: string
 }
 
 const vaultItems: VaultItem[] = [
-  { id: 'A-001', title: 'Botanical Monograph No. 01', icon: 'local_florist' },
-  { id: 'A-042', title: 'Signal / Noise Print Series', icon: 'graphic_eq' },
-  { id: 'B-119', title: 'Codex Fragment (Restored)', icon: 'history_edu' },
+  { id: 'A-001', title: 'Botanical Monograph No. 01', icon: 'local_florist', acquired: 'Acquired Jan 2026' },
+  { id: 'A-042', title: 'Signal / Noise Print Series', icon: 'graphic_eq', acquired: 'Acquired Feb 2026' },
+  { id: 'B-119', title: 'Codex Fragment (Restored)', icon: 'history_edu', acquired: 'Acquired Mar 2026' },
 ]
 
 /* -- Scroll reveal ------------------------------ */
 const heroSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(heroSection, '.reveal')
 useWordReveal(heroSection, '.word-reveal')
+
+const philosophySection = ref<HTMLElement | null>(null)
+useGsapScrollReveal(philosophySection, '.reveal', { stagger: 0.12 })
+useWordReveal(philosophySection, '.word-reveal')
 
 const featuredSection = ref<HTMLElement | null>(null)
 useGsapScrollReveal(featuredSection, '.reveal', { stagger: 0.08 })
@@ -351,6 +408,23 @@ onMounted(async () => {
         },
       })
     }
+
+    /* Tenet numerals count-up feel */
+    const numerals = philosophySection.value?.querySelectorAll('.tenet-numeral')
+    numerals?.forEach((numeral, i) => {
+      gsap.from(numeral, {
+        scale: 0.5,
+        opacity: 0,
+        duration: 0.5,
+        delay: i * 0.15,
+        ease: 'back.out(1.4)',
+        scrollTrigger: {
+          trigger: numeral,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      })
+    })
   })
 })
 
@@ -394,6 +468,10 @@ onUnmounted(() => {
   margin: 0 auto;
 }
 
+.mint-hero-sub + .mint-hero-sub {
+  margin-top: var(--space-4);
+}
+
 @media (max-width: 768px) {
   .mint-hero {
     padding-top: calc(var(--space-16) + 3rem);
@@ -402,11 +480,84 @@ onUnmounted(() => {
 }
 
 /* =============================================
+   PHILOSOPHY — Three Tenets
+   ============================================= */
+.ritual-philosophy {
+  padding: var(--space-24) var(--content-padding);
+  background: var(--color-surface);
+}
+
+.philosophy-header {
+  margin-bottom: var(--space-12);
+  text-align: center;
+}
+
+.philosophy-title {
+  font-size: var(--text-h1);
+  font-family: var(--font-display);
+  font-weight: 300;
+  color: var(--color-ink);
+  margin-top: var(--space-3);
+  line-height: var(--leading-tight);
+}
+
+.philosophy-title em {
+  font-style: italic;
+}
+
+.tenets-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+}
+
+.tenet-card {
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.tenet-numeral {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: 200;
+  color: var(--color-gold);
+  line-height: 1;
+  letter-spacing: var(--tracking-tight);
+}
+
+.tenet-title {
+  font-family: var(--font-body);
+  font-size: var(--text-h4);
+  font-weight: 600;
+  color: var(--color-ink);
+  letter-spacing: var(--tracking-snug);
+}
+
+.tenet-body {
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+@media (max-width: 768px) {
+  .ritual-philosophy {
+    padding: var(--space-16) var(--content-padding);
+  }
+
+  .tenets-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}
+
+/* =============================================
    FEATURED ACQUISITION — Hero product card
    ============================================= */
 .featured-acquisition {
   padding: var(--space-16) var(--content-padding);
-  background: var(--color-surface);
+  background: var(--color-background);
 }
 
 .featured-product-card {
@@ -421,7 +572,7 @@ onUnmounted(() => {
 .featured-product-image {
   position: relative;
   aspect-ratio: 4 / 3;
-  background: var(--color-background);
+  background: var(--color-surface);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -438,7 +589,7 @@ onUnmounted(() => {
 
 .featured-product-placeholder-icon {
   font-size: 4.5rem;
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
 }
 
@@ -489,14 +640,14 @@ onUnmounted(() => {
 
 .featured-product-date {
   font-size: var(--text-caption);
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
 }
 
 .featured-product-title {
   font-size: var(--text-h1);
   font-family: var(--font-display);
   font-weight: 300;
-  color: var(--color-ink);
+  color: var(--color-dark-text);
   margin-top: var(--space-3);
   margin-bottom: var(--space-2);
   line-height: var(--leading-tight);
@@ -511,13 +662,13 @@ onUnmounted(() => {
   font-weight: 500;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   margin-bottom: var(--space-6);
 }
 
 .featured-product-desc {
   font-size: var(--text-body);
-  color: var(--color-text-secondary);
+  color: var(--color-dark-secondary);
   line-height: var(--leading-relaxed);
   margin-bottom: var(--space-6);
 }
@@ -527,7 +678,7 @@ onUnmounted(() => {
   gap: var(--space-3);
   align-items: flex-start;
   font-size: var(--text-small);
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   line-height: var(--leading-normal);
   padding: var(--space-4);
   border-left: 2px solid rgba(184, 150, 78, 0.3);
@@ -608,6 +759,7 @@ onUnmounted(() => {
    ============================================= */
 .catalogues {
   padding: var(--space-24) var(--content-padding);
+  background: var(--color-surface);
 }
 
 .catalogues-header {
@@ -621,7 +773,7 @@ onUnmounted(() => {
   font-size: var(--text-h1);
   font-family: var(--font-display);
   font-weight: 300;
-  color: var(--color-dark-text);
+  color: var(--color-ink);
   margin-top: var(--space-3);
   line-height: var(--leading-tight);
 }
@@ -674,7 +826,7 @@ onUnmounted(() => {
 
 .catalogue-placeholder-icon {
   font-size: 3rem;
-  color: var(--color-dark-muted);
+  color: var(--color-text-muted);
   font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
 }
 
@@ -708,7 +860,7 @@ onUnmounted(() => {
   font-family: var(--font-display);
   font-size: var(--text-h3);
   font-weight: 300;
-  color: var(--color-dark-text);
+  color: var(--color-ink);
   line-height: var(--leading-snug);
   margin-bottom: var(--space-4);
 }
@@ -727,12 +879,12 @@ onUnmounted(() => {
   font-family: var(--font-mono);
   font-size: var(--text-small);
   font-weight: 500;
-  color: var(--color-dark-text);
+  color: var(--color-ink);
 }
 
 .catalogue-edition {
   font-size: var(--text-caption);
-  color: var(--color-dark-muted);
+  color: var(--color-text-muted);
   letter-spacing: var(--tracking-wide);
 }
 
@@ -758,7 +910,7 @@ onUnmounted(() => {
    ============================================= */
 .meraki-mint {
   padding: var(--space-24) var(--content-padding);
-  background: var(--color-surface);
+  background: var(--color-background);
 }
 
 .mint-header {
@@ -769,7 +921,7 @@ onUnmounted(() => {
   font-size: var(--text-h1);
   font-family: var(--font-display);
   font-weight: 300;
-  color: var(--color-ink);
+  color: var(--color-dark-text);
   margin-top: var(--space-3);
   margin-bottom: var(--space-4);
   line-height: var(--leading-tight);
@@ -781,7 +933,7 @@ onUnmounted(() => {
 
 .mint-desc {
   font-size: var(--text-body);
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
   max-width: 52ch;
 }
@@ -800,8 +952,9 @@ onUnmounted(() => {
 }
 
 .mint-card-image {
+  position: relative;
   aspect-ratio: 1 / 1;
-  background: var(--color-background);
+  background: var(--color-surface);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -815,8 +968,22 @@ onUnmounted(() => {
 
 .mint-card-icon {
   font-size: 2.5rem;
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
+}
+
+.mint-card-sequence-badge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid rgba(184, 150, 78, 0.3);
+  background: rgba(9, 9, 11, 0.85);
 }
 
 .mint-card-info {
@@ -839,13 +1006,19 @@ onUnmounted(() => {
   font-family: var(--font-display);
   font-size: var(--text-h4);
   font-weight: 300;
-  color: var(--color-ink);
+  color: var(--color-dark-text);
   line-height: var(--leading-snug);
-  margin-bottom: auto;
+  margin-bottom: var(--space-2);
 }
 
 .mint-card-title em {
   font-style: italic;
+}
+
+.mint-card-remaining {
+  font-size: var(--text-caption);
+  color: var(--color-dark-muted);
+  margin-bottom: auto;
 }
 
 .mint-card-footer {
@@ -861,7 +1034,7 @@ onUnmounted(() => {
   font-family: var(--font-mono);
   font-size: var(--text-small);
   font-weight: 500;
-  color: var(--color-ink);
+  color: var(--color-dark-text);
 }
 
 .mint-card-arrow {
@@ -871,7 +1044,7 @@ onUnmounted(() => {
   width: 36px;
   height: 36px;
   border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   background-image: none;
   transition: border-color var(--duration-normal) ease,
               color var(--duration-normal) ease,
@@ -899,7 +1072,7 @@ onUnmounted(() => {
    ============================================= */
 .the-vault {
   padding: var(--space-16) var(--content-padding);
-  background: var(--color-background);
+  background: var(--color-surface);
 }
 
 .vault-header {
@@ -956,7 +1129,7 @@ onUnmounted(() => {
 
 .vault-item-image {
   aspect-ratio: 1 / 1;
-  background: var(--color-surface);
+  background: var(--color-background);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -996,6 +1169,12 @@ onUnmounted(() => {
   font-style: italic;
   color: var(--color-ink);
   line-height: var(--leading-snug);
+  margin-bottom: var(--space-2);
+}
+
+.vault-item-acquired {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
 }
 
 @media (max-width: 768px) {
@@ -1014,7 +1193,7 @@ onUnmounted(() => {
    ============================================= */
 .provenance {
   padding: var(--space-24) var(--content-padding);
-  background: var(--color-surface);
+  background: var(--color-background);
 }
 
 .provenance-inner {
@@ -1033,7 +1212,7 @@ onUnmounted(() => {
   font-size: var(--text-h2);
   font-family: var(--font-display);
   font-weight: 300;
-  color: var(--color-ink);
+  color: var(--color-dark-text);
   margin-bottom: var(--space-8);
 }
 
@@ -1043,7 +1222,7 @@ onUnmounted(() => {
 
 .provenance-body {
   font-size: var(--text-body);
-  color: var(--color-text-muted);
+  color: var(--color-dark-muted);
   line-height: var(--leading-relaxed);
   max-width: 60ch;
   margin: 0 auto var(--space-6);
@@ -1058,7 +1237,7 @@ onUnmounted(() => {
    ============================================= */
 .mint-cta {
   padding: var(--space-24) var(--content-padding);
-  background: var(--color-background);
+  background: var(--color-surface);
   text-align: center;
 }
 
@@ -1075,6 +1254,7 @@ onUnmounted(() => {
   line-height: var(--leading-tight);
   color: var(--color-ink);
   margin-bottom: var(--space-8);
+  max-width: 20ch;
 }
 
 .cta-title em {
