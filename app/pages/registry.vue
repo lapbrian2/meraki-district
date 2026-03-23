@@ -128,6 +128,7 @@
             <div class="fellow-body">
               <div class="fellow-seal-row">
                 <span class="seal-base" :class="`seal-${fellow.seal.toLowerCase()}`">
+                  <SealMark :tier="fellow.seal.toLowerCase() as any" :size="14" />
                   {{ fellow.seal }}
                 </span>
                 <span v-if="fellow.district" class="fellow-district-tag">{{ fellow.district }}</span>

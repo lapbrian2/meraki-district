@@ -30,10 +30,7 @@
           </div>
           <div class="ti-row-right">
             <span :class="['ti-badge', 'ti-badge--' + creator.tier.toLowerCase()]">
-              <span
-                class="material-symbols-outlined ti-badge-icon"
-                :style="{ fontVariationSettings: (creator.tier === 'Fellow' || creator.tier === 'Legacy') ? '\'FILL\' 1' : '\'FILL\' 0' }"
-              >verified</span>
+              <SealMark :tier="creator.tier.toLowerCase() as any" :size="16" />
               {{ creator.tier }}
             </span>
             <span class="ti-affiliation">{{ creator.affiliation }}</span>
@@ -208,8 +205,9 @@ const creators: Creator[] = [
   color: var(--color-dark-muted);
 }
 
-.ti-badge-icon {
-  font-size: 14px;
+.ti-badge :deep(.seal-mark) {
+  width: 16px;
+  height: 16px;
 }
 
 /* Associate — entry level, muted */
@@ -224,18 +222,10 @@ const creators: Creator[] = [
   color: var(--color-gold);
 }
 
-.ti-badge--verified .ti-badge-icon {
-  color: var(--color-gold);
-}
-
 /* Fellow — distinguished, gold fill */
 .ti-badge--fellow {
   background: rgba(184, 150, 78, 0.15);
   border-color: rgba(184, 150, 78, 0.3);
-  color: var(--color-gold);
-}
-
-.ti-badge--fellow .ti-badge-icon {
   color: var(--color-gold);
 }
 
@@ -251,9 +241,9 @@ const creators: Creator[] = [
   background-clip: text;
 }
 
-.ti-badge--legacy .ti-badge-icon {
-  color: var(--color-gold);
-  -webkit-text-fill-color: var(--color-gold);
+/* Prevent background-clip: text from hiding SVG inside legacy badge */
+.ti-badge--legacy :deep(.seal-mark) {
+  -webkit-text-fill-color: initial;
 }
 
 .ti-affiliation {

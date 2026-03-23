@@ -4,6 +4,13 @@
   <!-- ═══════════════════════════════════════════════════════ -->
   <div v-if="district && isVoightStudio" ref="root" :style="{ '--color-accent': district.accentColor, '--color-accent-accessible': district.accentColorAccessible }">
 
+    <EditorialBreadcrumb
+      :items="[
+        { label: 'Districts', to: '/districts' },
+        { label: district.name },
+      ]"
+    />
+
     <!-- VS Hero — Full viewport, archival image background -->
     <section ref="heroSection" class="vs-hero">
       <div class="vs-hero-image-wrap">
@@ -201,6 +208,13 @@
   <!-- BESPOKE: The Provenance                                -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div v-else-if="district && isProvenance" ref="root" :style="{ '--color-accent': district.accentColor, '--color-accent-accessible': district.accentColorAccessible }">
+
+    <EditorialBreadcrumb
+      :items="[
+        { label: 'Districts', to: '/districts' },
+        { label: district.name },
+      ]"
+    />
 
     <!-- Prov Hero — Full viewport, archival treatment -->
     <section ref="heroSection" class="prov-hero">
@@ -483,6 +497,13 @@
   <!-- BESPOKE: The Seal — Credentials & Standards             -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div v-else-if="district && isSeal" ref="root" :style="{ '--color-accent': district.accentColor, '--color-accent-accessible': district.accentColorAccessible }">
+
+    <EditorialBreadcrumb
+      :items="[
+        { label: 'Districts', to: '/districts' },
+        { label: district.name },
+      ]"
+    />
 
     <!-- Seal Hero — Full viewport, archival image background -->
     <section ref="heroSection" class="seal-hero">
@@ -782,6 +803,14 @@
   <!-- GENERIC: All other districts                           -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div v-else-if="district" ref="root" :style="{ '--color-accent': district.accentColor, '--color-accent-accessible': district.accentColorAccessible }">
+
+    <EditorialBreadcrumb
+      :items="[
+        { label: 'Districts', to: '/districts' },
+        { label: district.name },
+      ]"
+    />
+
     <!-- Hero -->
     <section ref="heroSection" class="q-hero">
       <div class="q-hero-image-wrap parallax-container">

@@ -113,10 +113,11 @@
 import { useNavAnimation } from '~/composables/useNavAnimation'
 import { useDarkMode } from '~/composables/useDarkMode'
 import { useArchivalSearch } from '~/composables/useArchivalSearch'
+import { useMobileNav } from '~/composables/useMobileNav'
 
 const navRef = ref<HTMLElement | null>(null)
 const overlayRef = ref<HTMLElement | null>(null)
-const mobileOpen = ref(false)
+const { mobileOpen, toggleMobile: toggleMobileFn, closeMobile: closeMobileFn } = useMobileNav()
 const isScrolled = ref(false)
 const isHidden = ref(false)
 let lastScroll = 0
@@ -176,11 +177,11 @@ function onScroll() {
 }
 
 function toggleMobile() {
-  mobileOpen.value = !mobileOpen.value
+  toggleMobileFn()
 }
 
 function closeMobile() {
-  mobileOpen.value = false
+  closeMobileFn()
 }
 
 function onKeydown(e: KeyboardEvent) {
@@ -687,12 +688,13 @@ onUnmounted(() => {
     display: none;
   }
 
+  /* Hamburger and mobile search hidden — replaced by MobileBottomNav */
   .nav-toggle {
-    display: flex;
+    display: none;
   }
 
   .nav-mobile-search {
-    display: flex;
+    display: none;
   }
 
   .nav-mobile-logo {
@@ -721,6 +723,11 @@ onUnmounted(() => {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
+  }
+
+  /* Push theme toggle above the bottom nav bar */
+  .nav-theme-toggle {
+    bottom: calc(72px + var(--space-4) + env(safe-area-inset-bottom, 0px));
   }
 }
 

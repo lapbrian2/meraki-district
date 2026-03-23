@@ -38,10 +38,10 @@ export function useGsapScrollReveal(
   let ctx: gsap.Context | null = null
 
   const {
-    y = 30,
-    duration = 1,
-    stagger = 0.1,
-    ease = 'power2.out',
+    y = 20,
+    duration = 1.4,
+    stagger = 0.15,
+    ease = 'power3.out',
     start = 'top 85%',
   } = options
 

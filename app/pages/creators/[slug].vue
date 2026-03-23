@@ -1,6 +1,13 @@
 <template>
   <div class="monograph-page">
 
+    <EditorialBreadcrumb
+      :items="[
+        { label: 'Talent Index', to: '/registry' },
+        { label: creator.name },
+      ]"
+    />
+
     <!-- ============================================
          HERO — Full-bleed image with creator name
     ============================================= -->
@@ -19,6 +26,7 @@
         <div class="hero-content section-wide">
           <div class="hero-meta reveal">
             <span class="seal-base" :class="`seal-${creator.seal.toLowerCase()}`">
+              <SealMark :tier="creator.seal.toLowerCase() as any" :size="16" />
               {{ creator.seal }}
             </span>
             <span class="hero-discipline">{{ creator.discipline }}</span>

@@ -1,6 +1,13 @@
 <template>
   <div class="milan-page">
 
+    <EditorialBreadcrumb
+      :items="[
+        { label: 'The Circuit', to: '/circuit' },
+        { label: 'Milan Residency' },
+      ]"
+    />
+
     <!-- ============================================
          HERO — Exhibition introduction
     ============================================= -->

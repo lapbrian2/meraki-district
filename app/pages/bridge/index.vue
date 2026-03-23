@@ -90,7 +90,10 @@
               <div class="talent-avatar" :style="{ background: talent.gradient }">
                 <span class="material-symbols-outlined talent-avatar-icon">person</span>
               </div>
-              <span class="seal-base" :class="talent.sealClass">{{ talent.seal }}</span>
+              <span class="seal-base" :class="talent.sealClass">
+                <SealMark :tier="talent.seal.toLowerCase() as any" :size="14" />
+                {{ talent.seal }}
+              </span>
             </div>
             <div class="talent-details">
               <h3 class="talent-name"><em>{{ talent.name }}</em></h3>

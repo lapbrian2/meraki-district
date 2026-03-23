@@ -7,6 +7,7 @@
     </main>
     <AppFooterNew />
     <SocialSidebar />
+    <MobileBottomNav />
   </div>
 </template>
 
@@ -18,5 +19,12 @@
 }
 main {
   flex: 1;
+}
+
+/* Prevent content from hiding behind fixed bottom nav on mobile */
+@media (max-width: 768px) {
+  main {
+    padding-bottom: 72px;
+  }
 }
 </style>

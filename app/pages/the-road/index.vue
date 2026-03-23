@@ -1,6 +1,13 @@
 <template>
   <div class="road-page">
 
+    <EditorialBreadcrumb
+      :items="[
+        { label: 'Meraki Road', to: '/' },
+        { label: 'Publishing House' },
+      ]"
+    />
+
     <!-- ============================================
          HERO — District 02 Publishing
     ============================================= -->

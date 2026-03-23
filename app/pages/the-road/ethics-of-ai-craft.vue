@@ -1,6 +1,14 @@
 <template>
   <div class="essay-page">
 
+    <EditorialBreadcrumb
+      :items="[
+        { label: 'Publishing House', to: '/the-road' },
+        { label: 'Essays' },
+        { label: 'The Ethics of AI Craft' },
+      ]"
+    />
+
     <!-- ============================================
          HERO — Full-bleed essay header
     ============================================= -->

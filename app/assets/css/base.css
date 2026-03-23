@@ -75,6 +75,11 @@ select:focus-visible {
   outline-offset: 0;
 }
 
+/* Global deliberate easing for all interactive elements */
+a, button, [role="button"] {
+  transition-timing-function: var(--ease-vellum);
+}
+
 /* Interactive */
 button, [role="button"] {
   cursor: pointer;

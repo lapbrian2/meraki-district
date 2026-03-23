@@ -101,13 +101,14 @@
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --duration-fast: 150ms;
   --duration-normal: 300ms;
-  --duration-slow: 600ms;
   --duration-scroll: 800ms;
 
   /* Vellum transition tokens (Stitch spec) */
-  --ease-vellum: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-vellum: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-curator: cubic-bezier(0.1, 0.9, 0.2, 1);
   --duration-vellum: 1200ms;
+  --duration-slow: 1.4s;
+  --duration-slower: 2s;
 }
 
 /* Dark mode — inverts the light palette while keeping dark sections unchanged */
@@ -158,13 +159,13 @@
 
 /* Magnetic hover for cards — apply via useMagnetic composable */
 .magnetic-hover {
-  transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+  transition: transform 0.5s var(--ease-vellum);
 }
 
 /* Grayscale to color on hover — images reveal on interaction */
 .grayscale-hover img {
   filter: grayscale(100%) sepia(10%) contrast(1.05);
-  transition: filter 0.8s ease;
+  transition: filter 1s var(--ease-vellum);
 }
 .grayscale-hover:hover img {
   filter: grayscale(0) sepia(0) contrast(1);
@@ -173,7 +174,7 @@
 /* Archival image treatment */
 .archival-image {
   filter: grayscale(100%) sepia(10%) contrast(1.05);
-  transition: filter 0.8s ease;
+  transition: filter 1s var(--ease-vellum);
 }
 .archival-image:hover {
   filter: grayscale(0) sepia(0) contrast(1);
@@ -190,7 +191,7 @@
   background-size: 0% 1px;
   background-position: 0 100%;
   background-repeat: no-repeat;
-  transition: background-size 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+  transition: background-size 0.8s var(--ease-vellum);
 }
 .line-draw:hover {
   background-size: 100% 1px;
@@ -216,7 +217,7 @@
 
 /* Parallax container hover */
 .parallax-container img {
-  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1);
+  transition: transform 1s var(--ease-vellum);
 }
 .parallax-container:hover img {
   transform: scale(1.08) translateY(-2%);
@@ -306,9 +307,9 @@
   background: rgba(24, 24, 27, 0.85);
   border: 1px solid rgba(184, 150, 78, 0.08);
   box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
-              border-color 0.5s ease,
-              box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: transform var(--duration-slow) var(--ease-vellum),
+              border-color var(--duration-slow) ease,
+              box-shadow var(--duration-slow) var(--ease-vellum);
 }
 
 .vellum-card:hover {
@@ -328,9 +329,9 @@
 
 /* Lift card — spring hover with gold glow (Stitch immersive pattern) */
 .lift-card {
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-              border-color 0.5s ease;
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.8s ease;
 }
 .lift-card:hover {
   transform: translateY(-4px);
@@ -377,7 +378,7 @@
 /* ─── Grayscale to color on hover ─── */
 .cinematic-image img {
   filter: grayscale(100%) sepia(10%) contrast(1.05);
-  transition: filter 0.8s ease;
+  transition: filter 1s var(--ease-vellum);
 }
 .cinematic-image:hover img {
   filter: grayscale(0) sepia(0) contrast(1);
@@ -385,7 +386,7 @@
 
 /* ─── Stitch: Gold Glow Hover (warm ambient on interactive elements) ─── */
 .gold-glow-hover {
-  transition: box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: box-shadow 0.8s var(--ease-vellum);
 }
 .gold-glow-hover:hover {
   box-shadow: 0 8px 40px -8px rgba(184, 150, 78, 0.2);

@@ -1,6 +1,14 @@
 <template>
   <div class="monograph-page">
 
+    <EditorialBreadcrumb
+      :items="[
+        { label: 'Publishing House', to: '/the-road' },
+        { label: 'Monographs' },
+        { label: 'Architecture of Silence' },
+      ]"
+    />
+
     <!-- ============================================
          HERO — Full-bleed monograph header
     ============================================= -->
