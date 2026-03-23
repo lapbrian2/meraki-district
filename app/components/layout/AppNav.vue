@@ -159,6 +159,7 @@ const mobileLinks = [
   { to: '/legacy-hall', label: 'Legacy Hall' },
   { to: '/legacy-seal', label: 'Legacy Seal' },
   { to: '/quarterly', label: 'Quarterly' },
+  { to: '/curators-studio', label: 'Curator\'s Studio' },
 ]
 
 useNavAnimation({ navRef, overlayRef, mobileOpen })
